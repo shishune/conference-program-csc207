@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Contact Information
 
 Mizna Dada
@@ -10,6 +9,9 @@ Jiessie Tie
 Email: jiessie.tie@utoronto.ca
 Personal Email: jiessie.tie@gmail.com
 Preferred Mode of Communication: Discord(that one#7013) or Facebook Messenger
-=======
-Contact Information
->>>>>>> origin/master
+
+Akiki Liang
+Email: akiki.liang@mail.utoronto.ca
+Personal Email: akiki.liang@gmail.com
+Preferred Mode of Communication: Discord (Aklang#2712) or Facebook Messenger
+
