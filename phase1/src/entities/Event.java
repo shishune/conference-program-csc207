@@ -10,7 +10,6 @@ public class Event {
     private int startHour;
     private List<String> attendees;
     private String location;
-    private static int capacity = 2;
 
     public Event(String title, String speaker, int startHour,
                  List<String> attendees, String location){
@@ -159,28 +158,6 @@ public class Event {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    /**
-     * Return capacity of event
-     * @return maximum number of people who can attend event
-     * */
-    public static int getCapacity() {
-        return capacity;
-    }
-    /**
-     * set capacity for event
-     * @param capacity maximum number of people who can attend event
-     * */
-    public static void setCapacity(int capacity) {
-        Event.capacity = capacity;
-    }
-
-    // Stores, setter and getter of title of talk
-    //Stores, setter and getter list of speaker(s) for this talk
-    //Stores, setter and getter for start time of talk
-    //Stores, setter and getter for list of attendees for this talk
-    //Store, setter and getter of location/room
-    //Store, setter and getter of capacity (for now assume 2)
 
 
 }
