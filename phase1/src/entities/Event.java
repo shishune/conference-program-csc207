@@ -1,7 +1,6 @@
 package entities;
-import java.lang.reflect.Array;
 import java.util.List;
-import java.time.*;
+
 
 public class Event {
     private static String lastEventIdNums = "";
@@ -24,12 +23,12 @@ public class Event {
 
     }
 
+    /**
+     * Return a unique generated eventID
+     * @return ID of an event
+     * */
     private String generateEventId() {
-        /**
-         * Return a unique generated eventID
-         * @return ID of an event
-         * */
-        String id = "M";
+        String id = "E";
         String lastEventIdNumsSuffix;
 
         if (lastEventIdNums == "") {
@@ -55,75 +54,74 @@ public class Event {
         return id;
     }
 
+    /**
+     * Return eventID
+     * @return ID of event
+     * */
     public String getEventID() {
-        /**
-         * Return eventID
-         * @return ID of event
-         * */
         return eventID;
     }
 
+    /**
+     * Return title
+     * @return title of event
+     * */
     public String getTitle() {
-        /**
-         * Return title
-         * @return title of event
-         * */
         return title;
     }
 
+    /**
+     * Return speaker of event
+     * @return ID of speaker of event
+     * */
     public String getSpeaker() {
-        /**
-         * Return speaker of event
-         * @return ID of speaker of event
-         * */
         return speaker;
     }
+    /**
+     * set speaker for event
+     * @param speaker new speaker's id
+     * */
     public void setSpeaker(String speaker) {
-        /**
-         * set speaker for event
-         * @param speaker
-         * */
         this.speaker = speaker;
     }
 
+    /**
+     * Return startHour of event
+     * @return startHour of event
+     * */
     public int getStartHour() {
-        /**
-         * Return startHour of event
-         * @return startHour of event
-         * */
         return startHour;
     }
+    /**
+     * set startHour for event
+     * @param startHour hour event starts
+     * */
     public void setStartHour(int startHour) {
-        /**
-         * set startHour for event
-         * @param startHour
-         * */
         this.startHour = startHour;
     }
 
+    /**
+     * Return List of attendees of an event
+     * @return attendees of event
+     * */
     public List<String> getAttendees() {
-        /**
-         * Return List of attendees of an event
-         * @return attendees of event
-         * */
         return attendees;
     }
-
+    /**
+     * Set List of attendees of an event
+     * @param newAttendees list of IDs of the new attendee
+     * */
     public void setAttendees(List<String> newAttendees) {
-        /**
-         * Set List of attendees of an event
-         * @param newAttendees
-         * */
         this.attendees =  newAttendees;
     }
 
+    /**
+     * Add attendeeID to list of attendees, return True if attendee is successfully added
+     * (ie was not already in the list of attendees)
+     * @param attendeeID ID of the attendee to be added
+     * @return if attendee is successfully added to list of attendees
+     * */
     public boolean addAttendee(String attendeeID){
-        /**
-         * Add attendeeID to list of attendees, return True if attendee is successfully added
-         * (ie was not already in the list of attendees)
-         * @param attendeeID
-         * @return if attendee is successfully added to list of attendees
-         * */
         if (!this.attendees.contains(attendeeID)){
             this.attendees.add(attendeeID);
             return true;
@@ -132,13 +130,13 @@ public class Event {
         }
     }
 
+    /**
+     * Remove attendeeID to list of attendees, return True if attendee is successfully removed
+     * (ie was already in the list of attendees, and is now no longer there)
+     * @param attendeeID ID of the attendee to be removed
+     * @return if attendee is successfully removed to list of attendees
+     * */
     public boolean removeAttendee(String attendeeID){
-        /**
-         * Remove attendeeID to list of attendees, return True if attendee is successfully removed
-         * (ie was already in the list of attendees, and is now no longer there)
-         * @param attendeeID
-         * @return if attendee is successfully removed to list of attendees
-         * */
         if (this.attendees.contains(attendeeID)){
             this.attendees.remove(attendeeID);
             return true;
@@ -147,9 +145,38 @@ public class Event {
         }
     }
 
+    /**
+     * Return location of event (room)
+     * @return location of event
+     * */
+    public String getLocation() {
+        return location;
+    }
+    /**
+     * set location for event
+     * @param location room/location of event
+     * */
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    /**
+     * Return capacity of event
+     * @return maximum number of people who can attend event
+     * */
+    public static int getCapacity() {
+        return capacity;
+    }
+    /**
+     * set capacity for event
+     * @param capacity maximum number of people who can attend event
+     * */
+    public static void setCapacity(int capacity) {
+        Event.capacity = capacity;
+    }
+
     // Stores, setter and getter of title of talk
     //Stores, setter and getter list of speaker(s) for this talk
-    //Stores, setter and getter of Organizers in charge of this talk
     //Stores, setter and getter for start time of talk
     //Stores, setter and getter for list of attendees for this talk
     //Store, setter and getter of location/room
