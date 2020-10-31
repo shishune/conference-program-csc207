@@ -9,6 +9,7 @@ public abstract class User{
     private String password;
     private List<String> talkList;
     private List<String> contactsList;
+    String userID;
 
 
     public User (String username, String password, List<String> talkList, List<String> contactsList, boolean isLogin){
@@ -18,6 +19,8 @@ public abstract class User{
         this.contactsList = contactsList;
         this.talkList = talkList;
     }
+
+    public abstract String generateUserID();
 
     public boolean getIsLogin(){
         return isLogin;
