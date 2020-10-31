@@ -18,18 +18,18 @@ public class Message {
         this.receiverId = receiverId;
         this.message = message;
         sentTime = getSentTime(); // replace with ime (converted to est)
-        // then add info to message database
-        // (??) add info to entityId database
+        // then add info to message data file
+        // (??) add info to entityId data file
     }
 
     private String generateMessageId() {
         String id = "M";
         String lastMessageIdNumsSuffix;
 
-        if (lastMessageIdNums == "") {
-            id = id + "0000000000000000";
+        if (lastMessageIdNums.equals("")) {
+            id = id + "0000000000000000"; //
             lastMessageIdNums = "0000000000000000";
-        } else if (lastMessageIdNums == "0000000000000000") {
+        } else if (lastMessageIdNums.equals("0000000000000000")) {
             id = id + "0000000000000001";
             lastMessageIdNums = "0000000000000001";
         } else {
@@ -39,13 +39,13 @@ public class Message {
             int currMessageIdNumsSuffix = Integer.parseInt(lastMessageIdNumsSuffix) + 1;
 
             for (int i = 0; i < 16 - Integer.toString(currMessageIdNumsSuffix).length(); i++) {
-                id += "0";
+                id = id + "0";
             }
            id += currMessageIdNumsSuffix;
            lastMessageIdNums = id.substring(1);
         }
-        System.out.println(id);
-        System.out.println(lastMessageIdNums);
+        //System.out.println(id);
+        //System.out.println(lastMessageIdNums);
         return id;
     }
 
