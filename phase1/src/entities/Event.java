@@ -27,6 +27,7 @@ public class Event {
      * @return ID of an event
      * */
     private String generateEventId() {
+        // TODO: Change to implement java.io (DUE NOV 03)
         String id = "E";
         String lastEventIdNumsSuffix;
 

@@ -52,6 +52,7 @@ public class Room {
      * @return the generated id for this room
      * */
     private String generateRoomId() {
+        // TODO: Change to implement java.io (DUE NOV 03)
         String id = "R";
         String lastRoomIdNumsSuffix;
 

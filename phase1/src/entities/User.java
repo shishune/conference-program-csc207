@@ -9,7 +9,7 @@ public abstract class User{
     private String password;
     private List<String> talkList;
     private List<String> contactsList;
-    String userID;
+    String userID; // TODO: Make sure it implements java.io (DUE NOV 03)
 
 
     public User (String username, String password, List<String> talkList, List<String> contactsList, boolean isLogin){
