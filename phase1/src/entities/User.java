@@ -8,7 +8,7 @@ public abstract class User{
     private boolean isLogin;
     private String password;
     private List<String> contactsList;
-    String userID;
+    public static String userID;
 
 
     public User (String username, String password, List<String> contactsList, boolean isLogin){
