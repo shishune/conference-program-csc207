@@ -8,14 +8,17 @@ public abstract class User{
     private boolean isLogin;
     private String password;
     private List<String> contactsList;
+    private List<String> eventList;
     public static String userID;
 
 
-    public User (String username, String password, List<String> contactsList, boolean isLogin){
+    public User (String userID, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         this.username = username;
         this.isLogin = isLogin;
         this.password = password;
         this.contactsList = contactsList;
+        this.eventList = eventList;
+        // this.userID = generateId();
     }
 
     public abstract String generateId();
@@ -37,6 +40,14 @@ public abstract class User{
 
     public String getPassword() {
         return password;
+    }
+
+    public List<String> getEventList(){
+        return eventList;
+    }
+
+    public void setEventList(List<String> eventList){
+        this.eventList = eventList;
     }
 
 
