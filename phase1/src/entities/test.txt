@@ -1,0 +1,3 @@
+"String ID representation of object", "Username", "password", ["contactList"], ["eventList"], isLogin
+
+"User - Attendee","A0000000000000000", "John", "qwerty", [], [], false

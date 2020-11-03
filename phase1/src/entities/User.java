@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +54,20 @@ public abstract class User{
         this.eventList = eventList;
     }
 
+    public void generateID(){
+        String filename = "test.txt";
+        int numOfIds = numUsers;
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("User")) {
+                    numOfIds++;
+                }
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            }
+    }
 
 }
