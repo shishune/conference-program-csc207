@@ -4,21 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User{
-    private String username;
-    private boolean isLogin;
-    private String password;
-    private List<String> contactsList;
-    private List<String> eventList;
-    public static String userID;
+    protected String username;
+    protected boolean isLogin;
+    protected String password;
+    protected List<String> contactsList;
+    protected List<String> eventList;
+    protected String userID;
+    protected int numUsers;
 
 
-    public User (String userID, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+    public User (String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         this.username = username;
         this.isLogin = isLogin;
         this.password = password;
         this.contactsList = contactsList;
         this.eventList = eventList;
-        // this.userID = generateId();
+        //this.userID = "U" + numUsers;
+        //numUsers ++;
+        //questions: how to store id? should we use files?
     }
 
     public abstract String generateId();
