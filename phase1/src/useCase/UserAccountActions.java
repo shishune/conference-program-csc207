@@ -63,6 +63,13 @@ public class UserAccountActions {
 
 
     public String printAllEvents(User user) {
-        return user.getUsername();
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < user.getEventList().size(); i++){
+           // System.out.println(user.getEventList().get(i));
+            String a = user.getEventList().get(i);
+            result.append(a).append(' ');
     }
+        return result.toString();
+}
 }
