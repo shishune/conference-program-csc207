@@ -5,19 +5,21 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Message {
-    private static String lastMessageIdNums = "";
+    //private static String lastMessageIdNums = "";
     private String messageId;
     private String senderId;
     private String receiverId;
     private String message;
-    private String sentTime;
+    private String timeSent;
 
-    public Message(String senderId, String receiverId, String message) {
-        messageId = generateMessageId(); // load last message time from message database (remember for if nothing in file)
+    public Message(String messageId, String senderId, String receiverId, String message, String timeSent) {
+        // messageId = generateMessageId(); // Transfer Use case class: load last message time from message database (remember for if nothing in file)
+        this.messageId = messageId;
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.message = message;
-        sentTime = generateSentTime(); // replace with ime (converted to est)
+        this.timeSent = timeSent;
+        // timeSent = generateSentTime(); // Transfer Use Case Class: replace with ime (converted to est)
         // then add info to message data file
         // (??) add info to entityId data file
     }
@@ -26,8 +28,9 @@ public class Message {
      * Generates a unique ID for this message.
      * @return Unique ID for this message.
      * */
-    private String generateMessageId() {
+    /**private String generateMessageId() {
         // TODO: Change to implement java.io (DUE NOV 03)
+        // TODO: Move to Use Case class, Replace with UUID
         String id = "M";
         String lastMessageIdNumsSuffix;
 
@@ -52,7 +55,7 @@ public class Message {
         //System.out.println(id);
         //System.out.println(lastMessageIdNums);
         return id;
-    }
+    }**/
 
     /**
      * Generates the time of Message construction.
@@ -61,6 +64,7 @@ public class Message {
      * @return time of Message construction (converted to Toronto time)
      * */
     private String generateSentTime() {
+        // TODO: Move to Use Case Class
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
 
         // get local time in toronto time zone
@@ -102,7 +106,7 @@ public class Message {
      * Getter for the time sent of message.
      * @return time of message send
      * */
-    public String getSendTime() {
-        return sentTime;
+    public String getTimeSent() {
+        return timeSent;
     }
 }
