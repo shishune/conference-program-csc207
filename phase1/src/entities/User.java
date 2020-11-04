@@ -1,24 +1,28 @@
 package entities;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User{
-    private String username;
-    private boolean isLogin;
-    private String password;
-    private List<String> contactsList;
-<<<<<<< HEAD
-    String userID; // TODO: Make sure it implements java.io (DUE NOV 03)
-=======
->>>>>>> 34d9ed5048616df2ebb79f4c756ec34d332eb8f6
+    protected String username;
+    protected boolean isLogin;
+    protected String password;
+    protected List<String> contactsList;
+    protected List<String> eventList;
+    protected String userID;
+    protected int numUsers;
 
 
-    public User (String username, String password, List<String> contactsList, boolean isLogin){
+    public User (String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         this.username = username;
         this.isLogin = isLogin;
         this.password = password;
         this.contactsList = contactsList;
+        this.eventList = eventList;
+        //this.userID = "U" + numUsers;
+        //numUsers ++;
+        //questions: how to store id? should we use files?
     }
 
     public abstract String generateId();
@@ -42,5 +46,28 @@ public abstract class User{
         return password;
     }
 
+    public List<String> getEventList(){
+        return eventList;
+    }
+
+    public void setEventList(List<String> eventList){
+        this.eventList = eventList;
+    }
+
+    public void generateID(){
+        String filename = "test.txt";
+        int numOfIds = numUsers;
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("User")) {
+                    numOfIds++;
+                }
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            }
+    }
 
 }

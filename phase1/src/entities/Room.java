@@ -5,10 +5,10 @@ public class Room {
     private static String lastRoomIdNums = "";
     private String roomId;
     private int capacity;
-    private ArrayList<Event> eventList;
+    //private ArrayList<Event> eventList;
 
-    public Room(ArrayList<Event> eventList){
-        this.eventList = eventList;
+    public Room(){ /*ArrayList<Event> eventList*/
+        //this.eventList = eventList;
         this.capacity = 2;
         this.roomId = generateRoomId();
     }
@@ -16,17 +16,19 @@ public class Room {
     /**
      * Getter for the list of events held in this room.
      * @return list of events
-     * */
+
     public ArrayList<Event> getEventList(){ return eventList; }
+     * */
 
     /**
      * Setter for the list of events held in this room.
      * (The use case class should be responsible for checking/adding/removing events using this method.)
      * @param eventList list of events
-     * */
     public void setEventList(ArrayList<Event> eventList){
         this.eventList = eventList;
     }
+    * */
+
 
     /**
      * Getter for the capacity of this room.
@@ -82,3 +84,10 @@ public class Room {
 
 
 }
+
+// TODO (think over later):
+//  1) i don't think the room object needs the list of events at all. The Event object already depends on Room.
+//  None of our use case classes even use Room
+//  For now I'll keep the eventList instance variable as a comment.
+//  2) Even if we do need eventList we need to store it as strings/ints not objects, which is complicated and
+//  best handled by the Event object.
