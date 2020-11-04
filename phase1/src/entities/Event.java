@@ -1,7 +1,6 @@
 package entities;
 import java.util.List;
 
-
 public class Event {
     private static String lastEventIdNums = "";
     private String eventID;
@@ -11,9 +10,9 @@ public class Event {
     private List<String> attendees;
     private String location;
 
-    public Event(String title, String speaker, int startHour,
+    public Event(String eventID, String title, String speaker, int startHour,
                  List<String> attendees, String location){
-        this.eventID = generateEventId();
+        this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
         this.startHour = startHour;
@@ -22,37 +21,6 @@ public class Event {
 
     }
 
-    /**
-     * Return a unique generated eventID
-     * @return ID of an event
-     * */
-    private String generateEventId() {
-        // TODO: Change to implement java.io (DUE NOV 03)
-        String id = "E";
-        String lastEventIdNumsSuffix;
-
-        if (lastEventIdNums == "") {
-            id = id + "0000000000000000";
-            lastEventIdNums = "0000000000000000";
-        } else if (lastEventIdNums == "0000000000000000") {
-            id = id + "0000000000000001";
-            lastEventIdNums = "0000000000000001";
-        } else {
-            lastEventIdNumsSuffix = lastEventIdNums.replaceAll("^[0]*", "");
-            System.out.println(lastEventIdNumsSuffix);
-
-            int currMessageIdNumsSuffix = Integer.parseInt(lastEventIdNumsSuffix) + 1;
-
-            for (int i = 0; i < 16 - Integer.toString(currMessageIdNumsSuffix).length(); i++) {
-                id += "0";
-            }
-            id += currMessageIdNumsSuffix;
-            lastEventIdNums = id.substring(1);
-        }
-        System.out.println(id);
-        System.out.println(lastEventIdNums);
-        return id;
-    }
 
     /**
      * Return eventID
