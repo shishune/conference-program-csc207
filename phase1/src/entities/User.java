@@ -10,7 +10,6 @@ public abstract class User{
     protected String password;
     protected List<String> contactsList;
     protected List<String> eventList;
-    protected String userId;
     protected int numUsers;
 
 
@@ -20,9 +19,6 @@ public abstract class User{
         this.password = password;
         this.contactsList = contactsList;
         this.eventList = eventList;
-        this.userId = "U" + numUsers;
-        //numUsers ++;
-        //questions: how to store id? should we use files?
     }
 
     public abstract String generateId();
