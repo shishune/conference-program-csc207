@@ -9,8 +9,8 @@ public class Attendee extends User{
     private List<String> eventList;
     private static String lastAttendeeIdNums = "";
 
-    public Attendee (String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(username, password, contactsList, eventList, isLogin); //added eventList to constructor (Jiessie)
+    public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
+        super(attendeeId, username, password, contactsList, eventList, isLogin); //added eventList and userId to constructor (Jiessie)
         this.isOrganizer = isOrganizer;
         this.attendeeId = generateId();
         eventList = new ArrayList<>();

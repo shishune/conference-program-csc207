@@ -8,8 +8,8 @@ public class Organizer extends User{
     private String organizerId;
     private static String lastOrganizerIdNums = "";
 
-    public Organizer (String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(username, password, contactsList, eventList, isLogin); //added eventList to constructor (Jiessie)
+    public Organizer (String organizerId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
+        super(organizerId, username, password, contactsList, eventList, isLogin); //added eventList to constructor (Jiessie) added userId to constructor
         this.isOrganizer = isOrganizer;
         this.organizerId = generateId();
     }

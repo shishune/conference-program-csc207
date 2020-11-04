@@ -10,17 +10,17 @@ public abstract class User{
     protected String password;
     protected List<String> contactsList;
     protected List<String> eventList;
-    protected String userID;
+    protected String userId;
     protected int numUsers;
 
 
-    public User (String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+    public User (String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         this.username = username;
         this.isLogin = isLogin;
         this.password = password;
         this.contactsList = contactsList;
         this.eventList = eventList;
-        //this.userID = "U" + numUsers;
+        this.userId = "U" + numUsers;
         //numUsers ++;
         //questions: how to store id? should we use files?
     }
