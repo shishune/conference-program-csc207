@@ -11,7 +11,7 @@ public class GenerateID {
     protected int objectId; // objectId should be made from an user class/gateway
 
 
-    public String generateId() {
+    public static String generateId() {
         String filename = "entityIds.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;

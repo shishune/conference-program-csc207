@@ -2,6 +2,7 @@ package useCase;
 
 import entities.Event;
 import entities.User;
+import useCase.GenerateID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,6 @@ import java.util.List;
 public class UserAccountActions {
 
     // TODO: We have to change all these things relying on user objects to relying on their string representation
-
-    // create organizer
-
-        // store user
-        // id : user1 << put it into serializable
-
 
 
     public boolean addUserContactList(User toMe, User addMe) {
