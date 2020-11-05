@@ -5,7 +5,7 @@ import entities.User;
 
 import java.util.List;
 
-public class OrganizerActions {
+public class OrganizerActions extends UserAccountActions {
 
     public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         return new Organizer(userId, username, password, contactsList, eventList, isLogin, true);

@@ -5,7 +5,7 @@ import entities.User;
 
 import java.util.List;
 
-public class AttendeeActions {
+public class AttendeeActions extends UserAccountActions{
 
     public User createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         return new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
