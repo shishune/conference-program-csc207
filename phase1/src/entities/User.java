@@ -12,7 +12,6 @@ public abstract class User{
     protected List<String> eventList;
     protected int numUsers;
 
-
     public User (String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         this.username = username;
         this.isLogin = isLogin;
@@ -48,22 +47,6 @@ public abstract class User{
 
     public void setEventList(List<String> eventList){
         this.eventList = eventList;
-    }
-
-    public void generateID(){
-        String filename = "test.txt";
-        int numOfIds = numUsers;
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                if (line.contains("User")) {
-                    numOfIds++;
-                }
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            }
     }
 
 }
