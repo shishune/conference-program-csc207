@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Attendee extends User{
  //   private static String lastAttendeeIdNums = "";
-    String attendeeId; //TODO: why? T - T
 
     public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
         super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList and userId to constructor (Jiessie)
@@ -16,7 +15,7 @@ public class Attendee extends User{
      * @return the id of this attendee
      * */
     public String getId() {
-        return attendeeId;
+        return userId;
     }
 
     /**
