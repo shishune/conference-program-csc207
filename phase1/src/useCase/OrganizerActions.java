@@ -12,7 +12,8 @@ public class OrganizerActions extends UserAccountActions {
     }
 
     public User createOrganizer(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
-        String userId = "O" + GenerateID.generateId();
+        GenerateID generateId = new GenerateID();
+        String userId = "O" + generateId;
         return new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
 
     }

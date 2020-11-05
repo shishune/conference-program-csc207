@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public class GenerateID {
 
-    protected static int objectId; // objectId should be made from an user class/gateway
+    protected int objectId; // objectId should be made from an user class/gateway
     //TODO: ask ta if it should be static. If it's not static, how can we call method from other classes?
 
-    public static String generateId() {
+    public String generateId() {
         String filename = "entityIds.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;

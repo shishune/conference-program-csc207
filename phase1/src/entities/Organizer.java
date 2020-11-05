@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Organizer extends User{
     //private static String lastOrganizerIdNums = "";
-    String organizerId; //Todo: why?
 
     public Organizer (String organizerId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
         super(organizerId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList to constructor (Jiessie) added userId to constructor
@@ -47,7 +46,7 @@ public class Organizer extends User{
      * @return the id of this organizer
      * */
     public String getId() {
-        return organizerId;
+        return userId;
     }
 
     /**

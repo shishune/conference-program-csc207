@@ -12,7 +12,8 @@ public class SpeakerActions extends UserAccountActions {
     }
 
     public User createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        String userId = "S" + GenerateID.generateId();
+        GenerateID generateId = new GenerateID();
+        String userId = "S" + generateId;
         return new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
     }
 
