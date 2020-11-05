@@ -14,7 +14,6 @@ public class UserAccountActions {
 
     // TODO: We have to change all these things relying on user objects to relying on their string representation
 
-
     public boolean addUserContactList(User toMe, User addMe) {
         boolean isId = toMe.getContactsList().contains(addMe.getId());
         if (isId) {

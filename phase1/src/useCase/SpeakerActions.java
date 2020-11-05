@@ -1,18 +1,18 @@
 package useCase;
 
-import entities.Attendee;
+import entities.Speaker;
 import entities.User;
 
 import java.util.List;
 
-public class AttendeeActions {
+public class SpeakerActions {
 
     public User createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        return new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
+        return new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
     }
 
     public User createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        String userId = "A" + GenerateID.generateId();
-        return new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
+        String userId = "S" + GenerateID.generateId();
+        return new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
     }
 }

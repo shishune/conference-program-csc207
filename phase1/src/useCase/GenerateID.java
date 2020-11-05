@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class GenerateID {
-    //TODO: Use the usernums way so it increases everytime generateID is called
-    //TODO: implement java.io :')
 
     protected static int objectId; // objectId should be made from an user class/gateway
     //TODO: ask ta if it should be static. If it's not static, how can we call method from other classes?
