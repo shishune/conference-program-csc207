@@ -8,7 +8,7 @@ public class GenerateID {
     //TODO: Use the usernums way so it increases everytime generateID is called
     //TODO: implement java.io :')
 
-    protected int objectId; // objectId should be made from an user class/gateway
+    protected static int objectId; // objectId should be made from an user class/gateway
 
 
     public static String generateId() {
