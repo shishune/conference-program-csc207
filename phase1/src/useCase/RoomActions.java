@@ -6,7 +6,7 @@ import entities.*;
 import useCase.GenerateID;
 
 public class RoomActions {
-    private HashMap<String, List<Room>> roomsList;
+    public HashMap<String, List<Room>> roomsList;
 
 
 }

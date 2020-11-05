@@ -1,11 +1,11 @@
 package useCase;
 
+import entities.Attendee;
 import entities.Event;
 import entities.User;
 import useCase.GenerateID;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.List;
 public class UserAccountActions {
 
     // TODO: We have to change all these things relying on user objects to relying on their string representation
+    // TODO: hashmap the contains all the user objects; key is userID, value is userObject
 
     public boolean addUserContactList(User toMe, User addMe) {
         boolean isId = toMe.getContactsList().contains(addMe.getId());

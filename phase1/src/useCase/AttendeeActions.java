@@ -1,9 +1,11 @@
 package useCase;
 
 import entities.Attendee;
+import entities.Event;
 import entities.User;
 import useCase.GenerateID;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class AttendeeActions extends UserAccountActions{

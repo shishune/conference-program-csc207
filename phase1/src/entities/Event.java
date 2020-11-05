@@ -8,16 +8,16 @@ public class Event {
     private String speaker;
     private int startHour;
     private List<String> attendees;
-    private String location;
+    private String roomID;
 
     public Event(String eventID, String title, String speaker, int startHour,
-                 List<String> attendees, String location){
+                 List<String> attendees, String roomID){
         this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
         this.startHour = startHour;
         this.attendees = attendees;
-        this.location = location;
+        this.roomID = roomID;
 
     }
 
@@ -27,7 +27,7 @@ public class Event {
      * @return ID of event
      * */
     public String getId() {
-        return eventID;
+        return this.eventID;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Event {
      * @return title of event
      * */
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     /**
@@ -43,7 +43,7 @@ public class Event {
      * @return ID of speaker of event
      * */
     public String getSpeaker() {
-        return speaker;
+        return this.speaker;
     }
     /**
      * set speaker for event
@@ -58,7 +58,7 @@ public class Event {
      * @return startHour of event
      * */
     public int getStartHour() {
-        return startHour;
+        return this.startHour;
     }
     /**
      * set startHour for event
@@ -118,14 +118,14 @@ public class Event {
      * @return location of event
      * */
     public String getLocation() {
-        return location;
+        return this.roomID;
     }
     /**
      * set location for event
      * @param location room/location of event
      * */
     public void setLocation(String location) {
-        this.location = location;
+        this.roomID = location;
     }
 
 
