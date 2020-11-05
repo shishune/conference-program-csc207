@@ -8,14 +8,13 @@ import java.util.List;
 
 public class Speaker extends User{
     private String speakerId;
-    private static String lastSpeakerIdNums = "";
+    //private static String lastSpeakerIdNums = "";
 
-    public Speaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(username, password, contactsList, eventList, isLogin);
-        this.speakerId = generateId();
+    public Speaker(String speakerId,String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
+        super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer);
     }
 
-    @Override
+    /*@Override
     public String generateId(){
         String id = "S";
         String lastSpeakerIdNumsSuffix;
@@ -41,13 +40,15 @@ public class Speaker extends User{
         System.out.println(id);
         System.out.println(lastSpeakerIdNums);
         return id;
-    }
+    }*/
 
     /**
      * Getter for the id unique to this speaker.
      * @return the id of this speaker
      * */
-    public String getSpeakerId() {
+    public String getId() {
         return speakerId;
     }
 }
+
+//edited it to fit the new super constructor - Jiessie

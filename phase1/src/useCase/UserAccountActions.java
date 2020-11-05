@@ -16,25 +16,25 @@ public class UserAccountActions {
 
 
     public boolean addUserContactList(User toMe, User addMe) {
-        boolean isUsername = toMe.getContactsList().contains(addMe.getUsername());
-        if (isUsername) {
+        boolean isId = toMe.getContactsList().contains(addMe.getId());
+        if (isId) {
             return false;
         }
         else {
             List<String> toMeContacts = toMe.getContactsList();
-            toMeContacts.add(addMe.getUsername());
+            toMeContacts.add(addMe.getId());
             toMe.setContactsList(toMeContacts);
             return true;
         }}
 
     public boolean removeUserContactList(User toMe, User removeMe) {
-        boolean isPresent = toMe.getContactsList().contains(removeMe.getUsername());
+        boolean isPresent = toMe.getContactsList().contains(removeMe.getId());
         if (!isPresent) {
             return false;
         }
         else {
             List<String> toMeContacts = toMe.getContactsList();
-            toMeContacts.remove(removeMe.getUsername());
+            toMeContacts.remove(removeMe.getId());
             toMe.setContactsList(toMeContacts);
             return true;
         }}

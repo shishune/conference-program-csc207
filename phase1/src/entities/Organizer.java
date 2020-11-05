@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Organizer extends User{
-    private boolean isOrganizer;
-    private String organizerId;
-    private static String lastOrganizerIdNums = "";
+    //private static String lastOrganizerIdNums = "";
+    String organizerId; //Todo: why?
 
     public Organizer (String organizerId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(organizerId, username, password, contactsList, eventList, isLogin); //added eventList to constructor (Jiessie) added userId to constructor
-        this.isOrganizer = isOrganizer;
-        this.organizerId = generateId();
+        super(organizerId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList to constructor (Jiessie) added userId to constructor
     }
 
     /**
      * Return a unique generated organizerID
      * @return ID of an organizer
      * */
-    public String generateId() {
+    /*public String generateId() {
         String id = "O";
         String lastOrganizerIdNumsSuffix;
 
@@ -43,13 +40,13 @@ public class Organizer extends User{
         System.out.println(id);
         System.out.println(lastOrganizerIdNums);
         return id;
-    }
+    }*/
 
     /**
      * Getter for the id unique to this organizer.
      * @return the id of this organizer
      * */
-    public String getOrganizerId() {
+    public String getId() {
         return organizerId;
     }
 

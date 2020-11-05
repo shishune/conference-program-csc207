@@ -9,7 +9,7 @@ public class GenerateID {
     //TODO: implement java.io :')
 
     protected static int objectId; // objectId should be made from an user class/gateway
-
+    //TODO: ask ta if it should be static. If it's not static, how can we call method from other classes?
 
     public static String generateId() {
         String filename = "entityIds.csv";

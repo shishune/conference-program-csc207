@@ -4,23 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attendee extends User{
-    private boolean isOrganizer;
-    private String attendeeId;
-    private List<String> eventList;
-    private static String lastAttendeeIdNums = "";
+ //   private static String lastAttendeeIdNums = "";
+    String attendeeId; //TODO: why?
 
     public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(attendeeId, username, password, contactsList, eventList, isLogin); //added eventList and userId to constructor (Jiessie)
-        this.isOrganizer = isOrganizer;
-        this.attendeeId = generateId();
-        eventList = new ArrayList<>();
+        super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList and userId to constructor (Jiessie)
     }
 
     /**
      * Return a unique generated AttendeeID
      * @return ID of an attendee
      * */
-    public String generateId() {
+    /*public String generateId() {
         String id = "A";
         String lastAttendeeIdNumsSuffix;
 
@@ -45,13 +40,13 @@ public class Attendee extends User{
         System.out.println(id);
         System.out.println(lastAttendeeIdNums);
         return id;
-    }
+    }*/
 
     /**
      * Getter for the id unique to this attendee.
      * @return the id of this attendee
      * */
-    public String getAttendeeId() {
+    public String getId() {
         return attendeeId;
     }
 
@@ -98,6 +93,5 @@ public class Attendee extends User{
     public void cancelEnrolmentIn(String eventID){
         this.eventList.remove(eventID);
     }
-
 
 }

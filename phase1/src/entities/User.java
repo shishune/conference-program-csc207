@@ -10,17 +10,20 @@ public abstract class User{
     protected String password;
     protected List<String> contactsList;
     protected List<String> eventList;
-    protected int numUsers;
+    protected boolean isOrganizer;
+    protected String userId;
 
-    public User (String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+    public User (String userId, String username, String password, List<String> contactsList, List<String> eventList,
+                 boolean isLogin, boolean isOrganizer){
+
         this.username = username;
         this.isLogin = isLogin;
         this.password = password;
         this.contactsList = contactsList;
         this.eventList = eventList;
+        this.userId = userId;
+        this.isOrganizer = isOrganizer;
     }
-
-    public abstract String generateId();
 
     public boolean getIsLogin(){
         return isLogin;
@@ -29,6 +32,7 @@ public abstract class User{
     public List<String> getContactsList(){
         return contactsList;
     }
+
     public void setContactsList(List<String> contactsList){
         this.contactsList = contactsList;
     }
@@ -48,5 +52,7 @@ public abstract class User{
     public void setEventList(List<String> eventList){
         this.eventList = eventList;
     }
+
+    public abstract String getId();
 
 }
