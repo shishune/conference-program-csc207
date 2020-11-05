@@ -26,7 +26,7 @@ public class Event {
      * Return eventID
      * @return ID of event
      * */
-    public String getEventID() {
+    public String getId() {
         return eventID;
     }
 
