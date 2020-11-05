@@ -6,15 +6,18 @@ import entities.*;
 import useCase.GenerateID;
 
 public class EventActions {
-    private HashMap<String, List<Event>> eventsList; // public private
+    public HashMap<String, List<Event>> events; // public private
+    // hashmap room key and time as the value
     private GenerateID generate = new GenerateID();
 
     // TODO: Add new event object to the list of all events
-    public void createEvent(String title, String speaker, int startHour,
+    public boolean createEvent(String title, String speaker, int startHour,
                                List<String> attendees, String location){
         String newID = generate.generateId();
         Event newEvent = new Event(newID, title, speaker, startHour, attendees, location);
-
+        // check to make time and room isnt the same
+        // no overlap of events
+        return true;
 
     };
 
