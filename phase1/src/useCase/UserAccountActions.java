@@ -5,15 +5,39 @@ import entities.Event;
 import entities.User;
 import useCase.GenerateID;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 
 public class UserAccountActions {
 
     // TODO: We have to change all these things relying on user objects to relying on their string representation
     // TODO: hashmap the contains all the user objects; key is userID, value is userObject
+    public HashMap<String, User> usersHashMap;
+
+    public HashMap<String, User> returnUsersHashMap(){
+        return usersHashMap;
+    }
+
+    public boolean addUserToHashMap(User addme){
+
+        if (usersHashMap.containsKey(addme.getId())){
+            return false;
+        }
+        usersHashMap.put(addme.getId(), addme);
+        return true;
+    }
+
+    public boolean removeUserToHashMap(User removeme){
+        if (usersHashMap.containsKey(removeme.getId())){
+            usersHashMap.remove(removeme.getId(), removeme);
+            return true;
+        }
+        return false;
+    }
 
     public boolean addUserContactList(User toMe, User addMe) {
         boolean isId = toMe.getContactsList().contains(addMe.getId());

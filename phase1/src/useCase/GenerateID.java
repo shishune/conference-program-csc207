@@ -24,6 +24,7 @@ public class GenerateID {
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            // TODO: tell user error was generated
             e.printStackTrace();
         }
         objectId++;
