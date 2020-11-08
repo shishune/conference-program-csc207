@@ -22,4 +22,6 @@ public class OrganizerActions extends UserAccountActions {
         return userOrganizer;
 
     }
+
+    // TODO: Event Actions stuff
 }

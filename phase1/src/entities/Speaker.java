@@ -14,6 +14,16 @@ public class Speaker extends User{
         super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer);
     }
 
+
+    /**
+     * Getter for the id unique to this speaker.
+     * @return the id of this speaker
+     * */
+    public String getId() {
+        return speakerId;
+    }
+}
+
     /*@Override
     public String generateId(){
         String id = "S";
@@ -41,14 +51,5 @@ public class Speaker extends User{
         System.out.println(lastSpeakerIdNums);
         return id;
     }*/
-
-    /**
-     * Getter for the id unique to this speaker.
-     * @return the id of this speaker
-     * */
-    public String getId() {
-        return speakerId;
-    }
-}
 
 //edited it to fit the new super constructor - Jiessie
