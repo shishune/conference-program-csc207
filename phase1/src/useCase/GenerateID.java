@@ -8,6 +8,7 @@ public class GenerateID {
 
     protected int objectId; // objectId should be made from an user class/gateway
     //TODO: ask ta if it should be static. If it's not static, how can we call method from other classes?
+    //TODO: load up should proved the number of IDs
 
     public String generateId() {
         String filename = "entityIds.csv";
