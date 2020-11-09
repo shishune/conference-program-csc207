@@ -1,6 +1,25 @@
 package controller;
 
 public interface scheduleController {
+
+    public boolean signupEvent();
+
+    public boolean cancelSpotEvent();
+
+    public String viewOwnSchedule();
+
+    public String viewAvailableSchedule();
+
+    public int spotsAvailable();
+
+    public boolean checkConflict();
+
+    }
+
+
+
+
+
 }
 /*    Parent BASIC USER type actions **make into interfaces according to action**
          (user)
