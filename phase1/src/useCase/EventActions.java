@@ -1,4 +1,5 @@
 package useCase;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
@@ -9,13 +10,13 @@ public class EventActions {
     public HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
-    public HashMap<String, List<Integer>> timeSchedule; // roomID: date
-    public HashMap<String, List<Date>> speakerSchedule; // SpeakerID: date
+    public HashMap<String, List<LocalDateTime>> timeSchedule; // roomID: date
+    public HashMap<String, List<LocalDateTime>> speakerSchedule; // SpeakerID: date
     public HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
 
 
-    public boolean createEvent(String title, String speakerId, Date dateTime,
+    public boolean createEvent(String title, String speakerId, LocalDateTime dateTime,
                                List<String> attendees, String roomID){
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
             String newID = generate.generateId();
@@ -26,7 +27,7 @@ public class EventActions {
     }
 
 
-    public void loadEvent(String eventID, String title, String speakerId, Date dateTime,
+    public void loadEvent(String eventID, String title, String speakerId, LocalDateTime dateTime,
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
@@ -58,7 +59,7 @@ public class EventActions {
 
 
 
-    public boolean changeEventTime(String eventID, Date newDateTime){
+    public boolean changeEventTime(String eventID, LocalDateTime newDateTime){
         if(isRoomFree(events.get(eventID).getRoomID(), newDateTime) &&
                 isSpeakerFree(events.get(eventID).getSpeaker(), newDateTime)){
             events.get(eventID).setDateTime(newDateTime);
@@ -68,8 +69,9 @@ public class EventActions {
 
     }
 
-    private boolean isRoomFree(String roomID, Date dateTime){
-        List<Integer> roomTime = timeSchedule.get(roomID);
+    private boolean isRoomFree(String roomID, LocalDateTime dateTime){
+
+        List<LocalDateTime> roomTime = timeSchedule.get(roomID);
 
         if (roomTime.contains(dateTime)) {
             return false;
@@ -78,8 +80,8 @@ public class EventActions {
 
     }
 
-    private boolean isSpeakerFree(String speakerID, Date dateTime){
-        List<Date> SpeakerTime = speakerSchedule.get(speakerID);
+    private boolean isSpeakerFree(String speakerID, LocalDateTime dateTime){
+        List<LocalDateTime> SpeakerTime = speakerSchedule.get(speakerID);
 
         if (SpeakerTime.contains(dateTime)) {
             return false;

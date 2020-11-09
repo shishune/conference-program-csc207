@@ -1,4 +1,5 @@
 package entities;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Date;
 
@@ -8,11 +9,11 @@ public class Event {
     private String eventID;
     private String title;
     private String speaker;
-    private Date dateTime;
+    private LocalDateTime dateTime;
     private List<String> attendees;
     private String roomID;
 
-    public Event(String eventID, String title, String speaker, Date dateTime,
+    public Event(String eventID, String title, String speaker, LocalDateTime dateTime,
                  List<String> attendees, String roomID){
         this.eventID = eventID;
         this.title = title;
@@ -68,14 +69,14 @@ public class Event {
      * Return startHour of event
      * @return startHour of event
      * */
-    public Date getDateTime() {
+    public LocalDateTime getDateTime() {
         return this.dateTime;
     }
     /**
      * set startHour for event
      * @param newDateTime hour event starts
      * */
-    public void setDateTime(Date newDateTime) {
+    public void setDateTime(LocalDateTime newDateTime) {
         this.dateTime = newDateTime;
     }
 
