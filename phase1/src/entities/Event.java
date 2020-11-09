@@ -1,23 +1,34 @@
 package entities;
 import java.util.List;
+import java.util.Date;
+
 
 public class Event {
     private static String lastEventIdNums = "";
     private String eventID;
     private String title;
     private String speaker;
-    private int startHour;
+    private Date dateTime;
     private List<String> attendees;
     private String roomID;
 
-    public Event(String eventID, String title, String speaker, int startHour,
+    public Event(String eventID, String title, String speaker, Date dateTime,
                  List<String> attendees, String roomID){
         this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
-        this.startHour = startHour;
+        this.dateTime = dateTime;
         this.attendees = attendees;
         this.roomID = roomID;
+
+    }
+
+    /**
+     * @return String representation of Event entity
+     */
+    public String string(){
+        return eventID + ", " + title + ", " + speaker + ", " + dateTime + ", " +
+                attendees.toString() + ", " + roomID;
 
     }
 
@@ -57,15 +68,15 @@ public class Event {
      * Return startHour of event
      * @return startHour of event
      * */
-    public int getStartHour() {
-        return this.startHour;
+    public Date getDateTime() {
+        return this.dateTime;
     }
     /**
      * set startHour for event
-     * @param startHour hour event starts
+     * @param newDateTime hour event starts
      * */
-    public void setStartHour(int startHour) {
-        this.startHour = startHour;
+    public void setDateTime(Date newDateTime) {
+        this.dateTime = newDateTime;
     }
 
     /**
@@ -117,7 +128,7 @@ public class Event {
      * Return location of event (room)
      * @return location of event
      * */
-    public String getLocation() {
+    public String getRoomID() {
         return this.roomID;
     }
     /**

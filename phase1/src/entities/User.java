@@ -55,4 +55,11 @@ public abstract class User{
 
     public abstract String getId();
 
+    public String stringRepresentation() {
+        String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "$");
+        String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "$");
+
+        return userId + ", " + username + ", " + password + ", " + contacts + ", " + events + ", " + isLogin + ", " +isOrganizer + ", " ;
+    }
+
 }
