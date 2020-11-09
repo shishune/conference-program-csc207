@@ -2,12 +2,14 @@ package controller;
 
 public interface UserController {
 
-
-
+    public boolean sendMessage();
+    public boolean addContact();
+    public boolean deleteContact();
+    public String vewMessage();
 }
 /*    Parent BASIC USER type actions **make into interfaces according to action**
          (user)
-        Send and receive messages
+        Send messages
         Add contacts
         Delete/Block Contact
         View Message

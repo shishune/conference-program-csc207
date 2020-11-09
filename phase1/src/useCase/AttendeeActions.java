@@ -12,7 +12,7 @@ public class AttendeeActions extends UserAccountActions{
 
     public User createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userAttendee);
+        //addUserToHashMap(userAttendee);
         return userAttendee;
     }
 
@@ -20,6 +20,6 @@ public class AttendeeActions extends UserAccountActions{
         GenerateID generateId = new GenerateID();
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userAttendee);
+        //addUserToHashMap(userAttendee);
         return userAttendee;    }
 }

@@ -22,22 +22,39 @@ public class UserAccountActions {
         return usersHashMap;
     }
 
-//    public boolean addUserToHashMap(User addme){
-//
-//        if (usersHashMap.containsKey(addme.getId())){
-//            return false;
-//        }
-//        usersHashMap.put(addme.getId(), addme);
-//        return true;
-//    }
-//
-//    public boolean removeUserToHashMap(User removeMe){
-//        if (usersHashMap.containsKey(removeMe.getId())){
-//            usersHashMap.remove(removeMe.getId(), removeMe);
-//            return true;
-//        }
-//        return false;
-//    }
+    public boolean addUserIdToHashMap(User addme){
+
+        if (usersHashMap.containsKey(addme.getId())){
+            return false;
+        }
+        usersHashMap.put(addme.getId(), addme);
+        return true;
+    }
+
+    public boolean addUsernameToHashMap(User addme){
+
+        if (usersHashMap.containsKey(addme.getUsername())){
+            return false;
+        }
+        usersHashMap.put(addme.getUsername(), addme);
+        return true;
+    }
+
+    public boolean removeUserIdFromHashMap(User removeMe){
+        if (usersHashMap.containsKey(removeMe.getId())){
+            usersHashMap.remove(removeMe.getId(), removeMe);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeUsernameFromHashMap(User removeMe){
+        if (usersHashMap.containsKey(removeMe.getUsername())){
+            usersHashMap.remove(removeMe.getUsername(), removeMe);
+            return true;
+        }
+        return false;
+    }
 
     public boolean addUserContactList(User toMe, User addMe) {
         boolean isId = toMe.getContactsList().contains(addMe.getId());
@@ -98,4 +115,8 @@ public class UserAccountActions {
     }
         return result.toString();
 }
+    public User findUserFromUsername(String username){
+        return usersHashMap.get(username);
+    }
+
 }
