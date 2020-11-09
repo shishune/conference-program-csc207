@@ -4,6 +4,9 @@ import entities.Event;
 import gateway.LoadUp;
 import entities.Message;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +19,10 @@ public class MessageActions {
 
     public HashMap<String, Message> messages;
 
+    // hash of messages with sender's ID as key
+    // and a list of all messages sent or received by the sender as value
+    public HashMap<String, List<Message>> senderMessages;
+
     private LoadUp loader = new LoadUp(); // this is okay because IGateway
 
     /** gets list of messages from the IGateway **/
@@ -26,6 +33,21 @@ public class MessageActions {
     /** gets list of all messages between two users **/
     private void getMessages(String senderId, String receiverId) {
         // might not be necessary
+    }
+
+    private String generateSentTime() {
+        // TODO: Move to Use Case Class
+        final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
+
+        // get local time in toronto time zone
+        ZoneId torontoZoneId = ZoneId.of("America/Toronto");
+        LocalDateTime zonedDateTime = LocalDateTime.now(torontoZoneId);
+
+        // format the date according to <DATE_FORMAT>
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        String dateTime = format.format(zonedDateTime);
+        dateTime = dateTime.substring(0, dateTime.indexOf(".") + 4);
+        return dateTime;
     }
 
     /** Gets a ___ of users for the speaker, organizer and attendee messaging actions
