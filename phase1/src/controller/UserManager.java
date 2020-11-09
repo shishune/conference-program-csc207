@@ -10,8 +10,8 @@ import useCase.EventActions;
 public class UserManager {
 
     public boolean sendMessage(String sender, String receiver, String content){
-
-        if (sender.getContactsList().contains(receiver.getUsername())){
+        UserAccountActions sendMe = new UserAccountActions();
+        if (sendMe.findUserFromUsername(sender).getContactsList().contains(receiver)){
             MessageActions newMessage = new MessageActions();
             //newMessage.createMessage(sender, receiver, content);
             return true;
@@ -19,14 +19,16 @@ public class UserManager {
         return false;
     };
 
-    public boolean addContact(User addMe, User toMe){
+    public boolean addContact(String addMe, String toMe){
         UserAccountActions userAccount = new UserAccountActions();
-        return userAccount.addUserContactList(toMe, addMe);
+        return userAccount.addUserContactList(addMe, toMe);
     };
 
-    public boolean deleteContact(User removeMe, User toMe){
+    public boolean deleteContact(String removeMe, String toMe){
         UserAccountActions userAccount = new UserAccountActions();
-        return userAccount.removeUserContactList(toMe, removeMe);
+        User user = userAccount.findUserFromUsername(removeMe);
+        User userOne = userAccount.findUserFromUsername(toMe);
+        return userAccount.removeUserContactList(userOne, user);
     };
 
     public String viewMessage(Message fromMe, Message toMe){
