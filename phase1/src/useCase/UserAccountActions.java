@@ -22,22 +22,22 @@ public class UserAccountActions {
         return usersHashMap;
     }
 
-    public boolean addUserToHashMap(User addme){
-
-        if (usersHashMap.containsKey(addme.getId())){
-            return false;
-        }
-        usersHashMap.put(addme.getId(), addme);
-        return true;
-    }
-
-    public boolean removeUserToHashMap(User removeMe){
-        if (usersHashMap.containsKey(removeMe.getId())){
-            usersHashMap.remove(removeMe.getId(), removeMe);
-            return true;
-        }
-        return false;
-    }
+//    public boolean addUserToHashMap(User addme){
+//
+//        if (usersHashMap.containsKey(addme.getId())){
+//            return false;
+//        }
+//        usersHashMap.put(addme.getId(), addme);
+//        return true;
+//    }
+//
+//    public boolean removeUserToHashMap(User removeMe){
+//        if (usersHashMap.containsKey(removeMe.getId())){
+//            usersHashMap.remove(removeMe.getId(), removeMe);
+//            return true;
+//        }
+//        return false;
+//    }
 
     public boolean addUserContactList(User toMe, User addMe) {
         boolean isId = toMe.getContactsList().contains(addMe.getId());
