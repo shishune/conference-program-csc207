@@ -10,8 +10,8 @@ import useCase.EventActions;
 public class UserManager {
 
     public boolean sendMessage(String sender, String receiver, String content){
-
-        if (sender.getContactsList().contains(receiver.getUsername())){
+        UserAccountActions user = new UserAccountActions();
+        if (user.findUserFromUsername(sender).getContactsList().contains(receiver)){
             MessageActions newMessage = new MessageActions();
             //newMessage.createMessage(sender, receiver, content);
             return true;
@@ -19,12 +19,12 @@ public class UserManager {
         return false;
     };
 
-    public boolean addContact(User addMe, User toMe){
+    public boolean addContact(String addMe, String toMe){
         UserAccountActions userAccount = new UserAccountActions();
         return userAccount.addUserContactList(toMe, addMe);
     };
 
-    public boolean deleteContact(User removeMe, User toMe){
+    public boolean deleteContact(String removeMe, String toMe){
         UserAccountActions userAccount = new UserAccountActions();
         return userAccount.removeUserContactList(toMe, removeMe);
     };
@@ -34,12 +34,15 @@ public class UserManager {
         //TODO
     };
 
-    public boolean signupEvent(Event event, User user){
+    public boolean signupEvent(String event, String user){
         EventActions newEvent = new EventActions();
 
+        //Event event1 = newEvent.getEvent(event)
+        //if checkConfictTime and checkConfictSpots are both false, then add user
 
-        boolean added = user.getEventList().add(event.getId());
-        boolean result = newEvent.addAttendee(event.getId(), user.getId());
+//
+//        boolean added = user.getEventList().add(event.getId());
+//        boolean result = newEvent.addAttendee(event.getId(), user.getId());
     };
 
     public boolean cancelSpotEvent(){
@@ -58,11 +61,14 @@ public class UserManager {
 
     };
 
-    public boolean checkConflictTime(String username, Event event){
+    public boolean checkConflictTime(String username, String event){
+        //return true if there is a conflict
+        //Event e = new EventAction
+        //e.getDateTime
 
     };
 
-    public boolean checkConflictSpots(){
+    public boolean checkConflictSpots(String username, String event){
 
 
     };

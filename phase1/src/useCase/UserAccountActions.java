@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.HashMap;
 
 public class UserAccountActions {
-
-    // TODO: We have to change all these things relying on user objects to relying on their string representation
     // TODO: hashmap the contains all the user objects; key is userID, value is userObject
     public HashMap<String, User> usersHashMap;
 
@@ -22,21 +20,21 @@ public class UserAccountActions {
         return usersHashMap;
     }
 
-    public boolean addUserIdToHashMap(User addme){
+    public boolean addUserIdToHashMap(User addMe){
 
-        if (usersHashMap.containsKey(addme.getId())){
+        if (usersHashMap.containsKey(addMe.getId())){
             return false;
         }
-        usersHashMap.put(addme.getId(), addme);
+        usersHashMap.put(addMe.getId(), addMe);
         return true;
     }
 
-    public boolean addUsernameToHashMap(User addme){
+    public boolean addUsernameToHashMap(User addMe){
 
-        if (usersHashMap.containsKey(addme.getUsername())){
+        if (usersHashMap.containsKey(addMe.getUsername())){
             return false;
         }
-        usersHashMap.put(addme.getUsername(), addme);
+        usersHashMap.put(addMe.getUsername(), addMe);
         return true;
     }
 
@@ -56,67 +54,77 @@ public class UserAccountActions {
         return false;
     }
 
-    public boolean addUserContactList(User toMe, User addMe) {
-        boolean isId = toMe.getContactsList().contains(addMe.getId());
+    public boolean addUserContactList(String toMe, String addMe) {
+        User user = usersHashMap.get(toMe);
+        User userOne = usersHashMap.get(addMe);
+        boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;
         }
         else {
-            List<String> toMeContacts = toMe.getContactsList();
-            toMeContacts.add(addMe.getId());
-            toMe.setContactsList(toMeContacts);
+            List<String> toMeContacts = user.getContactsList();
+            toMeContacts.add(userOne.getId());
+            user.setContactsList(toMeContacts);
             return true;
         }}
 
-    public boolean removeUserContactList(User toMe, User removeMe) {
-        boolean isPresent = toMe.getContactsList().contains(removeMe.getId());
+    public boolean removeUserContactList(String toMe, String removeMe) {
+        User user = usersHashMap.get(toMe);
+        User userOne = usersHashMap.get(removeMe);
+        boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
             return false;
         }
         else {
-            List<String> toMeContacts = toMe.getContactsList();
-            toMeContacts.remove(removeMe.getId());
-            toMe.setContactsList(toMeContacts);
+            List<String> toMeContacts = user.getContactsList();
+            toMeContacts.remove(userOne.getId());
+            user.setContactsList(toMeContacts);
             return true;
         }}
 
-    public boolean addEventToUser(String event, User user) {
-        boolean isPresent = user.getEventList().contains(event);
+    public boolean addEventToUser(String event, String user) {
+        User userOne = usersHashMap.get(user);
+        boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
             return false;
         }
         else{
-            List<String> userEvents = user.getEventList();
+            List<String> userEvents = userOne.getEventList();
             userEvents.add(event);
-            user.setEventList(userEvents);
+            userOne.setEventList(userEvents);
             return true;
         }}
 
-    public boolean removeEventFromUser(String event, User user) {
-            boolean isPresent = user.getEventList().contains(event);
+    public boolean removeEventFromUser(String event, String user) {
+        User userOne = usersHashMap.get(user);
+            boolean isPresent = userOne.getEventList().contains(event);
             if (!isPresent) {
                 return false;
             }
             else{
-                List<String> userEvents = user.getEventList();
+                List<String> userEvents = userOne.getEventList();
                 userEvents.remove(event);
-                user.setEventList(userEvents);
+                userOne.setEventList(userEvents);
                 return true;
             }}
 
 
-    public String printAllEvents(User user) {
-
+    public String printAllEvents(String user) {
+        User userOne = usersHashMap.get(user);
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < user.getEventList().size(); i++){
+        for (int i = 0; i < userOne.getEventList().size(); i++){
            // System.out.println(user.getEventList().get(i));
-            String a = user.getEventList().get(i);
+            String a = userOne.getEventList().get(i);
             result.append(a).append(' ');
     }
         return result.toString();
 }
     public User findUserFromUsername(String username){
         return usersHashMap.get(username);
+    }
+
+    public User findUserFromId(String userId){
+        return usersHashMap.get(userId);
     }
 
 }
