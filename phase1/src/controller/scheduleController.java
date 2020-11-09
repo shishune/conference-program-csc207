@@ -13,13 +13,6 @@ public interface scheduleController {
     public int spotsAvailable();
 
     public boolean checkConflict();
-
-    }
-
-
-
-
-
 }
 /*    Parent BASIC USER type actions **make into interfaces according to action**
          (user)
