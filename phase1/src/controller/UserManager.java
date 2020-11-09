@@ -7,6 +7,8 @@ import useCase.MessageActions;
 import useCase.UserAccountActions;
 import useCase.EventActions;
 
+import java.util.Date;
+
 public class UserManager {
 
     public boolean sendMessage(String sender, String receiver, String content){
@@ -36,6 +38,7 @@ public class UserManager {
 
     public boolean signupEvent(String event, String user){
         EventActions newEvent = new EventActions();
+        newEvent.events.get(event).addAttendee(user);
 
         //Event event1 = newEvent.getEvent(event)
         //if checkConfictTime and checkConfictSpots are both false, then add user
@@ -63,9 +66,26 @@ public class UserManager {
 
     public boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
-        //Event e = new EventAction
-        //e.getDateTime
+        EventActions e = new EventActions();
+        Date timeEvent = e.events.get(event).getDateTime();
 
+        UserAccountActions u = new UserAccountActions();
+        User user = u.findUserFromUsername(username);
+
+        for (int i = 0; i < user.getEventList().size(); i++){
+
+            String name = user.getEventList().get(i);
+
+            EventActions eO = new EventActions();
+
+            Date time = eO.events.get(name).getDateTime();
+
+            if (time == timeEvent){
+                return true;
+            }
+        }
+
+        return false;
     };
 
     public boolean checkConflictSpots(String username, String event){
