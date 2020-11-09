@@ -55,10 +55,23 @@ public class MessageActions {
     private void getUsers() {
 
     }
-    public void createMessage() {
+    public void createMessage(String messageId, String senderId, String receiverId, String message) {
         // TODO: Set return type to Message
+        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
+        loadMessage(messageId, newMessage);
     }
-//hello this is random comment
+
+    public void createMessage(String senderId, String receiverId, String message) {
+        // TODO: Set return type to Message
+        GenerateID generateID = new GenerateID();
+        String messageId = "M" + generateID;
+        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
+        loadMessage(messageId, newMessage);
+    }
+
+    public void loadMessage(String messageId, Message newMessage){
+        messages.put(messageId, newMessage);
+    }
 
     //=======================================
 
