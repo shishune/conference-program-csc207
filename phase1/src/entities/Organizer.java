@@ -49,25 +49,5 @@ public class Organizer extends User{
         return userId;
     }
 
-    /**
-     * Add attendeeID to the attendee's contact list
-     * @param attendeeID ID of the attendee to be added
-     * @param attendee attendee who adds attendeeID to contact list
-     * */
-    public void addToContact(Attendee attendee, String attendeeID){
-        List<String> newContact = attendee.getContactsList();
-        newContact.add(attendeeID);
-        setContactsList(newContact);
-    }
 
-    /**
-     * Delete attendeeID from the attendee's contact list
-     * @param attendeeID ID of the attendee to be deleted
-     * @param attendee attendee who deletes attendeeID from contact list
-     * */
-    public void deleteContact(Attendee attendee, String attendeeID){
-        List<String> newContact = attendee.getContactsList();
-        newContact.remove(attendeeID);
-        setContactsList(newContact);
-    }
 }

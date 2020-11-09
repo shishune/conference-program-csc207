@@ -19,50 +19,6 @@ public class Attendee extends User{
     }
 
     /**
-     * Add attendeeID to this attendee's contact list
-     * @param attendeeID ID of the attendee to be added
-     * */
-    public void addToContact(String attendeeID){
-        List<String> newContact = getContactsList();
-        newContact.add(attendeeID);
-        setContactsList(newContact);
-    }
-
-    /**
-     * Delete attendeeID from this attendee's contact list
-     * @param attendeeID ID of the attendee to be deleted
-     * */
-    public void deleteContact(String attendeeID){
-        List<String> newContact = getContactsList();
-        newContact.remove(attendeeID);
-        setContactsList(newContact);
-    }
-
-    /**
-     * Getter for the list of events this attendee signed up for
-     * @return the list of events
-     * */
-    public List<String> getEventList() {
-        return eventList;
-    }
-
-    /**
-     * Sign up for the event
-     * @param eventID ID of the event to sign up
-     * */
-    public void signUpFor(String eventID){
-        this.eventList.add(eventID);
-    }
-
-    /**
-     * Cancel the enrolment of the event
-     * @param eventID ID of the event to be cancelled
-     * */
-    public void cancelEnrolmentIn(String eventID){
-        this.eventList.remove(eventID);
-    }
-
-    /**
      * Return a unique generated AttendeeID
      * @return ID of an attendee
      * */
