@@ -31,9 +31,9 @@ public class UserAccountActions {
         return true;
     }
 
-    public boolean removeUserToHashMap(User removeme){
-        if (usersHashMap.containsKey(removeme.getId())){
-            usersHashMap.remove(removeme.getId(), removeme);
+    public boolean removeUserToHashMap(User removeMe){
+        if (usersHashMap.containsKey(removeMe.getId())){
+            usersHashMap.remove(removeMe.getId(), removeMe);
             return true;
         }
         return false;
