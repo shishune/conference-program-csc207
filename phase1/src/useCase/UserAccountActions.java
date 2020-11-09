@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.HashMap;
 
 public class UserAccountActions {
-
-    // TODO: We have to change all these things relying on user objects to relying on their string representation
     // TODO: hashmap the contains all the user objects; key is userID, value is userObject
     public HashMap<String, User> usersHashMap;
 
@@ -97,35 +95,36 @@ public class UserAccountActions {
             return true;
         }}
 
-    public boolean removeEventFromUser(String event, User user) {
-            boolean isPresent = user.getEventList().contains(event);
+    public boolean removeEventFromUser(String event, String user) {
+        User userOne = usersHashMap.get(user);
+            boolean isPresent = userOne.getEventList().contains(event);
             if (!isPresent) {
                 return false;
             }
             else{
-                List<String> userEvents = user.getEventList();
+                List<String> userEvents = userOne.getEventList();
                 userEvents.remove(event);
-                user.setEventList(userEvents);
+                userOne.setEventList(userEvents);
                 return true;
             }}
 
 
-    public String printAllEvents(User user) {
-
+    public String printAllEvents(String user) {
+        User userOne = usersHashMap.get(user);
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < user.getEventList().size(); i++){
+        for (int i = 0; i < userOne.getEventList().size(); i++){
            // System.out.println(user.getEventList().get(i));
-            String a = user.getEventList().get(i);
+            String a = userOne.getEventList().get(i);
             result.append(a).append(' ');
     }
         return result.toString();
 }
-    public User findUserFromUsername(String username){
-        return usersHashMap.get(username);
-    }
-
-    public User findUserFromId(String userId){
-        return usersHashMap.get(userId);
-    }
+//    public User findUserFromUsername(String username){
+//        return usersHashMap.get(username);
+//    }
+//
+//    public User findUserFromId(String userId){
+//        return usersHashMap.get(userId);
+//    }
 
 }
