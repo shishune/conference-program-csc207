@@ -12,7 +12,7 @@ public class Message {
     private String message;
     private String timeSent;
 
-    public Message(String messageId, String senderId, String receiverId, String message, String timeSent) {
+    public Message() {
         // messageId = generateMessageId(); // Transfer Use case class: load last message time from message database (remember for if nothing in file)
         this.messageId = messageId;
         this.senderId = senderId;
