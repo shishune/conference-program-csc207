@@ -119,12 +119,12 @@ public class UserAccountActions {
     }
         return result.toString();
 }
-//    public User findUserFromUsername(String username){
-//        return usersHashMap.get(username);
-//    }
-//
-//    public User findUserFromId(String userId){
-//        return usersHashMap.get(userId);
-//    }
+    public User findUserFromUsername(String username){
+        return usersHashMap.get(username);
+    }
+
+    public User findUserFromId(String userId){
+        return usersHashMap.get(userId);
+    }
 
 }
