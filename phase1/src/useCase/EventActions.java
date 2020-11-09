@@ -1,6 +1,7 @@
 package useCase;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Date;
 
 import entities.*;
 
@@ -8,27 +9,26 @@ public class EventActions {
     public HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
-    public HashMap<String, List<Integer>> timeSchedule; // roomID: startHour
-    public HashMap<String, List<Integer>> speakerSchedule; // SpeakerID: startHour TODO: decide format
-    public HashMap<String, List<String>> attendees; // EventID: attendees TODO: key is event ID, value is a list of attendees who attend the event
+    public HashMap<String, List<Integer>> timeSchedule; // roomID: date
+    public HashMap<String, List<Date>> speakerSchedule; // SpeakerID: date
+    public HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
 
-    // TODO: Add new event object to the list of all events
-    public boolean createEvent(String title, String speakerId, int startHour,
+
+    public boolean createEvent(String title, String speakerId, Date dateTime,
                                List<String> attendees, String roomID){
-        String newID = generate.generateId();
-        Event newEvent = new Event(newID, title, speakerId, startHour, attendees, roomID);
-        // check to make time and room isnt the same
-        // no overlap of events
-        // if (isRoomFree(roomID, startHour))
-
-        return true;
-
+        if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
+            String newID = generate.generateId();
+            loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
+            return true;
+        }
+        return false;
     }
-    // TODO: Create Loader function
-    public void loadEvent(String eventID, String title, String speakerId, int startHour,
+
+
+    public void loadEvent(String eventID, String title, String speakerId, Date dateTime,
                           List<String> attendees, String roomID){
-        Event newEvent = new Event(eventID, title, speakerId, startHour, attendees, roomID);
+        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
 
     }
@@ -57,37 +57,39 @@ public class EventActions {
     }
 
 
-    // TODO: Change timing of chosen event
 
+    public boolean changeEventTime(String eventID, Date newDateTime){
+        if(isRoomFree(events.get(eventID).getRoomID(), newDateTime) &&
+                isSpeakerFree(events.get(eventID).getSpeaker(), newDateTime)){
+            events.get(eventID).setDateTime(newDateTime);
+            return true;
+        }
+        return false;
 
-    private boolean isRoomFree(Room roomID, int time){
+    }
+
+    private boolean isRoomFree(String roomID, Date dateTime){
         List<Integer> roomTime = timeSchedule.get(roomID);
 
-        if (roomTime.contains(time)) {
-            return false;
-        }
-        return true;
-
-
-    }
-
-    private boolean isSpeakerFree(String speakerID, int time){
-        List<Integer> SpeakerTime = speakerSchedule.get(speakerID);
-
-        if (SpeakerTime.contains(time)) {
+        if (roomTime.contains(dateTime)) {
             return false;
         }
         return true;
 
     }
 
-    // TODO: How do exceptions work?
-    public void eventAttendees(String eventID) {
-        try {
-            System.out.println(attendees.get(eventID));
-        } catch (Exception eventInvaild) {
-            System.out.println("This event does not exist");
+    private boolean isSpeakerFree(String speakerID, Date dateTime){
+        List<Date> SpeakerTime = speakerSchedule.get(speakerID);
 
+        if (SpeakerTime.contains(dateTime)) {
+            return false;
         }
+        return true;
+    }
+
+    // TODO: if event dne: return empty string inside list
+    public List<String> eventAttendees(String eventID){
+
+        return attendees.get(eventID);
     }
 }
