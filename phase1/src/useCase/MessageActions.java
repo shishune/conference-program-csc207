@@ -7,6 +7,7 @@ import entities.Message;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 // TODO: Add all required methods
 
 public class MessageActions {
-    private List<String> conversations = null;
+    private ArrayList<String> conversations = null;
     private List<String> userMessages = null;
 
     public HashMap<String, Message> messages;
@@ -23,18 +24,36 @@ public class MessageActions {
     // and a list of all messages sent or received by the sender as value
     public HashMap<String, List<Message>> senderMessages;
 
-    private LoadUp loader = new LoadUp(); // this is okay because IGateway
-
-    /** gets list of messages from the IGateway **/
-    private void getAllConversations() {
-        conversations = loader.getMessagesList();
+    public MessageActions() {
+        getAllMessages(); // gets all messages from message.csv
+        addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
+        // with message ID as key and message object as value
     }
 
-    /** gets list of all messages between two users **/
-    private void getMessages(String senderId, String receiverId) {
-        // might not be necessary
+    /** Create a message with unique ID as a parameter **/
+    public Message createMessage(String messageId, String senderId, String receiverId, String message) {
+        // TODO: Set return type to Message
+        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
+        loadMessage(messageId, newMessage);
+        return newMessage;
     }
 
+    /** Create a message and generate unique ID for message **/
+    public Message createMessage(String senderId, String receiverId, String message) {
+        // TODO: Set return type to Message
+        GenerateID generateID = new GenerateID();
+        String messageId = "M" + generateID;
+        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
+        loadMessage(messageId, newMessage);
+        return newMessage;
+    }
+
+    /** Load new messages into HashMap of new messages **/
+    public void loadMessage(String messageId, Message newMessage){
+        messages.put(messageId, newMessage);
+    }
+
+    /** Generate the time sent of message **/
     private String generateSentTime() {
         // TODO: Move to Use Case Class
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
@@ -50,28 +69,23 @@ public class MessageActions {
         return dateTime;
     }
 
-    /** Gets a ___ of users for the speaker, organizer and attendee messaging actions
-     **/
-    private void getUsers() {
-
-    }
-    public void createMessage(String messageId, String senderId, String receiverId, String message) {
-        // TODO: Set return type to Message
-        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
-        loadMessage(messageId, newMessage);
+    /** gets list of messages from the IGateway **/
+    private void getAllMessages() {
+        LoadUp loader = new LoadUp(); // this is okay because IGateway
+        conversations = loader.getMessagesList();
     }
 
-    public void createMessage(String senderId, String receiverId, String message) {
-        // TODO: Set return type to Message
-        GenerateID generateID = new GenerateID();
-        String messageId = "M" + generateID;
-        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
-        loadMessage(messageId, newMessage);
+    /** Adds messages loaded from the csv to <messages> **/
+    private void addLoadedToHashMap() {
+        for(String messageString : conversations) {
+            String[] messageInfo = messageString.split(",");
+            Message loadedMessage = new Message(
+                    messageInfo[0], messageInfo[1], messageInfo[2],
+                    messageInfo[3], messageInfo[4]);
+            messages.put(messageInfo[0], loadedMessage);
+        }
     }
 
-    public void loadMessage(String messageId, Message newMessage){
-        messages.put(messageId, newMessage);
-    }
 
     //=======================================
 

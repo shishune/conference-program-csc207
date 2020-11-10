@@ -35,7 +35,7 @@ public class LoadUp implements LoadUpIGateway {
     }
 
     // Overloaded with custom file path
-    public List<String> getMessages(String filePath) {
+    public ArrayList<String> getMessages(String filePath) {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
@@ -71,7 +71,7 @@ public class LoadUp implements LoadUpIGateway {
     // To be called inside Use Case Classes
     // this makes it okay to call a gateway inside use case class for some reason
     @Override
-    public List<String> getMessagesList() {
+    public ArrayList<String> getMessagesList() {
         return messages;
     }
 
