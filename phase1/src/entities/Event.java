@@ -28,8 +28,10 @@ public class Event {
      * @return String representation of Event entity
      */
     public String string(){
-        return eventID + ", " + title + ", " + speaker + ", " + dateTime + ", " +
-                attendees.toString() + ", " + roomID;
+        // date: year month day hour
+        return eventID + ", " + title + ", " + speaker + ", " +
+                this.dateTime.getYear() + " " + this.dateTime.getMonth()  + " " + this.dateTime.getDayOfMonth()+
+                " " + this.dateTime.getHour() + ", " + attendees.toString() + ", " + roomID;
 
     }
 

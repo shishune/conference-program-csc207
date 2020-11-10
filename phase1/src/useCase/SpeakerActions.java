@@ -11,7 +11,7 @@ public class SpeakerActions extends UserAccountActions {
 
     public User createSpeaker(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userSpeaker);
+        // addUserToHashMap(userSpeaker);
         return userSpeaker;
     }
 
@@ -19,7 +19,7 @@ public class SpeakerActions extends UserAccountActions {
         GenerateID generateId = new GenerateID();
         String userId = "S" + generateId;
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userSpeaker);
+        // addUserToHashMap(userSpeaker);
         return userSpeaker;
     }
 
