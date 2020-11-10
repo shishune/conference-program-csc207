@@ -3,6 +3,7 @@ package useCase;
 import entities.Event;
 import gateway.LoadUp;
 import entities.Message;
+import gateway.LoadUpIGateway;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -105,17 +106,6 @@ public class MessageActions {
      **/
     public void sendMessage(Message message) {
         loadMessage(message.getMessageId(), message);
-    }
-
-    /**
-     * Send messages to multiple users
-     **/
-    public void broadcastMessage(Message message) {
-
-    }
-
-    public void sendMessageToEvent() {
-
     }
 
     /**

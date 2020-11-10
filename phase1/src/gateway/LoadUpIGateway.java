@@ -13,7 +13,7 @@ public interface LoadUpIGateway {
 
     /** etc. etc. etc., one for every entity **/
 
-    public List<String> getMessagesList();
+    public ArrayList<String> getMessagesList();
     public List<String> getRoomsList();
 
 }
