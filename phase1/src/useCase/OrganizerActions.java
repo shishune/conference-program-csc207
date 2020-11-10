@@ -24,4 +24,7 @@ public class OrganizerActions extends UserAccountActions {
     }
 
     // TODO: Event Actions stuff
+    //add new event object to the list of all event
+    //change timing of talks
+    //cancel events
 }

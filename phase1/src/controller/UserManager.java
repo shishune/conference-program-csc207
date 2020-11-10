@@ -94,11 +94,11 @@ public class UserManager {
 
         String availableEvents;
         for (int i = 0; i < allEvents.size(); i++) {
-           // if (checkConflictTime(user, allEvents.))
-           // availableEvents +=
+            // if (checkConflictTime(user, allEvents.))
+            // availableEvents +=
         }
 
-    };
+    }
 
     public int spotsAvailable(String event){
         EventActions e = new EventActions();
@@ -127,7 +127,7 @@ public class UserManager {
 
             String time = eO.events.get(name).getDateTime();
 
-            if (time == timeEvent){
+            if (time.equals(timeEvent)){
                 return true;
             }
         }
@@ -138,10 +138,12 @@ public class UserManager {
     public boolean checkConflictSpots(String event){
         return spotsAvailable(event) > 0;
 
-    };
+    }
 
-    public boolean hello();
+    public abstrct hello();
+
 }
+
 
 /*      Send and receive messages
         Add contacts
@@ -153,3 +155,4 @@ public class UserManager {
         View available schedule(s)
         Number of spots left
         Check conflict with timing and spots*/
+
