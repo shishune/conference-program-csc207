@@ -17,19 +17,13 @@ public class EventTests {
     @Test(timeout = 50)
     public void testEventmaker() {
         EventActions eventActions = new EventActions();
-        LocalDateTime actualDateTime = LocalDateTime.of(2020, 12, 25, 4, 0);
         eventActions.events = new HashMap<String,Event>();
-        eventActions.timeSchedule = new HashMap<String, List<LocalDateTime>>();
-        eventActions.timeSchedule.put("Toronto", new ArrayList<LocalDateTime>());
-        eventActions.speakerSchedule = new HashMap<String, List<LocalDateTime>>();
-        eventActions.speakerSchedule.put("Mike", new ArrayList<LocalDateTime>());
-        boolean lions = eventActions.createEvent("Lions", "Mike",LocalDateTime.of(2018, Month.DECEMBER, 25, 4, 0) , new ArrayList<>(), "Toronto");
+        eventActions.timeSchedule = new HashMap<String, List<String>>();
+        eventActions.timeSchedule.put("Toronto", new ArrayList<String>());
+        eventActions.speakerSchedule = new HashMap<String, List<String>>();
+        eventActions.speakerSchedule.put("Mike", new ArrayList<String>());
+        boolean lions = eventActions.createEvent("Lions", "Mike","2020-10-13 2", new ArrayList<>(), "Toronto");
         assertTrue("Event not created", lions);
-        LocalDateTime date =  LocalDateTime.of(2018, Month.DECEMBER, 25, 4, 0);
-        System.out.println(date);
-
-        LocalDateTime dateTime = LocalDateTime.parse("2018-12-25T04:00");
-        System.out.println(dateTime);
 
 
     }
