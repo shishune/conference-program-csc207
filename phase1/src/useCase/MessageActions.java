@@ -18,7 +18,7 @@ public class MessageActions {
     private ArrayList<String> conversations = null;
     private List<String> userMessages = null;
 
-    public HashMap<String, Message> messages;
+    public HashMap<String, Message> messages; // hashmap containing all loaded and new messages
 
     // hash of messages with sender's ID as key
     // and a list of all messages sent or received by the sender as value
@@ -51,14 +51,19 @@ public class MessageActions {
     /** Load new messages into HashMap of new messages **/
     public void loadMessage(String messageId, Message newMessage){
         // This needs to update every collection we use for messages
-        // i.e. if we add a new hashmap/array/etc., we need to add
+        // i.e. if we add a new hashmap/array/etc. for some method, we need to add
         // otherHash.put(messageId, newMessage)
         // messageArray.add(newMessage)
         // etc. etc.
         messages.put(messageId, newMessage);
     }
 
-    /** Generate the time sent of message **/
+    /**
+     * Generates the time of Message construction.
+     * Method gets local time (time according the the timezone on the sender's computer)
+     * of the sender, and converts it to Toronto time.
+     * @return time of Message construction (converted to Toronto time)
+     * */
     private String generateSentTime() {
         // TODO: Move to Use Case Class
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
@@ -97,8 +102,8 @@ public class MessageActions {
     /**
      * Send message to a specific user
      **/
-    public void sendMessage(String senderId, String receiverId) {
-
+    public void sendMessage(String senderId, String receiverId, Message message) {
+        loadMessage(message.getMessageId(), message);
     }
 
     /**

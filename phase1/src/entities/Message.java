@@ -56,11 +56,12 @@ public class Message {
     }**/
 
     /**
-     * Generates the time of Message construction.
-     * Method gets local time (time according the the timezone on the sender's computer)
-     * of the sender, and converts it to Toronto time.
-     * @return time of Message construction (converted to Toronto time)
+     * Getter for the ID of message.
+     * @return ID of the message
      * */
+    public String getMessageId() {
+        return messageId;
+    }
 
     /**
      * Getter for the ID of sender.
