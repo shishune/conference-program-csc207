@@ -140,6 +140,7 @@ public class UserManager {
 
     };
 
+    public boolean hello();
 }
 
 /*      Send and receive messages
