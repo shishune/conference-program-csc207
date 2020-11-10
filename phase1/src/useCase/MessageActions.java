@@ -33,6 +33,14 @@ public class MessageActions {
     }
 
     /** Create a message with unique ID as a parameter **/
+    public Message createMessage(String messageId, String senderId, String receiverId, String message, String sentTime) {
+        // TODO: Set return type to Message
+        Message newMessage = new Message(messageId, senderId, receiverId, message, sentTime);
+        loadMessage(messageId, newMessage);
+        return newMessage;
+    }
+
+    /** Create a message with unique ID as a parameter **/
     public Message createMessage(String messageId, String senderId, String receiverId, String message) {
         // TODO: Set return type to Message
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
@@ -98,9 +106,6 @@ public class MessageActions {
         }
     }
 
-
-    //=======================================
-
     /**
      * Send message to a specific user
      **/
@@ -139,11 +144,11 @@ public class MessageActions {
     /**
      * Returns an array of all messages (new and old) for storage
      **/
-    public List<Message> storeMessages() {
-        ArrayList<Message> allMessages = null;
+    public List<String> storeMessages() {
+        ArrayList<String> allMessages = null;
         // store messages
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            allMessages.add(message.getValue());
+            allMessages.add(message.getValue().getStringRep());
         }
         return allMessages;
     }
