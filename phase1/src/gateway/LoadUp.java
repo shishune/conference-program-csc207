@@ -23,7 +23,7 @@ public class LoadUp implements LoadUpIGateway {
         // etc. etc., one for every .csv
         getRooms();
     }
-    public List<String> getMessages() {
+    public ArrayList<String> getMessages() {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/messages.csv"))) {
             String line = null;
