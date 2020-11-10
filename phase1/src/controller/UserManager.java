@@ -114,7 +114,7 @@ public class UserManager {
     public boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
         EventActions e = new EventActions();
-        LocalDateTime timeEvent = e.events.get(event).getDateTime();
+        String timeEvent = e.events.get(event).getDateTime();
 
         UserAccountActions u = new UserAccountActions();
         User user = u.findUserFromUsername(username);
@@ -125,7 +125,7 @@ public class UserManager {
 
             EventActions eO = new EventActions();
 
-            LocalDateTime time = eO.events.get(name).getDateTime();
+            String time = eO.events.get(name).getDateTime();
 
             if (time == timeEvent){
                 return true;

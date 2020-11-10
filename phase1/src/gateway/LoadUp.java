@@ -25,7 +25,7 @@ public class LoadUp implements LoadUpIGateway {
     }
     public ArrayList<String> getMessages() {
         // gets list of messages from messages.csv and sets it to <messages>
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/messages.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/assets.dataFiles/messages.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 messages.add(line);

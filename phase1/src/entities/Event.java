@@ -9,11 +9,11 @@ public class Event {
     private String eventID;
     private String title;
     private String speaker;
-    private LocalDateTime dateTime;
+    private String dateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;
 
-    public Event(String eventID, String title, String speaker, LocalDateTime dateTime,
+    public Event(String eventID, String title, String speaker, String dateTime,
                  List<String> attendees, String roomID){
         this.eventID = eventID;
         this.title = title;
@@ -30,8 +30,7 @@ public class Event {
     public String string(){
         // date: year month day hour
         return eventID + ", " + title + ", " + speaker + ", " +
-                this.dateTime.getYear() + " " + this.dateTime.getMonth()  + " " + this.dateTime.getDayOfMonth()+
-                " " + this.dateTime.getHour() + ", " + attendees.toString() + ", " + roomID;
+                this.dateTime + ", " + attendees.toString() + ", " + roomID;
 
     }
 
@@ -71,20 +70,20 @@ public class Event {
      * Return startHour of event
      * @return startHour of event
      * */
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return this.dateTime;
     }
     /**
      * set startHour for event
-     * @param newDateTime hour event starts
+     * @param newDateTime date and hour event starts  yyyy-mm-dd hh  (24 h)
      * */
-    public void setDateTime(LocalDateTime newDateTime) {
+    public void setDateTime(String newDateTime) {
         this.dateTime = newDateTime;
     }
 
     /**
      * Return List of attendees of an event
-     * @return attendees of event
+     * @return date and hour event starts  yyyy-mm-dd hh  (24 h)
      * */
     public List<String> getAttendees() {
         return attendees;

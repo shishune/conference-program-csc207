@@ -13,8 +13,8 @@ public class EventActions  {
     public HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
-    public HashMap<String, List<LocalDateTime>> timeSchedule; // roomID: date
-    public HashMap<String, List<LocalDateTime>> speakerSchedule; // SpeakerID: date
+    public HashMap<String, List<String>> timeSchedule; // roomID: date
+    public HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
     public HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
 
@@ -27,19 +27,12 @@ public class EventActions  {
         for (String event: eventList){
             String[] eventAttributes = event.split(", ");
             List<String> eventAttendees = Arrays.asList(eventAttributes[3].split(" "));
-            String dateAttributes = eventAttributes[4];
-            // date : 2018-12-25T04:00
-
-//            LocalDateTime dateTime = LocalDateTime.of(dateAttributes.substring(0, 3),
-//                    (int) dateAttributes.substring(5, 6));
-            LocalDateTime dateTime = LocalDateTime.parse(dateAttributes);
-
-            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], dateTime,
+            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                     eventAttendees, eventAttributes[5]);
         }
     }
 
-    public boolean createEvent(String title, String speakerId, LocalDateTime dateTime,
+    public boolean createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
             String newID = generate.generateId();
@@ -50,7 +43,7 @@ public class EventActions  {
     }
 
 
-    public void loadEvent(String eventID, String title, String speakerId, LocalDateTime dateTime,
+    public void loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
@@ -82,7 +75,7 @@ public class EventActions  {
 
 
 
-    public boolean changeEventTime(String eventID, LocalDateTime newDateTime){
+    public boolean changeEventTime(String eventID, String newDateTime){
         if(isRoomFree(events.get(eventID).getRoomID(), newDateTime) &&
                 isSpeakerFree(events.get(eventID).getSpeaker(), newDateTime)){
             events.get(eventID).setDateTime(newDateTime);
@@ -92,9 +85,9 @@ public class EventActions  {
 
     }
 
-    private boolean isRoomFree(String roomID, LocalDateTime dateTime){
+    private boolean isRoomFree(String roomID, String dateTime){
 
-        List<LocalDateTime> roomTime = timeSchedule.get(roomID);
+        List<String> roomTime = timeSchedule.get(roomID);
 
         if (roomTime.contains(dateTime)) {
             return false;
@@ -103,8 +96,8 @@ public class EventActions  {
 
     }
 
-    private boolean isSpeakerFree(String speakerID, LocalDateTime dateTime){
-        List<LocalDateTime> SpeakerTime = speakerSchedule.get(speakerID);
+    private boolean isSpeakerFree(String speakerID, String dateTime){
+        List<String> SpeakerTime = speakerSchedule.get(speakerID);
 
         if (SpeakerTime.contains(dateTime)) {
             return false;
