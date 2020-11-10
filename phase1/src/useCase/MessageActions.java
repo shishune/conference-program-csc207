@@ -119,7 +119,7 @@ public class MessageActions {
     }
 
     /**
-     * Returns nested array of all conversations for one user
+     * Returns all messages sent by user with senderId
      **/
     public List<Message> printMessages(String senderId) {
         // presenter should call this method and turn array into output
@@ -133,7 +133,7 @@ public class MessageActions {
     }
 
     /**
-     * Returns an array of conversation between one user and another user
+     * Returns all messages sent by user with senderId and received by user with receiverId
      **/
     public List<Message> printMessages(String senderId, String receiverId) {
         // presenter should call this method and turn array into output
