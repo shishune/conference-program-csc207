@@ -102,15 +102,15 @@ public class MessageActions {
     /**
      * Send message to a specific user
      **/
-    public void sendMessage(String senderId, String receiverId, Message message) {
+    public void sendMessage(Message message) {
         loadMessage(message.getMessageId(), message);
     }
 
     /**
      * Send messages to multiple users
      **/
-    public void sendMessage(String senderId, List<String> receiverIds) {
-        // check senderId for permission to send to multiple users
+    public void broadcastMessage() {
+
     }
 
     public void sendMessageToEvent() {
