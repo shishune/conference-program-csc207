@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TODO: Add appropriate return types for methods
 // TODO: Add all required methods
@@ -109,7 +110,7 @@ public class MessageActions {
     /**
      * Send messages to multiple users
      **/
-    public void broadcastMessage() {
+    public void broadcastMessage(Message message) {
 
     }
 
@@ -120,16 +121,41 @@ public class MessageActions {
     /**
      * Returns nested array of all conversations for one user
      **/
-    public void printMessages(String senderId) {
+    public List<Message> printMessages(String senderId) {
         // presenter should call this method and turn array into output
+        ArrayList<Message> userMessages = null;
+        for(Map.Entry<String, Message> message : messages.entrySet()) {
+            if(message.getKey() == senderId) {
+                userMessages.add(message.getValue());
+            }
+        }
+        return userMessages;
     }
 
     /**
      * Returns an array of conversation between one user and another user
      **/
-    public void printMessages(String senderId, String receiverId) {
+    public List<Message> printMessages(String senderId, String receiverId) {
         // presenter should call this method and turn array into output
+        ArrayList<Message> userMessages = null;
+        for(Map.Entry<String, Message> message : messages.entrySet()) {
+            if(message.getKey() == senderId && message.getValue().getReceiverId() == receiverId) {
+                userMessages.add(message.getValue());
+            }
+        }
+        return userMessages;
     }
 
+    /**
+     * Returns an array of all messages (new and old) for storage
+     **/
+    public List<Message> storeMessages() {
+        ArrayList<Message> allMessages = null;
+        // store messages
+        for(Map.Entry<String, Message> message : messages.entrySet()) {
+            allMessages.add(message.getValue());
+        }
+        return allMessages;
+    }
 
 }
