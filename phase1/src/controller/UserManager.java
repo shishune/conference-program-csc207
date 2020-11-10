@@ -1,11 +1,10 @@
 package controller;
 
 import entities.Event;
+import entities.Room;
 import entities.User;
 import entities.Message;
-import useCase.MessageActions;
-import useCase.UserAccountActions;
-import useCase.EventActions;
+import useCase.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -38,15 +37,19 @@ public class UserManager {
     };
 
     public boolean signupEvent(String event, String user){
-        EventActions newEvent = new EventActions();
-        newEvent.events.get(event).addAttendee(user);
+        EventActions e = new EventActions();
+        e.events.get(event).addAttendee(user);
 
-        //Event event1 = newEvent.getEvent(event)
-        //if checkConfictTime and checkConfictSpots are both false, then add user
+        Event e1 = e.events.get(event);
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
 
-//
-//        boolean added = user.getEventList().add(event.getId());
-//        boolean result = newEvent.addAttendee(event.getId(), user.getId());
+        if (checkConflictSpots(user, event) && (checkConflictTime(user, event))){
+            e.addAttendee(e1.getId(), a1.getId());
+            a1.getEventList().add(event);
+            return true;
+        }
+        return false;
     };
 
     public boolean cancelSpotEvent(){
@@ -90,7 +93,16 @@ public class UserManager {
     };
 
     public boolean checkConflictSpots(String username, String event){
+        EventActions e = new EventActions();
+        String room = e.events.get(event).getRoomID();
 
+        RoomActions r = new RoomActions();
+        Room r1 = r.returnHashMap().get(room);
+
+        if (r1.getCapacity() - e.events.get(event).getAttendees().size() > 0){
+            return true;
+        }
+        return false;
 
     };
 

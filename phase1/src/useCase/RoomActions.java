@@ -15,7 +15,6 @@ import useCase.GenerateID;
  * */
 public class RoomActions {
     private HashMap<String, Room> roomsList;
-
     /**
      * Instantiates a new RoomActions object. Allows transfer of data via gateway from csv file to hashmap
      * */
@@ -74,6 +73,10 @@ public class RoomActions {
             return true;
         }
         return false;
+    }
+
+    public HashMap<String, Room> returnHashMap(){
+        return roomsList;
     }
 
 
