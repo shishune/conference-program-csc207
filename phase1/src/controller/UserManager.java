@@ -8,6 +8,7 @@ import useCase.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
 public class UserManager {
 
@@ -31,10 +32,15 @@ public class UserManager {
         return userAccount.removeUserContactList(toMe, removeMe);
     };
 
-    public String viewMessage(Message fromMe, Message toMe){
-        return null;
-        //TODO
-    };
+//    public String viewMessageOneSender (String fromMe){
+//        MessageActions messageActions = new MessageActions();
+//        return messageActions.printMessages(fromMe).toString();
+//    };
+
+    public String viewMessages (String fromMe, String toMe) {
+        MessageActions messageActions = new MessageActions();
+        return messageActions.printMessages(fromMe, toMe).toString();
+    }
 
     public boolean signupEvent(String event, String user){
         EventActions e = new EventActions();
@@ -44,7 +50,7 @@ public class UserManager {
         AttendeeActions a = new AttendeeActions();
         User a1 = a.usersHashMap.get(user);
 
-        if (checkConflictSpots(user, event) && (checkConflictTime(user, event))){
+        if (checkConflictSpots(event) && (checkConflictTime(user, event))){
             e.addAttendee(e1.getId(), a1.getId());
             a1.getEventList().add(event);
             return true;
@@ -52,19 +58,56 @@ public class UserManager {
         return false;
     };
 
-    public boolean cancelSpotEvent(){
+//    public boolean cancelSpotEvent(String event, String user){
+//        AttendeeActions a = new AttendeeActions();
+//        User a1 = a.usersHashMap.get(user);
+//        String userId = a1.getId();
+//        if (userId.charAt(0) == 'A') {
+//            if () {
+//                EventActions e = new EventActions();
+//                e.events.get(event).removeAttendee(user);
+//
+//                Event e1 = e.events.get(event);
+//                AttendeeActions a = new AttendeeActions();
+//                User a1 = a.usersHashMap.get(user);
+//
+//                e.removeAttendee(e1.getId(), a1.getId());
+//                a1.getEventList().remove(event);
+//                return true;
+//            }
+//        }
+//
+//    };
+
+    public String viewOwnSchedule(String user){
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
+        return a1.getEventList().toString();
+    };
+
+    public String viewAvailableSchedule(String user){
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
+
+        EventActions e = new EventActions();
+        Set<String> allEvents = e.events.keySet();
+
+        String availableEvents;
+        for (int i = 0; i < allEvents.size(); i++) {
+           // if (checkConflictTime(user, allEvents.))
+           // availableEvents +=
+        }
 
     };
 
-    public String viewOwnSchedule(){
+    public int spotsAvailable(String event){
+        EventActions e = new EventActions();
+        String room = e.events.get(event).getRoomID();
 
-    };
+        RoomActions r = new RoomActions();
+        Room r1 = r.returnHashMap().get(room);
 
-    public String viewAvailableSchedule(){
-
-    };
-
-    public int spotsAvailable(){
+        return r1.getCapacity() - e.events.get(event).getAttendees().size();
 
     };
 
@@ -92,17 +135,8 @@ public class UserManager {
         return false;
     };
 
-    public boolean checkConflictSpots(String username, String event){
-        EventActions e = new EventActions();
-        String room = e.events.get(event).getRoomID();
-
-        RoomActions r = new RoomActions();
-        Room r1 = r.returnHashMap().get(room);
-
-        if (r1.getCapacity() - e.events.get(event).getAttendees().size() > 0){
-            return true;
-        }
-        return false;
+    public boolean checkConflictSpots(String event){
+        return spotsAvailable(event) > 0;
 
     };
 
