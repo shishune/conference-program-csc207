@@ -7,8 +7,7 @@ import entities.Message;
 import useCase.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 public class UserManager {
 
@@ -91,12 +90,21 @@ public class UserManager {
 
         EventActions e = new EventActions();
         Set<String> allEvents = e.events.keySet();
+        StringBuilder availableS = new StringBuilder();
 
-        String availableEvents;
-        for (int i = 0; i < allEvents.size(); i++) {
-            // if (checkConflictTime(user, allEvents.))
-            // availableEvents +=
+        Iterator<HashMap.Entry<String,Event>> it = e.events.entrySet().iterator();
+        while (it.hasNext()){
+            HashMap.Entry<String, Event> p = (HashMap.Entry <String, Event>)it.next();
+            availableS.append(p);
+            it.remove();
         }
+        return availableS.toString();
+        //TODO: this might not work, would rather use a list
+
+//        String availableEvents;
+//        for (int i = 0; i < allEvents.size(); i++) {
+//
+//            Event curr = e.events.get()
 
     }
 
@@ -139,8 +147,6 @@ public class UserManager {
         return spotsAvailable(event) > 0;
 
     }
-
-    public abstrct hello();
 
 }
 
