@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Store {
 
+    //do we need another interface for this like the loadup
     public void storeRooms(ArrayList<String> rooms) {
         try {
             FileWriter csvWriter = new FileWriter("rooms.csv");

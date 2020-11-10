@@ -1,11 +1,19 @@
 package entities;
 import java.util.ArrayList;
 
+/**
+ * An entity class. The Room object represents a room with a room ID attribute.
+ * @author Cynthia
+ * @version 1
+ * */
 public class Room {
-    private static String lastRoomIdNums = "";
     private String roomId;
     private int capacity;
 
+    /**
+     * instantiates a new Room object with an id attribute
+     * @param roomId the unique id of this room
+     */
     public Room(String roomId){
         this.capacity = 2;
         this.roomId = roomId;

@@ -90,6 +90,9 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
+    @Override
+    public ArrayList<String> getRoomsList() { return rooms; }
+
     /** etc. etc. one for every thingy
      * **/
 }
