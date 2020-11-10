@@ -50,6 +50,11 @@ public class MessageActions {
 
     /** Load new messages into HashMap of new messages **/
     public void loadMessage(String messageId, Message newMessage){
+        // This needs to update every collection we use for messages
+        // i.e. if we add a new hashmap/array/etc., we need to add
+        // otherHash.put(messageId, newMessage)
+        // messageArray.add(newMessage)
+        // etc. etc.
         messages.put(messageId, newMessage);
     }
 
