@@ -1,12 +1,15 @@
 package useCase;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
 
 import entities.*;
+import gateway.LoadUp;
+import gateway.LoadUpIGateway;
 
-public class EventActions {
+public class EventActions  {
     public HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
@@ -15,6 +18,26 @@ public class EventActions {
     public HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
 
+
+    private LoadUp loader = new LoadUp(); // this is okay because IGateway
+
+    /** gets list of events from the IGateway **/
+    private void getAllEvents() {
+        List<String> eventList = loader.getEventsList();
+        for (String event: eventList){
+            String[] eventAttributes = event.split(", ");
+            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split(" "));
+            String dateAttributes = eventAttributes[4];
+            // date : 2018-12-25T04:00
+
+//            LocalDateTime dateTime = LocalDateTime.of(dateAttributes.substring(0, 3),
+//                    (int) dateAttributes.substring(5, 6));
+            LocalDateTime dateTime = LocalDateTime.parse(dateAttributes);
+
+            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], dateTime,
+                    eventAttendees, eventAttributes[5]);
+        }
+    }
 
     public boolean createEvent(String title, String speakerId, LocalDateTime dateTime,
                                List<String> attendees, String roomID){

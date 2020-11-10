@@ -10,7 +10,7 @@ public class OrganizerActions extends UserAccountActions {
 
     public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userOrganizer);
+        // addUserToHashMap(userOrganizer);
         return userOrganizer;
     }
 
@@ -18,7 +18,7 @@ public class OrganizerActions extends UserAccountActions {
         GenerateID generateId = new GenerateID();
         String userId = "O" + generateId;
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserToHashMap(userOrganizer);
+        // addUserToHashMap(userOrganizer);
         return userOrganizer;
 
     }

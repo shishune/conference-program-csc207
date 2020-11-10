@@ -16,4 +16,6 @@ public interface LoadUpIGateway {
     public List<String> getMessagesList();
     public List<String> getRoomsList();
 
+    public List<String> getEventsList();
+
 }
