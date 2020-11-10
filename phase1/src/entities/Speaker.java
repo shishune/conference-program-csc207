@@ -6,10 +6,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A use case class that stores a list of rooms and can add/remove rooms.
+ * @author multiple
+ * @version 1
+ * */
 public class Speaker extends User{
     private String speakerId;
-    //private static String lastSpeakerIdNums = "";
 
+    /**
+     * Instantiates a new speaker object
+     * @param speakerId the string unique id of this speaker
+     * @param username the string username of this speaker
+     * @param password the string password required for speaker to login
+     * @param contactsList the list of people whom this speaker can message
+     * @param eventList the list of events which this speaker is scheduled to talk
+     * @param isLogin boolean whether this speaker has an account
+     * @param isOrganizer boolean whether this speaker is an organizer
+     * */
     public Speaker(String speakerId,String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
         super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer);
     }
@@ -20,36 +34,6 @@ public class Speaker extends User{
      * @return the id of this speaker
      * */
     public String getId() {
-        return speakerId;
+        return userId;
     }
 }
-
-    /*@Override
-    public String generateId(){
-        String id = "S";
-        String lastSpeakerIdNumsSuffix;
-
-        if (lastSpeakerIdNums.equals("")) {
-            id = id + "0000000000000000";
-            lastSpeakerIdNums = "0000000000000000";
-        } else if (lastSpeakerIdNums.equals("0000000000000000")) {
-            id = id + "0000000000000001";
-            lastSpeakerIdNums = "0000000000000001";
-        } else {
-            lastSpeakerIdNumsSuffix = lastSpeakerIdNums.replaceAll("^[0]*", "");
-            System.out.println(lastSpeakerIdNumsSuffix);
-
-            int currAttendeeIdNumsSuffix = Integer.parseInt(lastSpeakerIdNumsSuffix) + 1;
-
-            for (int i = 0; i < 16 - Integer.toString(currAttendeeIdNumsSuffix).length(); i++) {
-                id += "0";
-            }
-            id += currAttendeeIdNumsSuffix;
-            lastSpeakerIdNums = id.substring(1);
-        }
-        System.out.println(id);
-        System.out.println(lastSpeakerIdNums);
-        return id;
-    }*/
-
-//edited it to fit the new super constructor - Jiessie

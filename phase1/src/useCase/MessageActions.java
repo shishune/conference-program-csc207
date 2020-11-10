@@ -48,17 +48,6 @@ public class MessageActions {
         return newMessage;
     }
 
-    public Message createReceiverlist(String receiverId){
-        List receiverList = new ArrayList();
-        if (!receiverList.contains(receiverId)){
-            receiverList.add(receiverId);
-        }
-    }
-
-    public void loadReceiverlist(ArrayList<String> receiverList){
-        //load the receiver list
-    }
-
     /** Load new messages into HashMap of new messages **/
     public void loadMessage(String messageId, Message newMessage){
         // This needs to update every collection we use for messages
@@ -113,22 +102,15 @@ public class MessageActions {
     /**
      * Send message to a specific user
      **/
-    public void sendMessage(String messageId, String receiverId) {
+    public void sendMessage(Message message) {
         loadMessage(message.getMessageId(), message);
-        HashMap<String, String> user_dict = new HashMap<String, String>();
-        if (!user_dict.contains(messageId));
-            user_dict.put(receiverId, messageId);
     }
 
     /**
      * Send messages to multiple users
      **/
-    public void broadcastMessage(Message message, List<String> userList) {
-        loadMessage(message.getMessageId(), message);
-        HashMap<String, HashMap> manyuser_dict = new HashMap<>(String, HashMap);
-        for (userkey in manyuser_dict);
-        if (!manyuser_dict.contains(messageId));
-        user_dict.put(receiverId, messageId);
+    public void broadcastMessage() {
+
     }
 
     public void sendMessageToEvent() {
