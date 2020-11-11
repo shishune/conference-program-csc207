@@ -79,8 +79,8 @@ public class OrganizerActions extends UserAccountActions {
             String[] organizerInfo = organizersString.split(",");
             ArrayList<String> eventList = new ArrayList<String>();
             ArrayList<String> contactList = new ArrayList<String>();
-            String[] events = organizerInfo[4].split("[*$*]");     // TODO : Just check the *$* problem here
-            String[] contacts = organizerInfo[3].split("[*$*]");
+            String[] events = organizerInfo[4].split("[*$!]");
+            String[] contacts = organizerInfo[3].split("[*$!]");
             for (String e: events) {
                 eventList.add(e);
             }
