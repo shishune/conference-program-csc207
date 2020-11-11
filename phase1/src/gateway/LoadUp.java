@@ -90,6 +90,32 @@ public class LoadUp implements LoadUpIGateway {
 
     }
 
+    public ArrayList<String> getAttendees() {
+        // gets list of messages from messages.csv and sets it to <messages>
+        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/attendees.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                messages.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
+    public ArrayList<String> getOrganizers() {
+        // gets list of messages from messages.csv and sets it to <messages>
+        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/organizers.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                messages.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return messages;
+    }
+
 
 
 
