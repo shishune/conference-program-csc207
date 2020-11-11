@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class MessageActions {
     private ArrayList<String> conversations = null;
-    private List<String> userMessages = null;
+    //private List<String> userMessages = null;
 
     public HashMap<String, Message> messages; // hashmap containing all loaded and new messages
 
@@ -26,8 +26,8 @@ public class MessageActions {
     // and a list of all messages sent or received by the sender as value
     public HashMap<String, List<Message>> senderMessages;
 
-    public MessageActions() {
-        getAllMessages(); // gets all messages from message.csv
+    public MessageActions(LoadUpIGateway loader) {
+        getAllMessages(loader); // gets all messages from message.csv
         addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
     }
@@ -90,8 +90,8 @@ public class MessageActions {
     }
 
     /** gets list of messages from the IGateway **/
-    private void getAllMessages() {
-        LoadUp loader = new LoadUp(); // this is okay because IGateway
+    private void getAllMessages(LoadUpIGateway loader) {
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         conversations = loader.getMessagesList();
     }
 

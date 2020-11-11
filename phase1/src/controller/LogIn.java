@@ -1,5 +1,7 @@
 package controller;
 
+import gateway.LoadUp;
+import gateway.LoadUpIGateway;
 import useCase.EventActions;
 import useCase.MessageActions;
 import useCase.RoomActions;
@@ -11,7 +13,8 @@ public class LogIn {
     // tada! done with LogIn stuff
     // initialize all the usecase classes here
     public LogIn(){
-        MessageActions messageActions = new MessageActions();
+        LoadUpIGateway g = new LoadUp();
+        MessageActions messageActions = new MessageActions(g);
         EventActions eventActions = new EventActions();
         UserAccountActions userAccountActions = new UserAccountActions();
         RoomActions roomActions = new RoomActions();
