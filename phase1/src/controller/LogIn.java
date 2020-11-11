@@ -22,6 +22,7 @@ public class LogIn {
     public LogIn(){
         LoadUpIGateway g = new LoadUp();
         MessageActions messageActions = new MessageActions(g);
+        // how to fix controller --> messageAction.loadup(g); if this works??
         EventActions eventActions = new EventActions();
         UserAccountActions userAccountActions = new UserAccountActions();
         RoomActions roomActions = new RoomActions();

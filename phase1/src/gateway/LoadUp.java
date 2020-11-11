@@ -14,6 +14,8 @@ public class LoadUp implements LoadUpIGateway {
     // ArrayList<String> organizers = null;
     // etc.etc. one for every .csv
     private ArrayList<String> rooms;
+    private ArrayList<String> attendees = null;
+    private ArrayList<String> organizers = null;
 
     public LoadUp() {
         // these might be moved elsewhere, idk yet
@@ -86,21 +88,19 @@ public class LoadUp implements LoadUpIGateway {
             e.printStackTrace();
         }
         return messages;
-
-
     }
 
     public ArrayList<String> getAttendees() {
-        // gets list of messages from messages.csv and sets it to <messages>
+        // gets list of attendees from attendees.csv and sets it to <attendeesHM>
         try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/attendees.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
-                messages.add(line);
+                attendees.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return messages;
+        return attendees;
     }
 
     public ArrayList<String> getOrganizers() {
@@ -108,12 +108,12 @@ public class LoadUp implements LoadUpIGateway {
         try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/organizers.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
-                messages.add(line);
+                organizers.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return messages;
+        return organizers;
     }
 
 

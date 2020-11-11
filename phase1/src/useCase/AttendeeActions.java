@@ -1,6 +1,8 @@
 package useCase;
 
 import entities.*;
+import gateway.LoadUpIGateway;
+import gateway.LoadUp;
 import useCase.GenerateID;
 
 import java.util.ArrayList;
@@ -9,16 +11,22 @@ import java.util.List;
 
 public class AttendeeActions extends UserAccountActions{
 
-    private HashMap<String, Attendee> AttendeesHashMap;
+    private HashMap<String, Attendee> attendeesHashMap;
+    private HashMap<String, Attendee> attendeeUsernameHashMap;
     private ArrayList<String> attendees = new ArrayList<String>();
 
     public HashMap<String, Attendee> returnAttendeesHashMap(){
-        return AttendeesHashMap;
+        return attendeesHashMap;
+    }
+
+    public HashMap<String, Attendee> returnAttendeesUsernameHashMap(){
+        return attendeeUsernameHashMap;
     }
 
     public User createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        //addUserToHashMap(userAttendee);
+        addUserIdToHashMap(userAttendee);
+        addUsernameToHashMap(userAttendee);
         return userAttendee;
     }
 
@@ -26,17 +34,38 @@ public class AttendeeActions extends UserAccountActions{
         GenerateID generateId = new GenerateID();
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        //addUserToHashMap(userAttendee);
+        addUserIdToHashMap(userAttendee);
+        addUsernameToHashMap(userAttendee);
         return userAttendee;    }
+
+    private void loadUpMethodAttendees(LoadUpIGateway loader) {
+        getAllAttendees(loader); // gets all messages from message.csv
+        addAttendeeToHashMap();; // adds those messages to a hashmap of all messages from the csv
+        // with message ID as key and message object as value
+    }
+    // TODO: ADD THIS METHOD INSTEAD TO LOGIN,, i think
+
+    private void getAllAttendees(LoadUpIGateway loader) {
+        LoadUp loader = new LoadUp(); // this is okay because IGateway
+        attendees = loader.getAttendees();
+    }
 
     private void addAttendeeToHashMap() {
         for(String attendeeString : attendees) {
             String[] attendeeInfo = attendeeString.split(",");
-            for()
-            ArrayList<String> attendees = new ArrayList<String>();
-
-            Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], attendeeInfo[3], attendeeInfo[4], attendeeInfo[5], attendeeInfo[6]);
-            AttendeesHashMap.put(attendeeInfo[0], );
+            ArrayList<String> eventList = new ArrayList<String>();
+            ArrayList<String> contactList = new ArrayList<String>();
+            String[] events = attendeeInfo[4].split("[*$*]");     // TODO : Just check the *$* problem here
+            String[] contacts = attendeeInfo[3].split("[*$*]");
+            for (String e: events) {
+                eventList.add(e);
+            }
+            for (String c: contacts) {
+                contactList.add(c);
+            }
+            Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList, eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
+            attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
+            attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
         }
     }
 }
