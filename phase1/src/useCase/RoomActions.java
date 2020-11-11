@@ -15,6 +15,15 @@ import useCase.GenerateID;
  * */
 public class RoomActions {
     private HashMap<String, Room> roomsList;
+
+    public String createRoom(){
+        GenerateID generator = new GenerateID();
+        String roomID = "R" + generator.generateId();
+        Room room = new Room(roomID);
+        addRoom(room);
+        return roomID;
+    }
+
     /**
      * Instantiates a new RoomActions object. Allows transfer of data via gateway from csv file to hashmap
      * */
@@ -76,7 +85,7 @@ public class RoomActions {
     }
 
     public HashMap<String, Room> returnHashMap(){
-        return roomsList;
+        return this.roomsList;
     }
 
 

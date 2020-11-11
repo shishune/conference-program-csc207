@@ -73,21 +73,35 @@ public class EventActions  {
         }
     }
 
+    // TODO Cancel Event
+    public List<String> cancelEvent(String eventID){
+        Event event = this.events.get(eventID);
+        this.events.remove(eventID);
+        List<String> eventAttendees = this.attendees.get(eventID);
+        this.attendees.remove(eventID);
+        this.speakerSchedule.remove(event.getSpeaker(), event.getDateTime());
+        this.timeSchedule.remove(event.getRoomID(), event.getDateTime());
+        return eventAttendees;
+
+
+    }
 
 
     public boolean changeEventTime(String eventID, String newDateTime){
-        if(isRoomFree(events.get(eventID).getRoomID(), newDateTime) &&
-                isSpeakerFree(events.get(eventID).getSpeaker(), newDateTime)){
-            events.get(eventID).setDateTime(newDateTime);
+        Event event = this.events.get(eventID);
+        if(isRoomFree(event.getRoomID(), newDateTime) &&
+                isSpeakerFree(event.getSpeaker(), newDateTime)){
+            event.setDateTime(newDateTime); // TODO will this change the event?
+            // TODO this.speakerSchedule;
             return true;
         }
         return false;
 
     }
 
-    private boolean isRoomFree(String roomID, String dateTime){
+    public boolean isRoomFree(String roomID, String dateTime){
 
-        List<String> roomTime = timeSchedule.get(roomID);
+        List<String> roomTime = this.timeSchedule.get(roomID);
 
         if (roomTime.contains(dateTime)) {
             return false;
@@ -96,8 +110,8 @@ public class EventActions  {
 
     }
 
-    private boolean isSpeakerFree(String speakerID, String dateTime){
-        List<String> SpeakerTime = speakerSchedule.get(speakerID);
+    public boolean isSpeakerFree(String speakerID, String dateTime){
+        List<String> SpeakerTime = this.speakerSchedule.get(speakerID);
 
         if (SpeakerTime.contains(dateTime)) {
             return false;
