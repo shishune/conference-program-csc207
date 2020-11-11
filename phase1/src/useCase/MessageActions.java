@@ -8,10 +8,7 @@ import gateway.LoadUpIGateway;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // TODO: Add appropriate return types for methods
 // TODO: Add all required methods
@@ -124,6 +121,8 @@ public class MessageActions {
                 userMessages.add(message.getValue());
             }
         }
+        // sort userMessages by time sent
+        Collections.sort(userMessages, (m1, m2) -> m1.getTimeSent().compareTo(m2.getTimeSent()));
         return userMessages;
     }
 
@@ -138,6 +137,8 @@ public class MessageActions {
                 userMessages.add(message.getValue());
             }
         }
+        // sort userMessages by time sent
+        Collections.sort(userMessages, (m1, m2) -> m1.getTimeSent().compareTo(m2.getTimeSent()));
         return userMessages;
     }
 
