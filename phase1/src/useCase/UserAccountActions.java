@@ -1,14 +1,7 @@
 package useCase;
 
-import entities.Attendee;
-import entities.Event;
 import entities.User;
-import useCase.GenerateID;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
@@ -20,22 +13,20 @@ public class UserAccountActions {
         return usersHashMap;
     }
 
-    public boolean addUserIdToHashMap(User addMe){
+    public void addUserIdToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getId())){
-            return false;
+            usersHashMap.put(addMe.getId(), addMe);
         }
-        usersHashMap.put(addMe.getId(), addMe);
-        return true;
+
     }
 
-    public boolean addUsernameToHashMap(User addMe){
+    public void addUsernameToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getUsername())){
-            return false;
+            usersHashMap.put(addMe.getUsername(), addMe);
         }
-        usersHashMap.put(addMe.getUsername(), addMe);
-        return true;
+
     }
 
     public boolean removeUserIdFromHashMap(User removeMe){

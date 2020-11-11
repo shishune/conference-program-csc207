@@ -23,6 +23,13 @@ public class AttendeeActions extends UserAccountActions{
         return attendeeUsernameHashMap;
     }
 
+    private AttendeeActions(LoadUpIGateway loader) {
+        getAllAttendees(loader); // gets all messages from message.csv
+        addAttendeeToHashMap();
+        // adds those messages to a hashmap of all messages from the csv
+        // with message ID as key and message object as value
+    }
+
     public User createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
@@ -37,13 +44,6 @@ public class AttendeeActions extends UserAccountActions{
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         return userAttendee;    }
-
-    private void loadUpMethodAttendees(LoadUpIGateway loader) {
-        getAllAttendees(loader); // gets all messages from message.csv
-        addAttendeeToHashMap();; // adds those messages to a hashmap of all messages from the csv
-        // with message ID as key and message object as value
-    }
-    // TODO: ADD THIS METHOD INSTEAD TO LOGIN,, i think
 
     private void getAllAttendees(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway

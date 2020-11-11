@@ -27,6 +27,12 @@ public class OrganizerActions extends UserAccountActions {
 
     private LoadUp loader = new LoadUp();
 
+    private OrganizerActions(LoadUpIGateway loader) {
+        getAllOrganizer(loader); // gets all messages from message.csv
+        addOrganizerToHashMap();; // adds those messages to a hashmap of all messages from the csv
+        // with message ID as key and message object as value
+    }
+
     public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userOrganizer);
@@ -61,13 +67,6 @@ public class OrganizerActions extends UserAccountActions {
         EventActions eventactions = new EventActions();
         return eventactions.cancelEvent(eventId);
     }
-
-    private void loadUpMethodAttendees(LoadUpIGateway loader) {
-        getAllOrganizer(loader); // gets all messages from message.csv
-        addOrganizerToHashMap();; // adds those messages to a hashmap of all messages from the csv
-        // with message ID as key and message object as value
-    }
-    // TODO: ADD THIS METHOD INSTEAD TO LOGIN,, i think
 
     private void getAllOrganizer(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
