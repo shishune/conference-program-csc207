@@ -10,7 +10,7 @@ import useCase.GenerateID;
 
 /**
  * A use case class that stores a list of rooms and can add/remove rooms.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class RoomActions {
