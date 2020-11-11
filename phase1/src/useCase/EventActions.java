@@ -1,9 +1,6 @@
 package useCase;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
 
 import entities.*;
 import gateway.LoadUp;
@@ -13,7 +10,7 @@ public class EventActions  {
     public HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
-    public HashMap<String, List<String>> timeSchedule; // roomID: date
+    public HashMap<String, List<String>> roomSchedule; // roomID: date
     public HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
     public HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
@@ -47,6 +44,24 @@ public class EventActions  {
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
+        this.attendees.put(eventID, attendees);
+
+        if (speakerSchedule.containsKey(speakerId)){
+            speakerSchedule.get(speakerId).add(dateTime);
+
+        } else {
+            List<String> speakerTimes = new ArrayList<>();
+            speakerTimes.add(dateTime);
+            speakerSchedule.put(speakerId, speakerTimes);
+        }
+        if (roomSchedule.containsKey(roomID)){
+            roomSchedule.get(roomID).add(dateTime);
+
+        } else {
+            List<String> roomTimes = new ArrayList<>();
+            roomTimes.add(dateTime);
+            roomSchedule.put(roomID, roomTimes);
+        }
 
     }
 
@@ -80,9 +95,8 @@ public class EventActions  {
         List<String> eventAttendees = this.attendees.get(eventID);
         this.attendees.remove(eventID);
         this.speakerSchedule.remove(event.getSpeaker(), event.getDateTime());
-        this.timeSchedule.remove(event.getRoomID(), event.getDateTime());
+        this.roomSchedule.remove(event.getRoomID(), event.getDateTime());
         return eventAttendees;
-
 
     }
 
@@ -91,8 +105,14 @@ public class EventActions  {
         Event event = this.events.get(eventID);
         if(isRoomFree(event.getRoomID(), newDateTime) &&
                 isSpeakerFree(event.getSpeaker(), newDateTime)){
+
+            this.speakerSchedule.get(event.getSpeaker()).remove(event.getDateTime());
+            this.roomSchedule.get(event.getRoomID()).remove(event.getDateTime());
+
             event.setDateTime(newDateTime); // TODO will this change the event?
-            // TODO this.speakerSchedule;
+            this.speakerSchedule.get(event.getSpeaker()).add(event.getDateTime());
+            this.roomSchedule.get(event.getRoomID()).add(event.getDateTime());
+
             return true;
         }
         return false;
@@ -101,7 +121,7 @@ public class EventActions  {
 
     public boolean isRoomFree(String roomID, String dateTime){
 
-        List<String> roomTime = this.timeSchedule.get(roomID);
+        List<String> roomTime = this.roomSchedule.get(roomID);
 
         if (roomTime.contains(dateTime)) {
             return false;

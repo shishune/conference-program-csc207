@@ -18,8 +18,8 @@ public class EventTests {
     public void testEventmaker() {
         EventActions eventActions = new EventActions();
         eventActions.events = new HashMap<String,Event>();
-        eventActions.timeSchedule = new HashMap<String, List<String>>();
-        eventActions.timeSchedule.put("Toronto", new ArrayList<String>());
+        eventActions.roomSchedule = new HashMap<String, List<String>>();
+        eventActions.roomSchedule.put("Toronto", new ArrayList<String>());
         eventActions.speakerSchedule = new HashMap<String, List<String>>();
         eventActions.speakerSchedule.put("Mike", new ArrayList<String>());
         boolean lions = eventActions.createEvent("Lions", "Mike","2020-10-13 2", new ArrayList<>(), "Toronto");

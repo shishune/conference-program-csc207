@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import useCase.*;
+import entities.*;
 
 public class OrganizerController extends UserManager{
     public MessageActions messageActions;
@@ -32,29 +33,28 @@ public class OrganizerController extends UserManager{
         return this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
     }
 
-    // TODO Cancel Event
+
     public boolean cancelEvent(String eventID){
         if (this.eventActions.events.containsKey(eventID)){
             List<String> eventAttendees = this.eventActions.cancelEvent(eventID);
             for (String attendeeID: eventAttendees){
                 this.userAccountActions.removeEventFromUser(eventID, attendeeID);
             }
-
             return true;
         }
         return false;
     }
 
-    // TODO  create speakers ... would there be reasons to not be able to create a speaker?
+    // TODO would there be reasons to not be able to create a speaker?
     public void createSpeaker(String username, String password){
-        this.speakerActions.createSpeaker(username, password, new ArrayList<>(), new ArrayList<>(), false);
-
+        User speaker = this.speakerActions.createSpeaker(username, password, new ArrayList<>(), new ArrayList<>(), false);
+        this.eventActions.speakerSchedule.put(speaker.getId(), new ArrayList<>());
     }
 
 
-    // TODO Create rooms
     public void createRoom(){
-        this.roomActions.createRoom();
+        String roomID = this.roomActions.createRoom();
+        this.eventActions.roomSchedule.put(roomID, new ArrayList<>());
     }
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times
@@ -66,13 +66,12 @@ public class OrganizerController extends UserManager{
         // boolean
     }
 
-    // TODO Reschedule events
+
     public boolean rescheduleEvent(String eventID, String newDateTime){
         return this.eventActions.changeEventTime(eventID, newDateTime);
     }
 
 
-    // TODO Send message to all attendees of an event
     public void sendAttendeesMessage(String eventID, String message){
         List<String> attendees = this.eventActions.attendees.get(eventID);
 
