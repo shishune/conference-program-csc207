@@ -46,7 +46,7 @@ public class AttendeeActions extends UserAccountActions{
     // TODO: ADD THIS METHOD INSTEAD TO LOGIN,, i think
 
     private void getAllAttendees(LoadUpIGateway loader) {
-        LoadUp loader = new LoadUp(); // this is okay because IGateway
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         attendees = loader.getAttendees();
     }
 
