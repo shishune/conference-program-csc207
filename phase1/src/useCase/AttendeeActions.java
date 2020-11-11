@@ -23,7 +23,7 @@ public class AttendeeActions extends UserAccountActions{
         return attendeeUsernameHashMap;
     }
 
-    private AttendeeActions(LoadUpIGateway loader) {
+    public AttendeeActions(LoadUpIGateway loader) {
         getAllAttendees(loader); // gets all messages from message.csv
         addAttendeeToHashMap();
         // adds those messages to a hashmap of all messages from the csv

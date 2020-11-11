@@ -36,8 +36,8 @@ public class LogIn {
         UserAccountActions userAccountActions = new UserAccountActions();
         RoomActions roomActions = new RoomActions();
         SpeakerActions speakerActions = new SpeakerActions();
-        OrganizerActions organizerActions = new OrganizerActions();
-        AttendeeActions attendeeActions = new AttendeeActions();
+        OrganizerActions organizerActions = new OrganizerActions(g);
+        AttendeeActions attendeeActions = new AttendeeActions(g);
 
         if (l.isLogin(username, password)) {
             return u.usersHashMap.get(username).getId();

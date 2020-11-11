@@ -27,7 +27,7 @@ public class OrganizerActions extends UserAccountActions {
 
     private LoadUp loader = new LoadUp();
 
-    private OrganizerActions(LoadUpIGateway loader) {
+    public OrganizerActions(LoadUpIGateway loader) {
         getAllOrganizer(loader); // gets all messages from message.csv
         addOrganizerToHashMap();; // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
