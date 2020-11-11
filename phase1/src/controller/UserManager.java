@@ -15,7 +15,7 @@ public class UserManager {
         UserAccountActions user = new UserAccountActions();
         if (user.findUserFromUsername(sender).getContactsList().contains(receiver)){
             MessageActions newMessage = new MessageActions();
-            //newMessage.createMessage(sender, receiver, content);
+            newMessage.createMessage(sender, receiver, content);
             return true;
         }
         return false;

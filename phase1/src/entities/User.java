@@ -29,6 +29,8 @@ public abstract class User{
         return isLogin;
     }
 
+    public boolean getIsOrganizer() { return isOrganizer; }
+
     public List<String> getContactsList(){
         return contactsList;
     }
@@ -53,11 +55,13 @@ public abstract class User{
         this.eventList = eventList;
     }
 
+    public void setLogin(boolean bool) {this.isLogin = bool;}
+
     public abstract String getId();
 
     public String stringRepresentation() {
-        String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "$");
-        String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "$");
+        String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "*$*");
+        String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "*$*");
 
         return userId + ", " + username + ", " + password + ", " + contacts + ", " + events + ", " + isLogin + ", " +isOrganizer + ", " ;
     }

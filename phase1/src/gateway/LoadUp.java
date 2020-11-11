@@ -14,6 +14,9 @@ public class LoadUp implements LoadUpIGateway {
     // ArrayList<String> organizers = null;
     // etc.etc. one for every .csv
     private ArrayList<String> rooms;
+    private ArrayList<String> attendees = null;
+    private ArrayList<String> organizers = null;
+    protected int objectId;
 
     public LoadUp() {
         // these might be moved elsewhere, idk yet
@@ -86,11 +89,51 @@ public class LoadUp implements LoadUpIGateway {
             e.printStackTrace();
         }
         return messages;
+    }
 
+    public ArrayList<String> getAttendees() {
+        // gets list of attendees from attendees.csv and sets it to <attendeesHM>
+        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/attendees.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                attendees.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return attendees;
+    }
 
+    public ArrayList<String> getOrganizers() {
+        // gets list of messages from messages.csv and sets it to <messages>
+        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/organizers.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                organizers.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return organizers;
     }
 
 
+    public int getNumOfIds() {
+        String filename = "entityIds.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                objectId++;
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            // TODO: tell user error was generated
+            e.printStackTrace();
+        }
+        return objectId;
+    }
 
 
 
