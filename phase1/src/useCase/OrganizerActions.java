@@ -70,7 +70,7 @@ public class OrganizerActions extends UserAccountActions {
     // TODO: ADD THIS METHOD INSTEAD TO LOGIN,, i think
 
     private void getAllOrganizer(LoadUpIGateway loader) {
-        LoadUp loader = new LoadUp(); // this is okay because IGateway
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         organizers = loader.getAttendees();
     }
 

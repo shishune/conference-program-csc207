@@ -29,6 +29,8 @@ public abstract class User{
         return isLogin;
     }
 
+    public boolean getIsOrganizer() { return isOrganizer; }
+
     public List<String> getContactsList(){
         return contactsList;
     }
@@ -52,6 +54,8 @@ public abstract class User{
     public void setEventList(List<String> eventList){
         this.eventList = eventList;
     }
+
+    public void setLogin(boolean bool) {this.isLogin = bool;}
 
     public abstract String getId();
 

@@ -16,6 +16,7 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> rooms;
     private ArrayList<String> attendees = null;
     private ArrayList<String> organizers = null;
+    protected int objectId;
 
     public LoadUp() {
         // these might be moved elsewhere, idk yet
@@ -117,6 +118,22 @@ public class LoadUp implements LoadUpIGateway {
     }
 
 
+    public int getNumOfIds() {
+        String filename = "entityIds.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                objectId++;
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            // TODO: tell user error was generated
+            e.printStackTrace();
+        }
+        return objectId;
+    }
 
 
 
