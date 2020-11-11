@@ -1,14 +1,13 @@
 package controller;
 
 import entities.Event;
+import entities.Room;
 import entities.User;
 import entities.Message;
-import useCase.MessageActions;
-import useCase.UserAccountActions;
-import useCase.EventActions;
+import useCase.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.*;
 
 public class UserManager {
 
@@ -32,43 +31,98 @@ public class UserManager {
         return userAccount.removeUserContactList(toMe, removeMe);
     };
 
-    public String viewMessage(Message fromMe, Message toMe){
-        return null;
-        //TODO
-    };
+//    public String viewMessageOneSender (String fromMe){
+//        MessageActions messageActions = new MessageActions();
+//        return messageActions.printMessages(fromMe).toString();
+//    };
+
+    public String viewMessages (String fromMe, String toMe) {
+        MessageActions messageActions = new MessageActions();
+        return messageActions.printMessages(fromMe, toMe).toString();
+    }
 
     public boolean signupEvent(String event, String user){
-        EventActions newEvent = new EventActions();
-        newEvent.events.get(event).addAttendee(user);
+        EventActions e = new EventActions();
+        e.events.get(event).addAttendee(user);
 
-        //Event event1 = newEvent.getEvent(event)
-        //if checkConfictTime and checkConfictSpots are both false, then add user
+        Event e1 = e.events.get(event);
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
 
+        if (checkConflictSpots(event) && (checkConflictTime(user, event))){
+            e.addAttendee(e1.getId(), a1.getId());
+            a1.getEventList().add(event);
+            return true;
+        }
+        return false;
+    };
+
+//    public boolean cancelSpotEvent(String event, String user){
+//        AttendeeActions a = new AttendeeActions();
+//        User a1 = a.usersHashMap.get(user);
+//        String userId = a1.getId();
+//        if (userId.charAt(0) == 'A') {
+//            if () {
+//                EventActions e = new EventActions();
+//                e.events.get(event).removeAttendee(user);
 //
-//        boolean added = user.getEventList().add(event.getId());
-//        boolean result = newEvent.addAttendee(event.getId(), user.getId());
+//                Event e1 = e.events.get(event);
+//                AttendeeActions a = new AttendeeActions();
+//                User a1 = a.usersHashMap.get(user);
+//
+//                e.removeAttendee(e1.getId(), a1.getId());
+//                a1.getEventList().remove(event);
+//                return true;
+//            }
+//        }
+//
+//    };
+
+    public String viewOwnSchedule(String user){
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
+        return a1.getEventList().toString();
     };
 
-    public boolean cancelSpotEvent(){
+    public String viewAvailableSchedule(String user){
+        AttendeeActions a = new AttendeeActions();
+        User a1 = a.usersHashMap.get(user);
 
-    };
+        EventActions e = new EventActions();
+        Set<String> allEvents = e.events.keySet();
+        StringBuilder availableS = new StringBuilder();
 
-    public String viewOwnSchedule(){
+        Iterator<HashMap.Entry<String,Event>> it = e.events.entrySet().iterator();
+        while (it.hasNext()){
+            HashMap.Entry<String, Event> p = (HashMap.Entry <String, Event>)it.next();
+            availableS.append(p);
+            it.remove();
+        }
+        return availableS.toString();
+        //TODO: this might not work, would rather use a list
 
-    };
+//        String availableEvents;
+//        for (int i = 0; i < allEvents.size(); i++) {
+//
+//            Event curr = e.events.get()
 
-    public String viewAvailableSchedule(){
+    }
 
-    };
+    public int spotsAvailable(String event){
+        EventActions e = new EventActions();
+        String room = e.events.get(event).getRoomID();
 
-    public int spotsAvailable(){
+        RoomActions r = new RoomActions();
+        Room r1 = r.returnHashMap().get(room);
+
+        return r1.getCapacity() - e.events.get(event).getAttendees().size();
 
     };
 
     public boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
         EventActions e = new EventActions();
-        LocalDateTime timeEvent = e.events.get(event).getDateTime();
+        String timeEvent = e.events.get(event).getDateTime();
 
         UserAccountActions u = new UserAccountActions();
         User user = u.findUserFromUsername(username);
@@ -79,9 +133,9 @@ public class UserManager {
 
             EventActions eO = new EventActions();
 
-            LocalDateTime time = eO.events.get(name).getDateTime();
+            String time = eO.events.get(name).getDateTime();
 
-            if (time == timeEvent){
+            if (time.equals(timeEvent)){
                 return true;
             }
         }
@@ -89,12 +143,13 @@ public class UserManager {
         return false;
     };
 
-    public boolean checkConflictSpots(String username, String event){
+    public boolean checkConflictSpots(String event){
+        return spotsAvailable(event) > 0;
 
-
-    };
+    }
 
 }
+
 
 /*      Send and receive messages
         Add contacts
@@ -106,3 +161,4 @@ public class UserManager {
         View available schedule(s)
         Number of spots left
         Check conflict with timing and spots*/
+

@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
-
-    //do we need another interface for this like the loadup
+public class Store implements StoreIGateway{
+    //idk, just an idea
+    @Override
     public void storeRooms(ArrayList<String> rooms) {
         try {
             FileWriter csvWriter = new FileWriter("rooms.csv");
@@ -25,4 +25,5 @@ public class Store {
             e.printStackTrace();
         }
     }
+
 }

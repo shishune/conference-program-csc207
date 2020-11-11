@@ -8,33 +8,30 @@ import gateway.LoadUpIGateway;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 // TODO: Add appropriate return types for methods
 // TODO: Add all required methods
 
 public class MessageActions {
-    private ArrayList<String> conversations = null;
-    private List<String> userMessages = null;
+    private ArrayList<String> conversations = new ArrayList<String>(); // list containing loaded messages
+    private HashMap<String, Message> messages; // hashmap containing all loaded and new messages
 
-    public HashMap<String, Message> messages; // hashmap containing all loaded and new messages
-
-    // hash of messages with sender's ID as key
-    // and a list of all messages sent or received by the sender as value
-    public HashMap<String, List<Message>> senderMessages;
-
-    public MessageActions() {
-        getAllMessages(); // gets all messages from message.csv
+    public MessageActions(LoadUpIGateway loader) {
+        getAllMessages(loader); // gets all messages from message.csv
         addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
     }
 
     /** Create a message with unique ID as a parameter **/
+    public Message createMessage(String messageId, String senderId, String receiverId, String message, String sentTime) {
+        Message newMessage = new Message(messageId, senderId, receiverId, message, sentTime);
+        loadMessage(messageId, newMessage);
+        return newMessage;
+    }
+
+    /** Create a message with unique ID as a parameter **/
     public Message createMessage(String messageId, String senderId, String receiverId, String message) {
-        // TODO: Set return type to Message
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);
         return newMessage;
@@ -42,7 +39,6 @@ public class MessageActions {
 
     /** Create a message and generate unique ID for message **/
     public Message createMessage(String senderId, String receiverId, String message) {
-        // TODO: Set return type to Message
         GenerateID generateID = new GenerateID();
         String messageId = "M" + generateID;
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
@@ -67,7 +63,6 @@ public class MessageActions {
      * @return time of Message construction (converted to Toronto time)
      * */
     private String generateSentTime() {
-        // TODO: Move to Use Case Class
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
 
         // get local time in toronto time zone
@@ -82,8 +77,8 @@ public class MessageActions {
     }
 
     /** gets list of messages from the IGateway **/
-    private void getAllMessages() {
-        LoadUp loader = new LoadUp(); // this is okay because IGateway
+    private void getAllMessages(LoadUpIGateway loader) {
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         conversations = loader.getMessagesList();
     }
 
@@ -98,9 +93,6 @@ public class MessageActions {
         }
     }
 
-
-    //=======================================
-
     /**
      * Send message to a specific user
      **/
@@ -113,12 +105,23 @@ public class MessageActions {
      **/
     public List<Message> printMessages(String senderId) {
         // presenter should call this method and turn array into output
-        ArrayList<Message> userMessages = null;
+        List<Message> userMessages = new ArrayList<Message>();
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            if(message.getKey() == senderId) {
+            if(message.getKey().equals(senderId)) {
                 userMessages.add(message.getValue());
             }
         }
+        // sort userMessages by time sent
+        userMessages.sort(Comparator.comparing(Message::getTimeSent));
+
+        /**
+         //If return ids instead of objects
+         ArrayList<String> messageIds = new ArrayList<String>();
+         for(Message message : userMessages) {
+            messageIds.add(message.getMessageId());
+         }
+         return messageIds;
+         **/
         return userMessages;
     }
 
@@ -127,23 +130,30 @@ public class MessageActions {
      **/
     public List<Message> printMessages(String senderId, String receiverId) {
         // presenter should call this method and turn array into output
-        ArrayList<Message> userMessages = null;
+        ArrayList<Message> userMessages = new ArrayList<Message>();
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            if(message.getKey() == senderId && message.getValue().getReceiverId() == receiverId) {
+            if(message.getKey().equals(senderId) && message.getValue().getReceiverId().equals(receiverId)) {
                 userMessages.add(message.getValue());
             }
         }
+        // sort userMessages by time sent
+        userMessages.sort(Comparator.comparing(Message::getTimeSent));
         return userMessages;
+    }
+
+    /** For if presenter needs to access message using its Id (for printMessages) **/
+    public String getMessageFromMap(String messageId) {
+        return messages.get(messageId).getStringRep();
     }
 
     /**
      * Returns an array of all messages (new and old) for storage
      **/
-    public List<Message> storeMessages() {
-        ArrayList<Message> allMessages = null;
+    public List<String> storeMessages() {
+        ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            allMessages.add(message.getValue());
+            allMessages.add(message.getValue().getStringRep());
         }
         return allMessages;
     }

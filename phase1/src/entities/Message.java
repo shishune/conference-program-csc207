@@ -40,7 +40,6 @@ public class Message {
      * @return time of Message construction (converted to Toronto time)
      * */
     private String generateSentTime() {
-        // TODO: Move to Use Case Class
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
 
         // get local time in toronto time zone
