@@ -1,5 +1,6 @@
 package controller;
 
+import entities.Attendee;
 import gateway.LoadUp;
 import gateway.LoadUpIGateway;
 import entities.Organizer;
@@ -14,6 +15,7 @@ public class LogIn {
     public RoomActions roomActions;
     public SpeakerActions speakerActions;
     public OrganizerActions organizerActions;
+    public AttendeeActions attendeeActions;
 
     // calls LoadUp
     // calls next thingy; UserDashboard for example
@@ -28,6 +30,7 @@ public class LogIn {
         RoomActions roomActions = new RoomActions();
         SpeakerActions speakerActions = new SpeakerActions();
         OrganizerActions organizerActions = new OrganizerActions();
+        AttendeeActions attendeeActions = new AttendeeActions();
 
 
         // please move this information into the login if statement or however that works. i just need an organizer
