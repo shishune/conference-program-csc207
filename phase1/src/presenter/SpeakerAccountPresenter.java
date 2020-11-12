@@ -12,9 +12,9 @@ public class SpeakerAccountPresenter extends AccountPresenter{
      * Prints the main menu
      * */
     public void printMainMenu(){
-        String display = basicMenu
-                + "[6] View your schedule of talks"
-                + "Please select a menu item number.";
+        String display = ""
+                + "\n[6] View your schedule of talks"
+                + "\nPlease select a menu item number.";
         System.out.println(display);
     }
 }

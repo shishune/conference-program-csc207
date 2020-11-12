@@ -11,13 +11,13 @@ public class OrganizerAccountPresenter extends AccountPresenter{
      * Prints the main menu
      * */
     public void printMainMenu(){
-        String display = basicMenu
-                + "[6] Add an event"
-                + "[7] Remove an event"
-                + "[8] View all events"
-                + "[9] Add room"
-                + "[10] Remove room"
-                + "Please select a menu item number.";
+        String display = ""
+                + "\n[6] Add an event"
+                + "\n[7] Remove an event"
+                + "\n[8] View all events"
+                + "\n[9] Add room"
+                + "\n[10] Remove room"
+                + "\nPlease select a menu item number.";
         System.out.println(display);
     }
 }

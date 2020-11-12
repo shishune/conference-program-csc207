@@ -11,12 +11,12 @@ public class AttendeeAccountPresenter extends AccountPresenter{
      * Prints the main menu
      * */
     public void printMainMenu(){
-        String display = basicMenu
-                + "[6] Sign up for an event"
-                + "[7] Cancel enrollment for an event"
-                + "[8] View your schedule of events"
-                + "[9] View all events"
-                + "Please select a menu item number.";
+        String display = ""
+                + "\n[6] Sign up for an event"
+                + "\n[7] Cancel enrollment for an event"
+                + "\n[8] View your schedule of events"
+                + "\n[9] View all events"
+                + "\nPlease select a menu item number.";
         System.out.println(display);
     }
 }

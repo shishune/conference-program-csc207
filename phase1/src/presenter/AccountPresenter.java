@@ -6,7 +6,7 @@ package presenter;
  * @author Cynthia
  * @version 1
  * */
-abstract class AccountPresenter {
+public class AccountPresenter {
     String basicMenu = ""
             + "[1] Log out"
             + "[2] Send a message"
@@ -17,7 +17,9 @@ abstract class AccountPresenter {
     /**
      * An abstract class. Prints the main menu
      * */
-    public abstract void printMainMenu();
+    public void printBasicMenu(){
+        System.out.println(basicMenu);
+    }
 
     /**
      * Prompt for username
@@ -31,6 +33,10 @@ abstract class AccountPresenter {
      * */
     public void promptPassword(){
         System.out.println("Please enter your password.");
+    }
+
+    public void failedLogin(){
+        System.out.println("Either your username or password is incorrect.");
     }
 
     /**

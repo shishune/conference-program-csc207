@@ -6,6 +6,7 @@ import gateway.LoadUp;
 import gateway.LoadUpIGateway;
 import entities.Organizer;
 import useCase.*;
+import presenter.AccountPresenter;
 
 import java.util.ArrayList;
 
@@ -24,11 +25,12 @@ public class LogIn {
     // tada! done with LogIn stuff
     // initialize all the usecase classes here
 
-
+    //Cynthia: made some edits to interact with presenter classes
     public String loggingIn(String username, String password) {
 
         LoginActions l = new LoginActions();
         UserAccountActions u = new UserAccountActions();
+        AccountPresenter messages = new AccountPresenter();
 
         LoadUpIGateway g = new LoadUp();
         MessageActions messageActions = new MessageActions(g);
@@ -43,6 +45,7 @@ public class LogIn {
             return u.usersHashMap.get(username).getId();
             }
 
-            return "LogIn Failed";
+            messages.failedLogin();
+            return null;
         }
     }
