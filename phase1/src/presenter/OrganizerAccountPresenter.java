@@ -1,17 +1,22 @@
 package presenter;
 
+/**
+ * A presenter class. This class is responsible for anything related to logging in,
+ * logging out, and navigating through the account. It also creates a menu specific to an organizer.
+ * @author Cynthia
+ * @version 1
+ * */
 public class OrganizerAccountPresenter extends AccountPresenter{
+    /**
+     * Prints the main menu
+     * */
     public void printMainMenu(){
-        String display = ""
-                + "[1] Send a message"
-                + "[2] View all messages"
-                + "[3] Add a contact"
-                + "[4] View all contacts"
-                + "[5] Add an event"
-                + "[6] Remove an event"
-                + "[7] View all events"
-                + "[8] Add room"
-                + "[9] Remove room"
+        String display = basicMenu
+                + "[6] Add an event"
+                + "[7] Remove an event"
+                + "[8] View all events"
+                + "[9] Add room"
+                + "[10] Remove room"
                 + "Please select a menu item number.";
         System.out.println(display);
     }
