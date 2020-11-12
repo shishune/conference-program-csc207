@@ -149,12 +149,14 @@ public class EventActions  {
     }
 
     // TODO
-//    public List<String> storeEvents(){
-//        List<String> storedEvents = new ArrayList();
-//        for (Event event: events){
-//            storedEvents.add(event.toString());
-//        }
-//        return storedEvents;
-//
-//    }
+
+    public List<String> storeEvents(){
+        List<String> storedEvents = new ArrayList();
+        for(Map.Entry<String, Event> event : events.entrySet()) {
+            storedEvents.add(event.getValue().string());
+        }
+
+        return storedEvents;
+
+    }
 }
