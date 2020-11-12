@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.HashMap;
 
 public class UserAccountActions {
-    // TODO: hashmap the contains all the user objects; key is userID, value is userObject
+    // hashmap the contains all the user objects; key is userID, value is userObject
     public HashMap<String, User> usersHashMap;
 
     public HashMap<String, User> returnUsersHashMap(){
