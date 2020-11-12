@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class LogIn {
 
-    public MessageActions messageActions;
+/*    public MessageActions messageActions;
     public EventActions eventActions;
     public UserAccountActions userAccountActions;
     public RoomActions roomActions;
@@ -48,7 +48,7 @@ public class LogIn {
         messages.failedLogin();
         return null;
 
-    }
+    }*/
 
     //alternative. let me know if you disagree
     public User logIn(String username, String password, UserAccountActions u) {
