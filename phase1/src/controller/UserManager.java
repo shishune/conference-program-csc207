@@ -92,14 +92,22 @@ public class UserManager {
         EventActions e = new EventActions();
         Set<String> allEvents = e.events.keySet();
         StringBuilder availableS = new StringBuilder();
+        List<String> targetList = new ArrayList<>(allEvents);
 
-        Iterator<HashMap.Entry<String,Event>> it = e.events.entrySet().iterator();
-        while (it.hasNext()){
-            HashMap.Entry<String, Event> p = (HashMap.Entry <String, Event>)it.next();
-            availableS.append(p);
-            it.remove();
+        for (String s: targetList){
+            if (!(checkConflictTime(user, s) && checkConflictSpots(s))){
+                availableS.append(s);
+            }
         }
         return availableS.toString();
+
+//        Iterator<HashMap.Entry<String,Event>> it = e.events.entrySet().iterator();
+//        while (it.hasNext()){
+//            HashMap.Entry<String, Event> p = (HashMap.Entry <String, Event>)it.next();
+//            availableS.append(p);
+//            it.remove();
+//        }
+//        return availableS.toString();
         //TODO: this might not work, would rather use a list
 
 //        String availableEvents;
@@ -120,7 +128,7 @@ public class UserManager {
 
     };
 
-    public boolean checkConflictTime(String username, String event){
+    private boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
         EventActions e = new EventActions();
         String timeEvent = e.events.get(event).getDateTime();
@@ -144,8 +152,8 @@ public class UserManager {
         return false;
     };
 
-    public boolean checkConflictSpots(String event){
-        return spotsAvailable(event) > 0;
+    private boolean checkConflictSpots(String event){
+        return spotsAvailable(event) == 0;
 
     }
 
