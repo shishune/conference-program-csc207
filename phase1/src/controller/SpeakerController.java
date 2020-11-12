@@ -5,7 +5,7 @@ import useCase.*;
 
 import java.util.List;
 
-public class SpeakerController extends UserManager {
+public class SpeakerController extends UserController {
     private String SpeakerID;
     public MessageActions messageActions;
     public EventActions eventActions;
@@ -15,17 +15,13 @@ public class SpeakerController extends UserManager {
     public OrganizerActions organizerActions;
 
 
-    public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions,
-                             UserAccountActions userAccountActions, RoomActions roomActions,
-                             SpeakerActions speakerActions, OrganizerActions organizerActions) {
-        this.messageActions = messageActions;
-        this.eventActions = eventActions;
-        this.userAccountActions = userAccountActions;
-        this.roomActions = roomActions;
-        this.speakerActions = speakerActions;
-        this.organizerActions = organizerActions;
-        this.SpeakerID = SpeakerID;
+    public SpeakerController(String organizerID, MessageActions messageActions, EventActions eventActions,
+                               UserAccountActions userAccountActions, RoomActions roomActions,
+                               SpeakerActions speakerActions, OrganizerActions organizerActions, AttendeeActions attendeeActions){
 
+        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+
+        this.SpeakerID = organizerID;
     }
 
     public void sendmessage(String eventID, String message) {

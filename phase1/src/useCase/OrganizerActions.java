@@ -73,7 +73,7 @@ public class OrganizerActions extends UserAccountActions {
 
     private void getAllOrganizer(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
-        organizers = loader.getAttendees();
+        organizers = loader.getAllOrganizers();
     }
 
     private void addOrganizerToHashMap() {

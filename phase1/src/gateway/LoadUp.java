@@ -91,7 +91,7 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
-    public ArrayList<String> getAttendees() {
+    public ArrayList<String> getAllAttendees() {
         // gets list of attendees from attendees.csv and sets it to <attendeesHM>
         try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/attendees.csv"))) {
             String line = null;
@@ -104,7 +104,7 @@ public class LoadUp implements LoadUpIGateway {
         return attendees;
     }
 
-    public ArrayList<String> getOrganizers() {
+    public ArrayList<String> getAllOrganizers() {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/organizers.csv"))) {
             String line = null;
@@ -119,7 +119,7 @@ public class LoadUp implements LoadUpIGateway {
 
 
     public int getNumOfIds() {
-        String filename = "entityIds.csv";
+        String filename = "entities.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;
 
