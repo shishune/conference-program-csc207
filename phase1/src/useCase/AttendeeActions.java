@@ -49,7 +49,7 @@ public class AttendeeActions extends UserAccountActions{
 
     private void getAllAttendees(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
-        attendees = loader.getAttendees();
+        attendees = loader.getAllAttendees();
     }
 
     private void addAttendeeToHashMap() {
