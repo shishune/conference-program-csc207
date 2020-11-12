@@ -6,5 +6,5 @@ package presenter;
  *      send to all attendees of an event or multiple events
  *      respond to a message from a specific attendee
  */
-public class SpeakerMessagePresenter {
+public class SpeakerMessagePresenter extends MessagePresenter{
 }

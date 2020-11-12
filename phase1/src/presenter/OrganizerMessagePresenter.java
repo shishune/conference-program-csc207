@@ -8,5 +8,5 @@ package presenter;
  *      send message to all attendees
  *      send message to a single attendee
  */
-public class OrganizerMessagePresenter {
+public class OrganizerMessagePresenter extends MessagePresenter{
 }

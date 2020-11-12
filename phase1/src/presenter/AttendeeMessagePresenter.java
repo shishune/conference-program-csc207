@@ -5,5 +5,5 @@ package presenter;
  *      send to a speaker
  * display events that this user can send a message to (for sending to a speaker)
  */
-public class AttendeeMessagePresenter {
+public class AttendeeMessagePresenter extends MessagePresenter{
 }
