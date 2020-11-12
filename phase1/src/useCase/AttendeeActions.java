@@ -65,7 +65,8 @@ public class AttendeeActions extends UserAccountActions{
             for (String c: contacts) {
                 contactList.add(c);
             }
-            Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList, eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
+            Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
+                    eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
             attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
             attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
         }
