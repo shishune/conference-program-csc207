@@ -9,8 +9,6 @@ prompt to log out
 prompt to exit program
 
  */
-public class AccountPresenter {
-    public void printMainMenu(){
-
-    }
+abstract class AccountPresenter {
+    public abstract void printMainMenu();
 }

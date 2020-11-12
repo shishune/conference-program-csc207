@@ -1,15 +1,16 @@
 package presenter;
-/*
-Display main menu with these options:
-Send message [1]
-See messages [2]
-Add event [3]
-Remove event [4]
-See all events [5]
-Add room [6]
-Remove room [7]
-A prompt to choose a menu item number
 
- */
 public class OrganizerAccountPresenter extends AccountPresenter{
+    public void printMainMenu(){
+        String display = ""
+                + "[1] Send a message"
+                + "[2] View all messages"
+                + "[3] Add an event"
+                + "[4] Remove an event"
+                + "[5] View all events"
+                + "[6] Add room"
+                + "[7] Remove room"
+                + "Please select a menu item number.";
+        System.out.println(display);
+    }
 }
