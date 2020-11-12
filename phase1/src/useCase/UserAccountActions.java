@@ -1,41 +1,32 @@
 package useCase;
 
-import entities.Attendee;
-import entities.Event;
 import entities.User;
-import useCase.GenerateID;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
 public class UserAccountActions {
-    // TODO: hashmap the contains all the user objects; key is userID, value is userObject
+    // hashmap the contains all the user objects; key is userID, value is userObject
     public HashMap<String, User> usersHashMap;
 
     public HashMap<String, User> returnUsersHashMap(){
         return usersHashMap;
     }
 
-    public boolean addUserIdToHashMap(User addMe){
+    public void addUserIdToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getId())){
-            return false;
+            usersHashMap.put(addMe.getId(), addMe);
         }
-        usersHashMap.put(addMe.getId(), addMe);
-        return true;
+
     }
 
-    public boolean addUsernameToHashMap(User addMe){
+    public void addUsernameToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getUsername())){
-            return false;
+            usersHashMap.put(addMe.getUsername(), addMe);
         }
-        usersHashMap.put(addMe.getUsername(), addMe);
-        return true;
+
     }
 
     public boolean removeUserIdFromHashMap(User removeMe){
@@ -95,17 +86,13 @@ public class UserAccountActions {
             return true;
         }}
 
-    public boolean removeEventFromUser(String event, String user) {
+    public void removeEventFromUser(String event, String user) {
         User userOne = usersHashMap.get(user);
             boolean isPresent = userOne.getEventList().contains(event);
-            if (!isPresent) {
-                return false;
-            }
-            else{
+            if (isPresent) {
                 List<String> userEvents = userOne.getEventList();
                 userEvents.remove(event);
                 userOne.setEventList(userEvents);
-                return true;
             }}
 
 

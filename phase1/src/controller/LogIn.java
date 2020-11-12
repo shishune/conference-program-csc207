@@ -32,13 +32,12 @@ public class LogIn {
 
         LoadUpIGateway g = new LoadUp();
         MessageActions messageActions = new MessageActions(g);
-        // how to fix controller --> messageAction.loadup(g); if this works??
         EventActions eventActions = new EventActions();
         UserAccountActions userAccountActions = new UserAccountActions();
         RoomActions roomActions = new RoomActions();
         SpeakerActions speakerActions = new SpeakerActions();
-        OrganizerActions organizerActions = new OrganizerActions();
-        AttendeeActions attendeeActions = new AttendeeActions();
+        OrganizerActions organizerActions = new OrganizerActions(g);
+        AttendeeActions attendeeActions = new AttendeeActions(g);
 
         if (l.isLogin(username, password)) {
             return u.usersHashMap.get(username).getId();
