@@ -5,27 +5,24 @@ import java.util.List;
 import useCase.*;
 import entities.*;
 
-public class OrganizerController extends UserManager{
+public class OrganizerController extends UserController{
     public MessageActions messageActions;
     public EventActions eventActions;
     public UserAccountActions userAccountActions;
     public RoomActions roomActions;
     public SpeakerActions speakerActions;
     public OrganizerActions organizerActions;
+    public AttendeeActions attendeeActions;
     private String organizerID;
 
 
-    public OrganizerController( String organizerID, MessageActions messageActions, EventActions eventActions,
+    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions,
                                 UserAccountActions userAccountActions, RoomActions roomActions,
-                                SpeakerActions speakerActions, OrganizerActions organizerActions){
-        this.messageActions = messageActions;
-        this.eventActions = eventActions;
-        this.userAccountActions = userAccountActions;
-        this.roomActions = roomActions;
-        this.speakerActions = speakerActions;
-        this.organizerActions = organizerActions;
-        this.organizerID = organizerID;
+                                SpeakerActions speakerActions, OrganizerActions organizerActions, AttendeeActions attendeeActions){
 
+        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+
+        this.organizerID = organizerID;
     }
 
     public boolean createEvent(String title, String speakerId, String dateTime,
