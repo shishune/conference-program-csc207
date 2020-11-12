@@ -77,6 +77,7 @@ public class UserManager {
 //        }
 //
 //    };
+    //TODO: organizers are the only ones that can cancel events (unfinished)
 
     public String viewOwnSchedule(String user){
         AttendeeActions a = new AttendeeActions();

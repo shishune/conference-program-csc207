@@ -89,7 +89,8 @@ public class OrganizerActions extends UserAccountActions {
             for (String c: contacts) {
                 contactList.add(c);
             }
-            Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList, eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
+            Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
+                    eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
             organizerHashMap.put(organizerInfo[0], loadedOrganizer);
             organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
         }
