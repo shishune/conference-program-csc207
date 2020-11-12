@@ -5,11 +5,13 @@ public class OrganizerAccountPresenter extends AccountPresenter{
         String display = ""
                 + "[1] Send a message"
                 + "[2] View all messages"
-                + "[3] Add an event"
-                + "[4] Remove an event"
-                + "[5] View all events"
-                + "[6] Add room"
-                + "[7] Remove room"
+                + "[3] Add a contact"
+                + "[4] View all contacts"
+                + "[5] Add an event"
+                + "[6] Remove an event"
+                + "[7] View all events"
+                + "[8] Add room"
+                + "[9] Remove room"
                 + "Please select a menu item number.";
         System.out.println(display);
     }

@@ -5,7 +5,9 @@ public class SpeakerAccountPresenter extends AccountPresenter{
         String display = ""
                 + "[1] Send a message"
                 + "[2] View all messages"
-                + "[3] View your schedule of talks"
+                + "[3] Add a contact"
+                + "[4] View all contacts"
+                + "[5] View your schedule of talks"
                 + "Please select a menu item number.";
         System.out.println(display);
     }
