@@ -150,7 +150,7 @@ public class MessageActions {
     /**
      * Returns an array of all messages (new and old) for storage
      **/
-    public List<String> storeMessages() {
+    public ArrayList<String> storeMessages() {
         ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
         for(Map.Entry<String, Message> message : messages.entrySet()) {
