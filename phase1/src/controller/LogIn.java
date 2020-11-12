@@ -43,9 +43,19 @@ public class LogIn {
 
         if (l.isLogin(username, password)) {
             return u.usersHashMap.get(username).getId();
-            }
-
-            messages.failedLogin();
-            return null;
         }
+
+        messages.failedLogin();
+        return null;
+
     }
+
+    //alternative. let me know if you disagree
+    public User logIn(String username, String password, UserAccountActions u) {
+        LoginActions l = new LoginActions();
+        if (l.isLogin(username, password)) {
+            return u.usersHashMap.get(username);
+        }
+        return null;
+    }
+}

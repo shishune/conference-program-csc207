@@ -17,7 +17,7 @@ public class AccountPresenter {
     /**
      * An abstract class. Prints the main menu
      * */
-    public void printBasicMenu(){
+    public void printMainMenu(){
         System.out.println(basicMenu);
     }
 
