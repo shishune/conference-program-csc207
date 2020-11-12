@@ -55,4 +55,11 @@ public class AccountPresenter {
         System.out.println("You have successfully logged out. Enter any key to log into another account;" +
                 "Enter 'X' to exit the program.");
     }
+
+    /**
+     * A message informing user that the menu item number does not exist
+     * */
+    public void printMenuError() {
+        System.out.println("This number is not an option, please enter another number.");
+    }
 }
