@@ -46,9 +46,12 @@ public class OrganizerController extends UserManager{
     }
 
     // TODO would there be reasons to not be able to create a speaker?
+
     public void createSpeaker(String username, String password){
-        User speaker = this.speakerActions.createSpeaker(username, password, new ArrayList<>(), new ArrayList<>(), false);
-        this.eventActions.speakerSchedule.put(speaker.getId(), new ArrayList<>());
+        // what if speaker is already created?
+        String speakerID = this.speakerActions.createSpeaker(username, password,
+                new ArrayList<>(), new ArrayList<>(), false).getId();    // TODO is this violating clean architecture?
+        this.eventActions.speakerSchedule.put(speakerID, new ArrayList<>());
     }
 
 
@@ -60,11 +63,21 @@ public class OrganizerController extends UserManager{
     // TODO Schedule the speakers to each speak in one or more rooms at different times
     /**
      * Schedule speaker to speak at an event
-     * TODO: an event or a room???
+     * TODO: an event or a room??? have both???
+     * // does this imply that there is currently no speaker for this event?
+     * can events be without a speaker?
      */
-    public void scheduleSpeaker(String eventID){
-        // boolean
+    public boolean scheduleSpeaker(String eventID, String speakerID){
+        String eventDateTime = eventActions.events.get(eventID).getDateTime();
+        if (eventActions.isSpeakerFree(speakerID, eventDateTime)){
+            eventActions.setSpeaker(eventID, speakerID);
+            // TODO do speakers have a list of events they are speaking at?
+            return true;
+        }
+        return false;
     }
+
+    // TODO edit event details... is this necessary?
 
 
     public boolean rescheduleEvent(String eventID, String newDateTime){

@@ -23,7 +23,7 @@ public class EventActions  {
         List<String> eventList = loader.getEventsList();
         for (String event: eventList){
             String[] eventAttributes = event.split(", ");
-            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split(" "));
+            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
             loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                     eventAttendees, eventAttributes[5]);
         }
@@ -39,6 +39,9 @@ public class EventActions  {
         return false;
     }
 
+    public void setSpeaker(String eventID, String speakerID){
+        this.events.get(eventID).setSpeaker(speakerID);
+    }
 
     public void loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID){
@@ -144,4 +147,14 @@ public class EventActions  {
 
         return attendees.get(eventID);
     }
+
+    // TODO
+//    public List<String> storeEvents(){
+//        List<String> storedEvents = new ArrayList();
+//        for (Event event: events){
+//            storedEvents.add(event.toString());
+//        }
+//        return storedEvents;
+//
+//    }
 }
