@@ -29,12 +29,16 @@ public class Store implements StoreIGateway{
         }
     }
 
-    public void storeMessages(String messages) {
-        String path = "phase1/src/assets/dataFiles/messages.csv";
+    public void storeMessages(MessageActions messageActions) {
+        ArrayList<String> messagesList = new ArrayList<String>();
+        String path = "../assets/dataFiles/messages.csv";
+        messagesList = messageActions.storeMessages();
         try {
             FileWriter writer;
-            writer = new FileWriter(path, true);
-            writer.write(messages);
+            writer = new FileWriter(path, false);
+            for (String message : messagesList){
+                writer.write(message);
+            }
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
