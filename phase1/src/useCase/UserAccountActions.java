@@ -86,17 +86,13 @@ public class UserAccountActions {
             return true;
         }}
 
-    public boolean removeEventFromUser(String event, String user) {
+    public void removeEventFromUser(String event, String user) {
         User userOne = usersHashMap.get(user);
             boolean isPresent = userOne.getEventList().contains(event);
-            if (!isPresent) {
-                return false;
-            }
-            else{
+            if (isPresent) {
                 List<String> userEvents = userOne.getEventList();
                 userEvents.remove(event);
                 userOne.setEventList(userEvents);
-                return true;
             }}
 
 

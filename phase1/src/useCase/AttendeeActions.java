@@ -8,12 +8,14 @@ import useCase.GenerateID;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AttendeeActions extends UserAccountActions{
 
     private HashMap<String, Attendee> attendeesHashMap;
     private HashMap<String, Attendee> attendeeUsernameHashMap;
     private ArrayList<String> attendees = new ArrayList<String>();
+    public ArrayList<String> storedAttendee;
 
     public HashMap<String, Attendee> returnAttendeesHashMap(){
         return attendeesHashMap;
@@ -67,5 +69,13 @@ public class AttendeeActions extends UserAccountActions{
             attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
             attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
         }
+    }
+
+    public ArrayList<String> storingAttendees(){
+        for(Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {
+            storedAttendee.add(o.getValue().stringRepresentation());
+        }
+        return storedAttendee;
+
     }
 }
