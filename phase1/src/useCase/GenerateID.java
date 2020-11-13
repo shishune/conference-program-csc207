@@ -19,7 +19,8 @@ public class GenerateID {
     private LoadUpIGateway loader;
 
     /**
-     *
+     * instantiates the GenerateID class with an attribute bringing in
+     * @param loader LoadUpIGateway
      * */
     public GenerateID(LoadUpIGateway loader) {
         this.loader = loader;
