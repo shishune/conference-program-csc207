@@ -54,9 +54,9 @@ public class LogOut {
         store.storeMessages(messageActions);
         store.storeRooms(roomActions);
         store.storeEvents(eventActions);
-        store.storeOrganizaers(organizerActions);
+        store.storeOrganizers(organizerActions);
         store.storeAttendees(attendeeActions);
-        store.storeSpeakers(speakerActions);
+        // store.storeSpeakers(speakerActions);
     }
 
     /**

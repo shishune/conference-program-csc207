@@ -119,7 +119,7 @@ public class LoadUp implements LoadUpIGateway {
 
 
     public int getNumOfIds() {
-        String filename = "entities.csv";
+        String filename = "../assets/dataFiles/entities.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;
 

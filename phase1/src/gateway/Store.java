@@ -7,14 +7,12 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import entities.Organizer;
 import useCase.MessageActions;
 import useCase.RoomActions;
 import useCase.*;
 import entities.Message;
-
-/**
- * Stores information of regarding rooms, events, messages, and organizers of the conference
- */
 
 public class Store{
 
@@ -38,10 +36,6 @@ public class Store{
         }
     }
 
-    /**
-     * Uses the method in eventActions for obtaining all events as a list then stores in csv
-     * @param eventActions the use case class responsible for events
-     */
     public void storeEvents(EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";
@@ -58,10 +52,6 @@ public class Store{
         }
     }
 
-    /**
-     * Uses the method in messageActions for obtaining all messages as a list then stores in csv
-     * @param messageActions the use case class responsible for messages
-     */
     public void storeMessages(MessageActions messageActions) {
         ArrayList<String> messagesList = new ArrayList<String>();
         String path = "../assets/dataFiles/messages.csv";
@@ -77,59 +67,55 @@ public class Store{
             e.printStackTrace();
         }
     }
-
-    /**
-     *
-     * @param organizer
-     */
-    public void storeOrganizers(ArrayList<String> organizer) {
+    public void storeOrganizers(OrganizerActions organizerActions) {
+        ArrayList<String> organizerList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        organizerList = organizerActions.storingOrganizers();
         try {
-            FileWriter csvWriter = new FileWriter("organizers.csv");
-
-            for (String id : organizer) {
-                csvWriter.append(id);
-                csvWriter.append("\n");
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : organizerList){
+                writer.write(message);
             }
-
-            csvWriter.flush();
-            csvWriter.close();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void storeAttendees(AttendeeActions attendeeActions) {
+        ArrayList<String> attendeeList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        attendeeList = attendeeActions.storingAttendees();
+        try {
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : attendeeList){
+                writer.write(message);
+            }
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     *
-     * @param attendee
-     */
-    public void storeAttendees(ArrayList<String> attendee) {
-        try {
-            FileWriter csvWriter = new FileWriter("attendees.csv");
-
-            for (String id : attendee) {
-                csvWriter.append(id);
-                csvWriter.append("\n");
-            }
-
-            csvWriter.flush();
-            csvWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Uses
-     * @param attendee
-     * @param organizer
-     * @param message
-     * @param room
-     * @param event
-     * @param speaker
-     */
+//    public void storeSpeakers(SpeakerActions speakerActions) {
+//        ArrayList<String> speakerList = new ArrayList<String>();
+//        String path = "../assets/dataFiles/rooms.csv";
+//        speakerList = speakerActions.storeSpeakers();
+//        try {
+//            FileWriter writer;
+//            writer = new FileWriter(path, false);
+//            for (String message : speakerList){
+//                writer.write(message);
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
         try {
-            FileWriter csvWriter = new FileWriter("entities.csv");
+            FileWriter csvWriter = new FileWriter("../assets/dataFiles/entities.csv");
 
             for (String id : attendee) {
                 csvWriter.append(id);

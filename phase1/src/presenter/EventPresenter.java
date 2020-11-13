@@ -2,10 +2,6 @@ package presenter;
 import entities.Event;
 import java.util.List;
 /* TODO:
- * display a schedule of events in a given list (convert each event object to the corresponding time and event name) - can be used by any user
- * warning that organizer double-booked a speaker (???)
- * warning that organizer double-booked a room (???)
- * “It should be possible for an Organizer to schedule each speaker to give a talk at specific times in specific rooms, without double-booking a speaker (scheduling them to speak two places at the same time) or double-booking a room (scheduling two people to speak in the same room at the same time). This can be done automatically by your system, by giving the user enough information to avoid such conflicts, or restricting the choices an Organizer can make.”
  * warning that the event is full, user cannot attend (???)
  * “Attendees should not be able to sign up for an event that is already full.”
  */
@@ -103,4 +99,40 @@ public class EventPresenter {
     public void successRemoveRoom(){
         System.out.println(generic4+ "removed.");
     }
+
+    /**
+     * Message informing that room is full; user cannot attend
+     */
+    public void failedRoomFull(){
+        System.out.println("Sorry, this room is full.");
+    }
+
+    /**
+     * Message informing of time conflict
+     */
+    public void failedAttendeeTimeConflict(){
+        System.out.println("There is a time conflict with another event you are attending.");
+    }
+
+    /**
+     * Message informing that organizer double-booked speaker
+     * */
+    public void failedDoubleBookSpeaker(){
+        System.out.println("This speaker is double-booked at this time. Please enter another time.");
+    }
+
+    /**
+     * Message informing that organizer double-booked room
+     * */
+    public void failedDoubleBookRoom(){
+        System.out.println("This room is double-booked at this time. Please enter another time.");
+    }
+
+    /**
+     * Message informing that event does not exist
+     */
+    public void failedNoSuchEvent(){
+        System.out.println("This event does not exist.");
+    }
+
 }
