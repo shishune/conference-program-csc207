@@ -17,19 +17,4 @@ public class AttendeeMainMenuController extends MainMenuController{
         this.aController = attendeeController;
         this.displayMessage = new MessagePresenter();
     }
-    public void option2(){
-
-    }
-    public void option6(){
-
-    }
-    public void option7(){
-
-    }
-    public void option8(){
-
-    }
-    public void option9(){
-
-    }
 }

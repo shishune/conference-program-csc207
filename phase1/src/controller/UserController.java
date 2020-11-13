@@ -71,18 +71,33 @@ public class UserController {
         return contacts;
     }
 
-    public boolean signupEvent(String event, String user){
+    //edited so that presenter can print fail messages based on why user cannot attend event
+    public List<Boolean> signupEvent(String event, String user){
+        List<Boolean> checks = new ArrayList<Boolean>();
+        if (!e.eventExists(event)){
+            checks.add(false);
+            return checks;
+        }
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
         User a1 = attendee.usersHashMap.get(user);
 
+
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
             e.addAttendee(e1.getId(), a1.getId());
             a1.getEventList().add(event);
-            return true;
+            checks.add(true);
+            return checks;
         }
-        return false;
+        checks.add(false);
+        if (!checkConflictSpots(event)){
+            checks.add(true);
+        }
+        if (!checkConflictTime(user, event)){
+            checks.add(false);
+        }
+        return checks;
     };
 
     public String viewOwnSchedule(String user){

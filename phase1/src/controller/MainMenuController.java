@@ -6,19 +6,16 @@ import java.util.Scanner;
 
 public class MainMenuController {
     private UserController controller;
-    private OrganizerController oController;
-    private SpeakerController sController;
-    private AttendeeController aController;
     private User user;
     private MessagePresenter displayMessage = new MessagePresenter();
-    private EventPresenter eventPresenter = new EventPresenter();
+    private EventPresenter displayEvent = new EventPresenter();
     private Scanner scan = new Scanner(System.in);
 
 
     public MainMenuController(User user, UserController controller){
         this.controller = controller;
         this.user = user;
-        this.eventPresenter = new EventPresenter();
+        this.displayEvent = new EventPresenter();
     }
     public void option3(){
         displayMessage.displayMessages(controller, user.getId(), user.getId());
@@ -47,10 +44,26 @@ public class MainMenuController {
         displayMessage.failedMessage();
     }
     public void option6(){
+        displayEvent.promptAddEvent();
+        String event = scan.nextLine();
+        if(controller.signupEvent(event, user.getId()).size()==1){
+            displayEvent.successAddEvent();
+        }
+        else{
+            if (controller.signupEvent(event, user.getId()).get(1)){
+                displayEvent.failedRoomFull();
+            }
+            else if(!controller.signupEvent(event, user.getId()).get(1)){
+                displayEvent.failedAttendeeTimeConflict();
+            }
+        }
+
 
     }
     public void option7(){
-
+        displayEvent.promptCancelEvent();
+        String event = scan.nextLine();
+        if(controller.)
     }
     public void option8(){
 

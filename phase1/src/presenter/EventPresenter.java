@@ -101,6 +101,20 @@ public class EventPresenter {
     }
 
     /**
+     * Message informing that room is full; user cannot attend
+     */
+    public void failedRoomFull(){
+        System.out.println("Sorry, this room is full.");
+    }
+
+    /**
+     * Message informing of time conflict
+     */
+    public void failedAttendeeTimeConflict(){
+        System.out.println("There is a time conflict with another event you are attending.");
+    }
+
+    /**
      * Message informing that organizer double-booked speaker
      * */
     public void failedDoubleBookSpeaker(){
@@ -112,6 +126,13 @@ public class EventPresenter {
      * */
     public void failedDoubleBookRoom(){
         System.out.println("This room is double-booked at this time. Please enter another time.");
+    }
+
+    /**
+     * Message informing that event does not exist
+     */
+    public void failedNoSuchEvent(){
+        System.out.println("This event does not exist.");
     }
 
 }
