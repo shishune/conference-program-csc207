@@ -1,10 +1,14 @@
 package presenter;
-/*
- * prompt to ask user to enter a list of events and message content (can be a single event)
- * display events that this user can send a message to (for sending to all attendees)
- * a menu of options:
- *      send to all attendees of an event or multiple events
- *      respond to a message from a specific attendee
- */
 public class SpeakerMessagePresenter extends MessagePresenter{
+
+    public void promptListEvents(){
+        System.out.println("Enter an event or multiple events to send a message.");
+    }
+    public void printMenu(){
+        String display = ""
+                + "\n[1] Send a message to all attendees of an event or multiple events"
+                + "\n[2] Send a message to a single attendee"
+                + "\nPlease select a menu item number.";
+        System.out.println(display);
+    }
 }

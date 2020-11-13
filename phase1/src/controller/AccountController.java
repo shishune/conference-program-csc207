@@ -56,7 +56,6 @@ public class AccountController {
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
-                messageDisplay = new AttendeeMessagePresenter();
                 controller = new AttendeeController(attendeeActions, eventActions, roomActions, messageActions, attendeeActions); //TODO what's the first parameter
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
