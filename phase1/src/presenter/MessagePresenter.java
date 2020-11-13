@@ -55,4 +55,11 @@ public class MessagePresenter {
             System.out.println(count+". "+user.getUsername());
         }
     }
+
+    /**
+     * Message informing failed message
+     * */
+    public void failedMessage(){
+        System.out.println("Your message could not be sent. Please check if the recipient is valid.");
+    }
 }

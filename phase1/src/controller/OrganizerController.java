@@ -6,6 +6,7 @@ import useCase.*;
 import entities.*;
 
 public class OrganizerController extends UserController{
+    //todo should these be private?
     public MessageActions messageActions;
     public EventActions eventActions;
     public UserAccountActions userAccountActions;
@@ -119,6 +120,7 @@ public class OrganizerController extends UserController{
         }
 
     }
+
 
 }
 

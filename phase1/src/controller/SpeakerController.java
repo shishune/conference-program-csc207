@@ -7,6 +7,7 @@ import java.util.List;
 
 public class SpeakerController extends UserController {
     private String SpeakerID;
+    //todo should these be private?
     public MessageActions messageActions;
     public EventActions eventActions;
     public UserAccountActions userAccountActions;
@@ -35,4 +36,5 @@ public class SpeakerController extends UserController {
         return this.eventActions.getEventAttendees(eventID);
         }
 
-    }
+
+}

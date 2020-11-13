@@ -33,7 +33,7 @@ public class AccountController {
         //Instantiate controller classes
         LogIn logIn = new LogIn();
         UserController controller = new UserController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
-
+        MainMenuController menuController = new MainMenuController(controller);
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -53,10 +53,12 @@ public class AccountController {
                 controller = new OrganizerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
+                menuController = new OrganizerMainMenuController(controller);
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
                 controller = new AttendeeController(attendeeActions, eventActions, roomActions, messageActions, attendeeActions); //TODO what's the first parameter
+                menuController = new OrganizerMainMenuController(controller);
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
@@ -64,6 +66,7 @@ public class AccountController {
                 controller = new SpeakerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
+                menuController = new OrganizerMainMenuController(controller);
             }
 
             //Menu
@@ -82,45 +85,47 @@ public class AccountController {
                     break;
                 }
             }
-            else if(menuOption.equals("2")){ //send message
-                //controller.option2();
+            else if(menuOption.equals("2")){
+                // send message. for attendee there is just one option, for organizer/speaker there
+                // are several options
+                menuController.option2();
             }
             else if(menuOption.equals("3")){ //view all messages
-                //controller.option3();
+                menuController.option3();
             }
             else if(menuOption.equals("4")){ //add contact
-                //controller.option4();
+                menuController.option4();
             }
             else if(menuOption.equals("5")){ //view all contacts
-                //controller.option5(); //TODO need to add viewContacts method
+                menuController.option5(); //TODO need to add viewContacts method
             }
             else if(menuOption.equals("6")){
                 // attendee: sign up for event
                 // organizer: add event
                 // speaker: see schedule of given talks
-                //controller.option6();
+                menuController.option6();
             }
             else if(menuOption.equals("7") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
                 // attendee: cancel enrollment in event
                 // organizer: remove event
 
-                //controller.option7();
+                menuController.option7();
             }
             else if(menuOption.equals("8") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
                 // both: view all events
 
-                //controller.option8();
+                menuController.option8();
             }
             else if(menuOption.equals("9") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
                 // organizer: add room
                 //attendee: view own schedule of events
 
-                //controller.option9();
+                menuController.option9();
             }
             else if(menuOption.equals("10") && (user.getIsOrganizer())){
                 // organizer: add room
 
-                //controller.option10();
+                menuController.option10();
             }
             else{
                 accountDisplay.printMenuError();

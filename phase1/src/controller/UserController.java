@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserController {
-
+    //todo should these be private?
     UserAccountActions user;
     MessageActions message;
     EventActions e;
