@@ -51,7 +51,7 @@ public class UserController {
         return message.printMessages(fromMe, toMe); //Cynthia: removed toString, let me know if you disagree
     }
     public HashMap<String,User> getUsersHashMap(){
-        return user.getUsersHashMap();
+        return user.returnUsersHashMap();
     }
 
     public boolean signupEvent(String event, String user){

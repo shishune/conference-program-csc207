@@ -114,7 +114,4 @@ public class UserAccountActions {
         return usersHashMap.get(userId);
     }
 
-    public HashMap<String, User> getUsersHashMap(){
-        return usersHashMap;
-    }
 }
