@@ -205,11 +205,6 @@ public class EventActions  {
         return true;
     }
 
-    // TODO: if event dne: return empty string inside list
-    public List<String> eventAttendees(String eventID){
-
-        return attendees.get(eventID);
-    }
 
 
     public List<String> storeEvents(){

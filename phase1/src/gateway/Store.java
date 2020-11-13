@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import useCase.MessageActions;
 import useCase.RoomActions;
+import useCase.*;
 import entities.Message;
 
 public class Store{
@@ -25,6 +26,22 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : roomsList){
+                writer.write(message);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void storeEvents(EventActions eventActions) {
+        // ArrayList<String> eventsList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        List<String> eventsList = eventActions.storeEvents();
+        try {
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : eventsList){
                 writer.write(message);
             }
             writer.close();
