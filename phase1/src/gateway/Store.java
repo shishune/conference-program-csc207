@@ -14,6 +14,9 @@ import useCase.RoomActions;
 import useCase.*;
 import entities.Message;
 
+/**
+ * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
+ */
 public class Store{
 
     /**
@@ -131,6 +134,16 @@ public class Store{
 //            e.printStackTrace();
 //        }
 //    }
+
+    /**
+     * Stores entities of Attendee, Event, Message, Organizer, Room, Event, Speaker
+     * @param attendee from Attendee entity
+     * @param organizer from Organizer entity
+     * @param message from Message entity
+     * @param room from Room entity
+     * @param event from Event entity
+     * @param speaker from Speaker entity
+     */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
         try {
             FileWriter csvWriter = new FileWriter("../assets/dataFiles/entities.csv");
