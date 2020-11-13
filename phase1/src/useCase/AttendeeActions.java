@@ -16,6 +16,7 @@ public class AttendeeActions extends UserAccountActions{
     private HashMap<String, Attendee> attendeeUsernameHashMap;
     private ArrayList<String> attendees = new ArrayList<String>();
     public ArrayList<String> storedAttendee;
+    private LoadUpIGateway loader;
 
     public HashMap<String, Attendee> returnAttendeesHashMap(){
         return attendeesHashMap;
@@ -28,6 +29,7 @@ public class AttendeeActions extends UserAccountActions{
     public AttendeeActions(LoadUpIGateway loader) {
         getAllAttendees(loader); // gets all messages from message.csv
         addAttendeeToHashMap();
+        this.loader = loader;
         // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
     }
@@ -40,7 +42,7 @@ public class AttendeeActions extends UserAccountActions{
     }
 
     public User createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        GenerateID generateId = new GenerateID();
+        GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);

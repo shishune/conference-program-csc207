@@ -18,6 +18,7 @@ public class OrganizerActions extends UserAccountActions {
     private HashMap<String, Organizer> organizerUsernameHashMap;
     private ArrayList<String> organizers = new ArrayList<String>();
     public ArrayList<String> storedOrganizer;
+    private LoadUpIGateway loader;
 
 
     public HashMap<String, Organizer> returnOrganizersHashMap(){
@@ -28,12 +29,13 @@ public class OrganizerActions extends UserAccountActions {
         return organizerUsernameHashMap;
     }
 
-    private LoadUp loader = new LoadUp();
+    // private LoadUp loader = new LoadUp();
 
     public OrganizerActions(LoadUpIGateway loader) {
         getAllOrganizer(loader); // gets all messages from message.csv
         addOrganizerToHashMap();; // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
+        this.loader = loader;
     }
 
     public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
@@ -44,7 +46,7 @@ public class OrganizerActions extends UserAccountActions {
     }
 
     public User createOrganizer(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
-        GenerateID generateId = new GenerateID();
+        GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId;
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userOrganizer);

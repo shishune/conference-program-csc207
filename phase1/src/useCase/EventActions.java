@@ -11,11 +11,13 @@ public class EventActions  {
     private HashMap<String, List<String>> roomSchedule; // roomID: date
     private HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
     private HashMap<String, List<String>> attendees; // EventID: attendees
-    private GenerateID generate = new GenerateID();
+    private LoadUpIGateway loader;
+    private GenerateID generate = new GenerateID(loader);
 
 
     public EventActions(LoadUpIGateway loader) {
         getAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
+        this.loader = loader;
 
     }
 

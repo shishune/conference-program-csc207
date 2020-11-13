@@ -6,6 +6,7 @@ import java.util.Map;
 
 import entities.*;
 import gateway.LoadUp;
+import gateway.LoadUpIGateway;
 import gateway.Store;
 import useCase.GenerateID;
 
@@ -16,9 +17,10 @@ import useCase.GenerateID;
  * */
 public class RoomActions {
     private HashMap<String, Room> roomsList;
+    private LoadUpIGateway loader;
 
     public String createRoom(){
-        GenerateID generator = new GenerateID();
+        GenerateID generator = new GenerateID(loader);
         String roomID = "R" + generator.generateId();
         Room room = new Room(roomID);
         addRoom(room);

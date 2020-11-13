@@ -17,11 +17,13 @@ import java.io.*;
 public class MessageActions {
     private ArrayList<String> conversations = new ArrayList<String>(); // list containing loaded messages
     private HashMap<String, Message> messages; // hashmap containing all loaded and new messages
+    private LoadUpIGateway loader;
 
     public MessageActions(LoadUpIGateway loader) {
         getAllMessages(loader); // gets all messages from message.csv
         addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
+        this.loader = loader;
     }
 
     /** Create a message with unique ID as a parameter **/
@@ -40,7 +42,7 @@ public class MessageActions {
 
     /** Create a message and generate unique ID for message **/
     public Message createMessage(String senderId, String receiverId, String message) {
-        GenerateID generateID = new GenerateID();
+        GenerateID generateID = new GenerateID(loader);
         String messageId = "M" + generateID;
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);

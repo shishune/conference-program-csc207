@@ -133,7 +133,23 @@ public class LoadUp implements LoadUpIGateway {
             e.printStackTrace();
         }
         return objectId;
+
     }
+
+    /**
+     * Getter for the last object Id made using IGateway
+     * */
+    public int getObjectId() {
+        LoadUp l = new LoadUp();
+        return l.getNumOfIds();
+    }
+
+
+
+
+
+
+
 
 
 
@@ -147,6 +163,8 @@ public class LoadUp implements LoadUpIGateway {
 
     /** etc. etc. one for every thingy
      * **/
+
+
 
     // Methods from IGateway
     // To be called inside Use Case Classes
