@@ -102,14 +102,24 @@ public class EventActions  {
         }
     }
 
-    public boolean createEvent(String title, String speakerId, String dateTime,
+    // edited to interact well with presenter
+    public List<Boolean> createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
+        List<Boolean> checks = new ArrayList<Boolean>();
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
             String newID = generate.generateId();
             loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
-            return true;
+            checks.add(true);
+            return checks;
         }
-        return false;
+        checks.add(false);
+        if (!isRoomFree(roomID, dateTime)){
+            checks.add(true);
+        }
+        else if(!isSpeakerFree(speakerId, dateTime)){
+            checks.add(false);
+        }
+        return checks;
     }
 
     public void setSpeaker(String eventID, String speakerID){
