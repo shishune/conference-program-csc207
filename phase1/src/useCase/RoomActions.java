@@ -2,6 +2,7 @@ package useCase;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import entities.*;
 import gateway.LoadUp;
@@ -45,18 +46,16 @@ public class RoomActions {
     }
 
     /**
-     * Transfers data via gateway class from hashmap to csv file
-     * (does not violate SOLID principles because this is done via interface)
+     * Returns and array of all rooms for storage
+     * @Return array of all rooms for storage
      * */
-    public void storeRooms(){
-        Store store = new Store(); //initialize gateway class for storing
+    public ArrayList<String> storeRooms(){
         ArrayList<String> rooms = new ArrayList<String>();
         for (String id:rooms){
             rooms.add(id);
         }
-        store.storeRooms(rooms);
+        return rooms;
     }
-
     /**
      * Adds a room to existing repository of rooms
      * @param room the room to be added
@@ -84,6 +83,10 @@ public class RoomActions {
         return false;
     }
 
+    /**
+     * Getter method for the hashmap of id to rooms
+     * @return the hashmap of id to rooms
+     * */
     public HashMap<String, Room> returnHashMap(){
         return this.roomsList;
     }

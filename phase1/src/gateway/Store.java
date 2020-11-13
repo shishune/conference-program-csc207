@@ -8,22 +8,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import useCase.MessageActions;
+import useCase.RoomActions;
 import entities.Message;
 
-public class Store implements StoreIGateway{
-    //idk, just an idea
-    @Override
-    public void storeRooms(ArrayList<String> rooms) {
+public class Store{
+
+    /**
+     * Uses the method in roomActions for obtaining all room ids as a list then stores in csv
+     * @param roomActions the use case class responsible for rooms
+     * */
+    public void storeRooms(RoomActions roomActions) {
+        ArrayList<String> roomsList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        roomsList = roomActions.storeRooms();
         try {
-            FileWriter csvWriter = new FileWriter("rooms.csv");
-
-            for (String id : rooms) {
-                csvWriter.append(id);
-                csvWriter.append("\n");
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : roomsList){
+                writer.write(message);
             }
-
-            csvWriter.flush();
-            csvWriter.close();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
