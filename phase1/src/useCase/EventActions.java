@@ -19,34 +19,71 @@ public class EventActions  {
 
     }
 
-    public HashMap<String, Event> getEvents(){
-        return events;
+    /***
+     * return event of given ID
+     * @param eventID
+     * @return events
+     */
+    public Event getEvent(String eventID){
+        return events.get(eventID);
     }
 
+    /***
+     * return if the event exists in events
+     * @param eventID
+     * @return true if the event exists in events
+     */
+    public boolean eventExists(String eventID){
+        return events.containsKey(eventID);
+    }
+
+    /***
+     * return hashmap of all speakers and the times they are busy. key: speakerID value: List of date and time
+     * @return hashmap of all speakers and the times they are busy
+     */
     public HashMap<String, List<String>> getSpeakerSchedule(){
         return speakerSchedule;
     }
 
-    public void addSpeakerToSchedule(String speakerID, List<String> times){
-        speakerSchedule.put(speakerID, times);
+
+    /***
+     * Add a new speaker to the speakerSchedule
+     * @param speakerID ID of speaker
+     */
+    public void addSpeakerToSchedule(String speakerID){
+        speakerSchedule.put(speakerID, new ArrayList<>());
     }
 
+    /***
+     * return hashmap of all rooms and the times they are in use. key: roomID value: List of date and time
+     * @return hashmap of all rooms and the times they are in use
+     */
     public HashMap<String, List<String>> getRoomSchedule(){
         return roomSchedule;
     }
 
-    public void addRoomToSchedule(String roomID, List<String> times){
-        roomSchedule.put(roomID, times);
+    /***
+     * Add a new room to the roomSchedule
+     * @param roomID ID of room
+     */
+    public void addRoomToSchedule(String roomID){
+        roomSchedule.put(roomID, new ArrayList<>());
     }
 
-    public HashMap<String, List<String>> getAttendees(){
-        return attendees;
+    /***
+     *  return list of attendeeIDs of the attendees attending the event
+     * @param eventID ID of event
+     * @return list of attendeeIDs of the attendees attending the event
+     */
+    public List<String> getEventAttendees(String eventID){
+        return attendees.get(eventID);
     }
-
 
 
     /***
-     *  gets list of events from the IGateway **/
+     * gets list of events from the IGateway
+     * @param loader
+     */
     private void getAllEvents(LoadUpIGateway loader) {
         List<String> eventList = loader.getEventsList();
         for (String event: eventList){

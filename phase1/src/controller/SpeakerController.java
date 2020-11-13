@@ -25,14 +25,14 @@ public class SpeakerController extends UserController {
     }
 
     public void sendmessage(String eventID, String message) {
-        List<String> attendees = this.eventActions.getAttendees().get(eventID);
+        List<String> attendees = this.eventActions.getEventAttendees(eventID);
         for (String attendeeID : attendees) {
             this.messageActions.createMessage(this.SpeakerID, attendeeID, message);
         }
     }
     
     public List<String> viewAttendees(String eventID) {
-        return this.eventActions.getAttendees().get(eventID);
+        return this.eventActions.getEventAttendees(eventID);
         }
 
     }
