@@ -18,8 +18,6 @@ public class AccountController {
 
         //Instantiate presenter classes
         AccountPresenter accountDisplay = new AccountPresenter();
-        MessagePresenter messageDisplay = new MessagePresenter(); //TODO we possibly need this in the other controllers instead of master
-        EventPresenter eventDisplay = new EventPresenter(); //TODO we possibly need this in the other controllers instead of master
 
         //Instantiate use case classes
         MessageActions messageActions = new MessageActions(g);
@@ -57,8 +55,8 @@ public class AccountController {
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
-                AttendeeController attendeeController = new AttendeeController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
-                menuController = new AttendeeMainMenuController(user, controller, attendeeController);
+                //AttendeeController attendeeController = new AttendeeController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+                menuController = new AttendeeMainMenuController(user, controller);
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
@@ -120,11 +118,6 @@ public class AccountController {
                 //attendee: view own schedule of events
 
                 menuController.option9();
-            }
-            else if(menuOption.equals("10") && (user.getIsOrganizer())){
-                // organizer: add room
-
-                menuController.option10();
             }
             else{
                 accountDisplay.printMenuError();

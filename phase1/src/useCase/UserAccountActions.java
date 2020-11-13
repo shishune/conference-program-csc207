@@ -4,15 +4,28 @@ import entities.User;
 
 import java.util.List;
 import java.util.HashMap;
-
+/**
+ * A use case class that stores a hashmap of users and can add and remove users from the hashmap.
+ * Parent class to AttendeeActions, OrganizationActions and SpeakerActions. This class collaborates with user,
+ * message, event and conference entity.
+ * @author multiple
+ * @version 1
+ */
 public class UserAccountActions {
     // hashmap the contains all the user objects; key is userID, value is userObject
+
     public HashMap<String, User> usersHashMap;
 
     public HashMap<String, User> returnUsersHashMap(){
         return usersHashMap;
     }
 
+    /**
+     * Adds an userId to existing hashmap of userId's.
+     * The key is the userId, the value is an instance of the user object.
+     * @param addMe the user to be added
+     * @return void
+     * */
     public void addUserIdToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getId())){
@@ -21,6 +34,12 @@ public class UserAccountActions {
 
     }
 
+    /**
+     * Adds an username to existing hashmap of usernames.
+     * The key is the username, the value is an instance of the user object.
+     * @param addMe the user to be added
+     * @return void
+     * */
     public void addUsernameToHashMap(User addMe){
 
         if (usersHashMap.containsKey(addMe.getUsername())){
@@ -29,6 +48,12 @@ public class UserAccountActions {
 
     }
 
+    /**
+     * Removes an userId from existing hashmap of userId's.
+     * The key is the userId, the value is an instance of the user object.
+     * @param removeMe the user to be removed
+     * @return true if user is removed successfully, false if it has not been removed
+     * */
     public boolean removeUserIdFromHashMap(User removeMe){
         if (usersHashMap.containsKey(removeMe.getId())){
             usersHashMap.remove(removeMe.getId(), removeMe);
@@ -37,6 +62,13 @@ public class UserAccountActions {
         return false;
     }
 
+    /**
+     * Removes an username to existing hashmap of usernames.
+     * The key is the username, the value is an instance of the user object.
+     * @param removeMe the user to be removed
+     * @return true if user is removed successfully, false if it has not been removed
+     * */
+
     public boolean removeUsernameFromHashMap(User removeMe){
         if (usersHashMap.containsKey(removeMe.getUsername())){
             usersHashMap.remove(removeMe.getUsername(), removeMe);
@@ -44,6 +76,13 @@ public class UserAccountActions {
         }
         return false;
     }
+
+    /**
+     * Adds an user to existing list of contacts for an user.
+     * @param addMe the user to be added
+     * @param toMe the user who's contact list is updated
+     * @return true if user is added successfully, false if not
+     * */
 
     public boolean addUserContactList(String toMe, String addMe) {
         User user = usersHashMap.get(toMe);
@@ -59,6 +98,13 @@ public class UserAccountActions {
             return true;
         }}
 
+    /**
+     * Removes an user to existing list of contacts from an user.
+     * @param removeMe the user to be removed
+     * @param toMe the user who's contact list is updated
+     * @return true if user is removed successfully, false if not
+     * */
+
     public boolean removeUserContactList(String toMe, String removeMe) {
         User user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(removeMe);
@@ -73,6 +119,13 @@ public class UserAccountActions {
             return true;
         }}
 
+    /**
+     * Adds an user to existing list of events for an user.
+     * @param event the event to be added
+     * @param user the user who's event list is updated
+     * @return true if event is added successfully, false if not
+     * */
+
     public boolean addEventToUser(String event, String user) {
         User userOne = usersHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
@@ -86,6 +139,13 @@ public class UserAccountActions {
             return true;
         }}
 
+    /**
+     * Removes an event from existing list of events from an user.
+     * @param event the event to be removed
+     * @param user the user who's event list is updated
+     * @return true if event is removed successfully, false if not
+     * */
+
     public void removeEventFromUser(String event, String user) {
         User userOne = usersHashMap.get(user);
             boolean isPresent = userOne.getEventList().contains(event);
@@ -95,6 +155,11 @@ public class UserAccountActions {
                 userOne.setEventList(userEvents);
             }}
 
+    /**
+     * Prints all the events in an user's eventList
+     * @param user the user who's eventList is printed
+     * @return string of all the events a user is attending
+     * */
 
     public String printAllEvents(String user) {
         User userOne = usersHashMap.get(user);
@@ -106,16 +171,22 @@ public class UserAccountActions {
     }
         return result.toString();
 }
-    //todo username isn't the same as userId right? or did we decide that it was the same?
+    /**
+     * Finds an user from a given username
+     * @param username the username given
+     * @return user object from hashmap of user objects
+     * */
     public User findUserFromUsername(String username){
         return usersHashMap.get(username);
     }
 
+    /**
+     * Finds an user from a given userId
+     * @param userId the userId given
+     * @return user object from hashmap of user objects
+     * */
     public User findUserFromId(String userId){
         return usersHashMap.get(userId);
     }
 
-    public String findUsernameFromId(String userId){
-        return usersHashMap.get(userId).getUsername();
-    }
 }

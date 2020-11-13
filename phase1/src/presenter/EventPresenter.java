@@ -52,24 +52,12 @@ public class EventPresenter {
         System.out.println(generic4+ "add.");
     }
 
-    /**
-     * Prompt for user to remove room
-     * */
-    public void promptRemoveRoom(){
-        System.out.println(generic4+ "remove.");
-    }
 
-    /**
-     * Prompt for user to reschedule event
-     * */
-    public void promptRescheduleEvent(){
-        System.out.println(generic+ "reschedule.");
-    }
 
     /**
      * Message informing that user cancelled event
      * */
-    public void successCancelEvent(){
+    public void successCancelEnrol(){
         System.out.println(generic2+ "cancelled.");
     }
 
@@ -80,25 +68,7 @@ public class EventPresenter {
         System.out.println(generic2+ "added.");
     }
 
-    /**
-     * Message informing that user rescheduled event
-     * */
-    public void successRescheduleEvent(){
-        System.out.println(generic2+ "rescheduled.");
-    }
 
-    /**
-     * Message informing that user added room
-     * */
-    public void successAddRoom(){
-        System.out.println(generic3+ "added.");
-    }
-    /**
-     * Message informing that user removed room
-     * */
-    public void successRemoveRoom(){
-        System.out.println(generic4+ "removed.");
-    }
 
     /**
      * Message informing that room is full; user cannot attend
@@ -114,19 +84,7 @@ public class EventPresenter {
         System.out.println("There is a time conflict with another event you are attending.");
     }
 
-    /**
-     * Message informing that organizer double-booked speaker
-     * */
-    public void failedDoubleBookSpeaker(){
-        System.out.println("This speaker is double-booked at this time. Please enter another time.");
-    }
 
-    /**
-     * Message informing that organizer double-booked room
-     * */
-    public void failedDoubleBookRoom(){
-        System.out.println("This room is double-booked at this time. Please enter another time.");
-    }
 
     /**
      * Message informing that event does not exist
@@ -135,4 +93,17 @@ public class EventPresenter {
         System.out.println("This event does not exist.");
     }
 
+    /**
+     * General failure
+     */
+    public void failed(){
+        System.out.println("Sorry, there was a problem with your request.");
+    }
+
+    /**
+     * Failed event cancel
+     */
+    public void failedCancelEvent(){
+        System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
+    }
 }

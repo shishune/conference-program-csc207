@@ -13,10 +13,9 @@ public class OrganizerAccountPresenter extends AccountPresenter{
     public void printMainMenu(){
         String display = ""
                 + "\n[6] Add an event"
-                + "\n[7] Remove an event"
+                + "\n[7] Remove/reschedule an event"
                 + "\n[8] View all events"
                 + "\n[9] Add room"
-                + "\n[10] Remove room"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

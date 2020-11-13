@@ -1,20 +1,22 @@
 package controller;
-import presenter.*;
+import presenter.MessagePresenter;
+import presenter.EventPresenter;
 import entities.User;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class MainMenuController {
     private UserController controller;
     private User user;
-    private MessagePresenter displayMessage = new MessagePresenter();
-    private EventPresenter displayEvent = new EventPresenter();
+    private MessagePresenter displayMessage;
+    private EventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
 
 
     public MainMenuController(User user, UserController controller){
         this.controller = controller;
         this.user = user;
+        this.displayMessage = new MessagePresenter();
         this.displayEvent = new EventPresenter();
     }
     public void option3(){
@@ -46,15 +48,24 @@ public class MainMenuController {
     public void option6(){
         displayEvent.promptAddEvent();
         String event = scan.nextLine();
-        if(controller.signupEvent(event, user.getId()).size()==1){
-            displayEvent.successAddEvent();
+        List<Boolean> checks = controller.signupEvent(event, user.getId());
+        if(checks.size()==1){
+            if (checks.get(0)==true){
+                displayEvent.successAddEvent();
+            }
+            else{
+                displayEvent.failedNoSuchEvent();
+            }
         }
         else{
-            if (controller.signupEvent(event, user.getId()).get(1)){
+            if (checks.get(1)){
                 displayEvent.failedRoomFull();
             }
-            else if(!controller.signupEvent(event, user.getId()).get(1)){
+            else if(!checks.get(1)){
                 displayEvent.failedAttendeeTimeConflict();
+            }
+            else{
+                displayEvent.failed();
             }
         }
 
@@ -63,15 +74,17 @@ public class MainMenuController {
     public void option7(){
         displayEvent.promptCancelEvent();
         String event = scan.nextLine();
-        if(controller.)
+        if(controller.cancelSpotEvent(event, user.getId())){
+            displayEvent.successCancelEnrol();
+        }
+        else{
+            displayEvent.failedCancelEvent();
+        }
     }
     public void option8(){
-
+        displayEvent.displayEvents(controller.getAllEvents());
     }
     public void option9(){
-
-    }
-    public void option10(){
-
+        displayEvent.displayEvents(controller.getOwnEvents());
     }
 }

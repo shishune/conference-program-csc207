@@ -35,8 +35,8 @@ public class OrganizerController extends UserController{
      * @param roomID of event
      * @return if the event was created- this will return false if the event already exists
      */
-    public boolean createEvent(String title, String speakerId, String dateTime,
-                               List<String> attendees, String roomID){
+    public boolean createEvent(String title, String speakerId, String dateTime, String roomID){
+        List<String> attendees = new ArrayList<String>();
         return this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
     }
 
