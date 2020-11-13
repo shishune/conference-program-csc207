@@ -12,6 +12,10 @@ import useCase.RoomActions;
 import useCase.*;
 import entities.Message;
 
+/**
+ * Stores information of regarding rooms, events, messages, and organizers of the conference
+ */
+
 public class Store{
 
     /**
@@ -34,6 +38,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in eventActions for obtaining all events as a list then stores in csv
+     * @param eventActions the use case class responsible for events
+     */
     public void storeEvents(EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";
@@ -50,6 +58,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in messageActions for obtaining all messages as a list then stores in csv
+     * @param messageActions the use case class responsible for messages
+     */
     public void storeMessages(MessageActions messageActions) {
         ArrayList<String> messagesList = new ArrayList<String>();
         String path = "../assets/dataFiles/messages.csv";
@@ -65,6 +77,11 @@ public class Store{
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param organizer
+     */
     public void storeOrganizers(ArrayList<String> organizer) {
         try {
             FileWriter csvWriter = new FileWriter("organizers.csv");
@@ -80,6 +97,11 @@ public class Store{
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param attendee
+     */
     public void storeAttendees(ArrayList<String> attendee) {
         try {
             FileWriter csvWriter = new FileWriter("attendees.csv");
@@ -95,6 +117,16 @@ public class Store{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Uses
+     * @param attendee
+     * @param organizer
+     * @param message
+     * @param room
+     * @param event
+     * @param speaker
+     */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
         try {
             FileWriter csvWriter = new FileWriter("entities.csv");
