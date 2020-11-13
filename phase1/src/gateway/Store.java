@@ -77,7 +77,7 @@ public class Store{
     }
 
     /**
-     * Uses hte method in organizerActions for obtaining all organizers as a list then stores in csv
+     * Uses the method in organizerActions for obtaining all organizers as a list then stores in csv
      * @param organizerActions the use case class responsible for organizers
      */
     public void storeOrganizers(OrganizerActions organizerActions) {
@@ -95,6 +95,11 @@ public class Store{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Uses the method in attendeeActions for obtaining all attendees as a list then stores in csv
+     * @param attendeeActions the use case class responsible for attendees
+     */
     public void storeAttendees(AttendeeActions attendeeActions) {
         ArrayList<String> attendeeList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";
