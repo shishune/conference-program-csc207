@@ -106,6 +106,7 @@ public class UserAccountActions {
     }
         return result.toString();
 }
+    //todo username isn't the same as userId right? or did we decide that it was the same?
     public User findUserFromUsername(String username){
         return usersHashMap.get(username);
     }
@@ -114,4 +115,7 @@ public class UserAccountActions {
         return usersHashMap.get(userId);
     }
 
+    public String findUsernameFromId(String userId){
+        return usersHashMap.get(userId).getUsername();
+    }
 }

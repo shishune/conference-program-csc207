@@ -13,13 +13,16 @@ public class MainMenuController {
         this.user = user;
     }
     public void option3(){
-        controller.viewMessages(user.getId(), user.getId());
+        displayMessage.displayMessages(controller, user.getId(), user.getId());
     }
     public void option4(){
-
+        displayMessage.promptContact();
+        //todo add contact
+        // if (contact successful){displayMessage.successContact();}
+        // else {displayMessage.failedContact();}
     }
-    public void option5(){
-
+    public void option5(){ //view all contacts
+        //displayMessage.view
     }
 
     //todo idk what to do with these...cannot make them abstract

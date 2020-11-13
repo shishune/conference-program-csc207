@@ -47,11 +47,18 @@ public class UserController {
 //        return messageActions.printMessages(fromMe).toString();
 //    };
 
-    public List<Message> viewMessages (String fromMe, String toMe) {
-        return message.printMessages(fromMe, toMe); //Cynthia: removed toString, let me know if you disagree
-    }
-    public HashMap<String,User> getUsersHashMap(){
-        return user.returnUsersHashMap();
+    //edited to work with presenter, let me know if you disagree
+    public ArrayList<ArrayList<String>> viewMessages (String fromMe, String toMe) {
+        ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
+        List<Message> messageList = message.printMessages(fromMe, toMe);
+        for (Message message:messageList){
+            ArrayList<String> info = new ArrayList<String>();
+            info.add(user.findUserFromId(message.getSenderId()).getUsername());
+            info.add(user.findUserFromId(message.getReceiverId()).getUsername());
+            info.add(message.getMessage());
+            messages.add(info);
+        }
+        return messages;
     }
 
     public boolean signupEvent(String event, String user){

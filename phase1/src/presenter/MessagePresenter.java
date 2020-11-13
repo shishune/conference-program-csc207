@@ -1,6 +1,7 @@
 package presenter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import entities.Message;
 import entities.User;
 import controller.UserController;
@@ -15,15 +16,14 @@ public class MessagePresenter {
      * Dislay messages
      * */
     public void displayMessages (UserController controller, String fromMe, String toMe) {
-        HashMap<String, User> usersHashMap = controller.getUsersHashMap();
-        List<Message> messagesList = controller.viewMessages(fromMe, toMe);
+        ArrayList<ArrayList<String>> messagesList = controller.viewMessages(fromMe, toMe);
         int count = 1;
-        for (Message message: messagesList){
+        for (ArrayList<String> message: messagesList){
             System.out.println(count);
             count++;
-            System.out.println("Sender: "+usersHashMap.get(message.getSenderId()));
-            System.out.println("Recipient: "+usersHashMap.get(message.getReceiverId()));
-            System.out.println("Message: "+message.getMessage());
+            System.out.println("Sender: "+message.get(0));
+            System.out.println("Recipient: "+message.get(1));
+            System.out.println("Message: "+message.get(2));
             System.out.println("\n");
         }
     }
@@ -42,6 +42,23 @@ public class MessagePresenter {
     }
 
     /**
+     * Prompt for contact
+     * */
+    public void promptContact(){ System.out.println("Enter the username of the person you would like to add to your contacts list.");}
+    /**
+     * Message of successful contact
+     * */
+    public void successContact(){
+        System.out.println("You have successfully added this person to your contacts list!");
+    }
+    /**
+     * Message of failed contact
+     * */
+    public void failedContact(){
+        System.out.println("This username is not valid.");
+    }
+
+    /**
      * Message informing message sent
      * */
     public void successMessage(){
@@ -51,10 +68,11 @@ public class MessagePresenter {
     /**
      * Display all contacts
      * */
-    public void displayContacts(List<User> usersList){
+    public void displayContacts(User user){
+        List<String> usersList = user.getContactsList();
         int count = 1;
-        for (User user:usersList){
-            System.out.println(count+". "+user.getUsername());
+        for (String name:usersList){
+            System.out.println(count+". "+name);
         }
     }
 
