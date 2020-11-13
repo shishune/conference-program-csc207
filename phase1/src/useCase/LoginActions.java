@@ -18,7 +18,7 @@ public class LoginActions {
      * Returns true when the username and password are correct otherwise returns false.
      * @param username the username representing the username
      * @param password the string representing the password
-     * @return A boolean if username and password are correct
+     * @return A boolean if the username and password given are correct
      * */
     public boolean isLogin(String username, String password) {
 
