@@ -9,16 +9,27 @@ import useCase.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * A controller class for users. UserContoller is a parent class to OrganizerController, AccountController and
+ * SpeakerController.
+ * @author Jiessie and Mizna
+ * @version 1
+ * */
+
 public class UserController {
     //todo should these be private?
-    UserAccountActions user;
-    MessageActions message;
-    EventActions e;
-    AttendeeActions attendee;
-    RoomActions room;
+    protected UserAccountActions user;
+    protected MessageActions message;
+    protected EventActions e;
+    protected AttendeeActions attendee;
+    protected RoomActions room;
 
-
-    public UserController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message, AttendeeActions attendee) {
+    /**
+     * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
+     * AttendeeActions, RoomActions.
+     * */
+    public UserController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message,
+                          AttendeeActions attendee) {
         this.user = user;
         this.message = message;
         this.e = events;
@@ -26,14 +37,27 @@ public class UserController {
         this.attendee = attendee;
     }
 
+    /**
+     * Sends a message to a user
+     * @param content the message to be sent
+     * @param receiver the user who will be getting the message
+     * @param sender the user who is sending the message
+     * @return boolean true if message was successfully sent, false if it was not
+     * */
     public boolean sendMessage(String sender, String receiver, String content){
         if (user.findUserFromUsername(sender).getContactsList().contains(receiver)){
             message.createMessage(sender, receiver, content);
             return true;
         }
         return false;
-    };
+    }
 
+    /**
+     * Adds a user to the contact list of another user
+     * @param toMe the user who's contact list that is updated
+     * @param addMe the user who will be added
+     * @return boolean true if contact was successfully added, false if it was not
+     * */
     public boolean addContact(String addMe, String toMe){
         return user.addUserContactList(toMe, addMe);
     };
@@ -48,6 +72,13 @@ public class UserController {
 //    };
 
     //edited to work with presenter, let me know if you disagree
+
+    /**
+     * Shows the messages from one user to another
+     * @param toMe the user receiving the messages
+     * @param fromMe the user who is sending the messages
+     * @return array of a list of messages
+     * */
     public ArrayList<ArrayList<String>> viewMessages (String fromMe, String toMe) {
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         List<Message> messageList = message.printMessages(fromMe, toMe);
@@ -62,6 +93,13 @@ public class UserController {
     }
 
     //need this for presenter
+
+    /**
+     * Shows the contacts of a user
+     * @param userid the user who wants to see their contacts
+     * @return array of other usernames who are in their contacts
+     * */
+
     public ArrayList<String> viewContacts (String userid){
         ArrayList<String> contacts = new ArrayList<String>();
         List<String> usersList = user.findUserFromId(userid).getContactsList();
@@ -72,6 +110,14 @@ public class UserController {
     }
 
     //edited so that presenter can print fail messages based on why user cannot attend event
+
+    /**
+     * Adds an event to a user and an attendee to an event
+     * @param event the event the user wants to attend
+     * @param user the attendee who wants to attend an event
+     * @return list of booleans if users can attend event or not
+     * */
+
     public List<Boolean> signupEvent(String event, String user){
         List<Boolean> checks = new ArrayList<Boolean>();
         if (!e.eventExists(event)){
@@ -98,12 +144,24 @@ public class UserController {
             checks.add(false);
         }
         return checks;
-    };
+    }
+
+    /**
+     * Shows the events a given user is attending
+     * @param user the user who wants to see their events
+     * @return string of events that an user is attending
+     * */
 
     public String viewOwnSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
         return a1.getEventList().toString();
-    };
+    }
+
+    /**
+     * Shows the events a given user could be attending
+     * @param user the user who wants to see possible events to attend
+     * @return string of events that an user could attend
+     * */
 
     public String viewAvailableSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
@@ -120,6 +178,12 @@ public class UserController {
         return availableS.toString();
     }
 
+    /**
+     * Shows the spots available in an event
+     * @param event the event that is given
+     * @return int of the number of spots available
+     * */
+
     public int spotsAvailable(String event){
         String rooms = e.getEvent(event).getRoomID();
 
@@ -127,7 +191,14 @@ public class UserController {
 
         return r1.getCapacity() - e.getEvent(event).getAttendees().size();
 
-    };
+    }
+
+    /**
+     * Checks if users can attend an event or not
+     * @param username the user who wants to see if they can attend an event
+     * @param event the event the user wants to attend
+     * @return boolean if user can attend event
+     * */
 
     private boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
@@ -147,11 +218,26 @@ public class UserController {
         }
 
         return false;
-    };
+    }
 
+    /**
+     * Checks if event is full or not
+     * @param event the event that is being checked
+     * @return boolean if event is full
+     * */
     private boolean checkConflictSpots(String event){
         return spotsAvailable(event) == 0;
 
+    }
+
+    /**
+     * To be overloaded by OrganizerController
+     * @param eventID the event to be cancelled
+     * @param userId
+     * @return boolean if event was cancelled or not
+     * */
+    public boolean cancelEvent(String eventID, String userId){
+        return false;
     }
 
 }

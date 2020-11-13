@@ -74,17 +74,21 @@ public class MainMenuController {
     public void option7(){
         displayEvent.promptCancelEvent();
         String event = scan.nextLine();
-        if(controller.cancelSpotEvent(event, user.getId())){
+        // don't need to pass an id to cancel event
+        if(controller.cancelEvent(event, user.getId())){
             displayEvent.successCancelEnrol();
         }
         else{
             displayEvent.failedCancelEvent();
         }
     }
+
+    //user has different method names so i changed it. Also, can we discuss the returns, because we're returning a list, we're returning a string represenation of the list.
+    //Anyways idk who's working on this but message me and i'll change it since idk if ur done yet - jiessie
     public void option8(){
-        displayEvent.displayEvents(controller.getAllEvents());
+        displayEvent.displayEvents(controller.viewAvailableSchedule();
     }
     public void option9(){
-        displayEvent.displayEvents(controller.getOwnEvents());
+        displayEvent.displayEvents(controller.viewOwnSchedule());
     }
 }
