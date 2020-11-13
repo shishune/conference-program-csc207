@@ -12,14 +12,16 @@ import java.util.Scanner;
  */
 public class AccountController {
 
-    //just an idea to show how controllers interact with presenters; subject to change
     public void run(){
+        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
 
+        //Instantiate presenter classes
         AccountPresenter accountDisplay = new AccountPresenter();
-        MessagePresenter messageDisplay = new MessagePresenter();
-        EventPresenter eventDisplay = new EventPresenter();
+        MessagePresenter messageDisplay = new MessagePresenter(); //TODO we possibly need this in the other controllers instead of master
+        EventPresenter eventDisplay = new EventPresenter(); //TODO we possibly need this in the other controllers instead of master
 
+        //Instantiate use case classes
         MessageActions messageActions = new MessageActions(g);
         EventActions eventActions = new EventActions();
         UserAccountActions userAccountActions = new UserAccountActions();
@@ -28,7 +30,10 @@ public class AccountController {
         OrganizerActions organizerActions = new OrganizerActions(g);
         AttendeeActions attendeeActions = new AttendeeActions(g);
 
+        //Instantiate controller classes
         LogIn logIn = new LogIn();
+        UserController controller = new UserController();
+
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -44,15 +49,22 @@ public class AccountController {
 
             if (user.getIsOrganizer()){ // indicates organizer
                 accountDisplay = new OrganizerAccountPresenter();
-                messageDisplay = new OrganizerMessagePresenter();
+                messageDisplay = new OrganizerMessagePresenter();  //TODO we possibly need this in the other controllers instead of master
+                controller = new OrganizerController(organizerID, messageActions, eventActions, //TODO what's the first parameter
+                        userAccountActions, roomActions,
+                        speakerActions, organizerActions, attendeeActions);
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
                 messageDisplay = new AttendeeMessagePresenter();
+                controller = new AttendeeController(attendeeActions, eventActions, roomActions, messageActions, attendeeActions); //TODO what's the first parameter
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
                 messageDisplay = new SpeakerMessagePresenter();
+                controller = new SpeakerController(organizerID, messageActions, eventActions, //TODO what's the first parameter
+                        userAccountActions, roomActions,
+                        speakerActions, organizerActions, attendeeActions);
             }
 
             //Menu
@@ -71,26 +83,45 @@ public class AccountController {
                     break;
                 }
             }
-            else if(menuOption.equals("2")){
-                //do something
+            else if(menuOption.equals("2")){ //send message
+                //controller.option2();
             }
-            else if(menuOption.equals("3")){
-                //do something
+            else if(menuOption.equals("3")){ //view all messages
+                //controller.option3();
             }
-            else if(menuOption.equals("4")){
-                //do something
+            else if(menuOption.equals("4")){ //add contact
+                //controller.option4();
             }
-            else if(menuOption.equals("5")){
-                //do something
-            }
-            else if(menuOption.equals("5")){
-                //do something
+            else if(menuOption.equals("5")){ //view all contacts
+                //controller.option5(); //TODO need to add viewContacts method
             }
             else if(menuOption.equals("6")){
-                //do something
+                // attendee: sign up for event
+                // organizer: add event
+                // speaker: see schedule of given talks
+                //controller.option6();
             }
-            else if(menuOption.equals("7")){
-                //do something
+            else if(menuOption.equals("7") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
+                // attendee: cancel enrollment in event
+                // organizer: remove event
+
+                //controller.option7();
+            }
+            else if(menuOption.equals("8") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
+                // both: view all events
+
+                //controller.option8();
+            }
+            else if(menuOption.equals("9") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
+                // organizer: add room
+                //attendee: view own schedule of events
+
+                //controller.option9();
+            }
+            else if(menuOption.equals("10") && (user.getIsOrganizer())){
+                // organizer: add room
+
+                //controller.option10();
             }
             else{
                 accountDisplay.printMenuError();

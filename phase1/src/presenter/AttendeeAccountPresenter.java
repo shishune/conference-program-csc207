@@ -14,8 +14,8 @@ public class AttendeeAccountPresenter extends AccountPresenter{
         String display = ""
                 + "\n[6] Sign up for an event"
                 + "\n[7] Cancel enrollment for an event"
-                + "\n[8] View your schedule of events"
-                + "\n[9] View all events"
+                + "\n[8] View all events"
+                + "\n[9] View your schedule of events"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }
