@@ -36,6 +36,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in eventActions for obtaining all events as a list then stores in csv
+     * @param eventActions the use case class responsible for events
+     */
     public void storeEvents(EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";
@@ -52,6 +56,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in messageActions for obtaining all messages as a list then stores in csv
+     * @param messageActions the use case class responsible for messages
+     */
     public void storeMessages(MessageActions messageActions) {
         ArrayList<String> messagesList = new ArrayList<String>();
         String path = "../assets/dataFiles/messages.csv";
@@ -67,6 +75,11 @@ public class Store{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Uses hte method in organizerActions for obtaining all organizers as a list then stores in csv
+     * @param organizerActions the use case class responsible for organizers
+     */
     public void storeOrganizers(OrganizerActions organizerActions) {
         ArrayList<String> organizerList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";

@@ -66,7 +66,7 @@ public class UserController {
         ArrayList<String> contacts = new ArrayList<String>();
         List<String> usersList = user.findUserFromId(userid).getContactsList();
         for (String id:usersList){
-            contacts.add(user.findUsernameFromId(id));
+            contacts.add(user.findUserFromId(userid).getUsername());
         }
         return contacts;
     }
