@@ -61,6 +61,16 @@ public class UserController {
         return messages;
     }
 
+    //need this for presenter
+    public ArrayList<String> viewContacts (String userid){
+        ArrayList<String> contacts = new ArrayList<String>();
+        List<String> usersList = user.findUserFromId(userid).getContactsList();
+        for (String id:usersList){
+            contacts.add(user.findUsernameFromId(id));
+        }
+        return contacts;
+    }
+
     public boolean signupEvent(String event, String user){
         e.getEvent(event).addAttendee(user);
 

@@ -22,7 +22,7 @@ public class MainMenuController {
         // else {displayMessage.failedContact();}
     }
     public void option5(){ //view all contacts
-        //displayMessage.view
+        displayMessage.displayContacts(controller,user.getId());
     }
 
     //todo idk what to do with these...cannot make them abstract

@@ -68,8 +68,8 @@ public class MessagePresenter {
     /**
      * Display all contacts
      * */
-    public void displayContacts(User user){
-        List<String> usersList = user.getContactsList();
+    public void displayContacts(UserController controller, String userId){
+        List<String> usersList = controller.viewContacts(userId);
         int count = 1;
         for (String name:usersList){
             System.out.println(count+". "+name);
