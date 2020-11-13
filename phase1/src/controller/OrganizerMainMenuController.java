@@ -3,6 +3,7 @@ import entities.User;
 import presenter.EventPresenter;
 import presenter.MessagePresenter;
 import presenter.OrganizerMessagePresenter;
+import presenter.OrganizerEventPresenter;
 
 import java.util.Scanner;
 
@@ -11,13 +12,14 @@ public class OrganizerMainMenuController extends MainMenuController{
     private OrganizerController oController;
     private User user;
     private OrganizerMessagePresenter displayMessage;
-    private EventPresenter eventPresenter;
+    private OrganizerEventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
 
     public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
         super(user, controller);
         this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
+        this.displayEvent = new OrganizerEventPresenter();
     }
     public void option2(){
         displayMessage.printMenu();
@@ -37,18 +39,27 @@ public class OrganizerMainMenuController extends MainMenuController{
         }
     }
     public void option6(){
+        displayEvent.promptAddEvent();
+        String event = scan.nextLine();
+        if(oController.createEvent(event, )){
 
+        }
     }
     public void option7(){
-
-    }
-    public void option8(){
+        displayEvent.promptCancelEvent();
+        String event = scan.nextLine();
+        if(oController.cancelEvent(event)){
+            displayEvent.successCancelEvent();
+        }
+        else{
+            displayEvent.failedNoSuchEvent();
+        }
 
     }
     public void option9(){
-
-    }
-    public void option10(){
-
+        displayEvent.promptAddRoom();
+        String room = scan.nextLine();
+        oController.createRoom();
+        displayEvent.successAddRoom();
     }
 }
