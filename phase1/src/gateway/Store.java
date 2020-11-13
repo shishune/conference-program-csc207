@@ -36,6 +36,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in eventActions for obtaining all events as a list then stores in csv
+     * @param eventActions the use case class responsible for events
+     */
     public void storeEvents(EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "../assets/dataFiles/rooms.csv";
