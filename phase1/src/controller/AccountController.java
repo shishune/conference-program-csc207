@@ -23,7 +23,7 @@ public class AccountController {
 
         //Instantiate use case classes
         MessageActions messageActions = new MessageActions(g);
-        EventActions eventActions = new EventActions();
+        EventActions eventActions = new EventActions(g);
         UserAccountActions userAccountActions = new UserAccountActions();
         RoomActions roomActions = new RoomActions();
         SpeakerActions speakerActions = new SpeakerActions();
@@ -32,7 +32,7 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
-        UserController controller = new UserController();
+        UserController controller = new UserController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
 
 
         //this loop serves to allow user to return to menu repeatedly
@@ -50,7 +50,7 @@ public class AccountController {
             if (user.getIsOrganizer()){ // indicates organizer
                 accountDisplay = new OrganizerAccountPresenter();
                 messageDisplay = new OrganizerMessagePresenter();  //TODO we possibly need this in the other controllers instead of master
-                controller = new OrganizerController(organizerID, messageActions, eventActions, //TODO what's the first parameter
+                controller = new OrganizerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
             }
@@ -61,7 +61,7 @@ public class AccountController {
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
                 messageDisplay = new SpeakerMessagePresenter();
-                controller = new SpeakerController(organizerID, messageActions, eventActions, //TODO what's the first parameter
+                controller = new SpeakerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
             }

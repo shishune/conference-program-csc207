@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Room {
     private String roomId;
     private int capacity;
-    private String name;
 
     /**
      * instantiates a new Room object with an id attribute
@@ -18,7 +17,7 @@ public class Room {
     public Room(String roomId){
         this.capacity = 2;
         this.roomId = roomId;
-        // this.name = name; TODO name of room?
+
     }
 
     /**
@@ -39,15 +38,5 @@ public class Room {
      * */
     public String getRoomId(){ return roomId; }
 
-    /**
-     * Getter for the name of this room.
-     * @return name of room
-     * */
-    public String getName(){ return name; }
 
-    /**
-     * Setter for the capacity of this room.
-     * @param newName list of events
-     * */
-    public void setName(String newName){ this.name = newName; }
 }

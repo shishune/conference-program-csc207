@@ -1,25 +1,53 @@
 package useCase;
-import java.time.LocalDateTime;
 import java.util.*;
 
 import entities.*;
-import gateway.LoadUp;
 import gateway.LoadUpIGateway;
 
 public class EventActions  {
-    public HashMap<String, Event> events; // public private
+    private HashMap<String, Event> events; // public private
 
     // hashmap room key and time as the value
-    public HashMap<String, List<String>> roomSchedule; // roomID: date
-    public HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
-    public HashMap<String, List<String>> attendees; // EventID: attendees
+    private HashMap<String, List<String>> roomSchedule; // roomID: date
+    private HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
+    private HashMap<String, List<String>> attendees; // EventID: attendees
     private GenerateID generate = new GenerateID();
 
 
-    private LoadUp loader = new LoadUp(); // this is okay because IGateway
+    public EventActions(LoadUpIGateway loader) {
+        getAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
 
-    /** gets list of events from the IGateway **/
-    private void getAllEvents() {
+    }
+
+    public HashMap<String, Event> getEvents(){
+        return events;
+    }
+
+    public HashMap<String, List<String>> getSpeakerSchedule(){
+        return speakerSchedule;
+    }
+
+    public void addSpeakerToSchedule(String speakerID, List<String> times){
+        speakerSchedule.put(speakerID, times);
+    }
+
+    public HashMap<String, List<String>> getRoomSchedule(){
+        return roomSchedule;
+    }
+
+    public void addRoomToSchedule(String roomID, List<String> times){
+        roomSchedule.put(roomID, times);
+    }
+
+    public HashMap<String, List<String>> getAttendees(){
+        return attendees;
+    }
+
+
+
+    /***
+     *  gets list of events from the IGateway **/
+    private void getAllEvents(LoadUpIGateway loader) {
         List<String> eventList = loader.getEventsList();
         for (String event: eventList){
             String[] eventAttributes = event.split(", ");
@@ -91,7 +119,6 @@ public class EventActions  {
         }
     }
 
-    // TODO Cancel Event
     public List<String> cancelEvent(String eventID){
         Event event = this.events.get(eventID);
         this.events.remove(eventID);
@@ -112,7 +139,7 @@ public class EventActions  {
             this.speakerSchedule.get(event.getSpeaker()).remove(event.getDateTime());
             this.roomSchedule.get(event.getRoomID()).remove(event.getDateTime());
 
-            event.setDateTime(newDateTime); // TODO will this change the event?
+            event.setDateTime(newDateTime);
             this.speakerSchedule.get(event.getSpeaker()).add(event.getDateTime());
             this.roomSchedule.get(event.getRoomID()).add(event.getDateTime());
 
@@ -123,7 +150,6 @@ public class EventActions  {
     }
 
     public boolean isRoomFree(String roomID, String dateTime){
-
         List<String> roomTime = this.roomSchedule.get(roomID);
 
         if (roomTime.contains(dateTime)) {
@@ -148,14 +174,12 @@ public class EventActions  {
         return attendees.get(eventID);
     }
 
-    // TODO
 
     public List<String> storeEvents(){
         List<String> storedEvents = new ArrayList();
         for(Map.Entry<String, Event> event : events.entrySet()) {
             storedEvents.add(event.getValue().string());
         }
-
         return storedEvents;
 
     }

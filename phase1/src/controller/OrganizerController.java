@@ -25,6 +25,15 @@ public class OrganizerController extends UserController{
         this.organizerID = organizerID;
     }
 
+    /***
+     * create a new event
+     * @param title of event
+     * @param speakerId of event
+     * @param dateTime of event
+     * @param attendees of event
+     * @param roomID of event
+     * @return if the event was created- this will return false if the event already exists
+     */
     public boolean createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
         return this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
@@ -32,7 +41,7 @@ public class OrganizerController extends UserController{
 
 
     public boolean cancelEvent(String eventID){
-        if (this.eventActions.events.containsKey(eventID)){
+        if (this.eventActions.getEvents().containsKey(eventID)){
             List<String> eventAttendees = this.eventActions.cancelEvent(eventID);
             for (String attendeeID: eventAttendees){
                 this.userAccountActions.removeEventFromUser(eventID, attendeeID);
@@ -47,14 +56,14 @@ public class OrganizerController extends UserController{
     public void createSpeaker(String username, String password){
         // what if speaker is already created?
         String speakerID = this.speakerActions.createSpeaker(username, password,
-                new ArrayList<>(), new ArrayList<>(), false).getId();    // TODO is this violating clean architecture?
-        this.eventActions.speakerSchedule.put(speakerID, new ArrayList<>());
+                new ArrayList<>(), new ArrayList<>(), false).getId();
+        this.eventActions.addSpeakerToSchedule(speakerID, new ArrayList<>());
     }
 
 
     public void createRoom(){
         String roomID = this.roomActions.createRoom();
-        this.eventActions.roomSchedule.put(roomID, new ArrayList<>());
+        this.eventActions.addRoomToSchedule(roomID, new ArrayList<>());
     }
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times
@@ -65,7 +74,7 @@ public class OrganizerController extends UserController{
      * can events be without a speaker?
      */
     public boolean scheduleSpeaker(String eventID, String speakerID){
-        String eventDateTime = eventActions.events.get(eventID).getDateTime();
+        String eventDateTime = eventActions.getEvents().get(eventID).getDateTime();
         if (eventActions.isSpeakerFree(speakerID, eventDateTime)){
             eventActions.setSpeaker(eventID, speakerID);
             // TODO do speakers have a list of events they are speaking at?
@@ -83,7 +92,7 @@ public class OrganizerController extends UserController{
 
 
     public void sendAttendeesMessage(String eventID, String message){
-        List<String> attendees = this.eventActions.attendees.get(eventID);
+        List<String> attendees = this.eventActions.getAttendees().get(eventID);
 
         for (String attendeeID: attendees){
             this.messageActions.createMessage(this.organizerID, attendeeID, message);

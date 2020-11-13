@@ -52,24 +52,24 @@ public class OrganizerActions extends UserAccountActions {
         return userOrganizer;
     }
 
-    public boolean addNewEvent(Event event) {
-        EventActions eventactions = new EventActions();
-        eventactions.loadEvent(event.getId(), event.getTitle(), event.getSpeaker(), event.getDateTime(),
-                event.getAttendees(), event.getRoomID());
+//    public boolean addNewEvent(Event event) {
+//        EventActions eventactions = new EventActions();
+//        eventactions.loadEvent(event.getId(), event.getTitle(), event.getSpeaker(), event.getDateTime(),
+//                event.getAttendees(), event.getRoomID());
+//
+//        List<String> eventList = loader.getEventsList();
+//        return eventList.contains(event.getId());
+//    }
+//
+//    public boolean changeEventTime(String eventId, String newDateTime) {
+//        EventActions eventactions = new EventActions();
+//        return eventactions.changeEventTime(eventId, newDateTime);
+//    }
 
-        List<String> eventList = loader.getEventsList();
-        return eventList.contains(event.getId());
-    }
-
-    public boolean changeEventTime(String eventId, String newDateTime) {
-        EventActions eventactions = new EventActions();
-        return eventactions.changeEventTime(eventId, newDateTime);
-    }
-
-    public List<String> cancelEvent(String eventId) {
-        EventActions eventactions = new EventActions();
-        return eventactions.cancelEvent(eventId);
-    }
+//    public List<String> cancelEvent(String eventId) {
+//        EventActions eventactions = new EventActions();
+//        return eventactions.cancelEvent(eventId);
+//    }
 
     private void getAllOrganizer(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
