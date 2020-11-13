@@ -107,7 +107,7 @@ public abstract class User{
     }
 
     /**
-     * Getter for the list of events this user is attending
+     * Setter for the Login status of this user
      * @param bool A boolean to what the status should be set to
      * */
     public void setLogin(boolean bool) {this.isLogin = bool;}
