@@ -50,24 +50,22 @@ public class AccountController {
 
             if (user.getIsOrganizer()){ // indicates organizer
                 accountDisplay = new OrganizerAccountPresenter();
-                messageDisplay = new OrganizerMessagePresenter();  //TODO we possibly need this in the other controllers instead of master
-                controller = new OrganizerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
+                OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
-                menuController = new OrganizerMainMenuController(user, controller);
+                menuController = new OrganizerMainMenuController(user, controller, organizerController);
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
-                controller = new AttendeeController(attendeeActions, eventActions, roomActions, messageActions, attendeeActions); //TODO what's the first parameter
-                menuController = new OrganizerMainMenuController(user, controller);
+                AttendeeController attendeeController = new AttendeeController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+                menuController = new AttendeeMainMenuController(user, controller, attendeeController);
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
-                messageDisplay = new SpeakerMessagePresenter();
-                controller = new SpeakerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
+                SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
-                menuController = new OrganizerMainMenuController(user, controller);
+                menuController = new SpeakerMainMenuController(user, controller, speakerController);
             }
 
             //Menu
@@ -98,7 +96,7 @@ public class AccountController {
                 menuController.option4();
             }
             else if(menuOption.equals("5")){ //view all contacts
-                menuController.option5(); //TODO need to add viewContacts method
+                menuController.option5();
             }
             else if(menuOption.equals("6")){
                 // attendee: sign up for event
