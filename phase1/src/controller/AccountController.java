@@ -33,7 +33,6 @@ public class AccountController {
         //Instantiate controller classes
         LogIn logIn = new LogIn();
         UserController controller = new UserController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
-        MainMenuController menuController = new MainMenuController(controller);
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -46,6 +45,8 @@ public class AccountController {
             String password = scan.nextLine();  // Read user input
             //String id = logIn.loggingIn(username, password); // evaluate username/password
             User user = logIn.logIn(username, password, userAccountActions);
+            //instantiate generic menu controller
+            MainMenuController menuController = new MainMenuController(user, controller);
 
             if (user.getIsOrganizer()){ // indicates organizer
                 accountDisplay = new OrganizerAccountPresenter();
@@ -53,12 +54,12 @@ public class AccountController {
                 controller = new OrganizerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
-                menuController = new OrganizerMainMenuController(controller);
+                menuController = new OrganizerMainMenuController(user, controller);
             }
             else if (user.getId().charAt(0)=='A'){ //indicates attendee
                 accountDisplay = new AttendeeAccountPresenter();
                 controller = new AttendeeController(attendeeActions, eventActions, roomActions, messageActions, attendeeActions); //TODO what's the first parameter
-                menuController = new OrganizerMainMenuController(controller);
+                menuController = new OrganizerMainMenuController(user, controller);
             }
             else if (user.getId().charAt(0)=='S'){ //indicates speaker
                 accountDisplay = new SpeakerAccountPresenter();
@@ -66,7 +67,7 @@ public class AccountController {
                 controller = new SpeakerController(user.getId(), messageActions, eventActions, //TODO what's the first parameter
                         userAccountActions, roomActions,
                         speakerActions, organizerActions, attendeeActions);
-                menuController = new OrganizerMainMenuController(controller);
+                menuController = new OrganizerMainMenuController(user, controller);
             }
 
             //Menu

@@ -1,8 +1,9 @@
 package controller;
+import entities.User;
 
 public class AttendeeMainMenuController extends MainMenuController{
-    public AttendeeMainMenuController(UserController controller){
-        super(controller);
+    public AttendeeMainMenuController(User user, UserController controller){
+        super(user, controller);
     }
     public void option2(){
 

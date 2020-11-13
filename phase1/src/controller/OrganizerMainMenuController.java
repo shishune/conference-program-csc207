@@ -1,8 +1,10 @@
 package controller;
+import entities.User;
 
 public class OrganizerMainMenuController extends MainMenuController{
-    public OrganizerMainMenuController(UserController controller){
-        super(controller);
+
+    public OrganizerMainMenuController(User user, UserController controller){
+        super(user, controller);
     }
     public void option2(){
 

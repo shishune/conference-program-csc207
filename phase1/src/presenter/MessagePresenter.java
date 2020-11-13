@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import entities.Message;
 import entities.User;
+import controller.UserController;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
@@ -10,11 +11,12 @@ import entities.User;
  * @version 1
  * */
 public class MessagePresenter {
-
     /**
-     * Dislays messages
+     * Dislay messages
      * */
-    public void displayMessages(List<Message> messagesList, HashMap<String, User> usersHashMap){
+    public void displayMessages (UserController controller, String fromMe, String toMe) {
+        HashMap<String, User> usersHashMap = controller.getUsersHashMap();
+        List<Message> messagesList = controller.viewMessages(fromMe, toMe);
         int count = 1;
         for (Message message: messagesList){
             System.out.println(count);

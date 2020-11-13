@@ -1,8 +1,8 @@
 package controller;
-
+import entities.User;
 public class SpeakerMainMenuController extends MainMenuController{
-    public SpeakerMainMenuController(UserController controller){
-        super(controller);
+    public SpeakerMainMenuController(User user, UserController controller){
+        super(user, controller);
     }
     public void option2(){
 

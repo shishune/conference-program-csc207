@@ -47,8 +47,11 @@ public class UserController {
 //        return messageActions.printMessages(fromMe).toString();
 //    };
 
-    public String viewMessages (String fromMe, String toMe) {
-        return message.printMessages(fromMe, toMe).toString();
+    public List<Message> viewMessages (String fromMe, String toMe) {
+        return message.printMessages(fromMe, toMe); //Cynthia: removed toString, let me know if you disagree
+    }
+    public HashMap<String,User> getUsersHashMap(){
+        return user.getUsersHashMap();
     }
 
     public boolean signupEvent(String event, String user){
