@@ -52,9 +52,9 @@ public class UserController {
     }
 
     public boolean signupEvent(String event, String user){
-        e.events.get(event).addAttendee(user);
+        e.getEvent(event).addAttendee(user);
 
-        Event e1 = e.events.get(event);
+        Event e1 = e.getEvent(event);
         User a1 = attendee.usersHashMap.get(user);
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -73,7 +73,7 @@ public class UserController {
     public String viewAvailableSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
 
-        Set<String> allEvents = e.events.keySet();
+        Set<String> allEvents = e.getEvents().keySet();
         StringBuilder availableS = new StringBuilder();
         List<String> targetList = new ArrayList<>(allEvents);
 
@@ -86,17 +86,17 @@ public class UserController {
     }
 
     public int spotsAvailable(String event){
-        String rooms = e.events.get(event).getRoomID();
+        String rooms = e.getEvent(event).getRoomID();
 
         Room r1 = room.returnHashMap().get(rooms);
 
-        return r1.getCapacity() - e.events.get(event).getAttendees().size();
+        return r1.getCapacity() - e.getEvent(event).getAttendees().size();
 
     };
 
     private boolean checkConflictTime(String username, String event){
         //return true if there is a conflict
-        String timeEvent = e.events.get(event).getDateTime();
+        String timeEvent = e.getEvent(event).getDateTime();
 
         User u = user.findUserFromUsername(username);
 
@@ -104,7 +104,7 @@ public class UserController {
 
             String name = u.getEventList().get(i);
 
-            String time = e.events.get(name).getDateTime();
+            String time = e.getEvent(name).getDateTime();
 
             if (time.equals(timeEvent)){
                 return true;

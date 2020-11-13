@@ -38,6 +38,14 @@ public class EventActions  {
     }
 
     /***
+     * return hashmap of all eventIDs and the corresponding event object. key: speakerID value: List of date and time
+     * @return hashmap of all eventIDs and the corresponding event object
+     */
+    public HashMap<String, Event> getEvents(){
+        return events;
+    }
+
+    /***
      * return hashmap of all speakers and the times they are busy. key: speakerID value: List of date and time
      * @return hashmap of all speakers and the times they are busy
      */

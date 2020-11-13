@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import entities.Organizer;
 import useCase.MessageActions;
 import useCase.RoomActions;
 import useCase.*;
@@ -65,39 +67,55 @@ public class Store{
             e.printStackTrace();
         }
     }
-    public void storeOrganizers(ArrayList<String> organizer) {
+    public void storeOrganizers(OrganizerActions organizerActions) {
+        ArrayList<String> organizerList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        organizerList = organizerActions.storingOrganizers();
         try {
-            FileWriter csvWriter = new FileWriter("organizers.csv");
-
-            for (String id : organizer) {
-                csvWriter.append(id);
-                csvWriter.append("\n");
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : organizerList){
+                writer.write(message);
             }
-
-            csvWriter.flush();
-            csvWriter.close();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public void storeAttendees(ArrayList<String> attendee) {
+    public void storeAttendees(AttendeeActions attendeeActions) {
+        ArrayList<String> attendeeList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        attendeeList = attendeeActions.storingAttendees();
         try {
-            FileWriter csvWriter = new FileWriter("attendees.csv");
-
-            for (String id : attendee) {
-                csvWriter.append(id);
-                csvWriter.append("\n");
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : attendeeList){
+                writer.write(message);
             }
-
-            csvWriter.flush();
-            csvWriter.close();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+//    public void storeSpeakers(SpeakerActions speakerActions) {
+//        ArrayList<String> speakerList = new ArrayList<String>();
+//        String path = "../assets/dataFiles/rooms.csv";
+//        speakerList = speakerActions.storeSpeakers();
+//        try {
+//            FileWriter writer;
+//            writer = new FileWriter(path, false);
+//            for (String message : speakerList){
+//                writer.write(message);
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
         try {
-            FileWriter csvWriter = new FileWriter("entities.csv");
+            FileWriter csvWriter = new FileWriter("../assets/dataFiles/entities.csv");
 
             for (String id : attendee) {
                 csvWriter.append(id);
