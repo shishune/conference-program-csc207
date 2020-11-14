@@ -1,10 +1,6 @@
 package presenter;
 import entities.Event;
 import java.util.List;
-/* TODO:
- * warning that the event is full, user cannot attend (???)
- * “Attendees should not be able to sign up for an event that is already full.”
- */
 /**
  * A presenter class. This class is responsible for anything related to displaying events to the user.
  * @author Cynthia

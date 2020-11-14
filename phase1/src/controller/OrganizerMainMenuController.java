@@ -8,6 +8,11 @@ import presenter.OrganizerEventPresenter;
 
 import java.util.Scanner;
 
+/**
+ * A controller class for organizer that decides what to do based on user input when choosing from the main menu.
+ * @author Cynthia
+ * @version 1
+ * */
 public class OrganizerMainMenuController extends MainMenuController{
     private UserController controller;
     private OrganizerController oController;
@@ -16,12 +21,22 @@ public class OrganizerMainMenuController extends MainMenuController{
     private OrganizerEventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
 
+    /**
+     * Instantiates the main menu responder object
+     * @param user the user
+     * @param controller the controller responsible for user
+     * @param organizerController the controller responsible for organizer
+     */
     public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
         super(user, controller);
         this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
     }
+
+    /**
+     * Responds to menu option 2
+     */
     public void option2(){
         displayMessage.printMenu();
         String option = scan.nextLine();
@@ -36,6 +51,10 @@ public class OrganizerMainMenuController extends MainMenuController{
             super.option2();
         }
     }
+
+    /**
+     * Responds to menu option 6
+     */
     public void option6(){
         displayEvent.promptTitle();
         String title = scan.nextLine();
@@ -58,6 +77,10 @@ public class OrganizerMainMenuController extends MainMenuController{
             displayEvent.failed();
         }
     }
+
+    /**
+     * Responds to menu option 7
+     */
     public void option7(){
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
@@ -74,6 +97,11 @@ public class OrganizerMainMenuController extends MainMenuController{
         }
 
     }
+
+    /**
+     * helper function to take a dateTime string object from separate date  and time inputs
+     * @return the string combining date and time based on separate user inputs for date and time
+     */
     private String getDateTimeInput(){
         displayEvent.promptDate();
         String date = scan.nextLine();
@@ -82,6 +110,12 @@ public class OrganizerMainMenuController extends MainMenuController{
         String dateTime = date+"/"+time;
         return dateTime;
     }
+
+    /**
+     * helper function to reschedule event
+     * @param event the event ID
+     * @param dateTime the string representing date and time
+     */
     private void rescheduleEvent(String event, String dateTime){
         if(oController.rescheduleEvent(event, dateTime)){
             displayEvent.successRescheduleEvent();
@@ -90,6 +124,11 @@ public class OrganizerMainMenuController extends MainMenuController{
             displayEvent.failedRescheduleEvent();
         }
     }
+
+    /**
+     * helper function to cancel event
+     * @param event the event ID
+     */
     private void cancelEvent(String event){
 
         if(oController.cancelEvent(event)){
@@ -99,6 +138,10 @@ public class OrganizerMainMenuController extends MainMenuController{
             displayEvent.failedNoSuchEvent();
         }
     }
+
+    /**
+     * Responds to menu option 9
+     */
     public void option9(){
         displayEvent.promptAddRoom();
         String room = scan.nextLine();

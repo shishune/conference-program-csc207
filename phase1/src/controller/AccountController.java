@@ -8,10 +8,17 @@ import presenter.*;
 import java.util.Scanner;
 
 /**
- * Navigates account; takes in user input
- */
+ * A master controller class to take in user input and respond using other controllers and presenters.
+ * This is what is run in the main method.
+ * @author Cynthia
+ * @version 1
+ * */
 public class AccountController {
 
+    /**
+     * Interacts with user to prompt menu item choice and decides which presenter and controller
+     * methods to use to respond
+     */
     public void run(){
         //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
