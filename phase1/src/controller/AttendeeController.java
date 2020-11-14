@@ -18,7 +18,7 @@ public class AttendeeController extends UserController{
 
     @Override
     public boolean leaveEvent(String event, String userId){
-        String username = this.attendee.usersHashMap.get(userId).getUsername();
+        String username = this.attendee.returnUsersHashMap().get(userId).getUsername();
         return this.attendee.removeEventFromUser(event, username);
     }
 }
