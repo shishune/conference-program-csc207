@@ -123,7 +123,7 @@ public class MainMenuController {
      * Responds to menu option 8
      */
     public void option8(){
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername());
+        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
 
     /**

@@ -153,9 +153,15 @@ public class UserController {
      * @return string of events that an user is attending
      * */
 
-    public List<String> viewOwnSchedule(String user){
+    public List<Event> viewOwnSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
-        return a1.getEventList();
+        List<Event> eventS = new ArrayList<>();
+
+        for (int i = 0; i < a1.getEventList().size(); i++){
+            eventS.add(e.getEvents().get(a1.getEventList().get(i)));
+        }
+
+        return eventS;
     }
 
     /**
@@ -168,7 +174,7 @@ public class UserController {
         User a1 = attendee.usersHashMap.get(user);
 
         Set<String> allEvents = e.getEvents().keySet();
-        List<String> availableS = new ArrayList<String>();
+        List<String> availableS = new ArrayList<>();
         List<String> targetList = new ArrayList<>(allEvents);
 
         for (String s: targetList){
@@ -232,7 +238,7 @@ public class UserController {
     }
 
     /**
-     * To be overloaded by OrganizerController
+     * To be overrided by OrganizerController
      * @param eventID the event to be cancelled
      * @return boolean if event was cancelled or not
      * */
@@ -240,6 +246,12 @@ public class UserController {
         return false;
     }
 
+    /**
+     * To be overrided by AttendeeController
+     * @param event the event to be removed
+     * @param username the user who wants to leave the event
+     * @return boolean if event was removed or not
+     * */
     public boolean leaveEvent(String event, String username){
         return false;
     }
