@@ -12,6 +12,7 @@ import java.util.Scanner;
  * */
 public class SpeakerMainMenuController extends MainMenuController{
     private SpeakerController sController;
+    private User user;
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
@@ -46,6 +47,6 @@ public class SpeakerMainMenuController extends MainMenuController{
      * Responds to menu option 6
      */
     public void option6(){
-        displayEvent.displayEvents(controller.getOwnEvents());
+        displayEvent.displayEvents(sController.viewOwnSchedule(user));
     }
 }
