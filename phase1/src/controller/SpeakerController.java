@@ -24,14 +24,26 @@ public class SpeakerController extends UserController {
 
         this.SpeakerID = speakerID;
     }
-
-    public void sendmessage(String eventID, String message) {
+    // changed return type to boolean
+    public boolean sendmessage(String eventID, String message) {
+        if (!this.eventActions.eventExists(eventID)){
+            return false;
+        }
         List<String> attendees = this.eventActions.getEventAttendees(eventID);
         for (String attendeeID : attendees) {
             this.messageActions.createMessage(this.SpeakerID, attendeeID, message);
         }
+        return true;
     }
-    
+    //helper for presenter
+    public boolean sendMessages(List<String> events, String message){
+        for (String event:events){
+            if (!sendmessage(event, message)){
+                return false;
+            }
+        }
+        return true;
+    }
     public List<String> viewAttendees(String eventID) {
         return this.eventActions.getEventAttendees(eventID);
         }

@@ -21,9 +21,8 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void printMenu(){
         String display = ""
                 + "\n[1] Send a message to all speakers"
-                + "\n[2] Send a message to a single speaker"
-                + "\n[3] Send a message to all attendees"
-                + "\n[4] Send a message to a single attendee"
+                + "\n[2] Send a message to all attendees"
+                + "\n[3] Send a message to a single user"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

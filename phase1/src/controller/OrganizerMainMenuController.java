@@ -33,10 +33,7 @@ public class OrganizerMainMenuController extends MainMenuController{
             menuController.option2();
         }
         if (option.equals("3")){
-            menuController.option3();
-        }
-        if (option.equals("4")){
-            menuController.option4();
+            super.option2();
         }
     }
     public void option6(){
