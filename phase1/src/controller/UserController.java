@@ -128,7 +128,7 @@ public class UserController {
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
-        User a1 = attendee.usersHashMap.get(user);
+        User a1 = attendee.returnUsersHashMap().get(user);
 
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -154,7 +154,7 @@ public class UserController {
      * */
 
     public List<String> viewOwnSchedule(String user){
-        User a1 = attendee.usersHashMap.get(user);
+        User a1 = attendee.returnUsersHashMap().get(user);
 
         return a1.getEventList();
     }

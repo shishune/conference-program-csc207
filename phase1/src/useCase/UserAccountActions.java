@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class UserAccountActions {
     // hashmap the contains all the user objects; key is userID, value is userObject
 
-    public HashMap<String, User> usersHashMap;
+    protected HashMap<String, User> usersHashMap;
 
     public HashMap<String, User> returnUsersHashMap(){
         return usersHashMap;
@@ -164,7 +164,7 @@ public class UserAccountActions {
      * @return string of all the events a user is attending
      * */
 
-    public String printAllEvents(String user) {
+    public String returnAllEvents(String user) {
         User userOne = usersHashMap.get(user);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < userOne.getEventList().size(); i++){
