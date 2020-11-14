@@ -47,6 +47,6 @@ public class SpeakerMainMenuController extends MainMenuController{
      * Responds to menu option 6
      */
     public void option6(){
-        displayEvent.displayEvents(sController.viewOwnSchedule(user));
+        displayEvent.displayEvents(sController.viewOwnSchedule(user.getUsername()));
     }
 }

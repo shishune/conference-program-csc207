@@ -6,6 +6,7 @@ import entities.User;
 import entities.Message;
 import useCase.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -152,9 +153,9 @@ public class UserController {
      * @return string of events that an user is attending
      * */
 
-    public String viewOwnSchedule(String user){
+    public List<String> viewOwnSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
-        return a1.getEventList().toString();
+        return a1.getEventList();
     }
 
     /**
@@ -163,19 +164,19 @@ public class UserController {
      * @return string of events that an user could attend
      * */
 
-    public String viewAvailableSchedule(String user){
+    public List<String> viewAvailableSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
 
         Set<String> allEvents = e.getEvents().keySet();
-        StringBuilder availableS = new StringBuilder();
+        List<String> availableS = new ArrayList<String>();
         List<String> targetList = new ArrayList<>(allEvents);
 
         for (String s: targetList){
             if (!(checkConflictTime(user, s) && checkConflictSpots(s))){
-                availableS.append(s);
+                availableS.add(s);
             }
         }
-        return availableS.toString();
+        return availableS;
     }
 
     /**
@@ -233,10 +234,13 @@ public class UserController {
     /**
      * To be overloaded by OrganizerController
      * @param eventID the event to be cancelled
-     * @param userId
      * @return boolean if event was cancelled or not
      * */
-    public boolean cancelEvent(String eventID, String userId){
+    public boolean cancelEvent(String eventID){
+        return false;
+    }
+
+    public boolean leaveEvent(String event, String username){
         return false;
     }
 

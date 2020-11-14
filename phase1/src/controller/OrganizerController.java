@@ -45,9 +45,9 @@ public class OrganizerController extends UserController{
      * @param eventID
      * @return true if the event was successfully canceled (ie if it exists, then it will be cancelled)
      */
-    //make sure this works bc i edited it - Jiessie
+
     @Override
-    public boolean cancelEvent(String eventID, String organizerID){
+    public boolean cancelEvent(String eventID){
         if (this.eventActions.eventExists(eventID)){
             List<String> eventAttendees = this.eventActions.cancelEvent(eventID);
             for (String attendeeID: eventAttendees){

@@ -108,8 +108,8 @@ public class MainMenuController {
     public void option7(){
         displayEvent.promptCancelEvent();
         String event = scan.nextLine();
-        // don't need to pass an id to cancel event
-        if(controller.cancelEvent(event, user.getId())){
+        // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
+        if(controller.leaveEvent(event, user.getId())){
             displayEvent.successCancelEnrol();
         }
         else{
@@ -123,13 +123,13 @@ public class MainMenuController {
      * Responds to menu option 8
      */
     public void option8(){
-        displayEvent.displayEvents(controller.viewAvailableSchedule();
+        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername());
     }
 
     /**
      * Responds to menu option 9
      */
     public void option9(){
-        displayEvent.displayEvents(controller.viewOwnSchedule());
+        displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
     }
 }
