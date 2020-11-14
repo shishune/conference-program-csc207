@@ -5,6 +5,12 @@ import useCase.*;
 
 public class AttendeeController extends UserController{
 
+    private UserAccountActions user;
+    private MessageActions message;
+    private EventActions e;
+    private AttendeeActions attendee;
+    private RoomActions room;
+
     public AttendeeController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message,
                               AttendeeActions attendee) {
         super(user, events, rooms, message, attendee);

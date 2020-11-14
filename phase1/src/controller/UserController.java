@@ -19,11 +19,11 @@ import java.util.*;
 
 public class UserController {
     //todo should these be private?
-    protected UserAccountActions user;
-    protected MessageActions message;
-    protected EventActions e;
-    protected AttendeeActions attendee;
-    protected RoomActions room;
+    private UserAccountActions user;
+    private MessageActions message;
+    private EventActions e;
+    private AttendeeActions attendee;
+    private RoomActions room;
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
@@ -153,15 +153,10 @@ public class UserController {
      * @return string of events that an user is attending
      * */
 
-    public List<Event> viewOwnSchedule(String user){
+    public List<String> viewOwnSchedule(String user){
         User a1 = attendee.usersHashMap.get(user);
-        List<Event> eventS = new ArrayList<>();
 
-        for (int i = 0; i < a1.getEventList().size(); i++){
-            eventS.add(e.getEvents().get(a1.getEventList().get(i)));
-        }
-
-        return eventS;
+        return a1.getEventList();
     }
 
     /**
@@ -171,8 +166,6 @@ public class UserController {
      * */
 
     public List<String> viewAvailableSchedule(String user){
-        User a1 = attendee.usersHashMap.get(user);
-
         Set<String> allEvents = e.getEvents().keySet();
         List<String> availableS = new ArrayList<>();
         List<String> targetList = new ArrayList<>(allEvents);
