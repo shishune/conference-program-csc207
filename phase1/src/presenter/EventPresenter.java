@@ -15,15 +15,17 @@ public class EventPresenter {
     /**
      * Dislays events
      * */
-    public void displayEvents(List<Event> eventsList){
+    public void displayEvents(List<List<String>> eventsList){
         int count = 1;
-        for (Event event: eventsList){
+        for (List<String> info: eventsList){
             System.out.println(count);
             count ++;
-            System.out.println("Event title: "+event.getTitle());
-            System.out.println("Event time: "+event.getDateTime());
-            System.out.println("Event room: "+event.getRoomID());
-            System.out.println("Event speaker: "+event.getSpeaker());
+
+            System.out.println("Event title: "+info.get(0));
+            System.out.println("Event time: "+info.get(1));
+            System.out.println("Event room: "+info.get(2));
+            System.out.println("Event speaker: "+info.get(3));
+
             System.out.println("\n");
         }
     }

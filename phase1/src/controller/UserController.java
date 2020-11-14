@@ -18,7 +18,6 @@ import java.util.*;
  * */
 
 public class UserController {
-    //todo should these be private?
     private UserAccountActions user;
     private MessageActions message;
     private EventActions e;
@@ -153,10 +152,23 @@ public class UserController {
      * @return string of events that an user is attending
      * */
 
-    public List<String> viewOwnSchedule(String user){
+    public List<List<String>> viewOwnSchedule(String user){
         User a1 = attendee.returnUsersHashMap().get(user);
-
-        return a1.getEventList();
+        List<String> eventList = a1.getEventList();
+        List<List<String>> scheduleList = new ArrayList<List<String>>();
+        for (String event: eventList){
+            String title = e.getEvent(event).getTitle();
+            String dateTime = e.getEvent(event).getDateTime();
+            String roomId = e.getEvent(event).getRoomID();
+            String speaker = e.getEvent(event).getSpeaker();
+            List<String> info = new ArrayList<String>();
+            info.add(title);
+            info.add(dateTime);
+            info.add(roomId);
+            info.add(speaker);
+            scheduleList.add(info);
+        }
+        return scheduleList;
     }
 
     /**
@@ -165,7 +177,7 @@ public class UserController {
      * @return string of events that an user could attend
      * */
 
-    public List<String> viewAvailableSchedule(String user){
+    public List<List<String>> viewAvailableSchedule(String user){
         Set<String> allEvents = e.getEvents().keySet();
         List<String> availableS = new ArrayList<>();
         List<String> targetList = new ArrayList<>(allEvents);
@@ -175,7 +187,20 @@ public class UserController {
                 availableS.add(s);
             }
         }
-        return availableS;
+        List<List<String>> scheduleList = new ArrayList<List<String>>();
+        for (String event: availableS){
+            String title = e.getEvent(event).getTitle();
+            String dateTime = e.getEvent(event).getDateTime();
+            String roomId = e.getEvent(event).getRoomID();
+            String speaker = e.getEvent(event).getSpeaker();
+            List<String> info = new ArrayList<String>();
+            info.add(title);
+            info.add(dateTime);
+            info.add(roomId);
+            info.add(speaker);
+            scheduleList.add(info);
+        }
+        return scheduleList;
     }
 
     /**
