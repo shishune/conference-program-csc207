@@ -28,7 +28,7 @@ public class LoadUp implements LoadUpIGateway {
     }
     public ArrayList<String> getMessages() {
         // gets list of messages from messages.csv and sets it to <messages>
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/messages.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/messages.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 messages.add(line);
@@ -41,7 +41,7 @@ public class LoadUp implements LoadUpIGateway {
 
     public List<String> getRooms(){
         rooms = new ArrayList<String>();
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/rooms.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/rooms.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 rooms.add(line);
@@ -53,7 +53,7 @@ public class LoadUp implements LoadUpIGateway {
     }
     public List<String> getEvents() {
         // gets list of messages from messages.csv and sets it to <messages>
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/events.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/events.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 events.add(line);
@@ -93,7 +93,7 @@ public class LoadUp implements LoadUpIGateway {
 
     public ArrayList<String> getAllAttendees() {
         // gets list of attendees from attendees.csv and sets it to <attendeesHM>
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/attendees.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/attendees.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 attendees.add(line);
@@ -106,7 +106,7 @@ public class LoadUp implements LoadUpIGateway {
 
     public ArrayList<String> getAllOrganizers() {
         // gets list of messages from messages.csv and sets it to <messages>
-        try (BufferedReader br = new BufferedReader(new FileReader("../assets/dataFiles/organizers.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/organizers.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
                 organizers.add(line);
@@ -119,7 +119,7 @@ public class LoadUp implements LoadUpIGateway {
 
 
     public int getNumOfIds() {
-        String filename = "../assets/dataFiles/entities.csv";
+        String filename = "./phase1/src/assets/dataFiles/entities.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;
 
