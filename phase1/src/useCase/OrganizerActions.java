@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO: change return type to organizer instead of user (do so for attendee, and speaker as well)
+
 public class OrganizerActions extends UserAccountActions {
 
     private HashMap<String, Organizer> organizerHashMap = new HashMap<String, Organizer>();
@@ -32,26 +34,41 @@ public class OrganizerActions extends UserAccountActions {
     // private LoadUp loader = new LoadUp();
 
     public OrganizerActions(LoadUpIGateway loader) {
+        // this.loader = loader;
         getAllOrganizer(loader); // gets all messages from message.csv
-        addOrganizerToHashMap();; // adds those messages to a hashmap of all messages from the csv
+        addOrganizerToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
-        this.loader = loader;
+
     }
 
     public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userOrganizer);
         addUsernameToHashMap(userOrganizer);
+//        super.addUserIdToHashMap(userOrganizer);
+//        super.addUsernameToHashMap(userOrganizer);
         return userOrganizer;
     }
 
-    public User createOrganizer(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
-        GenerateID generateId = new GenerateID(loader);
-        String userId = "O" + generateId;
-        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
+    public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
         addUserIdToHashMap(userOrganizer);
         addUsernameToHashMap(userOrganizer);
+        organizerHashMap.put(userId, userOrganizer);
+        organizerUsernameHashMap.put(username, userOrganizer);
         return userOrganizer;
+    }
+
+    public Organizer addToOrganizerHashMap() {
+
+        return null;
+    }
+
+
+    public User createOrganizer(String username, String password, boolean isLogin){
+        GenerateID generateId = new GenerateID(loader);
+        String userId = "O" + generateId;
+        return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 
 //    public boolean addNewEvent(Event event) {
@@ -95,10 +112,12 @@ public class OrganizerActions extends UserAccountActions {
                     contactList.add(c);
                 }
 
-                Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
-                        eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
-                organizerHashMap.put(organizerInfo[0], loadedOrganizer);
-                organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
+//                Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
+//                        eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
+                loadOrganizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
+                        eventList, Boolean.parseBoolean(organizerInfo[5]));
+//                organizerHashMap.put(organizerInfo[0], loadedOrganizer);
+//                organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
             }
         }
     }
