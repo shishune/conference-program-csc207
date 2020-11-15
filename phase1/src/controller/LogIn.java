@@ -14,9 +14,9 @@ public class LogIn {
      * @param password Astring the user inputs as their password
      * @param userActions A UserAccountActions object so it can access the use case class
      * @return The user object of the user if the login was successful otherwise null if given username and password
-     * are incorrct.
+     * are incorrect.
      */
-    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions, UserController controller) {
+    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, UserAccountActions userActions, AttendeeActions attendeeActions, UserController controller) {
         System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
         if (l.isLogin(username, password, organizerActions, speakerActions, attendeeActions, controller)) {

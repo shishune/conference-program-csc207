@@ -21,7 +21,7 @@ public class LogoutActions{
      * @return A boolean if the username and password given are correct
      * */
     public void logout(String username, UserController userController) {
-        User user = userController.returnUsersHashMap().get(username);
+        User user = userController.returnUsernameHashMap().get(username);
         user.setLogin(false);
     }
 }

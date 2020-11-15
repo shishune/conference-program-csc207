@@ -22,7 +22,8 @@ public class UserController {
     private OrganizerActions organizer;
     private RoomActions room;
     private SpeakerActions speaker;
-    private HashMap<String, User> userHashmap = new HashMap<String, User>();
+    private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
+    private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
@@ -39,14 +40,28 @@ public class UserController {
         this.speaker = speaker;
     }
 
-    public HashMap<String, User> returnUsersHashMap() {
-        HashMap<String, Attendee> attendeeHashmap = attendee.returnAttendeesUsernameHashMap();
-        HashMap<String, Organizer> organizerHashMap = organizer.returnOrganizersUsernameHashMap();
-        HashMap<String, Speaker> speakerHashMap = speaker.returnSpeakerUsernameHashMap();
-        userHashmap.putAll(attendeeHashmap);
-        userHashmap.putAll(organizerHashMap);
-        userHashmap.putAll(speakerHashMap);
-        return userHashmap;
+    public HashMap<String, User> returnUsernameHashMap() {
+        if (attendee.returnAttendeesUsernameHashMap().isEmpty() || organizer.returnOrganizersUsernameHashMap().isEmpty() || speaker.returnSpeakerUsernameHashMap().isEmpty()){
+            return null;
+        }
+        else {
+            usernameHashmap.putAll(attendee.returnAttendeesUsernameHashMap());
+            usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
+            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
+            return usernameHashmap;
+        }
+    }
+
+
+    public HashMap<String, User> returnUserIdHashMap() {
+        if (attendee.returnAttendeesHashMap().isEmpty() || organizer.returnOrganizersHashMap().isEmpty() || speaker.returnSpeakerIDHashMap().isEmpty()){
+            return null;
+        }
+        else{
+        userIdHashmap.putAll(attendee.returnAttendeesHashMap());
+        userIdHashmap.putAll(organizer.returnOrganizersHashMap());
+        userIdHashmap.putAll(speaker.returnSpeakerIDHashMap());
+        return userIdHashmap;}
     }
     /**
      * Sends a message to a user
@@ -139,7 +154,7 @@ public class UserController {
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
-        User a1 = returnUsersHashMap().get(user);
+        User a1 = returnUsernameHashMap().get(user);
 
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -165,7 +180,7 @@ public class UserController {
      * */
 
     public List<List<String>> viewOwnSchedule(String user){
-        User a1 = returnUsersHashMap().get(user);
+        User a1 = returnUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         for (String event: eventList){

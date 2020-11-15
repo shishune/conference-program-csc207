@@ -26,15 +26,17 @@ public class LoginActions {
         System.out.println(organizerActions.returnOrganizersHashMap());
         System.out.println(speakerActions.returnSpeakerUsernameHashMap());
         System.out.println(attendeeActions.returnAttendeesHashMap());
-        if(controller.returnUsersHashMap().containsKey(username)){
+        if(controller.returnUsernameHashMap().containsKey(username)){
+            //the problem here is that the master hashmap is empty but idk why cuz it isn't empty before. i think the organizer entity hashmap thing gets erased idk why and im not sure
+            User user = controller.returnUsernameHashMap().get(username);
         //if (organizerActions.returnOrganizersHashMap().containsKey(username) || speakerActions.returnSpeakerIDHashMap().containsKey(username) || attendeeActions.returnAttendeesHashMap().containsKey(username)){
-            User user = organizerActions.returnOrganizersHashMap().get(username) != null
-                    ? organizerActions.returnOrganizersHashMap().get(username)
-                    : speakerActions.returnSpeakerUsernameHashMap().get(username) != null
-                    ? speakerActions.returnSpeakerUsernameHashMap().get(username)
-                    : attendeeActions.returnAttendeesHashMap().get(username) != null
-                    ? attendeeActions.returnAttendeesHashMap().get(username)
-                    : null;
+//            User user = organizerActions.returnOrganizersHashMap().get(username) != null
+//                    ? organizerActions.returnOrganizersHashMap().get(username)
+//                    : speakerActions.returnSpeakerUsernameHashMap().get(username) != null
+//                    ? speakerActions.returnSpeakerUsernameHashMap().get(username)
+//                    : attendeeActions.returnAttendeesHashMap().get(username) != null
+//                    ? attendeeActions.returnAttendeesHashMap().get(username)
+//                    : null;
             if(user.getPassword().equals(password)) {
                 user.setLogin(true);
                 return true;

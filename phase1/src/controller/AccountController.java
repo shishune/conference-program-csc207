@@ -132,7 +132,7 @@ public class AccountController {
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
             //String id = logIn.loggingIn(username, password); // evaluate username/password
-            String userID = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions, controller);
+            String userID = logIn.logIn(username, password, organizerActions, speakerActions,  userAccountActions, attendeeActions, controller);
 
             // TODO let us logout before login
             if(userID.equals("")){
