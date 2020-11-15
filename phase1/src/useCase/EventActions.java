@@ -117,6 +117,10 @@ public class EventActions  {
         }
     }
 
+    /**
+     * Create a new event based on the parmeters provided
+     * @return true if the event was created
+     * */
     // edited to interact well with presenter
     public List<Boolean> createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
@@ -137,10 +141,25 @@ public class EventActions  {
         return checks;
     }
 
+    /***
+     * set speaker of an event
+     * @param eventID if of event
+     * @param speakerID id of new speaker
+     */
     public void setSpeaker(String eventID, String speakerID){
         this.events.get(eventID).setSpeaker(speakerID);
     }
 
+    /***
+     *  Load a new event to CSV file so we are able to access it after the system has been closed as well
+     *
+     * @param eventID id of event
+     * @param title title of event
+     * @param speakerId id of speaker
+     * @param dateTime date and time of event
+     * @param attendees list of attendees of event
+     * @param roomID id of room
+     */
     public void loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
@@ -166,7 +185,12 @@ public class EventActions  {
 
     }
 
-
+    /***
+     * Add an attendee who has requested to be added to a specific event
+     * @param eventID
+     * @param attendeeID
+     * @return true if an attendee has been added to their desired event
+     */
     public boolean addAttendee(String eventID, String attendeeID){
         List<String> eventAttendees = attendees.get(eventID);
         if (eventAttendees.contains(attendeeID)) {
@@ -177,7 +201,12 @@ public class EventActions  {
             return true;
         }
     }
-
+    /***
+     * Remove an attendee who has requested to be removed to a specific event
+     * @param eventID
+     * @param attendeeID
+     * @return true if an attendee has been removed to their desired event
+     */
     public boolean removeAttendee(String eventID, String attendeeID){
         List<String> eventAttendees = attendees.get(eventID);
         if (!eventAttendees.contains(attendeeID)) {
@@ -189,6 +218,12 @@ public class EventActions  {
         }
     }
 
+
+    /***
+     * Remove an attendee who has requested to be removed from a specfic event
+     * @param eventID
+     * @return true if an attendee has been removed from an event that they used to be a part of
+     */
     public List<String> cancelEvent(String eventID){
         Event event = this.events.get(eventID);
         this.events.remove(eventID);
@@ -201,6 +236,12 @@ public class EventActions  {
     }
 
 
+    /***
+     * Cancel an event
+     * @param eventID
+     * @param newDateTime
+     * @return List<String> which is the list of attendees who had signed up for that event
+     */
     public boolean changeEventTime(String eventID, String newDateTime){
         Event event = this.events.get(eventID);
         if(isRoomFree(event.getRoomID(), newDateTime) &&
@@ -219,6 +260,13 @@ public class EventActions  {
 
     }
 
+    /**
+     * Change the time of an event which has been created
+     * @param roomID
+     * @param dateTime
+     * @return true if the event has been successfuly updated
+     * */
+
     public boolean isRoomFree(String roomID, String dateTime){
         List<String> roomTime = this.roomSchedule.get(roomID);
 
@@ -229,6 +277,12 @@ public class EventActions  {
 
     }
 
+    /**
+     * Check if a room is available as a certain time
+     * @param speakerID
+     * @param dateTime
+     * @return true if the room is in fact available
+     * */
     public boolean isSpeakerFree(String speakerID, String dateTime){
         List<String> SpeakerTime = this.speakerSchedule.get(speakerID);
 
@@ -238,7 +292,10 @@ public class EventActions  {
         return true;
     }
 
-
+    /***
+     * return all events in hashmap as a List of strings
+     * @return all events in hashmap as a List of strings
+     */
     public List<String> storeEvents(){
         List<String> storedEvents = new ArrayList();
         for(Map.Entry<String, Event> event : events.entrySet()) {
@@ -248,8 +305,12 @@ public class EventActions  {
 
     }
 
+    /***
+     * return list of all attendee IDs of an event
+     * @param eventID
+     * @return List of all attendee IDs of an event
+     */
     public List<String> getEventAttendees(String eventID){
-
         return attendees.get(eventID);
     }
 
