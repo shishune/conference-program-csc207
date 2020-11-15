@@ -28,6 +28,8 @@ public class LogIn {
                     : attendeeActions.returnAttendeesHashMap().get(username).getId() != null
                     ? attendeeActions.returnAttendeesHashMap().get(username).getId()
                     : "";
+            // ternary operations
+            // dog == animal ? to do if true : to do if false
         }
         return "";
     }
