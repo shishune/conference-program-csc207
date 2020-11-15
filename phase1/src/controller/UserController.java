@@ -42,10 +42,10 @@ public class UserController {
     public HashMap<String, User> returnUsersHashMap() {
         HashMap<String, Attendee> attendeeHashmap = attendee.returnAttendeesUsernameHashMap();
         HashMap<String, Organizer> organizerHashMap = organizer.returnOrganizersUsernameHashMap();
-       // HashMap<String, Speaker> speakerHashMap = speaker.returnSpeakersUsernameHashMap();
+        HashMap<String, Speaker> speakerHashMap = speaker.returnSpeakerUsernameHashMap();
         userHashmap.putAll(attendeeHashmap);
         userHashmap.putAll(organizerHashMap);
-       // userHashmap.putAll(speakerHashMap);
+        userHashmap.putAll(speakerHashMap);
         return userHashmap;
     }
     /**
