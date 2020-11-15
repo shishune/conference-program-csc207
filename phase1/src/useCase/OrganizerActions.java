@@ -79,25 +79,27 @@ public class OrganizerActions extends UserAccountActions {
     }
 
     private void addOrganizerToHashMap() {
-        for(String organizersString : organizers) {
-            String[] organizerInfo = organizersString.split(",");
-            ArrayList<String> eventList = new ArrayList<String>();
-            ArrayList<String> contactList = new ArrayList<String>();
-            String[] events = organizerInfo[4].split("%%");
-            String[] contacts = organizerInfo[3].split("%%");
+        if (organizers != null) {
+            for (String organizersString : organizers) {
+                String[] organizerInfo = organizersString.split(",");
+                ArrayList<String> eventList = new ArrayList<String>();
+                ArrayList<String> contactList = new ArrayList<String>();
+                String[] events = organizerInfo[4].split("%%");
+                String[] contacts = organizerInfo[3].split("%%");
 
-            for (String e: events) {
-                eventList.add(e);
+                for (String e : events) {
+                    eventList.add(e);
+                }
+
+                for (String c : contacts) {
+                    contactList.add(c);
+                }
+
+                Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
+                        eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
+                organizerHashMap.put(organizerInfo[0], loadedOrganizer);
+                organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
             }
-
-            for (String c: contacts) {
-                contactList.add(c);
-            }
-
-            Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
-                    eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
-            organizerHashMap.put(organizerInfo[0], loadedOrganizer);
-            organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
         }
     }
 

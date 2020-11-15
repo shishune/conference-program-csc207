@@ -55,22 +55,24 @@ public class AttendeeActions extends UserAccountActions{
     }
 
     private void addAttendeeToHashMap() {
-        for(String attendeeString : attendees) {
-            String[] attendeeInfo = attendeeString.split(",");
-            ArrayList<String> eventList = new ArrayList<String>();
-            ArrayList<String> contactList = new ArrayList<String>();
-            String[] events = attendeeInfo[4].split("%%");
-            String[] contacts = attendeeInfo[3].split("%%");
-            for (String e: events) {
-                eventList.add(e);
+        if (attendees != null) {
+            for (String attendeeString : attendees) {
+                String[] attendeeInfo = attendeeString.split(",");
+                ArrayList<String> eventList = new ArrayList<String>();
+                ArrayList<String> contactList = new ArrayList<String>();
+                String[] events = attendeeInfo[4].split("%%");
+                String[] contacts = attendeeInfo[3].split("%%");
+                for (String e : events) {
+                    eventList.add(e);
+                }
+                for (String c : contacts) {
+                    contactList.add(c);
+                }
+                Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
+                        eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
+                attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
+                attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }
-            for (String c: contacts) {
-                contactList.add(c);
-            }
-            Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
-                    eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
-            attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
-            attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
         }
     }
 
