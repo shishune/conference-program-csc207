@@ -46,6 +46,10 @@ public class SpeakerActions extends UserAccountActions {
         speakers.put(speakerId, newSpeaker);
     }
 
+    public HashMap<String, Speaker> returnSpeakerHashMap() {
+        return speakers;
+    }
+
     /** gets list of messages from the IGateway **/
     private void getAllSpeakers(LoadUpIGateway loader) {
         speakerLoadUpList = loader.getSpeakersList();
