@@ -30,6 +30,7 @@ public class AccountController {
         MessageActions messageActions = new MessageActions(g);
         EventActions eventActions = new EventActions(g);
         UserAccountActions userAccountActions = new UserAccountActions();
+        // ^^^ must we implement all the methods here to for it to be happy? cuz its gonna look so bad someone help pls
         RoomActions roomActions = new RoomActions(g);
         SpeakerActions speakerActions = new SpeakerActions(g);
         OrganizerActions organizerActions = new OrganizerActions(g);
@@ -38,7 +39,7 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
-        UserController controller = new UserController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+        UserController controller = new UserController(userAccountActions, eventActions, roomActions, messageActions, attendeeActions,organizerActions, speakerActions);
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program

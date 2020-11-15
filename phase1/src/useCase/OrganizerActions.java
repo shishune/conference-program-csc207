@@ -155,7 +155,6 @@ public class OrganizerActions extends UserAccountActions {
      * */
 
 
-    // TODO THERE IS AN ERASURE PROBLEM!!!
     public boolean addUserContactList(String toMe, String addMe) {
         Organizer user = organizerUsernameHashMap.get(toMe);
         Organizer userOne = organizerUsernameHashMap.get(addMe);
@@ -232,8 +231,45 @@ public class OrganizerActions extends UserAccountActions {
     }
 
 
+    /**
+     * Finds an user from a given username
+     * @param username the username given
+     * @return user object from hashmap of user objects
+     * */
+    public User findUserFromUsername(String username){
+        return organizerUsernameHashMap.get(username);
+    }
 
 
+    /**
+     * Finds an user from a given userId
+     * @param userId the userId given
+     * @return user object from hashmap of user objects
+     * */
+    public User findUserFromId(String userId){
+        return organizerHashMap.get(userId);
+    }
+
+
+    /**
+     * Returns all the events in an user's eventList
+     *
+     * @param user the user who's eventList is printed
+     * @return string of all the events a user is attending
+     */
+
+    public String returnAllEvents(String user) {
+        {
+            User userOne = organizerUsernameHashMap.get(user);
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < userOne.getEventList().size(); i++) {
+                // System.out.println(user.getEventList().get(i));
+                String a = userOne.getEventList().get(i);
+                result.append(a).append(' ');
+            }
+            return result.toString();
+        }
+    }
     private void getAllOrganizer(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
         organizers = loader.getAllOrganizers();
@@ -274,41 +310,4 @@ public class OrganizerActions extends UserAccountActions {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Finds an user from a given username
-     * @param username the username given
-     * @return user object from hashmap of user objects
-     * */
-    public User findUserFromUsername(String username, HashMap<String, User> usersHashMap){
-        return usersHashMap.get(username);
-    }
-
-    /**
-     * Finds an user from a given userId
-     * @param userId the userId given
-     * @return user object from hashmap of user objects
-     * */
-    public User findUserFromId(String userId, HashMap<String, User> usersHashMap){
-        return usersHashMap.get(userId);
-    }
-
-}
 }

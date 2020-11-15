@@ -1,9 +1,6 @@
 package controller;
 
-import entities.Event;
-import entities.Room;
-import entities.User;
-import entities.Message;
+import entities.*;
 import useCase.*;
 
 import java.lang.reflect.Array;
@@ -22,7 +19,9 @@ public class UserController {
     private MessageActions message;
     private EventActions e;
     private AttendeeActions attendee;
+    private OrganizerActions organizer;
     private RoomActions room;
+    private SpeakerActions speaker;
     private HashMap<String, User> userHashmap;
 
     /**
@@ -30,14 +29,25 @@ public class UserController {
      * AttendeeActions, RoomActions.
      * */
     public UserController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message,
-                          AttendeeActions attendee) {
+                          AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
         this.user = user;
         this.message = message;
         this.e = events;
         this.room = rooms;
         this.attendee = attendee;
+        this.organizer = organizer;
+        this.speaker = speaker;
     }
 
+    public HashMap<String, User> returnUsersHashMap() {
+        HashMap<String, Attendee> attendeeHashmap = attendee.returnAttendeesUsernameHashMap();
+        HashMap<String, Organizer> organizerHashMap = organizer.returnOrganizersUsernameHashMap();
+       // HashMap<String, Speaker> speakerHashMap = speaker.returnSpeakersUsernameHashMap();
+        userHashmap.putAll(attendeeHashmap);
+        userHashmap.putAll(organizerHashMap);
+       // userHashmap.putAll(speakerHashMap);
+        return userHashmap;
+    }
     /**
      * Sends a message to a user
      * @param content the message to be sent
@@ -60,7 +70,7 @@ public class UserController {
      * @return boolean true if contact was successfully added, false if it was not
      * */
     public boolean addContact(String addMe, String toMe){
-        return user.addUserContactList(toMe, addMe, userHashmap);
+        return user.addUserContactList(toMe, addMe);
     };
 
     public boolean deleteContact(String removeMe, String toMe){
@@ -128,7 +138,7 @@ public class UserController {
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
-        User a1 = attendee.returnUsersHashMap().get(user);
+        User a1 = returnUsersHashMap().get(user);
 
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -154,7 +164,7 @@ public class UserController {
      * */
 
     public List<List<String>> viewOwnSchedule(String user){
-        User a1 = attendee.returnUsersHashMap().get(user);
+        User a1 = returnUsersHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         for (String event: eventList){
