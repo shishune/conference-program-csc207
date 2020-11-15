@@ -30,7 +30,7 @@ public class AccountController {
         MessageActions messageActions = new MessageActions(g);
         EventActions eventActions = new EventActions(g);
         UserAccountActions userAccountActions = new UserAccountActions();
-        RoomActions roomActions = new RoomActions();
+        RoomActions roomActions = new RoomActions(g);
         SpeakerActions speakerActions = new SpeakerActions(g);
         OrganizerActions organizerActions = new OrganizerActions(g);
         AttendeeActions attendeeActions = new AttendeeActions(g);

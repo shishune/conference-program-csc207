@@ -110,7 +110,7 @@ public class EventActions  {
     private void getAllEvents(LoadUpIGateway loader) {
         List<String> eventList = loader.getEventsList();
         for (String event: eventList){
-            String[] eventAttributes = event.split(", ");
+            String[] eventAttributes = event.split(",");
             List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
             loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                     eventAttendees, eventAttributes[5]);

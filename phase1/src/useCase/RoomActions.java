@@ -18,6 +18,14 @@ import useCase.GenerateID;
 public class RoomActions {
     private HashMap<String, Room> roomsList;
     private LoadUpIGateway loader;
+    private ArrayList<String> loadUpRooms = new ArrayList<String>();
+
+    public RoomActions(LoadUpIGateway loader) {
+        this.loader = loader;
+        getAllRooms(loader);
+        addLoadedToHashMap();
+    }
+
 
     public String createRoom(){
         GenerateID generator = new GenerateID(loader);
@@ -93,8 +101,23 @@ public class RoomActions {
         return this.roomsList;
     }
 
+    /** gets list of messages from the IGateway **/
+    private void getAllRooms(LoadUpIGateway loader) {
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
+        loadUpRooms = loader.getRoomsList();
+    }
+
+    /** Adds messages loaded from the csv to <messages> **/
+    private void addLoadedToHashMap() {
+        //System.out.println(conversations);
+        if (loadUpRooms != null) {
+            for (String roomString : loadUpRooms) {
+                String[] roomInfo = roomString.split(",");
+                Room loadedRoom = new Room(roomInfo[0]);
+                roomsList.put(roomInfo[0], loadedRoom);
+            }
+        }
+    }
 
 
-
-
-}
+    }
