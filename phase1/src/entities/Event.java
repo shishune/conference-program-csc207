@@ -5,7 +5,6 @@ import java.util.Date;
 
 
 public class Event {
-    private static String lastEventIdNums = "";
     private String eventID;
     private String title;
     private String speaker;
