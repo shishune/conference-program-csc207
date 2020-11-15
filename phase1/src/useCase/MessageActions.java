@@ -87,12 +87,14 @@ public class MessageActions {
 
     /** Adds messages loaded from the csv to <messages> **/
     private void addLoadedToHashMap() {
-        for(String messageString : conversations) {
-            String[] messageInfo = messageString.split(",");
-            Message loadedMessage = new Message(
-                    messageInfo[0], messageInfo[1], messageInfo[2],
-                    messageInfo[3], messageInfo[4]);
-            messages.put(messageInfo[0], loadedMessage);
+        //System.out.println(conversations);
+        if (conversations != null) {
+            for(String messageString : conversations) {
+                String[] messageInfo = messageString.split(",");
+                Message loadedMessage = new Message(messageInfo[0], messageInfo[1], messageInfo[2],messageInfo[3], messageInfo[4]);
+                //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
+                messages.put(messageInfo[0], loadedMessage);
+            }
         }
     }
 
