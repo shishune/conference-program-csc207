@@ -6,6 +6,7 @@ import useCase.*;
 
 public class LogIn {
 
+    //TODO: Change javadocs
     /**
      * This method is called when the user is logging in after they have inputted a username and password and checks if
      * the username and password are correct, if so returns the user object which was logging in, otherwise returns null
