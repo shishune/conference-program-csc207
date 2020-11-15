@@ -28,7 +28,7 @@ public class OrganizerMessageMenuController{
     public void option1(){
         displayMessage.promptMessage();
         String message = scan.nextLine();
-        controller.sendSpeakersMessage(message); //todo: need to add this method to organizerController
+        //controller.sendSpeakersMessage(message); //todo: need to add this method to organizerController
         displayMessage.successMessage();
     }
     /**
