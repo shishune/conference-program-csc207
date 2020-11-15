@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class UserAccountActions {
     // hashmap the contains all the user objects; key is userID, value is userObject
 
-    protected HashMap<String, User> usersHashMap = new HashMap<String, User>();
+    //protected HashMap<String, User> usersHashMap = new HashMap<String, User>();
 
-    public HashMap<String, User> returnUsersHashMap(){
-        return usersHashMap;
-    }
+    //public HashMap<String, User> returnUsersHashMap(){
+    //    return usersHashMap;
+    //}
 
     /**
      * Adds an userId to existing hashmap of userId's.
@@ -26,8 +26,7 @@ public class UserAccountActions {
      * @param addMe the user to be added
      * @return void
      * */
-    public void addUserIdToHashMap(User addMe){
-
+    public void addUserIdToHashMap(User addMe, HashMap<String, User> usersHashMap){
         if (usersHashMap.containsKey(addMe.getId())){
             usersHashMap.put(addMe.getId(), addMe);
         }
@@ -40,7 +39,7 @@ public class UserAccountActions {
      * @param addMe the user to be added
      * @return void
      * */
-    public void addUsernameToHashMap(User addMe){
+    public void addUsernameToHashMap(User addMe, HashMap<String, User> usersHashMap){
 
         if (usersHashMap.containsKey(addMe.getUsername())){
             usersHashMap.put(addMe.getUsername(), addMe);
@@ -54,7 +53,7 @@ public class UserAccountActions {
      * @param removeMe the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-    public boolean removeUserIdFromHashMap(User removeMe){
+    public boolean removeUserIdFromHashMap(User removeMe,HashMap<String, User> usersHashMap){
         if (usersHashMap.containsKey(removeMe.getId())){
             usersHashMap.remove(removeMe.getId(), removeMe);
             return true;
@@ -69,7 +68,7 @@ public class UserAccountActions {
      * @return true if user is removed successfully, false if it has not been removed
      * */
 
-    public boolean removeUsernameFromHashMap(User removeMe){
+    public boolean removeUsernameFromHashMap(User removeMe, HashMap<String, User> usersHashMap){
         if (usersHashMap.containsKey(removeMe.getUsername())){
             usersHashMap.remove(removeMe.getUsername(), removeMe);
             return true;
@@ -84,7 +83,7 @@ public class UserAccountActions {
      * @return true if user is added successfully, false if not
      * */
 
-    public boolean addUserContactList(String toMe, String addMe) {
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> usersHashMap) {
         User user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
@@ -105,7 +104,7 @@ public class UserAccountActions {
      * @return true if user is removed successfully, false if not
      * */
 
-    public boolean removeUserContactList(String toMe, String removeMe) {
+    public boolean removeUserContactList(String toMe, String removeMe, HashMap<String, User> usersHashMap) {
         User user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(removeMe);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
@@ -126,7 +125,7 @@ public class UserAccountActions {
      * @return true if event is added successfully, false if not
      * */
 
-    public boolean addEventToUser(String event, String user) {
+    public boolean addEventToUser(String event, String user, HashMap<String, User> usersHashMap) {
         User userOne = usersHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
@@ -146,7 +145,7 @@ public class UserAccountActions {
      * @return true if event is removed successfully, false if not
      * */
 
-    public boolean removeEventFromUser(String event, String user) {
+    public boolean removeEventFromUser(String event, String user, HashMap<String, User> usersHashMap) {
         User userOne = usersHashMap.get(user);
             boolean isPresent = userOne.getEventList().contains(event);
             if (isPresent) {
@@ -164,7 +163,7 @@ public class UserAccountActions {
      * @return string of all the events a user is attending
      * */
 
-    public String returnAllEvents(String user) {
+    public String returnAllEvents(String user, HashMap<String, User> usersHashMap) {
         User userOne = usersHashMap.get(user);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < userOne.getEventList().size(); i++){
@@ -179,7 +178,7 @@ public class UserAccountActions {
      * @param username the username given
      * @return user object from hashmap of user objects
      * */
-    public User findUserFromUsername(String username){
+    public User findUserFromUsername(String username, HashMap<String, User> usersHashMap){
         return usersHashMap.get(username);
     }
 
@@ -188,7 +187,7 @@ public class UserAccountActions {
      * @param userId the userId given
      * @return user object from hashmap of user objects
      * */
-    public User findUserFromId(String userId){
+    public User findUserFromId(String userId, HashMap<String, User> usersHashMap){
         return usersHashMap.get(userId);
     }
 
