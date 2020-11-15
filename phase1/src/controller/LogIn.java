@@ -20,16 +20,17 @@ public class LogIn {
         System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
         if (l.isLogin(username, password, organizerActions, speakerActions, attendeeActions, controller)) {
-            //return userActions.returnUsersHashMap().get(username).getId();
-            return organizerActions.returnOrganizersHashMap().get(username).getId() != null
-                    ? organizerActions.returnOrganizersHashMap().get(username).getId()
-                    : speakerActions.returnSpeakerUsernameHashMap().get(username).getId() != null
-                    ? speakerActions.returnSpeakerUsernameHashMap().get(username).getId()
-                    : attendeeActions.returnAttendeesHashMap().get(username).getId() != null
-                    ? attendeeActions.returnAttendeesHashMap().get(username).getId()
-                    : "";
-            // ternary operations
-            // dog == animal ? to do if true : to do if false
+            return controller.returnUsernameHashMap().get(username).getId();
+//            //return userActions.returnUsersHashMap().get(username).getId();
+//            return organizerActions.returnOrganizersHashMap().get(username).getId() != null
+//                    ? organizerActions.returnOrganizersHashMap().get(username).getId()
+//                    : speakerActions.returnSpeakerUsernameHashMap().get(username).getId() != null
+//                    ? speakerActions.returnSpeakerUsernameHashMap().get(username).getId()
+//                    : attendeeActions.returnAttendeesHashMap().get(username).getId() != null
+//                    ? attendeeActions.returnAttendeesHashMap().get(username).getId()
+//                    : "";
+//            // ternary operations
+//            // dog == animal ? to do if true : to do if false
         }
         return "";
     }

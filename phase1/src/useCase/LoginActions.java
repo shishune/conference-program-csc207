@@ -26,6 +26,7 @@ public class LoginActions {
         System.out.println(organizerActions.returnOrganizersHashMap());
         System.out.println(speakerActions.returnSpeakerUsernameHashMap());
         System.out.println(attendeeActions.returnAttendeesHashMap());
+        System.out.println(controller.returnUserIdHashMap());
         if(controller.returnUsernameHashMap().containsKey(username)){
             //the problem here is that the master hashmap is empty but idk why cuz it isn't empty before. i think the organizer entity hashmap thing gets erased idk why and im not sure
             User user = controller.returnUsernameHashMap().get(username);

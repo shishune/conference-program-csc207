@@ -111,7 +111,6 @@ public class AccountController {
                 return null;
             }
         };
-        // ^^^ must we implement all the methods here to for it to be happy? cuz its gonna look so bad someone help pls
         RoomActions roomActions = new RoomActions(g);
         SpeakerActions speakerActions = new SpeakerActions(g);
         OrganizerActions organizerActions = new OrganizerActions(g);
@@ -140,13 +139,16 @@ public class AccountController {
             }else {
                 System.out.println("good password");
 
-                User user = userID.substring(0, 1) == "O"
-                        ? organizerActions.returnOrganizersHashMap().get(userID)
-                        : userID.substring(0, 1) == "S"
-                        ? speakerActions.returnSpeakerUsernameHashMap().get(userID)
-                        : userID.substring(0, 1) == "A"
-                        ? attendeeActions.returnAttendeesHashMap().get(userID)
-                        : null;
+                User user = controller.returnUserIdHashMap().get(userID);
+
+
+//                User user = userID.substring(0, 1) == "O"
+//                        ? organizerActions.returnOrganizersHashMap().get(userID)
+//                        : userID.substring(0, 1) == "S"
+//                        ? speakerActions.returnSpeakerUsernameHashMap().get(userID)
+//                        : userID.substring(0, 1) == "A"
+//                        ? attendeeActions.returnAttendeesHashMap().get(userID)
+
                 //instantiate generic menu controller
                 MainMenuController menuController = new MainMenuController(user, controller);
 

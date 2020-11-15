@@ -41,28 +41,33 @@ public class UserController {
     }
 
     public HashMap<String, User> returnUsernameHashMap() {
-        if (attendee.returnAttendeesUsernameHashMap().isEmpty() || organizer.returnOrganizersUsernameHashMap().isEmpty() || speaker.returnSpeakerUsernameHashMap().isEmpty()){
-            return null;
-        }
-        else {
+        if (!attendee.returnAttendeesUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(attendee.returnAttendeesUsernameHashMap());
-            usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
-            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
-            return usernameHashmap;
         }
-    }
+        if (!organizer.returnOrganizersUsernameHashMap().isEmpty()){
+            usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
+        }
+        if (!speaker.returnSpeakerUsernameHashMap().isEmpty()){
+            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
+        }
+        return usernameHashmap;
+        }
+
 
 
     public HashMap<String, User> returnUserIdHashMap() {
-        if (attendee.returnAttendeesHashMap().isEmpty() || organizer.returnOrganizersHashMap().isEmpty() || speaker.returnSpeakerIDHashMap().isEmpty()){
-            return null;
+        if (!attendee.returnAttendeesHashMap().isEmpty()){
+            userIdHashmap.putAll(attendee.returnAttendeesHashMap());
         }
-        else{
-        userIdHashmap.putAll(attendee.returnAttendeesHashMap());
-        userIdHashmap.putAll(organizer.returnOrganizersHashMap());
-        userIdHashmap.putAll(speaker.returnSpeakerIDHashMap());
-        return userIdHashmap;}
+        if (!organizer.returnOrganizersHashMap().isEmpty()){
+            userIdHashmap.putAll(organizer.returnOrganizersHashMap());
+        }
+        if (!speaker.returnSpeakerIDHashMap().isEmpty()){
+            userIdHashmap.putAll(speaker.returnSpeakerIDHashMap());
+        }
+        return userIdHashmap;
     }
+
     /**
      * Sends a message to a user
      * @param content the message to be sent
