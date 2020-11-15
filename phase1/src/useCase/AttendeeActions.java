@@ -54,7 +54,6 @@ public class AttendeeActions {
      * Adds an userId to existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
      * @param addMe the user to be added
-     * @return void
      * */
     public void addUserIdToHashMap(Attendee addMe, HashMap<String, Attendee> usersHashMap){
         if (usersHashMap.containsKey(addMe.getId())){
@@ -112,8 +111,9 @@ public class AttendeeActions {
      * @return true if user is added successfully, false if not
      * */
 
+    // TODO We need figure out to check all users that could be added fromt he different hasmaps which need to be passed in
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, Attendee> usersHashMap) {
-        User user = usersHashMap.get(toMe);
+        Attendee user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
@@ -134,7 +134,7 @@ public class AttendeeActions {
      * */
 
     public boolean removeUserContactList(String toMe, String removeMe, HashMap<String, Attendee> usersHashMap) {
-        User user = usersHashMap.get(toMe);
+        Attendee user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(removeMe);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
