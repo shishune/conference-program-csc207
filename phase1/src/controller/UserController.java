@@ -23,6 +23,7 @@ public class UserController {
     private EventActions e;
     private AttendeeActions attendee;
     private RoomActions room;
+    private HashMap<String, User> userHashmap;
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
@@ -59,7 +60,7 @@ public class UserController {
      * @return boolean true if contact was successfully added, false if it was not
      * */
     public boolean addContact(String addMe, String toMe){
-        return user.addUserContactList(toMe, addMe);
+        return user.addUserContactList(toMe, addMe, userHashmap);
     };
 
     public boolean deleteContact(String removeMe, String toMe){

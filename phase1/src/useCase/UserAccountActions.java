@@ -26,13 +26,14 @@ public class UserAccountActions {
      * @param addMe the user to be added
      * @return void
      * */
-    public void addUserIdToHashMap(User addMe){
+    public void addUserIdToHashMap(User addMe) {
 
-        if (usersHashMap.containsKey(addMe.getId())){
+        if (usersHashMap.containsKey(addMe.getId())) {
             usersHashMap.put(addMe.getId(), addMe);
         }
 
     }
+
 
     /**
      * Adds an username to existing hashmap of usernames.
@@ -84,7 +85,7 @@ public class UserAccountActions {
      * @return true if user is added successfully, false if not
      * */
 
-    public boolean addUserContactList(String toMe, String addMe) {
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> usersHashMap) {
         User user = usersHashMap.get(toMe);
         User userOne = usersHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
