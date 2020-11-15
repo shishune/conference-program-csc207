@@ -41,7 +41,7 @@ public class OrganizerActions extends UserAccountActions {
 
     }
 
-    public User createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+    public Organizer createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userOrganizer, organizerHashMap);
         addUsernameToHashMap(userOrganizer, organizerHashMap);
@@ -65,7 +65,7 @@ public class OrganizerActions extends UserAccountActions {
     }
 
 
-    public User createOrganizer(String username, String password, boolean isLogin) {
+    public Organizer createOrganizer(String username, String password, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId;
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
