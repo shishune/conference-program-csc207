@@ -7,6 +7,9 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+/**
+ * Loads up information for user including messages, events, rooms, attendees and organizers
+ */
 public class LoadUp implements LoadUpIGateway {
 
     private ArrayList<String> messages = null;
@@ -18,6 +21,9 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> organizers = null;
     protected int objectId;
 
+    /**
+     * Loads up information of messages, events, rooms, attendees and organizers
+     */
     public LoadUp() {
         // these might be moved elsewhere, idk yet
         getMessages();
@@ -26,6 +32,11 @@ public class LoadUp implements LoadUpIGateway {
         // etc. etc., one for every .csv
         getRooms();
     }
+
+    /**
+     * This method returns messages in a list from messages.csv
+     * @return messages in a list
+     */
     public ArrayList<String> getMessages() {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/messages.csv"))) {
@@ -39,6 +50,11 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
+    /**
+     * This method returns rooms in a list from rooms.csv
+     * @return rooms in a list
+     */
+
     public List<String> getRooms(){
         rooms = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/rooms.csv"))) {
@@ -51,6 +67,11 @@ public class LoadUp implements LoadUpIGateway {
         }
         return rooms;
     }
+
+    /**
+     * This method returns rooms in a list from events.csv
+     * @return rooms
+     */
     public List<String> getEvents() {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/events.csv"))) {
@@ -63,6 +84,12 @@ public class LoadUp implements LoadUpIGateway {
         }
         return events;
     }
+
+    /**
+     * Getter for events
+     * @param filePath the text file path of event to be found
+     * @return events
+     */
     public List<String> getEvents(String filePath) {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -76,6 +103,11 @@ public class LoadUp implements LoadUpIGateway {
         return events;
     }
 
+    /**
+     * Getter for messages
+     * @param filePath the text file path of messages to be found
+     * @return messages
+     */
 
     // Overloaded with custom file path
     public List<String> getMessages(String filePath) {
@@ -91,6 +123,10 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
+    /**
+     * This method returns attendees in a list from attendees.csv
+     * @return attendees in a list
+     */
     public ArrayList<String> getAllAttendees() {
         // gets list of attendees from attendees.csv and sets it to <attendeesHM>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/attendees.csv"))) {
@@ -104,6 +140,10 @@ public class LoadUp implements LoadUpIGateway {
         return attendees;
     }
 
+    /**
+     * This method returns organizers in a list from organizers.csv
+     * @return organizers in a list
+     */
     public ArrayList<String> getAllOrganizers() {
         // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/organizers.csv"))) {
@@ -117,7 +157,10 @@ public class LoadUp implements LoadUpIGateway {
         return organizers;
     }
 
-
+    /**
+     * Getter for the number of the object IDs
+     * @return objectId in a list
+     */
     public int getNumOfIds() {
         String filename = "./phase1/src/assets/dataFiles/entities.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
