@@ -38,11 +38,14 @@ public class SpeakerMessageMenuController{
                 break;
             }
         }
-        if(controller.sendMessages(events, content)){
-            displayMessage.successMessage();
-        }
-        else{
-            displayMessage.failedEvent();
+        for (String event: events) {
+            controller.sendMessages(event, content);
+            // -eryka TODO please fix
+//            if (controller.sendMessages(event, content)) {
+//                displayMessage.successMessage();
+//            } else {
+//                displayMessage.failedEvent();
+//            }
         }
     }
 }

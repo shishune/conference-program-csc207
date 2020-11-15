@@ -16,6 +16,7 @@ public class LogIn {
      * are incorrct.
      */
     public String logIn(String username, String password, UserAccountActions userActions) {
+        System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
         if (l.isLogin(username, password, userActions)) {
             return userActions.returnUsersHashMap().get(username).getId();
