@@ -51,6 +51,7 @@ public class AccountController {
             String password = scan.nextLine();  // Read user input
             //String id = logIn.loggingIn(username, password); // evaluate username/password
             String userID = logIn.logIn(username, password, userAccountActions);
+
             // TODO let us logout before login
             if(userID.equals("")){
                 System.out.println("Incorrect username or password");

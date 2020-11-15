@@ -21,6 +21,7 @@ public class LoginActions {
      * @return A boolean if the username and password given are correct
      * */
     public boolean isLogin(String username, String password, UserAccountActions userAccountActions) {
+        System.out.println(userAccountActions.returnUsersHashMap());
         if (userAccountActions.returnUsersHashMap().containsKey(username)){
             User user = userAccountActions.returnUsersHashMap().get(username);
              if (user.getPassword().equals(password)) {
