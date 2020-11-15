@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class OrganizerActions extends UserAccountActions {
 
-    private HashMap<String, Organizer> organizerHashMap;
-    private HashMap<String, Organizer> organizerUsernameHashMap;
+    private HashMap<String, Organizer> organizerHashMap = new HashMap<String, Organizer>();
+    private HashMap<String, Organizer> organizerUsernameHashMap = new HashMap<String, Organizer>();
     private ArrayList<String> organizers = new ArrayList<String>();
     public ArrayList<String> storedOrganizer;
     private LoadUpIGateway loader;

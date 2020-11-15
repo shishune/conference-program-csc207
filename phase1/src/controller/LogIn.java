@@ -15,11 +15,11 @@ public class LogIn {
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrct.
      */
-    public User logIn(String username, String password, UserAccountActions userActions) {
+    public String logIn(String username, String password, UserAccountActions userActions) {
         LoginActions l = new LoginActions();
-        if (l.isLogin(username, password)) {
-            return userActions.returnUsersHashMap().get(username);
+        if (l.isLogin(username, password, userActions)) {
+            return userActions.returnUsersHashMap().get(username).getId();
         }
-        return null;
+        return "";
     }
 }

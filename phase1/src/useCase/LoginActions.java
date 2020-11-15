@@ -20,15 +20,16 @@ public class LoginActions {
      * @param password the string representing the password
      * @return A boolean if the username and password given are correct
      * */
-    public boolean isLogin(String username, String password) {
-
-        UserAccountActions u = new UserAccountActions();
-        User user = u.usersHashMap.get(username);
-         if (user.getPassword().equals(password)) {
-             user.setLogin(true);
-             return true;
-         }
-        user.setLogin(false);
+    public boolean isLogin(String username, String password, UserAccountActions userAccountActions) {
+        if (userAccountActions.returnUsersHashMap().containsKey(username)){
+            User user = userAccountActions.returnUsersHashMap().get(username);
+             if (user.getPassword().equals(password)) {
+                 user.setLogin(true);
+                 return true;
+             }
+            user.setLogin(false);
+            return false;
+        }
         return false;
     }
 }

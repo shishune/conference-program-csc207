@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class UserAccountActions {
     // hashmap the contains all the user objects; key is userID, value is userObject
 
-    protected HashMap<String, User> usersHashMap;
+    protected HashMap<String, User> usersHashMap = new HashMap<String, User>();
 
     public HashMap<String, User> returnUsersHashMap(){
         return usersHashMap;

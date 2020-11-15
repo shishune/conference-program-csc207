@@ -12,13 +12,13 @@ import java.io.FileReader;
  */
 public class LoadUp implements LoadUpIGateway {
 
-    private ArrayList<String> messages = null;
+    private ArrayList<String> messages = new ArrayList<>();
     private ArrayList<String> events = new ArrayList<>();
     // ArrayList<String> organizers = null;
     // etc.etc. one for every .csv
     private ArrayList<String> rooms;
-    private ArrayList<String> attendees = null;
-    private ArrayList<String> organizers = null;
+    private ArrayList<String> attendees = new ArrayList<>();
+    private ArrayList<String> organizers = new ArrayList<>();
     private ArrayList<String> speakers = null;
     protected int objectId;
 
