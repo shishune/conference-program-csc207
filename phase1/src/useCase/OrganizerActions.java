@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 // TODO: change return type to organizer instead of user (do so for attendee, and speaker as well)
+        // (i did it organizer and attendee but please check them over, all that's left is for speaker)
+// TODO : Please finish the javadocs for the methods that are unique to OrganizerActions and check if the javadocs are correct for the methods moved from UserAccountActions
 
 public class OrganizerActions extends UserAccountActions {
 
@@ -43,8 +45,8 @@ public class OrganizerActions extends UserAccountActions {
 
     public Organizer createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserIdToHashMap(userOrganizer, organizerHashMap);
-        addUsernameToHashMap(userOrganizer, organizerHashMap);
+        addUserIdToHashMap(userOrganizer);
+        addUsernameToHashMap(userOrganizer);
 //        super.addUserIdToHashMap(userOrganizer);
 //        super.addUsernameToHashMap(userOrganizer);
         return userOrganizer;
@@ -52,8 +54,8 @@ public class OrganizerActions extends UserAccountActions {
 
     public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
-        addUserIdToHashMap(userOrganizer, organizerHashMap);
-        addUsernameToHashMap(userOrganizer, organizerHashMap);
+        addUserIdToHashMap(userOrganizer);
+        addUsernameToHashMap(userOrganizer);
         organizerHashMap.put(userId, userOrganizer);
         organizerUsernameHashMap.put(username, userOrganizer);
         return userOrganizer;
@@ -95,11 +97,10 @@ public class OrganizerActions extends UserAccountActions {
      * Adds an userId to existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
      * @param addMe the user to be added
-     * @return void
      * */
-    public void addUserIdToHashMap(Organizer addMe, HashMap<String, Organizer> usersHashMap){
-        if (usersHashMap.containsKey(addMe.getId())){
-            usersHashMap.put(addMe.getId(), addMe);
+    public void addUserIdToHashMap(Organizer addMe){
+        if (organizerUsernameHashMap.containsKey(addMe.getId())){
+            organizerUsernameHashMap.put(addMe.getId(), addMe);
         }
 
     }
@@ -108,12 +109,11 @@ public class OrganizerActions extends UserAccountActions {
      * Adds an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
      * @param addMe the user to be added
-     * @return void
      * */
-    protected void addUsernameToHashMap(Organizer addMe, HashMap<String, Organizer> usersHashMap){
+    protected void addUsernameToHashMap(Organizer addMe){
 
-        if (usersHashMap.containsKey(addMe.getUsername())){
-            usersHashMap.put(addMe.getUsername(), addMe);
+        if (organizerUsernameHashMap.containsKey(addMe.getUsername())){
+            organizerUsernameHashMap.put(addMe.getUsername(), addMe);
         }
 
     }
@@ -124,9 +124,9 @@ public class OrganizerActions extends UserAccountActions {
      * @param removeMe the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-    public boolean removeUserIdFromHashMap(Organizer removeMe,HashMap<String, Organizer> usersHashMap){
-        if (usersHashMap.containsKey(removeMe.getId())){
-            usersHashMap.remove(removeMe.getId(), removeMe);
+    public boolean removeUserIdFromHashMap(Organizer removeMe){
+        if (organizerUsernameHashMap.containsKey(removeMe.getId())){
+            organizerUsernameHashMap.remove(removeMe.getId(), removeMe);
             return true;
         }
         return false;
@@ -139,9 +139,9 @@ public class OrganizerActions extends UserAccountActions {
      * @return true if user is removed successfully, false if it has not been removed
      * */
 
-    public boolean removeUsernameFromHashMap(Organizer removeMe, HashMap<String, Organizer> usersHashMap){
-        if (usersHashMap.containsKey(removeMe.getUsername())){
-            usersHashMap.remove(removeMe.getUsername(), removeMe);
+    public boolean removeUsernameFromHashMap(Organizer removeMe){
+        if (organizerUsernameHashMap.containsKey(removeMe.getUsername())){
+            organizerUsernameHashMap.remove(removeMe.getUsername(), removeMe);
             return true;
         }
         return false;
@@ -156,9 +156,9 @@ public class OrganizerActions extends UserAccountActions {
 
 
     // TODO THERE IS AN ERASURE PROBLEM!!!
-    public boolean addUserContactList(String toMe, String addMe, HashMap<String, Organizer> usersHashMap) {
-        Organizer user = usersHashMap.get(toMe);
-        Organizer userOne = usersHashMap.get(addMe);
+    public boolean addUserContactList(String toMe, String addMe) {
+        Organizer user = organizerUsernameHashMap.get(toMe);
+        Organizer userOne = organizerUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;
@@ -177,9 +177,9 @@ public class OrganizerActions extends UserAccountActions {
      * @return true if user is removed successfully, false if not
      * */
 
-    public boolean removeUserContactList(String toMe, String removeMe, HashMap<String, Organizer> usersHashMap) {
-        User user = usersHashMap.get(toMe);
-        User userOne = usersHashMap.get(removeMe);
+    public boolean removeUserContactList(String toMe, String removeMe) {
+        User user = organizerUsernameHashMap.get(toMe);
+        User userOne = organizerUsernameHashMap.get(removeMe);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
             return false;
@@ -199,8 +199,8 @@ public class OrganizerActions extends UserAccountActions {
      * @return true if event is added successfully, false if not
      * */
 
-    public boolean addEventToUser(String event, String user, HashMap<String, Organizer> usersHashMap) {
-        Organizer userOne = usersHashMap.get(user);
+    public boolean addEventToUser(String event, String user) {
+        Organizer userOne = organizerUsernameHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
             return false;
@@ -219,8 +219,8 @@ public class OrganizerActions extends UserAccountActions {
      * @return true if event is removed successfully, false if not
      * */
 
-    public boolean removeEventFromUser(String event, String user, HashMap<String, Organizer> usersHashMap) {
-        Organizer userOne = usersHashMap.get(user);
+    public boolean removeEventFromUser(String event, String user) {
+        Organizer userOne = organizerUsernameHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
             List<String> userEvents = userOne.getEventList();

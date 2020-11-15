@@ -10,10 +10,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+// TODO : Please finish the javadocs for the methods that are unique to AttendeeActions and check if the javadocs are correct for the methods moved from UserAccountActions
 public class AttendeeActions {
 
-    private HashMap<String, Attendee> attendeesHashMap;
-    private HashMap<String, Attendee> attendeeUsernameHashMap;
+    private HashMap<String, Attendee> attendeesHashMap = new HashMap<String, Attendee>();
+    private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
     public ArrayList<String> storedAttendee;
     private LoadUpIGateway loader;
@@ -34,19 +36,19 @@ public class AttendeeActions {
         // with message ID as key and message object as value
     }
 
-    public Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserIdToHashMap(userAttendee, attendeesHashMap);
-        addUsernameToHashMap(userAttendee, attendeesHashMap);
+        addUserIdToHashMap(userAttendee);
+        addUsernameToHashMap(userAttendee);
         return userAttendee;
     }
 
-    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+    private Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserIdToHashMap(userAttendee, attendeesHashMap);
-        addUsernameToHashMap(userAttendee, attendeesHashMap);
+        addUserIdToHashMap(userAttendee);
+        addUsernameToHashMap(userAttendee);
         return userAttendee;
     }
 
@@ -55,9 +57,9 @@ public class AttendeeActions {
      * The key is the userId, the value is an instance of the user object.
      * @param addMe the user to be added
      * */
-    public void addUserIdToHashMap(Attendee addMe, HashMap<String, Attendee> usersHashMap){
-        if (usersHashMap.containsKey(addMe.getId())){
-            usersHashMap.put(addMe.getId(), addMe);
+    private void addUserIdToHashMap(Attendee addMe){
+        if (attendeesHashMap.containsKey(addMe.getId())){
+            attendeesHashMap.put(addMe.getId(), addMe);
         }
     }
 
@@ -65,12 +67,11 @@ public class AttendeeActions {
      * Adds an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
      * @param addMe the user to be added
-     * @return void
      * */
-    protected void addUsernameToHashMap(Attendee addMe, HashMap<String, Attendee> usersHashMap){
+    private void addUsernameToHashMap(Attendee addMe){
 
-        if (usersHashMap.containsKey(addMe.getUsername())){
-            usersHashMap.put(addMe.getUsername(), addMe);
+        if (attendeeUsernameHashMap.containsKey(addMe.getUsername())){
+            attendeeUsernameHashMap.put(addMe.getUsername(), addMe);
         }
     }
 
@@ -81,9 +82,9 @@ public class AttendeeActions {
      * @param removeMe the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-    public boolean removeUserIdFromHashMap(Attendee removeMe,HashMap<String, Attendee> usersHashMap){
-        if (usersHashMap.containsKey(removeMe.getId())){
-            usersHashMap.remove(removeMe.getId(), removeMe);
+    private boolean removeUserIdFromHashMap(Attendee removeMe){
+        if (attendeesHashMap.containsKey(removeMe.getId())){
+            attendeesHashMap.remove(removeMe.getId(), removeMe);
             return true;
         }
         return false;
@@ -96,9 +97,9 @@ public class AttendeeActions {
      * @return true if user is removed successfully, false if it has not been removed
      * */
 
-    public boolean removeUsernameFromHashMap(Attendee removeMe, HashMap<String, Attendee> usersHashMap){
-        if (usersHashMap.containsKey(removeMe.getUsername())){
-            usersHashMap.remove(removeMe.getUsername(), removeMe);
+    private boolean removeUsernameFromHashMap(Attendee removeMe){
+        if (attendeeUsernameHashMap.containsKey(removeMe.getUsername())){
+            attendeeUsernameHashMap.remove(removeMe.getUsername(), removeMe);
             return true;
         }
         return false;
@@ -106,15 +107,15 @@ public class AttendeeActions {
 
     /**
      * Adds an user to existing list of contacts for an user.
-     * @param addMe the user to be added
-     * @param toMe the user who's contact list is updated
-     * @return true if user is added successfully, false if not
+     * @param addMe the username of the user to be added
+     * @param toMe the username of the user who's contact list is updated
+]    * @return true if user is added successfully, false if not
      * */
 
-    // TODO We need figure out to check all users that could be added fromt he different hasmaps which need to be passed in
-    public boolean addUserContactList(String toMe, String addMe, HashMap<String, Attendee> usersHashMap) {
-        Attendee user = usersHashMap.get(toMe);
-        User userOne = usersHashMap.get(addMe);
+    // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
+    public boolean addUserContactList(String toMe, String addMe) {
+        Attendee user = attendeeUsernameHashMap.get(toMe);
+        User userOne = attendeeUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;
@@ -128,14 +129,14 @@ public class AttendeeActions {
 
     /**
      * Removes an user to existing list of contacts from an user.
-     * @param removeMe the user to be removed
-     * @param toMe the user who's contact list is updated
+     * @param removeMe the username of the user to be removed
+     * @param toMe the username of user who's contact list is updated
      * @return true if user is removed successfully, false if not
      * */
 
-    public boolean removeUserContactList(String toMe, String removeMe, HashMap<String, Attendee> usersHashMap) {
-        Attendee user = usersHashMap.get(toMe);
-        User userOne = usersHashMap.get(removeMe);
+    public boolean removeUserContactList(String toMe, String removeMe) {
+        Attendee user = attendeeUsernameHashMap.get(toMe);
+        User userOne = attendeeUsernameHashMap.get(removeMe);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
             return false;
@@ -150,13 +151,13 @@ public class AttendeeActions {
 
     /**
      * Adds an user to existing list of events for an user.
-     * @param event the event to be added
-     * @param user the user who's event list is updated
+     * @param event the name of the event to be added
+     * @param user the username of the user who's event list is updated
      * @return true if event is added successfully, false if not
      * */
 
-    public boolean addEventToUser(String event, String user, HashMap<String, Attendee> usersHashMap) {
-        User userOne = usersHashMap.get(user);
+    public boolean addEventToUser(String event, String user) {
+        User userOne = attendeeUsernameHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
             return false;
@@ -176,8 +177,8 @@ public class AttendeeActions {
      * @return true if event is removed successfully, false if not
      * */
 
-    public boolean removeEventFromUser(String event, String user, HashMap<String, Attendee> usersHashMap) {
-        Attendee userOne = usersHashMap.get(user);
+    public boolean removeEventFromUser(String event, String user) {
+        Attendee userOne = attendeeUsernameHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
         if (isPresent) {
             List<String> userEvents = userOne.getEventList();
@@ -195,8 +196,8 @@ public class AttendeeActions {
      * @return string of all the events a user is attending
      * */
 
-    public String returnAllEvents(String user, HashMap<String, Attendee> usersHashMap) {
-        Attendee userOne = usersHashMap.get(user);
+    public String returnAllEvents(String user) {
+        Attendee userOne = attendeeUsernameHashMap.get(user);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < userOne.getEventList().size(); i++){
             // System.out.println(user.getEventList().get(i));
@@ -212,8 +213,8 @@ public class AttendeeActions {
      * @return user object from hashmap of user objects
      * */
 
-    public Attendee findUserFromUsername(String username, HashMap<String, Attendee> usersHashMap){
-        return usersHashMap.get(username);
+    public Attendee findUserFromUsername(String username){
+        return attendeeUsernameHashMap.get(username);
     }
 
 
@@ -222,8 +223,8 @@ public class AttendeeActions {
      * @param userId the userId given
      * @return user object from hashmap of user objects
      * */
-    public Attendee findUserFromId(String userId, HashMap<String, Attendee> usersHashMap){
-        return usersHashMap.get(userId);
+    public Attendee findUserFromId(String userId){
+        return attendeeUsernameHashMap.get(userId);
     }
 
 }
