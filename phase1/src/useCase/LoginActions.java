@@ -3,9 +3,6 @@ package useCase;
 import entities.*;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +26,18 @@ public class LoginActions {
         System.out.println(speakerActions.returnSpeakerHashMap());
         System.out.println(attendeeActions.returnAttendeesHashMap());
         if (organizerActions.returnOrganizersHashMap().containsKey(username) || speakerActions.returnSpeakerHashMap().containsKey(username) || attendeeActions.returnAttendeesHashMap().containsKey(username)){
-            //User user = userAccountActions.returnUsersHashMap().get(username);
+            User user = organizerActions.returnOrganizersHashMap().get(username) != null
+                    ? organizerActions.returnOrganizersHashMap().get(username)
+                    : speakerActions.returnSpeakerHashMap().get(username) != null
+                    ? speakerActions.returnSpeakerHashMap().get(username)
+                    : attendeeActions.returnAttendeesHashMap().get(username) != null
+                    ? attendeeActions.returnAttendeesHashMap().get(username)
+                    : null;
+            if(user.getPassword().equals(password)) {
+                user.setLogin(true);
+                return true;
+            }
+            user.setLogin(false);
             //System.out.println(username);
              //if (user.getPassword().equals(password)) {
                  //user.setLogin(true);
@@ -39,13 +47,5 @@ public class LoginActions {
             return false;
         }
         return false;
-    }
-
-    private void loadHashToHash(HashMap<String, Organizer> loadingHashMap) {
-    // TODO: Change return type to HashMap<String, User>
-        HashMap<String, User> mainMap;
-        //for (Map.Entry<String, Organizer> entry : loadingHashMap.entrySet()) {
-            //mainMap.add();
-        //}
     }
 }

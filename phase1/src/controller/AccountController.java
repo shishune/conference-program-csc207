@@ -50,14 +50,21 @@ public class AccountController {
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
             //String id = logIn.loggingIn(username, password); // evaluate username/password
-            String userID = logIn.logIn(username, password, userAccountActions);
+            String userID = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions);
 
             // TODO let us logout before login
             if(userID.equals("")){
                 System.out.println("Incorrect username or password");
             }else {
                 System.out.println("good password");
-                User user = userAccountActions.returnUsersHashMap().get(userID);
+
+                User user = userID.substring(0, 1) == "O"
+                        ? organizerActions.returnOrganizersHashMap().get(userID)
+                        : userID.substring(0, 1) == "S"
+                        ? speakerActions.returnSpeakerHashMap().get(userID)
+                        : userID.substring(0, 1) == "A"
+                        ? attendeeActions.returnAttendeesHashMap().get(userID)
+                        : null;
                 //instantiate generic menu controller
                 MainMenuController menuController = new MainMenuController(user, controller);
 
