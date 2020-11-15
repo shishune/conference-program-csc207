@@ -6,18 +6,20 @@ import gateway.LoadUpIGateway;
 
 
 public class EventActions  {
-    private HashMap<String, Event> events; // public private
+    private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
 
     // hashmap room key and time as the value
-    private HashMap<String, List<String>> roomSchedule; // roomID: date
-    private HashMap<String, List<String>> speakerSchedule; // SpeakerID: date
-    private HashMap<String, List<String>> attendees; // EventID: attendees
+    private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
+    private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
+    private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
     private LoadUpIGateway loader;
     private GenerateID generate = new GenerateID(loader);
+    private List<String> eventList;
 
 
     public EventActions(LoadUpIGateway loader) {
-        getAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
+        loadAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
+        addLoadedToHashMap();
         this.loader = loader;
 
     }
@@ -81,13 +83,23 @@ public class EventActions  {
         roomSchedule.put(roomID, new ArrayList<>());
     }
 
-    /***
-     *  return list of attendeeIDs of the attendees attending the event
-     * @param eventID ID of event
-     * @return list of attendeeIDs of the attendees attending the event
-     */
-    public List<String> getEventAttendees(String eventID){
-        return attendees.get(eventID);
+    /** gets list of event from the IGateway **/
+    private void loadAllEvents(LoadUpIGateway loader) {
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
+        eventList = loader.getEventsList();
+    }
+
+    /** Adds events loaded from the csv to <events> **/
+    private void addLoadedToHashMap() {
+        //System.out.println(conversations);
+        if (eventList != null) {
+            for (String event: eventList){
+                String[] eventAttributes = event.split(", ");
+                List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
+                loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
+                        eventAttendees, eventAttributes[5]);
+            }
+        }
     }
 
 
@@ -234,6 +246,11 @@ public class EventActions  {
         }
         return storedEvents;
 
+    }
+
+    public List<String> getEventAttendees(String eventID){
+
+        return attendees.get(eventID);
     }
 
 }
