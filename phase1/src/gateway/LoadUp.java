@@ -19,6 +19,7 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> rooms;
     private ArrayList<String> attendees = null;
     private ArrayList<String> organizers = null;
+    private ArrayList<String> speakers = null;
     protected int objectId;
 
     /**
@@ -31,6 +32,7 @@ public class LoadUp implements LoadUpIGateway {
         // getOrganizers()
         // etc. etc., one for every .csv
         getRooms();
+        getSpeakers();
     }
 
     /**
@@ -108,7 +110,6 @@ public class LoadUp implements LoadUpIGateway {
      * @param filePath the text file path of messages to be found
      * @return messages
      */
-
     // Overloaded with custom file path
     public List<String> getMessages(String filePath) {
         // gets list of messages from messages.csv and sets it to <messages>
@@ -155,6 +156,23 @@ public class LoadUp implements LoadUpIGateway {
             e.printStackTrace();
         }
         return organizers;
+    }
+
+    /**
+     * This method returns messages in a list from messages.csv
+     * @return messages in a list
+     */
+    public ArrayList<String> getSpeakers() {
+        // gets list of messages from messages.csv and sets it to <messages>
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/speakers.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                speakers.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return speakers;
     }
 
     /**
@@ -224,6 +242,9 @@ public class LoadUp implements LoadUpIGateway {
     public List<String> getEventsList() {
         return events;
     }
+
+    @Override
+    public ArrayList<String> getSpeakersList() { return speakers; }
 
     /** etc. etc. one for every thingy
      * **/

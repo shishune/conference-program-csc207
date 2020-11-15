@@ -20,10 +20,10 @@ public class MessageActions {
     private LoadUpIGateway loader;
 
     public MessageActions(LoadUpIGateway loader) {
-        getAllMessages(loader); // gets all messages from message.csv
-        addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
         this.loader = loader;
+        getAllMessages(loader); // gets all messages from message.csv
+        addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
 
     /** Create a message with unique ID as a parameter **/
