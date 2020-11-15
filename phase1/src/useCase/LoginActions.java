@@ -1,5 +1,6 @@
 package useCase;
 
+import controller.UserController;
 import entities.*;
 
 
@@ -20,16 +21,17 @@ public class LoginActions {
      * @param password the string representing the password
      * @return A boolean if the username and password given are correct
      * */
-    public boolean isLogin(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
+    public boolean isLogin(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions, UserController controller) {
         System.out.println("IsLogin reached");
         System.out.println(organizerActions.returnOrganizersHashMap());
-        System.out.println(speakerActions.returnSpeakerHashMap());
+        System.out.println(speakerActions.returnSpeakerUsernameHashMap());
         System.out.println(attendeeActions.returnAttendeesHashMap());
-        if (organizerActions.returnOrganizersHashMap().containsKey(username) || speakerActions.returnSpeakerHashMap().containsKey(username) || attendeeActions.returnAttendeesHashMap().containsKey(username)){
+        if(controller.returnUsersHashMap().containsKey(username)){
+        //if (organizerActions.returnOrganizersHashMap().containsKey(username) || speakerActions.returnSpeakerIDHashMap().containsKey(username) || attendeeActions.returnAttendeesHashMap().containsKey(username)){
             User user = organizerActions.returnOrganizersHashMap().get(username) != null
                     ? organizerActions.returnOrganizersHashMap().get(username)
-                    : speakerActions.returnSpeakerHashMap().get(username) != null
-                    ? speakerActions.returnSpeakerHashMap().get(username)
+                    : speakerActions.returnSpeakerUsernameHashMap().get(username) != null
+                    ? speakerActions.returnSpeakerUsernameHashMap().get(username)
                     : attendeeActions.returnAttendeesHashMap().get(username) != null
                     ? attendeeActions.returnAttendeesHashMap().get(username)
                     : null;

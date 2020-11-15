@@ -1,5 +1,6 @@
 package useCase;
 
+import controller.UserController;
 import entities.*;
 
 import java.io.BufferedReader;
@@ -19,8 +20,8 @@ public class LogoutActions{
      * @param username the username representing the username
      * @return A boolean if the username and password given are correct
      * */
-    public void logout(String username, UserAccountActions userActions) {
-        User user = userActions.usersHashMap.get(username);
+    public void logout(String username, UserController userController) {
+        User user = userController.returnUsersHashMap().get(username);
         user.setLogin(false);
     }
 }

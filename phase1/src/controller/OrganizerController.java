@@ -28,7 +28,7 @@ public class OrganizerController extends UserController{
                                 UserAccountActions userAccountActions, RoomActions roomActions,
                                 SpeakerActions speakerActions, OrganizerActions organizerActions, AttendeeActions attendeeActions){
 
-        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions);
+        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
 
         this.organizerID = organizerID;
     }

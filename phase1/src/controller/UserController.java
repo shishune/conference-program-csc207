@@ -22,7 +22,7 @@ public class UserController {
     private OrganizerActions organizer;
     private RoomActions room;
     private SpeakerActions speaker;
-    private HashMap<String, User> userHashmap;
+    private HashMap<String, User> userHashmap = new HashMap<String, User>();
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
@@ -114,9 +114,10 @@ public class UserController {
     public ArrayList<String> viewContacts (String userid){
         ArrayList<String> contacts = new ArrayList<String>();
         List<String> usersList = user.findUserFromId(userid).getContactsList();
-        for (String id:usersList){
+        for (String id : usersList){
             contacts.add(user.findUserFromId(userid).getUsername());
         }
+        // TODO i think theres something wrong with the for loop here
         return contacts;
     }
 

@@ -29,7 +29,88 @@ public class AccountController {
         //Instantiate use case classes
         MessageActions messageActions = new MessageActions(g);
         EventActions eventActions = new EventActions(g);
-        UserAccountActions userAccountActions = new UserAccountActions();
+        UserAccountActions userAccountActions = new UserAccountActions() {
+            /**
+             * Adds an user to existing list of contacts for an user.
+             *
+             * @param toMe  the user who's contact list is updated
+             * @param addMe the user to be added
+             * @return true if user is added successfully, false if not
+             */
+            @Override
+            public boolean addUserContactList(String toMe, String addMe) {
+                return false;
+            }
+
+            /**
+             * Removes an user to existing list of contacts from an user.
+             *
+             * @param toMe     the user who's contact list is updated
+             * @param removeMe the user to be removed
+             * @return true if user is removed successfully, false if not
+             */
+            @Override
+            public boolean removeUserContactList(String toMe, String removeMe) {
+                return false;
+            }
+
+            /**
+             * Adds an user to existing list of events for an user.
+             *
+             * @param event the event to be added
+             * @param user  the user who's event list is updated
+             * @return true if event is added successfully, false if not
+             */
+            @Override
+            public boolean addEventToUser(String event, String user) {
+                return false;
+            }
+
+            /**
+             * Removes an event from existing list of events from an user.
+             *
+             * @param event the event to be removed
+             * @param user  the user who's event list is updated
+             * @return true if event is removed successfully, false if not
+             */
+            @Override
+            public boolean removeEventFromUser(String event, String user) {
+                return false;
+            }
+
+            /**
+             * Prints all the events in an user's eventList
+             *
+             * @param user the user who's eventList is printed
+             * @return string of all the events a user is attending
+             */
+            @Override
+            public String returnAllEvents(String user) {
+                return null;
+            }
+
+            /**
+             * Finds an user from a given username
+             *
+             * @param username the username given
+             * @return user object from hashmap of user objects
+             */
+            @Override
+            public User findUserFromUsername(String username) {
+                return null;
+            }
+
+            /**
+             * Finds an user from a given userId
+             *
+             * @param userId the userId given
+             * @return user object from hashmap of user objects
+             */
+            @Override
+            public User findUserFromId(String userId) {
+                return null;
+            }
+        };
         // ^^^ must we implement all the methods here to for it to be happy? cuz its gonna look so bad someone help pls
         RoomActions roomActions = new RoomActions(g);
         SpeakerActions speakerActions = new SpeakerActions(g);
@@ -51,7 +132,7 @@ public class AccountController {
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
             //String id = logIn.loggingIn(username, password); // evaluate username/password
-            String userID = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions);
+            String userID = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions, controller);
 
             // TODO let us logout before login
             if(userID.equals("")){
@@ -62,7 +143,7 @@ public class AccountController {
                 User user = userID.substring(0, 1) == "O"
                         ? organizerActions.returnOrganizersHashMap().get(userID)
                         : userID.substring(0, 1) == "S"
-                        ? speakerActions.returnSpeakerHashMap().get(userID)
+                        ? speakerActions.returnSpeakerUsernameHashMap().get(userID)
                         : userID.substring(0, 1) == "A"
                         ? attendeeActions.returnAttendeesHashMap().get(userID)
                         : null;
@@ -95,7 +176,7 @@ public class AccountController {
                     Store store = new Store();
                     LogOut logOut = new LogOut(store, userAccountActions, messageActions, organizerActions,
                             attendeeActions, roomActions, speakerActions, eventActions, logoutActions);
-                    logOut.loggingOut(username);
+                    logOut.loggingOut(username, controller);
                     accountDisplay.successLogout();
                     String choice = scan.nextLine();
                     if (choice.equals('x') || choice.equals('X')) {

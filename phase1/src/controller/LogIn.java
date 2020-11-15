@@ -16,15 +16,15 @@ public class LogIn {
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrct.
      */
-    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
+    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions, UserController controller) {
         System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
-        if (l.isLogin(username, password, organizerActions, speakerActions, attendeeActions)) {
+        if (l.isLogin(username, password, organizerActions, speakerActions, attendeeActions, controller)) {
             //return userActions.returnUsersHashMap().get(username).getId();
             return organizerActions.returnOrganizersHashMap().get(username).getId() != null
                     ? organizerActions.returnOrganizersHashMap().get(username).getId()
-                    : speakerActions.returnSpeakerHashMap().get(username).getId() != null
-                    ? speakerActions.returnSpeakerHashMap().get(username).getId()
+                    : speakerActions.returnSpeakerUsernameHashMap().get(username).getId() != null
+                    ? speakerActions.returnSpeakerUsernameHashMap().get(username).getId()
                     : attendeeActions.returnAttendeesHashMap().get(username).getId() != null
                     ? attendeeActions.returnAttendeesHashMap().get(username).getId()
                     : "";

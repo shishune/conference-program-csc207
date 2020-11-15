@@ -50,7 +50,7 @@ public class LogOut {
     /**
      * Stores information for logging out
      */
-    public void loggingOut(String username) {
+    public void loggingOut(String username, UserController userController) {
 
         // Store store = new Store();
         // UserAccountActions u = new UserAccountActions();
@@ -62,7 +62,7 @@ public class LogOut {
         store.storeAttendees(attendeeActions);
         // store.storeSpeakers(speakerActions);
 
-        logoutActions.logout(username, userActions);
+        logoutActions.logout(username, userController);
     }
 
     /**
