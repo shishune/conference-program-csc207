@@ -4,6 +4,7 @@ import java.util.*;
 import entities.*;
 import gateway.LoadUpIGateway;
 
+
 public class EventActions  {
     private HashMap<String, Event> events; // public private
 
@@ -226,7 +227,6 @@ public class EventActions  {
     }
 
 
-
     public List<String> storeEvents(){
         List<String> storedEvents = new ArrayList();
         for(Map.Entry<String, Event> event : events.entrySet()) {
@@ -235,4 +235,5 @@ public class EventActions  {
         return storedEvents;
 
     }
+
 }

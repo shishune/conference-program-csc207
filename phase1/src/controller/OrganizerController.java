@@ -2,18 +2,25 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import useCase.*;
 import entities.*;
 
+/***
+ * An organizer controller. Includes all the abilities only organizers can complete.
+ * @author Eryka Shi-Shun
+ *
+ */
+
 public class OrganizerController extends UserController{
-    //todo should these be private?
-    public MessageActions messageActions;
-    public EventActions eventActions;
-    public UserAccountActions userAccountActions;
-    public RoomActions roomActions;
-    public SpeakerActions speakerActions;
-    public OrganizerActions organizerActions;
-    public AttendeeActions attendeeActions;
+    private MessageActions messageActions;
+    private EventActions eventActions;
+    private UserAccountActions userAccountActions;
+    private RoomActions roomActions;
+    private SpeakerActions speakerActions;
+    private OrganizerActions organizerActions;
+    private AttendeeActions attendeeActions;
     private String organizerID;
 
 
@@ -31,7 +38,6 @@ public class OrganizerController extends UserController{
      * @param title of event
      * @param speakerId of event
      * @param dateTime of event
-     * @param attendees of event
      * @param roomID of event
      * @return if the event was created- this will return false if the event already exists
      */
@@ -116,6 +122,29 @@ public class OrganizerController extends UserController{
      */
     public void sendAttendeesMessage(String eventID, String message){
         List<String> attendees = this.eventActions.getEventAttendees(eventID);
+
+        for (String attendeeID: attendees){
+            this.messageActions.createMessage(this.organizerID, attendeeID, message);
+        }
+
+    }
+
+
+
+    /***
+     * Send all the attendees of conference a message
+     * @param message
+     */
+    public void sendAllAttendeesMessage( String message){
+        List<String> eventIDs = new ArrayList();
+        for(Map.Entry<String, Event> event : eventActions.getEvents().entrySet()) {
+            eventIDs.add(event.getValue().getId());
+        }
+
+        List<String> attendees = new ArrayList();
+        for(String eventID: eventIDs){
+            attendees.addAll(this.eventActions.getEventAttendees(eventID));
+        }
 
         for (String attendeeID: attendees){
             this.messageActions.createMessage(this.organizerID, attendeeID, message);
