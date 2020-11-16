@@ -7,12 +7,17 @@ package presenter;
  * @version 1
  * */
 public class SpeakerAccountPresenter extends AccountPresenter{
-
+    String basicMenu = ""
+            + "\n[1] Log out"
+            + "\n[2] Send a message"
+            + "\n[3] View all messages"
+            + "\n[4] Add a contact"
+            + "\n[5] View all contacts";
     /**
      * Prints the main menu
      * */
     public void printMainMenu(){
-        String display = ""
+        String display = basicMenu
                 + "\n[6] View your schedule of talks"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
