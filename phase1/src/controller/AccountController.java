@@ -136,7 +136,7 @@ public class AccountController {
 
             // TODO let us logout before login
             if(userID.equals("")){
-                System.out.println("Incorrect username or password");
+                accountDisplay.failedLogin();
             }else {
                 System.out.println("good password");
 
