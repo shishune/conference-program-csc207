@@ -22,12 +22,13 @@ public class SpeakerActions extends UserAccountActions {
         // with message ID as key and message object as value
         this.loader = loader;
         getAllSpeakers(loader); // gets all messages from message.csv
-        addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
+        addSpeakerToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
     // why does this return user instead of speaker type?
     public Speaker createSpeaker(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
         // addUserToHashMap(userSpeaker);
+        loadSpeaker(userSpeaker);
         return userSpeaker;
     }
 
@@ -36,17 +37,19 @@ public class SpeakerActions extends UserAccountActions {
         String userId = "S" + generateId;
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
         // addUserToHashMap(userSpeaker);
+        loadSpeaker(userSpeaker);
         return userSpeaker;
     }
 
     /** Load new messages into HashMap of new messages **/
-    public void loadSpeaker(String speakerId, Speaker newSpeaker){
+    public void loadSpeaker(Speaker newSpeaker){
         // This needs to update every collection we use for messages
         // i.e. if we add a new hashmap/array/etc. for some method, we need to add
         // otherHash.put(messageId, newMessage)
         // messageArray.add(newMessage)
         // etc. etc.
-        speakerID.put(speakerId, newSpeaker);
+        speakerID.put(newSpeaker.getId(), newSpeaker);
+        speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
     }
 
     public HashMap<String, Speaker> returnSpeakerIDHashMap() {
@@ -59,7 +62,7 @@ public class SpeakerActions extends UserAccountActions {
 
     /** gets list of messages from the IGateway **/
     private void getAllSpeakers(LoadUpIGateway loader) {
-        speakerLoadUpList = loader.getSpeakersList();
+        speakers = loader.getSpeakersList();
     }
 
     /** Adds messages loaded from the csv to <messages> **/
@@ -71,9 +74,9 @@ public class SpeakerActions extends UserAccountActions {
                 List<String> loadEventsList = Arrays.asList(speakerInfo[4].split("%%"));
                 boolean loadIsLogin = Boolean.parseBoolean(speakerInfo[5]);
                 boolean loadIsOrganizer = Boolean.parseBoolean(speakerInfo[6]);
-                Speaker loadedMessage = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList, loadEventsList, loadIsLogin, loadIsOrganizer);
+                Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList, loadEventsList, loadIsLogin, loadIsOrganizer);
                 //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
-                speakerID.put(speakerInfo[0], loadedMessage);
+                loadSpeaker(loadedSpeaker);
             }
         }
     }
@@ -283,8 +286,9 @@ public class SpeakerActions extends UserAccountActions {
                 }
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
                         eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6]));
-                speakerID.put(speakerInfo[0], loadedSpeaker);
-                speakerUsername.put(speakerInfo[1], loadedSpeaker);
+//                speakerID.put(speakerInfo[0], loadedSpeaker);
+//                speakerUsername.put(speakerInfo[1], loadedSpeaker);
+                loadSpeaker(loadedSpeaker);
             }
         }
     }

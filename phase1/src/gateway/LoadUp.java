@@ -19,7 +19,7 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> rooms;
     private ArrayList<String> attendees = new ArrayList<>();
     private ArrayList<String> organizers = new ArrayList<>();
-    private ArrayList<String> speakers = null;
+    private ArrayList<String> speakers = new ArrayList<>();
     protected int objectId;
 
     /**

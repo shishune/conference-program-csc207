@@ -75,7 +75,7 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Asks for speaker
      */
     public void promptSpeaker(){
-
+        System.out.println("Enter speaker username or enter NEW if you want to make a new speaker");
     }
     /**
      * Asks for room

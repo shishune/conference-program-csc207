@@ -5,6 +5,7 @@ import presenter.EventPresenter;
 import presenter.MessagePresenter;
 import presenter.OrganizerMessagePresenter;
 import presenter.OrganizerEventPresenter;
+import useCase.SpeakerActions;
 
 import java.util.Scanner;
 
@@ -59,7 +60,28 @@ public class OrganizerMainMenuController extends MainMenuController{
         displayEvent.promptTitle();
         String title = scan.nextLine();
         displayEvent.promptSpeaker();
-        String speakerId = scan.nextLine();
+        String speakerUserName = scan.nextLine();
+        boolean speakerExists = false;
+        String speakerId = "";
+        while(!speakerExists) {
+            if (speakerUserName.equals("NEW")) {
+                // TODO create speaker methods
+                speakerExists = true;
+            } else {
+                // System.out.println(controller.returnUsernameHashMap());
+
+                if (!controller.returnUsernameHashMap().isEmpty()){
+
+                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
+                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
+                        speakerExists = true;
+                    } else {
+                        System.out.println("this speaker does not exist");
+                    }
+                }
+            }
+        }
+        displayEvent.promptDate(); //- eryka
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();

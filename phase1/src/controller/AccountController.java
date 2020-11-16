@@ -127,6 +127,7 @@ public class AccountController {
             //login procedure.
             Scanner scan = new Scanner(System.in);  // Create a Scanner object
             accountDisplay.promptUsername();
+
             String username = scan.nextLine();  // Read user input
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
@@ -152,11 +153,13 @@ public class AccountController {
                 //instantiate generic menu controller
                 MainMenuController menuController = new MainMenuController(user, controller);
 
+                // TODO logs out organizer if i want to make a room/ view all events/ choose an option that im not allowed to do
+                // TODO option to create a speaker when creating an event?
                 if (user.getIsOrganizer()) { // indicates organizer
                     accountDisplay = new OrganizerAccountPresenter();
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             userAccountActions, roomActions,
-                            speakerActions, organizerActions, attendeeActions);
+                            attendeeActions, organizerActions, speakerActions);
                     menuController = new OrganizerMainMenuController(user, controller, organizerController);
                 } else if (user.getId().charAt(0) == 'A') { //indicates attendee
                     accountDisplay = new AttendeeAccountPresenter();

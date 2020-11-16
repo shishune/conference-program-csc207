@@ -26,7 +26,7 @@ public class OrganizerController extends UserController{
 
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions,
                                 UserAccountActions userAccountActions, RoomActions roomActions,
-                                SpeakerActions speakerActions, OrganizerActions organizerActions, AttendeeActions attendeeActions){
+                               AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){
 
         super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
 
