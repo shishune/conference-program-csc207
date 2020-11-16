@@ -8,11 +8,11 @@ package presenter;
  * */
 public class AccountPresenter {
     String basicMenu = ""
-            + "[1] Log out"
-            + "[2] Send a message"
-            + "[3] View all messages"
-            + "[4] Add a contact"
-            + "[5] View all contacts";
+            + "\n[1] Log out"
+            + "\n[2] Send a message"
+            + "\n[3] View all messages"
+            + "\n[4] Add a contact"
+            + "\n[5] View all contacts";
 
     /**
      * An abstract class. Prints the main menu
