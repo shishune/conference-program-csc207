@@ -51,7 +51,7 @@ public class UserController {
             usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
         }
         return usernameHashmap;
-        }
+    }
 
 
 

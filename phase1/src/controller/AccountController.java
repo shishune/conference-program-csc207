@@ -156,6 +156,7 @@ public class AccountController {
                 // TODO logs out organizer if i want to make a room/ view all events/ choose an option that im not allowed to do
                 // TODO option to create a speaker when creating an event?
                 if (user.getIsOrganizer()) { // indicates organizer
+                    System.out.println("In organizer");
                     accountDisplay = new OrganizerAccountPresenter();
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             userAccountActions, roomActions,
@@ -202,7 +203,9 @@ public class AccountController {
                     // attendee: sign up for event
                     // organizer: add event
                     // speaker: see schedule of given talks
+                    System.out.println("Running Option 6");
                     menuController.option6();
+                    System.out.println("Finished Option 6");
                 } else if (menuOption.equals("7") && (user.getId().charAt(0) == 'A' || user.getIsOrganizer())) {
                     // attendee: cancel enrollment in event
                     // organizer: remove event
@@ -223,6 +226,7 @@ public class AccountController {
                 else {
                     accountDisplay.printMenuError();
                 }
+                // TODO: wait for them to choose before auto log out (cycling to top of while loop)
                 accountDisplay.promptReturn();
 
             }

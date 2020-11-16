@@ -30,6 +30,9 @@ public class OrganizerMainMenuController extends MainMenuController{
      */
     public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
         super(user, controller);
+        this.user = user;
+        this.controller = controller;
+        System.out.println("Constructor: " + controller);
         this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
@@ -63,13 +66,15 @@ public class OrganizerMainMenuController extends MainMenuController{
         String speakerUserName = scan.nextLine();
         boolean speakerExists = false;
         String speakerId = "";
+        System.out.println("Inside option 6");
+        System.out.println("Controller: " + controller);
         while(!speakerExists) {
             if (speakerUserName.equals("NEW")) {
                 // TODO create speaker methods
                 speakerExists = true;
             } else {
                 // System.out.println(controller.returnUsernameHashMap());
-
+                System.out.println(controller.returnUsernameHashMap());
                 if (!controller.returnUsernameHashMap().isEmpty()){
 
                     if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
@@ -81,7 +86,6 @@ public class OrganizerMainMenuController extends MainMenuController{
                 }
             }
         }
-        displayEvent.promptDate(); //- eryka
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();
