@@ -40,7 +40,7 @@ public class GenerateID {
             objectId = loader != null ? loader.getObjectId() : 0;
         }
 
-        return String.format("%16d", objectId);
+        return Integer.toString(objectId);
     }
 }
 
