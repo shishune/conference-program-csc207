@@ -125,7 +125,7 @@ public abstract class User{
         String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
         String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
 
-        return userId + ", " + username + ", " + password + ", " + contacts + ", " + events + ", " + isLogin + ", " +isOrganizer + ", " ;
+        return userId + "," + username + "," + password + "," + contacts + "," + events + "," + isLogin + "," +isOrganizer;
     }
 
 }

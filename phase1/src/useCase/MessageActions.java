@@ -16,7 +16,7 @@ import java.io.*;
 
 public class MessageActions {
     private ArrayList<String> conversations = new ArrayList<String>(); // list containing loaded messages
-    private HashMap<String, Message> messages; // hashmap containing all loaded and new messages
+    private HashMap<String, Message> messages = new HashMap<String, Message>(); // hashmap containing all loaded and new messages
     private LoadUpIGateway loader;
 
     public MessageActions(LoadUpIGateway loader) {

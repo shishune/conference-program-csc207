@@ -60,7 +60,7 @@ public class LogOut {
         store.storeEvents(eventActions);
         store.storeOrganizers(organizerActions);
         store.storeAttendees(attendeeActions);
-        // store.storeSpeakers(speakerActions);
+        store.storeSpeakers(speakerActions);
 
         logoutActions.logout(username, userController);
     }

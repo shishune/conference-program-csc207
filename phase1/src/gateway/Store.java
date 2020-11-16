@@ -119,21 +119,21 @@ public class Store{
         }
     }
 
-//    public void storeSpeakers(SpeakerActions speakerActions) {
-//        ArrayList<String> speakerList = new ArrayList<String>();
-//        String path = "../assets/dataFiles/rooms.csv";
-//        speakerList = speakerActions.storeSpeakers();
-//        try {
-//            FileWriter writer;
-//            writer = new FileWriter(path, false);
-//            for (String message : speakerList){
-//                writer.write(message);
-//            }
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void storeSpeakers(SpeakerActions speakerActions) {
+        ArrayList<String> speakerList = new ArrayList<String>();
+        String path = "../assets/dataFiles/rooms.csv";
+        speakerList = speakerActions.storeSpeakers();
+        try {
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String message : speakerList){
+                writer.write(message);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Stores entities of Attendee, Event, Message, Organizer, Room, Event, Speaker

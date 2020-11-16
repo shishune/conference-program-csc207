@@ -293,9 +293,9 @@ public class SpeakerActions extends UserAccountActions {
         }
     }
 
-    public ArrayList<String> storingSpeakers() {
+    public ArrayList<String> storeSpeakers() {
         for (Map.Entry<String, Speaker> o : speakerID.entrySet()) {
-            storedSpeaker.add(o.getValue().stringRepresentation());
+            storedSpeaker.add(o.getValue().stringRepresentation() + "\n");
         }
         return storedSpeaker;
 
