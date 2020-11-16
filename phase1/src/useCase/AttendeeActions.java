@@ -270,7 +270,7 @@ public class AttendeeActions extends UserAccountActions {
         ArrayList<String> storedAttendee = new ArrayList<String>();
         if(attendeesHashMap != null) {
             for (Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {
-                storedAttendee.add(o.getValue().stringRepresentation());
+                storedAttendee.add(o.getValue().stringRepresentation() + "\n");
             }
         }
         return storedAttendee;
