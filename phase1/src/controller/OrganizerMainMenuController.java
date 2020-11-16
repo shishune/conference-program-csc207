@@ -29,16 +29,9 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param organizerController the controller responsible for organizer
      */
     public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
-<<<<<<< HEAD
-        super(user, controller);
-        this.user = user;
-        this.controller = controller;
-        System.out.println("Constructor: " + controller);
-=======
         super(user, controller); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.controller = controller;
->>>>>>> b1bf3454ab04e78b130a818ec27ba0191d3aa9df
         this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
