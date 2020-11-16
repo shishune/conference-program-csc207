@@ -16,7 +16,7 @@ import useCase.GenerateID;
  * @version 1
  * */
 public class RoomActions {
-    private HashMap<String, Room> roomsList;
+    private HashMap<String, Room> roomsList = new HashMap<String, Room>();
     private LoadUpIGateway loader;
     private ArrayList<String> loadUpRooms = new ArrayList<String>();
 
