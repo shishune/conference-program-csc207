@@ -67,7 +67,7 @@ public class OrganizerMainMenuController extends MainMenuController{
         String speakerId = "";
         System.out.println("Inside option 6");
         System.out.println("Controller: " + controller);
-        while(!speakerExists) {
+        //while(!speakerExists) {
             if (speakerUserName.equals("NEW")) {
                 // TODO create speaker methods
                 speakerExists = true;
@@ -84,7 +84,7 @@ public class OrganizerMainMenuController extends MainMenuController{
                     }
                 }
             }
-        }
+        //}
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();

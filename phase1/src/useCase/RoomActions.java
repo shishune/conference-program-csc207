@@ -110,7 +110,7 @@ public class RoomActions {
     /** Adds messages loaded from the csv to <messages> **/
     private void addLoadedToHashMap() {
         //System.out.println(conversations);
-        if (loadUpRooms != null) {
+        if (loadUpRooms != null && !loadUpRooms.isEmpty()) {
             for (String roomString : loadUpRooms) {
                 String[] roomInfo = roomString.split(",");
                 Room loadedRoom = new Room(roomInfo[0]);

@@ -303,7 +303,7 @@ public class OrganizerActions extends UserAccountActions {
 
     public ArrayList<String> storingOrganizers(){
         ArrayList<String> storedOrganizer = new ArrayList<String>();
-        if(organizerHashMap != null) {
+        if(organizerHashMap != null && !organizerHashMap.isEmpty()) {
             for(Map.Entry<String, Organizer> o : organizerHashMap.entrySet()) {
                 storedOrganizer.add(o.getValue().stringRepresentation() + "\n");
             }

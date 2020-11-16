@@ -31,7 +31,11 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : roomsList){
-                writer.write(message);
+                if(roomsList.indexOf(message) == roomsList.size()-1) {
+                    writer.write(message);
+                } else {
+                    writer.write(message + "\n");
+                }
             }
             writer.close();
         } catch (IOException e) {
@@ -51,7 +55,11 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : eventsList){
-                writer.write(message);
+                if(eventsList.indexOf(message) == eventsList.size()-1) {
+                    writer.write(message);
+                } else {
+                    writer.write(message + "\n");
+                }
             }
             writer.close();
         } catch (IOException e) {
@@ -71,7 +79,11 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : messagesList){
-                writer.write(message);
+                if(messagesList.indexOf(message) == messagesList.size()-1) {
+                    writer.write(message);
+                } else {
+                    writer.write(message + "\n");
+                }
             }
             writer.close();
         } catch (IOException e) {
@@ -91,7 +103,11 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : organizerList){
-                writer.write(message);
+                if(organizerList.indexOf(message) == organizerList.size()-1) {
+                    writer.write(message);
+                } else {
+                    writer.write(message + "\n");
+                }
             }
             writer.close();
         } catch (IOException e) {
@@ -111,7 +127,11 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : attendeeList){
-                writer.write(message);
+                if(attendeeList.indexOf(message) == attendeeList.size()-1) {
+                    writer.write(message);
+                } else {
+                    writer.write(message + "\n");
+                }
             }
             writer.close();
         } catch (IOException e) {
@@ -121,13 +141,13 @@ public class Store{
 
     public void storeSpeakers(SpeakerActions speakerActions) {
         ArrayList<String> speakerList = new ArrayList<String>();
-        String path = "../assets/dataFiles/rooms.csv";
+        String path = "./phase1/src/assets/dataFiles/speakers.csv";
         speakerList = speakerActions.storeSpeakers();
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : speakerList){
-                writer.write(message);
+                writer.write(message + "\n");
             }
             writer.close();
         } catch (IOException e) {

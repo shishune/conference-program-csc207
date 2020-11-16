@@ -93,12 +93,13 @@ public class EventActions  {
     /** Adds events loaded from the csv to <events> **/
     private void addLoadedToHashMap() {
         //System.out.println(conversations);
-        if (eventList != null) {
+        if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
-                loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
-                        eventAttendees, eventAttributes[5]);
+                System.out.println(eventAttributes[3]);
+                    List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
+                    loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
+                            eventAttendees, eventAttributes[5]);
             }
         }
     }
@@ -127,7 +128,7 @@ public class EventActions  {
                                List<String> attendees, String roomID){
         List<Boolean> checks = new ArrayList<Boolean>();
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
-            String newID = generate.generateId();
+            String newID = "E" + generate.generateId();
             loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
             checks.add(true);
             return checks;

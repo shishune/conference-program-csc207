@@ -271,7 +271,7 @@ public class SpeakerActions extends UserAccountActions {
 
 
     private void addSpeakerToHashMap() {
-        if (speakers != null) {
+        if (speakers != null  && !speakers.isEmpty()) {
             for (String speakerString : speakers) {
                 String[] speakerInfo = speakerString.split(",");
                 ArrayList<String> eventList = new ArrayList<String>();
@@ -294,11 +294,13 @@ public class SpeakerActions extends UserAccountActions {
     }
 
     public ArrayList<String> storeSpeakers() {
-        for (Map.Entry<String, Speaker> o : speakerID.entrySet()) {
-            storedSpeaker.add(o.getValue().stringRepresentation() + "\n");
+        ArrayList<String> storedSpeaker = new ArrayList<String>();
+        if(speakerID != null && !speakerID.isEmpty()) {
+            for (Map.Entry<String, Speaker> o : speakerID.entrySet()) {
+                storedSpeaker.add(o.getValue().stringRepresentation() + "\n");
+            }
         }
         return storedSpeaker;
-
     }
 
 
