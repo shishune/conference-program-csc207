@@ -32,12 +32,12 @@ public class GenerateID {
      * */
     public String generateId() {
 
-        if (loader.getObjectId() <= objectId) {
+        if (loader != null && loader.getObjectId() <= objectId) {
             objectId += 1;
         }
 
         else {
-            objectId = loader.getObjectId();
+            objectId = loader != null ? loader.getObjectId() : 0;
         }
 
         return String.format("%16d", objectId);

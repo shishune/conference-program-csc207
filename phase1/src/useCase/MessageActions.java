@@ -157,8 +157,10 @@ public class MessageActions {
     public ArrayList<String> storeMessages() {
         ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
-        for(Map.Entry<String, Message> message : messages.entrySet()) {
-            allMessages.add(message.getValue().getStringRep());
+        if (messages != null) {
+            for (Map.Entry<String, Message> message : messages.entrySet()) {
+                allMessages.add(message.getValue().getStringRep());
+            }
         }
         return allMessages;
     }

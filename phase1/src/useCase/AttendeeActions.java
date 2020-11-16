@@ -17,7 +17,6 @@ public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeesHashMap = new HashMap<String, Attendee>();
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
-    public ArrayList<String> storedAttendee;
     private LoadUpIGateway loader;
 
     public HashMap<String, Attendee> returnAttendeesHashMap() {
@@ -268,8 +267,11 @@ public class AttendeeActions extends UserAccountActions {
     }
 
     public ArrayList<String> storingAttendees() {
-        for (Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {
-            storedAttendee.add(o.getValue().stringRepresentation());
+        ArrayList<String> storedAttendee = new ArrayList<String>();
+        if(attendeesHashMap != null) {
+            for (Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {
+                storedAttendee.add(o.getValue().stringRepresentation());
+            }
         }
         return storedAttendee;
 

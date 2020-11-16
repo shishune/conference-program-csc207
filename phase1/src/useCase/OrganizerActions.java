@@ -21,7 +21,6 @@ public class OrganizerActions extends UserAccountActions {
     private HashMap<String, Organizer> organizerHashMap = new HashMap<String, Organizer>();
     private HashMap<String, Organizer> organizerUsernameHashMap = new HashMap<String, Organizer>();
     private ArrayList<String> organizers = new ArrayList<String>();
-    public ArrayList<String> storedOrganizer;
     private LoadUpIGateway loader;
 
 
@@ -303,8 +302,11 @@ public class OrganizerActions extends UserAccountActions {
     }
 
     public ArrayList<String> storingOrganizers(){
-        for(Map.Entry<String, Organizer> o : organizerHashMap.entrySet()) {
-            storedOrganizer.add(o.getValue().stringRepresentation());
+        ArrayList<String> storedOrganizer = new ArrayList<String>();
+        if(organizerHashMap != null) {
+            for(Map.Entry<String, Organizer> o : organizerHashMap.entrySet()) {
+                storedOrganizer.add(o.getValue().stringRepresentation());
+            }
         }
         return storedOrganizer;
 

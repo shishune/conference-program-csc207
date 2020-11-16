@@ -10,6 +10,7 @@ public class EventActions  {
 
     // hashmap room key and time as the value
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
+
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
     private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
     private LoadUpIGateway loader;
@@ -21,7 +22,7 @@ public class EventActions  {
         loadAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
         addLoadedToHashMap();
         this.loader = loader;
-
+        roomSchedule.put("Toronto", new ArrayList<String>());
     }
 
     /***
@@ -270,7 +271,7 @@ public class EventActions  {
     public boolean isRoomFree(String roomID, String dateTime){
         List<String> roomTime = this.roomSchedule.get(roomID);
 
-        if (roomTime.contains(dateTime)) {
+        if (roomTime != null && roomTime.contains(dateTime)) {
             return false;
         }
         return true;
@@ -286,7 +287,7 @@ public class EventActions  {
     public boolean isSpeakerFree(String speakerID, String dateTime){
         List<String> SpeakerTime = this.speakerSchedule.get(speakerID);
 
-        if (SpeakerTime.contains(dateTime)) {
+        if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
             return false;
         }
         return true;
