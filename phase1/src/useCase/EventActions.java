@@ -94,7 +94,7 @@ public class EventActions  {
         //System.out.println(conversations);
         if (eventList != null) {
             for (String event: eventList){
-                String[] eventAttributes = event.split(", ");
+                String[] eventAttributes = event.split(",");
                 List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
                 loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                         eventAttendees, eventAttributes[5]);
@@ -103,19 +103,19 @@ public class EventActions  {
     }
 
 
-    /***
-     * gets list of events from the IGateway
-     * @param loader
-     */
-    private void getAllEvents(LoadUpIGateway loader) {
-        List<String> eventList = loader.getEventsList();
-        for (String event: eventList){
-            String[] eventAttributes = event.split(",");
-            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
-            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
-                    eventAttendees, eventAttributes[5]);
-        }
-    }
+//    /***
+//     * gets list of events from the IGateway
+//     * @param loader
+//     */
+//    private void getAllEvents(LoadUpIGateway loader) {
+//        List<String> eventList = loader.getEventsList();
+//        for (String event: eventList){
+//            String[] eventAttributes = event.split(",");
+//            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
+//            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
+//                    eventAttendees, eventAttributes[5]);
+//        }
+//    }
 
     /**
      * Create a new event based on the parmeters provided

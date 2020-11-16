@@ -29,7 +29,9 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param organizerController the controller responsible for organizer
      */
     public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
-        super(user, controller);
+        super(user, controller); // THIS DOESNT DO ANYTHING?
+        this.user = user;
+        this.controller = controller;
         this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
@@ -70,7 +72,7 @@ public class OrganizerMainMenuController extends MainMenuController{
             } else {
                 // System.out.println(controller.returnUsernameHashMap());
 
-                if (!controller.returnUsernameHashMap().isEmpty()){
+                if (controller.returnUsernameHashMap() != null){
 
                     if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
                         speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
@@ -81,7 +83,6 @@ public class OrganizerMainMenuController extends MainMenuController{
                 }
             }
         }
-        displayEvent.promptDate(); //- eryka
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();

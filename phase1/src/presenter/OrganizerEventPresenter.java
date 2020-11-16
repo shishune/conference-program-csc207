@@ -81,6 +81,6 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Asks for room
      */
     public void promptRoom(){
-
+        System.out.println("Enter roomID");
     }
 }
