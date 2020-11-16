@@ -7,11 +7,17 @@ package presenter;
  * @version 1
  * */
 public class AttendeeAccountPresenter extends AccountPresenter{
+    String basicMenu = ""
+            + "\n[1] Log out"
+            + "\n[2] Send a message"
+            + "\n[3] View all messages"
+            + "\n[4] Add a contact"
+            + "\n[5] View all contacts";
     /**
      * Prints the main menu
      * */
     public void printMainMenu(){
-        String display = ""
+        String display = basicMenu
                 + "\n[6] Sign up for an event"
                 + "\n[7] Cancel enrollment for an event"
                 + "\n[8] View all events"
