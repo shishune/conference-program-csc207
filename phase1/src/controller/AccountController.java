@@ -118,35 +118,24 @@ public class AccountController {
                     // attendee: sign up for event
                     // organizer: add event
                     // speaker: see schedule of given talks
-                    System.out.println("Running Option 6");
                     menuController.option6();
-                    System.out.println("Finished Option 6");
                 } else if (menuOption.equals("7") && (type.equals("A") || type.equals("O"))) {
                     // attendee: cancel enrollment in event
                     // organizer: remove event
 
                     menuController.option7();
                 }
-                //            else if(menuOption.equals("8") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
-                //                // both: view all events
-                //
-                //                menuController.option8();
-                //            }
-                //            else if(menuOption.equals("9") && (user.getId().charAt(0)=='A'||user.getIsOrganizer())){
-                //                // organizer: add room
-                //                //attendee: view own schedule of events
-                //
-                //                menuController.option9();
-                //            }
                 else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))){
                     menuController.option8();
+                }
+                else if (menuOption.equals("9") && (type.equals("A") || type.equals("O"))){
+                    menuController.option9();
                 }
                 else {
                     accountDisplay.printMenuError();
                 }
-                // TODO: wait for them to choose before auto log out (cycling to top of while loop)
                 accountDisplay.promptReturn();
-
+                scan.nextLine();
             }
         }
     }
