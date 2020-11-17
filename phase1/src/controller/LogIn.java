@@ -17,7 +17,7 @@ public class LogIn {
      * This method is called when the user is logging in after they have inputted a username and password and checks if
      * the username and password are correct, if so returns the user object which was logging in, otherwise returns null
      * @param username A string the user inputs as their username
-     * @param password Astring the user inputs as their password
+     * @param password A string the user inputs as their password
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrect.
      */
@@ -28,6 +28,8 @@ public class LogIn {
         return type;
     }
 
+
+    // is this stuff suppose to go in a login presenter? sorry if this was temporary and u were meaning to change it tho
     public void signUp(OrganizerActions organizerActions, SpeakerActions speakerActions,
                              AttendeeActions attendeeActions) {
 
@@ -43,6 +45,7 @@ public class LogIn {
 
                 accountDisplay.printUserTypeMenu();
                 if(signUpCheck(username, password, organizerActions, speakerActions, attendeeActions)){
+                    // i think its here we have to add the create user? (for whatever type user they are and that will automatically add them to the hashmap)
                     accountDisplay.successSignUp();
                     break;
                 }
