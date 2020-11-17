@@ -121,7 +121,7 @@ public class AccountController {
                     System.out.println("Running Option 6");
                     menuController.option6();
                     System.out.println("Finished Option 6");
-                } else if (menuOption.equals("7") && (type.equals('A') || type.equals("O"))) {
+                } else if (menuOption.equals("7") && (type.equals("A") || type.equals("O"))) {
                     // attendee: cancel enrollment in event
                     // organizer: remove event
 
@@ -138,7 +138,7 @@ public class AccountController {
                 //
                 //                menuController.option9();
                 //            }
-                else if (menuOption.equals("8") && (type.equals('A') || type.equals("O"))){
+                else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))){
                     menuController.option8();
                 }
                 else {
