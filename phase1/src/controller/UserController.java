@@ -77,10 +77,13 @@ public class UserController {
      * @param sender the user who is sending the message
      * @return boolean true if message was successfully sent, false if it was not
      * */
-    public boolean sendMessage(String sender, String receiver, String content){
-        if (user.findUserFromUsername(sender).getContactsList().contains(receiver)){
-            message.createMessage(sender, receiver, content);
-            return true;
+    public boolean sendMessage(String sender, String receiver, String content) {
+        if (user != null) {
+            if (user.findUserFromUsername(sender).getContactsList().contains(receiver)) {
+                message.createMessage(sender, receiver, content);
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -264,23 +267,26 @@ public class UserController {
      * @return boolean if user can attend event
      * */
 
-    private boolean checkConflictTime(String username, String event){
+    private boolean checkConflictTime(String username, String event) {
         //return true if there is a conflict
         String timeEvent = e.getEvent(event).getDateTime();
+        if (user != null) {
 
-        User u = user.findUserFromUsername(username);
+            User u = user.findUserFromUsername(username);
 
-        for (int i = 0; i < u.getEventList().size(); i++){
+            for (int i = 0; i < u.getEventList().size(); i++) {
 
-            String name = u.getEventList().get(i);
+                String name = u.getEventList().get(i);
 
-            String time = e.getEvent(name).getDateTime();
+                String time = e.getEvent(name).getDateTime();
 
-            if (time.equals(timeEvent)){
-                return true;
+                if (time.equals(timeEvent)) {
+                    return true;
+                }
             }
-        }
 
+            return false;
+        }
         return false;
     }
 

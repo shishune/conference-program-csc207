@@ -63,14 +63,14 @@ public class OrganizerMainMenuController extends MainMenuController{
         String speakerId = "";
         System.out.println("Inside option 6");
         System.out.println("Controller: " + controller);
-        //while(!speakerExists) {
+        // if (user != null && controller != null) {
+            //while(!speakerExists) {
             if (speakerUserName.equals("NEW")) {
                 // TODO create speaker methods
                 speakerExists = true;
             } else {
                 // System.out.println(controller.returnUsernameHashMap());
-                System.out.println(controller.returnUsernameHashMap());
-                if (!controller.returnUsernameHashMap().isEmpty()){
+                if (!controller.returnUsernameHashMap().isEmpty()) {
 
                     if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
                         speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
@@ -80,10 +80,12 @@ public class OrganizerMainMenuController extends MainMenuController{
                     }
                 }
             }
+
         //}
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();
+        // we have to add this ---> if (controller != null) {}
         List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
         if(checks.size()==1){
             displayEvent.successAddEvent();
@@ -137,12 +139,13 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param event the event ID
      * @param dateTime the string representing date and time
      */
-    private void rescheduleEvent(String event, String dateTime){
-        if(controller.rescheduleEvent(event, dateTime)){
-            displayEvent.successRescheduleEvent();
-        }
-        else{
-            displayEvent.failedRescheduleEvent();
+    private void rescheduleEvent(String event, String dateTime) {
+        if (controller != null) {
+            if (controller.rescheduleEvent(event, dateTime)) {
+                displayEvent.successRescheduleEvent();
+            } else {
+                displayEvent.failedRescheduleEvent();
+            }
         }
     }
 
