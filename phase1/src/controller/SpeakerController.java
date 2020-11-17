@@ -15,9 +15,9 @@ public class SpeakerController extends UserController {
     public AttendeeActions attendeeActions;
 
     public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions,
-                             UserAccountActions userAccountActions, RoomActions roomActions,
+                             RoomActions roomActions,
                              SpeakerActions speakerActions, OrganizerActions organizerActions, AttendeeActions attendeeActions) {
-        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
+        super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
 
         this.SpeakerID = SpeakerID;
 

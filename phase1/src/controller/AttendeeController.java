@@ -5,8 +5,6 @@ import entities.Attendee;
 import useCase.*;
 
 public class AttendeeController extends UserController{
-
-    private UserAccountActions user;
     private MessageActions message;
     private EventActions e;
     private AttendeeActions attendee;
@@ -14,9 +12,9 @@ public class AttendeeController extends UserController{
     private OrganizerActions organizer;
     private SpeakerActions speaker;
 
-    public AttendeeController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message,
+    public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
                               AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        super(user, events, rooms, message, attendee, organizer, speaker);
+        super(events, rooms, message, attendee, organizer, speaker);
     }
 
     @Override

@@ -6,6 +6,7 @@ import gateway.LoadUpIGateway;
 import presenter.AccountPresenter;
 import useCase.*;
 import gateway.Store;
+import java.lang.*;
 
 /**
  * Allows user to exit the system with their information stored
@@ -19,7 +20,6 @@ public class LogOut {
     SpeakerActions speakerActions;
     EventActions eventActions;
     LogoutActions logoutActions;
-    UserAccountActions userActions;
 
     /**
      * Instantiates a new logout object
@@ -32,7 +32,7 @@ public class LogOut {
      * @param speakerActions the use case responsible for speakers
      * @param eventActions the use case responsible for events
      */
-    public LogOut(Store store, UserAccountActions userActions, MessageActions messageActions, OrganizerActions organizerActions,
+    public LogOut(Store store, MessageActions messageActions, OrganizerActions organizerActions,
                   AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions,
                   EventActions eventActions, LogoutActions logoutActions){
         this.store = store;
@@ -43,14 +43,13 @@ public class LogOut {
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
         this.logoutActions = logoutActions;
-        this.userActions = userActions;
 
     }
 
     /**
      * Stores information for logging out
      */
-    public void loggingOut(String username, UserController userController) {
+    public void loggingOut(String username, String type) {
 
         // Store store = new Store();
         // UserAccountActions u = new UserAccountActions();
@@ -62,7 +61,7 @@ public class LogOut {
         store.storeAttendees(attendeeActions);
         store.storeSpeakers(speakerActions);
 
-        logoutActions.logout(username, userController);
+        logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);
     }
 
     /**

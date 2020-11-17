@@ -15,8 +15,7 @@ import java.util.Scanner;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController{
-    private UserController controller;
-    private OrganizerController oController;
+    private OrganizerController controller;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
@@ -25,14 +24,11 @@ public class OrganizerMainMenuController extends MainMenuController{
     /**
      * Instantiates the main menu responder object
      * @param user the user
-     * @param controller the controller responsible for user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, UserController controller, OrganizerController organizerController){
-        super(user, controller); // THIS DOESNT DO ANYTHING?
+    public OrganizerMainMenuController(User user, OrganizerController organizerController){
+        super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
-        this.controller = controller;
-        this.oController = organizerController;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
     }
@@ -43,7 +39,7 @@ public class OrganizerMainMenuController extends MainMenuController{
     public void option2(){
         displayMessage.printMenu();
         String option = scan.nextLine();
-        OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.oController);
+        OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.controller);
         if (option.equals("1")){
             menuController.option1();
         }
@@ -88,7 +84,7 @@ public class OrganizerMainMenuController extends MainMenuController{
         String dateTime = getDateTimeInput();
         displayEvent.promptRoom();
         String roomID = scan.nextLine();
-        List<Boolean> checks = oController.createEvent(title, speakerId, dateTime, roomID);
+        List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
         if(checks.size()==1){
             displayEvent.successAddEvent();
         }
@@ -142,7 +138,7 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param dateTime the string representing date and time
      */
     private void rescheduleEvent(String event, String dateTime){
-        if(oController.rescheduleEvent(event, dateTime)){
+        if(controller.rescheduleEvent(event, dateTime)){
             displayEvent.successRescheduleEvent();
         }
         else{
@@ -156,7 +152,7 @@ public class OrganizerMainMenuController extends MainMenuController{
      */
     private void cancelEvent(String event){
 
-        if(oController.cancelEvent(event)){
+        if(controller.cancelEvent(event)){
             displayEvent.successCancelEvent();
         }
         else{
@@ -170,7 +166,7 @@ public class OrganizerMainMenuController extends MainMenuController{
     public void option9(){
         displayEvent.promptAddRoom();
         String room = scan.nextLine();
-        oController.createRoom();
+        controller.createRoom();
         displayEvent.successAddRoom();
     }
 }

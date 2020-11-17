@@ -1,37 +1,88 @@
 package controller;
 
+import entities.Organizer;
+import entities.Speaker;
+import entities.Attendee;
 import entities.User;
 import useCase.*;
-
+import presenter.AccountPresenter;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class LogIn {
-
+    private Scanner scan = new Scanner(System.in);  // Create a Scanner object
+    private AccountPresenter accountDisplay = new AccountPresenter();
     //TODO: Change javadocs
     /**
      * This method is called when the user is logging in after they have inputted a username and password and checks if
      * the username and password are correct, if so returns the user object which was logging in, otherwise returns null
      * @param username A string the user inputs as their username
      * @param password Astring the user inputs as their password
-     * @param userActions A UserAccountActions object so it can access the use case class
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrect.
      */
-    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, UserAccountActions userActions, AttendeeActions attendeeActions, UserController controller) {
+    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
         System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
-        if (l.isLogin(username, password, organizerActions, speakerActions, attendeeActions, controller)) {
-            return controller.returnUsernameHashMap().get(username).getId();
-//            //return userActions.returnUsersHashMap().get(username).getId();
-//            return organizerActions.returnOrganizersHashMap().get(username).getId() != null
-//                    ? organizerActions.returnOrganizersHashMap().get(username).getId()
-//                    : speakerActions.returnSpeakerUsernameHashMap().get(username).getId() != null
-//                    ? speakerActions.returnSpeakerUsernameHashMap().get(username).getId()
-//                    : attendeeActions.returnAttendeesHashMap().get(username).getId() != null
-//                    ? attendeeActions.returnAttendeesHashMap().get(username).getId()
-//                    : "";
-//            // ternary operations
-//            // dog == animal ? to do if true : to do if false
+        String type = l.isLogin(username, password, organizerActions, speakerActions, attendeeActions);
+        return type;
+    }
+
+    public void signUp(OrganizerActions organizerActions, SpeakerActions speakerActions,
+                             AttendeeActions attendeeActions) {
+
+        while (true){
+
+            accountDisplay.printSignUpMenu();
+            String loginOption = scan.nextLine();
+            if (loginOption.equals("x") || loginOption.equals("X")) {
+            accountDisplay.promptUsername();
+            String username = scan.nextLine();  // Read user input
+            accountDisplay.promptPassword();
+            String password = scan.nextLine();  // Read user input
+
+                accountDisplay.printUserTypeMenu();
+                if(signUpCheck(username, password, organizerActions, speakerActions, attendeeActions)){
+                    accountDisplay.successSignUp();
+                    break;
+                }
+            }
+            else{
+                break;
+            }
         }
-        return "";
+
+    }
+    private boolean signUpCheck(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions,
+                           AttendeeActions attendeeActions){
+        OrganizerController org = new OrganizerController();
+        while (true) {
+            String userType = scan.nextLine();
+            if (userType.equals("1")) {
+                if (!organizerActions.organizerExists(username)) {
+                    organizerActions.createOrganizer(username, password, false);
+                    return true;
+                }
+                break;
+            }
+            else if (userType.equals("2")){
+                if (!speakerActions.speakerExists(username)){
+                    speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+                    return true;
+                }
+                break;
+            }
+            else if (userType.equals("3")){
+                if (!attendeeActions.attendeeExists(username)){
+                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+                    return true;
+                }
+            }
+            else{
+                accountDisplay.failedInvalidMenuOption();
+            }
+        }
+        accountDisplay.failedUsernameExists();
+        return false;
     }
 }

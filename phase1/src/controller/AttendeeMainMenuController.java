@@ -10,12 +10,13 @@ import java.util.Scanner;
  * @version 1
  * */
 public class AttendeeMainMenuController extends MainMenuController{
+    private AttendeeController controller;
     /**
      * instantiates this class referring to super class
      * @param user the user object
      * @param controller the controller responsible for user
      */
-    public AttendeeMainMenuController(User user, UserController controller){
+    public AttendeeMainMenuController(User user, AttendeeController controller){
         super(user, controller);
     }
 }

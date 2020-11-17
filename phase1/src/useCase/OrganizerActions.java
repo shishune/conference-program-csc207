@@ -72,6 +72,10 @@ public class OrganizerActions extends UserAccountActions {
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 
+    public boolean organizerExists(String username){
+        return organizerUsernameHashMap.containsKey(username);
+    }
+
 //    public boolean addNewEvent(Event event) {
 //        EventActions eventactions = new EventActions();
 //        eventactions.loadEvent(event.getId(), event.getTitle(), event.getSpeaker(), event.getDateTime(),
@@ -276,6 +280,7 @@ public class OrganizerActions extends UserAccountActions {
 
     private void addOrganizerToHashMap() {
         if (organizers != null) {
+
             for (String organizersString : organizers) {
                 String[] organizerInfo = organizersString.split(",");
                 ArrayList<String> eventList = new ArrayList<String>();
@@ -298,6 +303,8 @@ public class OrganizerActions extends UserAccountActions {
 //                organizerHashMap.put(organizerInfo[0], loadedOrganizer);
 //                organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
             }
+
+
         }
     }
 

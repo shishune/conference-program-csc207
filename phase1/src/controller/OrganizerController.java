@@ -16,7 +16,6 @@ import entities.*;
 public class OrganizerController extends UserController{
     private MessageActions messageActions;
     private EventActions eventActions;
-    private UserAccountActions userAccountActions;
     private RoomActions roomActions;
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
@@ -24,21 +23,13 @@ public class OrganizerController extends UserController{
     private String organizerID;
 
 
-    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions,
-                                UserAccountActions userAccountActions, RoomActions roomActions,
+    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){
 
-        super(userAccountActions, eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
-        this.userAccountActions = userAccountActions;
-        this.eventActions = eventActions;
-        this.roomActions = roomActions;
-        this.messageActions = messageActions;
-        this.attendeeActions = attendeeActions;
-        this.organizerActions = organizerActions;
-        this.speakerActions = speakerActions;
+        super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
         this.organizerID = organizerID;
     }
-
+    public OrganizerController(){}
     /***
      * create a new event
      * @param title of event
@@ -63,7 +54,7 @@ public class OrganizerController extends UserController{
         if (this.eventActions.eventExists(eventID)){
             List<String> eventAttendees = this.eventActions.cancelEvent(eventID);
             for (String attendeeID: eventAttendees){
-                this.userAccountActions.removeEventFromUser(eventID, attendeeID);
+                this.organizerActions.removeEventFromUser(eventID, attendeeID);
             }
             return true;
         }

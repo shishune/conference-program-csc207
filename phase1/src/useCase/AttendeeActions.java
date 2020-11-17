@@ -42,7 +42,10 @@ public class AttendeeActions extends UserAccountActions {
         return userAttendee;
     }
 
-    private Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+    public boolean attendeeExists(String username){
+        return attendeeUsernameHashMap.containsKey(username);
+    }
+    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
@@ -245,7 +248,9 @@ public class AttendeeActions extends UserAccountActions {
     }
 
     private void addAttendeeToHashMap() {
+
         if (attendees != null) {
+
             for (String attendeeString : attendees) {
                 String[] attendeeInfo = attendeeString.split(",");
                 ArrayList<String> eventList = new ArrayList<String>();
@@ -263,6 +268,7 @@ public class AttendeeActions extends UserAccountActions {
                 attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
                 attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }
+
         }
     }
 

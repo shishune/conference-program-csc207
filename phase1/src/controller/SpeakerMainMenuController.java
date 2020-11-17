@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @version 1
  * */
 public class SpeakerMainMenuController extends MainMenuController{
-    private SpeakerController sController;
+    private SpeakerController controller;
     private User user;
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
@@ -20,12 +20,10 @@ public class SpeakerMainMenuController extends MainMenuController{
     /**
      * Instantiates the main menu responder object
      * @param user the user
-     * @param controller the controller responsible for user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, UserController controller, SpeakerController speakerController){
-        super(user, controller);
-        this.sController = speakerController;
+    public SpeakerMainMenuController(User user, SpeakerController speakerController){
+        super(user, speakerController);
         this.displayMessage = new SpeakerMessagePresenter();
         this.displayEvent = new EventPresenter();
     }
@@ -35,7 +33,7 @@ public class SpeakerMainMenuController extends MainMenuController{
     public void option2(){
         displayMessage.printMenu();
         String option = scan.nextLine();
-        SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.sController);
+        SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
         if (option.equals("1")){
             menuController.option1();
         }
@@ -46,7 +44,7 @@ public class SpeakerMainMenuController extends MainMenuController{
     /**
      * Responds to menu option 6
      */
-//    public void option6(){
-//        displayEvent.displayEvents(sController.viewOwnSchedule(user.getUsername()));
-//    }
+    public void option6(){
+      displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
+    }
 }

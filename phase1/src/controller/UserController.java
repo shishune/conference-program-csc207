@@ -29,7 +29,7 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      * */
-    public UserController(UserAccountActions user, EventActions events, RoomActions rooms, MessageActions message,
+    public UserController(EventActions events, RoomActions rooms, MessageActions message,
                           AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
         this.user = user;
         this.message = message;
@@ -39,6 +39,8 @@ public class UserController {
         this.organizer = organizer;
         this.speaker = speaker;
     }
+    //alternate constructor to access methods that do not need so many parameters
+    public UserController(){}
 
     public HashMap<String, User> returnUsernameHashMap() {
         if (!attendee.returnAttendeesUsernameHashMap().isEmpty()){

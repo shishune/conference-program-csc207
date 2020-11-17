@@ -20,8 +20,18 @@ public class LogoutActions{
      * @param username the username representing the username
      * @return A boolean if the username and password given are correct
      * */
-    public void logout(String username, UserController userController) {
-        User user = userController.returnUsernameHashMap().get(username);
-        user.setLogin(false);
+    public void logout(String username, String type, AttendeeActions attendees, OrganizerActions org, SpeakerActions speakers) {
+        if (type.equals("O")){
+            User user = org.returnOrganizersUsernameHashMap().get(username);
+            user.setLogin(false);
+        }
+        else if (type.equals("S")){
+            User user = speakers.returnSpeakerUsernameHashMap().get(username);
+            user.setLogin(false);
+        }
+        else{
+            User user = attendees.returnAttendeesUsernameHashMap().get(username);
+            user.setLogin(false);
+        }
     }
 }

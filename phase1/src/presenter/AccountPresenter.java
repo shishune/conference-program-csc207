@@ -15,7 +15,55 @@ public class AccountPresenter {
             + "\n[5] View all contacts";
 
     /**
-     * An abstract class. Prints the main menu
+     * Failed sign up. Username already exists
+     */
+    public void failedUsernameExists(){
+        System.out.println("This username already exists.");
+    }
+    public void successSignUp(){
+        System.out.println("You have successfully made a new account! You may now login with your new account.");
+    }
+
+    /**
+     * successful login message
+     */
+    public void successLogin(){
+        System.out.println("You have successfully logged in.");
+    }
+    /**
+     * Invalid option
+     */
+    public void failedInvalidMenuOption(){
+        System.out.println("Invalid option. Please enter again.");
+    }
+    /**
+     * Quite option
+     */
+    public void promptQuit(){
+        System.out.println("Enter 'x' if you would like to try another username, and any other key if you would" +
+                "like to log in instead.");
+    }
+
+    /**
+     * asks for sign up or login
+     */
+    public void printSignUpMenu(){
+        System.out.println("Enter 'x' to sign up, and any other character to login.");
+    }
+
+    /**
+     * Assks for user type
+     */
+    public void printUserTypeMenu(){
+        String display = "Enter the number that best describes your role in this conference:"
+                + "\n[1] Organizer"
+                + "\n[2] Speaker"
+                + "\n[3] Attendee";
+        System.out.println(display);
+    }
+
+    /**
+     * Prints the main menu
      * */
     public void printMainMenu(){
         System.out.println(basicMenu);

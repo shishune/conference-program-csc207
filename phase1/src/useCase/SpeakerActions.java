@@ -40,6 +40,9 @@ public class SpeakerActions extends UserAccountActions {
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
+    public boolean speakerExists(String username){
+        return speakerUsername.containsKey(username);
+    }
 
     /** Load new messages into HashMap of new messages **/
     public void loadSpeaker(Speaker newSpeaker){
@@ -272,6 +275,7 @@ public class SpeakerActions extends UserAccountActions {
 
     private void addSpeakerToHashMap() {
         if (speakers != null  && !speakers.isEmpty()) {
+
             for (String speakerString : speakers) {
                 String[] speakerInfo = speakerString.split(",");
                 ArrayList<String> eventList = new ArrayList<String>();
@@ -290,6 +294,8 @@ public class SpeakerActions extends UserAccountActions {
 //                speakerUsername.put(speakerInfo[1], loadedSpeaker);
                 loadSpeaker(loadedSpeaker);
             }
+
+
         }
     }
 
