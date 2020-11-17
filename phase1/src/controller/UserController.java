@@ -31,7 +31,7 @@ public class UserController {
      * */
     public UserController(EventActions events, RoomActions rooms, MessageActions message,
                           AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        this.user = user;
+        //this.user = user;
         this.message = message;
         this.e = events;
         this.room = rooms;
@@ -91,9 +91,12 @@ public class UserController {
      * @param addMe the user who will be added
      * @return boolean true if contact was successfully added, false if it was not
      * */
-    public boolean addContact(String addMe, String toMe){
-        return user.addUserContactList(toMe, addMe);
-    };
+    public boolean addContact(String addMe, String toMe) {
+        if (user != null) {
+            return user.addUserContactList(toMe, addMe);
+        }
+        return false;
+    }
 
     public boolean deleteContact(String removeMe, String toMe){
         return user.removeUserContactList(toMe, removeMe);
