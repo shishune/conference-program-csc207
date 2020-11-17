@@ -46,6 +46,7 @@ public class LogIn {
                 accountDisplay.printUserTypeMenu();
                 if(signUpCheck(username, password, organizerActions, speakerActions, attendeeActions)){
                     // i think its here we have to add the create user? (for whatever type user they are and that will automatically add them to the hashmap)
+                    // TODO: it's not saving the attendee information, but it's working for organizer
                     accountDisplay.successSignUp();
                     break;
                 }

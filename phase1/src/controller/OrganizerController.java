@@ -149,6 +149,14 @@ public class OrganizerController extends UserController{
 
     }
 
+    /***
+     * Check if event exists
+     * @param event
+     */
+    public boolean checkEvent(String event){
+        return (eventActions.getEvents().containsKey(event));
+    }
+
 
 }
 

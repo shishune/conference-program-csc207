@@ -107,6 +107,7 @@ public class Store{
                     writer.write(message);
                 } else {
                     writer.write(message + "\n");
+                    //TODO: the extra line is creating errors, should not have this since csv is added on top, so there's no need for new line
                 }
             }
             writer.close();

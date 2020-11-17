@@ -26,4 +26,12 @@ public class OrganizerMessagePresenter extends MessagePresenter{
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }
+
+    /**
+     * print message for error
+     * */
+    public void eventNotCreated(){
+        String display = "That event does not exist. Try again or create a new event first.";
+        System.out.println(display);
+    }
 }

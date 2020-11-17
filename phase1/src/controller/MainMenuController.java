@@ -80,7 +80,7 @@ public class MainMenuController {
         String event = scan.nextLine();
         List<Boolean> checks = controller.signupEvent(event, user.getId());
         if(checks.size()==1){
-            if (checks.get(0)==true){
+            if (checks.get(0)){
                 displayEvent.successAddEvent();
             }
             else{
