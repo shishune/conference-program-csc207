@@ -136,16 +136,18 @@ public class UserController {
      * @return array of other usernames who are in their contacts
      * */
 
-    public ArrayList<String> viewContacts (String userid){
+    public ArrayList<String> viewContacts (String userid) {
         ArrayList<String> contacts = new ArrayList<String>();
-        List<String> usersList = user.findUserFromId(userid).getContactsList();
-        for (String id : usersList){
-            contacts.add(user.findUserFromId(userid).getUsername());
+        if (user != null) {
+            List<String> usersList = user.findUserFromId(userid).getContactsList();
+            for (String id : usersList) {
+                contacts.add(user.findUserFromId(userid).getUsername());
+            }
+            // TODO i think theres something wrong with the for loop here
+            return contacts;
         }
-        // TODO i think theres something wrong with the for loop here
-        return contacts;
+        return null;
     }
-
     //edited so that presenter can print fail messages based on why user cannot attend event
 
     /**
