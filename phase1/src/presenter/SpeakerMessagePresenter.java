@@ -32,4 +32,9 @@ public class SpeakerMessagePresenter extends MessagePresenter{
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }
+
+    public void noAttendees(){
+        String display = "There are no attendees in the event.";
+        System.out.println(display);
+    }
 }

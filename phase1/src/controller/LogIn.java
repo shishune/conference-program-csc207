@@ -1,8 +1,5 @@
 package controller;
 
-import entities.Organizer;
-import entities.Speaker;
-import entities.Attendee;
 import entities.User;
 import useCase.*;
 import presenter.AccountPresenter;
@@ -12,6 +9,7 @@ import java.util.ArrayList;
 public class LogIn {
     private Scanner scan = new Scanner(System.in);  // Create a Scanner object
     private AccountPresenter accountDisplay = new AccountPresenter();
+    private UserController controller;
     //TODO: Change javadocs
     /**
      * This method is called when the user is logging in after they have inputted a username and password and checks if
@@ -40,6 +38,11 @@ public class LogIn {
             if (loginOption.equals("x") || loginOption.equals("X")) {
             accountDisplay.promptUsername();
             String username = scan.nextLine();  // Read user input
+                if (controller != null) {
+                    if (controller.returnUsernameHashMap().containsKey(username)) {
+                        accountDisplay.failedUsernameExists();
+                    }
+                }
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
 

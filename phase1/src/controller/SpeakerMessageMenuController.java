@@ -50,7 +50,7 @@ public class SpeakerMessageMenuController{
         }
         for (String event : events) {
             if (!controller.sendMessages(event, content)){
-                displayMessage.failedEvent();
+                displayMessage.noAttendees();
                 break;
             }
             controller.sendMessages(event, content);
