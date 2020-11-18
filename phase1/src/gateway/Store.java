@@ -120,7 +120,7 @@ public class Store{
 
     /**
      * Uses the method in attendeeActions for obtaining all attendees as a list then stores in csv
-     * @param attendeeActions the use case class responsible for attendees
+     * @param attendeeActions the use case class responsible for attendee
      */
     public void storeAttendees(AttendeeActions attendeeActions) {
         ArrayList<String> attendeeList = new ArrayList<String>();
@@ -142,6 +142,10 @@ public class Store{
         }
     }
 
+    /**
+     * Uses the method in speakerActions for obtaining all speakers as a list then stores in csv
+     * @param speakerActions the use case class for speaker
+     */
     public void storeSpeakers(SpeakerActions speakerActions) {
         ArrayList<String> speakerList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/speakers.csv";
