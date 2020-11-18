@@ -110,4 +110,6 @@ public class AccountPresenter {
     public void printMenuError() {
         System.out.println("This number is not an option, please enter another number.");
     }
+
+    public void printTypingError(){System.out.println(("There was an mistake with your answer. Please try again."));}
 }

@@ -59,25 +59,39 @@ public class LogIn {
                            AttendeeActions attendeeActions) {
         OrganizerController org = new OrganizerController();
         String userType = scan.nextLine();
+
         if (userType.equals("1")) {
             if (!organizerActions.organizerExists(username)) {
                 organizerActions.createOrganizer(username, password, false);
                 return true;
+            }
+            else{
+                accountDisplay.failedUsernameExists();
+                return false;
             }
         } else if (userType.equals("2")) {
             if (!speakerActions.speakerExists(username)) {
                 speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
             }
+            else{
+                accountDisplay.failedUsernameExists();
+                return false;
+            }
         } else if (userType.equals("3")) {
             if (!attendeeActions.attendeeExists(username)) {
                 attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
             }
+            else{
+                accountDisplay.failedUsernameExists();
+                return false;
+            }
         }
-
-        accountDisplay.failedUsernameExists();
-        return false;
+        else{
+            accountDisplay.printTypingError();
+            return false;
+        }
 
     }
 }
