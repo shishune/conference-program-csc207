@@ -286,5 +286,14 @@ public class AttendeeActions extends UserAccountActions {
 
     }
 
+    public ArrayList<String> getAttendeeIds() {
+        ArrayList<String> storedAttendee = new ArrayList<String>();
+        if (attendeesHashMap != null && !attendeesHashMap.isEmpty()) {
+            for (Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {
+                storedAttendee.add(o.getValue().getId() + "\n");
+            }
+        }
+        return storedAttendee;
+    }
 
 }

@@ -119,5 +119,15 @@ public class RoomActions {
         }
     }
 
+    public ArrayList<String> getRoomsIds() {
+        ArrayList<String> storedR = new ArrayList<String>();
+        if (roomsList != null && !roomsList.isEmpty()) {
+            for (Map.Entry<String, Room> o : roomsList.entrySet()) {
+                storedR.add(o.getValue().getRoomId() + "\n");
+            }
+        }
+        return storedR;
+    }
+
 
     }

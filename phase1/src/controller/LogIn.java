@@ -54,6 +54,7 @@ public class LogIn {
         }
 
     }
+    //TODO: WHAT IF THEY ENTER SOMETHING THATS NOT 123?
     private boolean signUpCheck(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions,
                            AttendeeActions attendeeActions) {
         OrganizerController org = new OrganizerController();

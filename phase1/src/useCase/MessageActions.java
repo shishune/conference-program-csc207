@@ -1,6 +1,7 @@
 package useCase;
 
 import entities.Event;
+import entities.Organizer;
 import gateway.LoadUp;
 import entities.Message;
 import gateway.LoadUpIGateway;
@@ -163,6 +164,16 @@ public class MessageActions {
             }
         }
         return allMessages;
+    }
+
+    public ArrayList<String> getMessengerIds() {
+        ArrayList<String> storedMessenger= new ArrayList<String>();
+        if (messages != null && !messages.isEmpty()) {
+            for (Map.Entry<String, Message> o : messages.entrySet()) {
+                storedMessenger.add(o.getValue().getMessageId() + "\n");
+            }
+        }
+        return storedMessenger;
     }
 
 }

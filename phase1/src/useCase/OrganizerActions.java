@@ -319,4 +319,14 @@ public class OrganizerActions extends UserAccountActions {
 
     }
 
+    public ArrayList<String> getOrganizerIds() {
+        ArrayList<String> storedOrganizer = new ArrayList<String>();
+        if (organizerHashMap != null && !organizerHashMap.isEmpty()) {
+            for (Map.Entry<String, Organizer> o : organizerHashMap.entrySet()) {
+                storedOrganizer.add(o.getValue().getId() + "\n");
+            }
+        }
+        return storedOrganizer;
+    }
+
 }

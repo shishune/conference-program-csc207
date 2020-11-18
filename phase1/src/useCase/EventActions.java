@@ -306,6 +306,16 @@ public class EventActions  {
 
     }
 
+    public ArrayList<String> getEventIds() {
+        ArrayList<String> storedE = new ArrayList<String>();
+        if (events != null && !events.isEmpty()) {
+            for (Map.Entry<String, Event> o : events.entrySet()) {
+                storedE.add(o.getValue().getId() + "\n");
+            }
+        }
+        return storedE;
+    }
+
     /***
      * return list of all attendee IDs of an event
      * @param eventID

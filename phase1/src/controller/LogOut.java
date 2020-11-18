@@ -60,6 +60,9 @@ public class LogOut {
         store.storeOrganizers(organizerActions);
         store.storeAttendees(attendeeActions);
         store.storeSpeakers(speakerActions);
+        store.storeEntities(attendeeActions.getAttendeeIds(), organizerActions.getOrganizerIds(),
+                messageActions.getMessengerIds(), roomActions.getRoomsIds(), eventActions.getEventIds(),
+                speakerActions.getSpeakerIds());
 
         logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);
     }

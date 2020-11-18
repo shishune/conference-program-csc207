@@ -43,6 +43,7 @@ public class Store{
         }
     }
 
+
     /**
      * Uses the method in eventActions for obtaining all events as a list then stores in csv
      * @param eventActions the use case class responsible for events
@@ -167,32 +168,27 @@ public class Store{
      * @param speaker from Speaker entity
      */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
+
         try {
             FileWriter csvWriter = new FileWriter("./phase1/src/assets/dataFiles/entities.csv");
 
             for (String id : attendee) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
             for (String id : organizer) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
             for (String id : message) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
             for (String id : room) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
             for (String id : event) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
             for (String id : speaker) {
                 csvWriter.append(id);
-                csvWriter.append("\n");
             }
 
             csvWriter.flush();

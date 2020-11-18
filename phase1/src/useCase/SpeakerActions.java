@@ -309,6 +309,16 @@ public class SpeakerActions extends UserAccountActions {
         return storedSpeaker;
     }
 
+    public ArrayList<String> getSpeakerIds() {
+        ArrayList<String> storedS = new ArrayList<String>();
+        if (speakerID != null && !speakerID.isEmpty()) {
+            for (Map.Entry<String, Speaker> o : speakerID.entrySet()) {
+                storedS.add(o.getValue().getId() + "\n");
+            }
+        }
+        return storedS;
+    }
+
 
 
 }
