@@ -44,7 +44,7 @@ public class MessageActions {
     /** Create a message and generate unique ID for message **/
     public Message createMessage(String senderId, String receiverId, String message) {
         GenerateID generateID = new GenerateID(loader);
-        String messageId = "M" + generateID;
+        String messageId = "M" + generateID.generateId();
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);
         return newMessage;
