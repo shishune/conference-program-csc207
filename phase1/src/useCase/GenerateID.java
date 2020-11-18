@@ -40,7 +40,7 @@ public class GenerateID {
             objectId = loader != null ? loader.getObjectId() : 0;
         }
 
-        return Integer.toString(objectId);
+        return String.valueOf(objectId);
     }
 }
 
