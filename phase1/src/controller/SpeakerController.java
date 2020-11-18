@@ -1,4 +1,5 @@
 package controller;
+import entities.Message;
 import entities.Speaker;
 import useCase.*;
 
@@ -26,11 +27,14 @@ public class SpeakerController extends UserController {
      *
      * Allows Speakers to send a message to those attendees attending their event
      * */
-    public void sendMessages(String eventID, String message) {
+    public boolean sendMessages(String eventID, String message) {
         List<String> attendees = this.eventActions.getEventAttendees(eventID);
         for (String attendeeID : attendees) {
-            this.messageActions.createMessage(this.SpeakerID, attendeeID, message);
+            if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
+                return false;
+            }
         }
+        return true;
     }
     /**
      *

@@ -59,27 +59,46 @@ public class OrganizerMainMenuController extends MainMenuController{
         String title = scan.nextLine();
         displayEvent.promptSpeaker();
         String speakerUserName = scan.nextLine();
-        boolean speakerExists = false;
         String speakerId = "";
-        System.out.println("Inside option 6");
-        System.out.println("Controller: " + controller);
-        // if (user != null && controller != null) {
-            //while(!speakerExists) {
-            if (speakerUserName.equals("NEW")) {
-                // TODO create speaker methods
-                speakerExists = true;
-            } else {
-                // System.out.println(controller.returnUsernameHashMap());
-                if (!controller.returnUsernameHashMap().isEmpty()) {
 
-                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
-                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
-                        speakerExists = true;
-                    } else {
-                        System.out.println("this speaker does not exist");
-                    }
-                }
+        //TODO: new! what if someone is named new??
+        if(speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")){
+            displayMessage.speakerUsernamePrompt();
+            String newSpeakerName = scan.nextLine();
+
+            displayMessage.speakerPasswordPrompt();
+            String newSpeakerPassword = scan.nextLine();
+            controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+        }
+
+        if (controller != null){
+            if(controller.returnUsernameHashMap().containsKey(speakerUserName)){
+                speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
             }
+        }
+
+
+//        boolean speakerExists = false;
+//        String speakerId = "";
+//        System.out.println("Inside option 6");
+//        System.out.println("Controller: " + controller);
+//        // if (user != null && controller != null) {
+//            //while(!speakerExists) {
+//            if (speakerUserName.equals("NEW")) {
+//                // TODO create speaker methods
+//                speakerExists = true;
+//            } else {
+//                // System.out.println(controller.returnUsernameHashMap());
+//                if (!controller.returnUsernameHashMap().isEmpty()) {
+//
+//                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
+//                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
+//                        speakerExists = true;
+//                    } else {
+//                        System.out.println("this speaker does not exist");
+//                    }
+//                }
+//            }
 
         //}
         String dateTime = getDateTimeInput();

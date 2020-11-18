@@ -33,19 +33,47 @@ public class SpeakerMessageMenuController{
         List<String> events = new ArrayList<String>();
         while (true){
             String event = scan.nextLine();
-            events.add(event);
             if (event.equals("x")||event.equals("X")){
                 break;
             }
+
+            else if (!(controller == null) && controller.eventActions.getEvents().containsKey(event)){
+                events.add(event);
+                //scan.next();
+            }
+
+            else{
+                displayMessage.failedEvent();
+                //scan.next();
+            }
+
         }
-        for (String event: events) {
+        for (String event : events) {
+            if (!controller.sendMessages(event, content)){
+                displayMessage.failedEvent();
+                break;
+            }
             controller.sendMessages(event, content);
-            // -eryka TODO please fix
-//            if (controller.sendMessages(event, content)) {
-//                displayMessage.successMessage();
-//            } else {
-//                displayMessage.failedEvent();
-//            }
         }
+
+
+        }
+
+
+//        while (true){
+//            String event = scan.nextLine();
+//            events.add(event);
+//            if (event.equals("x")||event.equals("X")){
+//                break;
+//            }
+//        }
+//        for (String event: events) {
+//            controller.sendMessages(event, content);
+//            // -eryka TODO please fix
+////            if (controller.sendMessages(event, content)) {
+////                displayMessage.successMessage();
+////            } else {
+////                displayMessage.failedEvent();
+////            }
+//        }
     }
-}

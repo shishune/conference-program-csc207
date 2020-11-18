@@ -1,5 +1,7 @@
 package presenter;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
  * Creates menu specific to organizer for the method of messaging.
@@ -32,6 +34,16 @@ public class OrganizerMessagePresenter extends MessagePresenter{
      * */
     public void eventNotCreated(){
         String display = "That event does not exist. Try again or create a new event first.";
+        System.out.println(display);
+    }
+
+    public void speakerUsernamePrompt(){
+        String display = "What is the username of the speaker you would like to create?";
+        System.out.println(display);
+    }
+
+    public void speakerPasswordPrompt(){
+        String display = "What is the password of the speaker you would like to create?";
         System.out.println(display);
     }
 }
