@@ -154,7 +154,7 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param event the event ID
      */
     private void cancelEvent(String event){
-
+    if (controller != null){
         if(controller.cancelEvent(event)){
             displayEvent.successCancelEvent();
         }
@@ -162,14 +162,17 @@ public class OrganizerMainMenuController extends MainMenuController{
             displayEvent.failedNoSuchEvent();
         }
     }
+    }
 
     /**
      * Responds to menu option 9
      */
-    public void option9(){
+    public void option9() {
         displayEvent.promptAddRoom();
         String room = scan.nextLine();
-        controller.createRoom();
-        displayEvent.successAddRoom();
+        if (controller != null) {
+            controller.createRoom();
+        }
+            displayEvent.successAddRoom();
     }
 }
