@@ -68,7 +68,7 @@ public class OrganizerActions extends UserAccountActions {
 
     public User createOrganizer(String username, String password, boolean isLogin){
         GenerateID generateId = new GenerateID(loader);
-        String userId = "O" + generateId;
+        String userId = "O" + generateId.generateId();
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 

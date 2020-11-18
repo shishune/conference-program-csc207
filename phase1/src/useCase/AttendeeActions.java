@@ -48,7 +48,7 @@ public class AttendeeActions extends UserAccountActions {
 
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
-        String userId = "A" + generateId;
+        String userId = "A" + generateId.generateId();
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
