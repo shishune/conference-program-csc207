@@ -19,7 +19,7 @@ public class SpeakerMessagePresenter extends MessagePresenter{
      * Message that the user did not input valid event
      */
     public void failedEvent(){
-        System.out.println("Message failed. An event you provided was not valid.");
+        System.out.println("Message failed. The event you provided was not valid. Enter 'X' to finish or re-enter the event");
     }
 
     /**
