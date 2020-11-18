@@ -45,12 +45,15 @@ public class AttendeeActions extends UserAccountActions {
     public boolean attendeeExists(String username){
         return attendeeUsernameHashMap.containsKey(username);
     }
+
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId;
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
+        attendeesHashMap.put(userId, userAttendee);
+        attendeeUsernameHashMap.put(username, userAttendee);
         return userAttendee;
     }
 
