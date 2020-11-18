@@ -54,7 +54,7 @@ public class OrganizerMainMenuController extends MainMenuController{
     /**
      * Responds to menu option 6
      */
-    public void option6(){
+    public void option6() {
         displayEvent.promptTitle();
         String title = scan.nextLine();
         displayEvent.promptSpeaker();
@@ -62,21 +62,43 @@ public class OrganizerMainMenuController extends MainMenuController{
         String speakerId = "";
 
         //TODO: new! what if someone is named new??
-        if(speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")){
+        if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
             displayMessage.speakerUsernamePrompt();
             String newSpeakerName = scan.nextLine();
 
             displayMessage.speakerPasswordPrompt();
             String newSpeakerPassword = scan.nextLine();
-            controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+            if (controller != null) {
+                controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+        }
         }
 
-        if (controller != null){
-            if(controller.returnUsernameHashMap().containsKey(speakerUserName)){
+        if (controller != null) {
+            if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
                 speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
+            }
+            else {
+                displayMessage.speakerNotCreated();
             }
         }
 
+        String dateTime = getDateTimeInput();
+        displayEvent.promptRoom();
+        String roomID = scan.nextLine();
+        if (controller != null) {
+            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
+            if (checks.size() == 1) {
+                displayEvent.successAddEvent();
+            } else {
+                if (checks.get(1)) {
+                    displayEvent.failedDoubleBookRoom();
+                } else if (!checks.get(1)) {
+                    displayEvent.failedDoubleBookSpeaker();
+                }
+                displayEvent.failed();
+            }
+        }
+    }
 
 //        boolean speakerExists = false;
 //        String speakerId = "";
@@ -99,26 +121,7 @@ public class OrganizerMainMenuController extends MainMenuController{
 //                    }
 //                }
 //            }
-
         //}
-        String dateTime = getDateTimeInput();
-        displayEvent.promptRoom();
-        String roomID = scan.nextLine();
-        // we have to add this ---> if (controller != null) {}
-        List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
-        if(checks.size()==1){
-            displayEvent.successAddEvent();
-        }
-        else{
-            if (checks.get(1)){
-                displayEvent.failedDoubleBookRoom();
-            }
-            else if(!checks.get(1)){
-                displayEvent.failedDoubleBookSpeaker();
-            }
-            displayEvent.failed();
-        }
-    }
 
     /**
      * Responds to menu option 7

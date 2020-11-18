@@ -117,8 +117,6 @@ public class MainMenuController {
         }
     }
 
-    //user has different method names so i changed it. Also, can we discuss the returns, because we're returning a list, we're returning a string represenation of the list.
-    //Anyways idk who's working on this but message me and i'll change it since idk if ur done yet - jiessie
     /**
      * Responds to menu option 8
      */

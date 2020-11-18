@@ -46,4 +46,9 @@ public class OrganizerMessagePresenter extends MessagePresenter{
         String display = "What is the password of the speaker you would like to create?";
         System.out.println(display);
     }
+
+    public void speakerNotCreated(){
+        String display = "This speaker does not exist. Try again or create a new speaker first.";
+        System.out.println(display);
+    }
 }

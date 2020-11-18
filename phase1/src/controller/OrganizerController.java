@@ -68,11 +68,18 @@ public class OrganizerController extends UserController{
      * @param username
      * @param password
      */
-    public void createSpeaker(String username, String password){
+    public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
+        boolean speaker = true;
+        if (speakerActions.findUserFromUsername(username) != null){
+            speaker = false;
+        }
+
         String speakerID = this.speakerActions.createSpeaker(username, password,
                 new ArrayList<>(), new ArrayList<>(), false).getId();
+
         this.eventActions.addSpeakerToSchedule(speakerID);
+        return speaker;
     }
 
     /***

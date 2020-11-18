@@ -56,7 +56,6 @@ public class SpeakerMessageMenuController{
             controller.sendMessages(event, content);
         }
 
-
         }
 
 
