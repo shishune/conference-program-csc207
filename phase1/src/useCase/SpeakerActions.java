@@ -37,6 +37,8 @@ public class SpeakerActions extends UserAccountActions {
         String userId = "S" + generateId.generateId();
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
         // addUserToHashMap(userSpeaker);
+        speakerUsername.put(userId, userSpeaker);
+        speakerID.put(username, userSpeaker);
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
