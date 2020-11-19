@@ -43,13 +43,13 @@ public class UserController {
     public UserController(){}
 
     public HashMap<String, User> returnUsernameHashMap() {
-        if (!attendee.returnAttendeesUsernameHashMap().isEmpty()){
+        if (!(attendee == null) && !attendee.returnAttendeesUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(attendee.returnAttendeesUsernameHashMap());
         }
-        if (!organizer.returnOrganizersUsernameHashMap().isEmpty()){
+        if (!(organizer == null) && !organizer.returnOrganizersUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
         }
-        if (!speaker.returnSpeakerUsernameHashMap().isEmpty()){
+        if (!(speaker == null) && !speaker.returnSpeakerUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
         }
         return usernameHashmap;

@@ -80,8 +80,9 @@ public class EventActions  {
      * Add a new room to the roomSchedule
      * @param roomID ID of room
      */
-    public void addRoomToSchedule(String roomID){
+    public boolean addRoomToSchedule(String roomID){
         roomSchedule.put(roomID, new ArrayList<>());
+        return roomSchedule.containsKey(roomID);
     }
 
     /** gets list of event from the IGateway **/

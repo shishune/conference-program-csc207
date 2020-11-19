@@ -37,8 +37,9 @@ public class GenerateID {
         }
 
         else {
-            assert loader != null;
-            objectId = loader.getObjectId();
+            objectId = loader != null ? loader.getObjectId() : 0;
+
+
         }
 
         return String.valueOf(objectId);
