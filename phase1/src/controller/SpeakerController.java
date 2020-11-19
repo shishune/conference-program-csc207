@@ -7,13 +7,13 @@ import java.util.List;
 
 public class SpeakerController extends UserController {
     private String SpeakerID;
-    public MessageActions messageActions;
-    public EventActions eventActions;
-    public UserAccountActions userAccountActions;
-    public RoomActions roomActions;
-    public SpeakerActions speakerActions;
-    public OrganizerActions organizerActions;
-    public AttendeeActions attendeeActions;
+    public MessageActions messageActions = super.getMessages();
+    public EventActions eventActions = super.getEvents();
+    public UserAccountActions userAccountActions = super.getUserAccountActions();
+    public RoomActions roomActions = super.getRooms();
+    public SpeakerActions speakerActions = super.getSpeakers();
+    public OrganizerActions organizerActions = super.getOrganizers();
+    public AttendeeActions attendeeActions = super.getAttendees();
 
     public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions,
                              RoomActions roomActions,

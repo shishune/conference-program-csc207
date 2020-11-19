@@ -14,11 +14,11 @@ import java.util.Scanner;
  * @version 1
  * */
 public class AccountController {
-
     /**
      * Interacts with user to prompt menu item choice and decides which presenter and controller
      * methods to use to respond
      */
+
     public void run(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
 
@@ -39,6 +39,8 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
+        UserController controller = new UserController(eventActions, roomActions, messageActions,
+                attendeeActions, organizerActions, speakerActions);
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -84,7 +86,7 @@ public class AccountController {
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController);
+                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions);
                 }
 
                 while (true) {
@@ -138,6 +140,82 @@ public class AccountController {
             }
         }
     }
+
+    public EventActions getEvents(){
+        LoadUpIGateway g = new LoadUp();
+        return new EventActions(g);
+    }
+
+    public OrganizerActions getOrganizers(){
+        LoadUpIGateway g = new LoadUp();
+        return new OrganizerActions(g);
+    }
+
+    public MessageActions getMessages(){
+        LoadUpIGateway g = new LoadUp();
+        return new MessageActions(g);
+    }
+
+    public RoomActions getRooms(){
+        LoadUpIGateway g = new LoadUp();
+        return new RoomActions(g);
+    }
+
+    public SpeakerActions getSpeakers(){
+        LoadUpIGateway g = new LoadUp();
+        return new SpeakerActions(g);
+    }
+
+    public AttendeeActions getAttendees(){
+        LoadUpIGateway g = new LoadUp();
+        return new AttendeeActions(g);
+    }
+
+    public LogoutActions getLogOut(){
+        LoadUpIGateway g = new LoadUp();
+        return new LogoutActions();
+    }
+
+    public UserAccountActions getUserAccountActions(){
+        LoadUpIGateway g = new LoadUp();
+        return new UserAccountActions() {
+            @Override
+            public boolean addUserContactList(String toMe, String addMe) {
+                return false;
+            }
+
+            @Override
+            public boolean removeUserContactList(String toMe, String removeMe) {
+                return false;
+            }
+
+            @Override
+            public boolean addEventToUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public boolean removeEventFromUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public String returnAllEvents(String user) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromUsername(String username) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromId(String userId) {
+                return null;
+            }
+        };
+    }
+
 
 
 }

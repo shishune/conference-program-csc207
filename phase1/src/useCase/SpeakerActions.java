@@ -15,8 +15,8 @@ public class SpeakerActions extends UserAccountActions {
     private HashMap<String, Speaker> speakerID = new HashMap<String, Speaker>();
     private HashMap<String, Speaker> speakerUsername = new HashMap<String, Speaker>();
 
-    private ArrayList<String> speakers;
-    public ArrayList<String> storedSpeaker;
+    private ArrayList<String> speakers = new ArrayList<String>();
+    public ArrayList<String> storedSpeaker = new ArrayList<String>();
 
     public SpeakerActions(LoadUpIGateway loader) {
         // with message ID as key and message object as value
@@ -34,9 +34,11 @@ public class SpeakerActions extends UserAccountActions {
 
     public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
-        String userId = "S" + generateId;
+        String userId = "S" + generateId.generateId();
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
         // addUserToHashMap(userSpeaker);
+        speakerUsername.put(userId, userSpeaker);
+        speakerID.put(username, userSpeaker);
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }

@@ -10,13 +10,12 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class MainMenuController {
+public class MainMenuController extends AccountController{
     private UserController controller;
     private User user;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
-
 
     /**
      * Instantiates the main menu responder object
@@ -66,6 +65,7 @@ public class MainMenuController {
         String receiver = scan.nextLine();
         displayMessage.promptMessage();
         String content = scan.nextLine();
+
         if (controller.sendMessage(user.getId(),receiver, content)){
             displayMessage.successMessage();
         }

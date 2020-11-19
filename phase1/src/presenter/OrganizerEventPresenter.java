@@ -81,6 +81,8 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Asks for room
      */
     public void promptRoom(){
-        System.out.println("Enter roomID");
+        System.out.println("Enter room name");
     }
+
+    public void badTime(){System.out.println("Time is not valid. Try again.");}
 }

@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * A controller class for users. UserContoller is a parent class to OrganizerController, AccountController and
+ * A controller class for users. UserController is a parent class to OrganizerController, AccountController and
  * SpeakerController.
  * @author Jiessie and Mizna
  * @version 1
  * */
 
-public class UserController {
-    private UserAccountActions user;
-    private MessageActions message;
-    private EventActions e;
-    private AttendeeActions attendee;
-    private OrganizerActions organizer;
-    private RoomActions room;
-    private SpeakerActions speaker;
+public class UserController extends AccountController{
+    private UserAccountActions user = super.getUserAccountActions();
+    private MessageActions message = super.getMessages();
+    private EventActions e = super.getEvents();
+    private AttendeeActions attendee = super.getAttendees();
+    private OrganizerActions organizer = super.getOrganizers();
+    private RoomActions room = super.getRooms();
+    private SpeakerActions speaker = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -31,9 +31,8 @@ public class UserController {
      * */
     public UserController(EventActions events, RoomActions rooms, MessageActions message,
                           AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        //this.user = user;
         this.message = message;
-        this.e = events;
+        this.e = super.getEvents();
         this.room = rooms;
         this.attendee = attendee;
         this.organizer = organizer;
@@ -43,13 +42,13 @@ public class UserController {
     public UserController(){}
 
     public HashMap<String, User> returnUsernameHashMap() {
-        if (!attendee.returnAttendeesUsernameHashMap().isEmpty()){
+        if (!(attendee == null) && !attendee.returnAttendeesUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(attendee.returnAttendeesUsernameHashMap());
         }
-        if (!organizer.returnOrganizersUsernameHashMap().isEmpty()){
+        if (!(organizer == null) && !organizer.returnOrganizersUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
         }
-        if (!speaker.returnSpeakerUsernameHashMap().isEmpty()){
+        if (!(speaker == null) && !speaker.returnSpeakerUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
         }
         return usernameHashmap;
@@ -147,9 +146,8 @@ public class UserController {
                 contacts.add(user.findUserFromId(userid).getUsername());
             }
             // TODO i think theres something wrong with the for loop here
-            return contacts;
         }
-        return null;
+        return contacts;
     }
     //edited so that presenter can print fail messages based on why user cannot attend event
 
@@ -198,17 +196,19 @@ public class UserController {
         User a1 = returnUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
-        for (String event: eventList){
-            String title = e.getEvent(event).getTitle();
-            String dateTime = e.getEvent(event).getDateTime();
-            String roomId = e.getEvent(event).getRoomID();
-            String speaker = e.getEvent(event).getSpeaker();
-            List<String> info = new ArrayList<String>();
-            info.add(title);
-            info.add(dateTime);
-            info.add(roomId);
-            info.add(speaker);
-            scheduleList.add(info);
+        if (e != null) {
+            for (String event : eventList) {
+                String title = e.getEvent(event).getTitle();
+                String dateTime = e.getEvent(event).getDateTime();
+                String roomId = e.getEvent(event).getRoomID();
+                String speaker = e.getEvent(event).getSpeaker();
+                List<String> info = new ArrayList<String>();
+                info.add(title);
+                info.add(dateTime);
+                info.add(roomId);
+                info.add(speaker);
+                scheduleList.add(info);
+            }
         }
         return scheduleList;
     }
@@ -301,7 +301,7 @@ public class UserController {
     }
 
     /**
-     * To be overrided by OrganizerController
+     * To be overridden by OrganizerController
      * @param eventID the event to be cancelled
      * @return boolean if event was cancelled or not
      * */
@@ -310,7 +310,7 @@ public class UserController {
     }
 
     /**
-     * To be overrided by AttendeeController
+     * To be overridden by AttendeeController
      * @param event the event to be removed
      * @param username the user who wants to leave the event
      * @return boolean if event was removed or not

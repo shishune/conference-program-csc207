@@ -8,16 +8,17 @@ import java.util.ArrayList;
  * */
 public class Room {
     private String roomId;
+    private String roomName;
     private int capacity;
 
     /**
      * instantiates a new Room object with an id attribute
      * @param roomId the unique id of this room
      */
-    public Room(String roomId){
+    public Room(String roomId, String roomName){
         this.capacity = 2;
         this.roomId = roomId;
-
+        this.roomName = roomName;
     }
 
     /**
@@ -37,6 +38,16 @@ public class Room {
      * @return the id of this room
      * */
     public String getRoomId(){ return roomId; }
+
+    public String getRoomName() {return roomName;}
+
+    /**
+     * Returns the string representation of this roomm object
+     * @return String representation of this room object int he way it should be stored in the csv. file
+     * */
+    public String stringRepresentation() {
+        return roomId + "," + roomName;
+    }
 
 
 }

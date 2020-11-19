@@ -26,7 +26,8 @@ public class Store{
     public void storeRooms(RoomActions roomActions) {
         ArrayList<String> roomsList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/rooms.csv";
-        roomsList = roomActions.storeRooms();
+        //List<String> roomsList = roomActions.storingRooms();
+        roomsList = roomActions.storingRooms();
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);

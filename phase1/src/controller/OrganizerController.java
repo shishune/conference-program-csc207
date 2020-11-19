@@ -14,12 +14,12 @@ import entities.*;
  */
 
 public class OrganizerController extends UserController{
-    private MessageActions messageActions;
-    private EventActions eventActions;
-    private RoomActions roomActions;
-    private SpeakerActions speakerActions;
-    private OrganizerActions organizerActions;
-    private AttendeeActions attendeeActions;
+    private MessageActions messageActions = super.getMessages();
+    private EventActions eventActions = super.getEvents();
+    private RoomActions roomActions = super.getRooms();
+    private SpeakerActions speakerActions = super.getSpeakers();
+    private OrganizerActions organizerActions = super.getOrganizers();
+    private AttendeeActions attendeeActions = super.getAttendees();
     private String organizerID;
 
 
@@ -28,6 +28,13 @@ public class OrganizerController extends UserController{
 
         super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
         this.organizerID = organizerID;
+        this.speakerActions = speakerActions;
+        this.eventActions = super.getEvents();
+        this.roomActions = roomActions;
+        this.messageActions = messageActions;
+        this.attendeeActions = attendeeActions;
+        this.organizerActions= organizerActions;
+
     }
     public OrganizerController(){}
     /***
@@ -71,23 +78,34 @@ public class OrganizerController extends UserController{
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
         boolean speaker = true;
-        if (speakerActions.findUserFromUsername(username) != null){
-            speaker = false;
+        if(!(speakerActions == null)) {
+            if (speakerActions.findUserFromUsername(username) != null) {
+                speaker = false;
+            }
+
+            String speakerID = this.speakerActions.createSpeaker(username, password,
+                    new ArrayList<>(), new ArrayList<>(), false).getId();
+
+            this.eventActions.addSpeakerToSchedule(speakerID);
         }
-
-        String speakerID = this.speakerActions.createSpeaker(username, password,
-                new ArrayList<>(), new ArrayList<>(), false).getId();
-
-        this.eventActions.addSpeakerToSchedule(speakerID);
         return speaker;
     }
 
     /***
      * Create a room and add it to the room schedule
      */
-    public void createRoom(){
-        String roomID = this.roomActions.createRoom();
-        this.eventActions.addRoomToSchedule(roomID);
+    public boolean createRoomActions(String roomName){
+        if(roomActions != null && eventActions != null){
+            String roomID = this.roomActions.createRoom(roomName).getRoomId();
+            return this.eventActions.addRoomToSchedule(roomID);
+            /*
+            this.eventActions.addRoomToSchedule(roomID);
+            System.out.println(roomActions.returnHashMap());
+            return true;
+
+             */
+        }
+        return false;
     }
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times

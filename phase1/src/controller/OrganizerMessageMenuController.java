@@ -46,6 +46,5 @@ public class OrganizerMessageMenuController{
         else{
             displayMessage.eventNotCreated();
         }
-
     }
 }

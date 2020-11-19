@@ -1,1 +1,6 @@
-AuseCase.GenerateID@6d6f6e28,5,6,,,true,false
+A1,a,a,A2,,true,false
+A2,q,q,,,true,false
+A3,3,3,,,true,false
+A4,6,6,,,false,false
+A5,qo,qo,,,true,false
+A7,i,o,,,false,false
