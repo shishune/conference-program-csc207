@@ -41,4 +41,13 @@ public class Room {
 
     public String getRoomName() {return roomName;}
 
+    /**
+     * Returns the string representation of this roomm object
+     * @return String representation of this room object int he way it should be stored in the csv. file
+     * */
+    public String stringRepresentation() {
+        return roomId + "," + roomName;
+    }
+
+
 }

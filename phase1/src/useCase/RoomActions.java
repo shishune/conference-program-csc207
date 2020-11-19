@@ -128,7 +128,7 @@ public class RoomActions {
         ArrayList<String> storedR = new ArrayList<String>();
         if(roomUsername != null && !roomUsername.isEmpty()) {
             for (Map.Entry<String, Room> o : roomUsername.entrySet()) {
-                storedR.add(o.getValue().getRoomName() + "\n");
+                storedR.add(o.getValue().stringRepresentation() + "\n");
             }
         }
         return storedR;
