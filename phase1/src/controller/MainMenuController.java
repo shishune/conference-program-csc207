@@ -66,6 +66,7 @@ public class MainMenuController {
         String receiver = scan.nextLine();
         displayMessage.promptMessage();
         String content = scan.nextLine();
+
         if (controller.sendMessage(user.getId(),receiver, content)){
             displayMessage.successMessage();
         }
