@@ -14,28 +14,6 @@ import java.util.Scanner;
  * @version 1
  * */
 public class AccountController {
-/*    Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-    //Instantiate gateway classes
-    LoadUpIGateway g = new LoadUp();
-
-    //Instantiate presenter classes
-    AccountPresenter accountDisplay = new AccountPresenter();
-
-    //Instantiate use case classes
-    MessageActions messageActions = new MessageActions(g);
-    EventActions eventActions = new EventActions(g);
-    RoomActions roomActions = new RoomActions(g);
-    SpeakerActions speakerActions = new SpeakerActions(g);
-    OrganizerActions organizerActions = new OrganizerActions(g);
-    AttendeeActions attendeeActions = new AttendeeActions(g);
-    LogoutActions logoutActions = new LogoutActions();
-
-    //Instantiate controller classes
-    LogIn logIn = new LogIn();
-    UserController controller = new UserController(eventActions, roomActions, messageActions,
-            attendeeActions, organizerActions, speakerActions);*/
-
     /**
      * Interacts with user to prompt menu item choice and decides which presenter and controller
      * methods to use to respond

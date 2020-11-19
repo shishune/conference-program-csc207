@@ -14,12 +14,12 @@ import entities.*;
  */
 
 public class OrganizerController extends UserController{
-    private MessageActions messageActions;
+    private MessageActions messageActions = super.getMessages();
     private EventActions eventActions = super.getEvents();
-    private RoomActions roomActions = new RoomActions();
-    private SpeakerActions speakerActions;
-    private OrganizerActions organizerActions;
-    private AttendeeActions attendeeActions;
+    private RoomActions roomActions = super.getRooms();
+    private SpeakerActions speakerActions = super.getSpeakers();
+    private OrganizerActions organizerActions = super.getOrganizers();
+    private AttendeeActions attendeeActions = super.getAttendees();
     private String organizerID;
 
 

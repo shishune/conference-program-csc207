@@ -51,12 +51,12 @@ public class UserController extends AccountController{
             return null;
         }
     };
-    private MessageActions message;
-    private EventActions e;
-    private AttendeeActions attendee;
-    private OrganizerActions organizer;
-    private RoomActions room;
-    private SpeakerActions speaker;
+    private MessageActions message = super.getMessages();
+    private EventActions e = super.getEvents();
+    private AttendeeActions attendee = super.getAttendees();
+    private OrganizerActions organizer = super.getOrganizers();
+    private RoomActions room = super.getRooms();
+    private SpeakerActions speaker = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
