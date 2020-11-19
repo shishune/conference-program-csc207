@@ -18,6 +18,8 @@ public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
     private LoadUpIGateway loader;
+    private SpeakerActions speaker;
+    private OrganizerActions organizer;
 
     public HashMap<String, Attendee> returnAttendeesHashMap() {
         return attendeesHashMap;
@@ -126,7 +128,10 @@ public class AttendeeActions extends UserAccountActions {
     // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
     public boolean addUserContactList(String toMe, String addMe) {
         Attendee user = attendeeUsernameHashMap.get(toMe);
-        User userOne = attendeeUsernameHashMap.get(addMe);
+        HashMap<String, User> userHashMap = new HashMap<String, User>();
+        userHashMap.putAll(speaker.returnSpeakerUsernameHashMap());
+        userHashMap.putAll(organizer.returnOrganizersUsernameHashMap());
+        User userOne = userHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;

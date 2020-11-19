@@ -16,7 +16,7 @@ import entities.*;
 public class OrganizerController extends UserController{
     private MessageActions messageActions;
     private EventActions eventActions;
-    private RoomActions roomActions;
+    private RoomActions roomActions = new RoomActions();
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
     private AttendeeActions attendeeActions;
@@ -29,6 +29,12 @@ public class OrganizerController extends UserController{
         super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
+        this.eventActions = eventActions;
+        this.roomActions = roomActions;
+        this.messageActions = messageActions;
+        this.attendeeActions = attendeeActions;
+        this.organizerActions= organizerActions;
+
     }
     public OrganizerController(){}
     /***
@@ -89,7 +95,7 @@ public class OrganizerController extends UserController{
      * Create a room and add it to the room schedule
      */
     public boolean createRoom(String roomName){
-        if(roomActions != null){
+        if(roomActions != null && eventActions != null){
             String roomID = this.roomActions.createRoom(roomName);
             return this.eventActions.addRoomToSchedule(roomID);
         }
