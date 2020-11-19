@@ -14,7 +14,7 @@ import java.util.*;
  * @version 1
  * */
 
-public class UserController {
+public class UserController extends AccountController{
     private UserAccountActions user;
     private MessageActions message;
     private EventActions e;
@@ -24,6 +24,7 @@ public class UserController {
     private SpeakerActions speaker;
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
+    private AccountController a = new AccountController();
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions

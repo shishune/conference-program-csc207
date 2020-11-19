@@ -19,6 +19,7 @@ public class AccountController {
      * Interacts with user to prompt menu item choice and decides which presenter and controller
      * methods to use to respond
      */
+
     public void run(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
 
@@ -39,6 +40,8 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
+        UserController controller = new UserController(eventActions, roomActions, messageActions,
+                attendeeActions, organizerActions, speakerActions);
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
