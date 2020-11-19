@@ -97,9 +97,13 @@ public class OrganizerController extends UserController{
     public boolean createRoomActions(String roomName){
         if(roomActions != null && eventActions != null){
             String roomID = this.roomActions.createRoom(roomName).getRoomId();
+            return this.eventActions.addRoomToSchedule(roomID);
+            /*
             this.eventActions.addRoomToSchedule(roomID);
             System.out.println(roomActions.returnHashMap());
             return true;
+
+             */
         }
         return false;
     }

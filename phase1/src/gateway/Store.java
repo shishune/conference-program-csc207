@@ -24,9 +24,10 @@ public class Store{
      * @param roomActions the use case class responsible for rooms
      * */
     public void storeRooms(RoomActions roomActions) {
-        //ArrayList<String> roomsList = new ArrayList<String>();
+        ArrayList<String> roomsList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/rooms.csv";
-        List<String> roomsList = roomActions.storingRooms();
+        //List<String> roomsList = roomActions.storingRooms();
+        roomsList = roomActions.storingRooms();
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);

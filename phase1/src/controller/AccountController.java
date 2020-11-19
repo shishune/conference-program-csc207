@@ -86,7 +86,7 @@ public class AccountController {
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController);
+                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions);
                 }
 
                 while (true) {

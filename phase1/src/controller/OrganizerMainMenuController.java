@@ -34,11 +34,13 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @param user the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController){
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room){
         super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
+        this.room = room;
+        this.controller = organizerController;
     }
 
     /**
@@ -256,20 +258,15 @@ public class OrganizerMainMenuController extends MainMenuController{
                 catcher = false;
             }
             if (controller != null) {
-                /*if (controller.createRoomActions(roomName)) {
-                    System.out.println(room.returnHashMap());
+                if (controller.createRoomActions(roomName)) {
+                    System.out.println(room.returnRoomUsernameHashMap());
                     displayMessage.addedRoom();
                     catcher = false;
-                    }
-                }*/
-                Room r = room.createRoom(roomName);
-                System.out.println(room.returnHashMap());
-                displayMessage.addedRoom();
-                catcher = false;
+                }
             }
 
-            }
         }
+    }
 //        displayEvent.promptAddRoom();
 //        String room = scan.nextLine();
 //        if (controller != null) {
@@ -277,4 +274,4 @@ public class OrganizerMainMenuController extends MainMenuController{
 //        }
 //            displayEvent.successAddRoom();
 //    }
-    }
+}

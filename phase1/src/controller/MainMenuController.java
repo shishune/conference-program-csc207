@@ -12,7 +12,6 @@ import java.util.Scanner;
  * */
 public class MainMenuController extends AccountController{
     private UserController controller;
-    private OrganizerController organizerController;
     private User user;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
