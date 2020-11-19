@@ -131,6 +131,7 @@ public class AttendeeActions extends UserAccountActions {
         HashMap<String, User> userHashMap = new HashMap<String, User>();
         userHashMap.putAll(speaker.returnSpeakerUsernameHashMap());
         userHashMap.putAll(organizer.returnOrganizersUsernameHashMap());
+        userHashMap.putAll(attendeeUsernameHashMap);
         User userOne = userHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {

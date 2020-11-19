@@ -45,8 +45,10 @@ public class RoomActions {
         GenerateID generateId = new GenerateID(loader);
         String userId = "R" + generateId.generateId();
         Room room = new Room(userId, username);
+        System.out.println(returnHashMap());
         addRoomIdToHashMap(room);
         addRoomUsernameToHashMap(room);
+        System.out.println(returnHashMap());
         addRoom(room);
         return room;
     }
