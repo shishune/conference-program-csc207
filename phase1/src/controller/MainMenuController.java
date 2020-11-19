@@ -12,11 +12,11 @@ import java.util.Scanner;
  * */
 public class MainMenuController extends AccountController{
     private UserController controller;
+    private OrganizerController organizerController;
     private User user;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
-
 
     /**
      * Instantiates the main menu responder object

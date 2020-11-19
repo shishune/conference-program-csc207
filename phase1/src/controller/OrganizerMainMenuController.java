@@ -256,12 +256,17 @@ public class OrganizerMainMenuController extends MainMenuController{
                 catcher = false;
             }
             if (controller != null) {
-                if (controller.createRoomActions(roomName)) {
+                /*if (controller.createRoomActions(roomName)) {
                     System.out.println(room.returnHashMap());
                     displayMessage.addedRoom();
                     catcher = false;
                     }
-                }
+                }*/
+                Room r = room.createRoom(roomName);
+                System.out.println(room.returnHashMap());
+                displayMessage.addedRoom();
+                catcher = false;
+            }
 
             }
         }
