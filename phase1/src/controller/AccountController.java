@@ -179,12 +179,10 @@ public class AccountController {
     public UserAccountActions getUserAccountActions(){
         LoadUpIGateway g = new LoadUp();
         return new UserAccountActions() {
-            @Override
             public boolean addUserContactList(String toMe, String addMe) {
                 return false;
             }
 
-            @Override
             public boolean removeUserContactList(String toMe, String removeMe) {
                 return false;
             }

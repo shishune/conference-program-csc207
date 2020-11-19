@@ -253,13 +253,12 @@ public class OrganizerMainMenuController extends MainMenuController{
         while (catcher) {
             displayEvent.promptAddRoom();
             String roomName = scan.nextLine();
-            if (room.returnHashMap().containsKey(roomName)) {
-                displayMessage.badRoom();
+            if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
+                displayMessage.alreadyAddedRoom();
                 catcher = false;
             }
-            if (controller != null) {
+            else if (controller != null) {
                 if (controller.createRoomActions(roomName)) {
-                    System.out.println(room.returnRoomUsernameHashMap());
                     displayMessage.addedRoom();
                     catcher = false;
                 }

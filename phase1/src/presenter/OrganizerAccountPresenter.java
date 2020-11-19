@@ -22,6 +22,7 @@ public class OrganizerAccountPresenter extends AccountPresenter{
                 + "\n[7] Remove/reschedule an event"
                 + "\n[8] View all events"
                 + "\n[9] Add room"
+                + "\n[10] Add speaker"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

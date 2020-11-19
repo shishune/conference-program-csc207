@@ -66,4 +66,5 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void addedRoom(){
         System.out.println("You have successfully created a new room.");
     }
+    public void alreadyAddedRoom(){System.out.println("That room already exists.");}
 }

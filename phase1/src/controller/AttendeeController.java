@@ -5,12 +5,12 @@ import entities.Attendee;
 import useCase.*;
 
 public class AttendeeController extends UserController{
-    private MessageActions message;
-    private EventActions e;
-    private AttendeeActions attendee;
-    private RoomActions room;
-    private OrganizerActions organizer;
-    private SpeakerActions speaker;
+//    private MessageActions message;
+//    private EventActions e;
+    private AttendeeActions attendee = super.getAttendees();
+//    private RoomActions room;
+//    private OrganizerActions organizer;
+//    private SpeakerActions speaker;
 
     public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
                               AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {

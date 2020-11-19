@@ -48,7 +48,6 @@ public class RoomActions {
         System.out.println(returnHashMap());
         addRoomIdToHashMap(room);
         addRoomUsernameToHashMap(room);
-        System.out.println(returnHashMap());
         addRoom(room);
         return room;
     }
