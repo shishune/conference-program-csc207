@@ -244,11 +244,29 @@ public class OrganizerMainMenuController extends MainMenuController{
      * Responds to menu option 9
      */
     public void option9() {
-        displayEvent.promptAddRoom();
-        String room = scan.nextLine();
-        if (controller != null) {
-            controller.createRoom(room);
+
+        boolean catcher = true;
+        String roomID;
+
+        while (catcher) {
+            displayEvent.promptAddRoom();
+            String roomName = scan.nextLine();
+            if (room.returnHashMap().containsKey(roomName)) {
+                displayMessage.badRoom();
+                catcher = false;
+                if (!(controller == null) && controller.createRoom(roomName)) {
+                    displayMessage.addedRoom();
+                    catcher = false;
+                }
+
+
+            }
         }
-            displayEvent.successAddRoom();
-    }
-}
+//        displayEvent.promptAddRoom();
+//        String room = scan.nextLine();
+//        if (controller != null) {
+//            controller.createRoom(room);
+//        }
+//            displayEvent.successAddRoom();
+//    }
+    }}
