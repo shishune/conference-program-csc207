@@ -21,7 +21,8 @@ public class AccountPresenter {
         System.out.println("This username already exists.");
     }
     public void successSignUp(){
-        System.out.println("You have successfully made a new account! You may now login with your new account.");
+        System.out.println("You have successfully made a new account! You may now login with your new account." +
+                "\nNote: You must login and logout completely in order to save your account.");
     }
 
     /**

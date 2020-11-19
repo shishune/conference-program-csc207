@@ -36,23 +36,25 @@ public class SpeakerActions extends UserAccountActions {
         GenerateID generateId = new GenerateID(loader);
         String userId = "S" + generateId.generateId();
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        // addUserToHashMap(userSpeaker);
-        speakerUsername.put(userId, userSpeaker);
-        speakerID.put(username, userSpeaker);
+        //addUserIdToHashMap(userSpeaker);
+        //addUsernameToHashMap(userSpeaker);
+        //speakerUsername.put(userId, userSpeaker);
+        //speakerID.put(username, userSpeaker);
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
+
+    /**
+     * Returns whether speaker is in the database
+     * @param username the username of user
+     * @return true iff speaker exists
+     */
     public boolean speakerExists(String username){
         return speakerUsername.containsKey(username);
     }
-
-    /** Load new messages into HashMap of new messages **/
+    /*
+    /** Load new speakers into HashMap of new speakers **/
     public void loadSpeaker(Speaker newSpeaker){
-        // This needs to update every collection we use for messages
-        // i.e. if we add a new hashmap/array/etc. for some method, we need to add
-        // otherHash.put(messageId, newMessage)
-        // messageArray.add(newMessage)
-        // etc. etc.
         speakerID.put(newSpeaker.getId(), newSpeaker);
         speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
     }
