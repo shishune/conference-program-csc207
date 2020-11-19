@@ -254,14 +254,16 @@ public class OrganizerMainMenuController extends MainMenuController{
             if (room.returnHashMap().containsKey(roomName)) {
                 displayMessage.badRoom();
                 catcher = false;
-                if (!(controller == null) && controller.createRoom(roomName)) {
+            }
+            if (controller != null) {
+                if (controller.createRoom(roomName)) {
                     displayMessage.addedRoom();
                     catcher = false;
                 }
-
-
             }
+
         }
+    }
 //        displayEvent.promptAddRoom();
 //        String room = scan.nextLine();
 //        if (controller != null) {
@@ -269,4 +271,4 @@ public class OrganizerMainMenuController extends MainMenuController{
 //        }
 //            displayEvent.successAddRoom();
 //    }
-    }}
+}

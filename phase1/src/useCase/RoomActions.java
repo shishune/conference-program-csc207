@@ -32,6 +32,8 @@ public class RoomActions {
         GenerateID generator = new GenerateID(loader);
         String roomID = "R" + generator.generateId();
         Room room = new Room(roomID, roomName);
+        roomUsername.put(roomName, room);
+        roomsList.put(roomID, room);
         addRoom(room);
         return roomID;
     }
