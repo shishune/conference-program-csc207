@@ -15,8 +15,8 @@ public class SpeakerActions extends UserAccountActions {
     private HashMap<String, Speaker> speakerID = new HashMap<String, Speaker>();
     private HashMap<String, Speaker> speakerUsername = new HashMap<String, Speaker>();
 
-    private ArrayList<String> speakers;
-    public ArrayList<String> storedSpeaker;
+    private ArrayList<String> speakers = new ArrayList<String>();
+    public ArrayList<String> storedSpeaker = new ArrayList<String>();
 
     public SpeakerActions(LoadUpIGateway loader) {
         // with message ID as key and message object as value

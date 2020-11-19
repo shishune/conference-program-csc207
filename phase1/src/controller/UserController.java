@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * A controller class for users. UserContoller is a parent class to OrganizerController, AccountController and
+ * A controller class for users. UserController is a parent class to OrganizerController, AccountController and
  * SpeakerController.
  * @author Jiessie and Mizna
  * @version 1
@@ -147,9 +147,8 @@ public class UserController {
                 contacts.add(user.findUserFromId(userid).getUsername());
             }
             // TODO i think theres something wrong with the for loop here
-            return contacts;
         }
-        return null;
+        return contacts;
     }
     //edited so that presenter can print fail messages based on why user cannot attend event
 
@@ -198,17 +197,19 @@ public class UserController {
         User a1 = returnUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
-        for (String event: eventList){
-            String title = e.getEvent(event).getTitle();
-            String dateTime = e.getEvent(event).getDateTime();
-            String roomId = e.getEvent(event).getRoomID();
-            String speaker = e.getEvent(event).getSpeaker();
-            List<String> info = new ArrayList<String>();
-            info.add(title);
-            info.add(dateTime);
-            info.add(roomId);
-            info.add(speaker);
-            scheduleList.add(info);
+        if (e != null) {
+            for (String event : eventList) {
+                String title = e.getEvent(event).getTitle();
+                String dateTime = e.getEvent(event).getDateTime();
+                String roomId = e.getEvent(event).getRoomID();
+                String speaker = e.getEvent(event).getSpeaker();
+                List<String> info = new ArrayList<String>();
+                info.add(title);
+                info.add(dateTime);
+                info.add(roomId);
+                info.add(speaker);
+                scheduleList.add(info);
+            }
         }
         return scheduleList;
     }
@@ -301,7 +302,7 @@ public class UserController {
     }
 
     /**
-     * To be overrided by OrganizerController
+     * To be overridden by OrganizerController
      * @param eventID the event to be cancelled
      * @return boolean if event was cancelled or not
      * */
@@ -310,7 +311,7 @@ public class UserController {
     }
 
     /**
-     * To be overrided by AttendeeController
+     * To be overridden by AttendeeController
      * @param event the event to be removed
      * @param username the user who wants to leave the event
      * @return boolean if event was removed or not
