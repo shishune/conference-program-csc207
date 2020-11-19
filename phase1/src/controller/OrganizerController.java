@@ -88,8 +88,8 @@ public class OrganizerController extends UserController{
     /***
      * Create a room and add it to the room schedule
      */
-    public boolean createRoom(){
-        String roomID = this.roomActions.createRoom();
+    public boolean createRoom(String roomName){
+        String roomID = this.roomActions.createRoom(roomName);
         return this.eventActions.addRoomToSchedule(roomID);
     }
 

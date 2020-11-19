@@ -50,10 +50,16 @@ public class RoomActions {
     public void loadRooms(){
         LoadUp loader = new LoadUp(); // initialize gateway class for loading
         List<String> rooms = loader.getRoomsList(); // gateway method to transfer from rooms.csv to a list of room ids
-        for (String id:rooms){
+        String roomName = "T-T"; //TODO : NEED TO FIX THIS RN ALL LOADED NAMES ARE GONNA BE CALLED T-T
+
+        for (String id:rooms) {
             Room room = new Room(id, roomName);
             roomsList.put(id, room);
         }
+//
+//        for (String name:roomNames) {
+//            roomUsername.put(name)
+//        }
     }
 
     /**
