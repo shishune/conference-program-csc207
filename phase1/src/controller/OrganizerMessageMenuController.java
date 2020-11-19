@@ -26,18 +26,18 @@ public class OrganizerMessageMenuController{
      * Responds to menu option 1
      */
     public void option1(){
-        displayMessage.promptMessage();
+        displayMessage.promptMessage(); // enter your message
         String message = scan.nextLine();
         //controller.sendSpeakersMessage(message); //todo: need to add this method to organizerController
-        displayMessage.successMessage();
+        displayMessage.successMessage(); // message has been sent successfully
     }
     /**
      * Responds to menu option 2
      */
     public void option2(){
-        displayMessage.promptMessage();
+        displayMessage.promptMessage(); // enter your message
         String message = scan.nextLine();
-        displayMessage.promptEvent();
+        displayMessage.promptEvent(); // enter name of event you want to send message to
         String event = scan.nextLine();
         if(!(controller == null) && controller.checkEvent(event)){
             controller.sendAttendeesMessage(event, message);

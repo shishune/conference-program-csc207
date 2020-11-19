@@ -127,15 +127,23 @@ public class AttendeeActions extends UserAccountActions {
     public boolean addUserContactList(String toMe, String addMe) {
         Attendee user = attendeeUsernameHashMap.get(toMe);
         User userOne = attendeeUsernameHashMap.get(addMe);
-        boolean isId = user.getContactsList().contains(userOne.getId());
-        if (isId) {
-            return false;
-        } else {
-            List<String> toMeContacts = user.getContactsList();
-            toMeContacts.add(userOne.getId());
-            user.setContactsList(toMeContacts);
-            return true;
+        //System.out.println("ATTENDEE ACTIONS");
+        //System.out.println("USER: " + user);
+        //System.out.println("USER: " + userOne);
+        //System.out.println(user.getContactsList().contains(userOne.getId()));
+        if (attendeeUsernameHashMap != null) {
+            boolean isId = user.getContactsList().contains(userOne.getId());
+            if (isId) {
+                return false;
+            } else {
+                List<String> toMeContacts = user.getContactsList();
+                toMeContacts.add(userOne.getId());
+                user.setContactsList(toMeContacts);
+                return true;
+            }
         }
+        return false;
+
     }
 
     /**

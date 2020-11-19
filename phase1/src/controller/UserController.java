@@ -15,7 +15,7 @@ import java.util.*;
  * */
 
 public class UserController {
-    private UserAccountActions user;
+    //private UserAccountActions user;
     private MessageActions message;
     private EventActions e;
     private AttendeeActions attendee;
@@ -78,12 +78,43 @@ public class UserController {
      * @return boolean true if message was successfully sent, false if it was not
      * */
     public boolean sendMessage(String sender, String receiver, String content) {
-        if (user != null) {
-            if (user.findUserFromUsername(sender).getContactsList().contains(receiver)) {
-                message.createMessage(sender, receiver, content);
+        if (attendee != null && organizer != null && speaker != null) {
+
+            HashMap<String, User> usernameHashMap = returnUsernameHashMap();
+            String senderId = usernameHashMap.get(sender).getId();
+            String receiverId = usernameHashMap.get(receiver).getId();
+
+            // add receiver to contact list
+            if (attendee.addUserContactList(senderId, receiverId)) {
+                attendee.addUserContactList(senderId, receiverId);
+            } else {
+                if (organizer.addUserContactList(senderId, receiverId)) {
+                    organizer.addUserContactList(senderId, receiverId);
+                } else {
+                    if (speaker.addUserContactList(senderId, receiverId)) {
+                        speaker.addUserContactList(senderId, receiverId);
+                    }
+                }
+            }
+
+            System.out.println(organizer.findUserFromUsername(sender));
+            System.out.println(organizer.findUserFromUsername(sender).getContactsList());
+            System.out.println(organizer.findUserFromUsername(sender).getContactsList().contains(receiver));
+
+            // sending message
+            if (attendee.findUserFromUsername(sender).getContactsList().contains(receiverId)
+                    || organizer.findUserFromUsername(sender).getContactsList().contains(receiverId)
+                    || speaker.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
+
+            //if (organizer.findUserFromUsername(sender).getContactsList().contains(receiver)) {
+                //<String, User> usernameHashMap = returnUsernameHashMap();
+                //String senderId = usernameHashMap.get(sender).getId();
+                //String receiverId = usernameHashMap.get(receiver).getId();
+                message.createMessage(senderId, receiverId, content);
                 return true;
             }
-            return false;
+        } else {
+            System.out.println("User does not exist");
         }
         return false;
     }
@@ -95,14 +126,22 @@ public class UserController {
      * @return boolean true if contact was successfully added, false if it was not
      * */
     public boolean addContact(String addMe, String toMe) {
-        if (user != null) {
-            return user.addUserContactList(toMe, addMe);
+        if (attendee != null && organizer != null && speaker != null) {
+            return attendee.addUserContactList(toMe, addMe)
+                    ? attendee.addUserContactList(toMe, addMe)
+                    : organizer.addUserContactList(toMe, addMe)
+                    ? organizer.addUserContactList(toMe, addMe)
+                    : speaker.addUserContactList(toMe, addMe) && speaker.addUserContactList(toMe, addMe);
         }
         return false;
     }
 
     public boolean deleteContact(String removeMe, String toMe){
-        return user.removeUserContactList(toMe, removeMe);
+        return attendee.removeUserContactList(toMe, removeMe)
+                ? attendee.removeUserContactList(toMe, removeMe)
+                : organizer.removeUserContactList(toMe, removeMe)
+                ? organizer.removeUserContactList(toMe, removeMe)
+                : speaker.removeUserContactList(toMe, removeMe) && speaker.removeUserContactList(toMe, removeMe);
     };
 
 //    public String viewMessageOneSender (String fromMe){
@@ -123,8 +162,20 @@ public class UserController {
         List<Message> messageList = message.printMessages(fromMe, toMe);
         for (Message message:messageList){
             ArrayList<String> info = new ArrayList<String>();
-            info.add(user.findUserFromId(message.getSenderId()).getUsername());
-            info.add(user.findUserFromId(message.getReceiverId()).getUsername());
+            info.add(attendee.findUserFromId(message.getSenderId()).getUsername() != null
+                    ? attendee.findUserFromId(message.getSenderId()).getUsername()
+                    : organizer.findUserFromId(message.getSenderId()).getUsername() != null
+                    ? organizer.findUserFromId(message.getSenderId()).getUsername()
+                    : speaker.findUserFromId(message.getSenderId()).getUsername() != null
+                    ? speaker.findUserFromId(message.getSenderId()).getUsername()
+                    : null);
+            info.add(attendee.findUserFromId(message.getReceiverId()).getUsername() != null
+                    ? attendee.findUserFromId(message.getReceiverId()).getUsername()
+                    : organizer.findUserFromId(message.getReceiverId()).getUsername() != null
+                    ? organizer.findUserFromId(message.getReceiverId()).getUsername()
+                    : speaker.findUserFromId(message.getReceiverId()).getUsername() != null
+                    ? speaker.findUserFromId(message.getReceiverId()).getUsername()
+                    : null);
             info.add(message.getMessage());
             messages.add(info);
         }
@@ -141,10 +192,22 @@ public class UserController {
 
     public ArrayList<String> viewContacts (String userid) {
         ArrayList<String> contacts = new ArrayList<String>();
-        if (user != null) {
-            List<String> usersList = user.findUserFromId(userid).getContactsList();
+        if (attendee != null && organizer != null && speaker != null) {
+            List<String> usersList = attendee.findUserFromId(userid).getContactsList() != null
+                    ? attendee.findUserFromId(userid).getContactsList()
+                    : organizer.findUserFromId(userid).getContactsList() != null
+                    ? organizer.findUserFromId(userid).getContactsList()
+                    : speaker.findUserFromId(userid).getContactsList() != null
+                    ? speaker.findUserFromId(userid).getContactsList()
+                    : null;
             for (String id : usersList) {
-                contacts.add(user.findUserFromId(userid).getUsername());
+                contacts.add(attendee.findUserFromId(userid).getUsername() != null
+                        ? attendee.findUserFromId(userid).getUsername()
+                        : organizer.findUserFromId(userid).getUsername() != null
+                        ? organizer.findUserFromId(userid).getUsername()
+                        : speaker.findUserFromId(userid).getUsername() != null
+                        ? speaker.findUserFromId(userid).getUsername()
+                        : null);
             }
             // TODO i think theres something wrong with the for loop here
             return contacts;
@@ -270,9 +333,14 @@ public class UserController {
     private boolean checkConflictTime(String username, String event) {
         //return true if there is a conflict
         String timeEvent = e.getEvent(event).getDateTime();
-        if (user != null) {
-
-            User u = user.findUserFromUsername(username);
+        if (attendee != null && organizer != null && speaker != null) {
+            User u = attendee.findUserFromUsername(username) != null
+                    ? attendee.findUserFromUsername(username)
+                    : organizer.findUserFromUsername(username) != null
+                    ? organizer.findUserFromUsername(username)
+                    : speaker.findUserFromUsername(username) != null
+                    ? speaker.findUserFromUsername(username)
+                    : null;
 
             for (int i = 0; i < u.getEventList().size(); i++) {
 
