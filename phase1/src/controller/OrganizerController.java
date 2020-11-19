@@ -89,8 +89,10 @@ public class OrganizerController extends UserController{
      * Create a room and add it to the room schedule
      */
     public boolean createRoom(String roomName){
-        String roomID = this.roomActions.createRoom(roomName);
-        return this.eventActions.addRoomToSchedule(roomID);
+        if(roomActions != null){
+            String roomID = this.roomActions.createRoom(roomName);
+            return this.eventActions.addRoomToSchedule(roomID);}
+        return false;
     }
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times

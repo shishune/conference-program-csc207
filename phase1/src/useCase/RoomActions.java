@@ -94,7 +94,7 @@ public class RoomActions {
      * @return false if the room id does not exist, true if the room has been removed successfully
      * */
     public boolean removeRoom(Room room){
-        if (roomsList.containsKey(room.getRoomId()) && ){
+        if (roomsList.containsKey(room.getRoomId())){
             roomsList.remove(room.getRoomId(), room);
             return true;
         }

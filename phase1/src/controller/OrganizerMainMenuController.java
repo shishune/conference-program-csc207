@@ -1,6 +1,11 @@
 package controller;
 import entities.Room;
 import entities.User;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import presenter.EventPresenter;
 import presenter.MessagePresenter;
@@ -69,11 +74,9 @@ public class OrganizerMainMenuController extends MainMenuController{
         if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
             displayMessage.speakerUsernamePrompt();
             String newSpeakerName = scan.nextLine();
-
             displayMessage.speakerPasswordPrompt();
 
             while (catcherUserName) {
-
                 String newSpeakerPassword = scan.nextLine();
                 if (controller != null) {
                     controller.createSpeaker(newSpeakerName, newSpeakerPassword);
@@ -81,7 +84,8 @@ public class OrganizerMainMenuController extends MainMenuController{
                     catcherUserName = false;
                 }
             }
-        } else {
+        }
+        else {
             while (catcherUserName) {
                 if (controller != null) {
                     if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
@@ -89,49 +93,43 @@ public class OrganizerMainMenuController extends MainMenuController{
                         catcherUserName = false;
                     } else {
                         displayMessage.speakerNotCreated();
+                        option6();
                     }
                 } else {
                     displayMessage.speakerNotCreated();
+                    option6();
                 }
             }
         }
 
         boolean catcher = true;
-        String outputDateTime = "";
-
-        while (catcher) {
-            String dateTime = getDateTimeInput();
-            //if (getDateTimeInput().matches("\\d{2}-\\d{2}-\\d{2}")) {
-                outputDateTime = dateTime;
-                catcher = false;
-            //}
-        }
-        catcher = true;
+        String dateTime = getDateTimeInput();
         String roomID = "";
+
         while (catcher){
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
-
-            if (!(room == null) && room.returnHashMap().get(roomName).getRoomId() != null){
-                roomID = roomName;
-                catcher = false;
-            }
-            else{
-                displayMessage.badRoom();
-                String reply = scan.nextLine();
-                if(reply.equals("ADD") || reply.equals("add") || reply.equals("Add")){
-                    displayMessage.newRoom();
-                    String name = scan.nextLine();
-                    if(!(controller == null) && controller.createRoom()){
-                        displayMessage.addedRoom();
-                        catcher = false;
+            if (!(room == null)) {
+                if (room.returnHashMap().containsKey(roomName)) {
+                    roomID = roomName;
+                    catcher = false;
+                } else {
+                    displayMessage.badRoom();
+                    String reply = scan.nextLine();
+                    if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
+                        displayMessage.newRoom();
+                        String name = scan.nextLine();
+                        if (!(controller == null) && controller.createRoom(name)) {
+                            displayMessage.addedRoom();
+                            catcher = false;
+                        }
                     }
                 }
             }
         }
 
         if (controller != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerId, outputDateTime, roomID);
+            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
             if (checks.size() == 1) {
                 displayEvent.successAddEvent();
             } else {
@@ -147,29 +145,6 @@ public class OrganizerMainMenuController extends MainMenuController{
         }
 
     }
-
-//        boolean speakerExists = false;
-//        String speakerId = "";
-//        System.out.println("Inside option 6");
-//        System.out.println("Controller: " + controller);
-//        // if (user != null && controller != null) {
-//            //while(!speakerExists) {
-//            if (speakerUserName.equals("NEW")) {
-//                // TODO create speaker methods
-//                speakerExists = true;
-//            } else {
-//                // System.out.println(controller.returnUsernameHashMap());
-//                if (!controller.returnUsernameHashMap().isEmpty()) {
-//
-//                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
-//                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
-//                        speakerExists = true;
-//                    } else {
-//                        System.out.println("this speaker does not exist");
-//                    }
-//                }
-//            }
-        //}
 
     /**
      * Responds to menu option 7
@@ -196,11 +171,42 @@ public class OrganizerMainMenuController extends MainMenuController{
      * @return the string combining date and time based on separate user inputs for date and time
      */
     private String getDateTimeInput(){
-        displayEvent.promptDate();
-        String date = scan.nextLine();
-        displayEvent.promptTime();
-        String time = scan.nextLine();
-        String dateTime = date+"/"+time;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        dateFormat.setLenient(false);
+        String date = "";
+        String time = "";
+        boolean catcher = true;
+
+        while (catcher) {
+            displayEvent.promptDate();
+            String d1 = scan.nextLine();
+
+            try {
+                Date d = dateFormat.parse(d1);
+                date = d.toString();
+                catcher = false;
+            }
+            catch (ParseException ex) {
+                displayEvent.badTime();
+            }}
+
+        catcher = true;
+        while (catcher){
+
+            displayEvent.promptTime();
+            if (scan.hasNextInt()) {
+                String t = scan.nextLine();
+                if (Integer.parseInt(t) < 24 && Integer.parseInt(t) > 0) {
+                    time = t;
+                    catcher = false;
+                }
+                else {
+                    displayEvent.badTime();
+                }
+            }
+        }
+
+        String dateTime = date + "-" + time;
         return dateTime;
     }
 
@@ -241,7 +247,7 @@ public class OrganizerMainMenuController extends MainMenuController{
         displayEvent.promptAddRoom();
         String room = scan.nextLine();
         if (controller != null) {
-            controller.createRoom();
+            controller.createRoom(room);
         }
             displayEvent.successAddRoom();
     }

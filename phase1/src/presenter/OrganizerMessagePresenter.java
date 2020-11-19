@@ -58,7 +58,7 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     }
 
     public void badRoom(){
-        System.out.println("That room does not exist. Add a new room by writing 'ADD' or rewrite the name of the room.");
+        System.out.println("That room does not exist. Add a new room by writing 'ADD' or rewrite the name of the room after pressing any key.");
     }
     public void newRoom(){
         System.out.println("Enter the name of the room to be added");
