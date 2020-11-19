@@ -16,7 +16,7 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> events = new ArrayList<>();
     // ArrayList<String> organizers = null;
     // etc.etc. one for every .csv
-    private ArrayList<String> rooms;
+    private ArrayList<String> rooms = new ArrayList<>();
     private ArrayList<String> attendees = new ArrayList<>();
     private ArrayList<String> organizers = new ArrayList<>();
     private ArrayList<String> speakers = new ArrayList<>();
@@ -57,8 +57,7 @@ public class LoadUp implements LoadUpIGateway {
      * @return rooms in a list
      */
 
-    public List<String> getRooms(){
-        rooms = new ArrayList<String>();
+    public ArrayList<String> getRooms(){
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/rooms.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
@@ -69,6 +68,7 @@ public class LoadUp implements LoadUpIGateway {
         }
         return rooms;
     }
+
 
     /**
      * This method returns rooms in a list from events.csv
@@ -206,14 +206,6 @@ public class LoadUp implements LoadUpIGateway {
     }
 
 
-
-
-
-
-
-
-
-
     /** public List<String> getOrganizers() {
 
      // gets list of organizers from organizers.csv
@@ -235,8 +227,8 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
-    @Override
-    public ArrayList<String> getRoomsList() { return rooms; }
+    /*@Override
+    public ArrayList<String> getRooms() { return rooms; }*/
 
     @Override
     public List<String> getEventsList() {

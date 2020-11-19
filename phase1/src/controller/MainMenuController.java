@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class MainMenuController {
+public class MainMenuController extends AccountController{
     private UserController controller;
     private User user;
     private MessagePresenter displayMessage;

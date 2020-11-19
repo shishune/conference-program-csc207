@@ -23,7 +23,7 @@ import java.util.Scanner;
  * */
 public class OrganizerMainMenuController extends MainMenuController{
     private OrganizerController controller = new OrganizerController();
-    private RoomActions room = new RoomActions();
+    private RoomActions room = super.getRooms();
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
