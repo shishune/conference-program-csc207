@@ -15,42 +15,7 @@ import java.util.*;
  * */
 
 public class UserController extends AccountController{
-    private UserAccountActions user = new UserAccountActions() {
-        @Override
-        public boolean addUserContactList(String toMe, String addMe) {
-            return false;
-        }
-
-        @Override
-        public boolean removeUserContactList(String toMe, String removeMe) {
-            return false;
-        }
-
-        @Override
-        public boolean addEventToUser(String event, String user) {
-            return false;
-        }
-
-        @Override
-        public boolean removeEventFromUser(String event, String user) {
-            return false;
-        }
-
-        @Override
-        public String returnAllEvents(String user) {
-            return null;
-        }
-
-        @Override
-        public User findUserFromUsername(String username) {
-            return null;
-        }
-
-        @Override
-        public User findUserFromId(String userId) {
-            return null;
-        }
-    };
+    private UserAccountActions user = super.getUserAccountActions();
     private MessageActions message = super.getMessages();
     private EventActions e = super.getEvents();
     private AttendeeActions attendee = super.getAttendees();

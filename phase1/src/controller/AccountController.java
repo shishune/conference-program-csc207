@@ -142,47 +142,79 @@ public class AccountController {
     }
 
     public EventActions getEvents(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new EventActions(g);
     }
 
     public OrganizerActions getOrganizers(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new OrganizerActions(g);
     }
 
     public MessageActions getMessages(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new MessageActions(g);
     }
 
     public RoomActions getRooms(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new RoomActions(g);
     }
 
     public SpeakerActions getSpeakers(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new SpeakerActions(g);
     }
 
     public AttendeeActions getAttendees(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new AttendeeActions(g);
     }
 
     public LogoutActions getLogOut(){
-        Scanner scan = new Scanner(System.in);  // Create a Scanner object
         LoadUpIGateway g = new LoadUp();
         return new LogoutActions();
     }
 
+    public UserAccountActions getUserAccountActions(){
+        LoadUpIGateway g = new LoadUp();
+        return new UserAccountActions() {
+            @Override
+            public boolean addUserContactList(String toMe, String addMe) {
+                return false;
+            }
+
+            @Override
+            public boolean removeUserContactList(String toMe, String removeMe) {
+                return false;
+            }
+
+            @Override
+            public boolean addEventToUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public boolean removeEventFromUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public String returnAllEvents(String user) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromUsername(String username) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromId(String userId) {
+                return null;
+            }
+        };
+    }
 
 
 
