@@ -165,79 +165,44 @@ public class AccountController {
 
     public EventActions getEvents(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-    //Instantiate gateway classes
-    LoadUpIGateway g = new LoadUp();
-
-    //Instantiate presenter classes
-
+        LoadUpIGateway g = new LoadUp();
         return new EventActions(g);
     }
 
     public OrganizerActions getOrganizers(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new OrganizerActions(g);
     }
 
     public MessageActions getMessages(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new MessageActions(g);
     }
 
     public RoomActions getRooms(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new RoomActions(g);
     }
 
     public SpeakerActions getSpeakers(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new SpeakerActions(g);
     }
 
     public AttendeeActions getAttendees(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new AttendeeActions(g);
     }
 
     public LogoutActions getLogOut(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
-
-        //Instantiate gateway classes
         LoadUpIGateway g = new LoadUp();
-
-        //Instantiate presenter classes
-
-        return new EventActions(g);
+        return new LogoutActions();
     }
 
 
