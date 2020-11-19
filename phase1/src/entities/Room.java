@@ -8,16 +8,17 @@ import java.util.ArrayList;
  * */
 public class Room {
     private String roomId;
+    private String roomName;
     private int capacity;
 
     /**
      * instantiates a new Room object with an id attribute
      * @param roomId the unique id of this room
      */
-    public Room(String roomId){
+    public Room(String roomId, String roomName){
         this.capacity = 2;
         this.roomId = roomId;
-
+        this.roomName = roomName;
     }
 
     /**
@@ -38,5 +39,6 @@ public class Room {
      * */
     public String getRoomId(){ return roomId; }
 
+    public String getRoomName() {return roomName;}
 
 }
