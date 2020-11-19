@@ -153,8 +153,9 @@ public class MessageActions {
     }
 
     /**
-     * Returns an array of all messages (new and old) for storage
-     **/
+     * This method stores messages in an array
+     * @return an array of all messages (new and old) for storage
+     */
     public ArrayList<String> storeMessages() {
         ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
@@ -166,6 +167,10 @@ public class MessageActions {
         return allMessages;
     }
 
+    /**
+     * This method accesses message IDs
+     * @return message IDs in a list
+     */
     public ArrayList<String> getMessengerIds() {
         ArrayList<String> storedMessenger= new ArrayList<String>();
         if (messages != null && !messages.isEmpty()) {
