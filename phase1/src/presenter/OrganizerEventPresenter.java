@@ -63,7 +63,7 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Asks for date of event to add
      */
     public void promptDate(){
-        System.out.println("Enter the date in DD/MM/YY format followed");
+        System.out.println("Enter the date in DD-MM-YY format followed");
     }
     /**
      * Asks for time of event to add

@@ -1,4 +1,5 @@
 package controller;
+import entities.Room;
 import entities.User;
 import java.util.List;
 import presenter.EventPresenter;
@@ -6,6 +7,7 @@ import presenter.MessagePresenter;
 import presenter.OrganizerMessagePresenter;
 import presenter.OrganizerEventPresenter;
 import useCase.SpeakerActions;
+import useCase.RoomActions;
 
 import java.util.Scanner;
 
@@ -15,7 +17,8 @@ import java.util.Scanner;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController{
-    private OrganizerController controller;
+    private OrganizerController controller = new OrganizerController();
+    private RoomActions room = new RoomActions();
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
@@ -61,32 +64,74 @@ public class OrganizerMainMenuController extends MainMenuController{
         String speakerUserName = scan.nextLine();
         String speakerId = "";
 
-        //TODO: new! what if someone is named new??
+        boolean catcherUserName = true;
+
         if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
             displayMessage.speakerUsernamePrompt();
             String newSpeakerName = scan.nextLine();
 
             displayMessage.speakerPasswordPrompt();
-            String newSpeakerPassword = scan.nextLine();
-            if (controller != null) {
-                controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+
+            while (catcherUserName) {
+
+                String newSpeakerPassword = scan.nextLine();
+                if (controller != null) {
+                    controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+                    displayMessage.speakerCreated();
+                    catcherUserName = false;
+                }
+            }
+        } else {
+            while (catcherUserName) {
+                if (controller != null) {
+                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
+                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
+                        catcherUserName = false;
+                    } else {
+                        displayMessage.speakerNotCreated();
+                    }
+                } else {
+                    displayMessage.speakerNotCreated();
+                }
+            }
         }
+
+        boolean catcher = true;
+        String outputDateTime = "";
+
+        while (catcher) {
+            String dateTime = getDateTimeInput();
+            //if (getDateTimeInput().matches("\\d{2}-\\d{2}-\\d{2}")) {
+                outputDateTime = dateTime;
+                catcher = false;
+            //}
+        }
+        catcher = true;
+        String roomID = "";
+        while (catcher){
+            displayEvent.promptRoom();
+            String roomName = scan.nextLine();
+
+            if (!(room == null) && room.returnHashMap().get(roomName).getRoomId() != null){
+                roomID = roomName;
+                catcher = false;
+            }
+            else{
+                displayMessage.badRoom();
+                String reply = scan.nextLine();
+                if(reply.equals("ADD") || reply.equals("add") || reply.equals("Add")){
+                    displayMessage.newRoom();
+                    String name = scan.nextLine();
+                    if(!(controller == null) && controller.createRoom()){
+                        displayMessage.addedRoom();
+                        catcher = false;
+                    }
+                }
+            }
         }
 
         if (controller != null) {
-            if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
-                speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
-            }
-            else {
-                displayMessage.speakerNotCreated();
-            }
-        }
-
-        String dateTime = getDateTimeInput();
-        displayEvent.promptRoom();
-        String roomID = scan.nextLine();
-        if (controller != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
+            List<Boolean> checks = controller.createEvent(title, speakerId, outputDateTime, roomID);
             if (checks.size() == 1) {
                 displayEvent.successAddEvent();
             } else {
@@ -97,7 +142,10 @@ public class OrganizerMainMenuController extends MainMenuController{
                 }
                 displayEvent.failed();
             }
+        } else {
+            displayEvent.failed();
         }
+
     }
 
 //        boolean speakerExists = false;

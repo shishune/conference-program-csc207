@@ -28,6 +28,7 @@ public class OrganizerController extends UserController{
 
         super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
         this.organizerID = organizerID;
+        this.speakerActions = speakerActions;
     }
     public OrganizerController(){}
     /***
@@ -71,23 +72,25 @@ public class OrganizerController extends UserController{
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
         boolean speaker = true;
-        if (speakerActions.findUserFromUsername(username) != null){
-            speaker = false;
+        if(!(speakerActions == null)) {
+            if (speakerActions.findUserFromUsername(username) != null) {
+                speaker = false;
+            }
+
+            String speakerID = this.speakerActions.createSpeaker(username, password,
+                    new ArrayList<>(), new ArrayList<>(), false).getId();
+
+            this.eventActions.addSpeakerToSchedule(speakerID);
         }
-
-        String speakerID = this.speakerActions.createSpeaker(username, password,
-                new ArrayList<>(), new ArrayList<>(), false).getId();
-
-        this.eventActions.addSpeakerToSchedule(speakerID);
         return speaker;
     }
 
     /***
      * Create a room and add it to the room schedule
      */
-    public void createRoom(){
+    public boolean createRoom(){
         String roomID = this.roomActions.createRoom();
-        this.eventActions.addRoomToSchedule(roomID);
+        return this.eventActions.addRoomToSchedule(roomID);
     }
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times
