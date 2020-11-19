@@ -20,6 +20,7 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> attendees = new ArrayList<>();
     private ArrayList<String> organizers = new ArrayList<>();
     private ArrayList<String> speakers = new ArrayList<>();
+    private ArrayList<String> ids = new ArrayList<>();
     protected int objectId;
 
     /**
@@ -33,8 +34,33 @@ public class LoadUp implements LoadUpIGateway {
         // etc. etc., one for every .csv
         getRooms();
         getSpeakers();
+        getIds();
     }
 
+    /**
+     * This method returns all object ids in a list from entities.csv
+     * @return object ids in a list
+     */
+    public ArrayList<String> getIds(){
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/entities.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                ids.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
+
+    /**
+     * adds to the list of ids
+     * @param id the id of an entity
+     */
+    public void addId(String id){
+        System.out.println(ids);
+        this.ids.add(id);
+    }
     /**
      * This method returns messages in a list from messages.csv
      * @return messages in a list
@@ -180,6 +206,7 @@ public class LoadUp implements LoadUpIGateway {
      * @return objectId in a list
      */
     public int getNumOfIds() {
+        /*
         String filename = "./phase1/src/assets/dataFiles/entities.csv";
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = null;
@@ -193,16 +220,19 @@ public class LoadUp implements LoadUpIGateway {
             // TODO: tell user error was generated
             e.printStackTrace();
         }
+        System.out.println(objectId);
         return objectId;
+        */
 
+        return ids.size();
     }
 
     /**
      * Getter for the last object Id made using IGateway
      * */
     public int getObjectId() {
-        LoadUp l = new LoadUp();
-        return l.getNumOfIds();
+        //LoadUp l = new LoadUp();
+        return getNumOfIds();
     }
 
 
