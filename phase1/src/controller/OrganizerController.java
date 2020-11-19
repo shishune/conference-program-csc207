@@ -15,7 +15,7 @@ import entities.*;
 
 public class OrganizerController extends UserController{
     private MessageActions messageActions;
-    private EventActions eventActions;
+    private EventActions eventActions = super.getEvents();
     private RoomActions roomActions = new RoomActions();
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
@@ -29,7 +29,7 @@ public class OrganizerController extends UserController{
         super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
-        this.eventActions = eventActions;
+        this.eventActions = super.getEvents();
         this.roomActions = roomActions;
         this.messageActions = messageActions;
         this.attendeeActions = attendeeActions;

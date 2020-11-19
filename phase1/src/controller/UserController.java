@@ -59,7 +59,6 @@ public class UserController extends AccountController{
     private SpeakerActions speaker;
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
-    private AccountController a = new AccountController();
 
     /**
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
@@ -67,9 +66,8 @@ public class UserController extends AccountController{
      * */
     public UserController(EventActions events, RoomActions rooms, MessageActions message,
                           AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        //this.user = user;
         this.message = message;
-        this.e = events;
+        this.e = super.getEvents();
         this.room = rooms;
         this.attendee = attendee;
         this.organizer = organizer;
