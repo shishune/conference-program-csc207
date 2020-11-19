@@ -48,19 +48,18 @@ public class RoomActions {
         addRoomIdToHashMap(room);
         addRoomUsernameToHashMap(room);
         addRoom(room);
-
         return room;
     }
 
     private void addRoomIdToHashMap(Room addMe) {
-        if (roomsID.containsKey(addMe.getRoomId())) {
+        if (!roomsID.containsKey(addMe.getRoomId())) {
             roomsID.put(addMe.getRoomId(), addMe);
         }
     }
 
     private void addRoomUsernameToHashMap(Room addMe) {
 
-        if (roomUsername.containsKey(addMe.getRoomName())) {
+        if (!roomUsername.containsKey(addMe.getRoomName())) {
             roomUsername.put(addMe.getRoomName(), addMe);
         }
     }

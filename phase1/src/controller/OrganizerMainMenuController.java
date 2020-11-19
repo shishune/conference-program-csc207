@@ -119,7 +119,7 @@ public class OrganizerMainMenuController extends MainMenuController{
                     if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
                         displayMessage.newRoom();
                         String name = scan.nextLine();
-                        if (!(controller == null) && controller.createRoom(name)) {
+                        if (!(controller == null) && controller.createRoomActions(name)) {
                             displayMessage.addedRoom();
                             catcher = false;
                         }
@@ -256,7 +256,8 @@ public class OrganizerMainMenuController extends MainMenuController{
                 catcher = false;
             }
             if (controller != null) {
-                if (controller.createRoom(roomName)) {
+                if (controller.createRoomActions(roomName)) {
+                    System.out.println(room.returnHashMap());
                     displayMessage.addedRoom();
                     catcher = false;
                     }
