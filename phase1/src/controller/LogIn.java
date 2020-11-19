@@ -20,7 +20,6 @@ public class LogIn {
      * are incorrect.
      */
     public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
-        System.out.println("LOGGING IN");
         LoginActions l = new LoginActions();
         String type = l.isLogin(username, password, organizerActions, speakerActions, attendeeActions);
         return type;
