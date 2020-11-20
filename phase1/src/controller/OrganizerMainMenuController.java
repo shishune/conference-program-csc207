@@ -5,17 +5,11 @@ import entities.User;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import presenter.OrganizerMessagePresenter;
 import presenter.OrganizerEventPresenter;
-import useCase.EventActions;
-import useCase.OrganizerActions;
-import useCase.SpeakerActions;
-import useCase.RoomActions;
-
-import java.util.Scanner;
+import useCase.*;
 
 /**
  * A controller class for organizer that decides what to do based on user input when choosing from the main menu.
@@ -31,7 +25,9 @@ public class OrganizerMainMenuController extends MainMenuController {
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
+    private AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
+    private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
 
     /**
      * Instantiates the main menu responder object
@@ -39,8 +35,8 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event, OrganizerActions organizerActions) {
-        super(user, organizerController); // THIS DOESNT DO ANYTHING?
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event, OrganizerActions organizerActions, AttendeeActions attendee) {
+        super(user, organizerController);
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
@@ -49,6 +45,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         this.speaker = speaker;
         this.event = event;
         this.organizer = organizerActions;
+        this.attendee = attendee;
     }
 
     /**
@@ -272,7 +269,13 @@ public class OrganizerMainMenuController extends MainMenuController {
                     }
                 }
             } else {
-                displayEvent.allYourContacts(user.getContactsList());
+                List<String> newList = new ArrayList<>();
+                for (String contact : user.getContactsList()) {
+                    if (controller != null) {
+                        newList.add(returnUserUsernameHashMap().get(contact).getUsername());
+                    }
+                }
+                displayEvent.allYourContacts(newList);
                 catcher = false;
             }
 
@@ -404,6 +407,20 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         }
+    public HashMap<String, User> returnUserUsernameHashMap() {
+
+        if (!(attendee == null) && !attendee.returnIDHashMap().isEmpty()) {
+            usernameHashmap.putAll(attendee.returnIDHashMap());
+        }
+        if (!(organizer == null) && !organizer.returnIDHashMap().isEmpty()) {
+            usernameHashmap.putAll(organizer.returnIDHashMap());
+        }
+        if (!(speaker == null) && !speaker.returnIDHashMap().isEmpty()) {
+            usernameHashmap.putAll(speaker.returnIDHashMap());
+        }
+        return usernameHashmap;
+
+    }
 
     }
 
