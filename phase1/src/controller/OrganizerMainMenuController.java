@@ -1,5 +1,6 @@
 package controller;
 import entities.Room;
+import entities.Speaker;
 import entities.User;
 
 import java.text.DateFormat;
@@ -24,6 +25,7 @@ import java.util.Scanner;
 public class OrganizerMainMenuController extends MainMenuController {
     private OrganizerController controller; // = new OrganizerController();
     private RoomActions room; // = super.getRooms();
+    private SpeakerActions speaker;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
@@ -35,13 +37,14 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room) {
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker) {
         super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
         this.room = room;
         this.controller = organizerController;
+        this.speaker = speaker;
     }
 
     /**
@@ -113,11 +116,11 @@ public class OrganizerMainMenuController extends MainMenuController {
                     displayEvent.promptSpeaker();
                     String speakerUser = scan.nextLine();
 
-                    if (controller != null) {
-                        if (controller.returnUsernameHashMap().containsKey(speakerUser)) {
-                            speakerId = controller.returnUsernameHashMap().get(speakerUser).getId();
+                    if (controller != null && speaker != null) {
+                        if (speaker.returnUsernameHashMap().containsKey(speakerUser)) {
+                            speakerId = speaker.returnUsernameHashMap().get(speakerUser).getId();
 
-                            if (controller.returnUsernameHashMap().get(speakerUser).getEventList() != null){
+                            if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null){
                                 if (controller.checkTimeConflict(speakerUser, dateTime)){
                                     displayEvent.failedDoubleBookSpeaker();
                                     catcher1 = false;
@@ -281,7 +284,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             String newSpeakerName = scan.nextLine();
 
 
-            if (controller.returnUsernameHashMap().containsKey(newSpeakerName)) {
+            if (controller.returnUserUsernameHashMap().containsKey(newSpeakerName)) {
                 displayMessage.alreadySpeaker();
             }
 

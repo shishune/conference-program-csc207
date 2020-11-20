@@ -41,16 +41,15 @@ public class UserController {
     }
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
-
-    public HashMap<String, User> returnUsernameHashMap() {
-        HashMap<String, User> usernameHashmap = new HashMap<String, User>();
-        System.out.println("RETURN USER HASH");
-        System.out.println("Attendee: " + attendee);
-        System.out.println("Organizer: " + organizer);
-        System.out.println("Speaker: " + speaker);
-        System.out.println("User: " + user);
-        System.out.println("Hash: " + attendee.returnUsernameHashMap());
-        System.out.println("EMPTY?: " + attendee.returnUsernameHashMap().isEmpty());
+    public HashMap<String, User> returnUserUsernameHashMap() {
+            HashMap<String, User> usernameHashmap = new HashMap<String, User>();
+            System.out.println("RETURN USER HASH");
+            System.out.println("Attendee: " + attendee);
+            System.out.println("Organizer: " + organizer);
+            System.out.println("Speaker: " + speaker);
+            System.out.println("User: " + user);
+            System.out.println("Hash: " + attendee.returnUsernameHashMap());
+            System.out.println("EMPTY?: " + attendee.returnUsernameHashMap().isEmpty());
         if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()){
             System.out.println(attendee.returnUsernameHashMap());
             usernameHashmap.putAll(attendee.returnUsernameHashMap());
@@ -184,6 +183,7 @@ public class UserController {
 
     public ArrayList<String> viewContacts (String userid) {
         ArrayList<String> contacts = new ArrayList<String>();
+<<<<<<< HEAD
         if (attendee != null && organizer != null && speaker != null) {
             List<String> usersList = attendee.findUserFromId(userid).getContactsList() != null
                     ? attendee.findUserFromId(userid).getContactsList()
@@ -192,6 +192,10 @@ public class UserController {
                     : speaker.findUserFromId(userid).getContactsList() != null
                     ? speaker.findUserFromId(userid).getContactsList()
                     : null;
+=======
+        if (user != null){
+            List<String> usersList = user.findUserFromId(userid).getContactsList();
+>>>>>>> 8328e5a2fec1f72ecee9e237470d38512aebc627
             for (String id : usersList) {
                 contacts.add(attendee.findUserFromId(userid).getUsername() != null
                         ? attendee.findUserFromId(userid).getUsername()
@@ -224,7 +228,7 @@ public class UserController {
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
-        User a1 = returnUsernameHashMap().get(user);
+        User a1 = returnUserUsernameHashMap().get(user);
 
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -250,7 +254,7 @@ public class UserController {
      * */
 
     public List<List<String>> viewOwnSchedule(String user){
-        User a1 = returnUsernameHashMap().get(user);
+        User a1 = returnUserUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         for (String event: eventList){
