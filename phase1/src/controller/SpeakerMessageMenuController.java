@@ -58,6 +58,38 @@ public class SpeakerMessageMenuController{
 
     }
 
+    public void option5(){
+        displayMessage.promptMessage();
+        String content = scan.nextLine();
+        displayMessage.promptListEvents();
+        List<String> events = new ArrayList<String>();
+        while (true){
+            String event = scan.nextLine();
+            if (event.equals("x")||event.equals("X")){
+                break;
+            }
+
+            else if (!(controller == null) && controller.eventActions.getEvents().containsKey(event)){
+                events.add(event);
+                //scan.next();
+            }
+
+            else{
+                displayMessage.failedEvent();
+                //scan.next();
+            }
+
+        }
+        for (String event : events) {
+            if (!controller.sendMessages(event, content)){
+                displayMessage.noAttendees();
+                break;
+            }
+            controller.sendMessages(event, content);
+        }
+
+    }
+
 
 //        while (true){
 //            String event = scan.nextLine();

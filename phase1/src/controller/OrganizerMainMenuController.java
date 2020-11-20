@@ -176,6 +176,22 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
+    public void option8() {
+        displayEvent.viewall();
+        String option = scan.nextLine();
+        if (option.equals("x") || option.equals("X")) {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            cancelEvent(event);
+        } else {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            String dateTime = getDateTimeInput();
+            rescheduleEvent(event, dateTime);
+        }
+
+    }
+
     /**
      * helper function to take a dateTime string object from separate date  and time inputs
      *
