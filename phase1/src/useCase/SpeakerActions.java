@@ -156,9 +156,9 @@ public class SpeakerActions extends UserAccountActions {
      */
 
     // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
-    public boolean addUserContactList(String toMe, String addMe) {
-        Speaker user = speakerUsername.get(toMe);
-        User userOne = speakerUsername.get(addMe);
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
+        User user = userUsernameHashMap.get(toMe);
+        User userOne = userUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;

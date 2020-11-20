@@ -13,8 +13,8 @@ public class AttendeeController extends UserController{
 //    private SpeakerActions speaker;
 
     public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
-                              AttendeeActions attendee) {
-        super(events, rooms, message, attendee);
+                              AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
+        super(events, rooms, message, 'a', attendee, organizer, speaker);
         this.attendee = attendee;
     }
 

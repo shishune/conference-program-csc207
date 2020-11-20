@@ -56,7 +56,7 @@ public abstract class UserAccountActions {
      * @return true if user is added successfully, false if not
      * */
 
-    public abstract boolean addUserContactList(String toMe, String addMe);
+    public abstract boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userHashMap);
 
 
     /**

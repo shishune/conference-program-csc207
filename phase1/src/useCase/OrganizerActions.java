@@ -158,9 +158,9 @@ public class OrganizerActions extends UserAccountActions {
      * */
 
 
-    public boolean addUserContactList(String toMe, String addMe) {
-        Organizer user = organizerUsernameHashMap.get(toMe);
-        Organizer userOne = organizerUsernameHashMap.get(addMe);
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
+        User user = userUsernameHashMap.get(toMe);
+        User userOne = userUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;

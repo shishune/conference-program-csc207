@@ -122,17 +122,17 @@ public class AttendeeActions extends UserAccountActions {
      *
      * @param addMe the username of the user to be added
      * @param toMe  the username of the user who's contact list is updated
-     *              ]    * @return true if user is added successfully, false if not
+     * @return true if user is added successfully, false if not
      */
 
     // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
-    public boolean addUserContactList(String toMe, String addMe) {
-        Attendee user = attendeeUsernameHashMap.get(toMe);
-        HashMap<String, User> userHashMap = new HashMap<String, User>();
-        userHashMap.putAll(speaker.returnUsernameHashMap());
-        userHashMap.putAll(organizer.returnUsernameHashMap());
-        userHashMap.putAll(attendeeUsernameHashMap);
-        User userOne = userHashMap.get(addMe);
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
+        User user = userUsernameHashMap.get(toMe);
+//        HashMap<String, User> userHashMap = new HashMap<String, User>();
+//        userHashMap.putAll(speaker.returnUsernameHashMap());
+//        userHashMap.putAll(organizer.returnUsernameHashMap());
+//        userHashMap.putAll(attendeeUsernameHashMap);
+        User userOne = userUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;
