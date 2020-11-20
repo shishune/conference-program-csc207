@@ -14,7 +14,7 @@ public class EventActions  {
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
     private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
     private LoadUpIGateway loader;
-    private GenerateID generate = new GenerateID(loader);
+    //private GenerateID generate = new GenerateID(loader);
     private List<String> eventList;
 
 
@@ -127,7 +127,9 @@ public class EventActions  {
     public Event createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
-            String newID = "E" + generate.generateId();
+            GenerateID generateId = new GenerateID(loader);
+            String newID = "E" + generateId.generateId();
+            System.out.println(newID);
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
         return null;
