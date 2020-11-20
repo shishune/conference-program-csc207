@@ -5,7 +5,7 @@ import entities.Attendee;
 import useCase.*;
 
 public class AttendeeController extends UserController{
-//    private MessageActions message;
+    //    private MessageActions message;
 //    private EventActions e;
     private AttendeeActions attendee;
 //    private RoomActions room;
@@ -23,10 +23,8 @@ public class AttendeeController extends UserController{
     public boolean leaveEvent(String event, String userId){
         String username = this.returnUserIDHashMap().get(userId).getUsername();
         // String username = this.attendee.returnUsersHashMap().get(userId).getUsername(); <-- original
-            // i just took away the attendee in this.attendee but i wasnt sure if the 'this' was important
+        // i just took away the attendee in this.attendee but i wasnt sure if the 'this' was important
         // i chnged it because i made a master hashmap and the method is now in usercontroller not attendee
         return this.attendee.removeEventFromUser(event, username);
     }
 }
-
-//hello
