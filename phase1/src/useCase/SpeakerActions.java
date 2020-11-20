@@ -46,11 +46,11 @@ public class SpeakerActions extends UserAccountActions {
     }
 
     public boolean isEventAddedToSpeaker(String eventID, String speakerId){
-        speakerID.get(speakerId).getEventList().add(eventID);
+        // speakerID.get(speakerId).getEventList().add(eventID);
         return speakerID.get(speakerId).getEventList().contains(eventID);
     }
     public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
-        speakerID.get(speakerId).getEventList().remove(eventID);
+        // speakerID.get(speakerId).getEventList().remove(eventID);
         return !speakerID.get(speakerId).getEventList().contains(eventID);
     }
 
@@ -210,19 +210,19 @@ public class SpeakerActions extends UserAccountActions {
      * Adds an user to existing list of events for an user.
      *
      * @param event the name of the event to be added
-     * @param user  the username of the user who's event list is updated
+     * @param username  the username of the user who's event list is updated
      * @return true if event is added successfully, false if not
      */
 
-    public boolean addEventToUser(String event, String user) {
-        User userOne = speakerUsername.get(user);
-        boolean isPresent = userOne.getEventList().contains(event);
+    public boolean addEventToUser(String event, String username) {
+        User user = speakerUsername.get(username);
+        boolean isPresent = user.getEventList().contains(event);
         if (isPresent) {
             return false;
         } else {
-            List<String> userEvents = userOne.getEventList();
+            List<String> userEvents = user.getEventList();
             userEvents.add(event);
-            userOne.setEventList(userEvents);
+            user.setEventList(userEvents);
             return true;
         }
     }

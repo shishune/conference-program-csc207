@@ -52,7 +52,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 2
+     * Responds to menu option 2- send message to....
      */
     public void option2() {
         displayMessage.printMenu();
@@ -70,7 +70,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 6
+     * Responds to menu option 6 - create an event
      */
     public void option6() {
         displayEvent.promptTitle();

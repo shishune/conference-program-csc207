@@ -50,7 +50,7 @@ public class OrganizerController extends UserController{
         Event event = this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
         List<Boolean> checks = new ArrayList<Boolean>();
         if(event != null){
-            scheduleSpeaker(event.getId(), speakerId);
+            scheduleSpeaker(event.getId(), speakerId, true);
             speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
             checks.add(true);
             return checks;
@@ -98,9 +98,9 @@ public class OrganizerController extends UserController{
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
         boolean speaker = true;
-        if(!(speakerActions == null)) {
+        if(speakerActions != null) {
             if (speakerActions.findUserFromUsername(username) != null) {
-                speaker = false;
+                return false;
             }
 
             String speakerID = this.speakerActions.createSpeaker(username, password,
@@ -130,14 +130,14 @@ public class OrganizerController extends UserController{
 
     // TODO Schedule the speakers to each speak in one or more rooms at different times
     /**
-     * Schedule speaker to speak at an event
+     * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
      * @param eventID
      * @param speakerID
-     * @return if the speaker is successfully scheduled ie if the speaker is free to speak at the event
+     *
      */
-    public boolean scheduleSpeaker(String eventID, String speakerID){
-        String eventDateTime = eventActions.getEvent(eventID).getDateTime();
-        if (eventActions.isSpeakerFree(speakerID, eventDateTime)){
+    public boolean scheduleSpeaker(String eventID, String speakerID, boolean canAdd){
+        // String eventDateTime = eventActions.getEvent(eventID).getDateTime();
+        if (canAdd) {
             eventActions.setSpeaker(eventID, speakerID);
             String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
             speakerActions.addEventToUser(eventID, speakerUsername);
