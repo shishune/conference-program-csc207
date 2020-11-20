@@ -20,7 +20,7 @@ public class SpeakerController extends UserController {
         super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions);
 
         this.SpeakerID = SpeakerID;
-        // hi
+
 
     }
     /**

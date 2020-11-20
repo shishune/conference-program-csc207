@@ -122,9 +122,10 @@ public abstract class User{
      * @return String representation of this user object int he way it should be stored in the csv. file
      * */
     public String stringRepresentation() {
-        String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-        String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-
+        String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+        String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+//        String contacts = contactsList.toString().replaceAll("", "%%");
+//        String events = eventList.toString().replaceAll("", "%%");
         return userId + "," + username + "," + password + "," + contacts + "," + events + "," + isLogin + "," +isOrganizer;
     }
 

@@ -34,7 +34,7 @@ public class OrganizerController extends UserController{
         this.messageActions = messageActions;
         // this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
-        // hi
+
 
     }
     // public OrganizerController(){ }
