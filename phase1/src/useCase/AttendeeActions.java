@@ -133,6 +133,9 @@ public class AttendeeActions extends UserAccountActions {
 //        userHashMap.putAll(organizer.returnUsernameHashMap());
 //        userHashMap.putAll(attendeeUsernameHashMap);
         User userOne = userUsernameHashMap.get(addMe);
+        if (userOne.getIsOrganizer()){
+            return false;
+        }
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (isId) {
             return false;

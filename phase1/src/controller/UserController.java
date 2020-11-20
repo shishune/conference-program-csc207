@@ -110,6 +110,7 @@ public class UserController {
             User me = user.findUserFromUsername(toMe);
             System.out.println(me.getContactsList());
             HashMap<String, User> userUsernameHashMap = returnUserUsernameHashMap();
+
             return user.addUserContactList(toMe, addMe, userUsernameHashMap);
         }
         return false;
