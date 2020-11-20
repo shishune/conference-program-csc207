@@ -162,10 +162,9 @@ public class OrganizerActions extends UserAccountActions {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
-        if (isId) {
+        if (userOne.getIsOrganizer() || isId) {
             return false;
-        }
-        else {
+        } else {
             List<String> toMeContacts = user.getContactsList();
             toMeContacts.add(userOne.getId());
             user.setContactsList(toMeContacts);
