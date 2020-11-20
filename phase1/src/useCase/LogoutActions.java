@@ -22,15 +22,15 @@ public class LogoutActions{
      * */
     public void logout(String username, String type, AttendeeActions attendees, OrganizerActions org, SpeakerActions speakers) {
         if (type.equals("O")){
-            User user = org.returnOrganizersUsernameHashMap().get(username);
+            User user = org.returnUsernameHashMap().get(username);
             user.setLogin(false);
         }
         else if (type.equals("S")){
-            User user = speakers.returnSpeakerUsernameHashMap().get(username);
+            User user = speakers.returnUsernameHashMap().get(username);
             user.setLogin(false);
         }
         else{
-            User user = attendees.returnAttendeesUsernameHashMap().get(username);
+            User user = attendees.returnUsernameHashMap().get(username);
             user.setLogin(false);
         }
     }

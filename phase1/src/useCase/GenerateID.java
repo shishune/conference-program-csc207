@@ -35,9 +35,7 @@ public class GenerateID {
         if (loader != null && loader.getObjectId() <= objectId) {
             objectId += 1;
 
-        }
-
-        else {
+        } else {
             objectId = loader != null ? loader.getObjectId() : 0;
             if (loader != null){
                 loader.addId(String.valueOf(objectId));

@@ -24,11 +24,11 @@ public class OrganizerActions extends UserAccountActions {
     private LoadUpIGateway loader;
 
 
-    public HashMap<String, Organizer> returnOrganizersHashMap(){
+    public HashMap<String, Organizer> returnIDHashMap(){
         return organizerHashMap;
     }
 
-    public HashMap<String, Organizer> returnOrganizersUsernameHashMap(){
+    public HashMap<String, Organizer> returnUsernameHashMap(){
         return organizerUsernameHashMap;
     }
 

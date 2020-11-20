@@ -14,14 +14,14 @@ import java.util.*;
  * @version 1
  * */
 
-public class UserController extends AccountController{
-    private UserAccountActions user = super.getUserAccountActions();
-    private MessageActions message = super.getMessages();
-    private EventActions e = super.getEvents();
-    private AttendeeActions attendee = super.getAttendees();
-    private OrganizerActions organizer = super.getOrganizers();
-    private RoomActions room = super.getRooms();
-    private SpeakerActions speaker = super.getSpeakers();
+public class UserController {
+    private UserAccountActions user; // = getUserAccountActions();
+    private MessageActions message; // = super.getMessages();
+    private EventActions e;  //= super.getEvents();
+    private RoomActions room; // = super.getRooms();
+    private AttendeeActions attendee; // = super.getAttendees();
+    private OrganizerActions organizer; // = super.getOrganizers();
+    private SpeakerActions speaker; // = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -29,42 +29,47 @@ public class UserController extends AccountController{
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      * */
-    public UserController(EventActions events, RoomActions rooms, MessageActions message,
-                          AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
+    public UserController(EventActions events, RoomActions rooms, MessageActions message, UserAccountActions user) {
         this.message = message;
-        this.e = super.getEvents();
+        this.e = events;
         this.room = rooms;
-        this.attendee = attendee;
-        this.organizer = organizer;
-        this.speaker = speaker;
+        this.user = user;
+        // this.user = user;
+//        this.attendee = attendee;
+//        this.organizer = organizer;
+//        this.speaker = speaker;
     }
     //alternate constructor to access methods that do not need so many parameters
-    public UserController(){}
+//    public UserController(){};
 
     public HashMap<String, User> returnUsernameHashMap() {
-        if (!(attendee == null) && !attendee.returnAttendeesUsernameHashMap().isEmpty()){
-            usernameHashmap.putAll(attendee.returnAttendeesUsernameHashMap());
+        if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()){
+            usernameHashmap.putAll(attendee.returnUsernameHashMap());
         }
-        if (!(organizer == null) && !organizer.returnOrganizersUsernameHashMap().isEmpty()){
-            usernameHashmap.putAll(organizer.returnOrganizersUsernameHashMap());
+        if (!(organizer == null) && !organizer.returnUsernameHashMap().isEmpty()){
+            usernameHashmap.putAll(organizer.returnUsernameHashMap());
         }
-        if (!(speaker == null) && !speaker.returnSpeakerUsernameHashMap().isEmpty()){
-            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
+        if (!(speaker == null) && !speaker.returnUsernameHashMap().isEmpty()){
+            usernameHashmap.putAll(speaker.returnUsernameHashMap());
         }
+//        if (!(user == null) && !user.returnUsernameHashMap().isEmpty()){
+////            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
+////        }
         return usernameHashmap;
+
     }
 
 
 
-    public HashMap<String, User> returnUserIdHashMap() {
-        if (!attendee.returnAttendeesHashMap().isEmpty()){
-            userIdHashmap.putAll(attendee.returnAttendeesHashMap());
+    public HashMap<String, User> returnUserIDHashMap(){
+        if (!attendee.returnIDHashMap().isEmpty()){
+            userIdHashmap.putAll(attendee.returnIDHashMap());
         }
-        if (!organizer.returnOrganizersHashMap().isEmpty()){
-            userIdHashmap.putAll(organizer.returnOrganizersHashMap());
+        if (!organizer.returnIDHashMap().isEmpty()){
+            userIdHashmap.putAll(organizer.returnIDHashMap());
         }
-        if (!speaker.returnSpeakerIDHashMap().isEmpty()){
-            userIdHashmap.putAll(speaker.returnSpeakerIDHashMap());
+        if (!speaker.returnIDHashMap().isEmpty()){
+            userIdHashmap.putAll(speaker.returnIDHashMap());
         }
         return userIdHashmap;
     }
@@ -89,12 +94,14 @@ public class UserController extends AccountController{
 
     /**
      * Adds a user to the contact list of another user
-     * @param toMe the user who's contact list that is updated
-     * @param addMe the user who will be added
+     * @param toMe the username who's contact list that is updated
+     * @param addMe the username who will be added
      * @return boolean true if contact was successfully added, false if it was not
      * */
-    public boolean addContact(String addMe, String toMe) {
+    public boolean addContact(String addMe, String toMe) { // toMe should be a username
         if (user != null) {
+            User me = user.findUserFromUsername(toMe);
+            System.out.println(me.getContactsList());
             return user.addUserContactList(toMe, addMe);
         }
         return false;

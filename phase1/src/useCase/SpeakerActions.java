@@ -59,11 +59,11 @@ public class SpeakerActions extends UserAccountActions {
         speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
     }
 
-    public HashMap<String, Speaker> returnSpeakerIDHashMap() {
+    public HashMap<String, Speaker> returnIDHashMap() {
         return speakerID;
     }
 
-    public HashMap<String, Speaker> returnSpeakerUsernameHashMap() {
+    public HashMap<String, Speaker> returnUsernameHashMap() {
         return speakerUsername;
     }
 

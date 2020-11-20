@@ -21,11 +21,11 @@ public class AttendeeActions extends UserAccountActions {
     private SpeakerActions speaker;
     private OrganizerActions organizer;
 
-    public HashMap<String, Attendee> returnAttendeesHashMap() {
+    public HashMap<String, Attendee> returnIDHashMap() {
         return attendeesHashMap;
     }
 
-    public HashMap<String, Attendee> returnAttendeesUsernameHashMap() {
+    public HashMap<String, Attendee> returnUsernameHashMap() {
         return attendeeUsernameHashMap;
     }
 
@@ -129,8 +129,8 @@ public class AttendeeActions extends UserAccountActions {
     public boolean addUserContactList(String toMe, String addMe) {
         Attendee user = attendeeUsernameHashMap.get(toMe);
         HashMap<String, User> userHashMap = new HashMap<String, User>();
-        userHashMap.putAll(speaker.returnSpeakerUsernameHashMap());
-        userHashMap.putAll(organizer.returnOrganizersUsernameHashMap());
+        userHashMap.putAll(speaker.returnUsernameHashMap());
+        userHashMap.putAll(organizer.returnUsernameHashMap());
         userHashMap.putAll(attendeeUsernameHashMap);
         User userOne = userHashMap.get(addMe);
         boolean isId = user.getContactsList().contains(userOne.getId());
@@ -247,7 +247,7 @@ public class AttendeeActions extends UserAccountActions {
      * @return user object from hashmap of user objects
      */
     public Attendee findUserFromId(String userId) {
-        return attendeeUsernameHashMap.get(userId);
+        return attendeesHashMap.get(userId);
     }
 
 

@@ -42,12 +42,14 @@ public class MainMenuController extends AccountController{
     public void option4(){
         displayMessage.promptContact();
         String add = scan.nextLine();
-        if (controller.addContact(add, user.getId())){
+        System.out.println(user.getContactsList());
+        if (controller.addContact(add, user.getUsername())){
             displayMessage.successContact();
         }
         else{
             displayMessage.failedContact();
         }
+        System.out.println(user.getContactsList());
     }
 
     /**

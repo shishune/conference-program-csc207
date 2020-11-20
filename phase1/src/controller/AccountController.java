@@ -39,8 +39,7 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
-        UserController controller = new UserController(eventActions, roomActions, messageActions,
-                attendeeActions, organizerActions, speakerActions);
+
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -67,21 +66,23 @@ public class AccountController {
                 // TODO logs out organizer if i want to make a room/ view all events/ choose an option that im not allowed to do
                 // TODO option to create a speaker when creating an event?
                 if (type.equals("A")) { //indicates attendee
-                    Attendee user = attendeeActions.returnAttendeesUsernameHashMap().get(username);
+                    // UserController controller = new UserController(eventActions, roomActions, messageActions);
+                    Attendee user = attendeeActions.returnUsernameHashMap().get(username);
                     accountDisplay = new AttendeeAccountPresenter();
-                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions,
-                            organizerActions, speakerActions);
+                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions);
                     menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController);
                 } else if (type.equals("S")) { //indicates speaker
-                    Speaker user = speakerActions.returnSpeakerUsernameHashMap().get(username);
+                    // UserController userController = new UserController(eventActions, roomActions, messageActions);
+                    Speaker user = speakerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new SpeakerAccountPresenter();
                     SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             speakerActions, organizerActions, attendeeActions);
-                    menuController = (SpeakerMainMenuController)new SpeakerMainMenuController(user, speakerController);
+                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController);
                 }
                 else{
-                    Organizer user = organizerActions.returnOrganizersUsernameHashMap().get(username);
+                    // UserController controller = new UserController(eventActions, roomActions, messageActions);
+                    Organizer user = organizerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new OrganizerAccountPresenter();
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,

@@ -22,8 +22,8 @@ import java.util.Scanner;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController {
-    private OrganizerController controller = new OrganizerController();
-    private RoomActions room = super.getRooms();
+    private OrganizerController controller; // = new OrganizerController();
+    private RoomActions room; // = super.getRooms();
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
