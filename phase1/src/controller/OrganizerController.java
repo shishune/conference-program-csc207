@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,6 @@ public class OrganizerController extends UserController{
         this.messageActions = messageActions;
         // this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
-
-
     }
     // public OrganizerController(){ }
     /***
@@ -154,18 +153,46 @@ public class OrganizerController extends UserController{
 
     /***
      * Send all the attendees of an event a message
-     * @param eventID
+     * @param event
      * @param message
      */
-    public void sendAttendeesMessage(String eventID, String message){
-        List<String> attendees = this.eventActions.getEventAttendees(eventID);
-
-        for (String attendeeID: attendees){
-            this.messageActions.createMessage(this.organizerID, attendeeID, message);
+    public boolean sendAttendeesMessage(String event, String message){
+        System.out.println("SEND ATTENDEES MESSAGE");
+        HashMap<String, Event> eventsHash = eventActions.getEventNames();
+        if(eventsHash.get(event) == null) {
+            System.out.println("Returns False");
+            return false;
         }
 
+        String eventID = eventsHash.get(event).getId();
+        System.out.println("THE ID: " + eventID); // done
+        System.out.println(eventActions.getEventAttendees(eventID));
+        List<String> attendees = eventActions.getEventAttendees(eventID);
+        System.out.println(attendees);
+        for (String attendeeID: attendees){
+            messageActions.createMessage(organizerID, attendeeID, message);
+        }
+        return true;
     }
 
+    public boolean sendSpeakersMessage(String messageContent) {
+        HashMap<String, User> userHash = returnUserUsernameHashMap();
+        HashMap<String, Speaker> speakersHash = speakerActions.returnUsernameHashMap();
+        HashMap<String, Organizer> idHash = organizerActions.returnIDHashMap();
+        String userUsername = idHash.get(organizerID).getUsername();
+        for(Map.Entry<String, Speaker> entry : speakersHash.entrySet()) {
+            organizerActions.addUserContactList(userUsername, entry.getValue().getUsername(), userHash);
+            if(userHash.get(entry.getValue().getUsername()) == null) {
+                return false;
+            }
+            if (organizerActions.findUserFromUsername(userUsername).getContactsList().contains(entry.getValue().getId())) {
+                messageActions.createMessage(organizerID, entry.getValue().getId(), messageContent);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     /***
@@ -194,7 +221,7 @@ public class OrganizerController extends UserController{
      * @param event
      */
     public boolean checkEvent(String event){
-        return (eventActions.getEvents().containsKey(event));
+        return (eventActions.getEventNames().containsKey(event));
     }
 
 

@@ -96,12 +96,12 @@ public class UserController {
             //System.out.println(user.findUserFromUsername(sender));
             // add receiver to contact list of sender
             user.addUserContactList(sender, receiver, usernameHash);
-            System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList());
+            //System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList());
             if(usernameHash.get(receiver) == null) {
                 return false;
             }
             String receiverId = usernameHash.get(receiver).getId();
-            System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList().contains(receiverId));
+            //System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList().contains(receiverId));
             if (user.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
                 message.createMessage(sender, receiver, content);
                 return true;

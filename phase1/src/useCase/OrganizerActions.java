@@ -152,8 +152,8 @@ public class OrganizerActions extends UserAccountActions {
 
     /**
      * Adds an user to existing list of contacts for an user.
-     * @param addMe the user to be added
-     * @param toMe the user who's contact list is updated
+     * @param addMe the username of the user to be added
+     * @param toMe the username of the user who's contact list is updated
      * @return true if user is added successfully, false if not
      * */
 
@@ -161,11 +161,11 @@ public class OrganizerActions extends UserAccountActions {
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
-        System.out.println("Add User Contact List");
-        System.out.println(userUsernameHashMap);
-        System.out.println(user.getContactsList());
-        System.out.println(userOne.getId());
-        if(userOne == null || userOne.getId() == null) {
+        //System.out.println("Add User Contact List");
+        //System.out.println(userUsernameHashMap);
+        //System.out.println(user.getContactsList());
+        //System.out.println(userOne.getId());
+        if(userOne.getId() == null) {
             return false;
         }
         boolean isId = user.getContactsList().contains(userOne.getId());
