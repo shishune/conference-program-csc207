@@ -34,6 +34,14 @@ public class EventActions  {
     public Event getEvent(String eventID){
         return events.get(eventID);
     }
+    /***
+     * return event of given ID
+     * @param eventID
+     * @return events
+     */
+    public Event getEventFromName(String eventName){
+        return eventNames.get(eventName);
+    }
 
 
     /***

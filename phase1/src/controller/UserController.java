@@ -180,34 +180,37 @@ public class UserController {
 
     /**
      * Adds an event to a user and an attendee to an event
-     * @param event the event the user wants to attend
-     * @param user the attendee who wants to attend an event
+     * @param eventName the event the user wants to attend
+     * @param userName the attendee who wants to attend an event
      * @return list of booleans if users can attend event or not
      * */
 
-    public List<Boolean> signupEvent(String event, String user){
+    public List<Boolean> signupEvent(String eventName, String userName){
+        String eventId = e.getEventFromName(eventName).getId();
         List<Boolean> checks = new ArrayList<Boolean>();
-        if (!e.eventExists(event)){
+        if (!e.eventExists(eventId)){
             checks.add(false);
             return checks;
         }
-        e.getEvent(event).addAttendee(user);
-
-        Event e1 = e.getEvent(event);
-        User a1 = returnUserUsernameHashMap().get(user);
+        Event e1 = e.getEvent(eventId);
+        User a1 = returnUserUsernameHashMap().get(userName);
 
 
-        if (checkConflictSpots(event) && (checkConflictTime(user, event))){
+        if (!(checkConflictSpots(eventId) && checkConflictTime(userName, eventId))){
             e.addAttendee(e1.getId(), a1.getId());
-            a1.getEventList().add(event);
+            a1.getEventList().add(eventId);
             checks.add(true);
             return checks;
         }
         checks.add(false);
-        if (!checkConflictSpots(event)){
+        if (!checkConflictSpots(eventId)){
             checks.add(true);
+        } else{
+            checks.add(false);
         }
-        if (!checkConflictTime(user, event)){
+        if (!checkConflictTime(userName, eventId)){
+            checks.add(true);
+        } else {
             checks.add(false);
         }
         return checks;
@@ -274,38 +277,38 @@ public class UserController {
 
     /**
      * Shows the spots available in an event
-     * @param event the event that is given
+     * @param eventID the event that is given
      * @return int of the number of spots available
      * */
 
-    public int spotsAvailable(String event){
-        String rooms = e.getEvent(event).getRoomID();
+    public int spotsAvailable(String eventID){
+        String rooms = e.getEvent(eventID).getRoomID();
 
         Room r1 = room.returnHashMap().get(rooms);
 
-        return r1.getCapacity() - e.getEvent(event).getAttendees().size();
+        return r1.getCapacity() - e.getEvent(eventID).getAttendees().size();
 
     }
 
     /**
      * Checks if users can attend an event or not
      * @param username the user who wants to see if they can attend an event
-     * @param event the event the user wants to attend
+     * @param eventID the event the user wants to attend
      * @return boolean if user can attend event
      * */
 
-    private boolean checkConflictTime(String username, String event) {
+    private boolean checkConflictTime(String username, String eventID) {
         //return true if there is a conflict
-        String timeEvent = e.getEvent(event).getDateTime();
+        String timeEvent = e.getEvent(eventID).getDateTime();
         if (user != null) {
 
             User u = user.findUserFromUsername(username);
 
             for (int i = 0; i < u.getEventList().size(); i++) {
 
-                String name = u.getEventList().get(i);
+                String eventId = u.getEventList().get(i);
 
-                String time = e.getEvent(name).getDateTime();
+                String time = e.getEvent(eventId).getDateTime();
 
                 if (time.equals(timeEvent)) {
                     return true;
@@ -319,11 +322,11 @@ public class UserController {
 
     /**
      * Checks if event is full or not
-     * @param event the event that is being checked
+     * @param eventID the event that is being checked
      * @return boolean if event is full
      * */
-    private boolean checkConflictSpots(String event){
-        return spotsAvailable(event) == 0;
+    private boolean checkConflictSpots(String eventID){
+        return spotsAvailable(eventID) == 0;
 
     }
 
