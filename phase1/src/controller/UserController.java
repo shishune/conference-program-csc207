@@ -97,7 +97,7 @@ public class UserController {
             //System.out.println(organizer.findUserFromUsername(sender).getContactsList());
             //System.out.println(organizer.findUserFromUsername(sender).getContactsList().contains(receiver));
             if (true) { // temp if condition, fill in parentheses later
-                HashMap<String, User> usernameHashMap = returnUsernameHashMap();
+                HashMap<String, User> usernameHashMap = returnUserUsernameHashMap();
                 System.out.println(usernameHashMap);
                 System.out.println(usernameHashMap.get(sender));
                 System.out.println(usernameHashMap.get(sender).getId());
@@ -183,19 +183,8 @@ public class UserController {
 
     public ArrayList<String> viewContacts (String userid) {
         ArrayList<String> contacts = new ArrayList<String>();
-<<<<<<< HEAD
-        if (attendee != null && organizer != null && speaker != null) {
-            List<String> usersList = attendee.findUserFromId(userid).getContactsList() != null
-                    ? attendee.findUserFromId(userid).getContactsList()
-                    : organizer.findUserFromId(userid).getContactsList() != null
-                    ? organizer.findUserFromId(userid).getContactsList()
-                    : speaker.findUserFromId(userid).getContactsList() != null
-                    ? speaker.findUserFromId(userid).getContactsList()
-                    : null;
-=======
         if (user != null){
             List<String> usersList = user.findUserFromId(userid).getContactsList();
->>>>>>> 8328e5a2fec1f72ecee9e237470d38512aebc627
             for (String id : usersList) {
                 contacts.add(attendee.findUserFromId(userid).getUsername() != null
                         ? attendee.findUserFromId(userid).getUsername()
