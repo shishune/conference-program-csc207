@@ -22,7 +22,7 @@ public class UserController {
     private AttendeeActions attendee; // = super.getAttendees();
     private OrganizerActions organizer; // = super.getOrganizers();
     private SpeakerActions speaker; // = super.getSpeakers();
-    //private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
+    private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
     /**
@@ -42,7 +42,6 @@ public class UserController {
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
     public HashMap<String, User> returnUserUsernameHashMap() {
-            HashMap<String, User> usernameHashmap = new HashMap<String, User>();
             System.out.println("RETURN USER HASH");
             System.out.println("Attendee: " + attendee);
             System.out.println("Organizer: " + organizer);
