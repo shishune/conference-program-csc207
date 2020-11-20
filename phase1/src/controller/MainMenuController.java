@@ -130,4 +130,5 @@ public class MainMenuController extends AccountController{
     public void option9(){
         displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
     }
+    public void option10(){}
 }

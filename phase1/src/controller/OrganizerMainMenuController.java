@@ -21,7 +21,7 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class OrganizerMainMenuController extends MainMenuController{
+public class OrganizerMainMenuController extends MainMenuController {
     private OrganizerController controller = new OrganizerController();
     private RoomActions room = super.getRooms();
     private User user;
@@ -31,10 +31,11 @@ public class OrganizerMainMenuController extends MainMenuController{
 
     /**
      * Instantiates the main menu responder object
-     * @param user the user
+     *
+     * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room){
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room) {
         super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
@@ -46,17 +47,17 @@ public class OrganizerMainMenuController extends MainMenuController{
     /**
      * Responds to menu option 2
      */
-    public void option2(){
+    public void option2() {
         displayMessage.printMenu();
         String option = scan.nextLine();
         OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.controller);
-        if (option.equals("1")){
+        if (option.equals("1")) {
             menuController.option1();
         }
-        if (option.equals("2")){
+        if (option.equals("2")) {
             menuController.option2();
         }
-        if (option.equals("3")){
+        if (option.equals("3")) {
             super.option2();
         }
     }
@@ -67,42 +68,6 @@ public class OrganizerMainMenuController extends MainMenuController{
     public void option6() {
         displayEvent.promptTitle();
         String title = scan.nextLine();
-        displayEvent.promptSpeaker();
-        String speakerUserName = scan.nextLine();
-        String speakerId = "";
-
-        boolean catcherUserName = true;
-
-        if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
-            displayMessage.speakerUsernamePrompt();
-            String newSpeakerName = scan.nextLine();
-            displayMessage.speakerPasswordPrompt();
-
-            while (catcherUserName) {
-                String newSpeakerPassword = scan.nextLine();
-                if (controller != null) {
-                    controller.createSpeaker(newSpeakerName, newSpeakerPassword);
-                    displayMessage.speakerCreated();
-                    catcherUserName = false;
-                }
-            }
-        }
-        else {
-            while (catcherUserName) {
-                if (controller != null) {
-                    if (controller.returnUsernameHashMap().containsKey(speakerUserName)) {
-                        speakerId = controller.returnUsernameHashMap().get(speakerUserName).getId();
-                        catcherUserName = false;
-                    } else {
-                        displayMessage.speakerNotCreated();
-                        option6();
-                    }
-                } else {
-                    displayMessage.speakerNotCreated();
-                    option6();
-                }
-            }
-        }
 
         boolean catcher = true;
         String dateTime = getDateTimeInput();
@@ -111,20 +76,61 @@ public class OrganizerMainMenuController extends MainMenuController{
         while (catcher){
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
+
             if (!(room == null)) {
-                if (room.returnHashMap().containsKey(roomName)) {
+                if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
                     roomID = roomName;
                     catcher = false;
-                } else {
+                }
+                else {
                     displayMessage.badRoom();
                     String reply = scan.nextLine();
                     if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
-                        displayMessage.newRoom();
-                        String name = scan.nextLine();
-                        if (!(controller == null) && controller.createRoomActions(name)) {
-                            displayMessage.addedRoom();
-                            catcher = false;
+                        option9();
+                    }
+                }
+            }
+        }
+
+        String speakerId = "";
+
+        boolean catcherUserName = true;
+
+        while (catcherUserName) {
+
+            displayMessage.newOrNoSpeaker();
+            String speakerUserName = scan.nextLine();
+
+            if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
+                option10();
+                catcherUserName = false;
+
+            }
+
+            else {
+                boolean catcher1 = true;
+                while (catcher1) {
+                    displayEvent.promptSpeaker();
+                    String speakerUser = scan.nextLine();
+
+                    if (controller != null) {
+                        if (controller.returnUsernameHashMap().containsKey(speakerUser)) {
+                            speakerId = controller.returnUsernameHashMap().get(speakerUser).getId();
+
+                            if (controller.returnUsernameHashMap().get(speakerUser).getEventList() != null){
+                                if (controller.checkTimeConflict(speakerUser, dateTime)){
+                                    displayEvent.failedDoubleBookSpeaker();
+                                    catcher1 = false;
+                                }
+                            }
+                            speakerUserName = speakerUser;
+                            catcher1 = false;
+                            catcherUserName = false;
                         }
+                        else {
+                            displayMessage.speakerNotCreated();
+                        }
+                        catcher1 = false;
                     }
                 }
             }
@@ -151,15 +157,14 @@ public class OrganizerMainMenuController extends MainMenuController{
     /**
      * Responds to menu option 7
      */
-    public void option7(){
+    public void option7() {
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
-        if (option.equals("x")||option.equals("X")){
+        if (option.equals("x") || option.equals("X")) {
             displayEvent.promptCancelEvent();
             String event = scan.nextLine();
             cancelEvent(event);
-        }
-        else{
+        } else {
             displayEvent.promptCancelEvent();
             String event = scan.nextLine();
             String dateTime = getDateTimeInput();
@@ -170,9 +175,10 @@ public class OrganizerMainMenuController extends MainMenuController{
 
     /**
      * helper function to take a dateTime string object from separate date  and time inputs
+     *
      * @return the string combining date and time based on separate user inputs for date and time
      */
-    private String getDateTimeInput(){
+    private String getDateTimeInput() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         dateFormat.setLenient(false);
         String date = "";
@@ -187,13 +193,13 @@ public class OrganizerMainMenuController extends MainMenuController{
                 Date d = dateFormat.parse(d1);
                 date = d.toString();
                 catcher = false;
-            }
-            catch (ParseException ex) {
+            } catch (ParseException ex) {
                 displayEvent.badTime();
-            }}
+            }
+        }
 
         catcher = true;
-        while (catcher){
+        while (catcher) {
 
             displayEvent.promptTime();
             if (scan.hasNextInt()) {
@@ -201,8 +207,7 @@ public class OrganizerMainMenuController extends MainMenuController{
                 if (Integer.parseInt(t) < 24 && Integer.parseInt(t) > 0) {
                     time = t;
                     catcher = false;
-                }
-                else {
+                } else {
                     displayEvent.badTime();
                 }
             }
@@ -214,7 +219,8 @@ public class OrganizerMainMenuController extends MainMenuController{
 
     /**
      * helper function to reschedule event
-     * @param event the event ID
+     *
+     * @param event    the event ID
      * @param dateTime the string representing date and time
      */
     private void rescheduleEvent(String event, String dateTime) {
@@ -229,17 +235,17 @@ public class OrganizerMainMenuController extends MainMenuController{
 
     /**
      * helper function to cancel event
+     *
      * @param event the event ID
      */
-    private void cancelEvent(String event){
-    if (controller != null){
-        if(controller.cancelEvent(event)){
-            displayEvent.successCancelEvent();
+    private void cancelEvent(String event) {
+        if (controller != null) {
+            if (controller.cancelEvent(event)) {
+                displayEvent.successCancelEvent();
+            } else {
+                displayEvent.failedNoSuchEvent();
+            }
         }
-        else{
-            displayEvent.failedNoSuchEvent();
-        }
-    }
     }
 
     /**
@@ -256,8 +262,7 @@ public class OrganizerMainMenuController extends MainMenuController{
             if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
                 displayMessage.alreadyAddedRoom();
                 catcher = false;
-            }
-            else if (controller != null) {
+            } else if (controller != null) {
                 if (controller.createRoomActions(roomName)) {
                     displayMessage.addedRoom();
                     catcher = false;
@@ -266,6 +271,32 @@ public class OrganizerMainMenuController extends MainMenuController{
 
         }
     }
+
+    public void option10() {
+
+        boolean catcherUserName = true;
+
+        while (catcherUserName) {
+            displayMessage.speakerUsernamePrompt();
+            String newSpeakerName = scan.nextLine();
+
+
+            if (controller.returnUsernameHashMap().containsKey(newSpeakerName)) {
+                displayMessage.alreadySpeaker();
+            }
+
+            else if (controller != null) {
+                displayMessage.speakerPasswordPrompt();
+                String newSpeakerPassword = scan.nextLine();
+                controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+                displayMessage.speakerCreated();
+                catcherUserName = false;
+            }
+        }
+
+        }
+    }
+
 //        displayEvent.promptAddRoom();
 //        String room = scan.nextLine();
 //        if (controller != null) {
@@ -273,4 +304,41 @@ public class OrganizerMainMenuController extends MainMenuController{
 //        }
 //            displayEvent.successAddRoom();
 //    }
-}
+//while (catcher){
+//        displayEvent.promptRoom();
+//        String roomName = scan.nextLine();
+//        if (!(room == null)) {
+//        if (room.returnHashMap().containsKey(roomName)) {
+//        roomID = roomName;
+//        catcher = false;
+//        } else {
+//        displayMessage.badRoom();
+//        String reply = scan.nextLine();
+//        if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
+//        displayMessage.newRoom();
+//        String name = scan.nextLine();
+//        if (!(controller == null) && controller.createRoomActions(name)) {
+//        displayMessage.addedRoom();
+//        catcher = false;
+//        }
+//        }
+//        }
+//        }
+//        }
+//            displayMessage.speakerUsernamePrompt();
+//            String newSpeakerName = scan.nextLine();
+//            displayMessage.speakerPasswordPrompt();
+//
+//            while (catcherUserName) {
+//                String newSpeakerPassword = scan.nextLine();
+//                if (controller != null) {
+//                    controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+//                    displayMessage.speakerCreated();
+//                    catcherUserName = false;
+//                }
+//            }
+//                        displayMessage.newRoom();
+//                        String name = scan.nextLine();
+//                        if (!(controller == null) && controller.createRoomActions(name)) {
+//                        displayMessage.addedRoom();
+//                        catcher = false;

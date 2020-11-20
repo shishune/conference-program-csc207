@@ -319,6 +319,32 @@ public class UserController extends AccountController{
         return false;
     }
 
+    public boolean checkTimeConflict(String username, String dateTime) {
+        //return true if there is a conflict
+        //String timeEvent = e.getEvent(event).getDateTime();
+        if (user != null) {
+
+            User u = user.findUserFromUsername(username);
+
+            if ((u != null) && u.getEventList() != null) {
+
+                for (int i = 0; i < u.getEventList().size(); i++) {
+
+                    String name = u.getEventList().get(i);
+
+                    String time = e.getEvent(name).getDateTime();
+
+                    if (time.equals(dateTime)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        return false;
+    }
+
 }
 
 
