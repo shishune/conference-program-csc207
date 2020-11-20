@@ -12,6 +12,17 @@ public class Event {
     private List<String> attendees;
     private String roomID;
 
+    /**
+     * Instantiates a new attendee object
+     * @param eventID the string unique id of this event
+     * @param title the string name of this event
+     * @param dateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
+     * @param speaker the string of the name of speaker of this event
+     * @param attendees the list of people whom this attendee can event
+     * @param roomID the string of the ID of the room of this event
+     * */
+
+
     public Event(String eventID, String title, String speaker, String dateTime,
                  List<String> attendees, String roomID){
         this.eventID = eventID;
