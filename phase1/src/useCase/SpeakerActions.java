@@ -49,8 +49,16 @@ public class SpeakerActions extends UserAccountActions {
         // speakerID.get(speakerId).getEventList().add(eventID);
         return speakerID.get(speakerId).getEventList().contains(eventID);
     }
+
+    /***
+     * check if event is properly removed from speaker
+     * @param eventID
+     * @param speakerId
+     * @return
+     */
     public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
         // speakerID.get(speakerId).getEventList().remove(eventID);
+
         return !speakerID.get(speakerId).getEventList().contains(eventID);
     }
 
