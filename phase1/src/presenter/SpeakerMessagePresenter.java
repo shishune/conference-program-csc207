@@ -37,4 +37,5 @@ public class SpeakerMessagePresenter extends MessagePresenter{
         String display = "There are no attendees in the event.";
         System.out.println(display);
     }
+
 }

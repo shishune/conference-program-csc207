@@ -3,6 +3,25 @@ import entities.User;
 import presenter.EventPresenter;
 import presenter.SpeakerMessagePresenter;
 
+import java.util.List;
+import java.util.Scanner;
+import entities.Room;
+import entities.Speaker;
+import entities.User;
+import entities.Event;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import presenter.EventPresenter;
+import presenter.MessagePresenter;
+import presenter.SpeakerMessagePresenter;
+import useCase.EventActions;
+import useCase.SpeakerActions;
+import useCase.RoomActions;
+
 import java.util.Scanner;
 
 /**
@@ -24,29 +43,30 @@ public class SpeakerMainMenuController extends MainMenuController{
      */
     public SpeakerMainMenuController(User user, SpeakerController speakerController){
         super(user, speakerController);
+        this.user = user;
+        this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
         this.displayEvent = new EventPresenter();
         this.user = user;
         this.controller = speakerController;
     }
     /**
-     * Responds to menu option 2
+     * Responds to menu option 3
      */
-    public void option2(){
-        displayMessage.printMenu();
-        String option = scan.nextLine();
-        SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
-        if (option.equals("1")){
-            menuController.option1();
-        }
-        if (option.equals("2")){
-            super.option2();
-        }
+    public void option3() {
+        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
     /**
      * Responds to menu option 6
      */
-    public void option6(){
-      displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
+
+
+    public void option6() {
+        displayEvent.viewall();
+        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
-}
+
+
+
+
+    }
