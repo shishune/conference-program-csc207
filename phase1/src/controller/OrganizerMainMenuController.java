@@ -284,7 +284,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             String newSpeakerName = scan.nextLine();
 
 
-            if (controller.returnUsernameHashMap().containsKey(newSpeakerName)) {
+            if (controller.returnUserUsernameHashMap().containsKey(newSpeakerName)) {
                 displayMessage.alreadySpeaker();
             }
 

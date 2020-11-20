@@ -42,7 +42,7 @@ public class UserController {
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
 
-    public HashMap<String, User> returnUsernameHashMap() {
+    public HashMap<String, User> returnUserUsernameHashMap() {
         if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(attendee.returnUsernameHashMap());
         }
@@ -174,7 +174,7 @@ public class UserController {
         e.getEvent(event).addAttendee(user);
 
         Event e1 = e.getEvent(event);
-        User a1 = returnUsernameHashMap().get(user);
+        User a1 = returnUserUsernameHashMap().get(user);
 
 
         if (checkConflictSpots(event) && (checkConflictTime(user, event))){
@@ -200,7 +200,7 @@ public class UserController {
      * */
 
     public List<List<String>> viewOwnSchedule(String user){
-        User a1 = returnUsernameHashMap().get(user);
+        User a1 = returnUserUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         if (e != null) {
