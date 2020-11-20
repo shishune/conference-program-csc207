@@ -63,6 +63,22 @@ public class SpeakerMainMenuController extends MainMenuController {
      * Responds to menu option 6
      */
 
+    public void option4(){
+        displayMessage.promptContact();
+        String add = scan.nextLine();
+        System.out.println(user.getContactsList());
+        //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
+        if (controller.returnUserUsernameHashMap().containsKey(add)){
+            if (controller.addContact(add, user.getUsername())){
+                displayMessage.successContact();
+            }
+        }
+        else{
+            displayMessage.failedContact();
+        }
+        //System.out.println(user.getContactsList());
+    }
+
     public void option5() { //view all contacts
         displayMessage.displayContacts(controller, user.getId());
     }
