@@ -151,8 +151,10 @@ public class MainMenuController extends AccountController{
         displayEvent.promptCancelEvent();
         String eventName = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
-        if(controller.leaveEvent(eventName, user.getId())){
-            displayEvent.successCancelEnrol();
+        if(user.getEventList().contains(eventName)){
+            if(controller.leaveEvent(eventName, user.getId())){
+                displayEvent.successCancelEnrol();
+            }
         }
         else{
             displayEvent.failedCancelEvent();

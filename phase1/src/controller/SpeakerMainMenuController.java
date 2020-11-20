@@ -122,7 +122,9 @@ public class SpeakerMainMenuController extends MainMenuController {
             }
 
 
-            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), roomActions.findRoomFromId(e1.getRoomID()).getRoomName()));
+            miniList.add((e1.getTitle()));
+            miniList.add(e1.getDateTime());
+            miniList.add(roomActions.findRoomFromId(e1.getRoomID()).getRoomName());
             miniList.add(newList.toString());
 
             stringE.add(miniList);
