@@ -216,12 +216,13 @@ public class EventActions  {
      * @return true if an attendee has been added to their desired event
      */
     public boolean addAttendee(String eventID, String attendeeID){
-        List<String> eventAttendees = new ArrayList<>();
-        eventAttendees.addAll(attendees.get(eventID));
+        List<String> eventAttendees = events.get(eventID).getAttendees();
+        //eventAttendees.addAttendee(attendeeID);
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
-            eventAttendees.add(attendeeID);
+            events.get(eventID).getAttendees().add(attendeeID);
+
             attendees.replace(eventID, eventAttendees);
             return true;
         }

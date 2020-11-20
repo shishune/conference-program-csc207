@@ -29,4 +29,5 @@ public class AttendeeController extends UserController{
         String eventID = e.getEventFromName(eventName).getId();
         return this.attendee.removeEventFromUser(eventID, userId);
     }
+
 }

@@ -33,6 +33,7 @@ public class SpeakerMainMenuController extends MainMenuController {
     private EventPresenter displayEvent;
     private EventActions eventActions;
     private AttendeeActions attendeeActions;
+    private RoomActions roomActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -41,7 +42,7 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions) {
+    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions) {
         super(user, speakerController);
         this.user = user;
         this.controller = speakerController;
@@ -51,6 +52,7 @@ public class SpeakerMainMenuController extends MainMenuController {
         this.controller = speakerController;
         this.eventActions = eventActions;
         this.attendeeActions = attendeeActions;
+        this.roomActions = roomActions;
     }
 
     /**
@@ -105,7 +107,6 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     public void option6() {
-       // displayEvent.
         List<String> e = user.getEventList();
         List<List<String>> stringE = new ArrayList<>();
 
@@ -119,14 +120,13 @@ public class SpeakerMainMenuController extends MainMenuController {
             }
 
 
-            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), e1.getRoomID(), e1.getAttendees().toString()));
+            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), roomActions.findRoomFromId(e1.getRoomID()).getRoomName()));
             miniList.add(newList.toString());
 
             stringE.add(miniList);
         }
-        System.out.println(stringE);
 
-        //displayEvent.viewEvents(user.getEventList());
+        displayEvent.viewEvents(stringE);
     }
 }
 

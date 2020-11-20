@@ -109,9 +109,20 @@ public class EventPresenter {
         System.out.println("Press 'x' to view the list of events organized by you.");
     }
 
-    public void viewEvents(List<String> user){System.out.println(user);}
+    public void viewEvents(List<List<String>> user){
+        int count = 1;
 
+        for (List<String> info: user){
+            System.out.println(count);
+            count ++;
 
+            System.out.println("Event title: "+info.get(0));
+            System.out.println("Event time: "+info.get(1));
+            System.out.println("Event room: "+info.get(2));
+            System.out.println("Attendees: "+info.get(3));
 
+            System.out.println("\n");
+        }
+    }
 
 }
