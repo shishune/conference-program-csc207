@@ -147,7 +147,7 @@ public class UserController {
 
     public ArrayList<String> viewContacts (String userid) {
         ArrayList<String> contacts = new ArrayList<String>();
-        if (user != null) {
+        if (user != null){
             List<String> usersList = user.findUserFromId(userid).getContactsList();
             for (String id : usersList) {
                 contacts.add(user.findUserFromId(userid).getUsername());
