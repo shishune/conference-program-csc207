@@ -292,7 +292,7 @@ public class OrganizerActions extends UserAccountActions {
                 }
 
                 for (String c : contacts) {
-                    if (c!= "") {
+                    if (!c.equals("")) {
                         contactList.add(c);
                     }
                 }

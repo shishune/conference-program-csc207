@@ -270,7 +270,7 @@ public class AttendeeActions extends UserAccountActions {
                     eventList.add(e);
                 }
                 for (String c : contacts) {
-                    if (c!= "") {
+                    if (!c.equals("")) {
                         contactList.add(c);
                     }
                 }
