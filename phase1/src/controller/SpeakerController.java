@@ -2,8 +2,14 @@ package controller;
 import entities.Message;
 import entities.Speaker;
 import useCase.*;
-
+import entities.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+/***
+ * A speaker controller. Includes all the abilities only speakers can complete.
+ */
 
 public class SpeakerController extends UserController {
     private String SpeakerID;
@@ -36,6 +42,7 @@ public class SpeakerController extends UserController {
         }
         return true;
     }
+
     /**
      *
      * Allows Speakers to view attendees attending their event
