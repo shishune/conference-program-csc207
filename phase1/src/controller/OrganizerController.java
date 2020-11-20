@@ -134,7 +134,6 @@ public class OrganizerController extends UserController{
             eventActions.setSpeaker(eventID, speakerID);
             String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
             speakerActions.addEventToUser(eventID, speakerUsername);
-            // TODO do speakers have a list of events they are speaking at?
             return true;
         }
         return false;

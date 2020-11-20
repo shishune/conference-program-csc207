@@ -131,7 +131,6 @@ public class EventActions  {
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
         return null;
-
     }
 
     /***
