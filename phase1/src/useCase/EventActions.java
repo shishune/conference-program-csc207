@@ -88,7 +88,7 @@ public class EventActions  {
     /** gets list of event from the IGateway **/
     private void loadAllEvents(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
-        eventList = loader.getEventsList();
+        eventList = loader.getEvents();
     }
 
     /** Adds events loaded from the csv to <events> **/

@@ -100,8 +100,8 @@ public class LoadUp implements LoadUpIGateway {
      * This method returns rooms in a list from events.csv
      * @return rooms
      */
-    public List<String> getEvents() {
-        // gets list of messages from messages.csv and sets it to <messages>
+    public ArrayList<String> getEvents() {
+        // gets list of events from events.csv and sets it to <events>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/events.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
@@ -113,23 +113,23 @@ public class LoadUp implements LoadUpIGateway {
         return events;
     }
 
-    /**
-     * Getter for events
-     * @param filePath the text file path of event to be found
-     * @return events
-     */
-    public List<String> getEvents(String filePath) {
-        // gets list of messages from messages.csv and sets it to <messages>
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                events.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return events;
-    }
+//    /**
+//     * Getter for events
+//     * @param filePath the text file path of event to be found
+//     * @return events
+//     */
+//    public List<String> getEvents(String filePath) {
+//        // gets list of messages from messages.csv and sets it to <messages>
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line = null;
+//            while ((line = br.readLine()) != null) {
+//                events.add(line);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return events;
+//    }
 
     /**
      * Getter for messages
@@ -260,10 +260,10 @@ public class LoadUp implements LoadUpIGateway {
     /*@Override
     public ArrayList<String> getRooms() { return rooms; }*/
 
-    @Override
+    /*@Override
     public List<String> getEventsList() {
         return events;
-    }
+    }*/
 
     @Override
     public ArrayList<String> getSpeakersList() { return speakers; }
