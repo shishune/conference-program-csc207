@@ -451,4 +451,4 @@ public class OrganizerMainMenuController extends MainMenuController {
 //                        String name = scan.nextLine();
 //                        if (!(controller == null) && controller.createRoomActions(name)) {
 //                        displayMessage.addedRoom();
-//                        catcher = false;
+//                        catcher = false; kfejaof
