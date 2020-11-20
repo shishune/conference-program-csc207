@@ -79,10 +79,10 @@ public class Store{
         messagesList = messageActions.storeMessages();
         try {
             FileWriter writer;
-            writer = new FileWriter(path, false);
+            writer = new FileWriter(path, true);
             for (String message : messagesList){
                 if(messagesList.indexOf(message) == messagesList.size()-1) {
-                    writer.write(message);
+                    writer.write(message + "\n");
                 } else {
                     writer.write(message);
                 }

@@ -97,6 +97,9 @@ public class UserController {
             // add receiver to contact list of sender
             user.addUserContactList(sender, receiver, usernameHash);
             System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList());
+            if(usernameHash.get(receiver) == null) {
+                return false;
+            }
             String receiverId = usernameHash.get(receiver).getId();
             System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList().contains(receiverId));
             if (user.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
