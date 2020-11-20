@@ -57,6 +57,11 @@ public class OrganizerEventPresenter extends EventPresenter{
     /**
      * Asks for title of event to add
      */
+
+    public void promptRescheduleMethod(){
+        System.out.println("If you are rescheduling an event, enter 'x'. Otherwise enter any key.");
+    }
+
     public void promptTitle(){
         System.out.println("Enter the title of the event you want to add.");
     }
