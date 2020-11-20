@@ -11,7 +11,7 @@ public class SpeakerMessagePresenter extends MessagePresenter{
      * Prompt to enter a list of events
      * */
     public void promptListEvents(){
-        System.out.println("Enter an event or multiple events to send a message." +
+        System.out.println("Enter an event name or multiple event names (separated by commas without spaces) to send a message. " +
                 "Enter the 'return' key to separate each event. Enter 'X' to finish.");
     }
 

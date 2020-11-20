@@ -1,7 +1,9 @@
 package controller;
+import entities.Event;
 import entities.Message;
 import entities.Speaker;
 import useCase.*;
+import java.util.HashMap;
 import entities.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,21 +28,30 @@ public class SpeakerController extends UserController {
         super(eventActions, roomActions, messageActions, 's', attendeeActions, organizerActions, speakerActions);
 
         this.SpeakerID = SpeakerID;
-
-
+        this.messageActions = messageActions;
+        this.eventActions = eventActions;
+        this.roomActions = roomActions;
+        this.attendeeActions = attendeeActions;
+        this.organizerActions = organizerActions;
+        this.speakerActions = speakerActions;
     }
     /**
      *
      * Allows Speakers to send a message to those attendees attending their event
      * */
-    public boolean sendMessages(String eventID, String message) {
-        List<String> attendees = this.eventActions.getEventAttendees(eventID);
-        for (String attendeeID : attendees) {
-            if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
-                return false;
+    public boolean sendMessages(String event, String message) {
+        if(eventActions != null) {
+            HashMap<String, Event> eventHash = eventActions.getEventNames();
+            String eventID = eventHash.get(event).getId();
+            List<String> attendees = this.eventActions.getEventAttendees(eventID);
+            for (String attendeeID : attendees) {
+                if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
