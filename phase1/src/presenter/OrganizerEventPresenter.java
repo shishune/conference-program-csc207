@@ -1,5 +1,7 @@
 package presenter;
 
+import java.util.List;
+
 /**
  * A presenter class. This class is responsible for anything related to displaying events to an organizer.
  * @author Cynthia
@@ -105,6 +107,14 @@ public class OrganizerEventPresenter extends EventPresenter{
     public void eventExists(){System.out.println("This event name is already taken.");}
 
     public void noEvent(){System.out.println("This event does not exist, please try again");}
+
+    public void allYourContacts(List<String> contacts){
+        System.out.println(contacts.toString());
+    }
+
+    public void allYourContactsEvent(List<String> eventContacts){
+        System.out.println(eventContacts.toString());
+    }
 
     //public void
 }

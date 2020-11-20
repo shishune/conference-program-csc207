@@ -244,14 +244,15 @@ public class OrganizerMainMenuController extends MainMenuController {
                     Event eventObject = event.getEventNames().get(eventName);
                     String eventID = event.getEventNames().get(eventName).getId();
                     if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
-                        System.out.println(eventObject.getAttendees());
+                        displayEvent.allYourContactsEvent(eventObject.getAttendees());
+                        catcher = false;
                     } else {
                         displayEvent.notYourEvent();
                     }
                 }
             } else {
-                organizer.
-                System.out.println("I didnt code this yet rip");
+                displayEvent.allYourContacts(user.getContactsList());
+                catcher = false;
             }
 
         }
