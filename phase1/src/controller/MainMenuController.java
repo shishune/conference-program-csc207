@@ -102,9 +102,10 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 6
      */
     public void option6(){
+        option8();
         displayEvent.promptAddEvent();
         String event = scan.nextLine();
-        List<Boolean> checks = controller.signupEvent(event, user.getId());
+        List<Boolean> checks = controller.signupEvent(event, user.getUsername());
         if(checks.size()==1){
             if (checks.get(0)){
                 displayEvent.successAddEvent();
@@ -114,10 +115,10 @@ public class MainMenuController extends AccountController{
             }
         }
         else{
-            if (checks.get(1)){
+            if (!checks.get(1)){
                 displayEvent.failedRoomFull();
             }
-            else if(!checks.get(1)){
+            else if(checks.get(2)){
                 displayEvent.failedAttendeeTimeConflict();
             }
             else{
@@ -132,10 +133,11 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 7
      */
     public void option7(){
+        option9();
         displayEvent.promptCancelEvent();
-        String event = scan.nextLine();
+        String eventName = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
-        if(controller.leaveEvent(event, user.getId())){
+        if(controller.leaveEvent(eventName, user.getId())){
             displayEvent.successCancelEnrol();
         }
         else{

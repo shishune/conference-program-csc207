@@ -5,8 +5,8 @@ import entities.Attendee;
 import useCase.*;
 
 public class AttendeeController extends UserController{
-    //    private MessageActions message;
-//    private EventActions e;
+    private MessageActions message;
+    private EventActions e;
     private AttendeeActions attendee;
 //    private RoomActions room;
 //    private OrganizerActions organizer;
@@ -16,15 +16,17 @@ public class AttendeeController extends UserController{
                               AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
         super(events, rooms, message, 'a', attendee, organizer, speaker);
         this.attendee = attendee;
+        this.e = events;
 
     }
 
     @Override
-    public boolean leaveEvent(String event, String userId){
-        String username = this.returnUserIDHashMap().get(userId).getUsername();
+    public boolean leaveEvent(String eventName, String userId){
+        // String username = this.returnUserIDHashMap().get(userId).getUsername();
         // String username = this.attendee.returnUsersHashMap().get(userId).getUsername(); <-- original
         // i just took away the attendee in this.attendee but i wasnt sure if the 'this' was important
         // i chnged it because i made a master hashmap and the method is now in usercontroller not attendee
-        return this.attendee.removeEventFromUser(event, username);
+        String eventID = e.getEventFromName(eventName).getId();
+        return this.attendee.removeEventFromUser(eventID, userId);
     }
 }
