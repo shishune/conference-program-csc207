@@ -111,8 +111,8 @@ public class MainMenuController extends AccountController{
     public void option5(){ //view all contacts
 
         displayMessage.displayContacts(controller,user.getId());
-    }
 
+    }
 
     /**
      * Responds to menu option 6- sign up for event
