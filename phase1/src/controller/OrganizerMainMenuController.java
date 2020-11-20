@@ -73,13 +73,16 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option6() {
         displayEvent.promptTitle();
-        String title = scan.nextLine();
+        String title ="";
 
         while(true){
-            if(event.getEvents().containsKey(title)){
+            //displayEvent.promptTitle();
+            String t = scan.nextLine();
+            if(event.getEventNames().containsKey(t)){
                 displayEvent.eventExists();
             }
             else{
+                title = t;
                 break;
             }
         }
