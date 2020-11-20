@@ -29,7 +29,7 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class SpeakerMainMenuController extends MainMenuController{
+public class SpeakerMainMenuController extends MainMenuController {
     private SpeakerController controller;
     private User user;
     private SpeakerMessagePresenter displayMessage;
@@ -38,26 +38,32 @@ public class SpeakerMainMenuController extends MainMenuController{
 
     /**
      * Instantiates the main menu responder object
-     * @param user the user
+     *
+     * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController){
+    public SpeakerMainMenuController(User user, SpeakerController speakerController) {
         super(user, speakerController);
         this.user = user;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
         this.displayEvent = new EventPresenter();
     }
+
     /**
      * Responds to menu option 3
      */
     public void option3() {
         displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
+
     /**
      * Responds to menu option 6
      */
 
+    public void option5() { //view all contacts
+        displayMessage.displayContacts(controller, user.getId());
+    }
 
     public void option6() {
         displayEvent.viewall();
