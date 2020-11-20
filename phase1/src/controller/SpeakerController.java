@@ -2,6 +2,7 @@ package controller;
 import entities.Event;
 import entities.Message;
 import entities.Speaker;
+import presenter.SpeakerMessagePresenter;
 import useCase.*;
 import java.util.HashMap;
 import entities.*;
@@ -22,6 +23,7 @@ public class SpeakerController extends UserController {
     public SpeakerActions speakerActions; // = super.getSpeakers();
     public OrganizerActions organizerActions; // = super.getOrganizers();
     public AttendeeActions attendeeActions; // = super.getAttendees();
+    private SpeakerMessagePresenter displayMessage;
 
     public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
                              AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions) {
@@ -34,6 +36,7 @@ public class SpeakerController extends UserController {
         this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
         this.speakerActions = speakerActions;
+        this.displayMessage = new SpeakerMessagePresenter();
     }
     /**
      *
@@ -42,14 +45,17 @@ public class SpeakerController extends UserController {
     public boolean sendMessages(String event, String message) {
         if(eventActions != null) {
             HashMap<String, Event> eventHash = eventActions.getEventNames();
-            String eventID = eventHash.get(event).getId();
-            List<String> attendees = this.eventActions.getEventAttendees(eventID);
-            for (String attendeeID : attendees) {
-                if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
-                    return false;
+            if(eventHash.get(event) != null) {
+                String eventID = eventHash.get(event).getId();
+                List<String> attendees = eventActions.getEventAttendees(eventID);
+                for (String attendeeID : attendees) {
+                    if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
+            return false;
         }
         return false;
     }

@@ -3,8 +3,8 @@ import entities.User;
 import presenter.EventPresenter;
 import presenter.SpeakerMessagePresenter;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 import entities.Room;
 import entities.Speaker;
 import entities.User;
@@ -13,7 +13,6 @@ import entities.Event;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import presenter.EventPresenter;
 import presenter.MessagePresenter;
@@ -51,10 +50,30 @@ public class SpeakerMainMenuController extends MainMenuController{
         this.controller = speakerController;
     }
     /**
+     * Responds to menu option 2
+     */
+    public void option2(){
+        displayMessage.printMenu();
+        String option = scan.nextLine();
+        SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
+        if (option.equals("1")){
+            menuController.option1();
+        }
+        if (option.equals("2")){
+            super.option2();
+        }
+    }
+    /**
      * Responds to menu option 3
      */
     public void option3() {
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+        //displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+        System.out.println("Option 3");
+        HashMap<String, User> receiverHash = controller.returnUserIDHashMap();
+        for(Map.Entry<String, User> entry : receiverHash.entrySet()) {
+            System.out.println("Loop");
+            displayMessage.displayMessages(controller, user.getId(), entry.getKey());
+        }
     }
     /**
      * Responds to menu option 6

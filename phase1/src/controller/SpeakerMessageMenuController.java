@@ -56,16 +56,22 @@ public class SpeakerMessageMenuController{
         if(controller != null) {
             //System.out.println("controller not null");
             //System.out.println(events);
+            boolean success = false;
             for (String event : events) {
                 if (!controller.sendMessages(event, content)) {
-                    displayMessage.noAttendees();
+                    //displayMessage.noAttendees();
+                    displayMessage.failedMessage();
+                    success = false;
                     break;
                 } else {
                     //System.out.println("Else");
                     controller.sendMessages(event, content);
+                    success = true;
                 }
             }
-            displayMessage.successMessage();
+            if(success) {
+                displayMessage.successMessage();
+            }
         }
     }
 
