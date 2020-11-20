@@ -38,14 +38,14 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Message informing that organizer double-booked speaker
      * */
     public void failedDoubleBookSpeaker(){
-        System.out.println("This speaker is booked at this time. Please enter another time.");
+        System.out.println("This speaker is booked at this time.");
     }
 
     /**
      * Message informing that organizer double-booked room
      * */
     public void failedDoubleBookRoom(){
-        System.out.println("This room is double-booked at this time. Please enter another time.");
+        System.out.println("This room is double-booked at this time.");
     }
 
     /**
@@ -92,8 +92,14 @@ public class OrganizerEventPresenter extends EventPresenter{
 
     public void badTime(){System.out.println("Time is not valid. Try again.");}
 
-    public void viewall(){
-        System.out.println("Press 'x' to view the list of events organized by you.");
+    public void promptViewContacts(){
+        System.out.println("Press 'x' if you want view your contacts according to event or any key to view all contacts together");
+    }
+    public void promptEvent(){
+        System.out.println("Please enter the name of the event you would like view your contacts from");
+    }
+    public void notYourEvent(){
+        System.out.println("You are not charge of this event, please try again");
     }
 
     public void eventExists(){System.out.println("This event name is already taken.");}

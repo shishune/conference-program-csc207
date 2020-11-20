@@ -1,6 +1,5 @@
 package controller;
-import entities.Room;
-import entities.Speaker;
+import entities.Event;
 import entities.User;
 
 import java.text.DateFormat;
@@ -8,11 +7,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import presenter.EventPresenter;
-import presenter.MessagePresenter;
+
 import presenter.OrganizerMessagePresenter;
 import presenter.OrganizerEventPresenter;
 import useCase.EventActions;
+import useCase.OrganizerActions;
 import useCase.SpeakerActions;
 import useCase.RoomActions;
 
@@ -28,6 +27,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     private RoomActions room; // = super.getRooms();
     private SpeakerActions speaker;
     private EventActions event;
+    private OrganizerActions organizer;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
@@ -39,7 +39,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event) {
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event, OrganizerActions organizerActions) {
         super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
@@ -48,6 +48,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         this.controller = organizerController;
         this.speaker = speaker;
         this.event = event;
+        this.organizer = organizerActions;
     }
 
     /**
@@ -220,20 +221,34 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
     public void option5() {
-        displayEvent.viewall();
+        displayEvent.promptViewContacts();
         String option = scan.nextLine();
-        if (option.equals("x") || option.equals("X")) {
-            displayEvent.promptCancelEvent();
-            String event = scan.nextLine();
-            cancelEvent(event);
-        } else {
-            displayEvent.promptCancelEvent();
-            String event = scan.nextLine();
-            String dateTime = getDateTimeInput();
-            rescheduleEvent(event, dateTime);
-        }
 
+        boolean catcher = true;
+
+        while (catcher) {
+
+            if (option.equals("x") || option.equals("X")) {
+                displayEvent.promptEvent();
+                String eventName = scan.nextLine();
+                if (!event.getEventNames().containsKey(eventName)) {
+                    displayEvent.noEvent();
+                } else {
+                    Event eventObject = event.getEventNames().get(eventName);
+                    String eventID = event.getEventNames().get(eventName).getId();
+                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+                        System.out.println(eventObject.getAttendees());
+                    } else {
+                        displayEvent.notYourEvent();
+                    }
+                }
+            } else {
+                System.out.println("I didnt code this yet rip");
+            }
+
+        }
     }
+
 
     /**
      * helper function to take a dateTime string object from separate date  and time inputs

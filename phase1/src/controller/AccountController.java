@@ -87,7 +87,7 @@ public class AccountController {
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions);
+                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions);
                 }
 
                 while (true) {
@@ -126,7 +126,6 @@ public class AccountController {
                     } else if (menuOption.equals("7") && (type.equals("A") || type.equals("O"))) {
                         // attendee: cancel enrollment in event
                         // organizer: remove event
-
                         menuController.option7();
                     } else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))) {
                         menuController.option8();
