@@ -248,17 +248,19 @@ public class EventActions  {
      */
     public boolean changeEventTime(String eventID, String newDateTime){
         Event event = this.events.get(eventID);
-        if(isRoomFree(event.getRoomID(), newDateTime) &&
-                isSpeakerFree(event.getSpeaker(), newDateTime)){
+        if(event != null) {
+            if (isRoomFree(event.getRoomID(), newDateTime) &&
+                    isSpeakerFree(event.getSpeaker(), newDateTime)) {
 
-            this.speakerSchedule.get(event.getSpeaker()).remove(event.getDateTime());
-            this.roomSchedule.get(event.getRoomID()).remove(event.getDateTime());
+                this.speakerSchedule.get(event.getSpeaker()).remove(event.getDateTime());
+                this.roomSchedule.get(event.getRoomID()).remove(event.getDateTime());
 
-            event.setDateTime(newDateTime);
-            this.speakerSchedule.get(event.getSpeaker()).add(event.getDateTime());
-            this.roomSchedule.get(event.getRoomID()).add(event.getDateTime());
+                event.setDateTime(newDateTime);
+                this.speakerSchedule.get(event.getSpeaker()).add(event.getDateTime());
+                this.roomSchedule.get(event.getRoomID()).add(event.getDateTime());
 
-            return true;
+                return true;
+            }
         }
         return false;
 

@@ -59,7 +59,7 @@ public class OrganizerEventPresenter extends EventPresenter{
      */
 
     public void promptRescheduleMethod(){
-        System.out.println("If you are rescheduling an event, enter 'x'. Otherwise enter any key.");
+        System.out.println("Enter the name of the event to be cancelled.");
     }
 
     public void promptTitle(){
@@ -97,4 +97,6 @@ public class OrganizerEventPresenter extends EventPresenter{
     }
 
     public void eventExists(){System.out.println("This event name is already taken.");}
+
+    public void noEvent(){System.out.println("This event does not exist.");}
 }

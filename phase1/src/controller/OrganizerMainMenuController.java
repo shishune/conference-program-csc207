@@ -182,12 +182,25 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayEvent.promptCancelEvent();
             String event = scan.nextLine();
             cancelEvent(event);
-        } else {
+        }
+        else {
             displayEvent.promptRescheduleMethod();
-            String event = scan.nextLine();
+            String e = "";
             boolean catcher = true;
-            String dateTime = getDateTimeInput();
-            rescheduleEvent(event, dateTime);
+
+            while(catcher){
+                String ev = scan.nextLine();
+                if (event.getEventNames().containsKey(ev)){
+                    e = ev;
+                    String dateTime = getDateTimeInput();
+                    rescheduleEvent(ev, dateTime);
+                    catcher = false;
+                }
+                else{
+                    displayEvent.noEvent();
+                }
+
+            }
         }
 
     }
@@ -271,12 +284,13 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * helper function to reschedule event
      *
-     * @param event    the event ID
+     * @param events    the event title
      * @param dateTime the string representing date and time
      */
-    private void rescheduleEvent(String event, String dateTime) {
+    private void rescheduleEvent(String events, String dateTime) {
         if (controller != null) {
-            if (controller.rescheduleEvent(event, dateTime)) {
+            String e = event.getEventNames().get(events).getId();
+            if (controller.rescheduleEvent(e, dateTime)) {
                 displayEvent.successRescheduleEvent();
             } else {
                 displayEvent.failedRescheduleEvent();
