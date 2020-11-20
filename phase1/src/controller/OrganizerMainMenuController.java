@@ -122,7 +122,25 @@ public class OrganizerMainMenuController extends MainMenuController {
             String speakerUserName = scan.nextLine();
 
             if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
-                option10();
+
+                while (catcherUserName) {
+                    displayMessage.speakerUsernamePrompt();
+                    String newSpeakerName = scan.nextLine();
+
+
+                    if (speaker.returnUsernameHashMap().containsKey(newSpeakerName)) {
+                        displayMessage.alreadySpeaker();
+                    }
+
+                    else if (controller != null) {
+                        displayMessage.speakerPasswordPrompt();
+                        String newSpeakerPassword = scan.nextLine();
+                        controller.createSpeaker(newSpeakerName, newSpeakerPassword);
+                        displayMessage.speakerCreated();
+                        speakerId = speaker.returnUsernameHashMap().get(newSpeakerName).getId();
+                        catcherUserName = false;
+                    }
+                }
                 catcherUserName = false;
 
             }
@@ -383,6 +401,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         }
+
     }
 
 //        displayEvent.promptAddRoom();
