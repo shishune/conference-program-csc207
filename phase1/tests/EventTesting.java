@@ -1,12 +1,9 @@
 import entities.Event;
-import useCase.EventActions;
 import org.junit.*;
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.*;
+
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 public class EventTesting {
 
