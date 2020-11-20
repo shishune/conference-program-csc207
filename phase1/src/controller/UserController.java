@@ -29,15 +29,22 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      * */
-    public UserController(EventActions events, RoomActions rooms, MessageActions message, UserAccountActions user) {
+    public UserController(EventActions events, RoomActions rooms, MessageActions message, char userType,
+                          AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
         this.message = message;
         this.e = events;
         this.room = rooms;
-        this.user = user;
-        // this.user = user;
-//        this.attendee = attendee;
-//        this.organizer = organizer;
-//        this.speaker = speaker;
+        if (userType=='o'){
+            this.user = organizer;
+        } else if (userType == 's'){
+            this.user = speaker;
+        } else {
+            this.user = attendee;
+        }
+
+        this.attendee = attendee;
+        this.organizer = organizer;
+        this.speaker = speaker;
     }
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
@@ -102,8 +109,8 @@ public class UserController {
         if (user != null) {
             User me = user.findUserFromUsername(toMe);
             System.out.println(me.getContactsList());
-            HashMap<String, User> userUsernameHashMapHashMap = returnUserUsernameHashMap();
-            return user.addUserContactList(toMe, addMe, userUsernameHashMapHashMap);
+            HashMap<String, User> userUsernameHashMap = returnUserUsernameHashMap();
+            return user.addUserContactList(toMe, addMe, userUsernameHashMap);
         }
         return false;
     }
