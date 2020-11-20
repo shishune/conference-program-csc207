@@ -129,7 +129,7 @@ public class UserController {
 
     public boolean deleteContact(String removeMe, String toMe){
         return user.removeUserContactList(toMe, removeMe);
-    };
+    }
 
 //    public String viewMessageOneSender (String fromMe){
 //        MessageActions messageActions = new MessageActions();

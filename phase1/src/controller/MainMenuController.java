@@ -133,6 +133,7 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 7
      */
     public void option7(){
+        option9();
         displayEvent.promptCancelEvent();
         String event = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
