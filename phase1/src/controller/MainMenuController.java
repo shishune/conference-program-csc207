@@ -64,6 +64,7 @@ public class MainMenuController extends AccountController{
         displayMessage.promptContact();
         String add = scan.nextLine();
         System.out.println(user.getContactsList());
+        HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
         if (controller.addContact(add, user.getUsername())){
             displayMessage.successContact();
         }

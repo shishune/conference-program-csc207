@@ -223,7 +223,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayEvent.promptTime();
             if (scan.hasNextInt()) {
                 String t = scan.nextLine();
-                if (Integer.parseInt(t) < 24 && Integer.parseInt(t) > 0) {
+                if (Integer.parseInt(t) < 17 && Integer.parseInt(t) > 9) {
                     time = t;
                     catcher = false;
                 } else {
@@ -300,7 +300,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             String newSpeakerName = scan.nextLine();
 
 
-            if (controller.returnUserUsernameHashMap().containsKey(newSpeakerName)) {
+            if (speaker.returnUsernameHashMap().containsKey(newSpeakerName)) {
                 displayMessage.alreadySpeaker();
             }
 
