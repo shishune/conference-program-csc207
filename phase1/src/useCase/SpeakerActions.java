@@ -44,7 +44,12 @@ public class SpeakerActions extends UserAccountActions {
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
-
+    /***
+     * check if event is properly added to speaker
+     * @param eventID
+     * @param speakerId
+     * @return if event is in speaker event list
+     */
     public boolean isEventAddedToSpeaker(String eventID, String speakerId){
         // speakerID.get(speakerId).getEventList().add(eventID);
         return speakerID.get(speakerId).getEventList().contains(eventID);
@@ -54,7 +59,7 @@ public class SpeakerActions extends UserAccountActions {
      * check if event is properly removed from speaker
      * @param eventID
      * @param speakerId
-     * @return
+     * @return if event is no longer in speaker event list
      */
     public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
         // speakerID.get(speakerId).getEventList().remove(eventID);

@@ -221,9 +221,9 @@ public class EventActions  {
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
+            System.out.println(events.get(eventID).getAttendees());
             events.get(eventID).getAttendees().add(attendeeID);
-
-            attendees.replace(eventID, eventAttendees);
+            attendees.get(eventID).add(attendeeID);
             return true;
         }
     }
