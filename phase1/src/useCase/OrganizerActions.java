@@ -161,8 +161,12 @@ public class OrganizerActions extends UserAccountActions {
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
+        System.out.println("Add User Contact List");
+        System.out.println(userUsernameHashMap);
+        System.out.println(user.getContactsList());
+        System.out.println(userOne.getId());
         boolean isId = user.getContactsList().contains(userOne.getId());
-        if (userOne.getIsOrganizer() || user.getId() == userOne.getId() || isId){
+        if (userOne.getIsOrganizer() || user.getId() == userOne.getId() || isId){ // organizers can now message other organizers
             return false;
         } else {
             List<String> toMeContacts = user.getContactsList();
