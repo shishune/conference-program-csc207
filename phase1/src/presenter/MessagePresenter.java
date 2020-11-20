@@ -12,20 +12,33 @@ import controller.UserController;
  * @version 1
  * */
 public class MessagePresenter {
+
+    // used in MainMenuController to print list of contacts for a user
+    public void printString(String theString){
+        System.out.println(theString);
+    }
+
+    public void promptSelectReceiver(){
+        System.out.println("Please select the conversation you would like to view by selecting the receiver of your message.");
+    }
+
     /**
      * Display messages
      * */
-    public void displayMessages (UserController controller, String fromMe, String toMe) {
-        ArrayList<ArrayList<String>> messagesList = controller.viewMessages(fromMe, toMe);
+    public boolean displayMessages (UserController controller, String fromMe, String toMe) {
+        ArrayList<ArrayList<String>> messagesList = controller.viewMessages(fromMe, toMe); // fromMe and toMe are are user IDs
+        System.out.println("DISPLAY MESSAGES: " + controller.viewMessages(fromMe, toMe));
         int count = 1;
         for (ArrayList<String> message: messagesList){
             System.out.println(count);
             count++;
             System.out.println("Sender: "+message.get(0));
             System.out.println("Recipient: "+message.get(1));
-            System.out.println("Message: "+message.get(2));
+            System.out.println("Time Sent: "+message.get(2));
+            System.out.println("Message: "+message.get(3));
             System.out.println("\n");
         }
+        return true;
     }
     /**
      * Prompt for recipient

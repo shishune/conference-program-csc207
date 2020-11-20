@@ -14,7 +14,8 @@ public class OrganizerMessagePresenter extends MessagePresenter{
      * prompt to enter event to send message to
      * */
     public void promptEvent(){
-        System.out.println("Please enter the name of an event you would like to send a message to.");
+        System.out.println("Please enter the name of an event you would like to send a message to."
+                + "\nYou can see a list of events by selecting option 8 in the main menu");
     }
 
     /**

@@ -175,16 +175,28 @@ public class MessageActions {
      * @param receiverId the ID of the receiver
      * @return messages sent and received by user
      */
-    public List<Message> printMessages(String senderId, String receiverId) {
+    public List<Message> getMessages(String senderId, String receiverId) {
+        System.out.println("Get Messages");
         // presenter should call this method and turn array into output
         ArrayList<Message> userMessages = new ArrayList<Message>();
+        System.out.println(messages);
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            if(message.getKey().equals(senderId) && message.getValue().getReceiverId().equals(receiverId)) {
+            System.out.println("Loop");
+            System.out.println(message);
+            System.out.println(message.getValue().getSenderId());
+            System.out.println(message.getValue().getSenderId().equals(senderId));
+            System.out.println(message.getValue().getReceiverId());
+            System.out.println(message.getValue().getReceiverId().equals(receiverId));
+            if((message.getValue().getSenderId().equals(senderId) && message.getValue().getReceiverId().equals(receiverId))
+                    || (message.getValue().getSenderId().equals(receiverId) && message.getValue().getReceiverId().equals(senderId)) ) {
+                System.out.println("in if");
                 userMessages.add(message.getValue());
             }
         }
         // sort userMessages by time sent
+        System.out.println(userMessages);
         userMessages.sort(Comparator.comparing(Message::getTimeSent));
+        System.out.println("Final view messages" + userMessages);
         return userMessages;
     }
 

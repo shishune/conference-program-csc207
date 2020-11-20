@@ -354,6 +354,7 @@ public class EventActions  {
      * @return List of all attendee IDs of an event
      */
     public List<String> getEventAttendees(String eventID){
+        //System.out.println("EVENT ATTENDEES: " + attendees.get(eventID));
         return attendees.get(eventID);
     }
 

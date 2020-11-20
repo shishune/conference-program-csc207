@@ -3,9 +3,7 @@ import presenter.MessagePresenter;
 import presenter.EventPresenter;
 import entities.User;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * A controller class that decides what to do based on user input when choosing from the main menu.
@@ -54,7 +52,34 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 3
      */
     public void option3(){
-        displayMessage.displayMessages(controller, user.getId(), user.getId());
+        System.out.println("MAIN OPT 3");
+        List<String> contactIds = user.getContactsList();
+        //System.out.println("USER ID HASH: " + controller.returnUserIDHashMap());
+        HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+        ArrayList<String> contactUsernames = new ArrayList<String>();
+        for(Map.Entry<String, User> user : userIdHash.entrySet()) {
+            if(contactIds.contains(user.getKey())){
+                contactUsernames.add(user.getValue().getUsername());
+            }
+        }
+        //System.out.println("Contact names: " + contactUsernames);
+        displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
+        for(String username : contactUsernames){
+            displayMessage.printString(username); // receiver username
+        }
+        String receiverUsername = scan.nextLine();
+        System.out.println(controller.returnUserIDHashMap());
+        HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
+        //System.out.println(controller);
+        //System.out.println(user.getId());
+        //System.out.println("USER HASH: " + usernameHash);
+        //System.out.println(receiverUsername + "%%");
+        //System.out.println(usernameHash.get(receiverUsername));
+        if(usernameHash.get(receiverUsername) != null){
+            displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+        } else {
+            displayMessage.failedContact();
+        }
     }
 
     /**
