@@ -58,9 +58,6 @@ public class SpeakerMainMenuController extends MainMenuController{
      * Responds to menu option 6
      */
 
-    public void viewall(){
-        System.out.println("Press 'x' to view the list of events organized by you.");
-    }
 
     public void option6() {
         displayEvent.viewall();

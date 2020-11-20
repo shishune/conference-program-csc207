@@ -104,4 +104,9 @@ public class EventPresenter {
     public void failedCancelEvent(){
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
     }
+
+    public void viewall(){
+        System.out.println("Press 'x' to view the list of events organized by you.");
+    }
+
 }
