@@ -40,8 +40,6 @@ public class GenerateID {
             if (loader != null){
                 loader.addId(String.valueOf(objectId));
             }
-
-
         }
 
         return String.valueOf(objectId);

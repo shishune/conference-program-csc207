@@ -54,14 +54,14 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayMessage.printMenu();
         String option = scan.nextLine();
         OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.controller);
-        if (option.equals("1")) {
-            menuController.option1();
+        if (option.equals("1")){
+            menuController.option1(); // send message to all speakers
         }
-        if (option.equals("2")) {
-            menuController.option2();
+        if (option.equals("2")){
+            menuController.option2(); // send message to all attendees of an event
         }
-        if (option.equals("3")) {
-            super.option2();
+        if (option.equals("3")){
+            super.option2(); // send message to one person
         }
     }
 

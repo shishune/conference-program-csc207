@@ -29,31 +29,16 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      * */
-    public UserController(EventActions events, RoomActions rooms, MessageActions message, char userType,
-                          AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        this.message = message;
-        this.e = events;
-        this.room = rooms;
-        if(userType == 'o'){
-            this.user = organizer;
-        } else if (userType == 's'){
-            this.user = speaker;
-        } else{
-            this.user = attendee;
-        }
-
-        this.attendee = attendee;
-        this.organizer = organizer;
-        this.speaker = speaker;
-    }
-
     public UserController(EventActions events, RoomActions rooms, MessageActions message, UserAccountActions user) {
         this.message = message;
         this.e = events;
         this.room = rooms;
+        this.user = user;
+        // this.user = user;
+//        this.attendee = attendee;
+//        this.organizer = organizer;
+//        this.speaker = speaker;
     }
-
-
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
 
@@ -67,7 +52,9 @@ public class UserController {
         if (!(speaker == null) && !speaker.returnUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(speaker.returnUsernameHashMap());
         }
-
+//        if (!(user == null) && !user.returnUsernameHashMap().isEmpty()){
+////            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
+////        }
         return usernameHashmap;
 
     }

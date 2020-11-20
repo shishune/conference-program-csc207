@@ -122,7 +122,7 @@ public class AttendeeActions extends UserAccountActions {
      *
      * @param addMe the username of the user to be added
      * @param toMe  the username of the user who's contact list is updated
-     * @return true if user is added successfully, false if not
+     *              ]    * @return true if user is added successfully, false if not
      */
 
     // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in

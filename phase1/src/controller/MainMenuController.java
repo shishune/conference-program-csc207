@@ -2,6 +2,8 @@ package controller;
 import presenter.MessagePresenter;
 import presenter.EventPresenter;
 import entities.User;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,6 +29,25 @@ public class MainMenuController extends AccountController{
         this.user = user;
         this.displayMessage = new MessagePresenter();
         this.displayEvent = new EventPresenter();
+    }
+
+    /**
+     * Responds to menu option 2
+     */
+    public void option2(){
+        displayMessage.promptRecipient(); // enter user you would like to send message to
+        String receiver = scan.nextLine();
+        displayMessage.promptMessage(); // enter the message
+        String content = scan.nextLine();
+        //HashMap<String, User> userNames = controller.returnUsernameHashMap();
+        //String receiverId = userNames.get(receiver).getId();
+        System.out.println("RECEIVER: " + receiver);
+        System.out.println("USER: " + user.getUsername());
+        if (controller.sendMessage(user.getUsername(), receiver, content)){
+            displayMessage.successMessage(); // message has been sent successfully
+        } else {
+            displayMessage.failedMessage(); // message could not be sent
+        }
     }
 
     /**
@@ -62,7 +83,7 @@ public class MainMenuController extends AccountController{
     /**
      * Responds to menu option 2
      */
-    public void option2(){
+    /**public void option2(){
         displayMessage.promptRecipient();
         String receiver = scan.nextLine();
         displayMessage.promptMessage();
@@ -72,7 +93,7 @@ public class MainMenuController extends AccountController{
             displayMessage.successMessage();
         }
         displayMessage.failedMessage();
-    }
+    }**/
 
     /**
      * Responds to menu option 6
