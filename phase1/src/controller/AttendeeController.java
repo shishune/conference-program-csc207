@@ -16,6 +16,7 @@ public class AttendeeController extends UserController{
                               AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
         super(events, rooms, message, 'a', attendee, organizer, speaker);
         this.attendee = attendee;
+        // hi
     }
 
     @Override
