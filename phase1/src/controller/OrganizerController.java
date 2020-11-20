@@ -14,29 +14,29 @@ import entities.*;
  */
 
 public class OrganizerController extends UserController{
-    private MessageActions messageActions;
-    private EventActions eventActions;
-    private RoomActions roomActions = new RoomActions();
-    private SpeakerActions speakerActions;
-    private OrganizerActions organizerActions;
-    private AttendeeActions attendeeActions;
+    private MessageActions messageActions;  //= super.getMessages();
+    private EventActions eventActions;  //= super.getEvents();
+    private RoomActions roomActions; // = super.getRooms();
+    private SpeakerActions speakerActions; //= super.getSpeakers();
+    private OrganizerActions organizerActions; //= super.getOrganizers();
+    // private AttendeeActions attendeeActions; // = super.getAttendees();
     private String organizerID;
 
 
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){
 
-        super(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
+        super(eventActions, roomActions, messageActions, organizerActions);
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
         this.roomActions = roomActions;
         this.messageActions = messageActions;
-        this.attendeeActions = attendeeActions;
-        this.organizerActions= organizerActions;
+        // this.attendeeActions = attendeeActions;
+        this.organizerActions = organizerActions;
 
     }
-    public OrganizerController(){}
+    // public OrganizerController(){ }
     /***
      * create a new event
      * @param title of event
@@ -47,7 +47,20 @@ public class OrganizerController extends UserController{
      */
     public List<Boolean> createEvent(String title, String speakerId, String dateTime, String roomID){
         List<String> attendees = new ArrayList<String>();
-        return this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
+        Event event = this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID);
+        List<Boolean> checks = new ArrayList<Boolean>();
+        if(event != null){
+            scheduleSpeaker(event.getId(), speakerId);
+            checks.add(true);
+            return checks;
+        }
+        checks.add(false);
+        if (!eventActions.isRoomFree(roomID, dateTime)){
+            checks.add(true);
+        } else if(!eventActions.isSpeakerFree(speakerId, dateTime)){
+            checks.add(false);
+        }
+        return checks;
     }
 
     /***
@@ -94,10 +107,16 @@ public class OrganizerController extends UserController{
     /***
      * Create a room and add it to the room schedule
      */
-    public boolean createRoom(String roomName){
+    public boolean createRoomActions(String roomName){
         if(roomActions != null && eventActions != null){
-            String roomID = this.roomActions.createRoom(roomName);
+            String roomID = this.roomActions.createRoom(roomName).getRoomId();
             return this.eventActions.addRoomToSchedule(roomID);
+            /*
+            this.eventActions.addRoomToSchedule(roomID);
+            System.out.println(roomActions.returnHashMap());
+            return true;
+
+             */
         }
         return false;
     }
@@ -113,7 +132,8 @@ public class OrganizerController extends UserController{
         String eventDateTime = eventActions.getEvent(eventID).getDateTime();
         if (eventActions.isSpeakerFree(speakerID, eventDateTime)){
             eventActions.setSpeaker(eventID, speakerID);
-            // TODO do speakers have a list of events they are speaking at?
+            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
+            speakerActions.addEventToUser(eventID, speakerUsername);
             return true;
         }
         return false;

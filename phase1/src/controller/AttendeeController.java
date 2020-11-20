@@ -5,16 +5,17 @@ import entities.Attendee;
 import useCase.*;
 
 public class AttendeeController extends UserController{
-    private MessageActions message;
-    private EventActions e;
+//    private MessageActions message;
+//    private EventActions e;
     private AttendeeActions attendee;
-    private RoomActions room;
-    private OrganizerActions organizer;
-    private SpeakerActions speaker;
+//    private RoomActions room;
+//    private OrganizerActions organizer;
+//    private SpeakerActions speaker;
 
     public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
-                              AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
-        super(events, rooms, message, attendee, organizer, speaker);
+                              AttendeeActions attendee) {
+        super(events, rooms, message, attendee);
+        this.attendee = attendee;
     }
 
     @Override

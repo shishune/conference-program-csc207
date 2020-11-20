@@ -14,11 +14,11 @@ import java.util.Scanner;
  * @version 1
  * */
 public class AccountController {
-
     /**
      * Interacts with user to prompt menu item choice and decides which presenter and controller
      * methods to use to respond
      */
+
     public void run(){
         Scanner scan = new Scanner(System.in);  // Create a Scanner object
 
@@ -39,6 +39,7 @@ public class AccountController {
 
         //Instantiate controller classes
         LogIn logIn = new LogIn();
+
 
         //this loop serves to allow user to return to menu repeatedly
         //loop breaks when user chooses to exit program
@@ -65,26 +66,28 @@ public class AccountController {
                 // TODO logs out organizer if i want to make a room/ view all events/ choose an option that im not allowed to do
                 // TODO option to create a speaker when creating an event?
                 if (type.equals("A")) { //indicates attendee
-                    Attendee user = attendeeActions.returnAttendeesUsernameHashMap().get(username);
+                    // UserController controller = new UserController(eventActions, roomActions, messageActions);
+                    Attendee user = attendeeActions.returnUsernameHashMap().get(username);
                     accountDisplay = new AttendeeAccountPresenter();
-                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions,
-                            organizerActions, speakerActions);
+                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions);
                     menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController);
                 } else if (type.equals("S")) { //indicates speaker
-                    Speaker user = speakerActions.returnSpeakerUsernameHashMap().get(username);
+                    // UserController userController = new UserController(eventActions, roomActions, messageActions);
+                    Speaker user = speakerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new SpeakerAccountPresenter();
                     SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             speakerActions, organizerActions, attendeeActions);
-                    menuController = (SpeakerMainMenuController)new SpeakerMainMenuController(user, speakerController);
+                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController);
                 }
                 else{
-                    Organizer user = organizerActions.returnOrganizersUsernameHashMap().get(username);
+                    // UserController controller = new UserController(eventActions, roomActions, messageActions);
+                    Organizer user = organizerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new OrganizerAccountPresenter();
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController);
+                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions);
                 }
 
                 while (true) {
@@ -128,7 +131,9 @@ public class AccountController {
                     } else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))) {
                         menuController.option8();
                     } else if (menuOption.equals("9") && (type.equals("A") || type.equals("O"))) {
-                        menuController.option9();
+                        menuController.option9();}
+                    else if (menuOption.equals("10") && (type.equals("O"))) {
+                        menuController.option10();
                     } else {
                         accountDisplay.printMenuError();
                     }
@@ -138,6 +143,80 @@ public class AccountController {
             }
         }
     }
+
+    public EventActions getEvents(){
+        LoadUpIGateway g = new LoadUp();
+        return new EventActions(g);
+    }
+
+    public OrganizerActions getOrganizers(){
+        LoadUpIGateway g = new LoadUp();
+        return new OrganizerActions(g);
+    }
+
+    public MessageActions getMessages(){
+        LoadUpIGateway g = new LoadUp();
+        return new MessageActions(g);
+    }
+
+    public RoomActions getRooms(){
+        LoadUpIGateway g = new LoadUp();
+        return new RoomActions(g);
+    }
+
+    public SpeakerActions getSpeakers(){
+        LoadUpIGateway g = new LoadUp();
+        return new SpeakerActions(g);
+    }
+
+    public AttendeeActions getAttendees(){
+        LoadUpIGateway g = new LoadUp();
+        return new AttendeeActions(g);
+    }
+
+    public LogoutActions getLogOut(){
+        LoadUpIGateway g = new LoadUp();
+        return new LogoutActions();
+    }
+
+    public UserAccountActions getUserAccountActions(){
+        LoadUpIGateway g = new LoadUp();
+        return new UserAccountActions() {
+            public boolean addUserContactList(String toMe, String addMe) {
+                return false;
+            }
+
+            public boolean removeUserContactList(String toMe, String removeMe) {
+                return false;
+            }
+
+            @Override
+            public boolean addEventToUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public boolean removeEventFromUser(String event, String user) {
+                return false;
+            }
+
+            @Override
+            public String returnAllEvents(String user) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromUsername(String username) {
+                return null;
+            }
+
+            @Override
+            public User findUserFromId(String userId) {
+                return null;
+            }
+        };
+    }
+
 
 
 }

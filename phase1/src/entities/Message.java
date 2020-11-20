@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Class for messages and their ID, sender ID, receiver ID and time sent
+ */
 public class Message {
     //private static String lastMessageIdNums = "";
     private String messageId;
@@ -13,6 +16,14 @@ public class Message {
     private String message;
     private String timeSent;
 
+    /**
+     * Instantiates a new message object
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message
+     * @param timeSent the time the message is sent
+     */
     public Message(String messageId, String senderId, String receiverId, String message, String timeSent) {
         this.messageId = messageId;
         this.senderId = senderId;
@@ -21,6 +32,13 @@ public class Message {
         this.timeSent = timeSent;
     }
 
+    /**
+     * Instantiates a new message object
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message
+     */
     public Message(String messageId, String senderId, String receiverId, String message) {
         this.messageId = messageId;
         this.senderId = senderId;
@@ -29,6 +47,10 @@ public class Message {
         this.timeSent = generateSentTime();
     }
 
+    /**
+     * This method gets the string representation of the message
+     * @return the message as a string with message ID, sender ID, receiver ID and the time sent
+     */
     public String getStringRep() {
         return messageId + "," + senderId + "," + receiverId + "," + message + "," + timeSent;
     }

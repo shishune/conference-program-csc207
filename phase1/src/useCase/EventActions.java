@@ -124,23 +124,13 @@ public class EventActions  {
      * @return true if the event was created
      * */
     // edited to interact well with presenter
-    public List<Boolean> createEvent(String title, String speakerId, String dateTime,
+    public Event createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
-        List<Boolean> checks = new ArrayList<Boolean>();
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
             String newID = "E" + generate.generateId();
-            loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
-            checks.add(true);
-            return checks;
+            return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
-        checks.add(false);
-        if (!isRoomFree(roomID, dateTime)){
-            checks.add(true);
-        }
-        else if(!isSpeakerFree(speakerId, dateTime)){
-            checks.add(false);
-        }
-        return checks;
+        return null;
     }
 
     /***
@@ -162,7 +152,7 @@ public class EventActions  {
      * @param attendees list of attendees of event
      * @param roomID id of room
      */
-    public void loadEvent(String eventID, String title, String speakerId, String dateTime,
+    public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
@@ -184,7 +174,7 @@ public class EventActions  {
             roomTimes.add(dateTime);
             roomSchedule.put(roomID, roomTimes);
         }
-
+        return newEvent;
     }
 
     /***

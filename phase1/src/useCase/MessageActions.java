@@ -15,11 +15,19 @@ import java.io.*;
 // TODO: Add appropriate return types for methods
 // TODO: Add all required methods
 
+/**
+ * Allows actions to be done with messages, including creating messages, sending messages, loading messages,
+ * retrieving message information, printing messages, storing messages
+ */
 public class MessageActions {
     private ArrayList<String> conversations = new ArrayList<String>(); // list containing loaded messages
     private HashMap<String, Message> messages = new HashMap<String, Message>(); // hashmap containing all loaded and new messages
     private LoadUpIGateway loader;
 
+    /**
+     * Gets all messages from message.csv and adds those messages to a hashmap of all messages from the csv
+     * @param loader loads up messages
+     */
     public MessageActions(LoadUpIGateway loader) {
         // with message ID as key and message object as value
         this.loader = loader;
@@ -27,21 +35,42 @@ public class MessageActions {
         addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
 
-    /** Create a message with unique ID as a parameter **/
+    /**
+     * Create a message with unique ID as a parameter
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message created
+     * @param sentTime the time that the message is sent
+     * @return a new message
+     */
     public Message createMessage(String messageId, String senderId, String receiverId, String message, String sentTime) {
         Message newMessage = new Message(messageId, senderId, receiverId, message, sentTime);
         loadMessage(messageId, newMessage);
         return newMessage;
     }
 
-    /** Create a message with unique ID as a parameter **/
+    /**
+     * Create a message with unique ID as a parameter
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message created
+     * @return a new message
+     */
     public Message createMessage(String messageId, String senderId, String receiverId, String message) {
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);
         return newMessage;
     }
 
-    /** Create a message and generate unique ID for message **/
+    /**
+     * Create a message and generate unique ID for message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message created
+     * @return a new message
+     */
     public Message createMessage(String senderId, String receiverId, String message) {
         GenerateID generateID = new GenerateID(loader);
         String messageId = "M" + generateID.generateId();
@@ -50,7 +79,9 @@ public class MessageActions {
         return newMessage;
     }
 
-    /** Load new messages into HashMap of new messages **/
+    /**
+     * Load new messages into HashMap of new messages
+     */
     public void loadMessage(String messageId, Message newMessage){
         // This needs to update every collection we use for messages
         // i.e. if we add a new hashmap/array/etc. for some method, we need to add
@@ -65,7 +96,7 @@ public class MessageActions {
      * Method gets local time (time according the the timezone on the sender's computer)
      * of the sender, and converts it to Toronto time.
      * @return time of Message construction (converted to Toronto time)
-     * */
+     */
     private String generateSentTime() {
         final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
 
@@ -80,13 +111,18 @@ public class MessageActions {
         return dateTime;
     }
 
-    /** gets list of messages from the IGateway **/
+    /**
+     * This method gets list of messages from the IGateway
+     * @param loader loads up messages
+     */
     private void getAllMessages(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
         conversations = loader.getMessagesList();
     }
 
-    /** Adds messages loaded from the csv to <messages> **/
+    /**
+     * This method adds messages loaded from the csv to <messages>
+     */
     private void addLoadedToHashMap() {
         //System.out.println(conversations);
         if (conversations != null) {
@@ -107,8 +143,10 @@ public class MessageActions {
     }
 
     /**
-     * Returns all messages sent by user with senderId
-     **/
+     * This method returns all messages sent by user with senderId
+     * @param senderId the ID of the sender
+     * @return messages sent by user
+     */
     public List<Message> printMessages(String senderId) {
         // presenter should call this method and turn array into output
         List<Message> userMessages = new ArrayList<Message>();
@@ -132,8 +170,11 @@ public class MessageActions {
     }
 
     /**
-     * Returns all messages sent by user with senderId and received by user with receiverId
-     **/
+     * This method returns all messages sent by user with senderId and received by user with receiverId
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @return messages sent and received by user
+     */
     public List<Message> printMessages(String senderId, String receiverId) {
         // presenter should call this method and turn array into output
         ArrayList<Message> userMessages = new ArrayList<Message>();
@@ -147,14 +188,17 @@ public class MessageActions {
         return userMessages;
     }
 
-    /** For if presenter needs to access message using its Id (for printMessages) **/
+    /**
+     * For if presenter needs to access message using its Id (for printMessages)
+     */
     public String getMessageFromMap(String messageId) {
         return messages.get(messageId).getStringRep();
     }
 
     /**
-     * Returns an array of all messages (new and old) for storage
-     **/
+     * This method stores messages in an array
+     * @return an array of all messages (new and old) for storage
+     */
     public ArrayList<String> storeMessages() {
         ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
@@ -166,6 +210,10 @@ public class MessageActions {
         return allMessages;
     }
 
+    /**
+     * This method accesses message IDs
+     * @return message IDs in a list
+     */
     public ArrayList<String> getMessengerIds() {
         ArrayList<String> storedMessenger= new ArrayList<String>();
         if (messages != null && !messages.isEmpty()) {

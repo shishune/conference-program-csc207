@@ -12,13 +12,12 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class MainMenuController {
+public class MainMenuController extends AccountController{
     private UserController controller;
     private User user;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private Scanner scan = new Scanner(System.in);
-
 
     /**
      * Instantiates the main menu responder object
@@ -64,12 +63,14 @@ public class MainMenuController {
     public void option4(){
         displayMessage.promptContact();
         String add = scan.nextLine();
-        if (controller.addContact(add, user.getId())){
+        System.out.println(user.getContactsList());
+        if (controller.addContact(add, user.getUsername())){
             displayMessage.successContact();
         }
         else{
             displayMessage.failedContact();
         }
+        System.out.println(user.getContactsList());
     }
 
     /**
@@ -82,7 +83,7 @@ public class MainMenuController {
     /**
      * Responds to menu option 2
      */
-    public void option2(){
+    /**public void option2(){
         displayMessage.promptRecipient();
         String receiver = scan.nextLine();
         displayMessage.promptMessage();
@@ -92,7 +93,7 @@ public class MainMenuController {
             displayMessage.successMessage();
         }
         displayMessage.failedMessage();
-    }
+    }**/
 
     /**
      * Responds to menu option 6
@@ -152,4 +153,5 @@ public class MainMenuController {
     public void option9(){
         displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
     }
+    public void option10(){}
 }

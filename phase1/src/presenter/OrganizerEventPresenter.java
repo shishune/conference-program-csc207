@@ -33,11 +33,12 @@ public class OrganizerEventPresenter extends EventPresenter{
         System.out.println(generic3+ "added.");
     }
 
+
     /**
      * Message informing that organizer double-booked speaker
      * */
     public void failedDoubleBookSpeaker(){
-        System.out.println("This speaker is double-booked at this time. Please enter another time.");
+        System.out.println("This speaker is booked at this time. Please enter another time.");
     }
 
     /**

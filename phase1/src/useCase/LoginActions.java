@@ -24,21 +24,21 @@ public class LoginActions {
     public String isLogin(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
 
         if (organizerActions.organizerExists(username)){
-            Organizer user = organizerActions.returnOrganizersUsernameHashMap().get(username);
+            Organizer user = organizerActions.returnUsernameHashMap().get(username);
             if(user.getPassword().equals(password)) {
                 user.setLogin(true);
                 return "O";
             }
         }
         else if (speakerActions.speakerExists(username)){
-            Speaker user = speakerActions.returnSpeakerUsernameHashMap().get(username);
+            Speaker user = speakerActions.returnUsernameHashMap().get(username);
             if(user.getPassword().equals(password)) {
                 user.setLogin(true);
                 return "S";
             }
         }
         else if (attendeeActions.attendeeExists(username)){
-            Attendee user = attendeeActions.returnAttendeesUsernameHashMap().get(username);
+            Attendee user = attendeeActions.returnUsernameHashMap().get(username);
             if(user.getPassword().equals(password)) {
                 user.setLogin(true);
                 return "A";
