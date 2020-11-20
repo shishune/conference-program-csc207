@@ -108,7 +108,9 @@ public class UserController {
     public boolean addContact(String addMe, String toMe) { // toMe should be a username
         if (user != null) {
             User me = user.findUserFromUsername(toMe);
+
             System.out.println(me.getContactsList());
+
             HashMap<String, User> userUsernameHashMap = returnUserUsernameHashMap();
 
             return user.addUserContactList(toMe, addMe, userUsernameHashMap);
