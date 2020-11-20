@@ -57,6 +57,11 @@ public class OrganizerEventPresenter extends EventPresenter{
     /**
      * Asks for title of event to add
      */
+
+    public void promptRescheduleMethod(){
+        System.out.println("Enter the name of the event to be cancelled.");
+    }
+
     public void promptTitle(){
         System.out.println("Enter the title of the event you want to add.");
     }
@@ -76,7 +81,7 @@ public class OrganizerEventPresenter extends EventPresenter{
      * Asks for speaker
      */
     public void promptSpeaker(){
-        System.out.println("Enter speaker username or enter NEW if you want to make a new speaker");
+        System.out.println("Enter speaker username.");
     }
     /**
      * Asks for room
@@ -90,4 +95,8 @@ public class OrganizerEventPresenter extends EventPresenter{
     public void viewall(){
         System.out.println("Press 'x' to view the list of events organized by you.");
     }
+
+    public void eventExists(){System.out.println("This event name is already taken.");}
+
+    public void noEvent(){System.out.println("This event does not exist.");}
 }

@@ -13,7 +13,7 @@ import controller.UserController;
  * */
 public class MessagePresenter {
     /**
-     * Dislay messages
+     * Display messages
      * */
     public void displayMessages (UserController controller, String fromMe, String toMe) {
         ArrayList<ArrayList<String>> messagesList = controller.viewMessages(fromMe, toMe);
@@ -28,7 +28,7 @@ public class MessagePresenter {
         }
     }
     /**
-     * Prompt for recicient
+     * Prompt for recipient
      * */
     public void promptRecipient(){
         System.out.println("To whom would you like to send this message? Enter a username.");

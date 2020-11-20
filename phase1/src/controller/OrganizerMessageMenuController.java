@@ -46,21 +46,6 @@ public class OrganizerMessageMenuController{
         else{
             displayMessage.eventNotCreated();
         }
-    }
-
-    public void option7() {
-        displayMessage.promptCancelMethod();
-        String option = scan.nextLine();
-        if (option.equals("x") || option.equals("X")) {
-            displayMessage.promptCancelMethod();
-            String event = scan.nextLine();
-        //    cancelEvent(event);
-        } else {
-            displayMessage.promptCancelMethod();
-            String event = scan.nextLine();
-          //  String dateTime = getDateTimeInput();
-          //  rescheduleEvent(event, dateTime);
-        }
 
     }
 
