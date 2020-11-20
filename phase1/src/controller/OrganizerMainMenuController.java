@@ -185,6 +185,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         } else {
             displayEvent.promptCancelEvent();
             String event = scan.nextLine();
+            boolean catcher = true;
             String dateTime = getDateTimeInput();
             rescheduleEvent(event, dateTime);
         }
@@ -192,6 +193,22 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     public void option8() {
+        displayEvent.viewall();
+        String option = scan.nextLine();
+        if (option.equals("x") || option.equals("X")) {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            cancelEvent(event);
+        } else {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            String dateTime = getDateTimeInput();
+            rescheduleEvent(event, dateTime);
+        }
+
+    }
+
+    public void option5() {
         displayEvent.viewall();
         String option = scan.nextLine();
         if (option.equals("x") || option.equals("X")) {
