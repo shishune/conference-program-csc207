@@ -27,3 +27,5 @@ public class AttendeeController extends UserController{
         return this.attendee.removeEventFromUser(event, username);
     }
 }
+
+//hello
