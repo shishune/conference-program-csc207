@@ -167,7 +167,7 @@ public class UserController {
         if (user != null){
             List<String> usersList = user.findUserFromId(userid).getContactsList();
             for (String id : usersList) {
-                contacts.add(user.findUserFromId(userid).getUsername());
+                contacts.add(user.findUserFromId(id).getUsername());
             }
             // TODO i think theres something wrong with the for loop here
         }

@@ -74,6 +74,7 @@ public class MessagePresenter {
         if (usersList != null){
             for (String name:usersList){
                 System.out.println(count+". "+name);
+                count += 1;
             }
         }
     }
