@@ -183,7 +183,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             String event = scan.nextLine();
             cancelEvent(event);
         } else {
-            displayEvent.promptCancelEvent();
+            displayEvent.promptRescheduleMethod();
             String event = scan.nextLine();
             boolean catcher = true;
             String dateTime = getDateTimeInput();
