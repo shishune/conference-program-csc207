@@ -26,6 +26,8 @@ public class SpeakerMainMenuController extends MainMenuController{
         super(user, speakerController);
         this.displayMessage = new SpeakerMessagePresenter();
         this.displayEvent = new EventPresenter();
+        this.user = user;
+        this.controller = speakerController;
     }
     /**
      * Responds to menu option 2

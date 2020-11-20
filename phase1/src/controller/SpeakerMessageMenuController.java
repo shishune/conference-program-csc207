@@ -1,5 +1,7 @@
 package controller;
 import presenter.SpeakerMessagePresenter;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,11 +29,12 @@ public class SpeakerMessageMenuController{
      * Responds to menu option 1
      */
     public void option1(){
-        displayMessage.promptMessage();
+        displayMessage.promptMessage(); // enter your message
         String content = scan.nextLine();
-        displayMessage.promptListEvents();
-        List<String> events = new ArrayList<String>();
-        while (true){
+        displayMessage.promptListEvents(); //
+        String eventEntry = scan.nextLine();
+        String[] events = eventEntry.split(",");
+        /*while (true){
             String event = scan.nextLine();
             if (event.equals("x")||event.equals("X")){
                 break;
@@ -47,15 +50,23 @@ public class SpeakerMessageMenuController{
                 //scan.next();
             }
 
-        }
-        for (String event : events) {
-            if (!controller.sendMessages(event, content)){
-                displayMessage.noAttendees();
-                break;
+        }*/
+        //System.out.println("OPTION 1");
+        //System.out.println(controller);
+        if(controller != null) {
+            //System.out.println("controller not null");
+            //System.out.println(events);
+            for (String event : events) {
+                if (!controller.sendMessages(event, content)) {
+                    displayMessage.noAttendees();
+                    break;
+                } else {
+                    //System.out.println("Else");
+                    controller.sendMessages(event, content);
+                }
             }
-            controller.sendMessages(event, content);
+            displayMessage.successMessage();
         }
-
     }
 
     public void option5(){
