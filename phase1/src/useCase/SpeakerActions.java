@@ -40,6 +40,7 @@ public class SpeakerActions extends UserAccountActions {
         //addUsernameToHashMap(userSpeaker);
         //speakerUsername.put(userId, userSpeaker);
         //speakerID.put(username, userSpeaker);
+
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }

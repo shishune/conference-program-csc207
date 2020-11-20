@@ -136,10 +136,13 @@ public class EventActions  {
     // edited to interact well with presenter
     public Event createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
+
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
+
             GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
             System.out.println(newID);
+
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
         return null;
@@ -166,32 +169,36 @@ public class EventActions  {
      * @param roomID id of room
      */
     public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
-                          List<String> attendees, String roomID){
-        if (attendees.get(0).equals("") && attendees.size() == 1){ // not certain second one is necessary
-            attendees = new ArrayList<>();
-        }
-        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
-        events.put(eventID, newEvent);
-        eventNames.put(title, newEvent);
-        this.attendees.put(eventID, attendees);
+                          List<String> attendees, String roomID) {
+        if (attendees.size() == 1) {
+            if (attendees.get(0).equals("")) { // not certain second one is necessary
+                attendees = new ArrayList<>();
+            }
+            Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
+            events.put(eventID, newEvent);
+            eventNames.put(title, newEvent);
+            this.attendees.put(eventID, attendees);
 
-        if (speakerSchedule.containsKey(speakerId)){
-            speakerSchedule.get(speakerId).add(dateTime);
+            if (speakerSchedule.containsKey(speakerId)) {
+                speakerSchedule.get(speakerId).add(dateTime);
 
-        } else {
-            List<String> speakerTimes = new ArrayList<>();
-            speakerTimes.add(dateTime);
-            speakerSchedule.put(speakerId, speakerTimes);
-        }
-        if (roomSchedule.containsKey(roomID)){
-            roomSchedule.get(roomID).add(dateTime);
+            } else {
+                List<String> speakerTimes = new ArrayList<>();
+                speakerTimes.add(dateTime);
+                speakerSchedule.put(speakerId, speakerTimes);
+            }
+            if (roomSchedule.containsKey(roomID)) {
+                roomSchedule.get(roomID).add(dateTime);
 
-        } else {
-            List<String> roomTimes = new ArrayList<>();
-            roomTimes.add(dateTime);
-            roomSchedule.put(roomID, roomTimes);
+            } else {
+                List<String> roomTimes = new ArrayList<>();
+                roomTimes.add(dateTime);
+                roomSchedule.put(roomID, roomTimes);
+            }
+            System.out.println(speakerSchedule);
+            return newEvent;
         }
-        return newEvent;
+        return null;
     }
 
     /***
@@ -295,8 +302,9 @@ public class EventActions  {
      * @return true if the room is in fact available
      * */
     public boolean isSpeakerFree(String speakerID, String dateTime){
-        List<String> SpeakerTime = this.speakerSchedule.get(speakerID);
-
+        System.out.println("INSIDE FUNCTION");
+        System.out.println(speakerSchedule);
+        List<String> SpeakerTime = speakerSchedule.get(speakerID);
         if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
             return false;
         }

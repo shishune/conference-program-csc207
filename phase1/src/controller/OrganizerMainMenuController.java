@@ -95,16 +95,17 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
 
-            if (!(room == null)) {
-                if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
-                    roomID = room.returnHashMap().get(roomName).getRoomId();
-                    catcher = false;
-                }
-                else {
-                    displayMessage.badRoom();
-                    String reply = scan.nextLine();
-                    if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
-                        option9();
+            if (room != null) {
+                if (room.returnRoomUsernameHashMap() != null) {
+                    if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
+                        roomID = room.returnRoomUsernameHashMap().get(roomName).getRoomId();
+                        catcher = false;
+                    } else {
+                        displayMessage.badRoom();
+                        String reply = scan.nextLine();
+                        if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
+                            option9();
+                        }
                     }
                 }
             }
@@ -155,6 +156,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null) {
+
             List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
             if (checks.size() == 1) {
                 displayEvent.successAddEvent();
@@ -178,10 +180,16 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option7() {
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
+
         if (option.equals("x") || option.equals("X")) {
-            displayEvent.promptCancelEvent();
-            String event = scan.nextLine();
-            cancelEvent(event);
+
+            boolean catcher = true;
+            while(catcher){
+                displayEvent.promptCancelEvent();
+                String eventCancel = scan.nextLine();
+                cancelEvent(eventCancel);
+                break;
+            }
         }
         else {
             displayEvent.promptRescheduleMethod();
