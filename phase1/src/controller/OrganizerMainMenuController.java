@@ -250,6 +250,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     }
                 }
             } else {
+                organizer.
                 System.out.println("I didnt code this yet rip");
             }
 
