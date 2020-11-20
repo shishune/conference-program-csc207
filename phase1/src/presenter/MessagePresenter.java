@@ -70,7 +70,12 @@ public class MessagePresenter {
     public void failedContact(){
         System.out.println("This username is not valid.");
     }
-
+    /**
+     * Message of failed contact
+     * */
+    public void sameUserContact(){
+        System.out.println("This username is your username");
+    }
     /**
      * Message informing message sent
      * */
@@ -83,13 +88,24 @@ public class MessagePresenter {
      * */
     public void displayContacts(UserController controller, String userId){
         List<String> usersList = controller.viewContacts(userId);
-        int count = 1;
-        if (usersList != null){
-            for (String name:usersList){
-                System.out.println(count+". "+name);
-                count += 1;
+        if(usersList.size() == 0){
+            noContacts();
+        } else {
+            int count = 1;
+            if (usersList != null) {
+                for (String name : usersList) {
+                    System.out.println(count + ". " + name);
+                    count += 1;
+                }
             }
         }
+    }
+    /**
+     * Message informing user they have no contacts
+     * */
+    public void noContacts(){
+        System.out.println("You currently have no contacts :(");
+        System.out.println("Add a friend through option 4!");
     }
 
     /**
@@ -97,5 +113,19 @@ public class MessagePresenter {
      * */
     public void failedMessage(){
         System.out.println("Your message could not be sent. Please check if the recipient is valid.");
+    }
+
+    /**
+     * Message informing user is signed up for no events
+     * */
+    public void noEventsSignUp(){
+        System.out.println("You are not signed up for any events.");
+    }
+
+    /**
+     * Message informing user there are no events
+     * */
+    public void noEvents(){
+        System.out.println("There are no events available.");
     }
 }

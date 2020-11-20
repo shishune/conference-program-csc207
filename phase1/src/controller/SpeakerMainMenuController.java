@@ -33,6 +33,8 @@ public class SpeakerMainMenuController extends MainMenuController {
     private EventPresenter displayEvent;
     private EventActions eventActions;
     private AttendeeActions attendeeActions;
+    private RoomActions roomActions;
+    private SpeakerActions speakerActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -41,8 +43,8 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions) {
-        super(user, speakerController);
+    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions) {
+        super(user, speakerController, roomActions, speakerActions);
         this.user = user;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
@@ -51,6 +53,7 @@ public class SpeakerMainMenuController extends MainMenuController {
         this.controller = speakerController;
         this.eventActions = eventActions;
         this.attendeeActions = attendeeActions;
+        this.roomActions = roomActions;
     }
 
     /**
@@ -81,7 +84,8 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 6
+     * Responds to menu option 4
+     * Add a contact
      */
 
     public void option4(){
@@ -118,15 +122,13 @@ public class SpeakerMainMenuController extends MainMenuController {
             }
 
 
-
-            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), e1.getRoomID(), e1.getAttendees().toString()));
+            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), roomActions.findRoomFromId(e1.getRoomID()).getRoomName()));
             miniList.add(newList.toString());
 
             stringE.add(miniList);
         }
-        System.out.println(stringE);
 
-        //displayEvent.viewEvents(user.getEventList());
+        displayEvent.viewEvents(stringE);
     }
 }
 

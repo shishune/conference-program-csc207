@@ -1,7 +1,9 @@
 package controller;
-import presenter.MessagePresenter;
-import presenter.EventPresenter;
 import entities.User;
+import presenter.EventPresenter;
+import presenter.MessagePresenter;
+import useCase.RoomActions;
+import useCase.SpeakerActions;
 
 import java.util.*;
 
@@ -13,8 +15,10 @@ import java.util.*;
 public class MainMenuController extends AccountController{
     private UserController controller;
     private User user;
+    private RoomActions room;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
+    private SpeakerActions speakerActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -22,11 +26,13 @@ public class MainMenuController extends AccountController{
      * @param user the user
      * @param controller the controller responsible for user
      */
-    public MainMenuController(User user, UserController controller){
+    public MainMenuController(User user, UserController controller, RoomActions room, SpeakerActions speakerActions){
         this.controller = controller;
         this.user = user;
         this.displayMessage = new MessagePresenter();
         this.displayEvent = new EventPresenter();
+        this.room = room;
+        this.speakerActions = speakerActions;
     }
 
     /**
@@ -37,8 +43,6 @@ public class MainMenuController extends AccountController{
         String receiver = scan.nextLine();
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
-        //HashMap<String, User> userNames = controller.returnUsernameHashMap();
-        //String receiverId = userNames.get(receiver).getId();
         System.out.println("RECEIVER: " + receiver);
         System.out.println("USER: " + user.getUsername());
         if (controller.sendMessage(user.getUsername(), receiver, content)){
@@ -89,42 +93,29 @@ public class MainMenuController extends AccountController{
         displayMessage.promptContact();
         String add = scan.nextLine();
         System.out.println(user.getContactsList());
-        //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
         if (controller.returnUserUsernameHashMap().containsKey(add)){
             if (controller.addContact(add, user.getUsername())){
                 displayMessage.successContact();
+            } else {
+                displayMessage.sameUserContact();
             }
         }
         else{
             displayMessage.failedContact();
         }
-        //System.out.println(user.getContactsList());
     }
 
     /**
-     * Responds to menu option 5
+     * Responds to menu option 5- view all contacts
      */
     public void option5(){ //view all contacts
+
         displayMessage.displayContacts(controller,user.getId());
     }
 
-    /**
-     * Responds to menu option 2
-     */
-    /**public void option2(){
-        displayMessage.promptRecipient();
-        String receiver = scan.nextLine();
-        displayMessage.promptMessage();
-        String content = scan.nextLine();
-
-        if (controller.sendMessage(user.getId(),receiver, content)){
-            displayMessage.successMessage();
-        }
-        displayMessage.failedMessage();
-    }**/
 
     /**
-     * Responds to menu option 6
+     * Responds to menu option 6- sign up for event
      */
     public void option6(){
         option8();
@@ -150,12 +141,10 @@ public class MainMenuController extends AccountController{
                 displayEvent.failed();
             }
         }
-
-
     }
 
     /**
-     * Responds to menu option 7
+     * Responds to menu option 7- cancel attendance to an event
      */
     public void option7(){
         option9();
@@ -171,17 +160,35 @@ public class MainMenuController extends AccountController{
     }
 
     /**
-     * Responds to menu option 8
+     * Responds to menu option 8- view all events
      */
     public void option8(){
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+
+        List<List<String>> eventsList = controller.viewAvailableSchedule(user.getUsername());
+        if (eventsList.size() == 0){
+            displayMessage.noEvents();
+        } else {
+
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+            }
+            displayEvent.displayEvents(eventsList);
+        }
     }
 
     /**
-     * Responds to menu option 9
+     * Responds to menu option 9- view events user is signed up for
      */
     public void option9(){
-        displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
+        List<List<String>> eventsList = controller.viewOwnSchedule(user.getUsername());
+        if (eventsList.size() == 0){
+            displayMessage.noEventsSignUp();
+        } else {
+            displayEvent.displayEvents(eventsList);
+        }
+
     }
     public void option10(){}
+
 }

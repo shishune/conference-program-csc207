@@ -1,12 +1,7 @@
 package controller;
 
-import entities.Attendee;
-import gateway.LoadUp;
-import gateway.LoadUpIGateway;
-import presenter.AccountPresenter;
-import useCase.*;
 import gateway.Store;
-import java.lang.*;
+import useCase.*;
 
 /**
  * Allows user to exit the system with their information stored
@@ -51,8 +46,6 @@ public class LogOut {
      */
     public void loggingOut(String username, String type) {
 
-        // Store store = new Store();
-        // UserAccountActions u = new UserAccountActions();
         // login procedure...
         store.storeMessages(messageActions);
         store.storeRooms(roomActions);

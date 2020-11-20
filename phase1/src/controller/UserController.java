@@ -256,7 +256,8 @@ public class UserController {
      * Shows the events a given user is attending
      *
      * @param user the user who wants to see their events
-     * @return string of events that an user is attending
+     * @return list of the events that a user is attending in the form of a list
+     * with the string representation of each aspect (title, dateTime, etc)
      */
 
     public List<List<String>> viewOwnSchedule(String user) {

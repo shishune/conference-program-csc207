@@ -1,6 +1,5 @@
 package controller;
 
-import entities.User;
 import useCase.*;
 import presenter.AccountPresenter;
 import java.util.Scanner;
@@ -26,7 +25,6 @@ public class LogIn {
     }
 
 
-    // is this stuff suppose to go in a login presenter? sorry if this was temporary and u were meaning to change it tho
     public void signUp(OrganizerActions organizerActions, SpeakerActions speakerActions,
                              AttendeeActions attendeeActions) {
 
@@ -56,7 +54,6 @@ public class LogIn {
     //TODO: WHAT IF THEY ENTER SOMETHING THATS NOT 123?
     private boolean signUpCheck(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions,
                            AttendeeActions attendeeActions) {
-        // OrganizerController org = new OrganizerController();
         String userType = scan.nextLine();
 
         if (userType.equals("1")) {

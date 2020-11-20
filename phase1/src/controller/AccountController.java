@@ -5,6 +5,8 @@ import gateway.Store;
 import useCase.*;
 import entities.*;
 import presenter.*;
+
+import java.util.HashMap;
 import java.util.Scanner;
 // A0000000000000002,sejal,1,,,false,false
 /**
@@ -71,7 +73,7 @@ public class AccountController {
                     Attendee user = attendeeActions.returnUsernameHashMap().get(username);
                     accountDisplay = new AttendeeAccountPresenter();
                     AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
-                    menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController);
+                    menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController, roomActions, speakerActions);
                 } else if (type.equals("S")) { //indicates speaker
                     // UserController userController = new UserController(eventActions, roomActions, messageActions);
                     Speaker user = speakerActions.returnUsernameHashMap().get(username);
@@ -79,7 +81,7 @@ public class AccountController {
                     SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController, eventActions, attendeeActions);
+                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController, eventActions, attendeeActions, roomActions, speakerActions);
                 } else{
                     // UserController controller = new UserController(eventActions, roomActions, messageActions);
                     Organizer user = organizerActions.returnUsernameHashMap().get(username);
@@ -87,7 +89,7 @@ public class AccountController {
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions);
+                    menuController = (OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions);
                 }
 
                 while (true) {
@@ -142,6 +144,7 @@ public class AccountController {
             }
         }
     }
+
 
 //    public EventActions getEvents(){
 //        LoadUpIGateway g = new LoadUp();
