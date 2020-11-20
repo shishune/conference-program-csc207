@@ -292,7 +292,9 @@ public class OrganizerActions extends UserAccountActions {
                 String[] contacts = organizerInfo[3].split("%%");
 
                 for (String e : events) {
-                    eventList.add(e);
+                    if (!e.equals("")) {
+                        eventList.add(e);
+                    }
                 }
 
                 for (String c : contacts) {

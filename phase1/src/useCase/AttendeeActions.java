@@ -267,7 +267,9 @@ public class AttendeeActions extends UserAccountActions {
                 String[] events = attendeeInfo[4].split("%%");
                 String[] contacts = attendeeInfo[3].split("%%");
                 for (String e : events) {
-                    eventList.add(e);
+                    if (!e.equals("")) {
+                        eventList.add(e);
+                    }
                 }
                 for (String c : contacts) {
                     if (!c.equals("")) {
