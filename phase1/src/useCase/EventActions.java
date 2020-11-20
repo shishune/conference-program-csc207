@@ -1,26 +1,24 @@
 package useCase;
-import java.util.*;
-
-import entities.*;
+import entities.Event;
 import gateway.LoadUpIGateway;
+
+import java.util.*;
 
 
 public class EventActions  {
     private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
 
-    // hashmap room key and time as the value
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
 
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
     private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
     private LoadUpIGateway loader;
-    //private GenerateID generate = new GenerateID(loader);
     private List<String> eventList;
 
 
     public EventActions(LoadUpIGateway loader) {
-        loadAllEvents(loader); // gets all events from message.csv and add those events to a hashmap of all events
+        loadAllEvents(loader);
         addLoadedToHashMap();
         this.loader = loader;
         roomSchedule.put("Toronto", new ArrayList<String>());
@@ -105,13 +103,11 @@ public class EventActions  {
 
     /** gets list of event from the IGateway **/
     private void loadAllEvents(LoadUpIGateway loader) {
-        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         eventList = loader.getEvents();
     }
 
     /** Adds events loaded from the csv to <events> **/
     private void addLoadedToHashMap() {
-        //System.out.println(conversations);
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
@@ -123,25 +119,11 @@ public class EventActions  {
     }
 
 
-//    /***
-//     * gets list of events from the IGateway
-//     * @param loader
-//     */
-//    private void getAllEvents(LoadUpIGateway loader) {
-//        List<String> eventList = loader.getEventsList();
-//        for (String event: eventList){
-//            String[] eventAttributes = event.split(",");
-//            List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
-//            loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
-//                    eventAttendees, eventAttributes[5]);
-//        }
-//    }
 
     /**
      * Create a new event based on the parmeters provided
      * @return true if the event was created
      * */
-    // edited to interact well with presenter
     public Event createEvent(String title, String speakerId, String dateTime,
                                List<String> attendees, String roomID){
 
@@ -205,8 +187,6 @@ public class EventActions  {
         }
         System.out.println(speakerSchedule);
         return newEvent;
-//        }
-//        return null;
     }
 
     /***
@@ -217,7 +197,6 @@ public class EventActions  {
      */
     public boolean addAttendee(String eventID, String attendeeID){
         List<String> eventAttendees = events.get(eventID).getAttendees();
-        //eventAttendees.addAttendee(attendeeID);
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
