@@ -97,7 +97,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             if (!(room == null)) {
                 if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
-                    roomID = roomName;
+                    roomID = room.returnHashMap().get(roomName).getRoomId();
                     catcher = false;
                 }
                 else {
