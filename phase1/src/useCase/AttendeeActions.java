@@ -195,17 +195,17 @@ public class AttendeeActions extends UserAccountActions {
     /**
      * Removes an event from existing list of events from an user.
      *
-     * @param event the event to be removed
-     * @param user  the user who's event list is updated
+     * @param eventID the event to be removed
+     * @param userID  the user who's event list is updated
      * @return true if event is removed successfully, false if not
      */
 
-    public boolean removeEventFromUser(String event, String user) {
-        Attendee userOne = attendeeUsernameHashMap.get(user);
-        boolean isPresent = userOne.getEventList().contains(event);
+    public boolean removeEventFromUser(String eventID, String userID) {
+        Attendee userOne = attendeesHashMap.get(userID);
+        boolean isPresent = userOne.getEventList().contains(eventID);
         if (isPresent) {
             List<String> userEvents = userOne.getEventList();
-            userEvents.remove(event);
+            userEvents.remove(eventID);
             userOne.setEventList(userEvents);
             return true;
         }
