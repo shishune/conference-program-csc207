@@ -287,7 +287,9 @@ public class SpeakerActions extends UserAccountActions {
                 String[] events = speakerInfo[4].split("%%");
                 String[] contacts = speakerInfo[3].split("%%");
                 for (String e : events) {
-                    eventList.add(e);
+                    if (!e.equals("")) {
+                        eventList.add(e);
+                    }
                 }
                 for (String c : contacts) {
                     if (!c.equals("")){

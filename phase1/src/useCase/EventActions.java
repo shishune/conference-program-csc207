@@ -307,7 +307,7 @@ public class EventActions  {
     public List<String> storeEvents(){
         List<String> storedEvents = new ArrayList();
         for(Map.Entry<String, Event> event : events.entrySet()) {
-            storedEvents.add(event.getValue().string());
+            storedEvents.add(event.getValue().string()+"\n");
         }
         return storedEvents;
 
