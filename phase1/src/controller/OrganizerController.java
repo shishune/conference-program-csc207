@@ -66,18 +66,20 @@ public class OrganizerController extends UserController{
 
     /***
      * cancel an event
-     * @param eventID
+     * @param eventName
      * @return true if the event was successfully canceled (ie if it exists, then it will be cancelled)
      */
 
     @Override
-    public boolean cancelEvent(String eventID){
-        if (this.eventActions.eventExists(eventID)){
-            List<String> eventAttendees = this.eventActions.cancelEvent(eventID);
-            for (String attendeeID: eventAttendees){
-                this.organizerActions.removeEventFromUser(eventID, attendeeID);
+    public boolean cancelEvent(String eventName){
+        if (this.eventActions.getEventNames().containsKey(eventName)) {
+            List<String> eventAttendees = this.eventActions.cancelEvent(eventName);
+            if (eventAttendees != null) {
+                for (String attendeeID : eventAttendees) {
+                    this.organizerActions.removeEventFromUser(eventName, attendeeID);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

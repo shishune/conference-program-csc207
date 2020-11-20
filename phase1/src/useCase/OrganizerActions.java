@@ -225,13 +225,22 @@ public class OrganizerActions extends UserAccountActions {
      * */
 
     public boolean removeEventFromUser(String event, String user) {
-        Organizer userOne = organizerUsernameHashMap.get(user);
-        boolean isPresent = userOne.getEventList().contains(event);
-        if (isPresent) {
-            List<String> userEvents = userOne.getEventList();
-            userEvents.remove(event);
-            userOne.setEventList(userEvents);
-            return true;
+        if (organizerUsernameHashMap != null) {
+                Organizer userOne = organizerUsernameHashMap.get(user);
+            if (userOne != null) {
+                if (userOne.getEventList() != null) {
+                    boolean isPresent = userOne.getEventList().contains(event);
+                    if (isPresent) {
+                        List<String> userEvents = userOne.getEventList();
+                        userEvents.remove(event);
+                        userOne.setEventList(userEvents);
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return false;
         }
         return false;
     }
