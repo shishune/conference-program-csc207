@@ -106,7 +106,8 @@ public class SpeakerMainMenuController extends MainMenuController {
 
     public void option5() { //view all contacts
         displayMessage.displayContacts(controller, user.getId());
-    }
+}
+
 
     public void option6() {
         List<String> e = user.getEventList();
