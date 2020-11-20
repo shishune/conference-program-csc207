@@ -35,8 +35,8 @@ public class EventActions  {
         return events.get(eventID);
     }
     /***
-     * return event of given ID
-     * @param eventID
+     * return event of given name
+     * @param eventName
      * @return events
      */
     public Event getEventFromName(String eventName){
@@ -178,35 +178,35 @@ public class EventActions  {
      */
     public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID) {
-        if (attendees.size() == 1) {
-            if (attendees.get(0).equals("")) { // not certain second one is necessary
-                attendees = new ArrayList<>();
-            }
-            Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
-            events.put(eventID, newEvent);
-            eventNames.put(title, newEvent);
-            this.attendees.put(eventID, attendees);
 
-            if (speakerSchedule.containsKey(speakerId)) {
-                speakerSchedule.get(speakerId).add(dateTime);
-
-            } else {
-                List<String> speakerTimes = new ArrayList<>();
-                speakerTimes.add(dateTime);
-                speakerSchedule.put(speakerId, speakerTimes);
-            }
-            if (roomSchedule.containsKey(roomID)) {
-                roomSchedule.get(roomID).add(dateTime);
-
-            } else {
-                List<String> roomTimes = new ArrayList<>();
-                roomTimes.add(dateTime);
-                roomSchedule.put(roomID, roomTimes);
-            }
-            System.out.println(speakerSchedule);
-            return newEvent;
+        if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
+            attendees = new ArrayList<>();
         }
-        return null;
+        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
+        events.put(eventID, newEvent);
+        eventNames.put(title, newEvent);
+        this.attendees.put(eventID, attendees);
+
+        if (speakerSchedule.containsKey(speakerId)) {
+            speakerSchedule.get(speakerId).add(dateTime);
+
+        } else {
+            List<String> speakerTimes = new ArrayList<>();
+            speakerTimes.add(dateTime);
+            speakerSchedule.put(speakerId, speakerTimes);
+        }
+        if (roomSchedule.containsKey(roomID)) {
+            roomSchedule.get(roomID).add(dateTime);
+
+        } else {
+            List<String> roomTimes = new ArrayList<>();
+            roomTimes.add(dateTime);
+            roomSchedule.put(roomID, roomTimes);
+        }
+        System.out.println(speakerSchedule);
+        return newEvent;
+//        }
+//        return null;
     }
 
     /***
