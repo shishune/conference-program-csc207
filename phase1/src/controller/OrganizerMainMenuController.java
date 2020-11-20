@@ -207,19 +207,9 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     public void option8() {
         displayEvent.viewall();
-        String option = scan.nextLine();
-        if (option.equals("x") || option.equals("X")) {
-            displayEvent.promptCancelEvent();
-            String event = scan.nextLine();
-            cancelEvent(event);
-        } else {
-            displayEvent.promptRescheduleMethod();
-            String event = scan.nextLine();
-            String dateTime = getDateTimeInput();
-            rescheduleEvent(event, dateTime);
-        }
-
+        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
+
 
     public void option5() {
         displayEvent.viewall();
