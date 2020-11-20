@@ -190,6 +190,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 String eventCancel = scan.nextLine();
                 if(event.getEventNames().containsKey(eventCancel)) {
                     cancelEvent(eventCancel);
+                    displayEvent.successCancelEvent();
                     catcher = false;
 
                 }
@@ -217,8 +218,8 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             }
         }
-
     }
+
 
     public void option8() {
         displayEvent.viewall();
@@ -322,14 +323,15 @@ public class OrganizerMainMenuController extends MainMenuController {
      *
      * @param event the event ID
      */
-    private void cancelEvent(String event) {
+    private boolean cancelEvent(String event) {
         if (controller != null) {
             if (controller.cancelEvent(event)) {
-                displayEvent.successCancelEvent();
+                return true;
             } else {
-                displayEvent.failedNoSuchEvent();
+                return false;
             }
         }
+        return false;
     }
 
     /**

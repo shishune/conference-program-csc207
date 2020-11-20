@@ -248,16 +248,17 @@ public class EventActions  {
      * @param eventID
      * @return true if an attendee has been removed from an event that they used to be a part of
      */
-    public List<String> cancelEvent(String eventID){
-        Event event = this.events.get(eventID);
-        if (event != null) {
+    public List<String> cancelEvent(String eventName){
+        Event eventObject = eventNames.get(eventName);
+        String eventID = eventObject.getId();
+        if (eventObject != null) {
             this.events.remove(eventID);
             List<String> eventAttendees = this.attendees.get(eventID);
             this.attendees.remove(eventID);
             ArrayList<String> a = new ArrayList<String>();
-            a.add(event.getDateTime());
-            this.speakerSchedule.remove(event.getSpeaker(), a);
-            this.roomSchedule.remove(event.getRoomID(), a);
+            a.add(eventObject.getDateTime());
+            this.speakerSchedule.remove(eventObject.getSpeaker(), a);
+            this.roomSchedule.remove(eventObject.getRoomID(), a);
             return eventAttendees;
         }
         return null;

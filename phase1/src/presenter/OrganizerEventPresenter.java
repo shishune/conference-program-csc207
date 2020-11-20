@@ -21,10 +21,10 @@ public class OrganizerEventPresenter extends EventPresenter{
         System.out.println(generic2+ "rescheduled.");
     }
     /**
-     * Message informing that user failed to reschedulled event
+     * Message informing that user failed to rescheduled event
      * */
     public void failedRescheduleEvent(){
-        System.out.println("Failed to reschedule event. Check for conflicts.");
+        System.out.println("Failed to reschedule event. Check for conflicts with either the speaker or room");
     }
     /**
      * Message informing that user added room
@@ -104,5 +104,7 @@ public class OrganizerEventPresenter extends EventPresenter{
 
     public void eventExists(){System.out.println("This event name is already taken.");}
 
-    public void noEvent(){System.out.println("This event does not exist.");}
+    public void noEvent(){System.out.println("This event does not exist, please try again");}
+
+    //public void
 }
