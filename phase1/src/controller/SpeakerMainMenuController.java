@@ -105,6 +105,7 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     public void option6() {
+       // displayEvent.
         List<String> e = user.getEventList();
         List<List<String>> stringE = new ArrayList<>();
 
@@ -116,7 +117,6 @@ public class SpeakerMainMenuController extends MainMenuController {
             for (String attendeeID : e1.getAttendees()) {
                 newList.add(attendeeActions.findUserFromId(attendeeID).getUsername());
             }
-
 
 
             miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), e1.getRoomID(), e1.getAttendees().toString()));

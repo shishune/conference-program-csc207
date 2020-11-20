@@ -177,6 +177,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         if (controller != null) {
 
             List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
+            String eventToAdd = event.getEventNames().get(title).getId();
+            organizer.addEventToUser(eventToAdd, user.getUsername());
+
             if (checks.size() == 1) {
                 displayEvent.successAddEvent();
             } else {
