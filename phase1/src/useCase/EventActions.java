@@ -107,7 +107,7 @@ public class EventActions  {
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                    List<String> eventAttendees = Arrays.asList(eventAttributes[3].split("%%"));
+                    List<String> eventAttendees = Arrays.asList(eventAttributes[4].split("%%"));
                     loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                             eventAttendees, eventAttributes[5]);
             }
@@ -167,6 +167,9 @@ public class EventActions  {
      */
     public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
                           List<String> attendees, String roomID){
+        if (attendees.get(0).equals("") && attendees.size() == 1){ // not certain second one is necessary
+            attendees = new ArrayList<>();
+        }
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
         eventNames.put(title, newEvent);
