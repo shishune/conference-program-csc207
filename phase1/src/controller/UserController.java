@@ -22,7 +22,7 @@ public class UserController {
     private AttendeeActions attendee; // = super.getAttendees();
     private OrganizerActions organizer; // = super.getOrganizers();
     private SpeakerActions speaker; // = super.getSpeakers();
-    private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
+    //private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
     /**
@@ -43,8 +43,18 @@ public class UserController {
 //    public UserController(){};
 
     public HashMap<String, User> returnUsernameHashMap() {
+        HashMap<String, User> usernameHashmap = new HashMap<String, User>();
+        System.out.println("RETURN USER HASH");
+        System.out.println("Attendee: " + attendee);
+        System.out.println("Organizer: " + organizer);
+        System.out.println("Speaker: " + speaker);
+        System.out.println("User: " + user);
+        System.out.println("Hash: " + attendee.returnUsernameHashMap());
+        System.out.println("EMPTY?: " + attendee.returnUsernameHashMap().isEmpty());
         if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()){
+            System.out.println(attendee.returnUsernameHashMap());
             usernameHashmap.putAll(attendee.returnUsernameHashMap());
+            System.out.println(usernameHashmap);
         }
         if (!(organizer == null) && !organizer.returnUsernameHashMap().isEmpty()){
             usernameHashmap.putAll(organizer.returnUsernameHashMap());
@@ -55,6 +65,7 @@ public class UserController {
 //        if (!(user == null) && !user.returnUsernameHashMap().isEmpty()){
 ////            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
 ////        }
+        System.out.println("END USERR HASH");
         return usernameHashmap;
 
     }
@@ -83,11 +94,14 @@ public class UserController {
      * */
     public boolean sendMessage(String sender, String receiver, String content) {
         if (user != null) {
-            System.out.println(organizer.findUserFromUsername(sender));
-            System.out.println(organizer.findUserFromUsername(sender).getContactsList());
-            System.out.println(organizer.findUserFromUsername(sender).getContactsList().contains(receiver));
-            if () { // fill in later?
+            //System.out.println(organizer.findUserFromUsername(sender));
+            //System.out.println(organizer.findUserFromUsername(sender).getContactsList());
+            //System.out.println(organizer.findUserFromUsername(sender).getContactsList().contains(receiver));
+            if (true) { // temp if condition, fill in parentheses later
                 HashMap<String, User> usernameHashMap = returnUsernameHashMap();
+                System.out.println(usernameHashMap);
+                System.out.println(usernameHashMap.get(sender));
+                System.out.println(usernameHashMap.get(sender).getId());
                 String senderId = usernameHashMap.get(sender).getId();
                 String receiverId = usernameHashMap.get(receiver).getId();
                 message.createMessage(senderId, receiverId, content);
