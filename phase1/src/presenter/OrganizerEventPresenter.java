@@ -90,4 +90,6 @@ public class OrganizerEventPresenter extends EventPresenter{
     public void viewall(){
         System.out.println("Press 'x' to view the list of events organized by you.");
     }
+
+    public void eventExists(){System.out.println("This event name is already taken.");}
 }

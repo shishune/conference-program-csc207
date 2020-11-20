@@ -7,6 +7,7 @@ import gateway.LoadUpIGateway;
 
 public class EventActions  {
     private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
+    private HashMap<String, Event> eventNames = new HashMap<String, Event>();
 
     // hashmap room key and time as the value
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
@@ -34,6 +35,7 @@ public class EventActions  {
         return events.get(eventID);
     }
 
+
     /***
      * return if the event exists in events
      * @param eventID
@@ -49,6 +51,14 @@ public class EventActions  {
      */
     public HashMap<String, Event> getEvents(){
         return events;
+    }
+
+    /***
+     * return hashmap of all eventNames and the corresponding event object. key: speakerID value: List of date and time
+     * @return hashmap of all eventNames and the corresponding event object
+     */
+    public HashMap<String, Event> getEventNames(){
+        return eventNames;
     }
 
     /***
@@ -157,6 +167,7 @@ public class EventActions  {
                           List<String> attendees, String roomID){
         Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
         events.put(eventID, newEvent);
+        eventNames.put(title, newEvent);
         this.attendees.put(eventID, attendees);
 
         if (speakerSchedule.containsKey(speakerId)){

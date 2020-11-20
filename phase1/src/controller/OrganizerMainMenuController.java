@@ -75,6 +75,15 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayEvent.promptTitle();
         String title = scan.nextLine();
 
+        while(true){
+            if(event.getEvents().containsKey(title)){
+                displayEvent.eventExists();
+            }
+            else{
+                break;
+            }
+        }
+
         boolean catcher = true;
         String dateTime = getDateTimeInput();
         String roomID = "";
