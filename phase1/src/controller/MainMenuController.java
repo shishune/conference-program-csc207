@@ -64,10 +64,11 @@ public class MainMenuController extends AccountController{
         displayMessage.promptContact();
         String add = scan.nextLine();
         System.out.println(user.getContactsList());
-        //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
         if (controller.returnUserUsernameHashMap().containsKey(add)){
             if (controller.addContact(add, user.getUsername())){
                 displayMessage.successContact();
+            } else {
+                displayMessage.sameUserContact();
             }
         }
         else{
@@ -77,9 +78,10 @@ public class MainMenuController extends AccountController{
     }
 
     /**
-     * Responds to menu option 5
+     * Responds to menu option 5- view all contacts
      */
     public void option5(){ //view all contacts
+
         displayMessage.displayContacts(controller,user.getId());
     }
 
@@ -99,7 +101,7 @@ public class MainMenuController extends AccountController{
     }**/
 
     /**
-     * Responds to menu option 6
+     * Responds to menu option 6- sign up for event
      */
     public void option6(){
         option8();
@@ -130,7 +132,7 @@ public class MainMenuController extends AccountController{
     }
 
     /**
-     * Responds to menu option 7
+     * Responds to menu option 7- cancel attendance to an event
      */
     public void option7(){
         option9();
@@ -146,17 +148,29 @@ public class MainMenuController extends AccountController{
     }
 
     /**
-     * Responds to menu option 8
+     * Responds to menu option 8- view all events
      */
     public void option8(){
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+
+        List<List<String>> eventsList = controller.viewAvailableSchedule(user.getUsername());
+        if (eventsList.size() == 0){
+            displayMessage.noEvents();
+        } else {
+            displayEvent.displayEvents(eventsList);
+        }
     }
 
     /**
-     * Responds to menu option 9
+     * Responds to menu option 9- view events user is signed up for
      */
     public void option9(){
-        displayEvent.displayEvents(controller.viewOwnSchedule(user.getUsername()));
+        List<List<String>> eventsList = controller.viewOwnSchedule(user.getUsername());
+        if (eventsList.size() == 0){
+            displayMessage.noEventsSignUp();
+        } else {
+            displayEvent.displayEvents(eventsList);
+        }
+
     }
     public void option10(){}
 }

@@ -83,7 +83,8 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 6
+     * Responds to menu option 4
+     * Add a contact
      */
 
     public void option4(){
