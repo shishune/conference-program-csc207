@@ -13,9 +13,9 @@ public class AttendeeController extends UserController{
 //    private SpeakerActions speaker;
 
     public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
-                              AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
-        super(events, rooms, message, 'a', attendee, organizer, speaker);
-        this.attendee = attendee;
+                              AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) { //hello
+        super(events, rooms, message, 'a', attendee, organizer, speaker); // hello
+        this.attendee = attendee; //hello
     }
 
     @Override
