@@ -165,6 +165,9 @@ public class OrganizerActions extends UserAccountActions {
         System.out.println(userUsernameHashMap);
         System.out.println(user.getContactsList());
         System.out.println(userOne.getId());
+        if(userOne == null || userOne.getId() == null) {
+            return false;
+        }
         boolean isId = user.getContactsList().contains(userOne.getId());
         if (userOne.getIsOrganizer() || user.getId() == userOne.getId() || isId){ // organizers can now message other organizers
             return false;

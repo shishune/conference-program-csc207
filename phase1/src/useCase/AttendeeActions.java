@@ -133,8 +133,11 @@ public class AttendeeActions extends UserAccountActions {
 //        userHashMap.putAll(organizer.returnUsernameHashMap());
 //        userHashMap.putAll(attendeeUsernameHashMap);
         User userOne = userUsernameHashMap.get(addMe);
+        if(userOne == null || userOne.getId() == null) {
+            return false;
+        }
         boolean isId = user.getContactsList().contains(userOne.getId());
-        if (userOne.getIsOrganizer() || user.getId() == userOne.getId() || isId) {
+        if (user.getId() == userOne.getId() || isId) {
             return false;
         } else {
             List<String> toMeContacts = user.getContactsList();
