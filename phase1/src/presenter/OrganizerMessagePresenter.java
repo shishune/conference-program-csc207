@@ -71,6 +71,6 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
 
     public void promptCancelMethod() {
-        System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.")
+        System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.");
     }
 }
