@@ -250,13 +250,17 @@ public class EventActions  {
      */
     public List<String> cancelEvent(String eventID){
         Event event = this.events.get(eventID);
-        this.events.remove(eventID);
-        List<String> eventAttendees = this.attendees.get(eventID);
-        this.attendees.remove(eventID);
-        this.speakerSchedule.remove(event.getSpeaker(), event.getDateTime());
-        this.roomSchedule.remove(event.getRoomID(), event.getDateTime());
-        return eventAttendees;
-
+        if (event != null) {
+            this.events.remove(eventID);
+            List<String> eventAttendees = this.attendees.get(eventID);
+            this.attendees.remove(eventID);
+            ArrayList<String> a = new ArrayList<String>();
+            a.add(event.getDateTime());
+            this.speakerSchedule.remove(event.getSpeaker(), a);
+            this.roomSchedule.remove(event.getRoomID(), a);
+            return eventAttendees;
+        }
+        return null;
     }
 
 

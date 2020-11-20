@@ -59,7 +59,7 @@ public class OrganizerEventPresenter extends EventPresenter{
      */
 
     public void promptRescheduleMethod(){
-        System.out.println("Enter the name of the event to be cancelled.");
+        System.out.println("Enter the name of the event to be rescheduled.");
     }
 
     public void promptTitle(){

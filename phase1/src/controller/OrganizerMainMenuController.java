@@ -188,8 +188,14 @@ public class OrganizerMainMenuController extends MainMenuController {
             while(catcher){
                 displayEvent.promptCancelEvent();
                 String eventCancel = scan.nextLine();
-                cancelEvent(eventCancel);
-                break;
+                if(event.getEventNames().containsKey(eventCancel)) {
+                    cancelEvent(eventCancel);
+                    catcher = false;
+
+                }
+                else {
+                    displayEvent.noEvent();
+                }
             }
         }
         else {
