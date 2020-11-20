@@ -17,9 +17,7 @@ import java.util.List;
 import presenter.EventPresenter;
 import presenter.MessagePresenter;
 import presenter.SpeakerMessagePresenter;
-import useCase.EventActions;
-import useCase.SpeakerActions;
-import useCase.RoomActions;
+import useCase.*;
 
 import java.util.Scanner;
 
@@ -33,6 +31,8 @@ public class SpeakerMainMenuController extends MainMenuController {
     private User user;
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
+    private EventActions eventActions;
+    private AttendeeActions attendeeActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -41,7 +41,7 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController) {
+    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions) {
         super(user, speakerController);
         this.user = user;
         this.controller = speakerController;
@@ -49,6 +49,8 @@ public class SpeakerMainMenuController extends MainMenuController {
         this.displayEvent = new EventPresenter();
         this.user = user;
         this.controller = speakerController;
+        this.eventActions = eventActions;
+        this.attendeeActions = attendeeActions;
     }
 
     /**
@@ -103,11 +105,39 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     public void option6() {
-        displayEvent.viewall();
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+        List<String> e = user.getEventList();
+        List<List<String>> stringE = new ArrayList<>();
+
+        for (String event : e) {
+            List<String> miniList = new ArrayList<>();
+            Event e1 = eventActions.getEvent(event);
+
+            List<String> newList = new ArrayList<>();
+            for (String attendeeID : e1.getAttendees()) {
+                newList.add(attendeeActions.findUserFromId(attendeeID).getUsername());
+            }
+
+
+
+            miniList.addAll(Arrays.asList(e1.getTitle(), e1.getDateTime(), e1.getRoomID(), e1.getAttendees().toString()));
+            miniList.add(newList.toString());
+
+            stringE.add(miniList);
+        }
+        System.out.println(stringE);
+
+        //displayEvent.viewEvents(user.getEventList());
     }
+}
 
 
+//        Event eventObject = event.getEventNames().get(eventName);
+//        String eventID = event.getEventNames().get(eventName).getId();
+//        if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+//            displayEvent.allYourContactsEvent(eventObject.getAttendees()); // hello
+//            catcher = false;
+//
+//    }
 
-
-    }
+//        displayEvent.viewAll();
+//        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));

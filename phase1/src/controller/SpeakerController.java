@@ -69,4 +69,6 @@ public class SpeakerController extends UserController {
         return this.eventActions.getEventAttendees(eventID);
     }
 
+    public List<String> viewEvents(String speakerID){return speakerActions.returnIDHashMap().get(speakerID).getEventList();}
+
 }

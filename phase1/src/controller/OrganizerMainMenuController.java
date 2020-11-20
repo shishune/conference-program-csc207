@@ -222,7 +222,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
     public void option8() {
-        displayEvent.viewall();
+        displayEvent.viewAll();
         displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
 

@@ -79,7 +79,7 @@ public class AccountController {
                     SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController);
+                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController, eventActions, attendeeActions);
                 } else{
                     // UserController controller = new UserController(eventActions, roomActions, messageActions);
                     Organizer user = organizerActions.returnUsernameHashMap().get(username);

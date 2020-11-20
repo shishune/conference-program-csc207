@@ -45,6 +45,15 @@ public class SpeakerActions extends UserAccountActions {
         return userSpeaker;
     }
 
+    public boolean isEventAddedToSpeaker(String eventID, String speakerId){
+        speakerID.get(speakerId).getEventList().add(eventID);
+        return speakerID.get(speakerId).getEventList().contains(eventID);
+    }
+    public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
+        speakerID.get(speakerId).getEventList().remove(eventID);
+        return !speakerID.get(speakerId).getEventList().contains(eventID);
+    }
+
     /**
      * Returns whether speaker is in the database
      * @param username the username of user

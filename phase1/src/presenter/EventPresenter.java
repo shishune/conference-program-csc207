@@ -13,7 +13,7 @@ public class EventPresenter {
     private String generic4 = "Please enter the name of the room you would like to ";
 
     /**
-     * Dislays events
+     * Displays events
      * */
     public void displayEvents(List<List<String>> eventsList){
         int count = 1;
@@ -105,8 +105,13 @@ public class EventPresenter {
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
     }
 
-    public void viewall(){
+    public void viewAll(){
         System.out.println("Press 'x' to view the list of events organized by you.");
     }
+
+    public void viewEvents(List<String> user){System.out.println(user);}
+
+
+
 
 }

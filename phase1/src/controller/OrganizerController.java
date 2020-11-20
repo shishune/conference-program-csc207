@@ -51,6 +51,7 @@ public class OrganizerController extends UserController{
         List<Boolean> checks = new ArrayList<Boolean>();
         if(event != null){
             scheduleSpeaker(event.getId(), speakerId);
+            speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
             checks.add(true);
             return checks;
         }
@@ -73,11 +74,15 @@ public class OrganizerController extends UserController{
     public boolean cancelEvent(String eventName){
         if (this.eventActions.getEventNames().containsKey(eventName)) {
             List<String> eventAttendees = this.eventActions.cancelEvent(eventName);
-            if (eventAttendees != null) {
-                for (String attendeeID : eventAttendees) {
-                    this.organizerActions.removeEventFromUser(eventName, attendeeID);
+            String s = eventActions.getEventNames().get(eventName).getSpeaker();
+            if (speakerActions.isEventRemovedFromSpeaker(this.eventActions.getEventFromName(eventName).getId(), s)) {
+                if (eventAttendees != null) {
+                    for (String attendeeID : eventAttendees) {
+                        this.organizerActions.removeEventFromUser(eventName, attendeeID);
+                    }
+
+                    return true;
                 }
-                return true;
             }
         }
         return false;
