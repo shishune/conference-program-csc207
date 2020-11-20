@@ -28,7 +28,7 @@ import java.util.Scanner;
  * @author Cynthia
  * @version 1
  * */
-public class SpeakerMainMenuController extends MainMenuController{
+public class SpeakerMainMenuController extends MainMenuController {
     private SpeakerController controller;
     private User user;
     private SpeakerMessagePresenter displayMessage;
@@ -37,10 +37,11 @@ public class SpeakerMainMenuController extends MainMenuController{
 
     /**
      * Instantiates the main menu responder object
-     * @param user the user
+     *
+     * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController){
+    public SpeakerMainMenuController(User user, SpeakerController speakerController) {
         super(user, speakerController);
         this.user = user;
         this.controller = speakerController;
@@ -49,6 +50,7 @@ public class SpeakerMainMenuController extends MainMenuController{
         this.user = user;
         this.controller = speakerController;
     }
+
     /**
      * Responds to menu option 2
      */
@@ -75,10 +77,30 @@ public class SpeakerMainMenuController extends MainMenuController{
             displayMessage.displayMessages(controller, user.getId(), entry.getKey());
         }
     }
+
     /**
      * Responds to menu option 6
      */
 
+    public void option4(){
+        displayMessage.promptContact();
+        String add = scan.nextLine();
+        System.out.println(user.getContactsList());
+        //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
+        if (controller.returnUserUsernameHashMap().containsKey(add)){
+            if (controller.addContact(add, user.getUsername())){
+                displayMessage.successContact();
+            }
+        }
+        else{
+            displayMessage.failedContact();
+        }
+        //System.out.println(user.getContactsList());
+    }
+
+    public void option5() { //view all contacts
+        displayMessage.displayContacts(controller, user.getId());
+    }
 
     public void option6() {
         displayEvent.viewall();
