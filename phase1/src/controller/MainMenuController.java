@@ -1,13 +1,12 @@
 package controller;
-import entities.Event;
-import entities.Room;
-import presenter.MessagePresenter;
-import presenter.EventPresenter;
 import entities.User;
+import presenter.EventPresenter;
+import presenter.MessagePresenter;
 import useCase.RoomActions;
 import useCase.SpeakerActions;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * A controller class that decides what to do based on user input when choosing from the main menu.
@@ -45,8 +44,6 @@ public class MainMenuController extends AccountController{
         String receiver = scan.nextLine();
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
-        //HashMap<String, User> userNames = controller.returnUsernameHashMap();
-        //String receiverId = userNames.get(receiver).getId();
         System.out.println("RECEIVER: " + receiver);
         System.out.println("USER: " + user.getUsername());
         if (controller.sendMessage(user.getUsername(), receiver, content)){
@@ -80,7 +77,6 @@ public class MainMenuController extends AccountController{
         else{
             displayMessage.failedContact();
         }
-        //System.out.println(user.getContactsList());
     }
 
     /**
@@ -91,20 +87,6 @@ public class MainMenuController extends AccountController{
         displayMessage.displayContacts(controller,user.getId());
     }
 
-    /**
-     * Responds to menu option 2
-     */
-    /**public void option2(){
-        displayMessage.promptRecipient();
-        String receiver = scan.nextLine();
-        displayMessage.promptMessage();
-        String content = scan.nextLine();
-
-        if (controller.sendMessage(user.getId(),receiver, content)){
-            displayMessage.successMessage();
-        }
-        displayMessage.failedMessage();
-    }**/
 
     /**
      * Responds to menu option 6- sign up for event
@@ -133,8 +115,6 @@ public class MainMenuController extends AccountController{
                 displayEvent.failed();
             }
         }
-
-
     }
 
     /**

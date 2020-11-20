@@ -1,19 +1,8 @@
 package controller;
-import entities.Room;
-import entities.Speaker;
 import entities.User;
-import presenter.EventPresenter;
-import presenter.MessagePresenter;
-import presenter.OrganizerEventPresenter;
 import presenter.EventPresenter;
 import useCase.RoomActions;
 import useCase.SpeakerActions;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 /**
  * A controller class for attendee that decides what to do based on user input when choosing from the main menu.
  * @author Cynthia

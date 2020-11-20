@@ -1,12 +1,15 @@
 package controller;
 
+import entities.Event;
+import entities.Organizer;
+import entities.Speaker;
+import entities.User;
+import useCase.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import useCase.*;
-import entities.*;
 
 /***
  * An organizer controller. Includes all the abilities only organizers can complete.
@@ -15,12 +18,11 @@ import entities.*;
  */
 
 public class OrganizerController extends UserController{
-    private MessageActions messageActions;  //= super.getMessages();
-    private EventActions eventActions;  //= super.getEvents();
-    private RoomActions roomActions; // = super.getRooms();
-    private SpeakerActions speakerActions; //= super.getSpeakers();
-    private OrganizerActions organizerActions; //= super.getOrganizers();
-    // private AttendeeActions attendeeActions; // = super.getAttendees();
+    private MessageActions messageActions;
+    private EventActions eventActions;
+    private RoomActions roomActions;
+    private SpeakerActions speakerActions;
+    private OrganizerActions organizerActions;
     private String organizerID;
 
 
@@ -36,7 +38,6 @@ public class OrganizerController extends UserController{
         // this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
     }
-    // public OrganizerController(){ }
     /***
      * create a new event
      * @param title of event
@@ -88,8 +89,6 @@ public class OrganizerController extends UserController{
         return false;
     }
 
-    // TODO would there be reasons to not be able to create a speaker?
-
     /***
      * create a speaker and add them to the speaker schedule
      * @param username
@@ -118,17 +117,10 @@ public class OrganizerController extends UserController{
         if(roomActions != null && eventActions != null){
             String roomID = this.roomActions.createRoom(roomName).getRoomId();
             return this.eventActions.addRoomToSchedule(roomID);
-            /*
-            this.eventActions.addRoomToSchedule(roomID);
-            System.out.println(roomActions.returnHashMap());
-            return true;
-
-             */
         }
         return false;
     }
 
-    // TODO Schedule the speakers to each speak in one or more rooms at different times
     /**
      * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
      * @param eventID
@@ -136,7 +128,6 @@ public class OrganizerController extends UserController{
      *
      */
     public boolean scheduleSpeaker(String eventID, String speakerID, boolean canAdd){
-        // String eventDateTime = eventActions.getEvent(eventID).getDateTime();
         if (canAdd) {
             eventActions.setSpeaker(eventID, speakerID);
             String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
@@ -234,5 +225,4 @@ public class OrganizerController extends UserController{
 
 }
 
-//hhh
 
