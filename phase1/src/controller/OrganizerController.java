@@ -23,10 +23,10 @@ public class OrganizerController extends UserController{
     private String organizerID;
 
 
-    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
-                               AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){
+    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
+                               AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
 
-        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions);
+        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions); //hello
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
