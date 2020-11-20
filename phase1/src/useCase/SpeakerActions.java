@@ -290,7 +290,9 @@ public class SpeakerActions extends UserAccountActions {
                     eventList.add(e);
                 }
                 for (String c : contacts) {
-                    contactList.add(c);
+                    if (c!= "") {
+                        contactList.add(c);
+                    }
                 }
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
                         eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6]));

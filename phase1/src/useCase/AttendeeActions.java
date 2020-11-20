@@ -270,7 +270,9 @@ public class AttendeeActions extends UserAccountActions {
                     eventList.add(e);
                 }
                 for (String c : contacts) {
-                    contactList.add(c);
+                    if (c!= "") {
+                        contactList.add(c);
+                    }
                 }
                 Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
                         eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));

@@ -292,7 +292,9 @@ public class OrganizerActions extends UserAccountActions {
                 }
 
                 for (String c : contacts) {
-                    contactList.add(c);
+                    if (c!= "") {
+                        contactList.add(c);
+                    }
                 }
 
 //                Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
