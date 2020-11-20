@@ -18,6 +18,8 @@ public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
     private LoadUpIGateway loader;
+    private SpeakerActions speaker;
+    private OrganizerActions organizer;
 
     public HashMap<String, Attendee> returnAttendeesHashMap() {
         return attendeesHashMap;
@@ -126,6 +128,7 @@ public class AttendeeActions extends UserAccountActions {
     // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
     public boolean addUserContactList(String toMe, String addMe) {
         Attendee user = attendeeUsernameHashMap.get(toMe);
+//<<<<<<< HEAD
         User userOne = attendeeUsernameHashMap.get(addMe);
         //System.out.println("ATTENDEE ACTIONS");
         //System.out.println("USER: " + user);
@@ -141,6 +144,20 @@ public class AttendeeActions extends UserAccountActions {
                 user.setContactsList(toMeContacts);
                 return true;
             }
+/**=======
+        HashMap<String, User> userHashMap = new HashMap<String, User>();
+        userHashMap.putAll(speaker.returnSpeakerUsernameHashMap());
+        userHashMap.putAll(organizer.returnOrganizersUsernameHashMap());
+        User userOne = userHashMap.get(addMe);
+        boolean isId = user.getContactsList().contains(userOne.getId());
+        if (isId) {
+            return false;
+        } else {
+            List<String> toMeContacts = user.getContactsList();
+            toMeContacts.add(userOne.getId());
+            user.setContactsList(toMeContacts);
+            return true;
+>>>>>>> 136430a0d11dd090478ce252444f6e0997261614**/
         }
         return false;
 

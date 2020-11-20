@@ -17,6 +17,7 @@ import useCase.GenerateID;
  * */
 public class RoomActions {
     private HashMap<String, Room> roomsList = new HashMap<String, Room>();
+    private HashMap<String, Room> roomUsername = new HashMap<String, Room>();
     private LoadUpIGateway loader;
     private ArrayList<String> loadUpRooms = new ArrayList<String>();
 
@@ -27,10 +28,12 @@ public class RoomActions {
     }
 
 
-    public String createRoom(){
+    public String createRoom(String roomName){
         GenerateID generator = new GenerateID(loader);
         String roomID = "R" + generator.generateId();
-        Room room = new Room(roomID);
+        Room room = new Room(roomID, roomName);
+        roomUsername.put(roomName, room);
+        roomsList.put(roomID, room);
         addRoom(room);
         return roomID;
     }
@@ -49,10 +52,16 @@ public class RoomActions {
     public void loadRooms(){
         LoadUp loader = new LoadUp(); // initialize gateway class for loading
         List<String> rooms = loader.getRoomsList(); // gateway method to transfer from rooms.csv to a list of room ids
-        for (String id:rooms){
-            Room room = new Room(id);
+        String roomName = "T-T"; //TODO : NEED TO FIX THIS RN ALL LOADED NAMES ARE GONNA BE CALLED T-T
+
+        for (String id:rooms) {
+            Room room = new Room(id, roomName);
             roomsList.put(id, room);
         }
+//
+//        for (String name:roomNames) {
+//            roomUsername.put(name)
+//        }
     }
 
     /**
@@ -77,6 +86,7 @@ public class RoomActions {
             return false;
         }
         roomsList.put(room.getRoomId(), room);
+        roomUsername.put(room.getRoomName(), room);
         return true;
     }
 
@@ -113,8 +123,9 @@ public class RoomActions {
         if (loadUpRooms != null && !loadUpRooms.isEmpty()) {
             for (String roomString : loadUpRooms) {
                 String[] roomInfo = roomString.split(",");
-                Room loadedRoom = new Room(roomInfo[0]);
+                Room loadedRoom = new Room(roomInfo[0], roomInfo[1]);
                 roomsList.put(roomInfo[0], loadedRoom);
+                roomUsername.put(roomInfo[1], loadedRoom);
             }
         }
     }

@@ -78,38 +78,14 @@ public class UserController {
      * @return boolean true if message was successfully sent, false if it was not
      * */
     public boolean sendMessage(String sender, String receiver, String content) {
-        if (attendee != null && organizer != null && speaker != null) {
-
-            HashMap<String, User> usernameHashMap = returnUsernameHashMap();
-            String senderId = usernameHashMap.get(sender).getId();
-            String receiverId = usernameHashMap.get(receiver).getId();
-
-            // add receiver to contact list
-            if (attendee.addUserContactList(senderId, receiverId)) {
-                attendee.addUserContactList(senderId, receiverId);
-            } else {
-                if (organizer.addUserContactList(senderId, receiverId)) {
-                    organizer.addUserContactList(senderId, receiverId);
-                } else {
-                    if (speaker.addUserContactList(senderId, receiverId)) {
-                        speaker.addUserContactList(senderId, receiverId);
-                    }
-                }
-            }
-
+        if (user != null) {
             System.out.println(organizer.findUserFromUsername(sender));
             System.out.println(organizer.findUserFromUsername(sender).getContactsList());
             System.out.println(organizer.findUserFromUsername(sender).getContactsList().contains(receiver));
-
-            // sending message
-            if (attendee.findUserFromUsername(sender).getContactsList().contains(receiverId)
-                    || organizer.findUserFromUsername(sender).getContactsList().contains(receiverId)
-                    || speaker.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
-
-            //if (organizer.findUserFromUsername(sender).getContactsList().contains(receiver)) {
-                //<String, User> usernameHashMap = returnUsernameHashMap();
-                //String senderId = usernameHashMap.get(sender).getId();
-                //String receiverId = usernameHashMap.get(receiver).getId();
+            if () {
+                HashMap<String, User> usernameHashMap = returnUsernameHashMap();
+                String senderId = usernameHashMap.get(sender).getId();
+                String receiverId = usernameHashMap.get(receiver).getId();
                 message.createMessage(senderId, receiverId, content);
                 return true;
             }

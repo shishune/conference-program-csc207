@@ -80,6 +80,21 @@ public class MainMenuController {
     }
 
     /**
+     * Responds to menu option 2
+     */
+    public void option2(){
+        displayMessage.promptRecipient();
+        String receiver = scan.nextLine();
+        displayMessage.promptMessage();
+        String content = scan.nextLine();
+
+        if (controller.sendMessage(user.getId(),receiver, content)){
+            displayMessage.successMessage();
+        }
+        displayMessage.failedMessage();
+    }
+
+    /**
      * Responds to menu option 6
      */
     public void option6(){

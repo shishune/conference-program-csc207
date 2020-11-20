@@ -51,4 +51,19 @@ public class OrganizerMessagePresenter extends MessagePresenter{
         String display = "This speaker does not exist. Try again or create a new speaker first.";
         System.out.println(display);
     }
+
+    public void speakerCreated(){
+        String display = "You have successfully created the speaker.";
+        System.out.println(display);
+    }
+
+    public void badRoom(){
+        System.out.println("That room does not exist. Add a new room by writing 'ADD' or rewrite the name of the room after pressing any key.");
+    }
+    public void newRoom(){
+        System.out.println("Enter the name of the room to be added");
+    }
+    public void addedRoom(){
+        System.out.println("You have successfully created a new room.");
+    }
 }
