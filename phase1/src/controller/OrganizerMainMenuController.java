@@ -12,6 +12,7 @@ import presenter.EventPresenter;
 import presenter.MessagePresenter;
 import presenter.OrganizerMessagePresenter;
 import presenter.OrganizerEventPresenter;
+import useCase.EventActions;
 import useCase.SpeakerActions;
 import useCase.RoomActions;
 
@@ -26,6 +27,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     private OrganizerController controller; // = new OrganizerController();
     private RoomActions room; // = super.getRooms();
     private SpeakerActions speaker;
+    private EventActions event;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
@@ -37,7 +39,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker) {
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event) {
         super(user, organizerController); // THIS DOESNT DO ANYTHING?
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
@@ -45,6 +47,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         this.room = room;
         this.controller = organizerController;
         this.speaker = speaker;
+        this.event = event;
     }
 
     /**
@@ -162,6 +165,22 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option7() {
         displayEvent.promptCancelMethod();
+        String option = scan.nextLine();
+        if (option.equals("x") || option.equals("X")) {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            cancelEvent(event);
+        } else {
+            displayEvent.promptCancelEvent();
+            String event = scan.nextLine();
+            String dateTime = getDateTimeInput();
+            rescheduleEvent(event, dateTime);
+        }
+
+    }
+
+    public void option8() {
+        displayEvent.viewall();
         String option = scan.nextLine();
         if (option.equals("x") || option.equals("X")) {
             displayEvent.promptCancelEvent();

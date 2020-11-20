@@ -86,4 +86,8 @@ public class OrganizerEventPresenter extends EventPresenter{
     }
 
     public void badTime(){System.out.println("Time is not valid. Try again.");}
+
+    public void viewall(){
+        System.out.println("Press 'x' to view the list of events organized by you.");
+    }
 }

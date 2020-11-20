@@ -69,4 +69,8 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void alreadyAddedRoom(){System.out.println("That room already exists.");}
     public void alreadySpeaker(){System.out.println("This speaker already exists.");}
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
+
+    public void promptCancelMethod() {
+        System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.");
+    }
 }
