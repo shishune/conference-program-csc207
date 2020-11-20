@@ -39,7 +39,7 @@ public class Event {
      */
     public String string(){
         // date: year month day hour
-        String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
+        String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return eventID + "," + title + "," + speaker + "," +
                 this.dateTime + "," + attendeesString + "," + roomID;
 

@@ -200,9 +200,11 @@ public class EventActions  {
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
-            System.out.println(events.get(eventID).getAttendees());
+
+            //List<String> eventAttendees = events.get(eventID).getAttendees().add(attendeeID);
             events.get(eventID).getAttendees().add(attendeeID);
-            attendees.get(eventID).add(attendeeID);
+            //attendees.get(eventID).add(attendeeID);
+            System.out.println(attendees.get(eventID));
             return true;
         }
     }
@@ -334,6 +336,7 @@ public class EventActions  {
      * @return List of all attendee IDs of an event
      */
     public List<String> getEventAttendees(String eventID){
+        //System.out.println("EVENT ATTENDEES: " + attendees.get(eventID));
         return attendees.get(eventID);
     }
 

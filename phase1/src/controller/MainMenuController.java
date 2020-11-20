@@ -5,8 +5,7 @@ import presenter.MessagePresenter;
 import useCase.RoomActions;
 import useCase.SpeakerActions;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * A controller class that decides what to do based on user input when choosing from the main menu.
@@ -57,7 +56,34 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 3
      */
     public void option3(){
-        displayMessage.displayMessages(controller, user.getId(), user.getId());
+        System.out.println("MAIN OPT 3");
+        List<String> contactIds = user.getContactsList();
+        //System.out.println("USER ID HASH: " + controller.returnUserIDHashMap());
+        HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+        ArrayList<String> contactUsernames = new ArrayList<String>();
+        for(Map.Entry<String, User> user : userIdHash.entrySet()) {
+            if(contactIds.contains(user.getKey())){
+                contactUsernames.add(user.getValue().getUsername());
+            }
+        }
+        //System.out.println("Contact names: " + contactUsernames);
+        displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
+        for(String username : contactUsernames){
+            displayMessage.printString(username); // receiver username
+        }
+        String receiverUsername = scan.nextLine();
+        System.out.println(controller.returnUserIDHashMap());
+        HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
+        //System.out.println(controller);
+        //System.out.println(user.getId());
+        //System.out.println("USER HASH: " + usernameHash);
+        //System.out.println(receiverUsername + "%%");
+        //System.out.println(usernameHash.get(receiverUsername));
+        if(usernameHash.get(receiverUsername) != null){
+            displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+        } else {
+            displayMessage.failedContact();
+        }
     }
 
     /**
@@ -125,8 +151,10 @@ public class MainMenuController extends AccountController{
         displayEvent.promptCancelEvent();
         String eventName = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
-        if(controller.leaveEvent(eventName, user.getId())){
-            displayEvent.successCancelEnrol();
+        if(user.getEventList().contains(eventName)){
+            if(controller.leaveEvent(eventName, user.getId())){
+                displayEvent.successCancelEnrol();
+            }
         }
         else{
             displayEvent.failedCancelEvent();
