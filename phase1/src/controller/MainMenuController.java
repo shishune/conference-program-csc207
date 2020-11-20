@@ -1,11 +1,13 @@
 package controller;
+import entities.Event;
+import entities.Room;
 import presenter.MessagePresenter;
 import presenter.EventPresenter;
 import entities.User;
+import useCase.RoomActions;
+import useCase.SpeakerActions;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * A controller class that decides what to do based on user input when choosing from the main menu.
@@ -15,8 +17,10 @@ import java.util.Scanner;
 public class MainMenuController extends AccountController{
     private UserController controller;
     private User user;
+    private RoomActions room;
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
+    private SpeakerActions speakerActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -24,11 +28,13 @@ public class MainMenuController extends AccountController{
      * @param user the user
      * @param controller the controller responsible for user
      */
-    public MainMenuController(User user, UserController controller){
+    public MainMenuController(User user, UserController controller, RoomActions room, SpeakerActions speakerActions){
         this.controller = controller;
         this.user = user;
         this.displayMessage = new MessagePresenter();
         this.displayEvent = new EventPresenter();
+        this.room = room;
+        this.speakerActions = speakerActions;
     }
 
     /**
@@ -156,6 +162,11 @@ public class MainMenuController extends AccountController{
         if (eventsList.size() == 0){
             displayMessage.noEvents();
         } else {
+
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+            }
             displayEvent.displayEvents(eventsList);
         }
     }
@@ -173,4 +184,5 @@ public class MainMenuController extends AccountController{
 
     }
     public void option10(){}
+
 }

@@ -1,9 +1,13 @@
 package controller;
+import entities.Room;
+import entities.Speaker;
 import entities.User;
 import presenter.EventPresenter;
 import presenter.MessagePresenter;
 import presenter.OrganizerEventPresenter;
 import presenter.EventPresenter;
+import useCase.RoomActions;
+import useCase.SpeakerActions;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,6 +23,8 @@ public class AttendeeMainMenuController extends MainMenuController {
     private AttendeeController controller;
     private User user;
     private EventPresenter displayEvent;
+    private RoomActions room;
+    private SpeakerActions speaker;
 
     /**
      * instantiates this class referring to super class
@@ -26,10 +32,11 @@ public class AttendeeMainMenuController extends MainMenuController {
      * @param user               the user object
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(User user, AttendeeController attendeeController) {
-        super(user, attendeeController);
+    public AttendeeMainMenuController(User user, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker) {
+        super(user, attendeeController, room, speaker);
         this.user = user;
         this.controller = attendeeController;
         this.displayEvent = new EventPresenter();
+        this.speaker = speaker;
     }
 }

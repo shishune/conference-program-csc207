@@ -34,6 +34,7 @@ public class SpeakerMainMenuController extends MainMenuController {
     private EventActions eventActions;
     private AttendeeActions attendeeActions;
     private RoomActions roomActions;
+    private SpeakerActions speakerActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -42,8 +43,8 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions) {
-        super(user, speakerController);
+    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions) {
+        super(user, speakerController, roomActions, speakerActions);
         this.user = user;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
