@@ -190,32 +190,37 @@ public class UserController {
      */
 
     public List<Boolean> signupEvent(String eventName, String userName) {
-        String eventId = e.getEventFromName(eventName).getId();
-        List<Boolean> checks = new ArrayList<Boolean>();
-        if (!e.eventExists(eventId)) {
-            checks.add(false);
-            return checks;
-        }
-        Event e1 = e.getEvent(eventId);
-        User a1 = returnUserUsernameHashMap().get(userName);
+        if (e.getEventNames().containsKey(eventName)) {
+            String eventId = e.getEventFromName(eventName).getId();
+            List<Boolean> checks = new ArrayList<Boolean>();
+            if (!e.eventExists(eventId)) {
+                checks.add(false);
+                return checks;
+            }
+            Event e1 = e.getEvent(eventId);
+            User a1 = returnUserUsernameHashMap().get(userName);
 
-        if (!checkConflictSpots(eventId) && !checkConflictTime(userName, eventId)) {
-            e.addAttendee(e1.getId(), a1.getId());
-            a1.getEventList().add(eventId);
-            checks.add(true);
+            if (!checkConflictSpots(eventId) && !checkConflictTime(userName, eventId)) {
+                e.addAttendee(e1.getId(), a1.getId());
+                a1.getEventList().add(eventId);
+                checks.add(true);
+                return checks;
+            }
+            checks.add(false);
+            if (!checkConflictSpots(eventId)) {
+                checks.add(true);
+            } else {
+                checks.add(false);
+            }
+            if (!checkConflictTime(userName, eventId)) {
+                checks.add(true);
+            } else {
+                checks.add(false);
+            }
             return checks;
         }
+        List<Boolean> checks = new ArrayList<>();
         checks.add(false);
-        if (!checkConflictSpots(eventId)) {
-            checks.add(true);
-        } else {
-            checks.add(false);
-        }
-        if (!checkConflictTime(userName, eventId)) {
-            checks.add(true);
-        } else {
-            checks.add(false);
-        }
         return checks;
     }
 

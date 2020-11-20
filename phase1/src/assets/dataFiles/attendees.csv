@@ -1,6 +1,6 @@
 A1,a,a,A2%%A3%%A12,E25,false,false
 A2,q,q,,,true,false
-A3,3,3,,,true,false
+A3,3,3,S36,E36%%E25%%E30,true,false
 A12,j,m,,,false,false
 A4,6,6,,,false,false
 A5,qo,qo,,,true,false

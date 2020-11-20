@@ -216,7 +216,8 @@ public class EventActions  {
      * @return true if an attendee has been added to their desired event
      */
     public boolean addAttendee(String eventID, String attendeeID){
-        List<String> eventAttendees = attendees.get(eventID);
+        List<String> eventAttendees = new ArrayList<>();
+        eventAttendees.addAll(attendees.get(eventID));
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
@@ -245,7 +246,7 @@ public class EventActions  {
 
     /***
      * Remove an attendee who has requested to be removed from a specfic event
-     * @param eventID
+     * @param eventName
      * @return true if an attendee has been removed from an event that they used to be a part of
      */
     public List<String> cancelEvent(String eventName){
