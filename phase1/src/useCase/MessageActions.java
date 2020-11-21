@@ -136,7 +136,7 @@ public class MessageActions {
         for(Map.Entry<String, Message> message : messages.entrySet()) {
             if((message.getValue().getSenderId().equals(senderId) && message.getValue().getReceiverId().equals(receiverId))
                     || (message.getValue().getSenderId().equals(receiverId) && message.getValue().getReceiverId().equals(senderId)) ) {
-                System.out.println("in if");
+                //System.out.println("in if");
                 userMessages.add(message.getValue());
             }
         }

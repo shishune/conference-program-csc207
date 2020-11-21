@@ -152,23 +152,29 @@ public class OrganizerActions extends UserAccountActions {
      * @param toMe the username of the user who's contact list is updated
      * @return true if user is added successfully, false if not
      * */
-
-
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
-        if(userOne.getId() == null) {
+        if(userOne != null && user != null) {
+            if(userOne.getId() == null) {
+                return false;
+            }
+            boolean isId = false;
+            if(user.getContactsList().contains(userOne.getId())){
+                isId = user.getContactsList().contains(userOne.getId());
+                if (userOne.getIsOrganizer() || user.getId().equals(userOne.getId()) || isId){ // organizers can now message other organizers
+                    return false;
+                } else {
+                    List<String> toMeContacts = user.getContactsList();
+                    toMeContacts.add(userOne.getId());
+                    user.setContactsList(toMeContacts);
+                    return true;
+                }
+            }
             return false;
         }
-        boolean isId = user.getContactsList().contains(userOne.getId());
-        if (userOne.getIsOrganizer() || user.getId() == userOne.getId() || isId){ // organizers can now message other organizers
-            return false;
-        } else {
-            List<String> toMeContacts = user.getContactsList();
-            toMeContacts.add(userOne.getId());
-            user.setContactsList(toMeContacts);
-            return true;
-        }}
+        return false;
+    }
 
     /**
      * Removes an user to existing list of contacts from an user.
