@@ -49,6 +49,11 @@ public class UserController {
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
 
+    /**
+     * This method shows the usernames
+     * @return a hashmap with usernames
+     */
+
     public HashMap<String, User> returnUserUsernameHashMap() {
         if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()) {
             usernameHashmap.putAll(attendee.returnUsernameHashMap());
@@ -66,7 +71,10 @@ public class UserController {
 
     }
 
-
+    /**
+     * This method shows the user IDs
+     * @return a hashmap with user IDs
+     */
     public HashMap<String, User> returnUserIDHashMap() {
         if (!attendee.returnIDHashMap().isEmpty()) {
             userIdHashmap.putAll(attendee.returnIDHashMap());
@@ -82,7 +90,6 @@ public class UserController {
 
     /**
      * Sends a message to a user
-     *
      * @param content  the message to be sent
      * @param receiver the user who will be getting the message
      * @param sender   the user who is sending the message
@@ -110,7 +117,6 @@ public class UserController {
 
     /**
      * Adds a user to the contact list of another user
-     *
      * @param toMe  the username who's contact list that is updated
      * @param addMe the username who will be added
      * @return boolean true if contact was successfully added, false if it was not
@@ -124,6 +130,12 @@ public class UserController {
         return false;
     }
 
+    /**
+     * This method removes user from the contact list
+     * @param removeMe the user being removed
+     * @param toMe the user being whose contact list is being modified
+     * @return true when the user has been removed
+     */
     public boolean deleteContact(String removeMe, String toMe) {
         return user.removeUserContactList(toMe, removeMe);
     }
@@ -137,7 +149,6 @@ public class UserController {
 
     /**
      * Shows the messages from one user to another
-     *
      * @param toMe   the user receiving the messages
      * @param fromMe the user who is sending the messages
      * @return array of a list of messages
@@ -174,7 +185,6 @@ public class UserController {
 
     /**
      * Shows the contacts of a user
-     *
      * @param userid the user who wants to see their contacts
      * @return array of other usernames who are in their contacts
      */
@@ -194,7 +204,6 @@ public class UserController {
 
     /**
      * Adds an event to a user and an attendee to an event
-     *
      * @param eventName the event the user wants to attend
      * @param userName  the attendee who wants to attend an event
      * @return list of booleans if users can attend event or not
@@ -237,7 +246,6 @@ public class UserController {
 
     /**
      * Shows the events a given user is attending
-     *
      * @param user the user who wants to see their events
      * @return list of the events that a user is attending in the form of a list
      * with the string representation of each aspect (title, dateTime, etc)
@@ -266,7 +274,6 @@ public class UserController {
 
     /**
      * Shows the events a given user could be attending
-     *
      * @param user the user who wants to see possible events to attend
      * @return string of events that an user could attend
      */
@@ -299,7 +306,6 @@ public class UserController {
 
     /**
      * Shows the spots available in an event
-     *
      * @param eventID the event that is given
      * @return int of the number of spots available
      */
@@ -315,7 +321,6 @@ public class UserController {
 
     /**
      * Checks if users can attend an event or not
-     *
      * @param username the user who wants to see if they can attend an event
      * @param eventID  the event the user wants to attend
      * @return boolean if user can attend event
@@ -346,7 +351,6 @@ public class UserController {
 
     /**
      * Checks if event is full or not
-     *
      * @param eventID the event that is being checked
      * @return boolean if event is full
      */
@@ -357,7 +361,6 @@ public class UserController {
 
     /**
      * To be overridden by OrganizerController
-     *
      * @param eventID the event to be cancelled
      * @return boolean if event was cancelled or not
      */
@@ -376,6 +379,12 @@ public class UserController {
         return false;
     }
 
+    /**
+     * This method checks for time conflict for the user
+     * @param username the username of the user
+     * @param dateTime the time checked to see if there is an event
+     * @return true if there is a conflict
+     */
     public boolean checkTimeConflict(String username, String dateTime) {
         //return true if there is a conflict
         //String timeEvent = e.getEvent(event).getDateTime();
