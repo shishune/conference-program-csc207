@@ -43,8 +43,6 @@ public class MainMenuController extends AccountController{
         String receiver = scan.nextLine();
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
-        //System.out.println("RECEIVER: " + receiver);
-        //System.out.println("USER: " + user.getUsername());
         if (controller.sendMessage(user.getUsername(), receiver, content)){
             displayMessage.successMessage(); // message has been sent successfully
         } else {

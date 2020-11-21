@@ -161,10 +161,6 @@ public class OrganizerActions extends UserAccountActions {
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
-        //System.out.println("Add User Contact List");
-        //System.out.println(userUsernameHashMap);
-        //System.out.println(user.getContactsList());
-        //System.out.println(userOne.getId());
         if(userOne.getId() == null) {
             return false;
         }
@@ -281,7 +277,6 @@ public class OrganizerActions extends UserAccountActions {
             User userOne = organizerUsernameHashMap.get(user);
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < userOne.getEventList().size(); i++) {
-                // System.out.println(user.getEventList().get(i));
                 String a = userOne.getEventList().get(i);
                 result.append(a).append(' ');
             }
