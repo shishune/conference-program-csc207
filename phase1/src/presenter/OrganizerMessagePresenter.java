@@ -76,9 +76,6 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void badRoom(){
         System.out.println("That room does not exist. Add a new room by writing 'ADD' or rewrite the name of the room after pressing any key.");
     }
-//    public void newRoom(){
-//        System.out.println("Enter the name of the room to be added");
-//    }
 
     /**
      * Message stating that the user successfully created a new room
@@ -102,10 +99,4 @@ public class OrganizerMessagePresenter extends MessagePresenter{
      */
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
 
-    /**
-     * Message explaining how to cancel an event
-     */
-    public void promptCancelMethod() {
-        System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.");
-    }
 }
