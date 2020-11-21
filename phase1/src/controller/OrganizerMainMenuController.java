@@ -67,6 +67,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * Responds to menu option 5
+     */
     public void option5() {
         displayEvent.promptViewContacts();
         String option = scan.nextLine();
@@ -291,7 +294,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
-
+    /**
+     * Responds to menu option 8
+     */
     public void option8() {
         List<List<String>> e = new ArrayList<>();
 
