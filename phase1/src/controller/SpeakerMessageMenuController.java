@@ -52,7 +52,9 @@ public class SpeakerMessageMenuController{
             }
         }
     }
-
+    /**
+     * Responds to menu option 5
+     */
     public void option5(){
         displayMessage.promptMessage();
         String content = scan.nextLine();

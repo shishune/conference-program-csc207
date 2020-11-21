@@ -122,6 +122,9 @@ public class SpeakerMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * Responds to menu option 5
+     */
     public void option5() { //view all contacts
         displayMessage.displayContacts(controller, user.getId());
 }
