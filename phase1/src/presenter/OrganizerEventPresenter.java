@@ -106,7 +106,7 @@ public class OrganizerEventPresenter extends EventPresenter{
 
     public void eventExists(){System.out.println("This event name is already taken.");}
 
-    public void noEvent(){System.out.println("This event does not exist, please try again or enter x to go back");}
+    public void noEvent(){System.out.println("This event does not exist, please try again.");}
 
     public void allYourContacts(List<String> contacts){
         System.out.println(contacts.toString());
@@ -115,6 +115,10 @@ public class OrganizerEventPresenter extends EventPresenter{
     public void allYourContactsEvent(List<String> eventContacts){
         System.out.println(eventContacts.toString());
     }
+
+    public void breakPlease(){System.out.println("*Write '!' if you would like exit the selection at any time. Doing so will not save your current information.*");}
+
+    public void warning(){System.out.println("WARNING: You are about to exit without saving your information. Enter 'x' to continue or any key to go back.");}
 
     //public void
 }
