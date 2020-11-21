@@ -100,6 +100,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                         catcher = false;
                     } else {
                         displayMessage.badRoom();
+
                         String reply = scan.nextLine();
                         if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
                             option9();
@@ -118,27 +119,14 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.newOrNoSpeaker();
             String speakerUserName = scan.nextLine();
 
-            if (speakerUserName.equals("!")){
-                displayEvent.warning();
-                String answer = scan.nextLine();
-                if (answer.equals("x") || answer.equals("X")) {
-                    break;
-                }
-                else{
-                    continue;
-                }
-            }
-
             if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
 
                 while (catcherUserName) {
                     displayMessage.speakerUsernamePrompt();
                     String newSpeakerName = scan.nextLine();
 
-
                     if (speaker.returnUsernameHashMap().containsKey(newSpeakerName)) {
                         displayMessage.alreadySpeaker();
-                        displayEvent.breakPlease();
 
                     } else if (controller != null) {
                         displayMessage.speakerPasswordPrompt();
@@ -244,6 +232,15 @@ public class OrganizerMainMenuController extends MainMenuController {
             while (catcher) {
                 String ev = scan.nextLine();
 
+                if (event.getEventNames().containsKey(ev)) {
+                    e = ev;
+                    String dateTime = getDateTimeInput();
+                    rescheduleEvent(ev, dateTime);
+                    catcher = false;
+                } else {
+                    displayEvent.noEvent();
+                    displayEvent.breakPlease();
+                }
                 if (ev.equals("!")){
                     displayEvent.warning();
                     String answer = scan.nextLine();
@@ -253,16 +250,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                     else{
                         continue;
                     }
-                }
-
-                if (event.getEventNames().containsKey(ev)) {
-                    e = ev;
-                    String dateTime = getDateTimeInput();
-                    rescheduleEvent(ev, dateTime);
-                    catcher = false;
-                } else {
-                    displayEvent.noEvent();
-                    displayEvent.breakPlease();
                 }
 
             }
