@@ -1,3 +1,8 @@
-## **README FILE**
+###### **README FILE** - G-0082
+## Conference System Program
+_This program creates a system allowing users to login in and according to their account type, schedule for events, message other users and present personalized schedules, whilst implementing design rules from Clean Architecture._
 
-_This is the readme file_
+#### How this program works.
+The user is first asked to either sign up or log in to their account. When signing up they have the choice of 3 different user types; Organizer, Speaker and Attendee. When logging into the account the user is prompted to give their username and password, if they are inputted incorrectly pr if they do not exist. The user will be taken back to the starting menu.
+
+Once they have logged in 
