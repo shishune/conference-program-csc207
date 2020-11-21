@@ -1,9 +1,6 @@
 package controller;
 
-import entities.Event;
-import entities.Organizer;
-import entities.Speaker;
-import entities.User;
+import entities.*;
 import useCase.*;
 
 import java.util.ArrayList;
@@ -23,6 +20,7 @@ public class OrganizerController extends UserController{
     private RoomActions roomActions;
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
+    private AttendeeActions attendeeActions;
     private String organizerID;
 
 
@@ -35,7 +33,7 @@ public class OrganizerController extends UserController{
         this.eventActions = eventActions;
         this.roomActions = roomActions;
         this.messageActions = messageActions;
-        // this.attendeeActions = attendeeActions;
+        this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
     }
     /***
@@ -155,6 +153,10 @@ public class OrganizerController extends UserController{
      * @param message
      */
     public boolean sendAttendeesMessage(String event, String message){
+        HashMap<String, User> userHash = returnUserUsernameHashMap();
+        HashMap<String, Attendee> attendeesHash = attendeeActions.returnIDHashMap();
+        HashMap<String, Organizer> idHash = organizerActions.returnIDHashMap();
+        String userUsername = idHash.get(organizerID).getUsername();
         HashMap<String, Event> eventsHash = eventActions.getEventNames();
         if(eventsHash.get(event) == null) {
             return false;
@@ -163,7 +165,12 @@ public class OrganizerController extends UserController{
         String eventID = eventsHash.get(event).getId();
         List<String> attendees = eventActions.getEventAttendees(eventID);
         for (String attendeeID: attendees){
-            messageActions.createMessage(organizerID, attendeeID, message);
+            organizerActions.addUserContactList(userUsername, attendeesHash.get(attendeeID).getUsername(), userHash);
+            attendeeActions.addUserContactList(attendeesHash.get(attendeeID).getUsername(), userUsername, userHash);
+            if(userHash.get(attendeesHash.get(attendeeID).getUsername()) == null) {
+                return false;
+            }
+                messageActions.createMessage(organizerID, attendeeID, message);
         }
         return true;
     }
