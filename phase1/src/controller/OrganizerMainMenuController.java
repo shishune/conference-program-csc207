@@ -166,7 +166,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-        if (controller != null) {
+        if (controller != null && event != null) {
 
             List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
             String eventToAdd = event.getEventNames().get(title).getId();
@@ -232,8 +232,25 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
     public void option8() {
-        displayEvent.viewAll();
-        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
+        List<List<String>> e = new ArrayList<>();
+
+
+        for (String event1 : user.getEventList()){
+            List<String> individualEvents = new ArrayList<>();
+            individualEvents.add(event.getEvent(event1).getTitle());
+            individualEvents.add(event.getEvent(event1).getDateTime());
+            String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
+            individualEvents.add(roomName);
+            String speakerName = speaker.findUserFromId(event.getEvent(event1).getSpeaker()).getUsername();
+            individualEvents.add(speakerName);
+            e.add(individualEvents);
+        }
+        displayEvent.displayEvents(e);
+
+//        Event e =
+//        user.getEventList()
+//        displayEvent.displayEvents(;
+//        System.out.println(user.getEventList());
     }
 
 

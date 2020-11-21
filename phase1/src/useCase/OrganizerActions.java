@@ -13,6 +13,7 @@ import java.util.Map;
         // (i did it organizer and attendee but please check them over, all that's left is for speaker)
 // TODO : Please finish the javadocs for the methods that are unique to OrganizerActions and check if the javadocs are correct for the methods moved from UserAccountActions
 
+
 public class OrganizerActions extends UserAccountActions {
 
     private HashMap<String, Organizer> organizerHashMap = new HashMap<String, Organizer>();

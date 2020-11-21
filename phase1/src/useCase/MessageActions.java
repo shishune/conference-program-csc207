@@ -8,9 +8,10 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+// TODO: Add appropriate return types for methods
+// TODO: Add all required methods
 
 /**
- * Initialize the MessageAction class
  * Allows actions to be done with messages, including creating messages, sending messages, loading messages,
  * retrieving message information, printing messages, storing messages
  */
@@ -31,6 +32,35 @@ public class MessageActions {
     }
 
     /**
+     * Create a message with unique ID as a parameter
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message created
+     * @param sentTime the time that the message is sent
+     * @return a new message
+     */
+    public Message createMessage(String messageId, String senderId, String receiverId, String message, String sentTime) {
+        Message newMessage = new Message(messageId, senderId, receiverId, message, sentTime);
+        loadMessage(messageId, newMessage);
+        return newMessage;
+    }
+
+    /**
+     * Create a message with unique ID as a parameter
+     * @param messageId the ID of the message
+     * @param senderId the ID of the sender
+     * @param receiverId the ID of the receiver
+     * @param message the message created
+     * @return a new message
+     */
+    public Message createMessage(String messageId, String senderId, String receiverId, String message) {
+        Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
+        loadMessage(messageId, newMessage);
+        return newMessage;
+    }
+
+    /**
      * Create a message and generate unique ID for message
      * @param senderId the ID of the sender
      * @param receiverId the ID of the receiver
@@ -47,10 +77,13 @@ public class MessageActions {
 
     /**
      * Load new messages into HashMap of new messages
-     * @param messageId the ID of message
-     * @param newMessage a new message
      */
     public void loadMessage(String messageId, Message newMessage){
+        // This needs to update every collection we use for messages
+        // i.e. if we add a new hashmap/array/etc. for some method, we need to add
+        // otherHash.put(messageId, newMessage)
+        // messageArray.add(newMessage)
+        // etc. etc.
         messages.put(messageId, newMessage);
     }
 
@@ -79,6 +112,7 @@ public class MessageActions {
      * @param loader loads up messages
      */
     private void getAllMessages(LoadUpIGateway loader) {
+        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         conversations = loader.getMessagesList();
     }
 
@@ -86,10 +120,12 @@ public class MessageActions {
      * This method adds messages loaded from the csv to <messages>
      */
     private void addLoadedToHashMap() {
+        //System.out.println(conversations);
         if (conversations != null) {
             for(String messageString : conversations) {
                 String[] messageInfo = messageString.split(",");
                 Message loadedMessage = new Message(messageInfo[0], messageInfo[1], messageInfo[2],messageInfo[3], messageInfo[4]);
+                //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
                 messages.put(messageInfo[0], loadedMessage);
             }
         }
@@ -97,7 +133,6 @@ public class MessageActions {
 
     /**
      * Send message to a specific user
-     * @param message a message to send
      **/
     public void sendMessage(Message message) {
         loadMessage(message.getMessageId(), message);
@@ -118,6 +153,15 @@ public class MessageActions {
         }
         // sort userMessages by time sent
         userMessages.sort(Comparator.comparing(Message::getTimeSent));
+
+        /**
+         //If return ids instead of objects
+         ArrayList<String> messageIds = new ArrayList<String>();
+         for(Message message : userMessages) {
+            messageIds.add(message.getMessageId());
+         }
+         return messageIds;
+         **/
         return userMessages;
     }
 
@@ -129,6 +173,7 @@ public class MessageActions {
      */
     public List<Message> getMessages(String senderId, String receiverId) {
         System.out.println("Get Messages");
+        // presenter should call this method and turn array into output
         ArrayList<Message> userMessages = new ArrayList<Message>();
         System.out.println(messages);
         for(Map.Entry<String, Message> message : messages.entrySet()) {

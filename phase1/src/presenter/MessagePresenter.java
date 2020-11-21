@@ -27,7 +27,6 @@ public class MessagePresenter {
      * */
     public boolean displayMessages (UserController controller, String fromMe, String toMe) {
         ArrayList<ArrayList<String>> messagesList = controller.viewMessages(fromMe, toMe); // fromMe and toMe are are user IDs
-        System.out.println("DISPLAY MESSAGES: " + controller.viewMessages(fromMe, toMe));
         int count = 1;
         for (ArrayList<String> message: messagesList){
             System.out.println(count);
@@ -70,6 +69,11 @@ public class MessagePresenter {
     public void failedContact(){
         System.out.println("This username is not valid.");
     }
+
+    /**
+     * User does not have any contacts
+     */
+    public void zeroContacts() { System.out.println("You have not received any messages or contacted anyone."); }
     /**
      * Message of failed contact
      * */

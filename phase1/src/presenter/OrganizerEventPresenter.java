@@ -98,7 +98,7 @@ public class OrganizerEventPresenter extends EventPresenter{
         System.out.println("Press 'x' if you want view your contacts according to event or any key to view all contacts together");
     }
     public void promptEvent(){
-        System.out.println("Please enter the name of the event you would like view your contacts from");
+        System.out.println("Please enter the name of the event you would like view your contacts from of X to go back");
     }
     public void notYourEvent(){
         System.out.println("You are not charge of this event, please try again");
@@ -106,7 +106,7 @@ public class OrganizerEventPresenter extends EventPresenter{
 
     public void eventExists(){System.out.println("This event name is already taken.");}
 
-    public void noEvent(){System.out.println("This event does not exist, please try again");}
+    public void noEvent(){System.out.println("This event does not exist, please try again or enter x to go back");}
 
     public void allYourContacts(List<String> contacts){
         System.out.println(contacts.toString());
