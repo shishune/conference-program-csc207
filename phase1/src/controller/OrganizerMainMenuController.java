@@ -1,15 +1,14 @@
 package controller;
 import entities.Event;
 import entities.User;
+import presenter.OrganizerEventPresenter;
+import presenter.OrganizerMessagePresenter;
+import useCase.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import presenter.OrganizerMessagePresenter;
-import presenter.OrganizerEventPresenter;
-import useCase.*;
 
 /**
  * A controller class for organizer that decides what to do based on user input when choosing from the main menu.
@@ -67,6 +66,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * Responds to menu option 5
+     */
     public void option5() {
         displayEvent.promptViewContacts();
         String option = scan.nextLine();
@@ -102,6 +104,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
         }
     }
+
     /**
      * Responds to menu option 6 - create an event
      */
@@ -238,13 +241,12 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayEvent.promptCancelEvent();
                 String eventCancel = scan.nextLine();
 
-                if (eventCancel.equals("!")){
+                if (eventCancel.equals("!")) {
                     displayEvent.warning();
                     String answer = scan.nextLine();
                     if (answer.equals("x") || answer.equals("X")) {
                         break;
-                    }
-                    else{
+                    } else {
                         continue;
                     }
                 }
@@ -276,13 +278,12 @@ public class OrganizerMainMenuController extends MainMenuController {
                     displayEvent.noEvent();
                     displayEvent.breakPlease();
                 }
-                if (ev.equals("!")){
+                if (ev.equals("!")) {
                     displayEvent.warning();
                     String answer = scan.nextLine();
                     if (answer.equals("x") || answer.equals("X")) {
                         break;
-                    }
-                    else{
+                    } else {
                         continue;
                     }
                 }
@@ -291,12 +292,14 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
-
+    /**
+     * Responds to menu option 8
+     */
     public void option8() {
         List<List<String>> e = new ArrayList<>();
 
 
-        for (String event1 : user.getEventList()){
+        for (String event1 : user.getEventList()) {
             List<String> individualEvents = new ArrayList<>();
             individualEvents.add(event.getEvent(event1).getTitle());
             individualEvents.add(event.getEvent(event1).getDateTime());
@@ -307,15 +310,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             e.add(individualEvents);
         }
         displayEvent.displayEvents(e);
-
-//        Event e =
-//        user.getEventList()
-//        displayEvent.displayEvents(;
-//        System.out.println(user.getEventList());
     }
-
-
-
 
 
     /**
@@ -443,72 +438,11 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
     }
+
     /***
      * Responds to menu option 11- view all created events
      */
     public void option11() {
         super.option8();
     }
-
-
-//    public HashMap<String, User> returnUserUserIDHashMap() {
-//
-//        if (!(attendee == null) && !attendee.returnIDHashMap().isEmpty()) {
-//            usernameHashmap.putAll(attendee.returnIDHashMap());
-//        }
-//        if (!(organizer == null) && !organizer.returnIDHashMap().isEmpty()) {
-//            usernameHashmap.putAll(organizer.returnIDHashMap());
-//        }
-//        if (!(speaker == null) && !speaker.returnIDHashMap().isEmpty()) {
-//            usernameHashmap.putAll(speaker.returnIDHashMap());
-//        }
-//        return usernameHashmap;
-//
-//    }
 }
-
-//        displayEvent.promptAddRoom();
-//        String room = scan.nextLine();
-//        if (controller != null) {
-//            controller.createRoom(room);
-//        }
-//            displayEvent.successAddRoom();
-//    }
-//while (catcher){
-//        displayEvent.promptRoom();
-//        String roomName = scan.nextLine();
-//        if (!(room == null)) {
-//        if (room.returnHashMap().containsKey(roomName)) {
-//        roomID = roomName;
-//        catcher = false;
-//        } else {
-//        displayMessage.badRoom();
-//        String reply = scan.nextLine();
-//        if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
-//        displayMessage.newRoom();
-//        String name = scan.nextLine();
-//        if (!(controller == null) && controller.createRoomActions(name)) {
-//        displayMessage.addedRoom();
-//        catcher = false;
-//        }
-//        }
-//        }
-//        }
-//        }
-//            displayMessage.speakerUsernamePrompt();
-//            String newSpeakerName = scan.nextLine();
-//            displayMessage.speakerPasswordPrompt();
-//
-//            while (catcherUserName) {
-//                String newSpeakerPassword = scan.nextLine();
-//                if (controller != null) {
-//                    controller.createSpeaker(newSpeakerName, newSpeakerPassword);
-//                    displayMessage.speakerCreated();
-//                    catcherUserName = false;
-//                }
-//            }
-//                        displayMessage.newRoom();
-//                        String name = scan.nextLine();
-//                        if (!(controller == null) && controller.createRoomActions(name)) {
-//                        displayMessage.addedRoom();
-//                        catcher = false; kfejaof

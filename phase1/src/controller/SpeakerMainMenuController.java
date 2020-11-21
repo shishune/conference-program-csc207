@@ -1,25 +1,14 @@
 package controller;
+import entities.Event;
 import entities.User;
 import presenter.EventPresenter;
 import presenter.SpeakerMessagePresenter;
+import useCase.AttendeeActions;
+import useCase.EventActions;
+import useCase.RoomActions;
+import useCase.SpeakerActions;
 
 import java.util.*;
-
-import entities.Room;
-import entities.Speaker;
-import entities.User;
-import entities.Event;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import presenter.EventPresenter;
-import presenter.MessagePresenter;
-import presenter.SpeakerMessagePresenter;
-import useCase.*;
-
-import java.util.Scanner;
 
 /**
  * A controller class for speaker that decides what to do based on user input when choosing from the main menu.
@@ -97,10 +86,6 @@ public class SpeakerMainMenuController extends MainMenuController {
                 displayMessage.failedContact();
             }
         }
-        /*HashMap<String, User> receiverHash = controller.returnUserIDHashMap();
-        for(Map.Entry<String, User> entry : receiverHash.entrySet()) {
-            displayMessage.displayMessages(controller, user.getId(), entry.getKey());
-        }*/
     }
 
     /**
@@ -122,11 +107,16 @@ public class SpeakerMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * Responds to menu option 5
+     */
     public void option5() { //view all contacts
         displayMessage.displayContacts(controller, user.getId());
 }
 
-
+    /**
+     * Responds to menu option 6
+     */
     public void option6() {
         List<String> e = user.getEventList();
         List<List<String>> stringE = new ArrayList<>();
@@ -152,15 +142,3 @@ public class SpeakerMainMenuController extends MainMenuController {
         displayEvent.viewEvents(stringE);
     }
 }
-
-
-//        Event eventObject = event.getEventNames().get(eventName);
-//        String eventID = event.getEventNames().get(eventName).getId();
-//        if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
-//            displayEvent.allYourContactsEvent(eventObject.getAttendees()); // hello
-//            catcher = false;
-//
-//    }
-
-//        displayEvent.viewAll();
-//        displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));

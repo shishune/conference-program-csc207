@@ -1,14 +1,11 @@
 package controller;
 import entities.Event;
-import entities.Message;
-import entities.Speaker;
+import entities.User;
 import presenter.SpeakerMessagePresenter;
 import useCase.*;
+
 import java.util.HashMap;
-import entities.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /***
  * A speaker controller. Includes all the abilities only speakers can complete.
@@ -68,14 +65,17 @@ public class SpeakerController extends UserController {
     }
 
     /**
-     *
      * Allows Speakers to view attendees attending their event
+     * @param eventID the id of the event
      * */
-
     public List<String> viewAttendees(String eventID) {
         return this.eventActions.getEventAttendees(eventID);
     }
 
+    /**
+     * Allows Speakers to view their events
+     * @param speakerID the id of the speaker
+     * */
     public List<String> viewEvents(String speakerID){return speakerActions.returnIDHashMap().get(speakerID).getEventList();}
 
 }
