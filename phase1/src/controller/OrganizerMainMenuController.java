@@ -395,7 +395,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 9
+     * Responds to menu option 9- create a new room
      */
     public void option9() {
 
@@ -418,6 +418,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    /***
+     * Responds to menu option 10- create a new speaker
+     */
     public void option10() {
 
         boolean catcherUserName = true;

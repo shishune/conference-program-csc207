@@ -118,7 +118,7 @@ public class EventActions  {
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                    List<String> eventAttendees = Arrays.asList(eventAttributes[4].split("%%"));
+                    List<String> eventAttendees = new ArrayList<String>(Arrays.asList(eventAttributes[4].split("%%")));
                     loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
                             eventAttendees, eventAttributes[5]);
             }
