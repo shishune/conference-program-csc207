@@ -43,6 +43,8 @@ public class LogOut {
 
     /**
      * Stores information for logging out
+     * @param username A string the user inputs as their username
+     * @param type A string that represents the type of user
      */
     public void loggingOut(String username, String type) {
 

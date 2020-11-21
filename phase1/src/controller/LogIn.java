@@ -9,7 +9,6 @@ public class LogIn {
     private Scanner scan = new Scanner(System.in);  // Create a Scanner object
     private AccountPresenter accountDisplay = new AccountPresenter();
     private UserController controller;
-    //TODO: Change javadocs
     /**
      * This method is called when the user is logging in after they have inputted a username and password and checks if
      * the username and password are correct, if so returns the user object which was logging in, otherwise returns null
@@ -24,7 +23,12 @@ public class LogIn {
         return type;
     }
 
-
+    /**
+     * This method is called when the user enter 'x' to sigh up. It reads the username and password the user inputted.
+     * @param organizerActions the use case responsible for organizers
+     * @param speakerActions the use case responsible for speakers
+     * @param attendeeActions the use case responsible for attendees
+     */
     public void signUp(OrganizerActions organizerActions, SpeakerActions speakerActions,
                              AttendeeActions attendeeActions) {
 
@@ -51,7 +55,16 @@ public class LogIn {
         }
 
     }
-    //TODO: WHAT IF THEY ENTER SOMETHING THATS NOT 123?
+
+    /**
+     * Checks if username is unique
+     * @param username A string the user inputs as their username
+     * @param password A string the user inputs as their password
+     * @param organizerActions the use case responsible for organizers
+     * @param speakerActions the use case responsible for speakers
+     * @param attendeeActions the use case responsible for attendees
+     * @return true if the username is unique otherwise return false
+     */
     private boolean signUpCheck(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions,
                            AttendeeActions attendeeActions) {
         String userType = scan.nextLine();

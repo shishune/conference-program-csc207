@@ -200,9 +200,11 @@ public class EventActions  {
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
-            System.out.println(events.get(eventID).getAttendees());
+
+            //List<String> eventAttendees = events.get(eventID).getAttendees().add(attendeeID);
             events.get(eventID).getAttendees().add(attendeeID);
-            attendees.get(eventID).add(attendeeID);
+            //attendees.get(eventID).add(attendeeID);
+            System.out.println(attendees.get(eventID));
             return true;
         }
     }
