@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying events to an organizer.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class OrganizerEventPresenter extends EventPresenter{

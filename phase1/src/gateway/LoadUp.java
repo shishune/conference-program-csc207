@@ -14,24 +14,19 @@ public class LoadUp implements LoadUpIGateway {
 
     private ArrayList<String> messages = new ArrayList<>();
     private ArrayList<String> events = new ArrayList<>();
-    // ArrayList<String> organizers = null;
-    // etc.etc. one for every .csv
     private ArrayList<String> rooms = new ArrayList<>();
     private ArrayList<String> attendees = new ArrayList<>();
     private ArrayList<String> organizers = new ArrayList<>();
     private ArrayList<String> speakers = new ArrayList<>();
     private ArrayList<String> ids = new ArrayList<>();
-    protected int objectId;
 
     /**
      * Loads up information of messages, events, rooms, attendees and organizers
      */
     public LoadUp() {
-        // these might be moved elsewhere, idk yet
+
         getMessages();
         getEvents();
-        // getOrganizers()
-        // etc. etc., one for every .csv
         getRooms();
         getSpeakers();
         getIds();
@@ -58,7 +53,6 @@ public class LoadUp implements LoadUpIGateway {
      * @param id the id of an entity
      */
     public void addId(String id){
-        //System.out.println(ids);
         this.ids.add(id);
     }
     /**
@@ -113,23 +107,6 @@ public class LoadUp implements LoadUpIGateway {
         return events;
     }
 
-//    /**
-//     * Getter for events
-//     * @param filePath the text file path of event to be found
-//     * @return events
-//     */
-//    public List<String> getEvents(String filePath) {
-//        // gets list of messages from messages.csv and sets it to <messages>
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//            String line = null;
-//            while ((line = br.readLine()) != null) {
-//                events.add(line);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return events;
-//    }
 
     /**
      * Getter for messages
@@ -206,24 +183,6 @@ public class LoadUp implements LoadUpIGateway {
      * @return objectId in a list
      */
     public int getNumOfIds() {
-        /*
-        String filename = "./phase1/src/assets/dataFiles/entities.csv";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line = null;
-
-            while ((line = br.readLine()) != null) {
-                objectId++;
-            }
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            // TODO: tell user error was generated
-            e.printStackTrace();
-        }
-        System.out.println(objectId);
-        return objectId;
-        */
-
         return ids.size();
     }
 
@@ -231,43 +190,26 @@ public class LoadUp implements LoadUpIGateway {
      * Getter for the last object Id made using IGateway
      * */
     public int getObjectId() {
-        //LoadUp l = new LoadUp();
         return getNumOfIds();
     }
 
 
-    /** public List<String> getOrganizers() {
-
-     // gets list of organizers from organizers.csv
-     // and sets it to <organizers>
-     // return organizerss
-     }
-     * **/
-
-    /** etc. etc. one for every thingy
-     * **/
-
-
-
     // Methods from IGateway
     // To be called inside Use Case Classes
-    // this makes it okay to call a gateway inside use case class for some reason
+
+    /**
+     * Getter for the list of messages from last use of program using IGateway
+     * */
     @Override
     public ArrayList<String> getMessagesList() {
         return messages;
     }
 
-    /*@Override
-    public ArrayList<String> getRooms() { return rooms; }*/
 
-    /*@Override
-    public List<String> getEventsList() {
-        return events;
-    }*/
-
+    /**
+     * Getter for the list of speakers from last use of program using IGateway
+     * */
     @Override
     public ArrayList<String> getSpeakersList() { return speakers; }
 
-    /** etc. etc. one for every thingy
-     * **/
 }

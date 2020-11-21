@@ -3,7 +3,7 @@ package presenter;
 /**
  * A presenter class. The AccountPresenter is responsible for anything related to logging in,
  * logging out, and navigating through the account.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class AccountPresenter {
@@ -15,11 +15,13 @@ public class AccountPresenter {
             + "\n[5] View all contacts";
 
     /**
-     * Failed sign up. Username already exists
+     * Failed sign up message when username already exists
      */
     public void failedUsernameExists(){
         System.out.println("This username already exists.");
     }
+
+
     public void successSignUp(){
         System.out.println("You have successfully made a new account! You may now login with your new account." +
                 "\nNote: You must login and logout completely in order to save your account.");
@@ -95,7 +97,7 @@ public class AccountPresenter {
         System.out.println("Note: You must log out of your account in order to save new information" +
                 "\n(including sent messages, sign up to events, etc.)." +
                 "\nIf you would like to return to the menu, enter any key " +
-                "\n This is accessible in the main menu.");
+                "\n This inaccessible in the main menu.");
     }
 
     /**

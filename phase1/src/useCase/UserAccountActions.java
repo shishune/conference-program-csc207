@@ -14,41 +14,6 @@ import java.util.HashMap;
 
 public abstract class UserAccountActions {
 
-//    /**
-//     * Adds an userId to existing hashmap of userId's.
-//     * The key is the userId, the value is an instance of the user object.
-//     * @param addMe the user to be added
-//     * */
-//    public abstract void addUserIdToHashMap(User addMe);
-//
-//
-//    /**
-//     * Adds an username to existing hashmap of usernames.
-//     * The key is the username, the value is an instance of the user object.
-//     * @param addMe the user to be added
-//     * */
-//    protected abstract void addUsernameToHashMap(User addMe);
-//
-//
-//    /**
-//     * Removes an userId from existing hashmap of userId's.
-//     * The key is the userId, the value is an instance of the user object.
-//     * @param removeMe the user to be removed
-//     * @return true if user is removed successfully, false if it has not been removed
-//     * */
-//    public abstract boolean removeUserIdFromHashMap(User removeMe);
-//
-//
-//    /**
-//     * Removes an username to existing hashmap of usernames.
-//     * The key is the username, the value is an instance of the user object.
-//     * @param removeMe the user to be removed
-//     * @return true if user is removed successfully, false if it has not been removed
-//     * */
-//
-//    public abstract boolean removeUsernameFromHashMap(User removeMe);
-
-
     /**
      * Adds an user to existing list of contacts for an user.
      * @param addMe the user to be added

@@ -3,7 +3,7 @@ import entities.Event;
 import java.util.List;
 /**
  * A presenter class. This class is responsible for anything related to displaying events to the user.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class EventPresenter {
@@ -36,12 +36,14 @@ public class EventPresenter {
         System.out.println(generic+ "cancel.");
     }
 
+
     /**
      * Prompt for user to add event/attend event
      * */
     public void promptAddEvent(){
         System.out.println(generic+ "add.");
     }
+
 
     /**
      * Prompt for user to add room
@@ -51,13 +53,13 @@ public class EventPresenter {
     }
 
 
-
     /**
      * Message informing that user cancelled event
      * */
     public void successCancelEnrol(){
         System.out.println(generic2+ "cancelled.");
     }
+
 
     /**
      * Message informing that user added event
@@ -67,13 +69,13 @@ public class EventPresenter {
     }
 
 
-
     /**
      * Message informing that room is full; user cannot attend
      */
     public void failedRoomFull(){
         System.out.println("Sorry, this room is full.");
     }
+
 
     /**
      * Message informing of time conflict
@@ -83,13 +85,13 @@ public class EventPresenter {
     }
 
 
-
     /**
      * Message informing that event does not exist
      */
     public void failedNoSuchEvent(){
         System.out.println("This event does not exist.");
     }
+
 
     /**
      * General failure
@@ -98,6 +100,7 @@ public class EventPresenter {
         System.out.println("Sorry, there was a problem with your request.");
     }
 
+
     /**
      * Failed event cancel
      */
@@ -105,10 +108,9 @@ public class EventPresenter {
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
     }
 
-    public void viewAll(){
-        System.out.println("Press 'x' to view the list of events organized by you.");
-    }
-
+    /**
+     * Displays events for inputted user
+     */
     public void viewEvents(List<List<String>> user){
         int count = 1;
 

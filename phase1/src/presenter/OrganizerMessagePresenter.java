@@ -5,7 +5,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
  * Creates menu specific to organizer for the method of messaging.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class OrganizerMessagePresenter extends MessagePresenter{

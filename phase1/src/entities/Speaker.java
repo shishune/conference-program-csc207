@@ -12,7 +12,6 @@ import java.util.List;
  * @version 1
  * */
 public class Speaker extends User{
-    private String speakerId;
 
     /**
      * Instantiates a new speaker object

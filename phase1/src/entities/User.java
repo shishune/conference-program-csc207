@@ -45,7 +45,7 @@ public abstract class User{
     }
 
     /**
-     * Getter for the login status of this user
+     * Getter for the login status of this user. (May be needed in Phase 2)
      * @return boolean of the user's login status
      * */
     public boolean getIsLogin(){

@@ -8,7 +8,8 @@ import presenter.*;
 
 import java.util.HashMap;
 import java.util.Scanner;
-// A0000000000000002,sejal,1,,,false,false
+
+
 /**
  * A master controller class to take in user input and respond using other controllers and presenters.
  * This is what is run in the main method.
@@ -56,7 +57,6 @@ public class AccountController {
             //String id = logIn.loggingIn(username, password); // evaluate username/password
             String type = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions);
 
-            // TODO let us logout before login
             if(type.equals("")){
                 accountDisplay.failedLogin();
             }
@@ -65,8 +65,6 @@ public class AccountController {
 
                 //instantiate generic menu controller
                 MainMenuController menuController;
-                // TODO logs out organizer if i want to make a room/ view all events/ choose an option that im not allowed to do
-                // TODO option to create a speaker when creating an event?
 
                 if (type.equals("A")) { //indicates attendee
                     // UserController controller = new UserController(eventActions, roomActions, messageActions, attendeeActions, attendeeActions, organizerActions, speakerActions);
@@ -144,81 +142,5 @@ public class AccountController {
             }
         }
     }
-
-
-//    public EventActions getEvents(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new EventActions(g);
-//    }
-//
-//    public OrganizerActions getOrganizers(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new OrganizerActions(g);
-//    }
-//
-//    public MessageActions getMessages(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new MessageActions(g);
-//    }
-//
-//    public RoomActions getRooms(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new RoomActions(g);
-//    }
-//
-//    public SpeakerActions getSpeakers(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new SpeakerActions(g);
-//    }
-//
-//    public AttendeeActions getAttendees(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new AttendeeActions(g);
-//    }
-//
-//    public LogoutActions getLogOut(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new LogoutActions();
-//    }
-//
-//    public UserAccountActions getUserAccountActions(){
-//        LoadUpIGateway g = new LoadUp();
-//        return new UserAccountActions() {
-//            public boolean addUserContactList(String toMe, String addMe) {
-//                return false;
-//            }
-//
-//            public boolean removeUserContactList(String toMe, String removeMe) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean addEventToUser(String event, String user) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean removeEventFromUser(String event, String user) {
-//                return false;
-//            }
-//
-//            @Override
-//            public String returnAllEvents(String user) {
-//                return null;
-//            }
-//
-//            @Override
-//            public User findUserFromUsername(String username) {
-//                return null;
-//            }
-//
-//            @Override
-//            public User findUserFromId(String userId) {
-//                return null;
-//            }
-//        };
-//    }
-
-
 
 }

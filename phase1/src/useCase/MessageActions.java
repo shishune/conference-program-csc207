@@ -18,6 +18,7 @@ public class MessageActions {
     private HashMap<String, Message> messages = new HashMap<String, Message>(); // hashmap containing all loaded and new messages
     private LoadUpIGateway loader;
 
+
     /**
      * Gets all messages from message.csv and adds those messages to a hashmap of all messages from the csv
      * @param loader loads up messages
@@ -28,6 +29,7 @@ public class MessageActions {
         getAllMessages(loader); // gets all messages from message.csv
         addLoadedToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
+
 
     /**
      * Create a message and generate unique ID for message
@@ -44,6 +46,7 @@ public class MessageActions {
         return newMessage;
     }
 
+
     /**
      * Load new messages into HashMap of new messages
      * @param messageId the id of message
@@ -52,6 +55,7 @@ public class MessageActions {
     public void loadMessage(String messageId, Message newMessage){
         messages.put(messageId, newMessage);
     }
+
 
     /**
      * Generates the time of Message construction.
@@ -73,14 +77,15 @@ public class MessageActions {
         return dateTime;
     }
 
+
     /**
      * This method gets list of messages from the IGateway
      * @param loader loads up messages
      */
     private void getAllMessages(LoadUpIGateway loader) {
-        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         conversations = loader.getMessagesList();
     }
+
 
     /**
      * This method adds messages loaded from the csv to <messages>
@@ -88,15 +93,13 @@ public class MessageActions {
     private void addLoadedToHashMap() {
         if (conversations != null) {
             for(String messageString : conversations) {
-                //System.out.println(messageString);
-                //System.out.println(messageString.split("%2%0%7%"));
                 String[] messageInfo = messageString.split("%2%0%7%");
                 Message loadedMessage = new Message(messageInfo[0], messageInfo[1], messageInfo[2],messageInfo[3], messageInfo[4]);
-                //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
                 messages.put(messageInfo[0], loadedMessage);
             }
         }
     }
+
 
     /**
      * Send message to a specific user
@@ -105,6 +108,7 @@ public class MessageActions {
     public void sendMessage(Message message) {
         loadMessage(message.getMessageId(), message);
     }
+
 
     /**
      * This method returns all messages sent by user with senderId

@@ -8,12 +8,11 @@ import controller.UserController;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class MessagePresenter {
 
-    // used in MainMenuController to print list of contacts for a user
     public void printString(String theString){
         System.out.println(theString);
     }

@@ -32,11 +32,7 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : roomsList){
-                if(roomsList.indexOf(message) == roomsList.size()-1) {
-                    writer.write(message);
-                } else {
-                    writer.write(message);
-                }
+                writer.write(message);
             }
             writer.close();
         } catch (IOException e) {
@@ -57,11 +53,7 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : eventsList){
-                if(eventsList.indexOf(message) == eventsList.size()-1) {
-                    writer.write(message);
-                } else {
-                    writer.write(message);
-                }
+                writer.write(message);
             }
             writer.close();
         } catch (IOException e) {
@@ -83,11 +75,7 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : messagesList){
-                if(messagesList.indexOf(message) == messagesList.size()-1) {
-                    writer.write(message);
-                } else {
-                    writer.write(message);
-                }
+                writer.write(message);
             }
             writer.close();
         } catch (IOException e) {
@@ -107,13 +95,7 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : organizerList){
-                if(organizerList.indexOf(message) == organizerList.size()-1) {
-                    writer.write(message);
-                } else {
-                    writer.write(message);
-                    //TODO: the extra line is creating errors, should not have this since csv is added on top, so there's no need for new line
-                    //TODO: COLLAPSE IF STATEMENT
-                }
+                writer.write(message);
             }
             writer.close();
         } catch (IOException e) {
@@ -134,11 +116,7 @@ public class Store{
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : attendeeList){
-                if(attendeeList.indexOf(message) == attendeeList.size()-1) {
-                    writer.write(message);
-                } else {
-                    writer.write(message);
-                }
+                writer.write(message);
             }
             writer.close();
         } catch (IOException e) {
