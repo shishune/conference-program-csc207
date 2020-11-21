@@ -89,13 +89,14 @@ public class UserController {
      * @return boolean true if message was successfully sent, false if it was not
      */
     public boolean sendMessage(String sender, String receiver, String content) {
-        System.out.println("SEND MESSAGE");
+        //System.out.println("SEND MESSAGE");
         //System.out.println(user != null);
         if (user != null) {
             HashMap<String, User> usernameHash = returnUserUsernameHashMap();
             //System.out.println(user.findUserFromUsername(sender));
             // add receiver to contact list of sender
             user.addUserContactList(sender, receiver, usernameHash);
+            user.addUserContactList(receiver, sender, usernameHash);
             //System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList());
             if(usernameHash.get(receiver) == null) {
                 return false;
@@ -148,39 +149,27 @@ public class UserController {
      * @return array of a list of messages
      */
     public ArrayList<ArrayList<String>> viewMessages(String fromMe, String toMe) {
-        System.out.println("View Messages");
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         HashMap<String, User> usernameHash = returnUserUsernameHashMap();
-
-        //System.out.println(message.getMessages(usernameHash.get(fromMe).getId(), usernameHash.get(toMe).getId()));
-        System.out.println(message.getMessages(fromMe, toMe));
         List<Message> messageList = message.getMessages(fromMe, toMe);
-        System.out.println("MESSAGE LIST: " + messageList);
         for (Message message : messageList) {
-            System.out.println("LOOP");
-            System.out.println(message);
             ArrayList<String> info = new ArrayList<String>();
             HashMap<String, User> userIdHash = returnUserIDHashMap();
-            String receiverUsername = userIdHash.get(toMe).getUsername();
-            String senderUsername = userIdHash.get(fromMe).getUsername();
-            if(receiverUsername != null) {
-                System.out.println("sender not null");
-                info.add(receiverUsername);
-            }
-            if(senderUsername != null){
-                System.out.println("receiver not null");
+            String receiverUsername = userIdHash.get(message.getReceiverId()).getUsername();
+            String senderUsername = userIdHash.get(message.getSenderId()).getUsername();
+            if(senderUsername != null) {
                 info.add(senderUsername);
             }
+            if(receiverUsername != null){
+                info.add(receiverUsername);
+            }
             if(message.getTimeSent() != null) {
-                System.out.println("Time sent not null");
                 info.add(message.getTimeSent());
             }
             if(message.getMessage() != null){
-                System.out.println("content not null");
                 info.add(message.getMessage());
             }
             if(info.get(0) != null && info.get(1) != null && info.get(2) != null && info.get(3) != null){
-                System.out.println("info added");
                 messages.add(info);
             }
         }
