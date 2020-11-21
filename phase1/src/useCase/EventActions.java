@@ -138,7 +138,7 @@ public class EventActions  {
 
             GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
-            System.out.println(newID);
+            //System.out.println(newID);
 
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
@@ -192,7 +192,7 @@ public class EventActions  {
             roomTimes.add(dateTime);
             roomSchedule.put(roomID, roomTimes);
         }
-        System.out.println(speakerSchedule);
+        //System.out.println(speakerSchedule);
         return newEvent;
     }
 
@@ -211,7 +211,7 @@ public class EventActions  {
             //List<String> eventAttendees = events.get(eventID).getAttendees().add(attendeeID);
             events.get(eventID).getAttendees().add(attendeeID);
             //attendees.get(eventID).add(attendeeID);
-            System.out.println(attendees.get(eventID));
+            //System.out.println(attendees.get(eventID));
             return true;
         }
     }
@@ -305,8 +305,8 @@ public class EventActions  {
      * @return true if the room is in fact available
      * */
     public boolean isSpeakerFree(String speakerID, String dateTime){
-        System.out.println("INSIDE FUNCTION");
-        System.out.println(speakerSchedule);
+        //System.out.println("INSIDE FUNCTION");
+        //System.out.println(speakerSchedule);
         List<String> SpeakerTime = speakerSchedule.get(speakerID);
         if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
             return false;

@@ -58,7 +58,7 @@ public class LoadUp implements LoadUpIGateway {
      * @param id the id of an entity
      */
     public void addId(String id){
-        System.out.println(ids);
+        //System.out.println(ids);
         this.ids.add(id);
     }
     /**

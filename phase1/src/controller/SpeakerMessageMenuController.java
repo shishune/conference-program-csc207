@@ -51,11 +51,7 @@ public class SpeakerMessageMenuController{
             }
 
         }*/
-        //System.out.println("OPTION 1");
-        //System.out.println(controller);
         if(controller != null) {
-            //System.out.println("controller not null");
-            //System.out.println(events);
             boolean success = false;
             for (String event : events) {
                 if (controller.sendMessages(event, content)) {

@@ -43,13 +43,11 @@ public class SpeakerController extends UserController {
      * Allows Speakers to send a message to those attendees attending their event
      * */
     public boolean sendMessages(String event, String message) {
-        //System.out.println("SEND MESSAGES");
         if(eventActions != null) {
             HashMap<String, Event> eventHash = eventActions.getEventNames();
             if(eventHash.get(event) != null) {
                 String eventID = eventHash.get(event).getId();
                 List<String> attendees = eventActions.getEventAttendees(eventID);
-                //System.out.println("Attendees: " + eventActions.getEventAttendees(eventID));
                 for (String attendeeID : attendees) {
                     if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
                         return false;

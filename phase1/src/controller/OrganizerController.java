@@ -155,18 +155,13 @@ public class OrganizerController extends UserController{
      * @param message
      */
     public boolean sendAttendeesMessage(String event, String message){
-        System.out.println("SEND ATTENDEES MESSAGE");
         HashMap<String, Event> eventsHash = eventActions.getEventNames();
         if(eventsHash.get(event) == null) {
-            System.out.println("Returns False");
             return false;
         }
 
         String eventID = eventsHash.get(event).getId();
-        System.out.println("THE ID: " + eventID); // done
-        System.out.println(eventActions.getEventAttendees(eventID));
         List<String> attendees = eventActions.getEventAttendees(eventID);
-        System.out.println(attendees);
         for (String attendeeID: attendees){
             messageActions.createMessage(organizerID, attendeeID, message);
         }

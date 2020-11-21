@@ -13,7 +13,7 @@ import useCase.*;
 
 /**
  * A controller class for organizer that decides what to do based on user input when choosing from the main menu.
- * @author Cynthia
+ * @author Cynthia, Mizna, Jiessie
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController {
@@ -118,6 +118,17 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.newOrNoSpeaker();
             String speakerUserName = scan.nextLine();
 
+            if (speakerUserName.equals("!")){
+                displayEvent.warning();
+                String answer = scan.nextLine();
+                if (answer.equals("x") || answer.equals("X")) {
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+
             if (speakerUserName.equals("NEW") || speakerUserName.equals("new") || speakerUserName.equals("New")) {
 
                 while (catcherUserName) {
@@ -127,6 +138,8 @@ public class OrganizerMainMenuController extends MainMenuController {
 
                     if (speaker.returnUsernameHashMap().containsKey(newSpeakerName)) {
                         displayMessage.alreadySpeaker();
+                        displayEvent.breakPlease();
+
                     } else if (controller != null) {
                         displayMessage.speakerPasswordPrompt();
                         String newSpeakerPassword = scan.nextLine();
@@ -201,6 +214,18 @@ public class OrganizerMainMenuController extends MainMenuController {
             while (catcher) {
                 displayEvent.promptCancelEvent();
                 String eventCancel = scan.nextLine();
+
+                if (eventCancel.equals("!")){
+                    displayEvent.warning();
+                    String answer = scan.nextLine();
+                    if (answer.equals("x") || answer.equals("X")) {
+                        break;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+
                 if (event.getEventNames().containsKey(eventCancel)) {
                     cancelEvent(eventCancel);
                     displayEvent.successCancelEvent();
@@ -208,6 +233,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
                 } else {
                     displayEvent.noEvent();
+                    displayEvent.breakPlease();
                 }
             }
         } else {
@@ -217,6 +243,18 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             while (catcher) {
                 String ev = scan.nextLine();
+
+                if (ev.equals("!")){
+                    displayEvent.warning();
+                    String answer = scan.nextLine();
+                    if (answer.equals("x") || answer.equals("X")) {
+                        break;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+
                 if (event.getEventNames().containsKey(ev)) {
                     e = ev;
                     String dateTime = getDateTimeInput();
@@ -224,6 +262,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     catcher = false;
                 } else {
                     displayEvent.noEvent();
+                    displayEvent.breakPlease();
                 }
 
             }
@@ -271,7 +310,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     Event eventObject = event.getEventNames().get(eventName);
                     String eventID = event.getEventNames().get(eventName).getId();
                     if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
-                        displayEvent.allYourContactsEvent(eventObject.getAttendees()); // hello
+                        displayEvent.allYourContactsEvent(eventObject.getAttendees());
                         catcher = false;
                     } else {
                         displayEvent.notYourEvent();
@@ -285,7 +324,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                     }
                 }
                 displayEvent.allYourContacts(newList);
-                catcher = false;
             }
 
         }

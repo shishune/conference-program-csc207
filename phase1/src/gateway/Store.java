@@ -74,15 +74,17 @@ public class Store{
      * @param messageActions the use case class responsible for messages
      */
     public void storeMessages(MessageActions messageActions) {
+        //System.out.println("STORE MESSAGES");
         ArrayList<String> messagesList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/messages.csv";
         messagesList = messageActions.storeMessages();
+        //System.out.println(messagesList);
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
             for (String message : messagesList){
                 if(messagesList.indexOf(message) == messagesList.size()-1) {
-                    writer.write(message + "\n");
+                    writer.write(message);
                 } else {
                     writer.write(message);
                 }
@@ -127,6 +129,7 @@ public class Store{
         ArrayList<String> attendeeList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/attendees.csv";
         attendeeList = attendeeActions.storingAttendees();
+        //System.out.println("ATTENDEES: " + attendeeList);
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);

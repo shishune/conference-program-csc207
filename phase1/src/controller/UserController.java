@@ -89,21 +89,16 @@ public class UserController {
      * @return boolean true if message was successfully sent, false if it was not
      */
     public boolean sendMessage(String sender, String receiver, String content) {
-        //System.out.println("SEND MESSAGE");
-        //System.out.println(user != null);
         if (user != null) {
             HashMap<String, User> usernameHash = returnUserUsernameHashMap();
-            //System.out.println(user.findUserFromUsername(sender));
             // add receiver to contact list of sender
             user.addUserContactList(sender, receiver, usernameHash);
             user.addUserContactList(receiver, sender, usernameHash);
-            //System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList());
             if(usernameHash.get(receiver) == null) {
                 return false;
             }
             String receiverId = usernameHash.get(receiver).getId();
             String senderId = usernameHash.get(sender).getId();
-            //System.out.println("FIND USER" + user.findUserFromUsername(sender).getContactsList().contains(receiverId));
             if (user.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
                 message.createMessage(senderId, receiverId, content);
                 return true;
@@ -124,7 +119,6 @@ public class UserController {
         if (user != null) {
             HashMap<String, User> userUsernameHashMap = returnUserUsernameHashMap();
             User me = user.findUserFromUsername(toMe);
-            System.out.println(me.getContactsList());
             return user.addUserContactList(toMe, addMe, userUsernameHashMap);
         }
         return false;

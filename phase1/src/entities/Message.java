@@ -52,7 +52,7 @@ public class Message {
      * @return the message as a string with message ID, sender ID, receiver ID and the time sent
      */
     public String getStringRep() {
-        return messageId + "," + senderId + "," + receiverId + "," + message + "," + timeSent;
+        return messageId + "%2%0%7%" + senderId + "%2%0%7%" + receiverId + "%2%0%7%" + message + "%2%0%7%" + timeSent;
     }
 
     /**

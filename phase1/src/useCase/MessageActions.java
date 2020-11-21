@@ -86,10 +86,11 @@ public class MessageActions {
      * This method adds messages loaded from the csv to <messages>
      */
     private void addLoadedToHashMap() {
-        //System.out.println(conversations);
         if (conversations != null) {
             for(String messageString : conversations) {
-                String[] messageInfo = messageString.split(",");
+                //System.out.println(messageString);
+                //System.out.println(messageString.split("%2%0%7%"));
+                String[] messageInfo = messageString.split("%2%0%7%");
                 Message loadedMessage = new Message(messageInfo[0], messageInfo[1], messageInfo[2],messageInfo[3], messageInfo[4]);
                 //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
                 messages.put(messageInfo[0], loadedMessage);
@@ -130,17 +131,9 @@ public class MessageActions {
      * @return messages sent and received by user
      */
     public List<Message> getMessages(String senderId, String receiverId) {
-        System.out.println("Get Messages");
         // presenter should call this method and turn array into output
         ArrayList<Message> userMessages = new ArrayList<Message>();
-        System.out.println(messages);
         for(Map.Entry<String, Message> message : messages.entrySet()) {
-            System.out.println("Loop");
-            System.out.println(message);
-            System.out.println(message.getValue().getSenderId());
-            System.out.println(message.getValue().getSenderId().equals(senderId));
-            System.out.println(message.getValue().getReceiverId());
-            System.out.println(message.getValue().getReceiverId().equals(receiverId));
             if((message.getValue().getSenderId().equals(senderId) && message.getValue().getReceiverId().equals(receiverId))
                     || (message.getValue().getSenderId().equals(receiverId) && message.getValue().getReceiverId().equals(senderId)) ) {
                 System.out.println("in if");
@@ -148,9 +141,7 @@ public class MessageActions {
             }
         }
         // sort userMessages by time sent
-        System.out.println(userMessages);
         userMessages.sort(Comparator.comparing(Message::getTimeSent));
-        System.out.println("Final view messages" + userMessages);
         return userMessages;
     }
 
@@ -171,7 +162,7 @@ public class MessageActions {
         // store messages
         if (messages != null && !messages.isEmpty()) {
             for (Map.Entry<String, Message> message : messages.entrySet()) {
-                allMessages.add(message.getValue().getStringRep());
+                allMessages.add(message.getValue().getStringRep() + "\n");
             }
         }
         return allMessages;
