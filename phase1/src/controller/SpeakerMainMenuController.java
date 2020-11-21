@@ -74,13 +74,33 @@ public class SpeakerMainMenuController extends MainMenuController {
      * Responds to menu option 3
      */
     public void option3() {
-        //displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
-        System.out.println("Option 3");
-        HashMap<String, User> receiverHash = controller.returnUserIDHashMap();
-        for(Map.Entry<String, User> entry : receiverHash.entrySet()) {
-            System.out.println("Loop");
-            displayMessage.displayMessages(controller, user.getId(), entry.getKey());
+        List<String> contactIds = user.getContactsList();
+        if(contactIds.isEmpty()){
+            displayMessage.zeroContacts();
+        } else {
+            HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+            ArrayList<String> contactUsernames = new ArrayList<String>();
+            for(Map.Entry<String, User> user : userIdHash.entrySet()) {
+                if(contactIds.contains(user.getKey())){
+                    contactUsernames.add(user.getValue().getUsername());
+                }
+            }
+            displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
+            for(String username : contactUsernames){
+                displayMessage.printString(username); // receiver username
+            }
+            String receiverUsername = scan.nextLine();
+            HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
+            if(usernameHash.get(receiverUsername) != null){
+                displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+            } else {
+                displayMessage.failedContact();
+            }
         }
+        /*HashMap<String, User> receiverHash = controller.returnUserIDHashMap();
+        for(Map.Entry<String, User> entry : receiverHash.entrySet()) {
+            displayMessage.displayMessages(controller, user.getId(), entry.getKey());
+        }*/
     }
 
     /**

@@ -43,8 +43,8 @@ public class MainMenuController extends AccountController{
         String receiver = scan.nextLine();
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
-        System.out.println("RECEIVER: " + receiver);
-        System.out.println("USER: " + user.getUsername());
+        //System.out.println("RECEIVER: " + receiver);
+        //System.out.println("USER: " + user.getUsername());
         if (controller.sendMessage(user.getUsername(), receiver, content)){
             displayMessage.successMessage(); // message has been sent successfully
         } else {
@@ -56,33 +56,28 @@ public class MainMenuController extends AccountController{
      * Responds to menu option 3
      */
     public void option3(){
-        System.out.println("MAIN OPT 3");
         List<String> contactIds = user.getContactsList();
-        //System.out.println("USER ID HASH: " + controller.returnUserIDHashMap());
-        HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
-        ArrayList<String> contactUsernames = new ArrayList<String>();
-        for(Map.Entry<String, User> user : userIdHash.entrySet()) {
-            if(contactIds.contains(user.getKey())){
-                contactUsernames.add(user.getValue().getUsername());
-            }
-        }
-        //System.out.println("Contact names: " + contactUsernames);
-        displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
-        for(String username : contactUsernames){
-            displayMessage.printString(username); // receiver username
-        }
-        String receiverUsername = scan.nextLine();
-        System.out.println(controller.returnUserIDHashMap());
-        HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
-        //System.out.println(controller);
-        //System.out.println(user.getId());
-        //System.out.println("USER HASH: " + usernameHash);
-        //System.out.println(receiverUsername + "%%");
-        //System.out.println(usernameHash.get(receiverUsername));
-        if(usernameHash.get(receiverUsername) != null){
-            displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+        if(contactIds.isEmpty()){
+            displayMessage.zeroContacts();
         } else {
-            displayMessage.failedContact();
+            HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+            ArrayList<String> contactUsernames = new ArrayList<String>();
+            for(Map.Entry<String, User> user : userIdHash.entrySet()) {
+                if(contactIds.contains(user.getKey())){
+                    contactUsernames.add(user.getValue().getUsername());
+                }
+            }
+            displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
+            for(String username : contactUsernames){
+                displayMessage.printString(username); // receiver username
+            }
+            String receiverUsername = scan.nextLine();
+            HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
+            if(usernameHash.get(receiverUsername) != null){
+                displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+            } else {
+                displayMessage.failedContact();
+            }
         }
     }
 
@@ -92,7 +87,7 @@ public class MainMenuController extends AccountController{
     public void option4(){
         displayMessage.promptContact();
         String add = scan.nextLine();
-        System.out.println(user.getContactsList());
+        //System.out.println(user.getContactsList());
         if (controller.returnUserUsernameHashMap().containsKey(add)){
             if (controller.addContact(add, user.getUsername())){
                 displayMessage.successContact();
