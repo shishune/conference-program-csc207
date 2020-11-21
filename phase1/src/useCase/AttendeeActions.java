@@ -9,11 +9,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * A use case class that stores a hashmap of Attendees.
+ * Child class to UserAccountActions.
+ * @author multiple
+ * @version 1
+ */
 
 // TODO : Please finish the javadocs for the methods that are unique to AttendeeActions and check if the javadocs are correct for the methods moved from UserAccountActions
-public class AttendeeActions extends UserAccountActions {
 
+public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeesHashMap = new HashMap<String, Attendee>();
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
@@ -21,14 +26,24 @@ public class AttendeeActions extends UserAccountActions {
     private SpeakerActions speaker;
     private OrganizerActions organizer;
 
+    /**
+     * @return ID of the attendee from the hashmap
+     * */
     public HashMap<String, Attendee> returnIDHashMap() {
         return attendeesHashMap;
     }
 
+    /**
+     * @return ID of the attendee username from the hashmap
+     * */
     public HashMap<String, Attendee> returnUsernameHashMap() {
         return attendeeUsernameHashMap;
     }
 
+    /**
+     * @parm loader
+     * This will load up the CSV
+     * */
     public AttendeeActions(LoadUpIGateway loader) {
         getAllAttendees(loader); // gets all messages from message.csv
         addAttendeeToHashMap();
@@ -36,7 +51,15 @@ public class AttendeeActions extends UserAccountActions {
         // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
     }
-
+    /**
+     * @parm userId
+     * @parm username
+     * @parm password
+     * @parm contactsList
+     * @parm eventList
+     * @parm isLogin
+     * This will create a new Attendee
+     * */
     private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
@@ -44,10 +67,24 @@ public class AttendeeActions extends UserAccountActions {
         return userAttendee;
     }
 
+    /**
+     * @parm username
+     * @return true if the user with the following username exists.
+     * */
+
     public boolean attendeeExists(String username){
         return attendeeUsernameHashMap.containsKey(username);
     }
 
+    /**
+     * @parm userId
+     * @parm username
+     * @parm password
+     * @parm contactsList
+     * @parm eventList
+     * @parm isLogin
+     * This will create a new Attendee
+     * */
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();

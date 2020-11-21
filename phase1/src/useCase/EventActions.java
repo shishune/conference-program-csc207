@@ -4,6 +4,12 @@ import gateway.LoadUpIGateway;
 
 import java.util.*;
 
+/**
+ * A use case class that stores a hashmap of Events.
+ * This class collaborates with UserAccountActions, OrganizationActions and SpeakerActions.
+ * @author multiple
+ * @version 1
+ */
 
 public class EventActions  {
     private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
