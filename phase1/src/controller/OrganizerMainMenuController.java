@@ -256,6 +256,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * Responds to menu option 8
+     */
 
     public void option8() {
         List<List<String>> e = new ArrayList<>();
@@ -279,7 +282,9 @@ public class OrganizerMainMenuController extends MainMenuController {
 //        System.out.println(user.getEventList());
     }
 
-
+    /**
+     * Responds to menu option 5
+     */
     public void option5() {
         displayEvent.promptViewContacts();
         String option = scan.nextLine();
@@ -443,6 +448,10 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
+    /**
+     * Shows a hashmap of usernames
+     * @return hashmap of usernames
+     */
     public HashMap<String, User> returnUserUserIDHashMap() {
 
         if (!(attendee == null) && !attendee.returnIDHashMap().isEmpty()) {

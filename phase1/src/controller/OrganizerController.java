@@ -24,7 +24,10 @@ public class OrganizerController extends UserController{
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
     private String organizerID;
-
+    /**
+     * Instantiates a new OrganizerController object. Creates an instance of organizerID, MessageActions, EventActions
+     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
+     */
 
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
@@ -66,8 +69,8 @@ public class OrganizerController extends UserController{
     }
 
     /***
-     * cancel an event
-     * @param eventName
+     * Cancel an event
+     * @param eventName the name of the event being cancelled
      * @return true if the event was successfully canceled (ie if it exists, then it will be cancelled)
      */
 
@@ -90,9 +93,9 @@ public class OrganizerController extends UserController{
     }
 
     /***
-     * create a speaker and add them to the speaker schedule
-     * @param username
-     * @param password
+     * Create a speaker and add them to the speaker schedule
+     * @param username the username of the user
+     * @param password the password fo the user
      */
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
@@ -123,8 +126,8 @@ public class OrganizerController extends UserController{
 
     /**
      * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
-     * @param eventID
-     * @param speakerID
+     * @param eventID the ID of the event
+     * @param speakerID the ID of the speaker
      *
      */
     public boolean scheduleSpeaker(String eventID, String speakerID, boolean canAdd){
@@ -140,9 +143,9 @@ public class OrganizerController extends UserController{
     // TODO edit event details... is this necessary?
 
     /***
-     * reschedule an event with a new date and time
-     * @param eventID
-     * @param newDateTime
+     * Reschedule an event with a new date and time
+     * @param eventID the ID of the event
+     * @param newDateTime the new date to schedule the event
      * @return if the event was successfully rescheduled
      */
     public boolean rescheduleEvent(String eventID, String newDateTime){
@@ -151,8 +154,8 @@ public class OrganizerController extends UserController{
 
     /***
      * Send all the attendees of an event a message
-     * @param event
-     * @param message
+     * @param event the event with the attendees
+     * @param message the message sent to the attendees
      */
     public boolean sendAttendeesMessage(String event, String message){
         HashMap<String, Event> eventsHash = eventActions.getEventNames();
@@ -168,6 +171,11 @@ public class OrganizerController extends UserController{
         return true;
     }
 
+    /**
+     * This method sends the speaker's message
+     * @param messageContent the message of the speaker
+     * @return whether the message has been sent
+     */
     public boolean sendSpeakersMessage(String messageContent) {
         HashMap<String, User> userHash = returnUserUsernameHashMap();
         HashMap<String, Speaker> speakersHash = speakerActions.returnUsernameHashMap();
@@ -191,7 +199,7 @@ public class OrganizerController extends UserController{
 
     /***
      * Send all the attendees of conference a message
-     * @param message
+     * @param message the message sent to the attendees of the conference
      */
     public void sendAllAttendeesMessage( String message){
         List<String> eventIDs = new ArrayList();
@@ -212,7 +220,7 @@ public class OrganizerController extends UserController{
 
     /***
      * Check if event exists
-     * @param event
+     * @param event the event that is being checked
      */
     public boolean checkEvent(String event){
         return (eventActions.getEventNames().containsKey(event));

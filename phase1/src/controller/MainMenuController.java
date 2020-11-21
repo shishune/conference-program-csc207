@@ -188,6 +188,10 @@ public class MainMenuController extends AccountController{
         }
 
     }
+
+    /**
+     * Responds to menu option 10
+     */
     public void option10(){}
 
 }
