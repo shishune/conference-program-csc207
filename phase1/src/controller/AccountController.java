@@ -133,6 +133,8 @@ public class AccountController {
                         menuController.option9();}
                     else if (menuOption.equals("10") && (type.equals("O"))) {
                         menuController.option10();
+                    } else if (menuOption.equals("11") && (type.equals("O"))) {
+                        menuController.option11();
                     } else {
                         accountDisplay.printMenuError();
                     }
