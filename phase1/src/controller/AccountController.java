@@ -67,21 +67,24 @@ public class AccountController {
                 MainMenuController menuController;
 
                 if (type.equals("A")) { //indicates attendee
-                    // UserController controller = new UserController(eventActions, roomActions, messageActions, attendeeActions, attendeeActions, organizerActions, speakerActions);
+
                     Attendee user = attendeeActions.returnUsernameHashMap().get(username);
                     accountDisplay = new AttendeeAccountPresenter();
-                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions, attendeeActions, organizerActions, speakerActions);
-                    menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController, roomActions, speakerActions);
-                } else if (type.equals("S")) { //indicates speaker
-                    // UserController userController = new UserController(eventActions, roomActions, messageActions);
+                    AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                            attendeeActions, organizerActions, speakerActions);
+                    menuController = (AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                            roomActions, speakerActions);
+                }
+                else if (type.equals("S")) { //indicates speaker
                     Speaker user = speakerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new SpeakerAccountPresenter();
                     SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController, eventActions, attendeeActions, roomActions, speakerActions);
-                } else{
-                    // UserController controller = new UserController(eventActions, roomActions, messageActions);
+                    menuController = (SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
+                            eventActions, attendeeActions, roomActions, speakerActions);
+                }
+                else{
                     Organizer user = organizerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new OrganizerAccountPresenter();
                     OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
