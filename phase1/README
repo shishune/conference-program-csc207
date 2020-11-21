@@ -8,36 +8,73 @@ The user is first asked to either sign up or log in to their account. When signi
 Once they have logged in, depending on their role in the program, they will be presented with different menus, allowing different actions.
 All users can;
             
-            [1] Log out
-            [2] Send a message
-            [3] View all messages
-            [4] Add a contact
-            [5] View all contacts
+    [1] Log out
+    [2] Send a message
+    [3] View all messages
+    [4] Add a contact
+    [5] View all contacts
             
 Option 1 allows them to log out, saving the information they have created in a corresponding csv file, which will be then loaded. If user does not log out, their information will not be stored.
+
 Option 2 allows them to send a message. The recipients of the messages will differ for each user. We will elaborate in later sections.
+
 Option 3 allows users to see all the messages that have been sent, categorized by users.
+
 Option 4 allows users to add any contact they want.
+
 Option 5 allows users to view all the contacts they have already added.
             
 If they are an;
 
 #### Organizer
+The organizer-specific menu is extended by the options below;
 
-                [6] Add an event/create new speaker account
-                [7] Remove/reschedule an event
-                [8] View all your created events
-                [9] Add room
-                [10] Add speaker
-                [11] View all created events
-                Please select a menu item number.
+    [6] Add an event/create new speaker account
+    [7] Remove/reschedule an event
+    [8] View all your created events
+    [9] Add room
+    [10] Add speaker
+    [11] View all created events
                 
 Option 6 allows organizers to create an event, and in doing so, allows them to create a new room, and/or adding a new speaker.
-- they can also use existing speakers and rooms. 
-- This option checks if speakers are double-booked or if the room is double-booked
+ - They can also use existing speakers and rooms. 
+ - This option checks if speakers are double-booked or if the room is double-booked
 
-Option 7 allows organizers to remove or reschedule an event. This option will also check if the event exists and if rescheduling will cause errors.
-Option 8 allows organizers to view all the events that the current user has created
+Option 7 allows organizers to remove or reschedule an event. This option will also check if the event exists and if rescheduling will cause errors.Option 8 allows organizers to view all the events that the current user has created
+
 Option 9 allows organizers to add a room without creating an event
+
 Option 10 allows organizers to create a speaker without creating an event
+
 Option 11 allows organizers to see all the events.
+
+### Speaker
+The speaker-specific menu is extended by the option below;
+     
+    [6] View your schedule of talks
+    
+Option 6 allows the speaker to view the events they are scheduled to speak at.
+
+### Attendee
+The attendee-specific menu is extended by the options below;
+
+    [6] Sign up for an event
+    [7] Cancel enrollment for an event
+    [8] View all events
+    [9] View your schedule of events
+    
+Option 6 allows the attendee to sign up to an event after showing the available events to them. It does not present the events that conflict with events that they are already sign up for, full events, nor the events they are already signed up for.
+
+Option 7 allows the attendee to cancel their spot for an event they are already signed up for.
+
+Option 8 allows the attendee to view the possible events available to them, with no conflicts.
+
+Option 9 allows the attendee to view the schedule of events they are already signed up for, showing the title, speaker and room that it will take place in.
+
+##Design
+
+Our code implements the design rules from Clean Architecture. The uml of this design can be found in the UML file. 
+
+
+
+###### Designed and Coded by : Jiessie Tie, Mizna Dada, Cynthia Shen, Eryka Shi, Akiki Liang, Sejal Sahni, Jennifer Vo, Suhyun Park
