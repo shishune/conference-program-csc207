@@ -23,7 +23,17 @@ public class OrganizerController extends UserController{
     private AttendeeActions attendeeActions;
     private String organizerID;
 
-
+    /**
+     * Instantiates a new SpeakerController object. Creates an instance of SpeakerID, MessageActions, EventActions
+     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
+     * @param organizerID
+     * @param messageActions
+     * @param eventActions
+     * @param roomActions
+     * @param attendeeActions
+     * @param organizerActions
+     * @param speakerActions
+     */
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
 
