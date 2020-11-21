@@ -1,11 +1,8 @@
 package useCase;
 
-import entities.*;
-
+import entities.Organizer;
+import entities.User;
 import gateway.LoadUpIGateway;
-import useCase.EventActions;
-import gateway.LoadUp;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +28,6 @@ public class OrganizerActions extends UserAccountActions {
     public HashMap<String, Organizer> returnUsernameHashMap(){
         return organizerUsernameHashMap;
     }
-
-    // private LoadUp loader = new LoadUp();
 
     public OrganizerActions(LoadUpIGateway loader) {
         // this.loader = loader;
