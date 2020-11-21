@@ -23,7 +23,7 @@ public class SpeakerMessagePresenter extends MessagePresenter{
     }
 
     /**
-     * print menu for messaging options specific to speaker
+     * Print menu for messaging options specific to speaker
      * */
     public void printMenu(){
         String display = ""
@@ -33,6 +33,9 @@ public class SpeakerMessagePresenter extends MessagePresenter{
         System.out.println(display);
     }
 
+    /**
+     * Display a message stating that there are no attendees in the event
+     */
     public void noAttendees(){
         String display = "There are no attendees in the event.";
         System.out.println(display);
