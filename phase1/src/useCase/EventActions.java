@@ -14,15 +14,16 @@ import java.util.*;
 public class EventActions  {
     private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
-
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
-
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
     private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
     private LoadUpIGateway loader;
     private List<String> eventList;
 
-
+    /**
+     * @parm loader
+     * This will load up the data in the hashmap to the CSV files.
+     * */
     public EventActions(LoadUpIGateway loader) {
         loadAllEvents(loader);
         addLoadedToHashMap();
@@ -325,7 +326,9 @@ public class EventActions  {
         return storedEvents;
 
     }
-
+    /***
+     * @return the event ID
+     */
     public ArrayList<String> getEventIds() {
         ArrayList<String> storedE = new ArrayList<String>();
         if (events != null && !events.isEmpty()) {

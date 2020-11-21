@@ -42,7 +42,7 @@ public class AttendeeActions extends UserAccountActions {
 
     /**
      * @parm loader
-     * This will load up the CSV
+     * This will load up the data in the hashmap to the CSV files.
      * */
     public AttendeeActions(LoadUpIGateway loader) {
         getAllAttendees(loader); // gets all messages from message.csv
@@ -290,12 +290,17 @@ public class AttendeeActions extends UserAccountActions {
         return attendeesHashMap.get(userId);
     }
 
-
+    /**
+     * It will get all attendees from the CSV file.
+     * @param loader the userId given
+     */
     private void getAllAttendees(LoadUpIGateway loader) {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
         attendees = loader.getAllAttendees();
     }
-
+    /**
+     * This method will add the attendee to the hashmap.
+     */
     private void addAttendeeToHashMap() {
 
         if (attendees != null) {
@@ -325,6 +330,10 @@ public class AttendeeActions extends UserAccountActions {
         }
     }
 
+    /**
+     * It will be storing attendees
+     * @return ArrayList<String>
+     */
     public ArrayList<String> storingAttendees() {
         ArrayList<String> storedAttendee = new ArrayList<String>();
         if(attendeesHashMap != null && !attendeesHashMap.isEmpty()) {
@@ -335,7 +344,10 @@ public class AttendeeActions extends UserAccountActions {
         return storedAttendee;
 
     }
-
+    /**
+     * It will be get the attendee ID
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getAttendeeIds() {
         ArrayList<String> storedAttendee = new ArrayList<String>();
         if (attendeesHashMap != null && !attendeesHashMap.isEmpty()) {
