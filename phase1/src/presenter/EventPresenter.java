@@ -110,7 +110,7 @@ public class EventPresenter {
 
 
     /**
-     * Prompts user to view list of events they created
+     * Displays events of the inputted user
      */
     public void viewEvents(List<List<String>> user){
         int count = 1;
