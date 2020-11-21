@@ -108,8 +108,9 @@ public class EventPresenter {
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
     }
 
+
     /**
-     * Displays events for inputted user
+     * Prompts user to view list of events they created
      */
     public void viewEvents(List<List<String>> user){
         int count = 1;
