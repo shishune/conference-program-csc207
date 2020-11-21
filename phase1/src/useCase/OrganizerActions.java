@@ -9,11 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// TODO: change return type to organizer instead of user (do so for attendee, and speaker as well)
-        // (i did it organizer and attendee but please check them over, all that's left is for speaker)
-// TODO : Please finish the javadocs for the methods that are unique to OrganizerActions and check if the javadocs are correct for the methods moved from UserAccountActions
-
-
+/**
+ * A use case class that stores a hashmap of organizers
+ */
 public class OrganizerActions extends UserAccountActions {
 
     private HashMap<String, Organizer> organizerHashMap = new HashMap<String, Organizer>();
@@ -21,32 +19,42 @@ public class OrganizerActions extends UserAccountActions {
     private ArrayList<String> organizers = new ArrayList<String>();
     private LoadUpIGateway loader;
 
-
+    /**
+     * @return ID of the organizer from the hashmap
+     */
     public HashMap<String, Organizer> returnIDHashMap(){
         return organizerHashMap;
     }
 
+    /**
+     * @return ID of the organizer username from the hashmap
+     */
     public HashMap<String, Organizer> returnUsernameHashMap(){
         return organizerUsernameHashMap;
     }
 
+    /**
+     * @parm loader
+     * This will load up the data in the hashmap to the CSV files.
+     * */
     public OrganizerActions(LoadUpIGateway loader) {
-        // this.loader = loader;
         getAllOrganizer(loader); // gets all messages from message.csv
         addOrganizerToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
 
     }
 
-    public Organizer createOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
-        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, false);
-        addUserIdToHashMap(userOrganizer);
-        addUsernameToHashMap(userOrganizer);
-//        super.addUserIdToHashMap(userOrganizer);
-//        super.addUsernameToHashMap(userOrganizer);
-        return userOrganizer;
-    }
 
+    /**
+     * This will be loading the organizer
+     * @param userId
+     * @param username
+     * @param password
+     * @param contactsList
+     * @param eventList
+     * @param isLogin
+     * @return the loaded organizer
+     */
     public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
         addUserIdToHashMap(userOrganizer);
@@ -56,40 +64,26 @@ public class OrganizerActions extends UserAccountActions {
         return userOrganizer;
     }
 
-    public Organizer addToOrganizerHashMap() {
-
-        return null;
-    }
-
-
+    /**
+     * This will create a new organizer
+     * @param username
+     * @param password
+     * @param isLogin
+     * @return a new organizer
+     */
     public User createOrganizer(String username, String password, boolean isLogin){
         GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId.generateId();
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 
+    /**
+     * @param username
+     * @return true if the user with the following username exists.
+     * */
     public boolean organizerExists(String username){
         return organizerUsernameHashMap.containsKey(username);
     }
-
-//    public boolean addNewEvent(Event event) {
-//        EventActions eventactions = new EventActions();
-//        eventactions.loadEvent(event.getId(), event.getTitle(), event.getSpeaker(), event.getDateTime(),
-//                event.getAttendees(), event.getRoomID());
-//
-//        List<String> eventList = loader.getEventsList();
-//        return eventList.contains(event.getId());
-//    }
-//
-//    public boolean changeEventTime(String eventId, String newDateTime) {
-//        EventActions eventactions = new EventActions();
-//        return eventactions.changeEventTime(eventId, newDateTime);
-//    }
-
-//    public List<String> cancelEvent(String eventId) {
-//        EventActions eventactions = new EventActions();
-//        return eventactions.cancelEvent(eventId);
-//    }
 
 
     /**
@@ -137,7 +131,6 @@ public class OrganizerActions extends UserAccountActions {
      * @param removeMe the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-
     public boolean removeUsernameFromHashMap(Organizer removeMe){
         if (organizerUsernameHashMap.containsKey(removeMe.getUsername())){
             organizerUsernameHashMap.remove(removeMe.getUsername(), removeMe);
@@ -182,7 +175,6 @@ public class OrganizerActions extends UserAccountActions {
      * @param toMe the user who's contact list is updated
      * @return true if user is removed successfully, false if not
      * */
-
     public boolean removeUserContactList(String toMe, String removeMe) {
         User user = organizerUsernameHashMap.get(toMe);
         User userOne = organizerUsernameHashMap.get(removeMe);
@@ -204,7 +196,6 @@ public class OrganizerActions extends UserAccountActions {
      * @param user the user who's event list is updated
      * @return true if event is added successfully, false if not
      * */
-
     public boolean addEventToUser(String event, String user) {
         Organizer userOne = organizerUsernameHashMap.get(user);
         boolean isPresent = userOne.getEventList().contains(event);
@@ -224,7 +215,6 @@ public class OrganizerActions extends UserAccountActions {
      * @param user the user who's event list is updated
      * @return true if event is removed successfully, false if not
      * */
-
     public boolean removeEventFromUser(String event, String user) {
         if (organizerUsernameHashMap != null) {
                 Organizer userOne = organizerUsernameHashMap.get(user);
@@ -246,7 +236,6 @@ public class OrganizerActions extends UserAccountActions {
         return false;
     }
 
-
     /**
      * Finds an user from a given username
      * @param username the username given
@@ -255,7 +244,6 @@ public class OrganizerActions extends UserAccountActions {
     public User findUserFromUsername(String username){
         return organizerUsernameHashMap.get(username);
     }
-
 
     /**
      * Finds an user from a given userId
@@ -273,7 +261,6 @@ public class OrganizerActions extends UserAccountActions {
      * @param user the user who's eventList is printed
      * @return string of all the events a user is attending
      */
-
     public String returnAllEvents(String user) {
         {
             User userOne = organizerUsernameHashMap.get(user);
@@ -285,11 +272,18 @@ public class OrganizerActions extends UserAccountActions {
             return result.toString();
         }
     }
+
+    /**
+     * It will get all organizers from the CSV file.
+     * @param loader the userId given
+     */
     private void getAllOrganizer(LoadUpIGateway loader) {
-        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         organizers = loader.getAllOrganizers();
     }
 
+    /**
+     * This method will add the organizer to the hashmap.
+     */
     private void addOrganizerToHashMap() {
         if (organizers != null) {
 
@@ -311,19 +305,16 @@ public class OrganizerActions extends UserAccountActions {
                         contactList.add(c);
                     }
                 }
-
-//                Organizer loadedOrganizer = new Organizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
-//                        eventList, Boolean.parseBoolean(organizerInfo[5]), Boolean.parseBoolean(organizerInfo[6]));
                 loadOrganizer(organizerInfo[0], organizerInfo[1], organizerInfo[2], contactList,
                         eventList, Boolean.parseBoolean(organizerInfo[5]));
-//                organizerHashMap.put(organizerInfo[0], loadedOrganizer);
-//                organizerUsernameHashMap.put(organizerInfo[1], loadedOrganizer);
             }
-
-
         }
     }
 
+    /**
+     * It will be storing organizers
+     * @return ArrayList<String>
+     */
     public ArrayList<String> storingOrganizers(){
         ArrayList<String> storedOrganizer = new ArrayList<String>();
         if(organizerHashMap != null && !organizerHashMap.isEmpty()) {
@@ -335,6 +326,10 @@ public class OrganizerActions extends UserAccountActions {
 
     }
 
+    /**
+     * It will be get the organizer ID
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getOrganizerIds() {
         ArrayList<String> storedOrganizer = new ArrayList<String>();
         if (organizerHashMap != null && !organizerHashMap.isEmpty()) {
@@ -345,6 +340,11 @@ public class OrganizerActions extends UserAccountActions {
         return storedOrganizer;
     }
 
+    /**
+     * It will be get the organizers' events
+     * @param username the username of organizer
+     * @return the list of event of this organizer
+     */
     public List<String> getOrganizersEvents(String username){
         return returnUsernameHashMap().get(username).getEventList();
     }

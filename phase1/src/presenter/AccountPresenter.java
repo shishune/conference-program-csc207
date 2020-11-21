@@ -95,7 +95,7 @@ public class AccountPresenter {
         System.out.println("Note: You must log out of your account in order to save new information" +
                 "\n(including sent messages, sign up to events, etc.)." +
                 "\nIf you would like to return to the menu, enter any key " +
-                "\n This isaccessible in the main menu.");
+                "\n This is accessible in the main menu.");
     }
 
     /**

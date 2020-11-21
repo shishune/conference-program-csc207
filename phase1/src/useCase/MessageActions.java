@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
- * Initialize the MessageActions class
+ * A use case class that stores a hashmap of messages
  * Allows actions to be done with messages, including creating messages, sending messages, loading messages,
  * retrieving message information, printing messages, storing messages
  */
