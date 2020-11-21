@@ -23,7 +23,17 @@ public class OrganizerController extends UserController{
     private AttendeeActions attendeeActions;
     private String organizerID;
 
-
+    /**
+     * Instantiates a new SpeakerController object. Creates an instance of SpeakerID, MessageActions, EventActions
+     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
+     * @param organizerID
+     * @param messageActions
+     * @param eventActions
+     * @param roomActions
+     * @param attendeeActions
+     * @param organizerActions
+     * @param speakerActions
+     */
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
 
@@ -158,6 +168,7 @@ public class OrganizerController extends UserController{
         HashMap<String, Organizer> idHash = organizerActions.returnIDHashMap();
         String userUsername = idHash.get(organizerID).getUsername();
         HashMap<String, Event> eventsHash = eventActions.getEventNames();
+
         if(eventsHash.get(event) == null) {
             return false;
         }
@@ -184,9 +195,11 @@ public class OrganizerController extends UserController{
         HashMap<String, Speaker> speakersHash = speakerActions.returnUsernameHashMap();
         HashMap<String, Organizer> idHash = organizerActions.returnIDHashMap();
         String userUsername = idHash.get(organizerID).getUsername();
+
         for(Map.Entry<String, Speaker> entry : speakersHash.entrySet()) {
             organizerActions.addUserContactList(userUsername, entry.getValue().getUsername(), userHash);
             speakerActions.addUserContactList(entry.getValue().getUsername(), userUsername, userHash);
+
             if(userHash.get(entry.getValue().getUsername()) == null) {
                 return false;
             }

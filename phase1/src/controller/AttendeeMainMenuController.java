@@ -16,8 +16,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     private SpeakerActions speaker;
 
     /**
-     * instantiates this class referring to super class
-     *
+     * Instantiates this class referring to super class
      * @param user               the user object
      * @param attendeeController the controller responsible for user
      */

@@ -158,7 +158,7 @@ public class OrganizerActions extends UserAccountActions {
                 return false;
             }
             boolean isId;
-            if(user.getContactsList().contains(userOne.getId())){
+            if(!user.getContactsList().contains(userOne.getId())){
                 isId = user.getContactsList().contains(userOne.getId());
                 if (userOne.getIsOrganizer() || user.getId().equals(userOne.getId()) || isId){ // organizers can now message other organizers
                     return false;

@@ -52,9 +52,6 @@ public class SpeakerMessageMenuController{
         }
     }
 
-    /**
-     * Responds to menu option 5
-     */
     public void option5(){
         displayMessage.promptMessage();
         String content = scan.nextLine();
@@ -86,4 +83,22 @@ public class SpeakerMessageMenuController{
         }
 
     }
-}
+
+
+//        while (true){
+//            String event = scan.nextLine();
+//            events.add(event);
+//            if (event.equals("x")||event.equals("X")){
+//                break;
+//            }
+//        }
+//        for (String event: events) {
+//            controller.sendMessages(event, content);
+//            // -eryka TODO please fix
+////            if (controller.sendMessages(event, content)) {
+////                displayMessage.successMessage();
+////            } else {
+////                displayMessage.failedEvent();
+////            }
+//        }
+    }

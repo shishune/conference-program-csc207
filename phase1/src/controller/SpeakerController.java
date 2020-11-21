@@ -22,6 +22,11 @@ public class SpeakerController extends UserController {
     public AttendeeActions attendeeActions; // = super.getAttendees();
     private SpeakerMessagePresenter displayMessage;
 
+    /**
+     * Instantiates a new SpeakerController object. Creates an instance of SpeakerID, MessageActions, EventActions
+     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
+     */
+
     public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
                              AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions) {
         super(eventActions, roomActions, messageActions, 's', attendeeActions, organizerActions, speakerActions);

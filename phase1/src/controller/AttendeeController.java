@@ -8,7 +8,15 @@ public class AttendeeController extends UserController{
     private EventActions e;
     private AttendeeActions attendee;
 
-
+    /**
+     *
+     * @param events
+     * @param rooms
+     * @param message
+     * @param attendee
+     * @param organizer
+     * @param speaker
+     */
     public AttendeeController(EventActions events, RoomActions rooms, MessageActions message,
                               AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker ) {
         super(events, rooms, message, 'a', attendee, organizer, speaker);
