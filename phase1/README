@@ -21,13 +21,12 @@ Option 2 allows them to send a message. The recipients of the messages will diff
 - Speakers can send messages to all attendees of one event or multiple events, as well as respond to a specific attendee
 - Attendees can send messages to other attendees, as well as view messages that have been sent to them.
 
-Option 3 allows users to see all the messages that have been sent, categorized by users.
+Option 3 allows users to see all the messages that have been sent, and are able to reply to them, categorized by users. 
 
 Option 4 allows users to add any contact they want.
 
 Option 5 allows users to view all the contacts they have already added.
             
-If they are an;
 
 #### Organizer
 The organizer-specific menu is extended by the options below;
@@ -58,6 +57,8 @@ The speaker-specific menu is extended by the option below;
     
 Option 6 allows the speaker to view the events they are scheduled to speak at.
 
+###### Note: The total number of speakers must be greater than or equal to the number of events as each event can only have one speaker.
+
 ### Attendee
 The attendee-specific menu is extended by the options below;
 
@@ -74,9 +75,14 @@ Option 8 allows the attendee to view the possible events available to them, with
 
 Option 9 allows the attendee to view the schedule of events they are already signed up for, showing the title, speaker and room that it will take place in.
 
+
 ##Design
 
-Our code implements the design rules from Clean Architecture. The uml of this design can be found in the UML file. 
+Our code implements the design rules from Clean Architecture. The UML diagram of this design can be found in the UML file.
+The choice to store the data in the csv files was made to prepare for the implementation for phase 2, as the way the information is processed, is similar to the way databases are used.
+
+
+
 
 
 
