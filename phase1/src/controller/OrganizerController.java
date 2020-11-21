@@ -219,11 +219,20 @@ public class OrganizerController extends UserController{
 
     /***
      * Check if event exists
-     * @param event
+     * @param eventName
      */
-    public boolean checkEvent(String event){
-        return (eventActions.getEventNames().containsKey(event));
+    public boolean checkEvent(String eventName){
+        return (eventActions.getEventNames().containsKey(eventName));
     }
+
+    /***
+     * Check if event has attendees
+     * @param eventName
+     */
+    public boolean eventHasAttendees(String eventName){
+        return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
+    }
+
 
 
 }

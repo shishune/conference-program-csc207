@@ -39,6 +39,14 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     }
 
     /**
+     * Print message event has no attendees
+     * */
+    public void eventNoAttendees(){
+        String display = "That event has no attendees. Try getting some friends first :/ ";
+        System.out.println(display);
+    }
+
+    /**
      * Prompt to enter the username of the speaker to create
      */
     public void speakerUsernamePrompt(){

@@ -40,7 +40,9 @@ public class MainMenuController extends AccountController{
      */
     public void option2(){
         displayMessage.promptRecipient(); // enter user you would like to send message to
+        option5();
         String receiver = scan.nextLine();
+        // if receiver in contacts
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
         if (controller.sendMessage(user.getUsername(), receiver, content)){
@@ -189,5 +191,7 @@ public class MainMenuController extends AccountController{
 
     }
     public void option10(){}
+
+    public void option11(){}
 
 }
