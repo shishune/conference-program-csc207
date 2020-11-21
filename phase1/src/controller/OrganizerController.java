@@ -175,6 +175,7 @@ public class OrganizerController extends UserController{
         String userUsername = idHash.get(organizerID).getUsername();
         for(Map.Entry<String, Speaker> entry : speakersHash.entrySet()) {
             organizerActions.addUserContactList(userUsername, entry.getValue().getUsername(), userHash);
+            speakerActions.addUserContactList(entry.getValue().getUsername(), userUsername, userHash);
             if(userHash.get(entry.getValue().getUsername()) == null) {
                 return false;
             }
