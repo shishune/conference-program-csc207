@@ -180,6 +180,10 @@ public class MainMenuController extends AccountController{
         if (eventsList.size() == 0){
             displayMessage.noEventsSignUp();
         } else {
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+            }
             displayEvent.displayEvents(eventsList);
         }
 

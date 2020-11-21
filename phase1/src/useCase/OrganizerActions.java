@@ -1,11 +1,8 @@
 package useCase;
 
-import entities.*;
-
+import entities.Organizer;
+import entities.User;
 import gateway.LoadUpIGateway;
-import useCase.EventActions;
-import gateway.LoadUp;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +12,7 @@ import java.util.Map;
 // TODO: change return type to organizer instead of user (do so for attendee, and speaker as well)
         // (i did it organizer and attendee but please check them over, all that's left is for speaker)
 // TODO : Please finish the javadocs for the methods that are unique to OrganizerActions and check if the javadocs are correct for the methods moved from UserAccountActions
+
 
 public class OrganizerActions extends UserAccountActions {
 
@@ -31,8 +29,6 @@ public class OrganizerActions extends UserAccountActions {
     public HashMap<String, Organizer> returnUsernameHashMap(){
         return organizerUsernameHashMap;
     }
-
-    // private LoadUp loader = new LoadUp();
 
     public OrganizerActions(LoadUpIGateway loader) {
         // this.loader = loader;
