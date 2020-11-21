@@ -59,11 +59,13 @@ public class OrganizerEventPresenter extends EventPresenter{
     /**
      * Asks for title of event to add
      */
-
     public void promptRescheduleMethod(){
         System.out.println("Enter the name of the event to be rescheduled.");
     }
 
+    /**
+     * Asks for the title fo the event to be added
+     */
     public void promptTitle(){
         System.out.println("Enter the title of the event you want to add.");
     }
@@ -91,33 +93,56 @@ public class OrganizerEventPresenter extends EventPresenter{
     public void promptRoom(){
         System.out.println("Enter room name");
     }
-
+    /**
+     * Shows that the time is not valid, prompts the user to try again
+     */
     public void badTime(){System.out.println("Time is not valid. Try again.");}
 
+    /**
+     * Prompts user to view contacts
+     */
     public void promptViewContacts(){
         System.out.println("Press 'x' if you want view your contacts according to event or any key to view all contacts together");
     }
+    /**
+     * Prompts user to view events
+     */
     public void promptEvent(){
         System.out.println("Please enter the name of the event you would like view your contacts from of X to go back");
     }
+    /**
+     * Messages user that they are not in charge of the event
+     */
     public void notYourEvent(){
         System.out.println("You are not charge of this event, please try again");
     }
-
+    /**
+     * Tells user that the event name is unavailable because it has already been taken
+     */
     public void eventExists(){System.out.println("This event name is already taken.");}
-
+    /**
+     * Messages user that the event does not exist
+     */
     public void noEvent(){System.out.println("This event does not exist, please try again.");}
-
+    /**
+     * Contacts of the user
+     */
     public void allYourContacts(List<String> contacts){
         System.out.println(contacts.toString());
     }
-
+    /**
+     * Events of the contacts of the user
+     */
     public void allYourContactsEvent(List<String> eventContacts){
         System.out.println(eventContacts.toString());
     }
-
+    /**
+     * Prompts user exit the selection
+     */
     public void breakPlease(){System.out.println("*Write '!' if you would like exit the selection at any time. Doing so will not save your current information.*");}
-
+    /**
+     * Warns the user that they are existing without saving their information
+     */
     public void warning(){System.out.println("WARNING: You are about to exit without saving your information. Enter 'x' to continue or any key to go back.");}
 
     //public void
