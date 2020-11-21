@@ -12,11 +12,10 @@ import java.util.Map;
 /**
  * A use case class that stores a hashmap of Attendees.
  * Child class to UserAccountActions.
- * @author multiple
+ * @author Jiessie & Mizna
  * @version 1
  */
 
-// TODO : Please finish the javadocs for the methods that are unique to AttendeeActions and check if the javadocs are correct for the methods moved from UserAccountActions
 
 public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeesHashMap = new HashMap<String, Attendee>();
@@ -33,6 +32,7 @@ public class AttendeeActions extends UserAccountActions {
         return attendeesHashMap;
     }
 
+
     /**
      * @return ID of the attendee username from the hashmap
      * */
@@ -40,8 +40,9 @@ public class AttendeeActions extends UserAccountActions {
         return attendeeUsernameHashMap;
     }
 
+
     /**
-     * @parm loader
+     * @param loader
      * This will load up the data in the hashmap to the CSV files.
      * */
     public AttendeeActions(LoadUpIGateway loader) {
@@ -51,14 +52,16 @@ public class AttendeeActions extends UserAccountActions {
         // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
     }
+
+
     /**
-     * @parm userId
-     * @parm username
-     * @parm password
-     * @parm contactsList
-     * @parm eventList
-     * @parm isLogin
-     * This will create a new Attendee
+     * @param userId the id of the attendee
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * @param contactsList the contact list of the attendee
+     * @param eventList the list of events the attending is attending
+     * @param isLogin
+     * This will create a new Attendee (Will need the overloaded function for phase 2)
      * */
     private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
@@ -67,8 +70,9 @@ public class AttendeeActions extends UserAccountActions {
         return userAttendee;
     }
 
+
     /**
-     * @parm username
+     * @param username the username of the attendee
      * @return true if the user with the following username exists.
      * */
 
@@ -76,13 +80,13 @@ public class AttendeeActions extends UserAccountActions {
         return attendeeUsernameHashMap.containsKey(username);
     }
 
+
     /**
-     * @parm userId
-     * @parm username
-     * @parm password
-     * @parm contactsList
-     * @parm eventList
-     * @parm isLogin
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * @param contactsList the contact list of the attendee
+     * @param eventList the list of events the attendee is attending
+     * @param isLogin
      * This will create a new Attendee
      * */
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
@@ -96,28 +100,30 @@ public class AttendeeActions extends UserAccountActions {
         return userAttendee;
     }
 
+
     /**
      * Adds an userId to existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
      *
-     * @param addMe the user to be added
+     * @param userId the user to be added
      */
-    private void addUserIdToHashMap(Attendee addMe) {
-        if (attendeesHashMap.containsKey(addMe.getId())) {
-            attendeesHashMap.put(addMe.getId(), addMe);
+    private void addUserIdToHashMap(Attendee userId) {
+        if (attendeesHashMap.containsKey(userId.getId())) {
+            attendeesHashMap.put(userId.getId(), userId);
         }
     }
+
 
     /**
      * Adds an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
      *
-     * @param addMe the user to be added
+     * @param username the user to be added
      */
-    private void addUsernameToHashMap(Attendee addMe) {
+    private void addUsernameToHashMap(Attendee username) {
 
-        if (attendeeUsernameHashMap.containsKey(addMe.getUsername())) {
-            attendeeUsernameHashMap.put(addMe.getUsername(), addMe);
+        if (attendeeUsernameHashMap.containsKey(username.getUsername())) {
+            attendeeUsernameHashMap.put(username.getUsername(), username);
         }
     }
 
@@ -126,28 +132,29 @@ public class AttendeeActions extends UserAccountActions {
      * Removes an userId from existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
      *
-     * @param removeMe the user to be removed
+     * @param removeUserId the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      */
-    private boolean removeUserIdFromHashMap(Attendee removeMe) {
-        if (attendeesHashMap.containsKey(removeMe.getId())) {
-            attendeesHashMap.remove(removeMe.getId(), removeMe);
+    private boolean removeUserIdFromHashMap(Attendee removeUserId) {
+        if (attendeesHashMap.containsKey(removeUserId.getId())) {
+            attendeesHashMap.remove(removeUserId.getId(), removeUserId);
             return true;
         }
         return false;
     }
 
+
     /**
      * Removes an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
      *
-     * @param removeMe the user to be removed
+     * @param removeUsername the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      */
 
-    private boolean removeUsernameFromHashMap(Attendee removeMe) {
-        if (attendeeUsernameHashMap.containsKey(removeMe.getUsername())) {
-            attendeeUsernameHashMap.remove(removeMe.getUsername(), removeMe);
+    private boolean removeUsernameFromHashMap(Attendee removeUsername) {
+        if (attendeeUsernameHashMap.containsKey(removeUsername.getUsername())) {
+            attendeeUsernameHashMap.remove(removeUsername.getUsername(), removeUsername);
             return true;
         }
         return false;
@@ -157,19 +164,14 @@ public class AttendeeActions extends UserAccountActions {
     /**
      * Adds an user to existing list of contacts for an user.
      *
-     * @param addMe the username of the user to be added
-     * @param toMe  the username of the user who's contact list is updated
+     * @param sender the username of the user to be added
+     * @param receiver  the username of the user who's contact list is updated
      * @return true if user is added successfully, false if not
      */
 
-    // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
-    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
-        User user = userUsernameHashMap.get(toMe);
-//        HashMap<String, User> userHashMap = new HashMap<String, User>();
-//        userHashMap.putAll(speaker.returnUsernameHashMap());
-//        userHashMap.putAll(organizer.returnUsernameHashMap());
-//        userHashMap.putAll(attendeeUsernameHashMap);
-        User userOne = userUsernameHashMap.get(addMe);
+    public boolean addUserContactList(String receiver, String sender, HashMap<String, User> userUsernameHashMap) {
+        User user = userUsernameHashMap.get(receiver);
+        User userOne = userUsernameHashMap.get(sender);
         if(userOne == null || userOne.getId() == null) {
             return false;
         }
@@ -184,17 +186,19 @@ public class AttendeeActions extends UserAccountActions {
         }
     }
 
+
+
     /**
      * Removes an user to existing list of contacts from an user.
      *
-     * @param removeMe the username of the user to be removed
-     * @param toMe     the username of user who's contact list is updated
+     * @param removedUsername the username of the user to be removed
+     * @param receiver     the username of user who's contact list is updated
      * @return true if user is removed successfully, false if not
      */
 
-    public boolean removeUserContactList(String toMe, String removeMe) {
-        Attendee user = attendeeUsernameHashMap.get(toMe);
-        User userOne = attendeeUsernameHashMap.get(removeMe);
+    public boolean removeUserContactList(String receiver, String removedUsername) {
+        Attendee user = attendeeUsernameHashMap.get(receiver);
+        User userOne = attendeeUsernameHashMap.get(removedUsername);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
             return false;
@@ -268,6 +272,7 @@ public class AttendeeActions extends UserAccountActions {
         return result.toString();
     }
 
+
     /**
      * Finds an user from a given username
      *
@@ -290,6 +295,7 @@ public class AttendeeActions extends UserAccountActions {
         return attendeesHashMap.get(userId);
     }
 
+
     /**
      * It will get all attendees from the CSV file.
      * @param loader the userId given
@@ -298,6 +304,8 @@ public class AttendeeActions extends UserAccountActions {
         //LoadUp loader = new LoadUp(); // this is okay because IGateway
         attendees = loader.getAllAttendees();
     }
+
+
     /**
      * This method will add the attendee to the hashmap.
      */
@@ -330,6 +338,7 @@ public class AttendeeActions extends UserAccountActions {
         }
     }
 
+
     /**
      * It will be storing attendees
      * @return ArrayList<String>
@@ -342,8 +351,9 @@ public class AttendeeActions extends UserAccountActions {
             }
         }
         return storedAttendee;
-
     }
+
+
     /**
      * It will be get the attendee ID
      * @return ArrayList<String>
@@ -357,5 +367,4 @@ public class AttendeeActions extends UserAccountActions {
         }
         return storedAttendee;
     }
-
 }

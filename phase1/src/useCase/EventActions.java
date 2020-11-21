@@ -21,7 +21,7 @@ public class EventActions  {
     private List<String> eventList;
 
     /**
-     * @parm loader
+     * @param loader
      * This will load up the data in the hashmap to the CSV files.
      * */
     public EventActions(LoadUpIGateway loader) {
@@ -31,6 +31,7 @@ public class EventActions  {
         roomSchedule.put("Toronto", new ArrayList<String>());
     }
 
+
     /***
      * return event of given ID
      * @param eventID
@@ -39,6 +40,8 @@ public class EventActions  {
     public Event getEvent(String eventID){
         return events.get(eventID);
     }
+
+
     /***
      * return event of given name
      * @param eventName
@@ -58,6 +61,7 @@ public class EventActions  {
         return events.containsKey(eventID);
     }
 
+
     /***
      * return hashmap of all eventIDs and the corresponding event object. key: speakerID value: List of date and time
      * @return hashmap of all eventIDs and the corresponding event object
@@ -66,6 +70,7 @@ public class EventActions  {
         return events;
     }
 
+
     /***
      * return hashmap of all eventNames and the corresponding event object. key: speakerID value: List of date and time
      * @return hashmap of all eventNames and the corresponding event object
@@ -73,6 +78,7 @@ public class EventActions  {
     public HashMap<String, Event> getEventNames(){
         return eventNames;
     }
+
 
     /***
      * return hashmap of all speakers and the times they are busy. key: speakerID value: List of date and time
@@ -91,6 +97,7 @@ public class EventActions  {
         speakerSchedule.put(speakerID, new ArrayList<>());
     }
 
+
     /***
      * return hashmap of all rooms and the times they are in use. key: roomID value: List of date and time
      * @return hashmap of all rooms and the times they are in use
@@ -98,6 +105,7 @@ public class EventActions  {
     public HashMap<String, List<String>> getRoomSchedule(){
         return roomSchedule;
     }
+
 
     /***
      * Add a new room to the roomSchedule
@@ -108,10 +116,12 @@ public class EventActions  {
         return roomSchedule.containsKey(roomID);
     }
 
+
     /** gets list of event from the IGateway **/
     private void loadAllEvents(LoadUpIGateway loader) {
         eventList = loader.getEvents();
     }
+
 
     /** Adds events loaded from the csv to <events> **/
     private void addLoadedToHashMap() {
@@ -126,7 +136,6 @@ public class EventActions  {
     }
 
 
-
     /**
      * Create a new event based on the parmeters provided
      * @return true if the event was created
@@ -138,13 +147,12 @@ public class EventActions  {
 
             GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
-            //System.out.println(newID);
 
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
         }
         return null;
-
     }
+
 
     /***
      * set speaker of an event
@@ -154,6 +162,7 @@ public class EventActions  {
     public void setSpeaker(String eventID, String speakerID){
         this.events.get(eventID).setSpeaker(speakerID);
     }
+
 
     /***
      *  Load a new event to CSV file so we are able to access it after the system has been closed as well
@@ -192,14 +201,15 @@ public class EventActions  {
             roomTimes.add(dateTime);
             roomSchedule.put(roomID, roomTimes);
         }
-        //System.out.println(speakerSchedule);
+        System.out.println(speakerSchedule);
         return newEvent;
     }
 
+
     /***
      * Add an attendee who has requested to be added to a specific event
-     * @param eventID
-     * @param attendeeID
+     * @param eventID the unique id of the event
+     * @param attendeeID the unique id of the attendee to be added
      * @return true if an attendee has been added to their desired event
      */
     public boolean addAttendee(String eventID, String attendeeID){
@@ -207,18 +217,17 @@ public class EventActions  {
         if (eventAttendees.contains(attendeeID)) {
             return false;
         } else{
-
-            //List<String> eventAttendees = events.get(eventID).getAttendees().add(attendeeID);
             events.get(eventID).getAttendees().add(attendeeID);
-            //attendees.get(eventID).add(attendeeID);
-            //System.out.println(attendees.get(eventID));
+            System.out.println(attendees.get(eventID));
             return true;
         }
     }
+
+
     /***
      * Remove an attendee who has requested to be removed to a specific event
-     * @param eventID
-     * @param attendeeID
+     * @param eventID the unique id of the event
+     * @param attendeeID the unique id of attendee to be removed
      * @return true if an attendee has been removed to their desired event
      */
     public boolean removeAttendee(String eventID, String attendeeID){
@@ -234,8 +243,8 @@ public class EventActions  {
 
 
     /***
-     * Remove an attendee who has requested to be removed from a specfic event
-     * @param eventName
+     * Remove an attendee who has requested to be removed from a specific event
+     * @param eventName the name of the event to be cancelled
      * @return true if an attendee has been removed from an event that they used to be a part of
      */
     public List<String> cancelEvent(String eventName){
@@ -257,8 +266,8 @@ public class EventActions  {
 
     /***
      * Cancel an event
-     * @param eventID
-     * @param newDateTime
+     * @param eventID the unique id of the event to be changed
+     * @param newDateTime the new date and time for the event to be changed to
      * @return List<String> which is the list of attendees who had signed up for that event
      */
     public boolean changeEventTime(String eventID, String newDateTime){
@@ -281,11 +290,12 @@ public class EventActions  {
 
     }
 
+
     /**
      * Change the time of an event which has been created
-     * @param roomID
-     * @param dateTime
-     * @return true if the event has been successfuly updated
+     * @param roomID the unique id for the room to be checked
+     * @param dateTime the date and time to be checked
+     * @return true if the event has been successfully updated
      * */
 
     public boolean isRoomFree(String roomID, String dateTime){
@@ -298,15 +308,14 @@ public class EventActions  {
 
     }
 
+
     /**
      * Check if a room is available as a certain time
-     * @param speakerID
-     * @param dateTime
+     * @param speakerID the unique id of the speaker to be checked
+     * @param dateTime the date and time to be checked
      * @return true if the room is in fact available
      * */
     public boolean isSpeakerFree(String speakerID, String dateTime){
-        //System.out.println("INSIDE FUNCTION");
-        //System.out.println(speakerSchedule);
         List<String> SpeakerTime = speakerSchedule.get(speakerID);
         if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
             return false;
@@ -314,18 +323,21 @@ public class EventActions  {
         return true;
     }
 
+
     /***
      * return all events in hashmap as a List of strings
      * @return all events in hashmap as a List of strings
      */
     public List<String> storeEvents(){
-        List<String> storedEvents = new ArrayList();
+        List<String> storedEvents = new ArrayList<String>();
         for(Map.Entry<String, Event> event : events.entrySet()) {
             storedEvents.add(event.getValue().string()+"\n");
         }
         return storedEvents;
 
     }
+
+
     /***
      * @return the event ID
      */
@@ -339,13 +351,13 @@ public class EventActions  {
         return storedE;
     }
 
+
     /***
      * return list of all attendee IDs of an event
-     * @param eventID
+     * @param eventID the unique id of the event
      * @return List of all attendee IDs of an event
      */
     public List<String> getEventAttendees(String eventID){
-        //System.out.println("EVENT ATTENDEES: " + attendees.get(eventID));
         return attendees.get(eventID);
     }
 

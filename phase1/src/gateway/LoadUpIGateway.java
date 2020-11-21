@@ -11,12 +11,9 @@ public interface LoadUpIGateway {
      * // gets list of organizers from the gateway
      **/
 
-    /** etc. etc. etc., one for every entity **/
+    // TODO: Finish Java Doc
 
     public ArrayList<String> getMessagesList();
-    //public ArrayList<String> getRoomsList();
-
-    //public List<String> getEventsList();
     public ArrayList<String> getAllAttendees();
     public ArrayList<String> getSpeakersList();
     public ArrayList<String> getAllOrganizers();

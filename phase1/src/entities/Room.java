@@ -28,7 +28,7 @@ public class Room {
     public int getCapacity(){ return capacity; }
 
     /**
-     * Setter for the capacity of this room.
+     * Setter for the capacity of this room. (Will be needed in Phase 2)
      * @param capacity list of events
      * */
     public void setCapacity(int capacity){ this.capacity = capacity; }
@@ -39,10 +39,14 @@ public class Room {
      * */
     public String getRoomId(){ return roomId; }
 
+    /**
+     * Returns the unique name of this room object
+     * @return the name of this room
+     * */
     public String getRoomName() {return roomName;}
 
     /**
-     * Returns the string representation of this roomm object
+     * Returns the string representation of this room object
      * @return String representation of this room object int he way it should be stored in the csv. file
      * */
     public String stringRepresentation() {

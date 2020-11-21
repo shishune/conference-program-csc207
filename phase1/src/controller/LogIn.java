@@ -71,7 +71,7 @@ public class LogIn {
 
         if (userType.equals("1")) {
             if (!organizerActions.organizerExists(username)) {
-                organizerActions.createOrganizer(username, password, false);
+                organizerActions.createOrganizer(username, password);
                 return true;
             }
             else{

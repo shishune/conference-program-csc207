@@ -144,13 +144,5 @@ public class Event {
     public String getRoomID() {
         return this.roomID;
     }
-    /**
-     * set location for event
-     * @param location room/location of event
-     * */
-    public void setLocation(String location) {
-        this.roomID = location;
-    }
-
 
 }
