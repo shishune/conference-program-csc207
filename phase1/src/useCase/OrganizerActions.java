@@ -19,12 +19,14 @@ public class OrganizerActions extends UserAccountActions {
     private ArrayList<String> organizers = new ArrayList<String>();
     private LoadUpIGateway loader;
 
+
     /**
      * @return ID of the organizer from the hashmap
      */
     public HashMap<String, Organizer> returnIDHashMap(){
         return organizerHashMap;
     }
+
 
     /**
      * @return ID of the organizer username from the hashmap
@@ -33,26 +35,26 @@ public class OrganizerActions extends UserAccountActions {
         return organizerUsernameHashMap;
     }
 
+
     /**
-     * @parm loader
+     * @param loader the IGateway
      * This will load up the data in the hashmap to the CSV files.
      * */
     public OrganizerActions(LoadUpIGateway loader) {
         getAllOrganizer(loader); // gets all messages from message.csv
         addOrganizerToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
-
     }
 
 
     /**
      * This will be loading the organizer
-     * @param userId
-     * @param username
-     * @param password
-     * @param contactsList
-     * @param eventList
-     * @param isLogin
+     * @param userId the unique id of the organizer
+     * @param username the unique username of the organizer
+     * @param password the password of the organizer
+     * @param contactsList the contact list of the organizer
+     * @param eventList the list of events the organizer is in charge of
+     * @param isLogin the login status of the organizer
      * @return the loaded organizer
      */
     public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
@@ -64,21 +66,22 @@ public class OrganizerActions extends UserAccountActions {
         return userOrganizer;
     }
 
+
     /**
      * This will create a new organizer
-     * @param username
-     * @param password
-     * @param isLogin
+     * @param username the username of the organizer to be created
+     * @param password the password of the organizer to be created
      * @return a new organizer
      */
-    public User createOrganizer(String username, String password, boolean isLogin){
+    public User createOrganizer(String username, String password){
         GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId.generateId();
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 
+
     /**
-     * @param username
+     * @param username the username of the organizer to check
      * @return true if the user with the following username exists.
      * */
     public boolean organizerExists(String username){
@@ -89,70 +92,72 @@ public class OrganizerActions extends UserAccountActions {
     /**
      * Adds an userId to existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
-     * @param addMe the user to be added
+     * @param userId the user to be added
      * */
-    public void addUserIdToHashMap(Organizer addMe){
-        if (organizerUsernameHashMap.containsKey(addMe.getId())){
-            organizerUsernameHashMap.put(addMe.getId(), addMe);
+    public void addUserIdToHashMap(Organizer userId){
+        if (organizerUsernameHashMap.containsKey(userId.getId())){
+            organizerUsernameHashMap.put(userId.getId(), userId);
         }
-
     }
+
 
     /**
      * Adds an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
-     * @param addMe the user to be added
+     * @param user the user to be added
      * */
-    protected void addUsernameToHashMap(Organizer addMe){
+    protected void addUsernameToHashMap(Organizer user){
 
-        if (organizerUsernameHashMap.containsKey(addMe.getUsername())){
-            organizerUsernameHashMap.put(addMe.getUsername(), addMe);
+        if (organizerUsernameHashMap.containsKey(user.getUsername())){
+            organizerUsernameHashMap.put(user.getUsername(), user);
         }
-
     }
+
 
     /**
      * Removes an userId from existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
-     * @param removeMe the user to be removed
+     * @param removedUser the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-    public boolean removeUserIdFromHashMap(Organizer removeMe){
-        if (organizerUsernameHashMap.containsKey(removeMe.getId())){
-            organizerUsernameHashMap.remove(removeMe.getId(), removeMe);
+    public boolean removeUserIdFromHashMap(Organizer removedUser){
+        if (organizerUsernameHashMap.containsKey(removedUser.getId())){
+            organizerUsernameHashMap.remove(removedUser.getId(), removedUser);
             return true;
         }
         return false;
     }
+
 
     /**
      * Removes an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
-     * @param removeMe the user to be removed
+     * @param removedUser the user to be removed
      * @return true if user is removed successfully, false if it has not been removed
      * */
-    public boolean removeUsernameFromHashMap(Organizer removeMe){
-        if (organizerUsernameHashMap.containsKey(removeMe.getUsername())){
-            organizerUsernameHashMap.remove(removeMe.getUsername(), removeMe);
+    public boolean removeUsernameFromHashMap(Organizer removedUser){
+        if (organizerUsernameHashMap.containsKey(removedUser.getUsername())){
+            organizerUsernameHashMap.remove(removedUser.getUsername(), removedUser);
             return true;
         }
         return false;
     }
 
+
     /**
      * Adds an user to existing list of contacts for an user.
-     * @param addMe the username of the user to be added
-     * @param toMe the username of the user who's contact list is updated
+     * @param sender the username of the user to be added
+     * @param receiver the username of the user who's contact list is updated
      * @return true if user is added successfully, false if not
      * */
-    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
-        User user = userUsernameHashMap.get(toMe);
-        User userOne = userUsernameHashMap.get(addMe);
+    public boolean addUserContactList(String receiver, String sender, HashMap<String, User> userUsernameHashMap) {
+        User user = userUsernameHashMap.get(receiver);
+        User userOne = userUsernameHashMap.get(sender);
         if(userOne != null && user != null) {
             if(userOne.getId() == null) {
                 return false;
             }
-            boolean isId = false;
+            boolean isId;
             if(user.getContactsList().contains(userOne.getId())){
                 isId = user.getContactsList().contains(userOne.getId());
                 if (userOne.getIsOrganizer() || user.getId().equals(userOne.getId()) || isId){ // organizers can now message other organizers
@@ -169,15 +174,16 @@ public class OrganizerActions extends UserAccountActions {
         return false;
     }
 
+
     /**
      * Removes an user to existing list of contacts from an user.
-     * @param removeMe the user to be removed
-     * @param toMe the user who's contact list is updated
+     * @param removeUser the user to be removed
+     * @param receiver the user who's contact list is updated
      * @return true if user is removed successfully, false if not
      * */
-    public boolean removeUserContactList(String toMe, String removeMe) {
-        User user = organizerUsernameHashMap.get(toMe);
-        User userOne = organizerUsernameHashMap.get(removeMe);
+    public boolean removeUserContactList(String receiver, String removeUser) {
+        User user = organizerUsernameHashMap.get(receiver);
+        User userOne = organizerUsernameHashMap.get(removeUser);
         boolean isPresent = user.getContactsList().contains(userOne.getId());
         if (!isPresent) {
             return false;
@@ -207,12 +213,14 @@ public class OrganizerActions extends UserAccountActions {
             userEvents.add(event);
             userOne.setEventList(userEvents);
             return true;
-        }}
+        }
+    }
+
 
     /**
      * Removes an event from existing list of events from an user.
      * @param event the event to be removed
-     * @param user the user who's event list is updated
+     * @param user the username of who's event list is updated
      * @return true if event is removed successfully, false if not
      * */
     public boolean removeEventFromUser(String event, String user) {
@@ -236,6 +244,7 @@ public class OrganizerActions extends UserAccountActions {
         return false;
     }
 
+
     /**
      * Finds an user from a given username
      * @param username the username given
@@ -244,6 +253,7 @@ public class OrganizerActions extends UserAccountActions {
     public User findUserFromUsername(String username){
         return organizerUsernameHashMap.get(username);
     }
+
 
     /**
      * Finds an user from a given userId
@@ -258,7 +268,7 @@ public class OrganizerActions extends UserAccountActions {
     /**
      * Returns all the events in an user's eventList
      *
-     * @param user the user who's eventList is printed
+     * @param user the username of who's eventList is printed
      * @return string of all the events a user is attending
      */
     public String returnAllEvents(String user) {
@@ -273,6 +283,7 @@ public class OrganizerActions extends UserAccountActions {
         }
     }
 
+
     /**
      * It will get all organizers from the CSV file.
      * @param loader the userId given
@@ -280,6 +291,7 @@ public class OrganizerActions extends UserAccountActions {
     private void getAllOrganizer(LoadUpIGateway loader) {
         organizers = loader.getAllOrganizers();
     }
+
 
     /**
      * This method will add the organizer to the hashmap.
@@ -311,6 +323,7 @@ public class OrganizerActions extends UserAccountActions {
         }
     }
 
+
     /**
      * It will be storing organizers
      * @return ArrayList<String>
@@ -326,6 +339,7 @@ public class OrganizerActions extends UserAccountActions {
 
     }
 
+
     /**
      * It will be get the organizer ID
      * @return ArrayList<String>
@@ -339,6 +353,7 @@ public class OrganizerActions extends UserAccountActions {
         }
         return storedOrganizer;
     }
+
 
     /**
      * It will be get the organizers' events

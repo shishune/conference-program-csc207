@@ -67,6 +67,41 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    public void option5() {
+        displayEvent.promptViewContacts();
+        String option = scan.nextLine();
+
+        boolean catcher = true;
+
+        while (catcher) {
+
+            if (option.equals("x") || option.equals("X")) {
+                displayEvent.promptEvent();
+                String eventName = scan.nextLine();
+                if (!event.getEventNames().containsKey(eventName)) {
+                    displayEvent.noEvent();
+                } else {
+                    Event eventObject = event.getEventNames().get(eventName);
+                    String eventID = event.getEventNames().get(eventName).getId();
+                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+                        displayEvent.allYourContactsEvent(eventObject.getAttendees());
+                        catcher = false;
+                    } else {
+                        displayEvent.notYourEvent();
+                    }
+                }
+            } else {
+                List<String> newList = new ArrayList<>();
+                for (String contact : user.getContactsList()) {
+                    if (controller != null) {
+                        newList.add(controller.returnUserIDHashMap().get(contact).getUsername());
+                    }
+                }
+                displayEvent.allYourContacts(newList);
+            }
+
+        }
+    }
     /**
      * Responds to menu option 6 - create an event
      */
@@ -256,9 +291,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
-    /**
-     * Responds to menu option 8
-     */
 
     public void option8() {
         List<List<String>> e = new ArrayList<>();
@@ -282,44 +314,8 @@ public class OrganizerMainMenuController extends MainMenuController {
 //        System.out.println(user.getEventList());
     }
 
-    /**
-     * Responds to menu option 5
-     */
-    public void option5() {
-        displayEvent.promptViewContacts();
-        String option = scan.nextLine();
 
-        boolean catcher = true;
 
-        while (catcher) {
-
-            if (option.equals("x") || option.equals("X")) {
-                displayEvent.promptEvent();
-                String eventName = scan.nextLine();
-                if (!event.getEventNames().containsKey(eventName)) {
-                    displayEvent.noEvent();
-                } else {
-                    Event eventObject = event.getEventNames().get(eventName);
-                    String eventID = event.getEventNames().get(eventName).getId();
-                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
-                        displayEvent.allYourContactsEvent(eventObject.getAttendees());
-                        catcher = false;
-                    } else {
-                        displayEvent.notYourEvent();
-                    }
-                }
-            } else {
-                List<String> newList = new ArrayList<>();
-                for (String contact : user.getContactsList()) {
-                    if (controller != null) {
-                        newList.add(returnUserUserIDHashMap().get(contact).getUsername());
-                    }
-                }
-                displayEvent.allYourContacts(newList);
-            }
-
-        }
-    }
 
 
     /**
@@ -447,25 +443,28 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
     }
-
-    /**
-     * Shows a hashmap of usernames
-     * @return hashmap of usernames
+    /***
+     * Responds to menu option 11- view all created events
      */
-    public HashMap<String, User> returnUserUserIDHashMap() {
-
-        if (!(attendee == null) && !attendee.returnIDHashMap().isEmpty()) {
-            usernameHashmap.putAll(attendee.returnIDHashMap());
-        }
-        if (!(organizer == null) && !organizer.returnIDHashMap().isEmpty()) {
-            usernameHashmap.putAll(organizer.returnIDHashMap());
-        }
-        if (!(speaker == null) && !speaker.returnIDHashMap().isEmpty()) {
-            usernameHashmap.putAll(speaker.returnIDHashMap());
-        }
-        return usernameHashmap;
-
+    public void option11() {
+        super.option8();
     }
+
+
+//    public HashMap<String, User> returnUserUserIDHashMap() {
+//
+//        if (!(attendee == null) && !attendee.returnIDHashMap().isEmpty()) {
+//            usernameHashmap.putAll(attendee.returnIDHashMap());
+//        }
+//        if (!(organizer == null) && !organizer.returnIDHashMap().isEmpty()) {
+//            usernameHashmap.putAll(organizer.returnIDHashMap());
+//        }
+//        if (!(speaker == null) && !speaker.returnIDHashMap().isEmpty()) {
+//            usernameHashmap.putAll(speaker.returnIDHashMap());
+//        }
+//        return usernameHashmap;
+//
+//    }
 }
 
 //        displayEvent.promptAddRoom();

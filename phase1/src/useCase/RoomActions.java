@@ -19,7 +19,7 @@ public class RoomActions {
     private ArrayList<String> loadUpRooms = new ArrayList<String>();
 
     /**
-     * @param loader
+     * @param loader the IGateway to use when loading
      * This will load up the data in the hashmap to the CSV files.
      * */
     public RoomActions(LoadUpIGateway loader) {
@@ -28,12 +28,14 @@ public class RoomActions {
         addRoomToHashMap();
     }
 
+
     /**
      * @return ID of the room from the hashmap
      */
     public HashMap<String, Room> returnHashMap() {
         return roomsID;
     }
+
 
     /**
      * @return ID of the room username from the hashmap
@@ -42,17 +44,19 @@ public class RoomActions {
         return roomUsername;
     }
 
+
     /**
-     * @param username
+     * @param roomName the name of the room to check
      * @return true if the room with the following username exists.
      */
-    public boolean roomExists(String username){
-        return roomUsername.containsKey(username);
+    public boolean roomExists(String roomName){
+        return roomUsername.containsKey(roomName);
     }
+
 
     /**
      * This will create a new room
-     * @param username
+     * @param username the name of the room to be created
      * @return a new room
      */
     public Room createRoom(String username) {
@@ -65,31 +69,34 @@ public class RoomActions {
         return room;
     }
 
+
     /**
      * Adds an roomId to existing hashmap of roomId's.
      * The key is the roomId, the value is an instance of the room object.
-     * @param addMe the room to be added
+     * @param roomId the room to be added
      * */
-    private void addRoomIdToHashMap(Room addMe) {
-        if (!roomsID.containsKey(addMe.getRoomId())) {
-            roomsID.put(addMe.getRoomId(), addMe);
+    private void addRoomIdToHashMap(Room roomId) {
+        if (!roomsID.containsKey(roomId.getRoomId())) {
+            roomsID.put(roomId.getRoomId(), roomId);
         }
     }
+
 
     /**
      * Adds an room username to existing hashmap of usernames.
      * The key is the room username, the value is an instance of the room object.
-     * @param addMe the room to be added
+     * @param roomName the room to be added
      * */
-    private void addRoomUsernameToHashMap(Room addMe) {
+    private void addRoomUsernameToHashMap(Room roomName) {
 
-        if (!roomUsername.containsKey(addMe.getRoomName())) {
-            roomUsername.put(addMe.getRoomName(), addMe);
+        if (!roomUsername.containsKey(roomName.getRoomName())) {
+            roomUsername.put(roomName.getRoomName(), roomName);
         }
     }
 
+
     /**
-     * Adds a room
+     * Adds a room (Kept as a boolean as it will be needed in Phase 2)
      * @param room the room to be added
      * @return true if the room is added successfully otherwise return false
      */
@@ -102,6 +109,7 @@ public class RoomActions {
         roomUsername.put(room.getRoomName(), room);
         return true;
     }
+
 
     /**
      * Removes a room
@@ -117,14 +125,16 @@ public class RoomActions {
         return false;
     }
 
+
     /**
-     * Finds a room from a given username
+     * Finds a room from a given username (Will need for Phase 2)
      * @param username the room username given
      * @return room object from hashmap of room objects
      * */
-    public Room findRoomFromUsername(String username) {
+    public Room findRoomFromName(String username) {
         return roomUsername.get(username);
     }
+
 
     /**
      * Finds a room from a given roomId
@@ -135,13 +145,15 @@ public class RoomActions {
         return roomsID.get(roomId);
     }
 
+
     /**
      * It will get all rooms from the CSV file.
-     * @param loader
+     * @param loader the IGateway to be used to load
      */
     private void getAllRooms(LoadUpIGateway loader) {
         loadUpRooms = loader.getRooms();
     }
+
 
     /**
      * This method will add the room to the hashmap.
@@ -162,6 +174,7 @@ public class RoomActions {
         }
     }
 
+
     /**
      * It will be get the room ID
      * @return ArrayList<String>
@@ -176,6 +189,7 @@ public class RoomActions {
         return storedR;
     }
 
+
     /**
      * It will be storing rooms
      * @return ArrayList<String>
@@ -188,6 +202,5 @@ public class RoomActions {
             }
         }
         return storedR;
-
     }
 }

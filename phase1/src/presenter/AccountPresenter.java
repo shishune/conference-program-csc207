@@ -6,6 +6,7 @@ package presenter;
  * @author Cynthia
  * @version 1
  * */
+
 public class AccountPresenter {
     String basicMenu = ""
             + "\n[1] Log out"
@@ -20,6 +21,10 @@ public class AccountPresenter {
     public void failedUsernameExists(){
         System.out.println("This username already exists.");
     }
+
+    /**
+     * A message informing user that signup was successful
+     * */
     public void successSignUp(){
         System.out.println("You have successfully made a new account! You may now login with your new account." +
                 "\nNote: You must login and logout completely in order to save your account.");
@@ -31,12 +36,16 @@ public class AccountPresenter {
     public void successLogin(){
         System.out.println("You have successfully logged in.");
     }
+
+
     /**
      * Invalid option
      */
     public void failedInvalidMenuOption(){
         System.out.println("Invalid option. Please enter again.");
     }
+
+
     /**
      * Quite option
      */
@@ -52,8 +61,9 @@ public class AccountPresenter {
         System.out.println("Enter 'x' to sign up, and any other character to login.");
     }
 
+
     /**
-     * Assks for user type
+     * Asks for user type
      */
     public void printUserTypeMenu(){
         String display = "Enter the number that best describes your role in this conference:"
@@ -63,12 +73,14 @@ public class AccountPresenter {
         System.out.println(display);
     }
 
+
     /**
      * Prints the main menu
      * */
     public void printMainMenu(){
         System.out.println(basicMenu);
     }
+
 
     /**
      * Prompt for username
@@ -77,6 +89,7 @@ public class AccountPresenter {
         System.out.println("Please enter your username.");
     }
 
+
     /**
      * Prompt for password
      * */
@@ -84,19 +97,24 @@ public class AccountPresenter {
         System.out.println("Please enter your password.");
     }
 
+
+    /**
+     * A message informing user that the login failed
+     * */
     public void failedLogin(){
         System.out.println("Either your username or password is incorrect.");
     }
+
 
     /**
      * Prompt to return to menu
      * */
     public void promptReturn(){
         System.out.println("Note: You must log out of your account in order to save new information" +
-                "\n(including sent messages, sign up to events, etc.)." +
                 "\nIf you would like to return to the menu, enter any key " +
                 "\n This is accessible in the main menu.");
     }
+
 
     /**
      * A message informing user of successful logout; option to log back in or exit the program.
@@ -106,6 +124,7 @@ public class AccountPresenter {
                 "Enter 'X' to exit the program.");
     }
 
+
     /**
      * A message informing user that the menu item number does not exist
      * */
@@ -113,5 +132,9 @@ public class AccountPresenter {
         System.out.println("This number is not an option, please enter another number.");
     }
 
+
+    /**
+     * A message informing user that there was a mistake with their answer
+     * */
     public void printTypingError(){System.out.println(("There was an mistake with your answer. Please try again."));}
 }

@@ -32,20 +32,6 @@ public class Message {
         this.timeSent = timeSent;
     }
 
-    /**
-     * Instantiates a new message object
-     * @param messageId the ID of the message
-     * @param senderId the ID of the sender
-     * @param receiverId the ID of the receiver
-     * @param message the message
-     */
-    public Message(String messageId, String senderId, String receiverId, String message) {
-        this.messageId = messageId;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
-        this.message = message;
-        this.timeSent = generateSentTime();
-    }
 
     /**
      * This method gets the string representation of the message
@@ -53,26 +39,6 @@ public class Message {
      */
     public String getStringRep() {
         return messageId + "%2%0%7%" + senderId + "%2%0%7%" + receiverId + "%2%0%7%" + message + "%2%0%7%" + timeSent;
-    }
-
-    /**
-     * Generates the time of Message construction.
-     * Method gets local time (time according the the timezone on the sender's computer)
-     * of the sender, and converts it to Toronto time.
-     * @return time of Message construction (converted to Toronto time)
-     * */
-    private String generateSentTime() {
-        final String DATE_FORMAT = "dd-M-yyyy k:mm:ss.n"; // format of date and time
-
-        // get local time in toronto time zone
-        ZoneId torontoZoneId = ZoneId.of("America/Toronto");
-        LocalDateTime zonedDateTime = LocalDateTime.now(torontoZoneId);
-
-        // format the date according to <DATE_FORMAT>
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        String dateTime = format.format(zonedDateTime);
-        dateTime = dateTime.substring(0, dateTime.indexOf(".") + 4);
-        return dateTime;
     }
 
     /**

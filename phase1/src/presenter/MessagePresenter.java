@@ -8,12 +8,11 @@ import controller.UserController;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class MessagePresenter {
 
-    // used in MainMenuController to print list of contacts for a user
     public void printString(String theString){
         System.out.println(theString);
     }
@@ -39,6 +38,7 @@ public class MessagePresenter {
         }
         return true;
     }
+
     /**
      * Prompt for recipient
      * */
@@ -57,12 +57,14 @@ public class MessagePresenter {
      * Prompt for contact
      * */
     public void promptContact(){ System.out.println("Enter the username of the person you would like to add to your contacts list.");}
+
     /**
      * Message of successful contact
      * */
     public void successContact(){
         System.out.println("You have successfully added this person to your contacts list!");
     }
+
     /**
      * Message of failed contact
      * */
@@ -74,12 +76,14 @@ public class MessagePresenter {
      * User does not have any contacts
      */
     public void zeroContacts() { System.out.println("You have not received any messages or contacted anyone."); }
+
     /**
      * Message of failed contact
      * */
     public void sameUserContact(){
         System.out.println("This username is your username");
     }
+
     /**
      * Message informing message sent
      * */
@@ -104,6 +108,7 @@ public class MessagePresenter {
             }
         }
     }
+
     /**
      * Message informing user they have no contacts
      * */

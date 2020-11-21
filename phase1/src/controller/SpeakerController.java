@@ -51,10 +51,17 @@ public class SpeakerController extends UserController {
         if(eventActions != null) {
             HashMap<String, Event> eventHash = eventActions.getEventNames();
             if(eventHash.get(event) != null) {
+                HashMap<String, User> speakerIdHash = returnUserIDHashMap();
+                HashMap<String, User> attendeeIdHash = returnUserIDHashMap();
+                HashMap<String, User> userHash = returnUserUsernameHashMap();
                 String eventID = eventHash.get(event).getId();
                 List<String> attendees = eventActions.getEventAttendees(eventID);
                 for (String attendeeID : attendees) {
-                    if(this.messageActions.createMessage(this.SpeakerID, attendeeID, message) == null){
+                    speakerActions.addUserContactList(speakerIdHash.get(SpeakerID).getUsername(),
+                            attendeeIdHash.get(attendeeID).getUsername(), userHash);
+                    attendeeActions.addUserContactList(attendeeIdHash.get(attendeeID).getUsername(),
+                            speakerIdHash.get(SpeakerID).getUsername(), userHash);
+                    if(messageActions.createMessage(SpeakerID, attendeeID, message) == null){
                         return false;
                     }
                 }

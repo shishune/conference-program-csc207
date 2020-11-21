@@ -1,9 +1,6 @@
 package controller;
 
-import entities.Event;
-import entities.Organizer;
-import entities.Speaker;
-import entities.User;
+import entities.*;
 import useCase.*;
 
 import java.util.ArrayList;
@@ -23,11 +20,9 @@ public class OrganizerController extends UserController{
     private RoomActions roomActions;
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
+    private AttendeeActions attendeeActions;
     private String organizerID;
-    /**
-     * Instantiates a new OrganizerController object. Creates an instance of organizerID, MessageActions, EventActions
-     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
-     */
+
 
     public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
                                AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
@@ -38,7 +33,7 @@ public class OrganizerController extends UserController{
         this.eventActions = eventActions;
         this.roomActions = roomActions;
         this.messageActions = messageActions;
-        // this.attendeeActions = attendeeActions;
+        this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
     }
     /***
@@ -69,8 +64,8 @@ public class OrganizerController extends UserController{
     }
 
     /***
-     * Cancel an event
-     * @param eventName the name of the event being cancelled
+     * cancel an event
+     * @param eventName
      * @return true if the event was successfully canceled (ie if it exists, then it will be cancelled)
      */
 
@@ -93,9 +88,9 @@ public class OrganizerController extends UserController{
     }
 
     /***
-     * Create a speaker and add them to the speaker schedule
-     * @param username the username of the user
-     * @param password the password fo the user
+     * create a speaker and add them to the speaker schedule
+     * @param username
+     * @param password
      */
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
@@ -126,8 +121,8 @@ public class OrganizerController extends UserController{
 
     /**
      * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
-     * @param eventID the ID of the event
-     * @param speakerID the ID of the speaker
+     * @param eventID
+     * @param speakerID
      *
      */
     public boolean scheduleSpeaker(String eventID, String speakerID, boolean canAdd){
@@ -143,9 +138,9 @@ public class OrganizerController extends UserController{
     // TODO edit event details... is this necessary?
 
     /***
-     * Reschedule an event with a new date and time
-     * @param eventID the ID of the event
-     * @param newDateTime the new date to schedule the event
+     * reschedule an event with a new date and time
+     * @param eventID
+     * @param newDateTime
      * @return if the event was successfully rescheduled
      */
     public boolean rescheduleEvent(String eventID, String newDateTime){
@@ -154,10 +149,14 @@ public class OrganizerController extends UserController{
 
     /***
      * Send all the attendees of an event a message
-     * @param event the event with the attendees
-     * @param message the message sent to the attendees
+     * @param event
+     * @param message
      */
     public boolean sendAttendeesMessage(String event, String message){
+        HashMap<String, User> userHash = returnUserUsernameHashMap();
+        HashMap<String, Attendee> attendeesHash = attendeeActions.returnIDHashMap();
+        HashMap<String, Organizer> idHash = organizerActions.returnIDHashMap();
+        String userUsername = idHash.get(organizerID).getUsername();
         HashMap<String, Event> eventsHash = eventActions.getEventNames();
         if(eventsHash.get(event) == null) {
             return false;
@@ -166,16 +165,16 @@ public class OrganizerController extends UserController{
         String eventID = eventsHash.get(event).getId();
         List<String> attendees = eventActions.getEventAttendees(eventID);
         for (String attendeeID: attendees){
-            messageActions.createMessage(organizerID, attendeeID, message);
+            organizerActions.addUserContactList(userUsername, attendeesHash.get(attendeeID).getUsername(), userHash);
+            attendeeActions.addUserContactList(attendeesHash.get(attendeeID).getUsername(), userUsername, userHash);
+            if(userHash.get(attendeesHash.get(attendeeID).getUsername()) == null) {
+                return false;
+            }
+                messageActions.createMessage(organizerID, attendeeID, message);
         }
         return true;
     }
 
-    /**
-     * This method sends the speaker's message
-     * @param messageContent the message of the speaker
-     * @return whether the message has been sent
-     */
     public boolean sendSpeakersMessage(String messageContent) {
         HashMap<String, User> userHash = returnUserUsernameHashMap();
         HashMap<String, Speaker> speakersHash = speakerActions.returnUsernameHashMap();
@@ -199,7 +198,7 @@ public class OrganizerController extends UserController{
 
     /***
      * Send all the attendees of conference a message
-     * @param message the message sent to the attendees of the conference
+     * @param message
      */
     public void sendAllAttendeesMessage( String message){
         List<String> eventIDs = new ArrayList();
@@ -220,11 +219,20 @@ public class OrganizerController extends UserController{
 
     /***
      * Check if event exists
-     * @param event the event that is being checked
+     * @param eventName
      */
-    public boolean checkEvent(String event){
-        return (eventActions.getEventNames().containsKey(event));
+    public boolean checkEvent(String eventName){
+        return (eventActions.getEventNames().containsKey(eventName));
     }
+
+    /***
+     * Check if event has attendees
+     * @param eventName
+     */
+    public boolean eventHasAttendees(String eventName){
+        return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
+    }
+
 
 
 }

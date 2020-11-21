@@ -19,6 +19,7 @@ public class SpeakerActions extends UserAccountActions {
     private ArrayList<String> speakers = new ArrayList<String>();
     public ArrayList<String> storedSpeaker = new ArrayList<String>();
 
+
     /**
      * @param loader
      * This will load up the data in the hashmap to the CSV files.
@@ -30,13 +31,14 @@ public class SpeakerActions extends UserAccountActions {
         addSpeakerToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
 
+
     /**
      * This will create a new speaker
-     * @param username
-     * @param password
-     * @param contactsList
-     * @param eventList
-     * @param isLogin
+     * @param username the username of the speaker
+     * @param password the password of the speaker
+     * @param contactsList the contact list of the speaker
+     * @param eventList the list of events that the speaker will speak at
+     * @param isLogin the login status of the speaker
      * @return a new speaker
      */
     public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
@@ -47,10 +49,11 @@ public class SpeakerActions extends UserAccountActions {
         return userSpeaker;
     }
 
+
     /**
      * check if event is properly added to speaker
-     * @param eventID
-     * @param speakerId
+     * @param eventID the unique id of the event to be added
+     * @param speakerId the unique id of the speaker to be added to
      * @return if event is in speaker event list
      */
     public boolean isEventAddedToSpeaker(String eventID, String speakerId){
@@ -58,15 +61,17 @@ public class SpeakerActions extends UserAccountActions {
         return speakerID.get(speakerId).getEventList().contains(eventID);
     }
 
+
     /***
      * check if event is properly removed from speaker
-     * @param eventID
-     * @param speakerId
+     * @param eventID the unique id of the event to be removed
+     * @param speakerId the unique id of the speaker to be removed from
      * @return if event is no longer in speaker event list
      */
     public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
         return !speakerID.get(speakerId).getEventList().contains(eventID);
     }
+
 
     /**
      * Returns whether speaker is in the database
@@ -76,12 +81,16 @@ public class SpeakerActions extends UserAccountActions {
     public boolean speakerExists(String username){
         return speakerUsername.containsKey(username);
     }
-    /*
-    /** Load new speakers into HashMap of new speakers **/
+
+
+    /**
+     * Load new speakers into HashMap of new speakers
+     */
     public void loadSpeaker(Speaker newSpeaker){
         speakerID.put(newSpeaker.getId(), newSpeaker);
         speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
     }
+
 
     /**
      * @return ID of the speaker from the hashmap
@@ -90,6 +99,7 @@ public class SpeakerActions extends UserAccountActions {
         return speakerID;
     }
 
+
     /**
      * @return ID of the speaker username from the hashmap
      */
@@ -97,12 +107,14 @@ public class SpeakerActions extends UserAccountActions {
         return speakerUsername;
     }
 
+
     /**
      * gets list of messages from the IGateway
      */
     private void getAllSpeakers(LoadUpIGateway loader) {
         speakers = loader.getSpeakersList();
     }
+
 
     /** Adds messages loaded from the csv to <messages> **/
     private void addLoadedToHashMap() {
@@ -119,6 +131,7 @@ public class SpeakerActions extends UserAccountActions {
         }
     }
 
+
     /**
      * Adds an userId to existing hashmap of userId's.
      * The key is the userId, the value is an instance of the user object.
@@ -130,6 +143,7 @@ public class SpeakerActions extends UserAccountActions {
             speakerID.put(addMe.getId(), addMe);
         }
     }
+
 
     /**
      * Adds an username to existing hashmap of usernames.
@@ -160,6 +174,7 @@ public class SpeakerActions extends UserAccountActions {
         return false;
     }
 
+
     /**
      * Removes an username to existing hashmap of usernames.
      * The key is the username, the value is an instance of the user object.
@@ -182,7 +197,7 @@ public class SpeakerActions extends UserAccountActions {
      *
      * @param addMe the username of the user to be added
      * @param toMe  the username of the user who's contact list is updated
-     *              ]    * @return true if user is added successfully, false if not
+     * @return true if user is added successfully, false if not
      */
 
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
@@ -202,11 +217,12 @@ public class SpeakerActions extends UserAccountActions {
         }
     }
 
+
     /**
      * Removes an user to existing list of contacts from an user.
      *
      * @param removeMe the username of the user to be removed
-     * @param toMe     the username of user who's contact list is updated
+     * @param toMe the username of user who's contact list is updated
      * @return true if user is removed successfully, false if not
      */
 
@@ -279,12 +295,12 @@ public class SpeakerActions extends UserAccountActions {
         Speaker userOne = speakerUsername.get(user);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < userOne.getEventList().size(); i++) {
-            // System.out.println(user.getEventList().get(i));
             String a = userOne.getEventList().get(i);
             result.append(a).append(' ');
         }
         return result.toString();
     }
+
 
     /**
      * Finds an user from a given username
@@ -307,6 +323,7 @@ public class SpeakerActions extends UserAccountActions {
     public Speaker findUserFromId(String userId) {
         return speakerID.get(userId);
     }
+
 
     /**
      * This method will add the speaker to the hashmap.
@@ -339,6 +356,7 @@ public class SpeakerActions extends UserAccountActions {
         }
     }
 
+
     /**
      * It will be storing speakers
      * @return ArrayList<String>
@@ -352,6 +370,7 @@ public class SpeakerActions extends UserAccountActions {
         }
         return storedSpeaker;
     }
+
 
     /**
      * It will be get the speaker ID

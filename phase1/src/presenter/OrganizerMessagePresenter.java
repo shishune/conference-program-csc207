@@ -5,7 +5,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
  * Creates menu specific to organizer for the method of messaging.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class OrganizerMessagePresenter extends MessagePresenter{
@@ -35,6 +35,14 @@ public class OrganizerMessagePresenter extends MessagePresenter{
      * */
     public void eventNotCreated(){
         String display = "That event does not exist. Try again or create a new event first.";
+        System.out.println(display);
+    }
+
+    /**
+     * Print message event has no attendees
+     * */
+    public void eventNoAttendees(){
+        String display = "That event has no attendees. Try getting some friends first :/ ";
         System.out.println(display);
     }
 
@@ -76,9 +84,6 @@ public class OrganizerMessagePresenter extends MessagePresenter{
     public void badRoom(){
         System.out.println("That room does not exist. Add a new room by writing 'ADD' or rewrite the name of the room after pressing any key.");
     }
-//    public void newRoom(){
-//        System.out.println("Enter the name of the room to be added");
-//    }
 
     /**
      * Message stating that the user successfully created a new room
@@ -102,10 +107,4 @@ public class OrganizerMessagePresenter extends MessagePresenter{
      */
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
 
-    /**
-     * Message explaining how to cancel an event
-     */
-    public void promptCancelMethod() {
-        System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.");
-    }
 }

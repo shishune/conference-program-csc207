@@ -42,13 +42,16 @@ public class OrganizerMessageMenuController{
         String message = scan.nextLine();
         displayMessage.promptEvent(); // enter name of event you want to send message to
         String event = scan.nextLine();
-        if(!(controller == null) && controller.checkEvent(event)){
-            if(controller.sendAttendeesMessage(event, message)) {
-                displayMessage.successMessage();
+        if(controller != null){
+            if (controller.checkEvent(event) && controller.eventHasAttendees(event)){
+                if(controller.sendAttendeesMessage(event, message)) {
+                    displayMessage.successMessage();
+                }
+            } else if (controller.checkEvent(event)){
+                displayMessage.eventNoAttendees();
+            } else {
+                displayMessage.eventNotCreated();
             }
-        }
-        else{
-            displayMessage.eventNotCreated();
         }
 
     }

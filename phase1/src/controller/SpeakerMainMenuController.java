@@ -111,7 +111,6 @@ public class SpeakerMainMenuController extends MainMenuController {
     public void option4(){
         displayMessage.promptContact();
         String add = scan.nextLine();
-        //System.out.println(user.getContactsList());
         //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
         if (controller.returnUserUsernameHashMap().containsKey(add)){
             if (controller.addContact(add, user.getUsername())){
@@ -121,7 +120,6 @@ public class SpeakerMainMenuController extends MainMenuController {
         else{
             displayMessage.failedContact();
         }
-        //System.out.println(user.getContactsList());
     }
 
     /**

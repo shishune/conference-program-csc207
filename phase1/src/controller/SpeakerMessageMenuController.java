@@ -34,23 +34,6 @@ public class SpeakerMessageMenuController{
         displayMessage.promptListEvents(); //
         String eventEntry = scan.nextLine();
         String[] events = eventEntry.split(",");
-        /*while (true){
-            String event = scan.nextLine();
-            if (event.equals("x")||event.equals("X")){
-                break;
-            }
-
-            else if (!(controller == null) && controller.eventActions.getEvents().containsKey(event)){
-                events.add(event);
-                //scan.next();
-            }
-
-            else{
-                displayMessage.failedEvent();
-                //scan.next();
-            }
-
-        }*/
         if(controller != null) {
             boolean success = false;
             for (String event : events) {
