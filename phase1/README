@@ -16,7 +16,10 @@ All users can;
             
 Option 1 allows them to log out, saving the information they have created in a corresponding csv file, which will be then loaded. If user does not log out, their information will not be stored.
 
-Option 2 allows them to send a message. The recipients of the messages will differ for each user. We will elaborate in later sections.
+Option 2 allows them to send a message. The recipients of the messages will differ for each user.
+- Organizers can send messages to all speakers and all attendees of an event, as well as individually
+- Speakers can send messages to all attendees of one event or multiple events, as well as respond to a specific attendee
+- Attendees can send messages to other attendees, as well as view messages that have been sent to them.
 
 Option 3 allows users to see all the messages that have been sent, categorized by users.
 
