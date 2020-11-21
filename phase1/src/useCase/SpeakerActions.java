@@ -1,13 +1,14 @@
 package useCase;
 
-import entities.Attendee;
-import entities.Organizer;
 import entities.Speaker;
 import entities.User;
 import gateway.LoadUpIGateway;
 
 import java.util.*;
 
+/**
+ * A use case class that stores a hashmap of speakers
+ */
 public class SpeakerActions extends UserAccountActions {
     private LoadUpIGateway loader;
     private ArrayList<String> speakerLoadUpList = new ArrayList<String>();
@@ -18,33 +19,35 @@ public class SpeakerActions extends UserAccountActions {
     private ArrayList<String> speakers = new ArrayList<String>();
     public ArrayList<String> storedSpeaker = new ArrayList<String>();
 
+    /**
+     * @param loader
+     * This will load up the data in the hashmap to the CSV files.
+     * */
     public SpeakerActions(LoadUpIGateway loader) {
         // with message ID as key and message object as value
         this.loader = loader;
         getAllSpeakers(loader); // gets all messages from message.csv
         addSpeakerToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
-    // why does this return user instead of speaker type?
-    public Speaker createSpeaker(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        // addUserToHashMap(userSpeaker);
-        loadSpeaker(userSpeaker);
-        return userSpeaker;
-    }
 
+    /**
+     * This will create a new speaker
+     * @param username
+     * @param password
+     * @param contactsList
+     * @param eventList
+     * @param isLogin
+     * @return a new speaker
+     */
     public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "S" + generateId.generateId();
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        //addUserIdToHashMap(userSpeaker);
-        //addUsernameToHashMap(userSpeaker);
-        //speakerUsername.put(userId, userSpeaker);
-        //speakerID.put(username, userSpeaker);
-
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
-    /***
+
+    /**
      * check if event is properly added to speaker
      * @param eventID
      * @param speakerId
@@ -62,8 +65,6 @@ public class SpeakerActions extends UserAccountActions {
      * @return if event is no longer in speaker event list
      */
     public boolean isEventRemovedFromSpeaker(String eventID, String speakerId){
-        // speakerID.get(speakerId).getEventList().remove(eventID);
-
         return !speakerID.get(speakerId).getEventList().contains(eventID);
     }
 
@@ -82,15 +83,23 @@ public class SpeakerActions extends UserAccountActions {
         speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
     }
 
+    /**
+     * @return ID of the speaker from the hashmap
+     */
     public HashMap<String, Speaker> returnIDHashMap() {
         return speakerID;
     }
 
+    /**
+     * @return ID of the speaker username from the hashmap
+     */
     public HashMap<String, Speaker> returnUsernameHashMap() {
         return speakerUsername;
     }
 
-    /** gets list of messages from the IGateway **/
+    /**
+     * gets list of messages from the IGateway
+     */
     private void getAllSpeakers(LoadUpIGateway loader) {
         speakers = loader.getSpeakersList();
     }
@@ -105,12 +114,10 @@ public class SpeakerActions extends UserAccountActions {
                 boolean loadIsLogin = Boolean.parseBoolean(speakerInfo[5]);
                 boolean loadIsOrganizer = Boolean.parseBoolean(speakerInfo[6]);
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList, loadEventsList, loadIsLogin, loadIsOrganizer);
-                //Message loadedMessage = createMessage(messageInfo[0], messageInfo[1], messageInfo[2], messageInfo[3], messageInfo[4]);
                 loadSpeaker(loadedSpeaker);
             }
         }
     }
-
 
     /**
      * Adds an userId to existing hashmap of userId's.
@@ -178,7 +185,6 @@ public class SpeakerActions extends UserAccountActions {
      *              ]    * @return true if user is added successfully, false if not
      */
 
-    // TODO We need figure out to check all users that could be added from the different hashmaps which need to be passed in
     public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userUsernameHashMap) {
         User user = userUsernameHashMap.get(toMe);
         User userOne = userUsernameHashMap.get(addMe);
@@ -186,7 +192,7 @@ public class SpeakerActions extends UserAccountActions {
             return false;
         }
         boolean isId = user.getContactsList().contains(userOne.getId());
-        if (/*userOne.getIsOrganizer() || */user.getId() == userOne.getId() || isId) {
+        if (user.getId() == userOne.getId() || isId) {
             return false;
         } else {
             List<String> toMeContacts = user.getContactsList();
@@ -302,7 +308,9 @@ public class SpeakerActions extends UserAccountActions {
         return speakerID.get(userId);
     }
 
-
+    /**
+     * This method will add the speaker to the hashmap.
+     */
     private void addSpeakerToHashMap() {
         if (speakers != null  && !speakers.isEmpty()) {
 
@@ -324,8 +332,6 @@ public class SpeakerActions extends UserAccountActions {
                 }
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
                         eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6]));
-//                speakerID.put(speakerInfo[0], loadedSpeaker);
-//                speakerUsername.put(speakerInfo[1], loadedSpeaker);
                 loadSpeaker(loadedSpeaker);
             }
 
@@ -333,6 +339,10 @@ public class SpeakerActions extends UserAccountActions {
         }
     }
 
+    /**
+     * It will be storing speakers
+     * @return ArrayList<String>
+     */
     public ArrayList<String> storeSpeakers() {
         ArrayList<String> storedSpeaker = new ArrayList<String>();
         if(speakerID != null && !speakerID.isEmpty()) {
@@ -343,6 +353,10 @@ public class SpeakerActions extends UserAccountActions {
         return storedSpeaker;
     }
 
+    /**
+     * It will be get the speaker ID
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getSpeakerIds() {
         ArrayList<String> storedS = new ArrayList<String>();
         if (speakerID != null && !speakerID.isEmpty()) {
@@ -352,7 +366,5 @@ public class SpeakerActions extends UserAccountActions {
         }
         return storedS;
     }
-
-
 
 }

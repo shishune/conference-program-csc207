@@ -1,14 +1,10 @@
 package useCase;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-
-import entities.*;
-import gateway.LoadUp;
+import entities.Room;
 import gateway.LoadUpIGateway;
-import gateway.Store;
-import useCase.GenerateID;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A use case class that stores a list of rooms and can add/remove rooms.
@@ -22,42 +18,69 @@ public class RoomActions {
     private LoadUpIGateway loader;
     private ArrayList<String> loadUpRooms = new ArrayList<String>();
 
+    /**
+     * @param loader
+     * This will load up the data in the hashmap to the CSV files.
+     * */
     public RoomActions(LoadUpIGateway loader) {
         this.loader = loader;
         getAllRooms(loader);
         addRoomToHashMap();
     }
 
-
+    /**
+     * @return ID of the room from the hashmap
+     */
     public HashMap<String, Room> returnHashMap() {
         return roomsID;
     }
 
+    /**
+     * @return ID of the room username from the hashmap
+     */
     public HashMap<String, Room> returnRoomUsernameHashMap() {
         return roomUsername;
     }
 
+    /**
+     * @param username
+     * @return true if the room with the following username exists.
+     */
     public boolean roomExists(String username){
         return roomUsername.containsKey(username);
     }
 
+    /**
+     * This will create a new room
+     * @param username
+     * @return a new room
+     */
     public Room createRoom(String username) {
         GenerateID generateId = new GenerateID(loader);
         String userId = "R" + generateId.generateId();
         Room room = new Room(userId, username);
-        //System.out.println(returnHashMap());
         addRoomIdToHashMap(room);
         addRoomUsernameToHashMap(room);
         addRoom(room);
         return room;
     }
 
+    /**
+     * Adds an roomId to existing hashmap of roomId's.
+     * The key is the roomId, the value is an instance of the room object.
+     * @param addMe the room to be added
+     * */
     private void addRoomIdToHashMap(Room addMe) {
         if (!roomsID.containsKey(addMe.getRoomId())) {
             roomsID.put(addMe.getRoomId(), addMe);
         }
     }
 
+    /**
+     * Adds an room username to existing hashmap of usernames.
+     * The key is the room username, the value is an instance of the room object.
+     * @param addMe the room to be added
+     * */
     private void addRoomUsernameToHashMap(Room addMe) {
 
         if (!roomUsername.containsKey(addMe.getRoomName())) {
@@ -65,6 +88,11 @@ public class RoomActions {
         }
     }
 
+    /**
+     * Adds a room
+     * @param room the room to be added
+     * @return true if the room is added successfully otherwise return false
+     */
     public boolean addRoom(Room room){
 
         if (roomsID.containsKey(room.getRoomId())){
@@ -75,6 +103,11 @@ public class RoomActions {
         return true;
     }
 
+    /**
+     * Removes a room
+     * @param room the room to be removed
+     * @return true if the room is removed successfully otherwise return false
+     */
     public boolean removeRoom(Room room){
         if (roomsID.containsKey(room.getRoomId()) && roomUsername.containsKey(room.getRoomName())){
             roomsID.remove(room.getRoomId(), room);
@@ -84,19 +117,35 @@ public class RoomActions {
         return false;
     }
 
+    /**
+     * Finds a room from a given username
+     * @param username the room username given
+     * @return room object from hashmap of room objects
+     * */
     public Room findRoomFromUsername(String username) {
         return roomUsername.get(username);
     }
 
-    public Room findRoomFromId(String userId) {
-        return roomsID.get(userId);
+    /**
+     * Finds a room from a given roomId
+     * @param roomId the roomId given
+     * @return room object from hashmap of room objects
+     * */
+    public Room findRoomFromId(String roomId) {
+        return roomsID.get(roomId);
     }
 
+    /**
+     * It will get all rooms from the CSV file.
+     * @param loader
+     */
     private void getAllRooms(LoadUpIGateway loader) {
-        //LoadUp loader = new LoadUp(); // this is okay because IGateway
         loadUpRooms = loader.getRooms();
     }
 
+    /**
+     * This method will add the room to the hashmap.
+     */
     private void addRoomToHashMap() {
 
         if (loadUpRooms != null) {
@@ -113,6 +162,10 @@ public class RoomActions {
         }
     }
 
+    /**
+     * It will be get the room ID
+     * @return ArrayList<String>
+     */
     public ArrayList<String> getRoomsIds() {
         ArrayList<String> storedR = new ArrayList<String>();
         if (roomsID != null && !roomsID.isEmpty()) {
@@ -123,6 +176,10 @@ public class RoomActions {
         return storedR;
     }
 
+    /**
+     * It will be storing rooms
+     * @return ArrayList<String>
+     */
     public ArrayList<String> storingRooms() {
         ArrayList<String> storedR = new ArrayList<String>();
         if(roomUsername != null && !roomUsername.isEmpty()) {
@@ -133,142 +190,4 @@ public class RoomActions {
         return storedR;
 
     }
-
-
-
-
-    /*
-    */
-/**
-     * Instantiates a new RoomActions object. Allows transfer of data via gateway from csv file to hashmap
-     * *//*
-
-    public RoomActions(){
-        loadRooms(); // transfer all rooms from rooms.csv to the roomsList Hashmap
-    }
-
-    */
-/**
-     * Transfers data via gateway class from csv file to hashmap
-     * (does not violate SOLID principles because this is done via interface)
-     * *//*
-
-    public void loadRooms(){
-        LoadUp loader = new LoadUp(); // initialize gateway class for loading
-        List<String> rooms = loader.getRooms(); // gateway method to transfer from rooms.csv to a list of room ids
-        String roomName = "T-T"; //TODO : NEED TO FIX THIS RN ALL LOADED NAMES ARE GONNA BE CALLED T-T
-
-        for (String id:rooms) {
-            Room room = new Room(id, roomName);
-            roomsList.put(id, room);
-        }
-//
-//        for (String name:roomNames) {
-//            roomUsername.put(name)
-//        }
-    }
-
-    */
-/**
-     * Returns and array of all rooms for storage
-     * @Return array of all rooms for storage
-     * *//*
-
-    public ArrayList<String> storeRooms(){
-        ArrayList<String> rooms = new ArrayList<String>();
-        for (String id:rooms){
-            rooms.add(id);
-        }
-        return rooms;
-    }
-    */
-/**
-     * Adds a room to existing repository of rooms
-     * @param room the room to be added
-     * @return false if the room id already exists, true if the room has been added successfully
-     * *//*
-
-    public boolean addRoom(Room room){
-
-        if (roomsList.containsKey(room.getRoomId())){
-            return false;
-        }
-        roomsList.put(room.getRoomId(), room);
-        roomUsername.put(room.getRoomName(), room);
-        return true;
-    }
-
-    */
-/**
-     * Removes a room from existing repository of rooms
-     * @param room the room to be removed
-     * @return false if the room id does not exist, true if the room has been removed successfully
-     * *//*
-
-    public boolean removeRoom(Room room){
-        if (roomsList.containsKey(room.getRoomId())){
-            roomsList.remove(room.getRoomId(), room);
-            return true;
-        }
-        return false;
-    }
-
-    */
-/**
-     * Getter method for the hashmap of id to rooms
-     * @return the hashmap of id to rooms
-     * *//*
-
-    public HashMap<String, Room> returnHashMap(){
-        return this.roomsList;
-    }
-
-    */
-/** gets list of messages from the IGateway **//*
-
-    private void getAllRooms(LoadUpIGateway loader) {
-        //LoadUp loader = new LoadUp(); // this is okay because IGateway
-        loadUpRooms = loader.getRooms();
-    }
-
-
-    */
-/** Adds messages loaded from the csv to <messages> **//*
-
-    private void addLoadedToHashMap() {
-        //System.out.println(conversations);
-        if (loadUpRooms != null && !loadUpRooms.isEmpty()) {
-            for (String roomString : loadUpRooms) {
-                String[] roomInfo = roomString.split(",");
-                Room loadedRoom = new Room(roomInfo[0], roomInfo[1]);
-                roomsList.put(roomInfo[0], loadedRoom);
-                roomUsername.put(roomInfo[1], loadedRoom);
-            }
-        }
-        //return loadUpRooms;
-    }
-
-    public ArrayList<String> getRoomsIds() {
-        ArrayList<String> storedR = new ArrayList<String>();
-        if (roomsList != null && !roomsList.isEmpty()) {
-            for (Map.Entry<String, Room> o : roomsList.entrySet()) {
-                storedR.add(o.getValue().getRoomId() + "\n");
-            }
-        }
-        return storedR;
-    }
-
-    public ArrayList<String> storingRooms() {
-        ArrayList<String> storedR = new ArrayList<String>();
-        if(roomUsername != null && !roomUsername.isEmpty()) {
-            for (Map.Entry<String, Room> o : roomUsername.entrySet()) {
-                storedR.add(o.getValue().getRoomName() + "\n");
-            }
-        }
-        return storedR;
-
-    }
-*/
-
-
-    }
+}
