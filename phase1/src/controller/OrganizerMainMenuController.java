@@ -67,6 +67,48 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    public void option5() {
+        displayEvent.promptViewContacts();
+        String option = scan.nextLine();
+
+        boolean catcher = true;
+
+        while (catcher) {
+
+            if (option.equals("x") || option.equals("X")) {
+                option8();
+                displayEvent.promptEvent();
+                String eventName = scan.nextLine();
+                if (option.equals("x") || option.equals("X")) {
+                    break;
+                }
+                if (!event.getEventNames().containsKey(eventName)) {
+                    displayEvent.noEvent();
+                } else {
+                    Event eventObject = event.getEventNames().get(eventName);
+                    String eventID = event.getEventNames().get(eventName).getId();
+                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+                        displayEvent.allYourContactsEvent(eventObject.getAttendees()); // hello
+                        catcher = false;
+                    } else {
+                        displayEvent.notYourEvent();
+                    }
+                }
+            } else {
+                List<String> newList = new ArrayList<>();
+                for (String contact : user.getContactsList()) {
+                    if (controller != null) {
+                        newList.add(returnUserUserIDHashMap().get(contact).getUsername());
+                    }
+                }
+                displayEvent.allYourContacts(newList);
+                catcher = false;
+            }
+
+        }
+    }
+
+
     /**
      * Responds to menu option 6 - create an event
      */
@@ -169,10 +211,11 @@ public class OrganizerMainMenuController extends MainMenuController {
         if (controller != null) {
 
             List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
-            String eventToAdd = event.getEventNames().get(title).getId();
-            organizer.addEventToUser(eventToAdd, user.getUsername());
+
 
             if (checks.size() == 1) {
+                String eventToAdd = event.getEventNames().get(title).getId();
+                organizer.addEventToUser(eventToAdd, user.getUsername());
                 displayEvent.successAddEvent();
             } else {
                 if (checks.get(1)) {
@@ -194,7 +237,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option7() {
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
-
+        option8();
         if (option.equals("x") || option.equals("X")) {
 
             boolean catcher = true;
@@ -222,6 +265,8 @@ public class OrganizerMainMenuController extends MainMenuController {
                     String dateTime = getDateTimeInput();
                     rescheduleEvent(ev, dateTime);
                     catcher = false;
+                } else if(ev.equals("x") || ev.equals("X")){
+                    catcher = false;
                 } else {
                     displayEvent.noEvent();
                 }
@@ -233,46 +278,11 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     public void option8() {
         displayEvent.viewAll();
+        // scan line?
         displayEvent.displayEvents(controller.viewAvailableSchedule(user.getUsername()));
     }
 
 
-    public void option5() {
-        displayEvent.promptViewContacts();
-        String option = scan.nextLine();
-
-        boolean catcher = true;
-
-        while (catcher) {
-
-            if (option.equals("x") || option.equals("X")) {
-                displayEvent.promptEvent();
-                String eventName = scan.nextLine();
-                if (!event.getEventNames().containsKey(eventName)) {
-                    displayEvent.noEvent();
-                } else {
-                    Event eventObject = event.getEventNames().get(eventName);
-                    String eventID = event.getEventNames().get(eventName).getId();
-                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
-                        displayEvent.allYourContactsEvent(eventObject.getAttendees()); // hello
-                        catcher = false;
-                    } else {
-                        displayEvent.notYourEvent();
-                    }
-                }
-            } else {
-                List<String> newList = new ArrayList<>();
-                for (String contact : user.getContactsList()) {
-                    if (controller != null) {
-                        newList.add(returnUserUserIDHashMap().get(contact).getUsername());
-                    }
-                }
-                displayEvent.allYourContacts(newList);
-                catcher = false;
-            }
-
-        }
-    }
 
 
     /**
