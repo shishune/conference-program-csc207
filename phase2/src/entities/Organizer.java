@@ -1,9 +1,8 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Organizer extends User{
+public class Organizer extends User {
     //private static String lastOrganizerIdNums = "";
 
     /**

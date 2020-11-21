@@ -1,5 +1,4 @@
 package presenter;
-import entities.Event;
 import java.util.List;
 /**
  * A presenter class. This class is responsible for anything related to displaying events to the user.

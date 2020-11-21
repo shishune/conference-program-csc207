@@ -1,5 +1,6 @@
 package controller;
-import presenter.OrganizerMessagePresenter;
+import controllers.OrganizerController;
+import presenters.OrganizerMessagePresenter;
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
  * @version 1
  * */
 public class OrganizerMessageMenuController{
-    private OrganizerController controller;
+    private controllers.OrganizerController controller;
     private OrganizerMessagePresenter displayMessage;
     private Scanner scan = new Scanner(System.in);
 

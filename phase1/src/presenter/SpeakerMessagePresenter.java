@@ -1,12 +1,14 @@
 package presenter;
 
+import presenters.MessagePresenter;
+
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
  * Creates menu specific to speaker for the method of messaging.
  * @author multiple
  * @version 1
  * */
-public class SpeakerMessagePresenter extends MessagePresenter{
+public class SpeakerMessagePresenter extends MessagePresenter {
     /**
      * Prompt to enter a list of events
      * */

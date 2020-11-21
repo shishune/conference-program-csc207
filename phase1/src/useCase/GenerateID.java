@@ -1,11 +1,6 @@
 package useCase;
 
-import gateway.LoadUp;
-import gateway.LoadUpIGateway;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import gateways.LoadUpIGateway;
 
 /**
  * A use case class that creates a unique id when called

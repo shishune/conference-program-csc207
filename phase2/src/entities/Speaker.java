@@ -1,9 +1,6 @@
 package entities;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -11,7 +8,7 @@ import java.util.List;
  * @author multiple
  * @version 1
  * */
-public class Speaker extends User{
+public class Speaker extends User {
 
     /**
      * Instantiates a new speaker object

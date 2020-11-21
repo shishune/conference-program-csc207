@@ -2,7 +2,6 @@ package useCase;
 
 import entities.User;
 
-import java.util.List;
 import java.util.HashMap;
 /**
  * A use case class that stores a hashmap of users and can add and remove users from the hashmap.

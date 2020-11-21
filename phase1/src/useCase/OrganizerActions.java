@@ -2,7 +2,9 @@ package useCase;
 
 import entities.Organizer;
 import entities.User;
-import gateway.LoadUpIGateway;
+import gateways.LoadUpIGateway;
+import useCases.GenerateID;
+import useCases.UserAccountActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +76,7 @@ public class OrganizerActions extends UserAccountActions {
      * @return a new organizer
      */
     public User createOrganizer(String username, String password){
-        GenerateID generateId = new GenerateID(loader);
+        useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId.generateId();
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }

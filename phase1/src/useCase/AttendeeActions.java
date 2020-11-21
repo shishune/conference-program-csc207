@@ -1,9 +1,12 @@
 package useCase;
 
-import entities.*;
-import gateway.LoadUpIGateway;
-import gateway.LoadUp;
-import useCase.GenerateID;
+import entities.User;
+import entities.Attendee;
+import gateways.LoadUpIGateway;
+import useCases.GenerateID;
+import useCases.OrganizerActions;
+import useCases.SpeakerActions;
+import useCases.UserAccountActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +93,7 @@ public class AttendeeActions extends UserAccountActions {
      * This will create a new Attendee
      * */
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        GenerateID generateId = new GenerateID(loader);
+        useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
         addUserIdToHashMap(userAttendee);

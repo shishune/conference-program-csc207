@@ -1,8 +1,9 @@
 package controller;
+import controllers.UserController;
 import entities.Event;
 import entities.User;
-import presenter.SpeakerMessagePresenter;
-import useCase.*;
+import presenters.SpeakerMessagePresenter;
+import useCases.RoomActions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,13 +14,13 @@ import java.util.List;
 
 public class SpeakerController extends UserController {
     private String SpeakerID;
-    public MessageActions messageActions; // = super.getMessages();
-    public EventActions eventActions; // = super.getEvents();
-    public UserAccountActions userAccountActions; // = super.getUserAccountActions();
-    public RoomActions roomActions; // = super.getRooms();
-    public SpeakerActions speakerActions; // = super.getSpeakers();
-    public OrganizerActions organizerActions; // = super.getOrganizers();
-    public AttendeeActions attendeeActions; // = super.getAttendees();
+    public useCases.MessageActions messageActions; // = super.getMessages();
+    public useCases.EventActions eventActions; // = super.getEvents();
+    public useCases.UserAccountActions userAccountActions; // = super.getUserAccountActions();
+    public useCases.RoomActions roomActions; // = super.getRooms();
+    public useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+    public useCases.OrganizerActions organizerActions; // = super.getOrganizers();
+    public useCases.AttendeeActions attendeeActions; // = super.getAttendees();
     private SpeakerMessagePresenter displayMessage;
 
     /**
@@ -27,8 +28,8 @@ public class SpeakerController extends UserController {
      * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
      */
 
-    public SpeakerController(String SpeakerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions,
-                             AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions) {
+    public SpeakerController(String SpeakerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions,
+                             useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions) {
         super(eventActions, roomActions, messageActions, 's', attendeeActions, organizerActions, speakerActions);
 
         this.SpeakerID = SpeakerID;

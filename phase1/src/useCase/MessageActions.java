@@ -1,7 +1,8 @@
 package useCase;
 
 import entities.Message;
-import gateway.LoadUpIGateway;
+import gateways.LoadUpIGateway;
+import useCases.GenerateID;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -39,7 +40,7 @@ public class MessageActions {
      * @return a new message
      */
     public Message createMessage(String senderId, String receiverId, String message) {
-        GenerateID generateID = new GenerateID(loader);
+        useCases.GenerateID generateID = new GenerateID(loader);
         String messageId = "M" + generateID.generateId();
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);

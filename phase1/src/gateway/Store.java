@@ -1,18 +1,13 @@
 package gateway;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import entities.Organizer;
-import useCase.MessageActions;
-import useCase.RoomActions;
-import useCase.*;
-import entities.Message;
+import useCases.MessageActions;
+import useCases.OrganizerActions;
+import useCases.RoomActions;
 
 /**
  * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
@@ -45,7 +40,7 @@ public class Store{
      * Uses the method in eventActions for obtaining all events as a list then stores in csv
      * @param eventActions the use case class responsible for events
      */
-    public void storeEvents(EventActions eventActions) {
+    public void storeEvents(useCases.EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/events.csv";
         List<String> eventsList = eventActions.storeEvents();
@@ -105,7 +100,7 @@ public class Store{
      * Uses the method in attendeeActions for obtaining all attendees as a list then stores in csv
      * @param attendeeActions the use case class responsible for attendee
      */
-    public void storeAttendees(AttendeeActions attendeeActions) {
+    public void storeAttendees(useCases.AttendeeActions attendeeActions) {
         ArrayList<String> attendeeList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/attendees.csv";
         attendeeList = attendeeActions.storingAttendees();
@@ -125,7 +120,7 @@ public class Store{
      * Uses the method in speakerActions for obtaining all speakers as a list then stores in csv
      * @param speakerActions the use case class for speaker
      */
-    public void storeSpeakers(SpeakerActions speakerActions) {
+    public void storeSpeakers(useCases.SpeakerActions speakerActions) {
         ArrayList<String> speakerList = new ArrayList<String>();
         String path = "./phase1/src/assets/dataFiles/speakers.csv";
         speakerList = speakerActions.storeSpeakers();

@@ -1,9 +1,12 @@
 package controller;
+import controllers.MainMenuController;
+import controllers.OrganizerController;
+import controllers.OrganizerMessageMenuController;
 import entities.Event;
 import entities.User;
-import presenter.OrganizerEventPresenter;
-import presenter.OrganizerMessagePresenter;
-import useCase.*;
+import presenters.OrganizerEventPresenter;
+import presenters.OrganizerMessagePresenter;
+import useCases.RoomActions;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,15 +19,15 @@ import java.util.*;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController {
-    private OrganizerController controller; // = new OrganizerController();
-    private RoomActions room; // = super.getRooms();
-    private SpeakerActions speaker;
-    private EventActions event;
-    private OrganizerActions organizer;
+    private controllers.OrganizerController controller; // = new OrganizerController();
+    private useCases.RoomActions room; // = super.getRooms();
+    private useCases.SpeakerActions speaker;
+    private useCases.EventActions event;
+    private useCases.OrganizerActions organizer;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
-    private AttendeeActions attendee;
+    private useCases.AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
 
@@ -35,7 +38,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, SpeakerActions speaker, EventActions event, OrganizerActions organizerActions, AttendeeActions attendee) {
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, useCases.SpeakerActions speaker, useCases.EventActions event, useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee) {
         super(user, organizerController, room, speaker);
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
@@ -54,7 +57,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option2() {
         displayMessage.printMenu();
         String option = scan.nextLine();
-        OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.controller);
+        controllers.OrganizerMessageMenuController menuController = new OrganizerMessageMenuController(this.controller);
         if (option.equals("1")) {
             menuController.option1(); // send message to all speakers
         }

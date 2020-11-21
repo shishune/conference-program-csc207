@@ -1,6 +1,6 @@
 package presenter;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import presenters.MessagePresenter;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
@@ -8,7 +8,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
  * @author multiple
  * @version 1
  * */
-public class OrganizerMessagePresenter extends MessagePresenter{
+public class OrganizerMessagePresenter extends MessagePresenter {
 
     /**
      * Prompt to enter event to send message to

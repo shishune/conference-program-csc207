@@ -1,7 +1,9 @@
 package controller;
 
-import useCase.*;
-import presenter.AccountPresenter;
+import controllers.UserController;
+import presenters.AccountPresenter;
+import useCases.LoginActions;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,8 +19,8 @@ public class LogIn {
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrect.
      */
-    public String logIn(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions, AttendeeActions attendeeActions) {
-        LoginActions l = new LoginActions();
+    public String logIn(String username, String password, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.AttendeeActions attendeeActions) {
+        useCases.LoginActions l = new LoginActions();
         String type = l.isLogin(username, password, organizerActions, speakerActions, attendeeActions);
         return type;
     }
@@ -29,8 +31,8 @@ public class LogIn {
      * @param speakerActions the use case responsible for speakers
      * @param attendeeActions the use case responsible for attendees
      */
-    public void signUp(OrganizerActions organizerActions, SpeakerActions speakerActions,
-                             AttendeeActions attendeeActions) {
+    public void signUp(useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
+                       useCases.AttendeeActions attendeeActions) {
 
         while (true){
 
@@ -65,8 +67,8 @@ public class LogIn {
      * @param attendeeActions the use case responsible for attendees
      * @return true if the username is unique otherwise return false
      */
-    private boolean signUpCheck(String username, String password, OrganizerActions organizerActions, SpeakerActions speakerActions,
-                           AttendeeActions attendeeActions) {
+    private boolean signUpCheck(String username, String password, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
+                                useCases.AttendeeActions attendeeActions) {
         String userType = scan.nextLine();
 
         if (userType.equals("1")) {

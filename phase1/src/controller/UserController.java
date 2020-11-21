@@ -4,7 +4,7 @@ import entities.Event;
 import entities.Message;
 import entities.Room;
 import entities.User;
-import useCase.*;
+import useCases.RoomActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +19,13 @@ import java.util.Set;
  * */
 
 public class UserController {
-    private UserAccountActions user; // = getUserAccountActions();
-    private MessageActions message; // = super.getMessages();
-    private EventActions e;  //= super.getEvents();
-    private RoomActions room; // = super.getRooms();
-    private AttendeeActions attendee; // = super.getAttendees();
-    private OrganizerActions organizer; // = super.getOrganizers();
-    private SpeakerActions speaker; // = super.getSpeakers();
+    private useCases.UserAccountActions user; // = getUserAccountActions();
+    private useCases.MessageActions message; // = super.getMessages();
+    private useCases.EventActions e;  //= super.getEvents();
+    private useCases.RoomActions room; // = super.getRooms();
+    private useCases.AttendeeActions attendee; // = super.getAttendees();
+    private useCases.OrganizerActions organizer; // = super.getOrganizers();
+    private useCases.SpeakerActions speaker; // = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -33,8 +33,8 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      */
-    public UserController(EventActions events, RoomActions rooms, MessageActions message, char userType,
-                          AttendeeActions attendee, OrganizerActions organizer, SpeakerActions speaker) {
+    public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
+                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker) {
         this.message = message;
         this.e = events;
         this.room = rooms;

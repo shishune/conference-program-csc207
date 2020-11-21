@@ -1,5 +1,7 @@
 package presenter;
 
+import presenters.EventPresenter;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
  * @version 1
  * */
 
-public class OrganizerEventPresenter extends EventPresenter{
+public class OrganizerEventPresenter extends EventPresenter {
     private String generic2 = "This event has been successfully ";
     private String generic3 = "This room has been successfully ";
 

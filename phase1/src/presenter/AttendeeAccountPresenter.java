@@ -1,12 +1,14 @@
 package presenter;
 
+import presenters.AccountPresenter;
+
 /**
  * A presenter class. This class is responsible for anything related to logging in,
  * logging out, and navigating through the account. It also creates a menu specific to an attendee.
  * @author Cynthia
  * @version 1
  * */
-public class AttendeeAccountPresenter extends AccountPresenter{
+public class AttendeeAccountPresenter extends AccountPresenter {
     String basicMenu = ""
             + "\n[1] Log out"
             + "\n[2] Send a message"

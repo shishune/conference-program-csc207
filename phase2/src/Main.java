@@ -1,5 +1,4 @@
-import entities.*;
-import controller.AccountController;
+import controllers.AccountController;
 
 public class Main {
     public static void main(String[] args) {

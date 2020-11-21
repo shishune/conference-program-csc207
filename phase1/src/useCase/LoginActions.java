@@ -1,11 +1,11 @@
 package useCase;
 
-import controller.UserController;
-import entities.*;
-
-
-import java.util.HashMap;
-import java.util.Map;
+import entities.Organizer;
+import entities.Speaker;
+import entities.Attendee;
+import useCases.AttendeeActions;
+import useCases.OrganizerActions;
+import useCases.SpeakerActions;
 
 /**
  * A use case class which is responsible for validating of the user's username and password match

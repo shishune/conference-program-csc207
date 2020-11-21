@@ -1,12 +1,15 @@
 package controller;
+import controllers.MainMenuController;
+import controllers.SpeakerController;
+import controllers.SpeakerMessageMenuController;
 import entities.Event;
 import entities.User;
-import presenter.EventPresenter;
-import presenter.SpeakerMessagePresenter;
-import useCase.AttendeeActions;
-import useCase.EventActions;
-import useCase.RoomActions;
-import useCase.SpeakerActions;
+import presenters.EventPresenter;
+import presenters.SpeakerMessagePresenter;
+import useCases.AttendeeActions;
+import useCases.EventActions;
+import useCases.RoomActions;
+import useCases.SpeakerActions;
 
 import java.util.*;
 
@@ -16,7 +19,7 @@ import java.util.*;
  * @version 1
  * */
 public class SpeakerMainMenuController extends MainMenuController {
-    private SpeakerController controller;
+    private controllers.SpeakerController controller;
     private User user;
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
@@ -51,7 +54,7 @@ public class SpeakerMainMenuController extends MainMenuController {
     public void option2(){
         displayMessage.printMenu();
         String option = scan.nextLine();
-        SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
+        controllers.SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
         if (option.equals("1")){
             menuController.option1();
         }

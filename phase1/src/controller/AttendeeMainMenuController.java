@@ -1,15 +1,17 @@
 package controller;
+import controllers.AttendeeController;
+import controllers.MainMenuController;
 import entities.User;
-import presenter.EventPresenter;
-import useCase.RoomActions;
-import useCase.SpeakerActions;
+import presenters.EventPresenter;
+import useCases.RoomActions;
+import useCases.SpeakerActions;
 /**
  * A controller class for attendee that decides what to do based on user input when choosing from the main menu.
  * @author Cynthia
  * @version 1
  * */
 public class AttendeeMainMenuController extends MainMenuController {
-    private AttendeeController controller;
+    private controllers.AttendeeController controller;
     private User user;
     private EventPresenter displayEvent;
     private RoomActions room;

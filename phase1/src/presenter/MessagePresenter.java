@@ -1,10 +1,8 @@
 package presenter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import entities.Message;
-import entities.User;
-import controller.UserController;
+
+import controllers.UserController;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.

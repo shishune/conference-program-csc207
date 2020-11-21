@@ -1,6 +1,7 @@
 package gateway;
 
-import java.io.FileNotFoundException;
+import gateways.LoadUpIGateway;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

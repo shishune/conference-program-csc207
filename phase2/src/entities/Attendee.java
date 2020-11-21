@@ -1,9 +1,8 @@
 package entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Attendee extends User{
+public class Attendee extends User {
 
     /**
      * Instantiates a new attendee object

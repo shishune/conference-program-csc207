@@ -1,7 +1,12 @@
 package controller;
 
-import entities.*;
-import useCase.*;
+import controllers.UserController;
+import entities.Event;
+import entities.Organizer;
+import entities.Speaker;
+import entities.User;
+import entities.Attendee;
+import useCases.RoomActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,13 +19,13 @@ import java.util.Map;
  *
  */
 
-public class OrganizerController extends UserController{
-    private MessageActions messageActions;
-    private EventActions eventActions;
-    private RoomActions roomActions;
-    private SpeakerActions speakerActions;
-    private OrganizerActions organizerActions;
-    private AttendeeActions attendeeActions;
+public class OrganizerController extends UserController {
+    private useCases.MessageActions messageActions;
+    private useCases.EventActions eventActions;
+    private useCases.RoomActions roomActions;
+    private useCases.SpeakerActions speakerActions;
+    private useCases.OrganizerActions organizerActions;
+    private useCases.AttendeeActions attendeeActions;
     private String organizerID;
 
     /**
@@ -34,8 +39,8 @@ public class OrganizerController extends UserController{
      * @param organizerActions
      * @param speakerActions
      */
-    public OrganizerController(String organizerID, MessageActions messageActions, EventActions eventActions, RoomActions roomActions, //hello
-                               AttendeeActions attendeeActions, OrganizerActions organizerActions, SpeakerActions speakerActions ){ //hello
+    public OrganizerController(String organizerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions, //hello
+                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions ){ //hello
 
         super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions); //hello
         this.organizerID = organizerID;
