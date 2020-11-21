@@ -41,6 +41,4 @@ public class SpeakerMessagePresenter extends MessagePresenter{
         System.out.println(display);
     }
 
-
-
 }

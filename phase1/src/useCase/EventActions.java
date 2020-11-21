@@ -201,7 +201,6 @@ public class EventActions  {
             roomTimes.add(dateTime);
             roomSchedule.put(roomID, roomTimes);
         }
-        System.out.println(speakerSchedule);
         return newEvent;
     }
 
@@ -218,7 +217,6 @@ public class EventActions  {
             return false;
         } else{
             events.get(eventID).getAttendees().add(attendeeID);
-            System.out.println(attendees.get(eventID));
             return true;
         }
     }

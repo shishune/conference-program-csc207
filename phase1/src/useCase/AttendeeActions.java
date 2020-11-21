@@ -265,7 +265,6 @@ public class AttendeeActions extends UserAccountActions {
         Attendee userOne = attendeeUsernameHashMap.get(user);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < userOne.getEventList().size(); i++) {
-            // System.out.println(user.getEventList().get(i));
             String a = userOne.getEventList().get(i);
             result.append(a).append(' ');
         }

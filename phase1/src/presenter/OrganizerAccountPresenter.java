@@ -20,9 +20,10 @@ public class OrganizerAccountPresenter extends AccountPresenter{
         String display = basicMenu
                 + "\n[6] Add an event/create new speaker account"
                 + "\n[7] Remove/reschedule an event"
-                + "\n[8] View all events"
+                + "\n[8] View all your created events"
                 + "\n[9] Add room"
                 + "\n[10] Add speaker"
+                + "\n[11] View all created events"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }
