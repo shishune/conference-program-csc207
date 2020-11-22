@@ -60,8 +60,17 @@ public class OrganizerController extends UserController {
      */
     public List<Boolean> createEvent(String title, String speakerId, String dateTime, String roomID, int capacity){
         List<String> attendees = new ArrayList<String>();
-        Event event = this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID, capacity);
         List<Boolean> checks = new ArrayList<Boolean>();
+        int roomCap = roomActions.findRoomFromId(roomID).getCapacity();
+        Event event;
+        if (roomCap >= capacity) {
+            event = this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID, capacity);
+        } else {
+            checks.add(false);
+            return checks;
+        }
+
+        // TODO check if room capacity >= event capacity!!!
         if(event != null){
             scheduleSpeaker(event.getId(), speakerId, true);
             speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
@@ -76,6 +85,7 @@ public class OrganizerController extends UserController {
         }
         return checks;
     }
+
 
     /***
      * cancel an event
@@ -103,8 +113,8 @@ public class OrganizerController extends UserController {
 
     /***
      * create a speaker and add them to the speaker schedule
-     * @param username
-     * @param password
+     * @param username username of speaker
+     * @param password password of speaker
      */
     public boolean createSpeaker(String username, String password){
         // what if speaker is already created?
@@ -123,9 +133,9 @@ public class OrganizerController extends UserController {
     }
 
     /***
-     * create a speaker and add them to the speaker schedule
-     * @param username
-     * @param password
+     * create an attendee
+     * @param username username of attendee
+     * @param password password of attendee
      */
     public boolean createAttendee(String username, String password){
         if(attendeeActions != null) {
@@ -133,8 +143,7 @@ public class OrganizerController extends UserController {
                 return false;
             }
 
-            String attendeeID = this.attendeeActions.createAttendee(username, password,
-                    new ArrayList<>(), new ArrayList<>(), false).getId();
+            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), false);
 
             return true;
         }
@@ -146,7 +155,7 @@ public class OrganizerController extends UserController {
     /***
      * Create a room and add it to the room schedule
      */
-    public boolean createRoomActions(String roomName){
+    public boolean createRoom(String roomName){
         if(roomActions != null && eventActions != null){
             String roomID = this.roomActions.createRoom(roomName).getRoomId();
             return this.eventActions.addRoomToSchedule(roomID);

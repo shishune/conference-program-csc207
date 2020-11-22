@@ -211,10 +211,13 @@ public class OrganizerMainMenuController extends MainMenuController {
             String eventToAdd = event.getEventNames().get(title).getId();
             organizer.addEventToUser(eventToAdd, user.getUsername());
 
-            if (checks.size() == 1) {
+            if (checks.get(0)) {
                 displayEvent.successAddEvent();
             } else {
-                if (checks.get(1)) {
+                if (!checks.get(0)){
+                    int roomCap = room.findRoomFromId(roomID).getCapacity(); // necessary?
+                    displayEvent.roomCapacityLow(roomCap);
+                } else if (checks.get(1)) {
                     displayEvent.failedDoubleBookRoom();
                 } else if (!checks.get(1)) {
                     displayEvent.failedDoubleBookSpeaker();
@@ -395,7 +398,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.alreadyAddedRoom();
                 catcher = false;
             } else if (controller != null) {
-                if (controller.createRoomActions(roomName)) {
+                if (controller.createRoom(roomName)) {
                     displayMessage.addedRoom();
                     catcher = false;
                 }

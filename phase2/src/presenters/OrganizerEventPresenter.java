@@ -51,7 +51,15 @@ public class OrganizerEventPresenter extends EventPresenter {
      * Message informing that organizer double-booked room
      * */
     public void failedDoubleBookRoom(){
-        System.out.println("This room is double-booked at this time.");
+        System.out.println("This room is booked at this time.");
+    }
+
+    /***
+     * Message informing organizer room capacity is too low
+     * @param roomCap capacity of room
+     */
+    public void roomCapacityLow(int roomCap){
+        System.out.println("This room has the capacity of " + roomCap + " and so the event cannot be held there.");
     }
 
     /**

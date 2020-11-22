@@ -111,6 +111,7 @@ public class RoomActions {
     }
 
 
+
     /**
      * Removes a room
      * @param room the room to be removed
