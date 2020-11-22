@@ -1,11 +1,11 @@
 package controller;
-import controllers.AccountController;
-import controllers.UserController;
-import entities.User;
-import presenters.EventPresenter;
-import presenters.MessagePresenter;
-import useCases.RoomActions;
-import useCases.SpeakerActions;
+import controller.AccountController;
+import controller.UserController;
+import entity.User;
+import presenter.EventPresenter;
+import presenter.MessagePresenter;
+import useCase.RoomActions;
+import useCase.SpeakerActions;
 
 import java.util.*;
 
@@ -15,7 +15,7 @@ import java.util.*;
  * @version 1
  * */
 public class MainMenuController extends AccountController {
-    private controllers.UserController controller;
+    private controller.UserController controller;
     private User user;
     private RoomActions room;
     private MessagePresenter displayMessage;

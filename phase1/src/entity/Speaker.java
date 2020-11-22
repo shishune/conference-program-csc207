@@ -1,7 +1,7 @@
 package entity;
 
 
-import entities.User;
+import entity.User;
 
 import java.util.List;
 

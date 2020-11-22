@@ -107,6 +107,22 @@ public class SpeakerActions extends UserAccountActions {
         return speakerUsername;
     }
 
+    /**
+     *
+     * @return ID of the speaker from the hashmap
+     */
+    public String getIDFromName(String username) {
+        return speakerUsername.get(username).getId();
+    }
+
+
+    /**
+     * @return ID of the speaker username from the hashmap
+     */
+    public String getUsernameFromID(String userID) {
+        return speakerID.get(userID).getUsername();
+    }
+
 
     /**
      * gets list of messages from the IGateway

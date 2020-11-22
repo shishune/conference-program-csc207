@@ -19,7 +19,7 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     /**
      * Print menu for messaging options specific to organizer
      * */
-    public void printMenu(){
+    public void printMessageMenu(){
         String display = ""
                 + "\n[1] Send a message to all speakers"
                 + "\n[2] Send a message to all attendees of an event."
@@ -47,16 +47,28 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     /**
      * Prompt to enter the username of the speaker to create
      */
-    public void speakerUsernamePrompt(){
-        String display = "What is the username of the speaker you would like to create?";
+    public void userUsernamePrompt(){
+        String display = "What is the username of the user you would like to create? [enter x to go back]";
         System.out.println(display);
     }
 
     /**
      * Prompt to enter the password of the speaker to create
      */
-    public void speakerPasswordPrompt(){
-        String display = "What is the password of the speaker you would like to create?";
+    public void userPasswordPrompt(){
+        String display = "What is the password of the user you would like to create?";
+        System.out.println(display);
+    }
+
+    /**
+     * Print menu for messaging options specific to organizer
+     * */
+    public void printUserMenu(){
+        String display = ""
+                + "\n[1] Create a speakers"
+                + "\n[2] Create an attendee."
+                + "\n[3] Create a _____" // TODO
+                + "\nPlease select a menu item number or enter x to go back";
         System.out.println(display);
     }
 
@@ -71,10 +83,15 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     /**
      * Message stating that the speaker has been successfully created
      */
-    public void speakerCreated(){
-        String display = "You have successfully created the speaker.";
+    public void userCreated(){
+        String display = "You have successfully created the user.";
         System.out.println(display);
     }
+
+    /**
+     * Message stating that the user already exists
+     */
+    public void userExists(){System.out.println("This username already exists in our files. \nTry another one or enter x to go back");}
 
     /**
      * Message stating that the room does not exist and that the user can create a new room or rewrite the name of the room
@@ -95,14 +112,15 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      */
     public void alreadyAddedRoom(){System.out.println("That room already exists.");}
 
-    /**
-     * Message stating that the speaker already exists
-     */
-    public void alreadySpeaker(){System.out.println("This speaker already exists.");}
 
     /**
      * Message prompting the user to create a new speaker or to press another key if speaker exists
      */
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
+
+    /**
+     * Message stating that the room already exists
+     */
+    public void notValidChoice(){System.out.println("That choice is invalid please try again or press x to go back.");}
 
 }

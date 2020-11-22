@@ -1,6 +1,6 @@
 package useCase;
 
-import entities.User;
+import entity.User;
 
 import java.util.HashMap;
 /**

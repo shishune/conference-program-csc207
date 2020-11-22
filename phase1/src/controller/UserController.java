@@ -1,10 +1,10 @@
 package controller;
 
-import entities.Event;
-import entities.Message;
-import entities.Room;
-import entities.User;
-import useCases.RoomActions;
+import entity.Event;
+import entity.Message;
+import entity.Room;
+import entity.User;
+import useCase.RoomActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +19,13 @@ import java.util.Set;
  * */
 
 public class UserController {
-    private useCases.UserAccountActions user; // = getUserAccountActions();
-    private useCases.MessageActions message; // = super.getMessages();
-    private useCases.EventActions e;  //= super.getEvents();
-    private useCases.RoomActions room; // = super.getRooms();
-    private useCases.AttendeeActions attendee; // = super.getAttendees();
-    private useCases.OrganizerActions organizer; // = super.getOrganizers();
-    private useCases.SpeakerActions speaker; // = super.getSpeakers();
+    private useCase.UserAccountActions user; // = getUserAccountActions();
+    private useCase.MessageActions message; // = super.getMessages();
+    private useCase.EventActions e;  //= super.getEvents();
+    private useCase.RoomActions room; // = super.getRooms();
+    private useCase.AttendeeActions attendee; // = super.getAttendees();
+    private useCase.OrganizerActions organizer; // = super.getOrganizers();
+    private useCase.SpeakerActions speaker; // = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -33,8 +33,8 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      */
-    public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
-                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker) {
+    public UserController(useCase.EventActions events, RoomActions rooms, useCase.MessageActions message, char userType,
+                          useCase.AttendeeActions attendee, useCase.OrganizerActions organizer, useCase.SpeakerActions speaker) {
         this.message = message;
         this.e = events;
         this.room = rooms;

@@ -1,6 +1,6 @@
 package presenter;
 
-import presenters.EventPresenter;
+import presenter.EventPresenter;
 
 import java.util.List;
 

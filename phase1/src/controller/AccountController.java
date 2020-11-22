@@ -1,22 +1,9 @@
 package controller;
-import controllers.AttendeeController;
-import controllers.AttendeeMainMenuController;
-import controllers.LogIn;
-import controllers.LogOut;
-import controllers.MainMenuController;
-import controllers.OrganizerController;
-import controllers.OrganizerMainMenuController;
-import controllers.SpeakerController;
-import controllers.SpeakerMainMenuController;
-import entities.Organizer;
-import entities.Speaker;
-import entities.Attendee;
-import gateways.LoadUp;
-import gateways.LoadUpIGateway;
-import gateways.Store;
-import presenters.AccountPresenter;
-import useCases.RoomActions;
-
+import controller.*;
+import entity.*;
+import gateway.*;
+import presenter.AccountPresenter;
+import useCase.RoomActions;
 import java.util.Scanner;
 
 
@@ -39,19 +26,19 @@ public class AccountController {
         LoadUpIGateway g = new LoadUp();
 
         //Instantiate presenter classes
-        presenters.AccountPresenter accountDisplay = new AccountPresenter();
+        presenter.AccountPresenter accountDisplay = new AccountPresenter();
 
         //Instantiate use case classes
-        useCases.MessageActions messageActions = new useCases.MessageActions(g);
-        useCases.EventActions eventActions = new useCases.EventActions(g);
-        useCases.RoomActions roomActions = new RoomActions(g);
-        useCases.SpeakerActions speakerActions = new useCases.SpeakerActions(g);
-        useCases.OrganizerActions organizerActions = new useCases.OrganizerActions(g);
-        useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
-        useCases.LogoutActions logoutActions = new useCases.LogoutActions();
+        useCase.MessageActions messageActions = new useCase.MessageActions(g);
+        useCase.EventActions eventActions = new useCase.EventActions(g);
+        useCase.RoomActions roomActions = new RoomActions(g);
+        useCase.SpeakerActions speakerActions = new useCase.SpeakerActions(g);
+        useCase.OrganizerActions organizerActions = new useCase.OrganizerActions(g);
+        useCase.AttendeeActions attendeeActions = new useCase.AttendeeActions(g);
+        useCase.LogoutActions logoutActions = new useCase.LogoutActions();
 
         //Instantiate controller classes
-        controllers.LogIn logIn = new LogIn();
+        controller.LogIn logIn = new LogIn();
 
 
         //this loop serves to allow user to return to menu repeatedly
@@ -79,28 +66,28 @@ public class AccountController {
                 if (type.equals("A")) { //indicates attendee
 
                     Attendee user = attendeeActions.returnUsernameHashMap().get(username);
-                    accountDisplay = new presenters.AttendeeAccountPresenter();
-                    controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                    accountDisplay = new presenter.AttendeeAccountPresenter();
+                    controller.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                    menuController = (controller.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
                             roomActions, speakerActions);
                 }
                 else if (type.equals("S")) { //indicates speaker
                     Speaker user = speakerActions.returnUsernameHashMap().get(username);
-                    accountDisplay = new presenters.SpeakerAccountPresenter();
-                    controllers.SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
+                    accountDisplay = new presenter.SpeakerAccountPresenter();
+                    controller.SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
+                    menuController = (controller.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
                             eventActions, attendeeActions, roomActions, speakerActions);
                 }
                 else{
                     Organizer user = organizerActions.returnUsernameHashMap().get(username);
-                    accountDisplay = new presenters.OrganizerAccountPresenter();
-                    controllers.OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
+                    accountDisplay = new presenter.OrganizerAccountPresenter();
+                    controller.OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions);
+                    menuController = (controller.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions);
                 }
 
                 while (true) {
@@ -110,7 +97,7 @@ public class AccountController {
                     if (menuOption.equals("1")) {
                         //logout procedure. will loop back to login procedure if user does not exit
                         Store store = new Store();
-                        controllers.LogOut logOut = new LogOut(store, messageActions, organizerActions,
+                        controller.LogOut logOut = new LogOut(store, messageActions, organizerActions,
                                 attendeeActions, roomActions, speakerActions, eventActions, logoutActions);
 
                         logOut.loggingOut(username, type);

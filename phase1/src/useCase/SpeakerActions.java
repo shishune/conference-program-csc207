@@ -1,10 +1,10 @@
 package useCase;
 
-import entities.Speaker;
-import entities.User;
-import gateways.LoadUpIGateway;
-import useCases.GenerateID;
-import useCases.UserAccountActions;
+import entity.Speaker;
+import entity.User;
+import gateway.LoadUpIGateway;
+import useCase.GenerateID;
+import useCase.UserAccountActions;
 
 import java.util.*;
 
@@ -44,7 +44,7 @@ public class SpeakerActions extends UserAccountActions {
      * @return a new speaker
      */
     public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        useCases.GenerateID generateId = new GenerateID(loader);
+        useCase.GenerateID generateId = new GenerateID(loader);
         String userId = "S" + generateId.generateId();
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
         loadSpeaker(userSpeaker);

@@ -20,12 +20,12 @@ import java.util.Set;
 
 public class UserController {
     private useCases.UserAccountActions user; // = getUserAccountActions();
-    private useCases.MessageActions message; // = super.getMessages();
-    private useCases.EventActions e;  //= super.getEvents();
-    private useCases.RoomActions room; // = super.getRooms();
-    private useCases.AttendeeActions attendee; // = super.getAttendees();
-    private useCases.OrganizerActions organizer; // = super.getOrganizers();
-    private useCases.SpeakerActions speaker; // = super.getSpeakers();
+    private useCases.MessageActions messageActions; // = super.getMessages();
+    private useCases.EventActions eventActions;  //= super.getEvents();
+    private useCases.RoomActions roomActions; // = super.getRooms();
+    private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
+    private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
+    private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -35,9 +35,9 @@ public class UserController {
      */
     public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
                           useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker) {
-        this.message = message;
-        this.e = events;
-        this.room = rooms;
+        this.messageActions = message;
+        this.eventActions = events;
+        this.roomActions = rooms;
         if (userType == 'o') {
             this.user = organizer;
         } else if (userType == 's') {
@@ -46,22 +46,22 @@ public class UserController {
             this.user = attendee;
         }
 
-        this.attendee = attendee;
-        this.organizer = organizer;
-        this.speaker = speaker;
+        this.attendeeActions = attendee;
+        this.organizerActions = organizer;
+        this.speakerActions = speaker;
     }
     //alternate constructor to access methods that do not need so many parameters
 //    public UserController(){};
 
     public HashMap<String, User> returnUserUsernameHashMap() {
-        if (!(attendee == null) && !attendee.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(attendee.returnUsernameHashMap());
+        if (!(attendeeActions == null) && !attendeeActions.returnUsernameHashMap().isEmpty()) {
+            usernameHashmap.putAll(attendeeActions.returnUsernameHashMap());
         }
-        if (!(organizer == null) && !organizer.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(organizer.returnUsernameHashMap());
+        if (!(organizerActions == null) && !organizerActions.returnUsernameHashMap().isEmpty()) {
+            usernameHashmap.putAll(organizerActions.returnUsernameHashMap());
         }
-        if (!(speaker == null) && !speaker.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(speaker.returnUsernameHashMap());
+        if (!(speakerActions == null) && !speakerActions.returnUsernameHashMap().isEmpty()) {
+            usernameHashmap.putAll(speakerActions.returnUsernameHashMap());
         }
 //        if (!(user == null) && !user.returnUsernameHashMap().isEmpty()){
 ////            usernameHashmap.putAll(speaker.returnSpeakerUsernameHashMap());
@@ -72,14 +72,14 @@ public class UserController {
 
 
     public HashMap<String, User> returnUserIDHashMap() {
-        if (!attendee.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(attendee.returnIDHashMap());
+        if (!attendeeActions.returnIDHashMap().isEmpty()) {
+            userIdHashmap.putAll(attendeeActions.returnIDHashMap());
         }
-        if (!organizer.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(organizer.returnIDHashMap());
+        if (!organizerActions.returnIDHashMap().isEmpty()) {
+            userIdHashmap.putAll(organizerActions.returnIDHashMap());
         }
-        if (!speaker.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(speaker.returnIDHashMap());
+        if (!speakerActions.returnIDHashMap().isEmpty()) {
+            userIdHashmap.putAll(speakerActions.returnIDHashMap());
         }
         return userIdHashmap;
     }
@@ -104,7 +104,7 @@ public class UserController {
             String receiverId = usernameHash.get(receiver).getId();
             String senderId = usernameHash.get(sender).getId();
             if (user.findUserFromUsername(sender).getContactsList().contains(receiverId)) {
-                message.createMessage(senderId, receiverId, content);
+                messageActions.createMessage(senderId, receiverId, content);
                 return true;
             }
             return false;
@@ -149,7 +149,7 @@ public class UserController {
     public ArrayList<ArrayList<String>> viewMessages(String fromMe, String toMe) {
         ArrayList<ArrayList<String>> messages = new ArrayList<ArrayList<String>>();
         HashMap<String, User> usernameHash = returnUserUsernameHashMap();
-        List<Message> messageList = message.getMessages(fromMe, toMe);
+        List<Message> messageList = messageActions.getMessages(fromMe, toMe);
         for (Message message : messageList) {
             ArrayList<String> info = new ArrayList<String>();
             HashMap<String, User> userIdHash = returnUserIDHashMap();
@@ -205,18 +205,18 @@ public class UserController {
      */
 
     public List<Boolean> signupEvent(String eventName, String userName) {
-        if (e.getEventNames().containsKey(eventName)) {
-            String eventId = e.getEventFromName(eventName).getId();
+        if (eventActions.getEventNames().containsKey(eventName)) {
+            String eventId = eventActions.getEventFromName(eventName).getId();
             List<Boolean> checks = new ArrayList<Boolean>();
-            if (!e.eventExists(eventId)) {
+            if (!eventActions.eventExists(eventId)) {
                 checks.add(false);
                 return checks;
             }
-            Event e1 = e.getEvent(eventId);
+            Event e1 = eventActions.getEvent(eventId);
             User a1 = returnUserUsernameHashMap().get(userName);
 
             if (!checkConflictSpots(eventId) && !checkConflictTime(userName, eventId)) {
-                e.addAttendee(e1.getId(), a1.getId());
+                eventActions.addAttendee(e1.getId(), a1.getId());
                 a1.getEventList().add(eventId);
                 checks.add(true);
                 return checks;
@@ -251,12 +251,12 @@ public class UserController {
         User a1 = returnUserUsernameHashMap().get(user);
         List<String> eventList = a1.getEventList();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
-        if (e != null) {
+        if (eventActions != null) {
             for (String event : eventList) {
-                String title = e.getEvent(event).getTitle();
-                String dateTime = e.getEvent(event).getDateTime();
-                String roomId = e.getEvent(event).getRoomID();
-                String speaker = e.getEvent(event).getSpeaker();
+                String title = eventActions.getEvent(event).getTitle();
+                String dateTime = eventActions.getEvent(event).getDateTime();
+                String roomId = eventActions.getEvent(event).getRoomID();
+                String speaker = eventActions.getEvent(event).getSpeaker();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
@@ -276,7 +276,7 @@ public class UserController {
      */
 
     public List<List<String>> viewAvailableSchedule(String user) {
-        Set<String> allEvents = e.getEvents().keySet();
+        Set<String> allEvents = eventActions.getEvents().keySet();
         List<String> availableS = new ArrayList<>();
         List<String> targetList = new ArrayList<>(allEvents);
 
@@ -287,10 +287,10 @@ public class UserController {
         }
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         for (String event : availableS) {
-            String title = e.getEvent(event).getTitle();
-            String dateTime = e.getEvent(event).getDateTime();
-            String roomId = e.getEvent(event).getRoomID();
-            String speaker = e.getEvent(event).getSpeaker();
+            String title = eventActions.getEvent(event).getTitle();
+            String dateTime = eventActions.getEvent(event).getDateTime();
+            String roomId = eventActions.getEvent(event).getRoomID();
+            String speaker = eventActions.getEvent(event).getSpeaker();
             List<String> info = new ArrayList<String>();
             info.add(title);
             info.add(dateTime);
@@ -309,11 +309,11 @@ public class UserController {
      */
 
     public int spotsAvailable(String eventID) {
-        String rooms = e.getEvent(eventID).getRoomID();
+        String rooms = eventActions.getEvent(eventID).getRoomID();
 
-        Room r1 = room.returnHashMap().get(rooms);
+        Room r1 = roomActions.returnHashMap().get(rooms);
 
-        return r1.getCapacity() - e.getEvent(eventID).getAttendees().size();
+        return r1.getCapacity() - eventActions.getEvent(eventID).getAttendees().size();
 
     }
 
@@ -327,7 +327,7 @@ public class UserController {
 
     private boolean checkConflictTime(String username, String eventID) {
         //return true if there is a conflict
-        String timeEvent = e.getEvent(eventID).getDateTime();
+        String timeEvent = eventActions.getEvent(eventID).getDateTime();
         if (user != null) {
 
             User u = user.findUserFromUsername(username);
@@ -336,7 +336,7 @@ public class UserController {
 
                 String eventId = u.getEventList().get(i);
 
-                String time = e.getEvent(eventId).getDateTime();
+                String time = eventActions.getEvent(eventId).getDateTime();
 
                 if (time.equals(timeEvent)) {
                     return true;
@@ -393,7 +393,7 @@ public class UserController {
 
                     String name = u.getEventList().get(i);
 
-                    String time = e.getEvent(name).getDateTime();
+                    String time = eventActions.getEvent(name).getDateTime();
 
                     if (time.equals(dateTime)) {
                         return true;
@@ -405,6 +405,31 @@ public class UserController {
         }
         return false;
     }
+
+    /***
+     * Check if event exists
+     * @param eventName
+     */
+    public boolean checkEvent(String eventName){
+        return (eventActions.getEventNames().containsKey(eventName));
+    }
+
+    /***
+     * Check if event has attendees
+     * @param eventName
+     */
+    public boolean eventHasAttendees(String eventName){
+        return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
+    }
+    /***
+     * Check if any speakers exists in the system
+     */
+    public boolean speakersExist(){
+        return (speakerActions.returnIDHashMap().size() > 0);
+    }
+
+
+
 
 //    // TODO ??? can this be here?
 //    public boolean leaveEvent(String eventName, String userId) {

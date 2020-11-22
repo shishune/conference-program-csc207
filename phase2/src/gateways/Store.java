@@ -20,7 +20,7 @@ public class Store{
      * */
     public void storeRooms(RoomActions roomActions) {
         ArrayList<String> roomsList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/rooms.csv";
+        String path = "./phase2/src/assets/dataFiles/rooms.csv";
         //List<String> roomsList = roomActions.storingRooms();
         roomsList = roomActions.storingRooms();
         try {
@@ -42,7 +42,7 @@ public class Store{
      */
     public void storeEvents(useCases.EventActions eventActions) {
         // ArrayList<String> eventsList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/events.csv";
+        String path = "./phase2/src/assets/dataFiles/events.csv";
         List<String> eventsList = eventActions.storeEvents();
         try {
             FileWriter writer;
@@ -62,7 +62,7 @@ public class Store{
      */
     public void storeMessages(MessageActions messageActions) {
         ArrayList<String> messagesList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/messages.csv";
+        String path = "./phase2/src/assets/dataFiles/messages.csv";
         messagesList = messageActions.storeMessages();
         try {
             FileWriter writer;
@@ -82,7 +82,7 @@ public class Store{
      */
     public void storeOrganizers(OrganizerActions organizerActions) {
         ArrayList<String> organizerList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/organizers.csv";
+        String path = "./phase2/src/assets/dataFiles/organizers.csv";
         organizerList = organizerActions.storingOrganizers();
         try {
             FileWriter writer;
@@ -102,7 +102,7 @@ public class Store{
      */
     public void storeAttendees(useCases.AttendeeActions attendeeActions) {
         ArrayList<String> attendeeList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/attendees.csv";
+        String path = "./phase2/src/assets/dataFiles/attendees.csv";
         attendeeList = attendeeActions.storingAttendees();
         try {
             FileWriter writer;
@@ -122,7 +122,7 @@ public class Store{
      */
     public void storeSpeakers(useCases.SpeakerActions speakerActions) {
         ArrayList<String> speakerList = new ArrayList<String>();
-        String path = "./phase1/src/assets/dataFiles/speakers.csv";
+        String path = "./phase2/src/assets/dataFiles/speakers.csv";
         speakerList = speakerActions.storeSpeakers();
         try {
             FileWriter writer;
@@ -148,7 +148,7 @@ public class Store{
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
 
         try {
-            FileWriter csvWriter = new FileWriter("./phase1/src/assets/dataFiles/entities.csv");
+            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
 
             for (String id : attendee) {
                 csvWriter.append(id);

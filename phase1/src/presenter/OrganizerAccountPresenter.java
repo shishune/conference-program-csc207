@@ -1,6 +1,6 @@
 package presenter;
 
-import presenters.AccountPresenter;
+import presenter.AccountPresenter;
 
 /**
  * A presenter class. This class is responsible for anything related to logging in,

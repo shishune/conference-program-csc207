@@ -1,6 +1,6 @@
 package controller;
-import controllers.SpeakerController;
-import presenters.SpeakerMessagePresenter;
+import controller.SpeakerController;
+import presenter.SpeakerMessagePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version 1
  * */
 public class SpeakerMessageMenuController{
-    private controllers.SpeakerController controller;
+    private controller.SpeakerController controller;
     private SpeakerMessagePresenter displayMessage;
     private Scanner scan = new Scanner(System.in);
 

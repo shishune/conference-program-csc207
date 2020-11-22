@@ -1,13 +1,13 @@
 package controller;
 
 // import com.sun.org.apache.xpath.internal.operations.Or;
-import controllers.UserController;
-import useCases.RoomActions;
+import controller.UserController;
+import useCase.RoomActions;
 
 public class AttendeeController extends UserController {
-    private useCases.MessageActions message;
-    private useCases.EventActions e;
-    private useCases.AttendeeActions attendee;
+    private useCase.MessageActions message;
+    private useCase.EventActions e;
+    private useCase.AttendeeActions attendee;
 
     /**
      *
@@ -18,8 +18,8 @@ public class AttendeeController extends UserController {
      * @param organizer
      * @param speaker
      */
-    public AttendeeController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message,
-                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker ) {
+    public AttendeeController(useCase.EventActions events, RoomActions rooms, useCase.MessageActions message,
+                              useCase.AttendeeActions attendee, useCase.OrganizerActions organizer, useCase.SpeakerActions speaker ) {
         super(events, rooms, message, 'a', attendee, organizer, speaker);
         this.attendee = attendee;
         this.e = events;

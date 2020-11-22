@@ -1,6 +1,6 @@
 package gateway;
 
-import gateways.LoadUpIGateway;
+import gateway.LoadUpIGateway;
 
 import java.io.IOException;
 import java.util.ArrayList;

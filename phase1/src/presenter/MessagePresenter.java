@@ -2,7 +2,7 @@ package presenter;
 import java.util.List;
 import java.util.ArrayList;
 
-import controllers.UserController;
+import controller.UserController;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.

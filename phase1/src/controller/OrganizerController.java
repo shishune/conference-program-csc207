@@ -1,12 +1,7 @@
 package controller;
 
-import controllers.UserController;
-import entities.Event;
-import entities.Organizer;
-import entities.Speaker;
-import entities.User;
-import entities.Attendee;
-import useCases.RoomActions;
+import controller.UserController;
+import entity.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,12 +15,12 @@ import java.util.Map;
  */
 
 public class OrganizerController extends UserController {
-    private useCases.MessageActions messageActions;
-    private useCases.EventActions eventActions;
-    private useCases.RoomActions roomActions;
-    private useCases.SpeakerActions speakerActions;
-    private useCases.OrganizerActions organizerActions;
-    private useCases.AttendeeActions attendeeActions;
+    private useCase.MessageActions messageActions;
+    private useCase.EventActions eventActions;
+    private useCase.RoomActions roomActions;
+    private useCase.SpeakerActions speakerActions;
+    private useCase.OrganizerActions organizerActions;
+    private useCase.AttendeeActions attendeeActions;
     private String organizerID;
 
     /**
@@ -39,8 +34,8 @@ public class OrganizerController extends UserController {
      * @param organizerActions
      * @param speakerActions
      */
-    public OrganizerController(String organizerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions, //hello
-                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions ){ //hello
+    public OrganizerController(String organizerID, useCase.MessageActions messageActions, useCase.EventActions eventActions, useCase.RoomActions roomActions, //hello
+                               useCase.AttendeeActions attendeeActions, useCase.OrganizerActions organizerActions, useCase.SpeakerActions speakerActions ){ //hello
 
         super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions); //hello
         this.organizerID = organizerID;

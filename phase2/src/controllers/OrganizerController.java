@@ -123,6 +123,27 @@ public class OrganizerController extends UserController {
     }
 
     /***
+     * create a speaker and add them to the speaker schedule
+     * @param username
+     * @param password
+     */
+    public boolean createAttendee(String username, String password){
+        if(attendeeActions != null) {
+            if (attendeeActions.findUserFromUsername(username) != null) { // if attendee username exists
+                return false;
+            }
+
+            String attendeeID = this.attendeeActions.createAttendee(username, password,
+                    new ArrayList<>(), new ArrayList<>(), false).getId();
+
+            return true;
+        }
+        return false;
+
+    }
+
+
+    /***
      * Create a room and add it to the room schedule
      */
     public boolean createRoomActions(String roomName){
@@ -238,21 +259,7 @@ public class OrganizerController extends UserController {
 
     }
 
-    /***
-     * Check if event exists
-     * @param eventName
-     */
-    public boolean checkEvent(String eventName){
-        return (eventActions.getEventNames().containsKey(eventName));
-    }
 
-    /***
-     * Check if event has attendees
-     * @param eventName
-     */
-    public boolean eventHasAttendees(String eventName){
-        return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
-    }
 
 
 

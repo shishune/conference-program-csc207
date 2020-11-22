@@ -1,6 +1,6 @@
 package presenter;
 
-import presenters.MessagePresenter;
+import presenter.MessagePresenter;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.

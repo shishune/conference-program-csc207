@@ -90,6 +90,13 @@ public class MessagePresenter {
     }
 
     /**
+     * Message informing message sent
+     * */
+    public void failedMessageNoSpeakers(){
+        System.out.println("No speakers exist so there is no one to send your message to :(");
+    }
+
+    /**
      * Display all contacts
      * */
     public void displayContacts(UserController controller, String userId){

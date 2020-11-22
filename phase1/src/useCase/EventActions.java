@@ -1,7 +1,7 @@
 package useCase;
-import entities.Event;
-import gateways.LoadUpIGateway;
-import useCases.GenerateID;
+import entity.Event;
+import gateway.LoadUpIGateway;
+import useCase.GenerateID;
 
 import java.util.*;
 
@@ -146,7 +146,7 @@ public class EventActions  {
 
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
 
-            useCases.GenerateID generateId = new GenerateID(loader);
+            useCase.GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
 
             return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);

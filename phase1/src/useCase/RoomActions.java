@@ -1,7 +1,7 @@
 package useCase;
-import entities.Room;
-import gateways.LoadUpIGateway;
-import useCases.GenerateID;
+import entity.Room;
+import gateway.LoadUpIGateway;
+import useCase.GenerateID;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class RoomActions {
      * @return a new room
      */
     public Room createRoom(String username) {
-        useCases.GenerateID generateId = new GenerateID(loader);
+        useCase.GenerateID generateId = new GenerateID(loader);
         String userId = "R" + generateId.generateId();
         Room room = new Room(userId, username);
         addRoomIdToHashMap(room);

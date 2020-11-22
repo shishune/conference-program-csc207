@@ -1,20 +1,20 @@
 package controller;
 
-import gateways.Store;
-import useCases.RoomActions;
+import gateway.Store;
+import useCase.RoomActions;
 
 /**
  * Allows user to exit the system with their information stored
  */
 public class LogOut {
     Store store;
-    useCases.MessageActions messageActions;
-    useCases.OrganizerActions organizerActions;
-    useCases.AttendeeActions attendeeActions;
-    useCases.RoomActions roomActions;
-    useCases.SpeakerActions speakerActions;
-    useCases.EventActions eventActions;
-    useCases.LogoutActions logoutActions;
+    useCase.MessageActions messageActions;
+    useCase.OrganizerActions organizerActions;
+    useCase.AttendeeActions attendeeActions;
+    useCase.RoomActions roomActions;
+    useCase.SpeakerActions speakerActions;
+    useCase.EventActions eventActions;
+    useCase.LogoutActions logoutActions;
 
     /**
      * Instantiates a new logout object
@@ -27,9 +27,9 @@ public class LogOut {
      * @param speakerActions the use case responsible for speakers
      * @param eventActions the use case responsible for events
      */
-    public LogOut(Store store, useCases.MessageActions messageActions, useCases.OrganizerActions organizerActions,
-                  useCases.AttendeeActions attendeeActions, RoomActions roomActions, useCases.SpeakerActions speakerActions,
-                  useCases.EventActions eventActions, useCases.LogoutActions logoutActions){
+    public LogOut(Store store, useCase.MessageActions messageActions, useCase.OrganizerActions organizerActions,
+                  useCase.AttendeeActions attendeeActions, RoomActions roomActions, useCase.SpeakerActions speakerActions,
+                  useCase.EventActions eventActions, useCase.LogoutActions logoutActions){
         this.store = store;
         this.messageActions = messageActions;
         this.organizerActions = organizerActions;

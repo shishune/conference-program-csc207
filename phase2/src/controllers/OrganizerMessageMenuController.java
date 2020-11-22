@@ -24,11 +24,14 @@ public class OrganizerMessageMenuController{
     }
     /**
      * Responds to menu option 1
+     * send message to all speakers
      */
     public void option1(){
         displayMessage.promptMessage(); // enter your message
         String messageContent = scan.nextLine();
-        if(controller.sendSpeakersMessage(messageContent)) {
+        if (!controller.speakersExist()){
+            displayMessage.failedMessageNoSpeakers();
+        } else if(controller.sendSpeakersMessage(messageContent)) {
             displayMessage.successMessage(); // message has been sent successfully
         } else {
             displayMessage.failedMessage();
@@ -36,6 +39,7 @@ public class OrganizerMessageMenuController{
     }
     /**
      * Responds to menu option 2
+     * send message to all attendees of an event
      */
     public void option2(){
         displayMessage.promptMessage(); // enter your message
@@ -43,12 +47,14 @@ public class OrganizerMessageMenuController{
         displayMessage.promptEvent(); // enter name of event you want to send message to
         String event = scan.nextLine();
         if(controller != null){
-            if (controller.checkEvent(event) && controller.eventHasAttendees(event)){
-                if(controller.sendAttendeesMessage(event, message)) {
-                    displayMessage.successMessage();
+            if (controller.checkEvent(event)){
+                if(controller.eventHasAttendees(event)) {
+                    if (controller.sendAttendeesMessage(event, message)) {
+                        displayMessage.successMessage();
+                    }
+                } else {
+                    displayMessage.eventNoAttendees();
                 }
-            } else if (controller.checkEvent(event)){
-                displayMessage.eventNoAttendees();
             } else {
                 displayMessage.eventNotCreated();
             }

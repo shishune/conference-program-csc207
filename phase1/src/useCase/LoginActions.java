@@ -1,11 +1,11 @@
 package useCase;
 
-import entities.Organizer;
-import entities.Speaker;
-import entities.Attendee;
-import useCases.AttendeeActions;
-import useCases.OrganizerActions;
-import useCases.SpeakerActions;
+import entity.Organizer;
+import entity.Speaker;
+import entity.Attendee;
+import useCase.AttendeeActions;
+import useCase.OrganizerActions;
+import useCase.SpeakerActions;
 
 /**
  * A use case class which is responsible for validating of the user's username and password match
