@@ -143,6 +143,17 @@ public class MessagePresenter {
         System.out.println("There are no events available.");
     }
 
+
+    /**
+     * A message asking for the capacity of an event
+     * */
+    public void eventCapacity(){System.out.println("Please enter the event capacity");}
+
+    /**
+     * A message informing user that their input is invalid
+     * */
+    public void invalidCapaity(){System.out.println("Seems like that wasn't a number, please try again");}
+
     /**
      * A message informing user that their input is invalid
      * */

@@ -189,8 +189,24 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
+        int capacity = -1;
+        boolean isInt = false;
+        while(!isInt){
+            displayMessage.eventCapacity();
+            String capStr = scan.nextLine();
+            try {
+                if(Integer.parseInt(capStr) > 0){
+                    capacity = Integer.parseInt(capStr);
+                    isInt = true;
+                } else {
+                    displayMessage.invalidInput();
+                }
+            } catch (NumberFormatException e){
+                displayMessage.invalidCapaity();
+            }
+        }
+
         if (controller != null && event != null) {
-            int capacity = 3;
             List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID, capacity);
             String eventToAdd = event.getEventNames().get(title).getId();
             organizer.addEventToUser(eventToAdd, user.getUsername());
