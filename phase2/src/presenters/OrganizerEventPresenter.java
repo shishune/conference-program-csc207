@@ -161,6 +161,6 @@ public class OrganizerEventPresenter extends EventPresenter {
     /**
      * Warns the user that they are existing without saving their information
      */
-    public void warning(){System.out.println("WARNING: You are about to exit without saving your information. Enter 'x' to continue or any key to go back.");}
+    public void warning(){System.out.println("WARNING: You are about to exit without saving your information. Enter 'x' to leave or any key to go back.");}
 
 }

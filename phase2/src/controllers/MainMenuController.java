@@ -197,4 +197,8 @@ public class MainMenuController extends AccountController {
 
     public void option11(){}
 
+    protected boolean validInput(String str){
+        return !str.equals("") && !str.equalsIgnoreCase("x");
+    }
+
 }

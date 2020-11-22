@@ -142,4 +142,9 @@ public class MessagePresenter {
     public void noEvents(){
         System.out.println("There are no events available.");
     }
+
+    /**
+     * A message informing user that their input is invalid
+     * */
+    public void invalidInput(){System.out.println("Your input is invalid please try again");}
 }

@@ -1,4 +1,4 @@
-import entities.Event;
+import entity.Event;
 import org.junit.*;
 
 import java.util.ArrayList;

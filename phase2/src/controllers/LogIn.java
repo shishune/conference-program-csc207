@@ -26,11 +26,12 @@ public class LogIn {
 
     /**
      * This method is called when the user enter 'x' to sigh up. It reads the username and password the user inputted.
+     * @param userController controller responsible for all users
      * @param organizerActions the use case responsible for organizers
      * @param speakerActions the use case responsible for speakers
      * @param attendeeActions the use case responsible for attendees
      */
-    public void signUp(useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
+    public void signUp(controllers.UserController userController, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
                        useCases.AttendeeActions attendeeActions) {
 
         while (true){
@@ -45,7 +46,7 @@ public class LogIn {
             String password = scan.nextLine();  // Read user input
 
                 accountDisplay.printUserTypeMenu();
-                if(signUpCheck(username, password, organizerActions, speakerActions, attendeeActions)){
+                if(signUpCheck(username, password, userController, organizerActions, speakerActions, attendeeActions)){
                     accountDisplay.successSignUp();
                     break;
                 }
@@ -66,41 +67,51 @@ public class LogIn {
      * @param attendeeActions the use case responsible for attendees
      * @return true if the username is unique otherwise return false
      */
-    private boolean signUpCheck(String username, String password, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
+    private boolean signUpCheck(String username, String password, controllers.UserController userController,
+                                useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
                                 useCases.AttendeeActions attendeeActions) {
         String userType = scan.nextLine();
-
-        if (userType.equals("1")) {
-            if (!organizerActions.organizerExists(username)) {
+        if (userController.usernameExists(username)){ // hi i changed this because if not you could have two different types of accounts with the same username. -eryka
+            accountDisplay.failedUsernameExists();
+            return false;
+        } else {
+            if (userType.equals("1")) {
                 organizerActions.createOrganizer(username, password);
                 return true;
-            }
-            else{
-                accountDisplay.failedUsernameExists();
-                return false;
-            }
-        } else if (userType.equals("2")) {
-            if (!speakerActions.speakerExists(username)) {
+//                if (!organizerActions.organizerExists(username)) {
+//                    organizerActions.createOrganizer(username, password);
+//                    return true;
+//                }
+//                else{
+//                    accountDisplay.failedUsernameExists();
+//                    return false;
+//                }
+            } else if (userType.equals("2")) {
                 speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
-            }
-            else{
-                accountDisplay.failedUsernameExists();
-                return false;
-            }
-        } else if (userType.equals("3")) {
-            if (!attendeeActions.attendeeExists(username)) {
+//                if (!speakerActions.speakerExists(username)) {
+//                    speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+//                    return true;
+//                }
+//                else{
+//                    accountDisplay.failedUsernameExists();
+//                    return false;
+//                }
+            } else if (userType.equals("3")) {
                 attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
-            }
-            else{
-                accountDisplay.failedUsernameExists();
+//                if (!attendeeActions.attendeeExists(username)) {
+//                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+//                    return true;
+//                }
+//                else{
+//                    accountDisplay.failedUsernameExists();
+//                    return false;
+//                }
+            } else{
+                accountDisplay.printTypingError();
                 return false;
             }
-        }
-        else{
-            accountDisplay.printTypingError();
-            return false;
         }
 
     }

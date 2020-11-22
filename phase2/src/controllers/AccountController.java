@@ -7,6 +7,7 @@ import gateways.LoadUpIGateway;
 import gateways.Store;
 import presenters.AccountPresenter;
 import useCases.RoomActions;
+import controllers.UserController;
 
 import java.util.Scanner;
 
@@ -40,6 +41,8 @@ public class AccountController {
         useCases.OrganizerActions organizerActions = new useCases.OrganizerActions(g);
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
+        controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
+                messageActions, 'u', attendeeActions, organizerActions, speakerActions);
 
         //Instantiate controller classes
         controllers.LogIn logIn = new LogIn();
@@ -49,7 +52,7 @@ public class AccountController {
         //loop breaks when user chooses to exit program
         while (true) {
             //login procedure.
-            logIn.signUp(organizerActions, speakerActions, attendeeActions);
+            logIn.signUp(userController, organizerActions, speakerActions, attendeeActions);
             accountDisplay.promptUsername();
             String username = scan.nextLine();  // Read user input
             accountDisplay.promptPassword();

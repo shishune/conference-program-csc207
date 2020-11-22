@@ -114,11 +114,12 @@ public class OrganizerMainMenuController extends MainMenuController {
 
         while (true) {
             //displayEvent.promptTitle();
-            String t = scan.nextLine();
-            if (event.getEventNames().containsKey(t)) {
+            title = scan.nextLine();
+            if (!validInput(title)){
+               displayMessage.invalidInput();
+            } else if (event.eventNameExists(title)) {
                 displayEvent.eventExists();
             } else {
-                title = t;
                 break;
             }
         }
@@ -140,7 +141,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                         displayMessage.badRoom();
 
                         String reply = scan.nextLine();
-                        if (reply.equals("ADD") || reply.equals("add") || reply.equals("Add")) {
+                        if (reply.equalsIgnoreCase("ADD")) {
                             option9();
                         }
                     }
@@ -149,11 +150,8 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         String speakerId = "";
-
         boolean catcherUserName = true;
-
         while (catcherUserName) {
-
             displayMessage.newOrNoSpeaker();
             String speakerUserName = scan.nextLine();
 
@@ -170,7 +168,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     String speakerUser = scan.nextLine();
 
                     if (controller != null && speaker != null) {
-                        if (speaker.returnUsernameHashMap().containsKey(speakerUser)) {
+                        if (speaker.speakerExists(speakerUser)) {
                             speakerId = speaker.returnUsernameHashMap().get(speakerUser).getId();
 
                             if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
@@ -183,7 +181,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                             catcher1 = false;
                             catcherUserName = false;
                         } else {
-                            displayMessage.speakerNotCreated();
+                            displayMessage.speakerDoesNotExist();
                         }
                         catcher1 = false;
                     }
@@ -192,8 +190,8 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null && event != null) {
-
-            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID);
+            int capacity = 3;
+            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID, capacity);
             String eventToAdd = event.getEventNames().get(title).getId();
             organizer.addEventToUser(eventToAdd, user.getUsername());
 
@@ -220,7 +218,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
 
-        if (option.equals("x") || option.equals("X")) {
+        if (option.equalsIgnoreCase("x")) {
 
             boolean catcher = true;
             while (catcher) {
@@ -230,13 +228,10 @@ public class OrganizerMainMenuController extends MainMenuController {
                 if (eventCancel.equals("!")) {
                     displayEvent.warning();
                     String answer = scan.nextLine();
-                    if (answer.equals("x") || answer.equals("X")) {
+                    if (answer.equalsIgnoreCase("x")) {
                         break;
-                    } else {
-                        continue;
                     }
                 }
-
                 if (event.getEventNames().containsKey(eventCancel)) {
                     cancelEvent(eventCancel);
                     displayEvent.successCancelEvent();
@@ -249,28 +244,24 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         } else {
             displayEvent.promptRescheduleMethod();
-            String e = "";
+            String eventName = "";
             boolean catcher = true;
 
             while (catcher) {
-                String ev = scan.nextLine();
-
-                if (event.getEventNames().containsKey(ev)) {
-                    e = ev;
+                eventName = scan.nextLine();
+                if (event.getEventNames().containsKey(eventName)) {
                     String dateTime = getDateTimeInput();
-                    rescheduleEvent(ev, dateTime);
+                    rescheduleEvent(eventName, dateTime);
                     catcher = false;
                 } else {
                     displayEvent.noEvent();
                     displayEvent.breakPlease();
                 }
-                if (ev.equals("!")) {
+                if (eventName.equals("!")) {
                     displayEvent.warning();
                     String answer = scan.nextLine();
-                    if (answer.equals("x") || answer.equals("X")) {
+                    if (answer.equalsIgnoreCase("x")) {
                         break;
-                    } else {
-                        continue;
                     }
                 }
 
@@ -279,12 +270,10 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 8
+     * Responds to menu option 8- view all events user has created
      */
     public void option8() {
         List<List<String>> e = new ArrayList<>();
-
-
         for (String event1 : user.getEventList()) {
             List<String> individualEvents = new ArrayList<>();
             individualEvents.add(event.getEvent(event1).getTitle());
@@ -406,15 +395,14 @@ public class OrganizerMainMenuController extends MainMenuController {
         boolean loop = true;
         displayMessage.printUserMenu();
         while(loop) {
-
             String option = scan.nextLine();
             if (option.equals("x") || option.equals("X")) {
-                createSpeaker();
                 loop = false;
             } else if (option.equals("1")) {
-                createAttendee();
+                createSpeaker();
                 loop = false;
             } else if (option.equals("2")) {
+                createAttendee();
                 loop = false;
             } else if (option.equals("3")) {
                 loop = false;
@@ -429,22 +417,28 @@ public class OrganizerMainMenuController extends MainMenuController {
      * create a new speaker
      */
     private String createSpeaker() {
-        while (true) {
+        displayMessage.createSpeakerMessage();
+        while (true){
             displayMessage.userUsernamePrompt();
             String speakerUsername = scan.nextLine();
 
             if (speakerUsername.equals("x") || speakerUsername.equals("X")) {
                 break;
-            } else if (speaker.returnUsernameHashMap().containsKey(speakerUsername)) {
+            } else if (controller.usernameExists(speakerUsername)) {
                 displayMessage.userExists();
-            } else if (controller != null) {
+            } else if (controller != null && validInput(speakerUsername)) {
                 displayMessage.userPasswordPrompt();
                 String newSpeakerPassword = scan.nextLine();
-                controller.createSpeaker(speakerUsername, newSpeakerPassword);
-                displayMessage.userCreated();
-                return speakerUsername;
+                if (validInput(newSpeakerPassword)) {
+                    controller.createSpeaker(speakerUsername, newSpeakerPassword);
+                    displayMessage.userCreated();
+                    return speakerUsername;
+                } else {
+                    displayMessage.invalidInput();
+                }
+            } else {
+                displayMessage.invalidInput();
             }
-
         }
         return null;
     }
@@ -453,22 +447,28 @@ public class OrganizerMainMenuController extends MainMenuController {
      * create a new user
      */
     private String createAttendee() {
+        displayMessage.createAttendeeMessage();
         while (true) {
             displayMessage.userUsernamePrompt();
             String newAttendeeUsername = scan.nextLine();
 
             if (newAttendeeUsername.equals("x") || newAttendeeUsername.equals("X")) {
                 break;
-            } else if (attendee.returnUsernameHashMap().containsKey(newAttendeeUsername)) {
+            } else if (controller.usernameExists(newAttendeeUsername)) {
                 displayMessage.userExists();
-            } else if (controller != null) {
+            } else if (controller != null && validInput(newAttendeeUsername)) {
                 displayMessage.userPasswordPrompt();
                 String newAttendeePassword = scan.nextLine();
-                controller.createAttendee(newAttendeeUsername, newAttendeePassword);
-                displayMessage.userCreated();
-                return newAttendeeUsername;
+                if (validInput(newAttendeePassword)) {
+                    controller.createAttendee(newAttendeeUsername, newAttendeePassword);
+                    displayMessage.userCreated();
+                    return newAttendeeUsername;
+                } else {
+                    displayMessage.invalidInput();
+                }
+            } else {
+                displayMessage.invalidInput();
             }
-
         }
         return null;
     }

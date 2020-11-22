@@ -42,7 +42,7 @@ public class UserController {
             this.user = organizer;
         } else if (userType == 's') {
             this.user = speaker;
-        } else {
+        } else if (userType == 'a'){
             this.user = attendee;
         }
 
@@ -82,6 +82,15 @@ public class UserController {
             userIdHashmap.putAll(speakerActions.returnIDHashMap());
         }
         return userIdHashmap;
+    }
+
+    /***
+     * return if the username already belongs to a user
+     * @param username
+     * @return true if the username already exists
+     */
+    public boolean usernameExists(String username){
+        return returnUserUsernameHashMap().containsKey(username);
     }
 
     /**

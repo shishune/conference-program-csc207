@@ -45,6 +45,21 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     }
 
     /**
+     * Tell user they are creating a speaker
+     */
+    public void createSpeakerMessage(){
+        System.out.println("You have chosen to create a speaker");
+    }
+
+    /**
+     * Tell user they are creating a speaker
+     */
+    public void createAttendeeMessage(){
+        System.out.println("You have chosen to create an attendee");
+    }
+
+
+    /**
      * Prompt to enter the username of the speaker to create
      */
     public void userUsernamePrompt(){
@@ -75,7 +90,7 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     /**
      * Message stating that the user does not exist, prompts user to try again or create a new speaker
      */
-    public void speakerNotCreated(){
+    public void speakerDoesNotExist(){
         String display = "This speaker does not exist. Try again or create a new speaker first.";
         System.out.println(display);
     }

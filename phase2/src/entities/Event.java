@@ -11,6 +11,7 @@ public class Event {
     private String dateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;
+    private int capacity;
 
     /**
      * Instantiates a new attendee object
@@ -24,13 +25,14 @@ public class Event {
 
 
     public Event(String eventID, String title, String speaker, String dateTime,
-                 List<String> attendees, String roomID){
+                 List<String> attendees, String roomID, int capacity){
         this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
         this.dateTime = dateTime;
         this.attendees = attendees;
         this.roomID = roomID;
+        this.capacity = capacity;
 
     }
 
@@ -42,7 +44,6 @@ public class Event {
         String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return eventID + "," + title + "," + speaker + "," +
                 this.dateTime + "," + attendeesString + "," + roomID;
-
     }
 
 
@@ -75,6 +76,22 @@ public class Event {
      * */
     public void setSpeaker(String speaker) {
         this.speaker = speaker;
+    }
+
+
+    /**
+     * Return capacity of event
+     * @return capacity of event
+     * */
+    public int getCapacity() {
+        return this.capacity;
+    }
+    /**
+     * set capacity for event
+     * @param newCapacity new capacity of event
+     * */
+    public void setCapacity(int newCapacity) {
+        this.capacity = newCapacity;
     }
 
     /**

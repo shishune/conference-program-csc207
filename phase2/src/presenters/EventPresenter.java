@@ -6,10 +6,10 @@ import java.util.List;
  * @version 1
  * */
 public class EventPresenter {
-    private String generic = "Please enter the name of the event you would like to ";
-    private String generic2 = "This event has been successfully ";
-    private String generic3 = "This room has been successfully ";
-    private String generic4 = "Please enter the name of the room you would like to ";
+    private String enterNameOfEvent = "Please enter the name of the event you would like to ";
+    private String eventSuccess = "This event has been successfully ";
+    private String genericRoomSuccess = "This room has been successfully ";
+    private String enterNameofRoom = "Please enter the name of the room you would like to ";
 
     /**
      * Displays events
@@ -32,7 +32,7 @@ public class EventPresenter {
      * Prompt for user to cancel event/remove event
      * */
     public void promptCancelEvent(){
-        System.out.println(generic+ "cancel.");
+        System.out.println(enterNameOfEvent+ "cancel.");
     }
 
 
@@ -40,7 +40,7 @@ public class EventPresenter {
      * Prompt for user to add event/attend event
      * */
     public void promptAddEvent(){
-        System.out.println(generic+ "add.");
+        System.out.println(enterNameOfEvent+ "add.");
     }
 
 
@@ -48,7 +48,7 @@ public class EventPresenter {
      * Prompt for user to add room
      * */
     public void promptAddRoom(){
-        System.out.println(generic4+ "add.");
+        System.out.println(enterNameofRoom+ "add.");
     }
 
 
@@ -56,7 +56,7 @@ public class EventPresenter {
      * Message informing that user cancelled event
      * */
     public void successCancelEnrol(){
-        System.out.println(generic2+ "cancelled.");
+        System.out.println(eventSuccess+ "cancelled.");
     }
 
 
@@ -64,7 +64,7 @@ public class EventPresenter {
      * Message informing that user added event
      * */
     public void successAddEvent(){
-        System.out.println(generic2+ "added.");
+        System.out.println(eventSuccess+ "added.");
     }
 
 

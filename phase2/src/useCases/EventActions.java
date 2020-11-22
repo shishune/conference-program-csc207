@@ -61,6 +61,14 @@ public class EventActions  {
         return events.containsKey(eventID);
     }
 
+    /***
+     * return if the eventName exists in eventNames
+     * @param eventName
+     * @return true if the eventName exists in eventNames
+     */
+    public boolean eventNameExists(String eventName){
+        return eventNames.containsKey(eventName);
+    }
 
     /***
      * return hashmap of all eventIDs and the corresponding event object. key: speakerID value: List of date and time
@@ -130,7 +138,7 @@ public class EventActions  {
                 String[] eventAttributes = event.split(",");
                     List<String> eventAttendees = new ArrayList<String>(Arrays.asList(eventAttributes[4].split("%%")));
                     loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
-                            eventAttendees, eventAttributes[5]);
+                            eventAttendees, eventAttributes[5], Integer.parseInt(eventAttributes[6]));
             }
         }
     }
@@ -141,14 +149,14 @@ public class EventActions  {
      * @return true if the event was created
      * */
     public Event createEvent(String title, String speakerId, String dateTime,
-                               List<String> attendees, String roomID){
+                               List<String> attendees, String roomID, int capacity){
 
         if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
 
             useCases.GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
 
-            return loadEvent(newID, title, speakerId, dateTime, attendees, roomID);
+            return loadEvent(newID, title, speakerId, dateTime, attendees, roomID, capacity);
         }
         return null;
     }
@@ -175,12 +183,12 @@ public class EventActions  {
      * @param roomID id of room
      */
     public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
-                          List<String> attendees, String roomID) {
+                          List<String> attendees, String roomID, int capacity) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }
-        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID);
+        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID, capacity);
         events.put(eventID, newEvent);
         eventNames.put(title, newEvent);
         this.attendees.put(eventID, attendees);
