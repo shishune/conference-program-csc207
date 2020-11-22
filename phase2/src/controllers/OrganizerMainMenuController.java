@@ -396,7 +396,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayMessage.printUserMenu();
         while(loop) {
             String option = scan.nextLine();
-            if (option.equals("x") || option.equals("X")) {
+            if (option.equalsIgnoreCase("x")) {
                 loop = false;
             } else if (option.equals("1")) {
                 createSpeaker();
@@ -422,7 +422,8 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.userUsernamePrompt();
             String speakerUsername = scan.nextLine();
 
-            if (speakerUsername.equals("x") || speakerUsername.equals("X")) {
+            if (speakerUsername.equalsIgnoreCase("x")) {
+                displayMessage.exit();
                 break;
             } else if (controller.usernameExists(speakerUsername)) {
                 displayMessage.userExists();

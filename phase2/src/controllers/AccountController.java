@@ -146,7 +146,7 @@ public class AccountController {
                         accountDisplay.printMenuError();
                     }
                     accountDisplay.promptReturn();
-                    scan.nextLine();
+                    // scan.nextLine();
                 }
             }
         }

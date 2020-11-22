@@ -147,4 +147,10 @@ public class MessagePresenter {
      * A message informing user that their input is invalid
      * */
     public void invalidInput(){System.out.println("Your input is invalid please try again");}
+
+    /**
+     * A message informing user that they are exiting their current task
+     * */
+    public void exit(){System.out.println("Exiting...");}
+
 }
