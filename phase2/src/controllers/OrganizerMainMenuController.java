@@ -149,46 +149,59 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
+
+        displayMessage.zerospeakers();//
+        String zerospeaker = scan.nextLine();
         String speakerId = "";
-        boolean catcherUserName = true;
-        while (catcherUserName) {
-            displayMessage.newOrNoSpeaker();
-            String speakerUserName = scan.nextLine();
 
-            if (speakerUserName.equalsIgnoreCase("NEW")) {
-                String speakerUsername = createSpeaker();
-                if (speakerUserName != null){
-                    speakerId = speaker.getIDFromName(speakerUsername);
-                }
+        if (zerospeaker.equals("YES")) {
+            zerospeaker = "a";
+        } else {
+            displayMessage.numberofspeaker();
+            String numberofspeakers = scan.nextLine();
+            Integer i = 0;
+            while (i < Integer.valueOf(numberofspeakers)) {
+                boolean catcherUserName = true;
+                while (catcherUserName) {
+                    displayMessage.newOrNoSpeaker();
+                    String speakerUserName = scan.nextLine();
 
-            } else {
-                boolean catcher1 = true;
-                while (catcher1) {
-                    displayEvent.promptSpeaker();
-                    String speakerUser = scan.nextLine();
-
-                    if (controller != null && speaker != null) {
-                        if (speaker.speakerExists(speakerUser)) {
-                            speakerId = speaker.returnUsernameHashMap().get(speakerUser).getId();
-
-                            if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
-                                if (controller.checkTimeConflict(speakerUser, dateTime)) {
-                                    displayEvent.failedDoubleBookSpeaker();
-                                    catcher1 = false;
-                                }
-                            }
-                            speakerUserName = speakerUser;
-                            catcher1 = false;
-                            catcherUserName = false;
-                        } else {
-                            displayMessage.speakerDoesNotExist();
+                    if (speakerUserName.equalsIgnoreCase("NEW")) {
+                        String speakerUsername = createSpeaker();
+                        if (speakerUserName != null) {
+                            speakerId = speaker.getIDFromName(speakerUsername);
                         }
-                        catcher1 = false;
+
+                    } else {
+                        boolean catcher1 = true;
+                        while (catcher1) {
+                            displayEvent.promptSpeaker();
+                            String speakerUser = scan.nextLine();
+
+                            if (controller != null && speaker != null) {
+                                if (speaker.speakerExists(speakerUser)) {
+                                    speakerId = speaker.returnUsernameHashMap().get(speakerUser).getId();
+
+                                    if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
+                                        if (controller.checkTimeConflict(speakerUser, dateTime)) {
+                                            displayEvent.failedDoubleBookSpeaker();
+                                            catcher1 = false;
+                                        }
+                                    }
+                                    speakerUserName = speakerUser;
+                                    catcher1 = false;
+                                    catcherUserName = false;
+                                } else {
+                                    displayMessage.speakerDoesNotExist();
+                                }
+                                catcher1 = false;
+                            }
+                        }
                     }
                 }
             }
+            i++;
         }
-
         int capacity = -1;
         boolean isInt = false;
         while(!isInt){
