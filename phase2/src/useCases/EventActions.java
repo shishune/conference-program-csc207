@@ -136,27 +136,33 @@ public class EventActions  {
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                    List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[4].split("%%")));
-                    loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3],
-                            eventAttendees, eventAttributes[5], Integer.parseInt(eventAttributes[6]));
+                    List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
+                    loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3], eventAttributes[4],
+                            eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]));
             }
         }
     }
 
 
     /**
-     * Create a new event based on the parmeters provided
+     * Create a new event based on the parameters provided
+     * @param title title of event
+     * @param speakerId id of speaker
+     * @param startDateTime the start date and time for the event
+     * @param endDateTime the end date and time for the event
+     * @param attendees list of attendees of event
+     * @param roomID id of room
      * @return true if the event was created
      * */
-    public Event createEvent(String title, String speakerId, String dateTime,
+    public Event createEvent(String title, String speakerId, String startDateTime, String endDateTime,
                                List<String> attendees, String roomID, int capacity){
 
-        if (isRoomFree(roomID, dateTime) && isSpeakerFree(speakerId, dateTime)){
+        if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 
             useCases.GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
 
-            return loadEvent(newID, title, speakerId, dateTime, attendees, roomID, capacity);
+            return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
         }
         return null;
     }
@@ -178,40 +184,63 @@ public class EventActions  {
      * @param eventID id of event
      * @param title title of event
      * @param speakerId id of speaker
-     * @param dateTime date and time of event
+     * @param startDateTime the start date and time for the event
+     * @param endDateTime the end date and time for the event
      * @param attendees list of attendees of event
      * @param roomID id of room
      */
-    public Event loadEvent(String eventID, String title, String speakerId, String dateTime,
+    public Event loadEvent(String eventID, String title, String speakerId, String startDateTime, String endDateTime,
                           List<String> attendees, String roomID, int capacity) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }
-        Event newEvent = new Event(eventID, title, speakerId, dateTime, attendees, roomID, capacity);
+        Event newEvent = new Event(eventID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
         events.put(eventID, newEvent);
         eventNames.put(title, newEvent);
         this.attendees.put(eventID, attendees);
+        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+        for (String dateTime: dateTimes) {
+            if (speakerSchedule.containsKey(speakerId)) {
+                speakerSchedule.get(speakerId).add(dateTime);
 
-        if (speakerSchedule.containsKey(speakerId)) {
-            speakerSchedule.get(speakerId).add(dateTime);
+            } else {
+                List<String> speakerTimes = new ArrayList<>();
+                speakerTimes.add(dateTime);
+                speakerSchedule.put(speakerId, speakerTimes);
+            }
+            if (roomSchedule.containsKey(roomID)) {
+                roomSchedule.get(roomID).add(dateTime);
 
-        } else {
-            List<String> speakerTimes = new ArrayList<>();
-            speakerTimes.add(dateTime);
-            speakerSchedule.put(speakerId, speakerTimes);
-        }
-        if (roomSchedule.containsKey(roomID)) {
-            roomSchedule.get(roomID).add(dateTime);
-
-        } else {
-            List<String> roomTimes = new ArrayList<>();
-            roomTimes.add(dateTime);
-            roomSchedule.put(roomID, roomTimes);
+            } else {
+                List<String> roomTimes = new ArrayList<>();
+                roomTimes.add(dateTime);
+                roomSchedule.put(roomID, roomTimes);
+            }
         }
         return newEvent;
     }
 
+    /***
+     * return list of dates in string format of the time beginning with and including startDateTime,
+     *      and ending with and excluding  endDateTime
+     * @param startDateTime the new start date and time for the event to be changed to
+     * @param endDateTime the new end date and time for the event to be changed to
+     * @return list of dates in string format of the time beginning with and including startDateTime,
+     *      and ending with and excluding  endDateTime
+     */
+    private List<String> timeInBetween(String startDateTime, String endDateTime){
+        int startTime = Integer.parseInt(startDateTime.substring(29, 31));
+        int endTime = Integer.parseInt(endDateTime.substring(29, 31));
+        String date = startDateTime.substring(0, 10);
+        List<String> times = new ArrayList<>();
+        times.add(startDateTime);
+        while (startTime < endTime){
+            times.add(date + startTime);
+            startTime += 1;
+        }
+        return times;
+    }
 
     /***
      * Add an attendee who has requested to be added to a specific event
@@ -254,16 +283,15 @@ public class EventActions  {
      * @return true if an attendee has been removed from an event that they used to be a part of
      */
     public List<String> cancelEvent(String eventName){
-        Event eventObject = eventNames.get(eventName);
-        String eventID = eventObject.getId();
-        if (eventObject != null) {
+        Event event = eventNames.get(eventName);
+        String eventID = event.getId();
+        if (event != null) {
             this.events.remove(eventID);
             List<String> eventAttendees = this.attendees.get(eventID);
             this.attendees.remove(eventID);
-            ArrayList<String> a = new ArrayList<String>();
-            a.add(eventObject.getDateTime());
-            this.speakerSchedule.remove(eventObject.getSpeaker(), a);
-            this.roomSchedule.remove(eventObject.getRoomID(), a);
+            List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
+            speakerSchedule.get(event.getSpeaker()).removeAll(dateTimes);
+            roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
             return eventAttendees;
         }
         return null;
@@ -273,22 +301,25 @@ public class EventActions  {
     /***
      * Cancel an event
      * @param eventID the unique id of the event to be changed
-     * @param newDateTime the new date and time for the event to be changed to
+     * @param newStartDateTime the new start date and time for the event to be changed to
+     * @param newEndDateTime the new end date and time for the event to be changed to
      * @return List<String> which is the list of attendees who had signed up for that event
      */
-    public boolean changeEventTime(String eventID, String newDateTime){
+    public boolean changeEventTime(String eventID, String newStartDateTime, String newEndDateTime){
         Event event = this.events.get(eventID);
         if(event != null) {
-            if (isRoomFree(event.getRoomID(), newDateTime) &&
-                    isSpeakerFree(event.getSpeaker(), newDateTime)) {
+            if (isRoomFree(event.getRoomID(), newStartDateTime, newEndDateTime) &&
+                    isSpeakerFree(event.getSpeaker(), newStartDateTime, newEndDateTime)) {
 
-                this.speakerSchedule.get(event.getSpeaker()).remove(event.getDateTime());
-                this.roomSchedule.get(event.getRoomID()).remove(event.getDateTime());
+                List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
+                this.speakerSchedule.get(event.getSpeaker()).removeAll(dateTimes);
+                this.roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
 
-                event.setDateTime(newDateTime);
-                this.speakerSchedule.get(event.getSpeaker()).add(event.getDateTime());
-                this.roomSchedule.get(event.getRoomID()).add(event.getDateTime());
-
+                event.setStartTime(newStartDateTime);
+                event.setEndDateTime(newEndDateTime);
+                List<String> newDateTimes = timeInBetween(newStartDateTime, newEndDateTime);
+                this.speakerSchedule.get(event.getSpeaker()).addAll(newDateTimes);
+                this.roomSchedule.get(event.getRoomID()).addAll(newDateTimes);
                 return true;
             }
         }
@@ -296,19 +327,40 @@ public class EventActions  {
 
     }
 
+    /***
+     * return if this dateTime is in conflict with a given event
+     * @param eventID ID of event
+     * @param startDateTime startDateTime to check if it is in conflict with the event
+     * @param endDateTime endDateTime to check if it is in conflict with the event
+     * @return if this dateTime is in conflict with a given event
+     */
+    public boolean timeConflict(String eventID, String startDateTime, String endDateTime){
+        Event event = getEvent(eventID);
+        List<String> eventDateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
+        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+        for(String dateTime: dateTimes){
+            if (eventDateTimes.contains(dateTime)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Change the time of an event which has been created
      * @param roomID the unique id for the room to be checked
-     * @param dateTime the date and time to be checked
+     * @param startDateTime the date and time to be checked
+     * @param endDateTime the date and time to be checked
      * @return true if the event has been successfully updated
      * */
 
-    public boolean isRoomFree(String roomID, String dateTime){
+    public boolean isRoomFree(String roomID, String startDateTime, String endDateTime){
         List<String> roomTime = this.roomSchedule.get(roomID);
-
-        if (roomTime != null && roomTime.contains(dateTime)) {
-            return false;
+        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+        for (String dateTime: dateTimes) {
+            if (roomTime != null && roomTime.contains(dateTime)) {
+                return false;
+            }
         }
         return true;
 
@@ -318,13 +370,17 @@ public class EventActions  {
     /**
      * Check if a room is available as a certain time
      * @param speakerID the unique id of the speaker to be checked
-     * @param dateTime the date and time to be checked
+     * @param startDateTime the date and time to be checked
+     * @param endDateTime the date and time to be checked
      * @return true if the room is in fact available
      * */
-    public boolean isSpeakerFree(String speakerID, String dateTime){
+    public boolean isSpeakerFree(String speakerID, String startDateTime, String endDateTime){
         List<String> SpeakerTime = speakerSchedule.get(speakerID);
-        if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
-            return false;
+        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+        for (String dateTime: dateTimes) {
+            if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
+                return false;
+            }
         }
         return true;
     }

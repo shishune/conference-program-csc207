@@ -9,21 +9,21 @@ import java.util.List;
  * */
 
 public class OrganizerEventPresenter extends EventPresenter {
-    private String generic2 = "This event has been successfully ";
-    private String generic3 = "This room has been successfully ";
+    private String eventSuccess = "This event has been successfully ";
+    private String roomSuccess = "This room has been successfully ";
 
     /**
      * Message informing that user cancelled event
      * */
     public void successCancelEvent(){
-        System.out.println(generic2+ "cancelled.");
+        System.out.println(eventSuccess+ "cancelled.");
     }
 
     /**
      * Message informing that user succeeded in rescheduling event
      * */
     public void successRescheduleEvent(){
-        System.out.println(generic2+ "rescheduled.");
+        System.out.println(eventSuccess+ "rescheduled.");
     }
 
     /**
@@ -37,7 +37,7 @@ public class OrganizerEventPresenter extends EventPresenter {
      * Message informing that user added room
      * */
     public void successAddRoom(){
-        System.out.println(generic3+ "added.");
+        System.out.println(roomSuccess+ "added.");
     }
 
     /**
@@ -91,10 +91,17 @@ public class OrganizerEventPresenter extends EventPresenter {
     }
 
     /**
-     * Asks for time of event to add
+     * Asks for start time of event to add
      */
-    public void promptTime(){
-        System.out.println("Enter the hour of day as a single integer using the 24-hour clock.");
+    public void promptStartTime(){
+        System.out.println("Enter the start hour of day as a single integer using the 24-hour clock.");
+    }
+
+    /**
+     * Asks for end time of event to add
+     */
+    public void promptEndTime(){
+        System.out.println("Enter the end hour of day as a single integer using the 24-hour clock.");
     }
 
     /**

@@ -54,34 +54,39 @@ public class OrganizerController extends UserController {
      * create a new event
      * @param title of event
      * @param speakerId of event
-     * @param dateTime of event
+     * @param startDateTime the start date and time for the event
+     * @param endDateTime the end date and time for the event
      * @param roomID of event
      * @return if the event was created- this will return false if the event already exists
      */
-    public List<Boolean> createEvent(String title, String speakerId, String dateTime, String roomID, int capacity){
+    public List<Boolean> createEvent(String title, String speakerId, String startDateTime, String endDateTime,
+                                     String roomID, int capacity){
         List<String> attendees = new ArrayList<String>();
         List<Boolean> checks = new ArrayList<Boolean>();
         int roomCap = roomActions.findRoomFromId(roomID).getCapacity();
         Event event;
         if (roomCap >= capacity) {
-            event = this.eventActions.createEvent(title, speakerId, dateTime, attendees, roomID, capacity);
-        } else {
+            event = this.eventActions.createEvent(title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
+            checks.add(true);
+            if(event != null){
+                scheduleSpeaker(event.getId(), speakerId, true);
+                speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
+
+                return checks;
+            }
+        } else{
             checks.add(false);
-            return checks;
         }
 
-        // TODO check if room capacity >= event capacity!!!
-        if(event != null){
-            scheduleSpeaker(event.getId(), speakerId, true);
-            speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
-            checks.add(true);
-            return checks;
-        }
-        checks.add(false);
-        if (!eventActions.isRoomFree(roomID, dateTime)){
-            checks.add(true);
-        } else if(!eventActions.isSpeakerFree(speakerId, dateTime)){
+        if (!eventActions.isRoomFree(roomID, startDateTime, endDateTime)){
             checks.add(false);
+        } else {
+            checks.add(true);
+        }
+        if(!eventActions.isSpeakerFree(speakerId, startDateTime, endDateTime)){
+            checks.add(false);
+        } else {
+            checks.add(true);
         }
         return checks;
     }
@@ -184,11 +189,12 @@ public class OrganizerController extends UserController {
     /***
      * reschedule an event with a new date and time
      * @param eventID
-     * @param newDateTime
+     * @param newStartDateTime the new start date and time for the event to be changed to
+     * @param newEndDateTime the new end date and time for the event to be changed to
      * @return if the event was successfully rescheduled
      */
-    public boolean rescheduleEvent(String eventID, String newDateTime){
-        return this.eventActions.changeEventTime(eventID, newDateTime);
+    public boolean rescheduleEvent(String eventID, String newStartDateTime, String newEndDateTime){
+        return this.eventActions.changeEventTime(eventID, newStartDateTime, newEndDateTime);
     }
 
     /***

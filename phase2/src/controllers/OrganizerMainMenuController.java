@@ -125,7 +125,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         boolean catcher = true;
-        String dateTime = getDateTimeInput();
+        List<String> dateTimes = getDateTimeInputs();
         String roomID = "";
 
         while (catcher) {
@@ -183,7 +183,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                                     speakerId = speaker.returnUsernameHashMap().get(speakerUser).getId();
 
                                     if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
-                                        if (controller.checkTimeConflict(speakerUser, dateTime)) {
+                                        if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
                                             catcher1 = false;
                                         }
@@ -200,8 +200,8 @@ public class OrganizerMainMenuController extends MainMenuController {
                     }
                 }
             }
-            i++;
         }
+
         int capacity = -1;
         boolean isInt = false;
         while(!isInt){
@@ -220,25 +220,26 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null && event != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerId, dateTime, roomID, capacity);
-            String eventToAdd = event.getEventNames().get(title).getId();
-            organizer.addEventToUser(eventToAdd, user.getUsername());
+            List<Boolean> checks = controller.createEvent(title, speakerId, dateTimes.get(0), dateTimes.get(1), roomID, capacity);
 
-            if (checks.get(0)) {
+
+            if (checks.get(0) && checks.size() == 1) {
+                String eventToAdd = event.getEventNames().get(title).getId();
+                organizer.addEventToUser(eventToAdd, user.getUsername());
                 displayEvent.successAddEvent();
             } else {
-                if (!checks.get(0)){
+                if (!checks.get(0)) {
                     int roomCap = room.findRoomFromId(roomID).getCapacity(); // necessary?
                     displayEvent.roomCapacityLow(roomCap);
-                } else if (checks.get(1)) {
+                }
+                if (!checks.get(1)) {
                     displayEvent.failedDoubleBookRoom();
-                } else if (!checks.get(1)) {
+                }
+                if (!checks.get(2)) {
                     displayEvent.failedDoubleBookSpeaker();
                 }
-                displayEvent.failed();
+                displayEvent.notCreated();
             }
-        } else {
-            displayEvent.failed();
         }
 
     }
@@ -282,8 +283,8 @@ public class OrganizerMainMenuController extends MainMenuController {
             while (catcher) {
                 eventName = scan.nextLine();
                 if (event.getEventNames().containsKey(eventName)) {
-                    String dateTime = getDateTimeInput();
-                    rescheduleEvent(eventName, dateTime);
+                    List<String> dateTimes = getDateTimeInputs();
+                    rescheduleEvent(eventName, dateTimes.get(0), dateTimes.get(1));
                     catcher = false;
                 } else {
                     displayEvent.noEvent();
@@ -308,28 +309,31 @@ public class OrganizerMainMenuController extends MainMenuController {
         List<List<String>> e = new ArrayList<>();
         for (String event1 : user.getEventList()) {
             List<String> individualEvents = new ArrayList<>();
-            individualEvents.add(event.getEvent(event1).getTitle());
-            individualEvents.add(event.getEvent(event1).getDateTime());
-            String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
-            individualEvents.add(roomName);
-            String speakerName = speaker.findUserFromId(event.getEvent(event1).getSpeaker()).getUsername();
-            individualEvents.add(speakerName);
-            e.add(individualEvents);
+            if (event.getEvent(event1) != null) {
+                individualEvents.add(event.getEvent(event1).getTitle());
+                individualEvents.add(event.getEvent(event1).getDateTime());
+                String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
+                individualEvents.add(roomName);
+                String speakerName = speaker.findUserFromId(event.getEvent(event1).getSpeaker()).getUsername();
+                individualEvents.add(speakerName);
+                e.add(individualEvents);
+            }
         }
         displayEvent.displayEvents(e);
     }
 
 
     /**
-     * helper function to take a dateTime string object from separate date  and time inputs
+     * helper function to take a start and end dateTime string object from separate date and time inputs
      *
-     * @return the string combining date and time based on separate user inputs for date and time
+     * @return the list of strings combining date and the start and end time based on separate user inputs for date and time
      */
-    private String getDateTimeInput() {
+    private List<String> getDateTimeInputs() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         dateFormat.setLenient(false);
         String date = "";
-        String time = "";
+        String startTime = "";
+        String endTime = "";
         boolean catcher = true;
 
         while (catcher) {
@@ -348,11 +352,11 @@ public class OrganizerMainMenuController extends MainMenuController {
         catcher = true;
         while (catcher) {
 
-            displayEvent.promptTime();
+            displayEvent.promptStartTime();
             if (scan.hasNextInt()) {
                 String t = scan.nextLine();
                 if (Integer.parseInt(t) < 17 && Integer.parseInt(t) >= 9) {
-                    time = t;
+                    startTime = t;
                     catcher = false;
                 } else {
                     displayEvent.badTime();
@@ -360,20 +364,38 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-        String dateTime = date + "-" + time;
-        return dateTime;
+        catcher = true;
+        while (catcher) {
+
+            displayEvent.promptEndTime();
+            if (scan.hasNextInt()) {
+                String t = scan.nextLine();
+                if (Integer.parseInt(t) < 17 && Integer.parseInt(t) >= 9) {
+                    endTime = t;
+                    catcher = false;
+                } else {
+                    displayEvent.badTime();
+                }
+            }
+        }
+
+        List<String> dateTimes = new ArrayList<>();
+        dateTimes.add(date + "-" + startTime);
+        dateTimes.add(date + "-" + endTime);
+        return dateTimes;
     }
 
     /**
      * helper function to reschedule event
      *
-     * @param events   the event title
-     * @param dateTime the string representing date and time
+     * @param eventTitle the event title
+     * @param newStartDateTime the new start date and time for the event to be changed to
+     * @param newEndDateTime the new end date and time for the event to be changed to
      */
-    private void rescheduleEvent(String events, String dateTime) {
+    private void rescheduleEvent(String eventTitle, String newStartDateTime, String newEndDateTime) {
         if (controller != null) {
-            String e = event.getEventNames().get(events).getId();
-            if (controller.rescheduleEvent(e, dateTime)) {
+            String e = event.getEventNames().get(eventTitle).getId();
+            if (controller.rescheduleEvent(e, newStartDateTime, newEndDateTime)) {
                 displayEvent.successRescheduleEvent();
             } else {
                 displayEvent.failedRescheduleEvent();

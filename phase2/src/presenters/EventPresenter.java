@@ -98,6 +98,12 @@ public class EventPresenter {
     public void failed(){
         System.out.println("Sorry, there was a problem with your request.");
     }
+    /**
+     * Event not created
+     */
+    public void notCreated(){
+        System.out.println("Your event was not created.");
+    }
 
 
     /**

@@ -86,7 +86,7 @@ public class UserController {
 
     /***
      * return if the username already belongs to a user
-     * @param username
+     * @param username potential username 
      * @return true if the username already exists
      */
     public boolean usernameExists(String username){
@@ -389,7 +389,14 @@ public class UserController {
         return false;
     }
 
-    public boolean checkTimeConflict(String username, String dateTime) {
+    /***
+     * TODO
+     * @param username
+     * @param startDateTime
+     * @param endDateTime
+     * @return
+     */
+    public boolean checkTimeConflict(String username, String startDateTime, String endDateTime) {
         //return true if there is a conflict
         //String timeEvent = e.getEvent(event).getDateTime();
         if (user != null) {
@@ -399,17 +406,15 @@ public class UserController {
             if ((u != null) && u.getEventList() != null) {
 
                 for (int i = 0; i < u.getEventList().size(); i++) {
-
-                    String name = u.getEventList().get(i);
-
-                    String time = eventActions.getEvent(name).getDateTime();
-
-                    if (time.equals(dateTime)) {
-                        return true;
+                    boolean noConflict = true;
+                    String eventID = u.getEventList().get(i);
+                    if(eventActions.timeConflict(eventID, startDateTime, endDateTime)){
+                        return false;
                     }
-                }
-            }
 
+                }
+                return true;
+            }
             return false;
         }
         return false;
