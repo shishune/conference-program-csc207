@@ -98,7 +98,7 @@ public class UserController {
             // add receiver to contact list of sender
             user.addUserContactList(sender, receiver, usernameHash);
             user.addUserContactList(receiver, sender, usernameHash);
-            if(usernameHash.get(receiver) == null) {
+            if (usernameHash.get(receiver) == null) {
                 return false;
             }
             String receiverId = usernameHash.get(receiver).getId();
@@ -155,19 +155,19 @@ public class UserController {
             HashMap<String, User> userIdHash = returnUserIDHashMap();
             String receiverUsername = userIdHash.get(message.getReceiverId()).getUsername();
             String senderUsername = userIdHash.get(message.getSenderId()).getUsername();
-            if(senderUsername != null) {
+            if (senderUsername != null) {
                 info.add(senderUsername);
             }
-            if(receiverUsername != null){
+            if (receiverUsername != null) {
                 info.add(receiverUsername);
             }
-            if(message.getTimeSent() != null) {
+            if (message.getTimeSent() != null) {
                 info.add(message.getTimeSent());
             }
-            if(message.getMessage() != null){
+            if (message.getMessage() != null) {
                 info.add(message.getMessage());
             }
-            if(info.get(0) != null && info.get(1) != null && info.get(2) != null && info.get(3) != null){
+            if (info.get(0) != null && info.get(1) != null && info.get(2) != null && info.get(3) != null) {
                 messages.add(info);
             }
         }
@@ -190,7 +190,6 @@ public class UserController {
             for (String id : usersList) {
                 contacts.add(returnUserIDHashMap().get(id).getUsername());
             }
-            // TODO i think theres something wrong with the for loop here
         }
         return contacts;
     }
@@ -405,68 +404,4 @@ public class UserController {
         }
         return false;
     }
-
-//    // TODO ??? can this be here?
-//    public boolean leaveEvent(String eventName, String userId) {
-//        // String username = this.returnUserIDHashMap().get(userId).getUsername();
-//        // String username = this.attendee.returnUsersHashMap().get(userId).getUsername(); <-- original
-//        // i just took away the attendee in this.attendee but i wasnt sure if the 'this' was important
-//        // i chnged it because i made a master hashmap and the method is now in usercontroller not attendee
-//        String eventID = e.getEventFromName(eventName).getId();
-//        return this.attendee.removeEventFromUser(eventID, userId);
-//    }
 }
-
-
-//    public boolean cancelSpotEvent(String event, String user){
-//        AttendeeActions a = new AttendeeActions();
-//        User a1 = a.usersHashMap.get(user);
-//        String userId = a1.getId();
-//        if (userId.charAt(0) == 'A') {
-//            if () {
-//                EventActions e = new EventActions();
-//                e.events.get(event).removeAttendee(user);
-//
-//                Event e1 = e.events.get(event);
-//                AttendeeActions a = new AttendeeActions();
-//                User a1 = a.usersHashMap.get(user);
-//
-//                e.removeAttendee(e1.getId(), a1.getId());
-//                a1.getEventList().remove(event);
-//                return true;
-//            }
-//        }
-//
-//    };
-//ODO: organizers are the only ones that can cancel events (unfinished)
-
-//------------------------------------------
-
-//        Iterator<HashMap.Entry<String,Event>> it = e.events.entrySet().iterator();
-//        while (it.hasNext()){
-//            HashMap.Entry<String, Event> p = (HashMap.Entry <String, Event>)it.next();
-//            availableS.append(p);
-//            it.remove();
-//        }
-//        return availableS.toString();
-//ODO: this might not work, would rather use a list
-
-//        String availableEvents;
-//        for (int i = 0; i < allEvents.size(); i++) {
-//
-//            Event curr = e.events.get()
-
-//------------------------------------------
-
-/*      Send and receive messages
-        Add contacts
-        Delete/Block Contact
-        View Message
-        Sign-up for events
-        Cancel Spot in Event
-        View their own schedule (s)
-        View available schedule(s)
-        Number of spots left
-        Check conflict with timing and spots*/
-
-

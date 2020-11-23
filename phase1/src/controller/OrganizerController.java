@@ -145,8 +145,6 @@ public class OrganizerController extends UserController {
         return false;
     }
 
-    // TODO edit event details... is this necessary?
-
     /***
      * reschedule an event with a new date and time
      * @param eventID
