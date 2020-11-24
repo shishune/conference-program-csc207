@@ -155,9 +155,9 @@ public class MessagePresenter {
     public void invalidCapaity(){System.out.println("Seems like that wasn't a number, please try again");}
 
     /**
-     * A message informing user that their input is invalid
+     * A message informing user that their input is invalid ie emprty or a veriation of 'x'
      * */
-    public void invalidInput(){System.out.println("Your input is invalid please try again");}
+    public void invalidInput(){System.out.println("Your input is invalid and either empty or 'x'. Please try again");}
 
     /**
      * A message informing user that they are exiting their current task

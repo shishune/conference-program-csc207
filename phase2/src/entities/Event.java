@@ -8,7 +8,8 @@ public class Event {
     private String eventID;
     private String title;
     private String speaker;
-    private String dateTime; //  yyyy-mm-dd hh  (24 h)
+    private String startDateTime; //  yyyy-mm-dd hh  (24 h)
+    private String endDateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;
     private int capacity;
@@ -17,19 +18,21 @@ public class Event {
      * Instantiates a new attendee object
      * @param eventID the string unique id of this event
      * @param title the string name of this event
-     * @param dateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
+     * @param startDateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
+     * @param endDateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
      * @param speaker the string of the name of speaker of this event
      * @param attendees the list of people whom this attendee can event
      * @param roomID the string of the ID of the room of this event
      * */
 
 
-    public Event(String eventID, String title, String speaker, String dateTime,
+    public Event(String eventID, String title, String speaker, String startDateTime, String endDateTime,
                  List<String> attendees, String roomID, int capacity){
         this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
-        this.dateTime = dateTime;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         this.attendees = attendees;
         this.roomID = roomID;
         this.capacity = capacity;
@@ -43,7 +46,7 @@ public class Event {
         // date: year month day hour
         String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return eventID + "," + title + "," + speaker + "," +
-                this.dateTime + "," + attendeesString + "," + roomID + "," + capacity;
+                this.startDateTime + ","+ this.endDateTime + ","+ attendeesString + "," + roomID + "," + capacity;
     }
 
 
@@ -95,18 +98,40 @@ public class Event {
     }
 
     /**
+     * Return dateTime of event
+     * @return dateTime of event
+     * */
+    public String getDateTime() {
+        return startDateTime + " to " + endDateTime;
+    }
+
+    /**
      * Return startHour of event
      * @return startHour of event
      * */
-    public String getDateTime() {
-        return this.dateTime;
+    public String getStartDateTime() {
+        return this.startDateTime;
     }
     /**
      * set startHour for event
      * @param newDateTime date and hour event starts  yyyy-mm-dd hh  (24 h)
      * */
-    public void setDateTime(String newDateTime) {
-        this.dateTime = newDateTime;
+    public void setStartTime(String newDateTime) {
+        this.startDateTime = newDateTime;
+    }
+    /**
+     * Return endHour of event
+     * @return startHour of event
+     * */
+    public String getEndDateTime() {
+        return this.endDateTime;
+    }
+    /**
+     * set endHour for event
+     * @param newDateTime date and hour event starts  yyyy-mm-dd hh  (24 h)
+     * */
+    public void setEndDateTime(String newDateTime) {
+        this.endDateTime = newDateTime;
     }
 
     /**

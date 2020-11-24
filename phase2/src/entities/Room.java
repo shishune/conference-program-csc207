@@ -16,7 +16,7 @@ public class Room {
      * @param roomId the unique id of this room
      */
     public Room(String roomId, String roomName){
-        this.capacity = 2;
+        this.capacity = 8;
         this.roomId = roomId;
         this.roomName = roomName;
     }
