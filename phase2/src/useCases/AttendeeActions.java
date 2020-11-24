@@ -1,7 +1,6 @@
 package useCases;
 
 import entities.Attendee;
-import entities.Event;
 import entities.User;
 import gateways.LoadUpIGateway;
 
@@ -63,8 +62,8 @@ public class AttendeeActions extends UserAccountActions {
      * @param isLogin
      * This will create a new Attendee (Will need the overloaded function for phase 2)
      * */
-    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
+    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin) {
+        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         return userAttendee;
@@ -89,10 +88,10 @@ public class AttendeeActions extends UserAccountActions {
      * @param isLogin
      * This will create a new Attendee
      * */
-    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();
-        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, isLogin, false);
+        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         attendeesHashMap.put(userId, userAttendee);
@@ -316,8 +315,10 @@ public class AttendeeActions extends UserAccountActions {
                 String[] attendeeInfo = attendeeString.split(",");
                 ArrayList<String> eventList = new ArrayList<String>();
                 ArrayList<String> contactList = new ArrayList<String>();
+                ArrayList<String> savedEventList = new ArrayList<String>();
                 String[] events = attendeeInfo[4].split("%%");
                 String[] contacts = attendeeInfo[3].split("%%");
+                String[] savedEvents = attendeeInfo[5].split("%%");
                 for (String e : events) {
                     if (!e.equals("")) {
                         eventList.add(e);
@@ -328,8 +329,13 @@ public class AttendeeActions extends UserAccountActions {
                         contactList.add(c);
                     }
                 }
+                for (String s : savedEvents) {
+                    if(!s.equals("")) {
+                        savedEventList.add(s);
+                    }
+                }
                 Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
-                        eventList, Boolean.parseBoolean(attendeeInfo[5]), Boolean.parseBoolean(attendeeInfo[6]));
+                        eventList, savedEventList, Boolean.parseBoolean(attendeeInfo[6]), Boolean.parseBoolean(attendeeInfo[7]));
                 attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
                 attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }

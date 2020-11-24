@@ -148,7 +148,7 @@ public class OrganizerController extends UserController {
                 return false;
             }
 
-            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), false);
+            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false);
 
             return true;
         }

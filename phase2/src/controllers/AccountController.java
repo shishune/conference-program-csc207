@@ -1,13 +1,13 @@
 package controllers;
+
+import entities.Attendee;
 import entities.Organizer;
 import entities.Speaker;
-import entities.Attendee;
 import gateways.LoadUp;
 import gateways.LoadUpIGateway;
 import gateways.Store;
 import presenters.AccountPresenter;
 import useCases.RoomActions;
-import controllers.UserController;
 
 import java.util.Scanner;
 
@@ -138,7 +138,7 @@ public class AccountController {
                         menuController.option8();
                     } else if (menuOption.equals("9") && (type.equals("A") || type.equals("O"))) {
                         menuController.option9();}
-                    else if (menuOption.equals("10") && (type.equals("O"))) {
+                    else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
                         menuController.option10();
                     } else if (menuOption.equals("11") && (type.equals("O"))) {
                         menuController.option11();

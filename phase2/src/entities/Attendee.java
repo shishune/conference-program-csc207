@@ -18,7 +18,7 @@ public class Attendee extends User {
      * */
 
 
-    public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer, List<String> savedEventList){
+    public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isOrganizer){
         super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList and userId to constructor (Jiessie)
         this.savedEventList = savedEventList;
     }

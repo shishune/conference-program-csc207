@@ -22,6 +22,7 @@ public class AttendeeAccountPresenter extends AccountPresenter {
                 + "\n[7] Cancel enrollment for an event"
                 + "\n[8] View all events"
                 + "\n[9] View your schedule of events"
+                + "\n[10] View your saved events"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

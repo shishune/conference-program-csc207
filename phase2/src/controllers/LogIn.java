@@ -98,7 +98,7 @@ public class LogIn {
 //                    return false;
 //                }
             } else if (userType.equals("3")) {
-                attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+                attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
 //                if (!attendeeActions.attendeeExists(username)) {
 //                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);

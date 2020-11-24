@@ -1,8 +1,8 @@
 package presenters;
-import java.util.List;
-import java.util.ArrayList;
-
 import controllers.UserController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
@@ -134,6 +134,13 @@ public class MessagePresenter {
      * */
     public void noEventsSignUp(){
         System.out.println("You are not signed up for any events.");
+    }
+
+    /**
+     * Message informing user has no saved events
+     * */
+    public void noSavedEvents(){
+        System.out.println("You didn't save any events");
     }
 
     /**
