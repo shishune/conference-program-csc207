@@ -368,7 +368,7 @@ public class AttendeeActions extends UserAccountActions {
     }
 
     /**
-     * Adds an user to existing list of saved events for an user.
+     * Adds an event to list of saved events for an user.
      *
      * @param event the name of the event to be added
      * @param user  the username of the user who's event list is updated
@@ -389,7 +389,7 @@ public class AttendeeActions extends UserAccountActions {
     }
 
     /**
-     * Removes an event from existing list of saved events from an user.
+     * Removes an event from list of saved events for an user.
      *
      * @param eventID the event to be removed
      * @param userID  the user who's event list is updated
