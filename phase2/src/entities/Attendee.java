@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Attendee extends User {
 
+    private List<String> savedEventList;
+
     /**
      * Instantiates a new attendee object
      * @param attendeeId the string unique id of this attendee
@@ -14,8 +16,11 @@ public class Attendee extends User {
      * @param isLogin boolean whether this attendee has an account
      * @param isOrganizer boolean whether this attendee is an organizer
      * */
-    public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
+
+
+    public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer, List<String> savedEventList){
         super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer); //added eventList and userId to constructor (Jiessie)
+        this.savedEventList = savedEventList;
     }
 
     /**
@@ -24,5 +29,13 @@ public class Attendee extends User {
      * */
     public String getId() {
         return userId;
+    }
+
+    public void setSavedEventList(List<String> savedEventList) {
+        this.savedEventList = savedEventList;
+    }
+
+    public List<String> getSavedEventList() {
+        return savedEventList;
     }
 }
