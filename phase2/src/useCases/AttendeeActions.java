@@ -1,7 +1,8 @@
 package useCases;
 
-import entities.User;
 import entities.Attendee;
+import entities.Event;
+import entities.User;
 import gateways.LoadUpIGateway;
 
 import java.util.ArrayList;
@@ -365,4 +366,47 @@ public class AttendeeActions extends UserAccountActions {
         }
         return storedAttendee;
     }
+
+    /**
+     * Adds an user to existing list of saved events for an user.
+     *
+     * @param event the name of the event to be added
+     * @param user  the username of the user who's event list is updated
+     * @return true if event is added successfully, false if not
+     */
+
+    public boolean addEventToSavedEvent(String event, String user) {
+        Attendee userOne = attendeeUsernameHashMap.get(user);
+        boolean isPresent = userOne.getSavedEventList().contains(event);
+        if (isPresent) {
+            return false;
+        } else {
+            List<String> userSavedEvents = userOne.getSavedEventList();
+            userSavedEvents.add(event);
+            userOne.setEventList(userSavedEvents);
+            return true;
+        }
+    }
+
+    /**
+     * Removes an event from existing list of saved events from an user.
+     *
+     * @param eventID the event to be removed
+     * @param userID  the user who's event list is updated
+     * @return true if event is removed successfully, false if not
+     */
+
+    public boolean removeEventFromSavedEvent(String eventID, String userID) {
+        Attendee userOne = attendeesHashMap.get(userID);
+        boolean isPresent = userOne.getSavedEventList().contains(eventID);
+        if (isPresent) {
+            List<String> userSavedEvents = userOne.getSavedEventList();
+            userSavedEvents.remove(eventID);
+            userOne.setSavedEventList(userSavedEvents);
+            return true;
+        }
+        return false;
+    }
+
+
 }
