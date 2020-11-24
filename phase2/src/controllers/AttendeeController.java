@@ -31,4 +31,24 @@ public class AttendeeController extends UserController {
         return this.attendee.removeEventFromUser(eventID, userId);
     }
 
+    /**
+     * Saves an event to list of saved events for an user.
+     * @param eventName the name of the event to be save
+     * @param userName the username of the user who's saved event list is updated
+     * @return true if the event is successfully saved return false if not
+     */
+    public boolean saveEvent(String eventName, String userName){
+        return this.attendee.addEventToSavedEvent(eventName, userName);
+    }
+
+    /**
+     * Removes an event from list of saved events for an user
+     * @param eventName the name of the event to be removed
+     * @param userID the id of the user who's saved event list is updated
+     * @return true if the event is successfully removed return false if not
+     */
+    public boolean unSaveEvent(String eventName, String userID){
+        String eventID = e.getEventFromName(eventName).getId();
+        return this.attendee.removeEventFromSavedEvent(eventID, userID);
+    }
 }
