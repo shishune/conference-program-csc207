@@ -1,4 +1,5 @@
 package useCase;
+import entity.Attendee;
 import entity.Event;
 import gateway.LoadUpIGateway;
 import useCase.GenerateID;
@@ -13,7 +14,7 @@ import java.util.*;
  */
 
 public class EventActions  {
-    private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
+    public HashMap<String, Event> events = new HashMap<String, Event>(); // public private
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
@@ -360,4 +361,35 @@ public class EventActions  {
         return attendees.get(eventID);
     }
 
+
+    /**
+     *
+     * @return
+     */
+    public Integer numberEventsAvailable(){
+        Integer total = 0;
+        for (object : eventNames) {
+            total++;
+        }
+        return total;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public String mostAttendedEvents() {
+        int maxSize = Integer.MIN_VALUE;
+        for (String e : attendees.keySet()) {
+            if (maxSize < attendees.get(e).size()) {
+                maxSize = attendees.get(e).size();
+            }
+            return e;
+        }
+        return null;
+    }
 }
+
+
+

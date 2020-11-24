@@ -10,13 +10,8 @@ public class AttendeeController extends UserController {
     private useCase.AttendeeActions attendee;
 
     /**
-     *
-     * @param events
-     * @param rooms
-     * @param message
-     * @param attendee
-     * @param organizer
-     * @param speaker
+     *Instantiates a new AttendeeController object. Creates an instance of SpeakerID, MessageActions, EventActions
+     * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
      */
     public AttendeeController(useCase.EventActions events, RoomActions rooms, useCase.MessageActions message,
                               useCase.AttendeeActions attendee, useCase.OrganizerActions organizer, useCase.SpeakerActions speaker ) {

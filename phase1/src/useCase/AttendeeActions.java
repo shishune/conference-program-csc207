@@ -355,7 +355,6 @@ public class AttendeeActions extends UserAccountActions {
         return storedAttendee;
     }
 
-
     /**
      * It will be get the attendee ID
      * @return ArrayList<String>
@@ -369,4 +368,18 @@ public class AttendeeActions extends UserAccountActions {
         }
         return storedAttendee;
     }
+
+
+    /**
+     *
+     * @return
+     */
+    public Integer totalNumberAttendees(){
+        Integer total = 0;
+        for (object : attendeesHashMap) {
+            total++;
+        }
+        return total;
+    }
+
 }
