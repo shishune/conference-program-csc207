@@ -393,7 +393,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
             int t1 = scan.nextInt();
             if (t1 < 17 && t1 >= 9){
-                startTime = String.valueOf(t1);
+                endTime = String.valueOf(t1);
                 catcher = false;
             }
             else{
