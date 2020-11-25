@@ -341,7 +341,6 @@ public class AttendeeActions extends UserAccountActions {
                 attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
                 attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }
-
         }
     }
 

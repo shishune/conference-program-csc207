@@ -143,5 +143,6 @@ public class AccountPresenter {
      * */
     public void VIPStatusPrompt(){System.out.println("Please input 'VIP' if you are a VIP attendee, otherwise press any other key");}
 
-
 }
+
+

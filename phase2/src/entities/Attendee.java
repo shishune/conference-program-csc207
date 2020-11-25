@@ -64,4 +64,6 @@ public class Attendee extends User {
         String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return userId + "," + username + "," + password + "," + contacts + "," + events + "," + savedEventList + "," + isLogin + "," +isOrganizer + "," +isVIP;
     }
+
+
 }
