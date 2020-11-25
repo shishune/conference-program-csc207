@@ -7,7 +7,7 @@ import java.util.Date;
 public class Event {
     private String eventID;
     private String title;
-    private String speaker;
+    private List<String> speakers;
     private String startDateTime; //  yyyy-mm-dd hh  (24 h)
     private String endDateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
@@ -28,11 +28,11 @@ public class Event {
      * */
 
 
-    public Event(String eventID, String title, String speakers, String startDateTime, String endDateTime,
+    public Event(String eventID, String title, List<String> speakers, String startDateTime, String endDateTime,
                  List<String> attendees, String roomID, int capacity, boolean isVIP){
         this.eventID = eventID;
         this.title = title;
-        this.speaker = speakers;
+        this.speakers = speakers;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.attendees = attendees;
@@ -61,7 +61,7 @@ public class Event {
     public String string(){
         // date: year month day hour
         String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
-        return eventID + "," + title + "," + speaker + "," +
+        return eventID + "," + title + "," + speakers + "," +
                 this.startDateTime + ","+ this.endDateTime + ","+ attendeesString + "," + roomID + "," + capacity + "," + isVIP;
     }
 
@@ -86,15 +86,15 @@ public class Event {
      * Return speaker of event
      * @return ID of speaker of event
      * */
-    public String getSpeaker() {
-        return this.speaker;
+    public List<String> getSpeaker() {
+        return this.speakers;
     }
     /**
      * set speaker for event
-     * @param speaker new speaker's id
+     * @param speakers new speakers' ids
      * */
-    public void setSpeaker(String speaker) {
-        this.speaker = speaker;
+    public void setSpeaker(List<String> speakers) {
+        this.speakers = speakers;
     }
 
 
