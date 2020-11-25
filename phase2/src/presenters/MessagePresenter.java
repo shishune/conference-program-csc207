@@ -162,7 +162,7 @@ public class MessagePresenter {
     public void invalidCapaity(){System.out.println("Seems like that wasn't a number, please try again");}
 
     /**
-     * A message informing user that their input is invalid ie emprty or a veriation of 'x'
+     * A message informing user that their input is invalid ie empty or a variation of 'x'
      * */
     public void invalidInput(){System.out.println("Your input is invalid and either empty or 'x'. Please try again");}
 
@@ -170,5 +170,6 @@ public class MessagePresenter {
      * A message informing user that they are exiting their current task
      * */
     public void exit(){System.out.println("Exiting...");}
+
 
 }

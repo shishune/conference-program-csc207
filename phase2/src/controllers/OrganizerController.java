@@ -142,13 +142,13 @@ public class OrganizerController extends UserController {
      * @param username username of attendee
      * @param password password of attendee
      */
-    public boolean createAttendee(String username, String password){
+    public boolean createAttendee(String username, String password, boolean isVIP){
         if(attendeeActions != null) {
             if (attendeeActions.findUserFromUsername(username) != null) { // if attendee username exists
                 return false;
             }
 
-            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false);
+            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, isVIP);
 
             return true;
         }

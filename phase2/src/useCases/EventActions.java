@@ -459,11 +459,14 @@ public class EventActions  {
         Integer total = 0;
         for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
             for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
-                if (entry1.getValue().size() = entry2.getValue();
+                if (entry1.getValue().size() == entry2.getValue());
             {
                 total++;
             }
         }
         return total;
     }
+        return null;
+}
+
 }

@@ -59,11 +59,12 @@ public class AttendeeActions extends UserAccountActions {
      * @param password the password of the attendee
      * @param contactsList the contact list of the attendee
      * @param eventList the list of events the attending is attending
-     * @param isLogin
+     * @param isLogin the login status of the attendee
+     * @param isVIP the VIP status of the attendee
      * This will create a new Attendee (Will need the overloaded function for phase 2)
      * */
-    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin) {
-        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false);
+    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
+        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false, isVIP);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         return userAttendee;
@@ -85,13 +86,14 @@ public class AttendeeActions extends UserAccountActions {
      * @param password the password of the attendee
      * @param contactsList the contact list of the attendee
      * @param eventList the list of events the attendee is attending
-     * @param isLogin
+     * @param isLogin the login status of the attendee
+     * @param isVIP the VIP status of the attendee
      * This will create a new Attendee
      * */
-    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin) {
+    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();
-        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false);
+        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false, isVIP);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         attendeesHashMap.put(userId, userAttendee);
@@ -335,7 +337,7 @@ public class AttendeeActions extends UserAccountActions {
                     }
                 }
                 Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
-                        eventList, savedEventList, Boolean.parseBoolean(attendeeInfo[6]), Boolean.parseBoolean(attendeeInfo[7]));
+                        eventList, savedEventList, Boolean.parseBoolean(attendeeInfo[6]), Boolean.parseBoolean(attendeeInfo[7]), Boolean.parseBoolean(attendeeInfo[8]));
                 attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
                 attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }

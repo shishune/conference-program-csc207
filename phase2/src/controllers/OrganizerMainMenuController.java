@@ -514,8 +514,14 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else if (controller != null && validInput(newAttendeeUsername)) {
                 displayMessage.userPasswordPrompt();
                 String newAttendeePassword = scan.nextLine();
+                displayEvent.VIPStatusPrompt();
+                boolean VIPStatus = false;
+                String responseInput = scan.nextLine();
+                if (responseInput.equals("VIP")) {
+                    VIPStatus = true;
+                }
                 if (validInput(newAttendeePassword)) {
-                    controller.createAttendee(newAttendeeUsername, newAttendeePassword);
+                    controller.createAttendee(newAttendeeUsername, newAttendeePassword, VIPStatus);
                     displayMessage.userCreated();
                     return newAttendeeUsername;
                 } else {

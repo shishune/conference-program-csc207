@@ -39,13 +39,16 @@ public class LogIn {
             accountDisplay.printSignUpMenu();
             String loginOption = scan.nextLine();
             if (loginOption.equals("x") || loginOption.equals("X")) {
+
             accountDisplay.promptUsername();
             String username = scan.nextLine();  // Read user input
 
             accountDisplay.promptPassword();
             String password = scan.nextLine();  // Read user input
 
-                accountDisplay.printUserTypeMenu();
+
+            accountDisplay.printUserTypeMenu();
+
                 if(signUpCheck(username, password, userController, organizerActions, speakerActions, attendeeActions)){
                     accountDisplay.successSignUp();
                     break;
@@ -98,7 +101,16 @@ public class LogIn {
 //                    return false;
 //                }
             } else if (userType.equals("3")) {
-                attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), false);
+
+                accountDisplay.VIPStatusPrompt();
+                boolean VIPStatus = false;
+                String responseInput = scan.nextLine();
+
+                if (responseInput.equals("VIP")) {
+                    VIPStatus = true;
+                }
+
+                attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), false, false);
                 return true;
 //                if (!attendeeActions.attendeeExists(username)) {
 //                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);

@@ -138,4 +138,10 @@ public class AccountPresenter {
     public void printTypingError(){System.out.println(("There was an mistake with your answer. Please try again."));}
 
 
+    /**
+     * A prompt asking the user for their VIP status
+     * */
+    public void VIPStatusPrompt(){System.out.println("Please input 'VIP' if you are a VIP attendee, otherwise press any other key");}
+
+
 }
