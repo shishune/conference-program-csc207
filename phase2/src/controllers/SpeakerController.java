@@ -10,8 +10,7 @@ import java.util.List;
 /***
  * A speaker controller. Includes all the abilities only speakers can complete.
  */
-
-public class SpeakerController extends UserController {
+public class SpeakerController extends UserController{
     private String SpeakerID;
     public useCases.MessageActions messageActions; // = super.getMessages();
     public useCases.EventActions eventActions; // = super.getEvents();

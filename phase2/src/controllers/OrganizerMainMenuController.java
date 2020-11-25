@@ -161,7 +161,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-        List<String> speakerIDs = new ArrayList<>();
+        List<String> speakerUsernames = new ArrayList<>();
         displayMessage.zeroSpeakers();//
         String zeroSpeaker = scan.nextLine();
         String speakerId = "";
@@ -172,18 +172,17 @@ public class OrganizerMainMenuController extends MainMenuController {
             int i = 0;
             while (i < Integer.parseInt(numberOfSpeakers)) {
                 boolean catcherUserName = true;
-                while (catcherUserName) {
+                while (catcherUserName && i < Integer.parseInt(numberOfSpeakers)) {
                     displayMessage.newOrNoSpeaker();
                     String speakerUserName = scan.nextLine();
+                    i++;
 
                     if (speakerUserName.equalsIgnoreCase("NEW")) {
                         String speakerUsername = createSpeaker();
                         if (speakerUserName != null) {
                             speakerId = speaker.getIDFromName(speakerUsername);
-                            speakerIDs.add(speakerId);
+                            speakerUsernames.add(speakerUsername);
                             displayMessage.speakerAdded();
-                            i ++;
-                            catcherUserName = false;
                         }
 
                     } else {
@@ -200,18 +199,20 @@ public class OrganizerMainMenuController extends MainMenuController {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
                                             catcher1 = false;
+
                                         } else {
-                                            speakerIDs.add(speakerId);
+                                            speakerUsernames.add(speakerId);
                                             displayMessage.speakerAdded();
-                                            i++;
-                                            catcher1 = false;
-                                            catcherUserName = false;
+
                                         }
                                     }
+                                    speakerUserName = speakerUser;
+                                    catcher1 = false;
+                                    catcherUserName = false;
                                 } else {
                                     displayMessage.speakerDoesNotExist();
                                 }
-//                                catcher1 = false; // why
+                                catcher1 = false;
                             }
                         }
                     }
