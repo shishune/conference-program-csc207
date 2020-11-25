@@ -22,17 +22,17 @@ public class Event {
      * @param title the string name of this event
      * @param startDateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
      * @param endDateTime the string of the date of this event which is yyyy-mm-dd hh an d is 24 hour
-     * @param speaker the string of the name of speaker of this event
+     * @param speakers the list of strings of the ids of each speaker of this event
      * @param attendees the list of people whom this attendee can event
      * @param roomID the string of the ID of the room of this event
      * */
 
 
-    public Event(String eventID, String title, String speaker, String startDateTime, String endDateTime,
+    public Event(String eventID, String title, String speakers, String startDateTime, String endDateTime,
                  List<String> attendees, String roomID, int capacity, boolean isVIP){
         this.eventID = eventID;
         this.title = title;
-        this.speaker = speaker;
+        this.speaker = speakers;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.attendees = attendees;

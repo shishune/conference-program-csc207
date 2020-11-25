@@ -133,6 +133,12 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      */
     public void newOrNoSpeaker(){System.out.println("Enter 'NEW' to create new speaker or another other key if speaker exists.");}
 
+
+    /**
+     * Message telling speaker has successfully been added
+     */
+    public void speakerAdded(){System.out.println("User has successfully been added");}
+
     /**
      * Message stating that the room already exists
      */

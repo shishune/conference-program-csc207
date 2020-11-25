@@ -180,6 +180,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                         String speakerUsername = createSpeaker();
                         if (speakerUserName != null) {
                             speakerId = speaker.getIDFromName(speakerUsername);
+                            i ++;
                         }
 
                     } else {
@@ -196,6 +197,10 @@ public class OrganizerMainMenuController extends MainMenuController {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
                                             catcher1 = false;
+                                        } else {
+                                            displayMessage.speakerAdded();
+                                            i++;
+
                                         }
                                     }
                                     speakerUserName = speakerUser;
