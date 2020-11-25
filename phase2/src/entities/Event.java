@@ -13,6 +13,8 @@ public class Event {
     private List<String> attendees;
     private String roomID;
     public int capacity;
+    private boolean isVIP;
+
 
     /**
      * Instantiates a new attendee object
@@ -27,7 +29,7 @@ public class Event {
 
 
     public Event(String eventID, String title, String speaker, String startDateTime, String endDateTime,
-                 List<String> attendees, String roomID, int capacity){
+                 List<String> attendees, String roomID, int capacity, boolean isVIP){
         this.eventID = eventID;
         this.title = title;
         this.speaker = speaker;
@@ -36,7 +38,21 @@ public class Event {
         this.attendees = attendees;
         this.roomID = roomID;
         this.capacity = capacity;
+        this.isVIP = isVIP;
 
+    }
+    /**
+     * @return isVip of Event entity
+     */
+    public boolean getIsVip() {
+        return isVIP;
+    }
+    /**
+     * Setter isVip of Event entity
+     * @param newVip the new vip boolean
+     */
+    public void setVIP(boolean newVip){
+        this.isVIP = newVip;
     }
 
     /**
@@ -46,7 +62,7 @@ public class Event {
         // date: year month day hour
         String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return eventID + "," + title + "," + speaker + "," +
-                this.startDateTime + ","+ this.endDateTime + ","+ attendeesString + "," + roomID + "," + capacity;
+                this.startDateTime + ","+ this.endDateTime + ","+ attendeesString + "," + roomID + "," + capacity + "," + isVIP;
     }
 
 

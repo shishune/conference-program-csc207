@@ -178,4 +178,14 @@ public class OrganizerEventPresenter extends EventPresenter {
      */
     public void warning(){System.out.println("WARNING: You are about to exit without saving your information. Enter 'x' to leave or any key to go back.");}
 
+    /**
+     * Asks user if event is a vip event
+     */
+    public void promptVIP(){System.out.println("Is this a VIP event? Enter 'Y' for Yes and 'N' for No.");}
+
+    /**
+     * Tells user that their input is not valid
+     */
+    public void bad(){System.out.println("That is not a valid input. Try again.");}
+
 }

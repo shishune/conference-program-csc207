@@ -111,6 +111,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option6() {
         displayEvent.promptTitle();
         String title = "";
+        boolean isVip = false;
 
         while (true) {
             //displayEvent.promptTitle();
@@ -120,7 +121,15 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else if (event.eventNameExists(title)) {
                 displayEvent.eventExists();
             } else {
-                break;
+                displayEvent.promptVIP();
+                String vip = scan.nextLine();
+                if (vip.equals("Y") || vip.equals("y")){
+                    isVip = true;
+                    break;
+                }
+                else{
+                    displayEvent.bad();
+                }
             }
         }
 
@@ -220,7 +229,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null && event != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerId, dateTimes.get(0), dateTimes.get(1), roomID, capacity);
+            List<Boolean> checks = controller.createEvent(title, speakerId, dateTimes.get(0), dateTimes.get(1), roomID, capacity, isVip);
 
 
             if (checks.get(0) && checks.size() == 1) {
@@ -350,32 +359,37 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         catcher = true;
-        while (catcher) {
-
+        while(catcher){
             displayEvent.promptStartTime();
-            if (scan.hasNextInt()) {
-                String t = scan.nextLine();
-                if (Integer.parseInt(t) < 17 && Integer.parseInt(t) >= 9) {
-                    startTime = t;
-                    catcher = false;
-                } else {
+            while (!scan.hasNextInt()) {
                     displayEvent.badTime();
+                    scan.next();
                 }
+            int t1 = scan.nextInt();
+            if (t1 < 17 && t1 >= 9){
+                startTime = String.valueOf(t1);
+                catcher = false;
+            }
+            else{
+                displayEvent.badTime();
             }
         }
 
-        catcher = true;
-        while (catcher) {
 
+        catcher = true;
+        while(catcher){
             displayEvent.promptEndTime();
-            if (scan.hasNextInt()) {
-                String t = scan.nextLine();
-                if (Integer.parseInt(t) < 17 && Integer.parseInt(t) >= 9) {
-                    endTime = t;
-                    catcher = false;
-                } else {
-                    displayEvent.badTime();
-                }
+            while (!scan.hasNextInt()) {
+                displayEvent.badTime();
+                scan.next();
+            }
+            int t1 = scan.nextInt();
+            if (t1 < 17 && t1 >= 9){
+                startTime = String.valueOf(t1);
+                catcher = false;
+            }
+            else{
+                displayEvent.badTime();
             }
         }
 

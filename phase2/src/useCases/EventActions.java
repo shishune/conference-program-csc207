@@ -141,7 +141,7 @@ public class EventActions  {
                 String[] eventAttributes = event.split(",");
                     List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
                     loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3], eventAttributes[4],
-                            eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]));
+                            eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]), Boolean.parseBoolean(eventAttributes[8]));
             }
         }
     }
@@ -155,17 +155,18 @@ public class EventActions  {
      * @param endDateTime the end date and time for the event
      * @param attendees list of attendees of event
      * @param roomID id of room
+     * @param isVip if event is a vip event
      * @return true if the event was created
      * */
     public Event createEvent(String title, String speakerId, String startDateTime, String endDateTime,
-                               List<String> attendees, String roomID, int capacity){
+                               List<String> attendees, String roomID, int capacity, boolean isVip){
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 
             useCases.GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
 
-            return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
+            return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
         }
         return null;
     }
@@ -191,14 +192,15 @@ public class EventActions  {
      * @param endDateTime the end date and time for the event
      * @param attendees list of attendees of event
      * @param roomID id of room
+     * @param isVip if event is a vip event
      */
     public Event loadEvent(String eventID, String title, String speakerId, String startDateTime, String endDateTime,
-                          List<String> attendees, String roomID, int capacity) {
+                          List<String> attendees, String roomID, int capacity, boolean isVip) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }
-        Event newEvent = new Event(eventID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
+        Event newEvent = new Event(eventID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
         events.put(eventID, newEvent);
         eventNames.put(title, newEvent);
         this.attendees.put(eventID, attendees);
