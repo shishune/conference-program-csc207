@@ -4,6 +4,7 @@ import entities.Event;
 import gateways.LoadUpIGateway;
 
 import java.util.*;
+import java.util.ArrayList;
 
 /**
  * A use case class that stores a hashmap of Events.
@@ -14,6 +15,7 @@ import java.util.*;
 
 public class EventActions  {
     public HashMap<String, Event> events = new HashMap<String, Event>(); // public private
+    public HashMap<String, Integer> eventCapacity = new HashMap<String, Integer>(); //eventID: capacity
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
@@ -452,12 +454,17 @@ public class EventActions  {
         return null;
     }
 
-//    public Integer numberEventsFull(){
-//        Integer total = 0;
-//            if (roomUsername.containsKey(roomUsername.Event.capacity){
-//                total ++;
-//            }
-//        } return total;
-//    }
+    public Integer getEventCapacity(String eventID) {return eventCapacity.get(eventID);
+    }
 
+    public Integer numberEventsFull(String eventID) {
+        Integer total = 0;
+        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
+            if (entry.getEventCapacity(eventID) = entry.getEventCapacity()) ;
+            {
+                total++;
+            }
+        }
+        return total;
+    }
 }
