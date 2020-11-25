@@ -12,7 +12,7 @@ public class Event {
     private String endDateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;
-    private int capacity;
+    public int capacity;
 
     /**
      * Instantiates a new attendee object

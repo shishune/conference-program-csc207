@@ -420,7 +420,7 @@ public class AttendeeActions extends UserAccountActions {
          */
         public Integer totalNumberAttendees(){
             Integer total = 0;
-            for (object : attendeesHashMap) {
+            for (Map.Entry<String, Attendee> entry : attendeesHashMap.entrySet()) {
                 total++;
             }
             return total;

@@ -1,4 +1,5 @@
 package useCases;
+import entities.Attendee;
 import entities.Event;
 import gateways.LoadUpIGateway;
 
@@ -429,7 +430,7 @@ public class EventActions  {
      */
     public Integer numberEventsAvailable(){
         Integer total = 0;
-        for (object : eventNames) {
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
             total++;
         }
         return total;
@@ -453,12 +454,10 @@ public class EventActions  {
 
 //    public Integer numberEventsFull(){
 //        Integer total = 0;
-//        for (object: eventNames){
-//            if eventNames.containsKey(Event.capacity){
+//            if (roomUsername.containsKey(roomUsername.Event.capacity){
 //                total ++;
 //            }
 //        } return total;
 //    }
-
 
 }
