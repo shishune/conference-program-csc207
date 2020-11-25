@@ -161,7 +161,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-
+        List<String> Listofspeakers = new ArrayList<>();
         displayMessage.zeroSpeakers();//
         String zerospeaker = scan.nextLine();
         String speakerId = "";
@@ -170,7 +170,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.numberOfSpeaker();
             String numberOfSpeakers = scan.nextLine();
             Integer i = 0;
-            while (i < Integer.valueOf(numberOfSpeakers)) {
+            while (i < Integer.parseInt(numberOfSpeakers)) {
                 boolean catcherUserName = true;
                 while (catcherUserName) {
                     displayMessage.newOrNoSpeaker();
@@ -178,9 +178,10 @@ public class OrganizerMainMenuController extends MainMenuController {
 
                     if (speakerUserName.equalsIgnoreCase("NEW")) {
                         String speakerUsername = createSpeaker();
+                        i++;
                         if (speakerUserName != null) {
                             speakerId = speaker.getIDFromName(speakerUsername);
-                            i ++;
+
                         }
 
                     } else {
@@ -197,6 +198,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
                                             catcher1 = false;
+
                                         } else {
                                             displayMessage.speakerAdded();
                                             i++;
