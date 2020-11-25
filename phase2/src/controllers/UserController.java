@@ -390,32 +390,29 @@ public class UserController {
     }
 
     /***
-     * TODO
-     * @param username
-     * @param startDateTime
-     * @param endDateTime
-     * @return
+     * check if a user has any other events booked between the startDateTime and endDateTime
+     * @param username of user to check if they are available
+     * @param startDateTime start time of event
+     * @param endDateTime end time of event
+     * @return true if there is a conflict
      */
     public boolean checkTimeConflict(String username, String startDateTime, String endDateTime) {
         //return true if there is a conflict
         //String timeEvent = e.getEvent(event).getDateTime();
         if (user != null) {
-
             User u = user.findUserFromUsername(username);
 
             if ((u != null) && u.getEventList() != null) {
-
                 for (int i = 0; i < u.getEventList().size(); i++) {
-                    boolean noConflict = true;
                     String eventID = u.getEventList().get(i);
                     if(eventActions.timeConflict(eventID, startDateTime, endDateTime)){
-                        return false;
+                        return true;
                     }
 
                 }
-                return true;
+                // return false;
             }
-            return false;
+            // return false;
         }
         return false;
     }

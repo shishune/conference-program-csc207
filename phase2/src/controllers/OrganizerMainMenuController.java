@@ -162,17 +162,15 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
 
-        displayMessage.zerospeakers();//
+        displayMessage.zeroSpeakers();//
         String zerospeaker = scan.nextLine();
         String speakerId = "";
 
-        if (zerospeaker.equals("YES")) {
-            zerospeaker = "a";
-        } else {
-            displayMessage.numberofspeaker();
-            String numberofspeakers = scan.nextLine();
+        if (!zerospeaker.equalsIgnoreCase("y")) {
+            displayMessage.numberOfSpeaker();
+            String numberOfSpeakers = scan.nextLine();
             Integer i = 0;
-            while (i < Integer.valueOf(numberofspeakers)) {
+            while (i < Integer.valueOf(numberOfSpeakers)) {
                 boolean catcherUserName = true;
                 while (catcherUserName) {
                     displayMessage.newOrNoSpeaker();

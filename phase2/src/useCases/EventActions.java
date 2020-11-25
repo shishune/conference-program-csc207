@@ -337,7 +337,7 @@ public class EventActions  {
      * @param eventID ID of event
      * @param startDateTime startDateTime to check if it is in conflict with the event
      * @param endDateTime endDateTime to check if it is in conflict with the event
-     * @return if this dateTime is in conflict with a given event
+     * @return true if this dateTime is in conflict with a given event
      */
     public boolean timeConflict(String eventID, String startDateTime, String endDateTime){
         Event event = getEvent(eventID);
@@ -345,10 +345,10 @@ public class EventActions  {
         List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
         for(String dateTime: dateTimes){
             if (eventDateTimes.contains(dateTime)){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
