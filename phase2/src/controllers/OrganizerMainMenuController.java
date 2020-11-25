@@ -127,6 +127,12 @@ public class OrganizerMainMenuController extends MainMenuController {
                     isVip = true;
                     break;
                 }
+                if (vip.equals("N") || vip.equals("n")){
+                    break;
+                }
+                else{
+                    displayEvent.bad();
+                }
             }
         }
 
