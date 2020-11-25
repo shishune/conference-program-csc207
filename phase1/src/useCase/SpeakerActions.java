@@ -387,5 +387,6 @@ public class SpeakerActions extends UserAccountActions {
         }
         return storedS;
     }
-
 }
+
+

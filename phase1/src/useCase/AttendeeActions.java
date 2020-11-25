@@ -355,7 +355,6 @@ public class AttendeeActions extends UserAccountActions {
         return storedAttendee;
     }
 
-
     /**
      * It will be get the attendee ID
      * @return ArrayList<String>
@@ -369,4 +368,5 @@ public class AttendeeActions extends UserAccountActions {
         }
         return storedAttendee;
     }
+
 }

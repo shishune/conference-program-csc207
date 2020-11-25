@@ -1,5 +1,6 @@
 package useCases;
 
+import entities.Event;
 import entities.Speaker;
 import entities.User;
 import gateways.LoadUpIGateway;
@@ -400,6 +401,20 @@ public class SpeakerActions extends UserAccountActions {
             }
         }
         return storedS;
+    }
+
+
+
+    /**
+     *
+     * @return
+     */
+    public Integer totalNumberSpeakers(){
+        Integer total = 0;
+        for (Map.Entry<String, Speaker> entry : speakerID.entrySet()) {
+            total++;
+        }
+        return total;
     }
 
 }

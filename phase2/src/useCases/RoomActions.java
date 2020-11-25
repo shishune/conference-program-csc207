@@ -1,4 +1,6 @@
 package useCases;
+import entities.Attendee;
+import entities.Event;
 import entities.Room;
 import gateways.LoadUpIGateway;
 
@@ -204,4 +206,5 @@ public class RoomActions {
         }
         return storedR;
     }
+
 }

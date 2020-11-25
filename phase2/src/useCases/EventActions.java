@@ -1,8 +1,10 @@
 package useCases;
+import entities.Attendee;
 import entities.Event;
 import gateways.LoadUpIGateway;
 
 import java.util.*;
+import java.util.ArrayList;
 
 /**
  * A use case class that stores a hashmap of Events.
@@ -12,7 +14,8 @@ import java.util.*;
  */
 
 public class EventActions  {
-    private HashMap<String, Event> events = new HashMap<String, Event>(); // public private
+    public HashMap<String, Event> events = new HashMap<String, Event>(); // public private
+    public HashMap<String, Integer> eventCapacity = new HashMap<String, Integer>(); //eventID: capacity
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
     private HashMap<String, List<String>> roomSchedule = new HashMap<String, List<String>>(); // roomID: date
     private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
@@ -423,4 +426,44 @@ public class EventActions  {
         return attendees.get(eventID);
     }
 
+    /**
+     *
+     * @return
+     */
+    public Integer numberEventsAvailable(){
+        Integer total = 0;
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
+            total++;
+        }
+        return total;
+    }
+
+
+    /**
+     *
+     * @return
+     */
+    public String mostAttendedEvents() {
+        int maxSize = Integer.MIN_VALUE;
+        for (String e : attendees.keySet()) {
+            if (maxSize < attendees.get(e).size()) {
+                maxSize = attendees.get(e).size();
+            }
+            return e;
+        }
+        return null;
+    }
+
+
+    public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
+        Integer total = 0;
+        for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
+            for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
+                if (entry1.getValue().size() = entry2.getValue();
+            {
+                total++;
+            }
+        }
+        return total;
+    }
 }

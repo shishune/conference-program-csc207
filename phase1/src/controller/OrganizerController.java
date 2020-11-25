@@ -184,10 +184,6 @@ public class OrganizerController extends UserController {
         return true;
     }
 
-    /***
-     * Send the speaker a message
-     * @param messageContent
-     */
     public boolean sendSpeakersMessage(String messageContent) {
         HashMap<String, User> userHash = returnUserUsernameHashMap();
         HashMap<String, Speaker> speakersHash = speakerActions.returnUsernameHashMap();
