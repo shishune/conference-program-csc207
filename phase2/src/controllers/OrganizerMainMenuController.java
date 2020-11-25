@@ -127,9 +127,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                     isVip = true;
                     break;
                 }
-                else{
-                    displayEvent.bad();
-                }
             }
         }
 
