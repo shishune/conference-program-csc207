@@ -414,5 +414,15 @@ public class AttendeeActions extends UserAccountActions {
         return false;
     }
 
-
+        /**
+         *
+         * @return
+         */
+        public Integer totalNumberAttendees(){
+            Integer total = 0;
+            for (object : attendeesHashMap) {
+                total++;
+            }
+            return total;
+        }
 }

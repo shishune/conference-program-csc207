@@ -402,4 +402,18 @@ public class SpeakerActions extends UserAccountActions {
         return storedS;
     }
 
+
+
+    /**
+     *
+     * @return
+     */
+    public Integer totalNumberSpeakers(){
+        Integer total = 0;
+        for (object : speakers) {
+            total++;
+        }
+        return total;
+    }
+
 }

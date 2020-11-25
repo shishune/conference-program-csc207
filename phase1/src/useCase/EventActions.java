@@ -361,34 +361,6 @@ public class EventActions  {
         return attendees.get(eventID);
     }
 
-
-    /**
-     *
-     * @return
-     */
-    public Integer numberEventsAvailable(){
-        Integer total = 0;
-        for (object : eventNames) {
-            total++;
-        }
-        return total;
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    public String mostAttendedEvents() {
-        int maxSize = Integer.MIN_VALUE;
-        for (String e : attendees.keySet()) {
-            if (maxSize < attendees.get(e).size()) {
-                maxSize = attendees.get(e).size();
-            }
-            return e;
-        }
-        return null;
-    }
 }
 
 
