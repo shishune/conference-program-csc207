@@ -143,7 +143,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         while (catcher) {
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
-
+            // fix TODO does skips the first input??
             if (room != null) {
                 if (room.returnRoomUsernameHashMap() != null) {
                     if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
@@ -161,15 +161,15 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-        List<String> Listofspeakers = new ArrayList<>();
+        List<String> speakerIDs = new ArrayList<>();
         displayMessage.zeroSpeakers();//
-        String zerospeaker = scan.nextLine();
+        String zeroSpeaker = scan.nextLine();
         String speakerId = "";
 
-        if (!zerospeaker.equalsIgnoreCase("y")) {
+        if (!zeroSpeaker.equalsIgnoreCase("y")) {
             displayMessage.numberOfSpeaker();
             String numberOfSpeakers = scan.nextLine();
-            Integer i = 0;
+            int i = 0;
             while (i < Integer.parseInt(numberOfSpeakers)) {
                 boolean catcherUserName = true;
                 while (catcherUserName) {
@@ -178,10 +178,12 @@ public class OrganizerMainMenuController extends MainMenuController {
 
                     if (speakerUserName.equalsIgnoreCase("NEW")) {
                         String speakerUsername = createSpeaker();
-                        i++;
                         if (speakerUserName != null) {
                             speakerId = speaker.getIDFromName(speakerUsername);
-
+                            speakerIDs.add(speakerId);
+                            displayMessage.speakerAdded();
+                            i ++;
+                            catcherUserName = false;
                         }
 
                     } else {
@@ -198,20 +200,18 @@ public class OrganizerMainMenuController extends MainMenuController {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
                                             catcher1 = false;
-
                                         } else {
+                                            speakerIDs.add(speakerId);
                                             displayMessage.speakerAdded();
                                             i++;
-
+                                            catcher1 = false;
+                                            catcherUserName = false;
                                         }
                                     }
-                                    speakerUserName = speakerUser;
-                                    catcher1 = false;
-                                    catcherUserName = false;
                                 } else {
                                     displayMessage.speakerDoesNotExist();
                                 }
-                                catcher1 = false;
+//                                catcher1 = false; // why
                             }
                         }
                     }

@@ -137,7 +137,7 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     /**
      * Message telling speaker has successfully been added
      */
-    public void speakerAdded(){System.out.println("User has successfully been added");}
+    public void speakerAdded(){System.out.println("Speaker has successfully been added");}
 
     /**
      * Message stating that the room already exists
