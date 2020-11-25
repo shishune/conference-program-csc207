@@ -454,13 +454,12 @@ public class EventActions  {
         return null;
     }
 
-    public Integer getEventCapacity(String eventID) {return eventCapacity.get(eventID);
-    }
 
-    public Integer numberEventsFull(String eventID) {
+    public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
         Integer total = 0;
-        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
-            if (entry.getEventCapacity(eventID) = entry.getEventCapacity()) ;
+        for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
+            for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
+                if (entry1.getValue().size() = entry2.getValue();
             {
                 total++;
             }
