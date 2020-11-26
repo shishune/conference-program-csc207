@@ -26,8 +26,8 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : roomsList){
-                writer.write(message);
+            for (String room : roomsList){
+                writer.write(room);
             }
             writer.close();
         } catch (IOException e) {
@@ -47,8 +47,8 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : eventsList){
-                writer.write(message);
+            for (String event : eventsList){
+                writer.write(event);
             }
             writer.close();
         } catch (IOException e) {
@@ -87,8 +87,8 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : organizerList){
-                writer.write(message);
+            for (String organizer : organizerList){
+                writer.write(organizer);
             }
             writer.close();
         } catch (IOException e) {
@@ -107,8 +107,8 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : attendeeList){
-                writer.write(message);
+            for (String attendee : attendeeList){
+                writer.write(attendee);
             }
             writer.close();
         } catch (IOException e) {
@@ -127,8 +127,28 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : speakerList){
-                writer.write(message);
+            for (String speaker : speakerList){
+                writer.write(speaker);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Uses the method in conferenceActions for obtaining all conferences as a list then stores in csv
+     * @param conferenceActions the use case class for conference
+     */
+    public void storeConferences(useCases.ConferenceActions conferenceActions) {
+        ArrayList<String> conferenceList = new ArrayList<String>();
+        String path = "./phase2/src/assets/dataFiles/conferences.csv";
+        conferenceList = conferenceActions.storeConferences();
+        try {
+            FileWriter writer;
+            writer = new FileWriter(path, false);
+            for (String conference : conferenceList){
+                writer.write(conference);
             }
             writer.close();
         } catch (IOException e) {
@@ -144,8 +164,9 @@ public class Store{
      * @param room from Room entity
      * @param event from Event entity
      * @param speaker from Speaker entity
+     * @param conference from Conference entity
      */
-    public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker) {
+    public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker, ArrayList<String> conference) {
 
         try {
             FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
@@ -166,6 +187,9 @@ public class Store{
                 csvWriter.append(id);
             }
             for (String id : speaker) {
+                csvWriter.append(id);
+            }
+            for (String id : conference) {
                 csvWriter.append(id);
             }
 
