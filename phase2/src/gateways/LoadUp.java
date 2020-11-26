@@ -18,17 +18,19 @@ public class LoadUp implements LoadUpIGateway {
     private ArrayList<String> organizers = new ArrayList<>();
     private ArrayList<String> speakers = new ArrayList<>();
     private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<String> conferences = new ArrayList<>();
+
 
     /**
      * Loads up information of messages, events, rooms, attendees and organizers
      */
     public LoadUp() {
-
         getMessages();
         getEvents();
         getRooms();
         getSpeakers();
         getIds();
+        getConferences();
     }
 
     /**
@@ -104,6 +106,22 @@ public class LoadUp implements LoadUpIGateway {
             e.printStackTrace();
         }
         return events;
+    }
+
+    /**
+     * This method returns conferences in a list from conferences.csv
+     * @return conferences
+     */
+    public ArrayList<String> getConferences() {
+        try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/conferences.csv"))) {
+            String line = null;
+            while((line = br.readLine()) != null) {
+                conferences.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return conferences;
     }
 
 
@@ -210,5 +228,13 @@ public class LoadUp implements LoadUpIGateway {
      * */
     @Override
     public ArrayList<String> getSpeakersList() { return speakers; }
+
+    /**
+     * Getter for the list of conferences from last use of program using IGateway
+     * */
+    @Override
+    public ArrayList<String> getConferencesList() {
+        return conferences;
+    }
 
 }
