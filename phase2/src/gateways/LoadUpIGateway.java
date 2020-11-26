@@ -21,5 +21,6 @@ public interface LoadUpIGateway {
     public void addId(String id);
     public ArrayList<String> getRooms();
     public ArrayList<String> getEvents();
+    public ArrayList<String> getConferencesList();
 
 }
