@@ -354,6 +354,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         String date = "";
         String startTime = "";
         String endTime = "";
+        int t1 = 0;
         boolean catcher = true;
 
         while (catcher) {
@@ -376,7 +377,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     displayEvent.badTime();
                     scan.next();
                 }
-            int t1 = scan.nextInt();
+            t1 = scan.nextInt();
             if (t1 < 17 && t1 >= 9){
                 startTime = String.valueOf(t1);
                 catcher = false;
@@ -394,9 +395,9 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayEvent.badTime();
                 scan.next();
             }
-            int t1 = scan.nextInt();
-            if (t1 < 17 && t1 >= 9){
-                endTime = String.valueOf(t1);
+            int t2 = scan.nextInt();
+            if (t2 < 17 &&  t2 >= t1){
+                endTime = String.valueOf(t2);
                 catcher = false;
             }
             else{
