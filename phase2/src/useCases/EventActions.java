@@ -456,6 +456,18 @@ public class EventActions  {
         return null;
     }
 
+    public int numAtMaxCapacity(){
+        int count = 0;
+        for(Map.Entry<String, Event> entry : events.entrySet()){
+            // entry.getKey();
+            // entry.getValue();
+            if(attendees.get(entry.getValue()).size() == entry.getValue().getCapacity()) { // >= or ==?
+                count += 1;
+            }
+        }
+        return count;
+    }
+
 
     public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
         Integer total = 0;
