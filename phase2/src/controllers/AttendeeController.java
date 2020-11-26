@@ -74,12 +74,12 @@ public class AttendeeController extends UserController {
                 String title = e.getEvent(event).getTitle();
                 String dateTime = e.getEvent(event).getDateTime();
                 String roomId = e.getEvent(event).getRoomID();
-                String speaker = e.getEvent(event).getSpeaker();
+                List<String> speaker = e.getEvent(event).getSpeaker();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
                 info.add(roomId);
-                info.add(speaker);
+                info.addAll(speaker);
                 saveEventList.add(info);
             }
         }
