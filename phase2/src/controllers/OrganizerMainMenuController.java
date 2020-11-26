@@ -238,7 +238,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null && event != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerId, dateTimes.get(0), dateTimes.get(1), roomID, capacity, isVip);
+            List<Boolean> checks = controller.createEvent(title, speakerUsernames, dateTimes.get(0), dateTimes.get(1), roomID, capacity, isVip);
 
 
             if (checks.get(0) && checks.size() == 1) {
@@ -332,9 +332,11 @@ public class OrganizerMainMenuController extends MainMenuController {
                 individualEvents.add(event.getEvent(event1).getDateTime());
                 String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
                 individualEvents.add(roomName);
-                String speakerName = speaker.findUserFromId(event.getEvent(event1).getSpeaker()).getUsername();
-                individualEvents.add(speakerName);
-                e.add(individualEvents);
+                for (String elem : event.getEvent(event1).getSpeaker()) {
+                    String speakerName = speaker.findUserFromId(elem).getUsername();
+                    individualEvents.add(speakerName);
+                    e.add(individualEvents);
+                }
             }
         }
         displayEvent.displayEvents(e);

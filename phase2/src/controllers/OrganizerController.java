@@ -60,7 +60,7 @@ public class OrganizerController extends UserController {
      * @param isVip if event is a vip event
      * @return if the event was created- this will return false if the event already exists
      */
-    public List<Boolean> createEvent(String title, String speakerId, String startDateTime, String endDateTime,
+    public List<Boolean> createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
                                      String roomID, int capacity, boolean isVip){
         List<String> attendees = new ArrayList<String>();
         List<Boolean> checks = new ArrayList<Boolean>();
@@ -72,7 +72,6 @@ public class OrganizerController extends UserController {
             if(event != null){
                 scheduleSpeaker(event.getId(), speakerId, true);
                 speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
-
                 return checks;
             }
         } else{
@@ -103,7 +102,7 @@ public class OrganizerController extends UserController {
     public boolean cancelEvent(String eventName){
         if (this.eventActions.getEventNames().containsKey(eventName)) {
             List<String> eventAttendees = this.eventActions.cancelEvent(eventName);
-            String s = eventActions.getEventNames().get(eventName).getSpeaker();
+            List<String> s = eventActions.getEventNames().get(eventName).getSpeaker();
             if (speakerActions.isEventRemovedFromSpeaker(this.eventActions.getEventFromName(eventName).getId(), s)) {
                 if (eventAttendees != null) {
                     for (String attendeeID : eventAttendees) {
@@ -175,7 +174,7 @@ public class OrganizerController extends UserController {
      * @param speakerID
      *
      */
-    public boolean scheduleSpeaker(String eventID, String speakerID, boolean canAdd){
+    public boolean scheduleSpeaker(String eventID, List<String> speakerID, boolean canAdd){
         if (canAdd) {
             eventActions.setSpeaker(eventID, speakerID);
             String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();

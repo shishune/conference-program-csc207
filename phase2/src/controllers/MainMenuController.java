@@ -12,7 +12,7 @@ import java.util.*;
  * @author Cynthia
  * @version 1
  * */
-public class MainMenuController extends AccountController {
+public abstract class MainMenuController extends AccountController {
     private controllers.UserController controller;
     private User user;
     private RoomActions room;
@@ -111,31 +111,7 @@ public class MainMenuController extends AccountController {
     /**
      * Responds to menu option 6- sign up for event
      */
-    public void option6(){
-        option8();
-        displayEvent.promptAddEvent();
-        String event = scan.nextLine();
-        List<Boolean> checks = controller.signupEvent(event, user.getUsername());
-        if(checks.size()==1){
-            if (checks.get(0)){
-                displayEvent.successAddEvent();
-            }
-            else{
-                displayEvent.failedNoSuchEvent();
-            }
-        }
-        else{
-            if (!checks.get(1)){
-                displayEvent.failedRoomFull();
-            }
-            else if(checks.get(2)){
-                displayEvent.failedAttendeeTimeConflict();
-            }
-            else{
-                displayEvent.failed();
-            }
-        }
-    }
+    public abstract void option6();
 
     /**
      * Responds to menu option 7- cancel attendance to an event

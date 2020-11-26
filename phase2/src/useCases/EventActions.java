@@ -140,7 +140,8 @@ public class EventActions  {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
                     List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
-                    loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3], eventAttributes[4],
+                    List<String> eventSpeaker = new ArrayList<>(Arrays.asList(eventAttributes[2].split("%%")));
+                    loadEvent(eventAttributes[0], eventAttributes[1], eventSpeaker, eventAttributes[3], eventAttributes[4],
                             eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]), Boolean.parseBoolean(eventAttributes[8]));
             }
         }
@@ -158,7 +159,7 @@ public class EventActions  {
      * @param isVip if event is a vip event
      * @return true if the event was created
      * */
-    public Event createEvent(String title, String speakerId, String startDateTime, String endDateTime,
+    public Event createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
                                List<String> attendees, String roomID, int capacity, boolean isVip){
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
@@ -177,7 +178,7 @@ public class EventActions  {
      * @param eventID if of event
      * @param speakerID id of new speaker
      */
-    public void setSpeaker(String eventID, String speakerID){
+    public void setSpeaker(String eventID, List<String> speakerID){
         this.events.get(eventID).setSpeaker(speakerID);
     }
 
@@ -194,7 +195,7 @@ public class EventActions  {
      * @param roomID id of room
      * @param isVip if event is a vip event
      */
-    public Event loadEvent(String eventID, String title, String speakerId, String startDateTime, String endDateTime,
+    public Event loadEvent(String eventID, String title, List<String> speakerId, String startDateTime, String endDateTime,
                           List<String> attendees, String roomID, int capacity, boolean isVip) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
@@ -210,9 +211,11 @@ public class EventActions  {
                 speakerSchedule.get(speakerId).add(dateTime);
 
             } else {
-                List<String> speakerTimes = new ArrayList<>();
-                speakerTimes.add(dateTime);
-                speakerSchedule.put(speakerId, speakerTimes);
+                for (String elem : speakerId) {
+                    List<String> speakerTimes = new ArrayList<>();
+                    speakerTimes.add(dateTime);
+                    speakerSchedule.put(elem, speakerTimes);
+                }
             }
             if (roomSchedule.containsKey(roomID)) {
                 roomSchedule.get(roomID).add(dateTime);
@@ -379,16 +382,19 @@ public class EventActions  {
      * @param endDateTime the date and time to be checked
      * @return true if the room is in fact available
      * */
-    public boolean isSpeakerFree(String speakerID, String startDateTime, String endDateTime){
-        List<String> SpeakerTime = speakerSchedule.get(speakerID);
-        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
-        for (String dateTime: dateTimes) {
-            if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
-                return false;
+    public boolean isSpeakerFree(List<String> speakerID, String startDateTime, String endDateTime){
+        for(String object : speakerID){
+            List<String> SpeakerTime = speakerSchedule.get(object);
+            List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+            for (String dateTime: dateTimes) {
+                if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
+                    return false;
+                }
             }
-        }
-        return true;
+
+        } return true;
     }
+
 
 
     /***

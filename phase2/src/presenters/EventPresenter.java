@@ -37,12 +37,18 @@ public class EventPresenter {
 
 
     /**
-     * Prompt for user to add event/attend event
+     * Prompt for user to select an event to add or save
      * */
-    public void promptAddEvent(){
-        System.out.println(enterNameOfEvent+ "add.");
+    public void promptSelectEvent(){
+        System.out.println(enterNameOfEvent+ "add or save.");
     }
 
+    /**
+     * Prompt for user to add or save an event
+     * */
+    public void promptAddOrSaveEvent(){
+        System.out.println("Enter 'A' to add the event or enter 'S' to save the event");
+    }
 
     /**
      * Prompt for user to add room
@@ -67,6 +73,13 @@ public class EventPresenter {
         System.out.println(eventSuccess+ "added.");
     }
 
+    public void successSaveEvent() {
+        System.out.println(eventSuccess+ "saved.");
+    }
+
+    public void failedSaveEvent() {
+        System.out.println("The event is already saved.");
+    }
 
     /**
      * Message informing that room is full; user cannot attend
