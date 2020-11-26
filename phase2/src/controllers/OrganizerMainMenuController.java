@@ -354,7 +354,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         String date = "";
         String startTime = "";
         String endTime = "";
-        int t1 = 0;
         boolean catcher = true;
 
         while (catcher) {
@@ -370,19 +369,26 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
+
         catcher = true;
         while(catcher){
             displayEvent.promptStartTime();
-            while (!scan.hasNextInt()) {
-                    displayEvent.badTime();
-                    scan.next();
-                }
-            t1 = scan.nextInt();
-            if (t1 < 17 && t1 >= 9){
+            String t1 = scan.nextLine();
+//            while (!scan.hasNextInt()) {
+//                    displayEvent.badTime();
+//                    scan.next();
+//                }
+//            int t1 = scan.nextInt();
+            try{
+            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
                 startTime = String.valueOf(t1);
                 catcher = false;
             }
             else{
+                displayEvent.badTime();
+            }}
+            catch (NumberFormatException ex){
+            //else{
                 displayEvent.badTime();
             }
         }
@@ -391,16 +397,23 @@ public class OrganizerMainMenuController extends MainMenuController {
         catcher = true;
         while(catcher){
             displayEvent.promptEndTime();
-            while (!scan.hasNextInt()) {
-                displayEvent.badTime();
-                scan.next();
-            }
-            int t2 = scan.nextInt();
-            if (t2 < 17 &&  t2 >= t1){
-                endTime = String.valueOf(t2);
+//            while (!scan.hasNextInt()) {
+//                displayEvent.badTime();
+//                scan.next();
+//            }
+            String t1 = scan.nextLine();
+            //int t1 = scan.nextInt();
+            try{
+                int start = Integer.parseInt(startTime);
+            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9 && Integer.parseInt(t1) > start){
+                endTime = String.valueOf(t1);
                 catcher = false;
             }
             else{
+                displayEvent.badTime();
+            }}
+            catch (NumberFormatException ex){
+            //else{
                 displayEvent.badTime();
             }
         }
