@@ -18,7 +18,7 @@ public class AttendeeAccountPresenter extends AccountPresenter {
      * */
     public void printMainMenu(){
         String display = basicMenu
-                + "\n[6] Sign up for an event"
+                + "\n[6] Sign up for an event / Save an event"
                 + "\n[7] Cancel enrollment for an event"
                 + "\n[8] View all events"
                 + "\n[9] View your schedule of events"
