@@ -141,6 +141,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         String roomID = "";
 
         while (catcher) {
+            displayRooms();
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
             // fix TODO does skips the first input??
@@ -262,6 +263,33 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
+    /**
+     * displays all the rooms that match the requirements
+     */
+    public void displayRooms(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        displayEvent.promptNeedProjector();
+        String needProjector = scan.nextLine();
+        if (needProjector.equalsIgnoreCase("y")){
+            rooms.addAll(room.getRoomsWithProjector());
+        }
+        displayEvent.promptNeedMicrophone();
+        String needMicrophone = scan.nextLine();
+        if (needMicrophone.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithMicrophone());
+        }
+        displayEvent.promptNeedTables();
+        String needTables = scan.nextLine();
+        if(needTables.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithTables());
+        }
+        displayEvent.promptNeedWhiteboard();
+        String needWhiteboard = scan.nextLine();
+        if(needWhiteboard.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithWhiteboard());
+        }
+        displayEvent.viewRooms(rooms);
+    }
     /**
      * Responds to menu option 7
      */

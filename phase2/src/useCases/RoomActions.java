@@ -227,29 +227,84 @@ public class RoomActions {
     /**
      * checks if there is a projector in room
      */
-    public boolean checkProjector(String roomName){
+    private boolean checkProjector(String roomName){
         return roomUsername.get(roomName).getHasProjector();
     }
 
     /**
      * checks if there is a microphone in room
      */
-    public boolean checkMicrophone(String roomName){
+    private boolean checkMicrophone(String roomName){
         return roomUsername.get(roomName).getHasMicrophone();
     }
     /**
      * checks if there are tables in room
      */
-    public boolean checkTables(String roomName){
+    private boolean checkTables(String roomName){
         return roomUsername.get(roomName).getHasTables();
     }
     /**
      * checks if there is a whiteboard in room
      */
-    public boolean checkWhiteboard(String roomName){
+    private boolean checkWhiteboard(String roomName){
         return roomUsername.get(roomName).getHasWhiteboard();
     }
 
+    /**
+     * returns all the rooms containing projector
+     * @return all rooms containing projector
+     */
+    public ArrayList<String> getRoomsWithProjector(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        for (Map.Entry<String, Room> o:roomUsername.entrySet()){
+            if (o.getValue().getHasProjector()){
+                rooms.add(o.getKey());
+            }
+        }
+        return rooms;
+    }
+
+    /**
+     * returns all the rooms containing microphone
+     * @return all rooms containing microphone
+     */
+    public ArrayList<String> getRoomsWithMicrophone(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        for (Map.Entry<String, Room> o:roomUsername.entrySet()){
+            if (o.getValue().getHasMicrophone()){
+                rooms.add(o.getKey());
+            }
+        }
+        return rooms;
+    }
+
+    /**
+     * returns all the rooms containing tables
+     * @return all rooms containing tables
+     */
+    public ArrayList<String> getRoomsWithTables(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        for (Map.Entry<String, Room> o:roomUsername.entrySet()){
+            if (o.getValue().getHasTables()){
+                rooms.add(o.getKey());
+            }
+        }
+        return rooms;
+    }
+
+    /**
+     * returns all the rooms containing whiteboard
+     * @return all rooms containing whiteboard
+     */
+    public ArrayList<String> getRoomsWithWhiteboard(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        for (Map.Entry<String, Room> o:roomUsername.entrySet()){
+            if (o.getValue().getHasWhiteboard()){
+                rooms.add(o.getKey());
+            }
+        }
+        return rooms;
+    }
 
     /**
      * It will be storing rooms
