@@ -473,6 +473,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 catcher = false;
             } else if (controller != null) {
                 if (controller.createRoom(roomName)) {
+                    addRoomProperties(roomName);
                     displayMessage.addedRoom();
                     catcher = false;
                 }
@@ -481,6 +482,28 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    public void addRoomProperties(String roomName){
+        displayEvent.promptHasProjector();
+        String hasProjector = scan.nextLine();
+        if (hasProjector.equalsIgnoreCase("y")){
+            room.setProjector(roomName);
+        }
+        displayEvent.promptHasMicrophone();
+        String hasMicrophone = scan.nextLine();
+        if (hasMicrophone.equalsIgnoreCase("y")){
+            room.setMicrophone(roomName);
+        }
+        displayEvent.promptHasTables();
+        String hasTables = scan.nextLine();
+        if (hasTables.equalsIgnoreCase("y")){
+            room.setTables(roomName);
+        }
+        displayEvent.promptHasWhiteboard();
+        String hasWhiteboard = scan.nextLine();
+        if (hasWhiteboard.equalsIgnoreCase("y")){
+            room.setWhiteboard(roomName);
+        }
+    }
     /***
      * Responds to menu option 10- create a new user
      */

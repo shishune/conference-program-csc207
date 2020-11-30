@@ -14,7 +14,6 @@ public class Room {
     private boolean hasMicrophone = false;
     private boolean hasTables = false;
     private boolean hasWhiteboard = false;
-    private boolean hasStage = false;
 
     /**
      * instantiates a new Room object with an id attribute
@@ -56,6 +55,62 @@ public class Room {
      * */
     public String stringRepresentation() {
         return roomId + "," + roomName;
+    }
+
+    /**
+     * sets a projector in room
+     */
+    public void setProjector(){
+        this.hasProjector = true;
+    }
+
+    /**
+     * sets a microphone in room
+     */
+    public void setMicrophone(){
+        this.hasMicrophone = true;
+    }
+
+    /**
+     * sets tables in room
+     */
+    public void setTables(){
+        this.hasTables = true;
+    }
+
+    /**
+     * sets whiteboard in room
+     */
+    public void setWhiteboard(){
+        this.hasWhiteboard = true;
+    }
+
+    /**
+     * returns whether the room has a projector
+     */
+    public boolean getHasProjector(){
+        return this.hasProjector;
+    }
+
+    /**
+     * returns whether the room has a microphone
+     */
+    public boolean getHasMicrophone(){
+        return this.hasMicrophone;
+    }
+
+    /**
+     * returns whether the room has tables
+     */
+    public boolean getHasTables(){
+        return this.hasTables;
+    }
+
+    /**
+     * returns whether the room has a whiteboard
+     */
+    public boolean getHasWhiteboard(){
+        return this.hasWhiteboard;
     }
 
 

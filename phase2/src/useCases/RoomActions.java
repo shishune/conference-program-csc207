@@ -192,6 +192,64 @@ public class RoomActions {
         return storedR;
     }
 
+    /**
+     * Sets a  projector in the room
+     * @param roomName the name of the room
+     */
+    public void setProjector(String roomName){
+        roomUsername.get(roomName).setProjector();
+    }
+
+    /**
+     * Sets a microphone in the room
+     * @param roomName the name of the rooom
+     */
+    public void setMicrophone(String roomName){
+        roomUsername.get(roomName).setMicrophone();
+    }
+
+    /**
+     * sets tables in the room
+     * @param roomName the name of the room
+     */
+    public void setTables(String roomName){
+        roomUsername.get(roomName).setTables();
+    }
+
+    /**
+     * sets a whiteboard in the room
+     * @param roomName the name of the room
+     */
+    public void setWhiteboard(String roomName){
+        roomUsername.get(roomName).setProjector();
+    }
+
+    /**
+     * checks if there is a projector in room
+     */
+    public boolean checkProjector(String roomName){
+        return roomUsername.get(roomName).getHasProjector();
+    }
+
+    /**
+     * checks if there is a microphone in room
+     */
+    public boolean checkMicrophone(String roomName){
+        return roomUsername.get(roomName).getHasMicrophone();
+    }
+    /**
+     * checks if there are tables in room
+     */
+    public boolean checkTables(String roomName){
+        return roomUsername.get(roomName).getHasTables();
+    }
+    /**
+     * checks if there is a whiteboard in room
+     */
+    public boolean checkWhiteboard(String roomName){
+        return roomUsername.get(roomName).getHasWhiteboard();
+    }
+
 
     /**
      * It will be storing rooms

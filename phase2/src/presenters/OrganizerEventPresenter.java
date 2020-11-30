@@ -184,6 +184,25 @@ public class OrganizerEventPresenter extends EventPresenter {
     public void promptVIP(){System.out.println("Is this a VIP event? Enter 'Y' for Yes and 'N' for No.");}
 
     /**
+     * Asks user if room has projector
+     */
+    public void promptHasProjector(){System.out.println("Does this room have a projector? Enter 'y' for yes and 'n' for no.");}
+
+    /**
+     * Asks user if room has microphone
+     */
+    public void promptHasMicrophone(){System.out.println("Does this room have a microphone? Enter 'y' for yes and 'n' for no.");}
+
+    /**
+     * Asks user if room has tables
+     */
+    public void promptHasTables(){System.out.println("Does this room have tables? Enter 'y' for yes and 'n' for no.");}
+    /**
+     * Asks user if room has whiteboard
+     */
+    public void promptHasWhiteboard(){System.out.println("Does this room have a white board? Enter 'y' for yes and 'n' for no.");}
+
+    /**
      * Tells user that their input is not valid
      */
     public void bad(){System.out.println("That is not a valid input. Try again.");}
