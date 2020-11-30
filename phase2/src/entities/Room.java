@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 /**
  * An entity class. The Room object represents a room with a room ID attribute.
+ * Implements the builder design pattern.
+ *  * Sources:
+ *  * https://sourcemaking.com/design_patterns/builder
+ *  * https://www.codejava.net/coding/how-to-use-builder-pattern-for-designing-method-parameters
+ *  * https://refactoring.guru/design-patterns/builder (this link is very useful)
  * @author Cynthia
  * @version 1
  * */
