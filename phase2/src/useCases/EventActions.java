@@ -139,9 +139,10 @@ public class EventActions  {
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                    List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
-                    loadEvent(eventAttributes[0], eventAttributes[1], eventAttributes[2], eventAttributes[3], eventAttributes[4],
-                            eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]));
+                List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
+                List<String> eventSpeaker = new ArrayList<>(Arrays.asList(eventAttributes[2].split("%%")));
+                loadEvent(eventAttributes[0], eventAttributes[1], eventSpeaker, eventAttributes[3], eventAttributes[4],
+                        eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]), Boolean.parseBoolean(eventAttributes[8]));
             }
         }
     }
@@ -158,15 +159,15 @@ public class EventActions  {
      * @param isVip if event is a vip event
      * @return true if the event was created
      * */
-    public Event createEvent(String title, String speakerId, String startDateTime, String endDateTime,
-                               List<String> attendees, String roomID, int capacity){
+    public Event createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
+                             List<String> attendees, String roomID, int capacity, boolean isVip){
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 
             useCases.GenerateID generateId = new GenerateID(loader);
             String newID = "E" + generateId.generateId();
 
-            return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
+            return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
         }
         return null;
     }
@@ -175,10 +176,10 @@ public class EventActions  {
     /***
      * set speaker of an event
      * @param eventID if of event
-     * @param speakerIDs id of new speaker
+     * @param speakerID id of new speaker
      */
-    public void setSpeakers(String eventID, List<String> speakerIDs){
-        this.events.get(eventID).setSpeaker(speakerIDs);
+    public void setSpeaker(String eventID, List<String> speakerID){
+        this.events.get(eventID).setSpeaker(speakerID);
     }
 
 
@@ -192,14 +193,15 @@ public class EventActions  {
      * @param endDateTime the end date and time for the event
      * @param attendees list of attendees of event
      * @param roomID id of room
+     * @param isVip if event is a vip event
      */
-    public Event loadEvent(String eventID, String title, String speakerId, String startDateTime, String endDateTime,
-                          List<String> attendees, String roomID, int capacity) {
+    public Event loadEvent(String eventID, String title, List<String> speakerId, String startDateTime, String endDateTime,
+                           List<String> attendees, String roomID, int capacity, boolean isVip) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }
-        Event newEvent = new Event(eventID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity);
+        Event newEvent = new Event(eventID, title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
         events.put(eventID, newEvent);
         eventNames.put(title, newEvent);
         this.attendees.put(eventID, attendees);
@@ -209,9 +211,11 @@ public class EventActions  {
                 speakerSchedule.get(speakerId).add(dateTime);
 
             } else {
-                List<String> speakerTimes = new ArrayList<>();
-                speakerTimes.add(dateTime);
-                speakerSchedule.put(speakerId, speakerTimes);
+                for (String elem : speakerId) {
+                    List<String> speakerTimes = new ArrayList<>();
+                    speakerTimes.add(dateTime);
+                    speakerSchedule.put(elem, speakerTimes);
+                }
             }
             if (roomSchedule.containsKey(roomID)) {
                 roomSchedule.get(roomID).add(dateTime);
@@ -336,7 +340,7 @@ public class EventActions  {
      * @param eventID ID of event
      * @param startDateTime startDateTime to check if it is in conflict with the event
      * @param endDateTime endDateTime to check if it is in conflict with the event
-     * @return if this dateTime is in conflict with a given event
+     * @return true if this dateTime is in conflict with a given event
      */
     public boolean timeConflict(String eventID, String startDateTime, String endDateTime){
         Event event = getEvent(eventID);
@@ -344,10 +348,10 @@ public class EventActions  {
         List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
         for(String dateTime: dateTimes){
             if (eventDateTimes.contains(dateTime)){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -378,15 +382,17 @@ public class EventActions  {
      * @param endDateTime the date and time to be checked
      * @return true if the room is in fact available
      * */
-    public boolean isSpeakerFree(String speakerID, String startDateTime, String endDateTime){
-        List<String> SpeakerTime = speakerSchedule.get(speakerID);
-        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
-        for (String dateTime: dateTimes) {
-            if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
-                return false;
+    public boolean isSpeakerFree(List<String> speakerID, String startDateTime, String endDateTime){
+        for(String object : speakerID){
+            List<String> SpeakerTime = speakerSchedule.get(object);
+            List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
+            for (String dateTime: dateTimes) {
+                if (SpeakerTime != null && SpeakerTime.contains(dateTime)) {
+                    return false;
+                }
             }
-        }
-        return true;
+
+        } return true;
     }
 
 
@@ -457,13 +463,17 @@ public class EventActions  {
     }
 
 
-    public int numAtMaxCapacity() {
-        int count = 0;
-        for (Map.Entry<String, Event> entry : events.entrySet()) {
-            if (attendees.get(entry.getValue()).size() == entry.getValue().getCapacity()) {
-                count += 1;
+    public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
+        Integer total = 0;
+        for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
+            for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
+                if (entry1.getValue().size() == entry2.getValue());
+                {
+                    total++;
+                }
             }
+            return total;
         }
-        return count;
+        return null;
     }
 }
