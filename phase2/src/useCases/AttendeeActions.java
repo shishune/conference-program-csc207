@@ -25,6 +25,18 @@ public class AttendeeActions extends UserAccountActions {
 //    private OrganizerActions organizer;
 
     /**
+     * @param loader
+     * This will load up the data in the hashmap to the CSV files.
+     * */
+    public AttendeeActions(LoadUpIGateway loader) {
+        getAllAttendees(loader); // gets all messages from message.csv
+        addAttendeeToHashMap();
+        this.loader = loader;
+        // adds those messages to a hashmap of all messages from the csv
+        // with message ID as key and message object as value
+    }
+
+    /**
      * @return ID of the attendee from the hashmap
      * */
     public HashMap<String, Attendee> returnIDHashMap() {
@@ -37,19 +49,6 @@ public class AttendeeActions extends UserAccountActions {
      * */
     public HashMap<String, Attendee> returnUsernameHashMap() {
         return attendeeUsernameHashMap;
-    }
-
-
-    /**
-     * @param loader
-     * This will load up the data in the hashmap to the CSV files.
-     * */
-    public AttendeeActions(LoadUpIGateway loader) {
-        getAllAttendees(loader); // gets all messages from message.csv
-        addAttendeeToHashMap();
-        this.loader = loader;
-        // adds those messages to a hashmap of all messages from the csv
-        // with message ID as key and message object as value
     }
 
 

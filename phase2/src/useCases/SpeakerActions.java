@@ -59,7 +59,9 @@ public class SpeakerActions extends UserAccountActions {
      */
     public boolean isEventAddedToSpeaker(String eventID, List<String> speakerId){
         // speakerID.get(speakerId).getEventList().add(eventID);
-        return speakerID.get(speakerId).getEventList().contains(eventID);
+        for (String elem : speakerId) {
+            return speakerID.get(elem).getEventList().contains(eventID);
+        } return false;
     }
 
 
@@ -70,7 +72,10 @@ public class SpeakerActions extends UserAccountActions {
      * @return if event is no longer in speaker event list
      */
     public boolean isEventRemovedFromSpeaker(String eventID, List<String> speakerId){
-        return !speakerID.get(speakerId).getEventList().contains(eventID);
+        for (String elem : speakerId) {
+            return !speakerID.get(elem).getEventList().contains(eventID);
+        } return false;
+
     }
 
 

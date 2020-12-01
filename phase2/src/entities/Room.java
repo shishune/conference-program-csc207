@@ -54,8 +54,10 @@ public class Room {
      * @return String representation of this room object int he way it should be stored in the csv. file
      * */
     public String stringRepresentation() {
-        return roomId + "," + roomName;
+        return roomId + "," + roomName + "," + hasProjector + "," + hasMicrophone
+                + "," + hasTables + "," + hasWhiteboard;
     }
+
 
     /**
      * sets a projector in room
