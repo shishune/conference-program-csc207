@@ -8,7 +8,7 @@ public class Event {
     private String eventID;
     private String title;
     private List<String> speakers;
-    private String startDateTime; //  yyyy-mm-dd hh  (24 h)
+    public String startDateTime; //  yyyy-mm-dd hh  (24 h)
     private String endDateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;

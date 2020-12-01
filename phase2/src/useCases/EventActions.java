@@ -427,11 +427,11 @@ public class EventActions  {
     }
 
     /**
-     *
-     * @return
+     * Reveals the number of events available
+     * @return the number of events available
      */
-    public Integer numberEventsAvailable(){
-        Integer total = 0;
+    public int numberEventsAvailable(){
+        int total = 0;
         for (Map.Entry<String, Event> entry : events.entrySet()) {
             total++;
         }
@@ -440,20 +440,26 @@ public class EventActions  {
 
 
     /**
-     *
-     * @return
+     * Events are considered to be one of the most attended event with an attendance rate of over 75%
+     * @return a list of the most attended events
      */
-    public String mostAttendedEvents() {    //edit this to have a list of events
-        int maxSize = Integer.MIN_VALUE;
-        for (String e : attendees.keySet()) {
-            if (maxSize < attendees.get(e).size()) {
-                maxSize = attendees.get(e).size();
+    public ArrayList<String> mostAttendedEvents() {
+        ArrayList<String> mostAttended = new ArrayList<String>();
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
+            double numAttendees = attendees.get(entry.getValue()).size();
+            double eventCapacity = entry.getValue().getCapacity();
+            if (numAttendees/eventCapacity >= 0.75) {
+                mostAttended.add(entry.getKey());
+                return mostAttended;
             }
-            return e;
         }
-        return null;
+        return mostAttended;
     }
 
+    /**
+     * Reveals the number of events that are at full capacity
+     * @return the number of events at full capacity
+     */
 
     public int numAtMaxCapacity() {
         int count = 0;
@@ -463,5 +469,20 @@ public class EventActions  {
             }
         }
         return count;
+    }
+
+    /**
+     * Provides a list of events in ascending order of event date
+     * @return a list of events with their date times in ascending order
+     */
+
+    public ArrayList<String> eventsOrderedByDate() {
+        ArrayList<String> eventsByDate = new ArrayList<String>();
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
+            eventsByDate.add(entry.getValue().getStartDateTime() + " , " + entry.getKey());
+            eventsByDate.sort(Comparator.comparing(String::toString));
+            return eventsByDate;
+        }
+        return eventsByDate;
     }
 }
