@@ -266,7 +266,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * displays all the rooms that match the requirements
      */
-    public void displayRooms(){
+    private void displayRooms(){
         ArrayList<String> rooms = new ArrayList<String>();
         displayEvent.promptNeedProjector();
         String needProjector = scan.nextLine();
@@ -387,7 +387,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         while (catcher) {
             displayEvent.promptDate();
             String d1 = scan.nextLine();
-
             try {
                 Date d = dateFormat.parse(d1);
                 date = d.toString();
@@ -408,13 +407,14 @@ public class OrganizerMainMenuController extends MainMenuController {
 //                }
 //            int t1 = scan.nextInt();
             try{
-            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
-                startTime = String.valueOf(t1);
-                catcher = false;
+                if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
+                    startTime = t1;
+                    catcher = false;
+                }
+                else{
+                    displayEvent.badTime();
+                }
             }
-            else{
-                displayEvent.badTime();
-            }}
             catch (NumberFormatException ex){
             //else{
                 displayEvent.badTime();
@@ -429,12 +429,12 @@ public class OrganizerMainMenuController extends MainMenuController {
 //                displayEvent.badTime();
 //                scan.next();
 //            }
-            String t1 = scan.nextLine();
+            String t2 = scan.nextLine();
             //int t1 = scan.nextInt();
             try{
                 int start = Integer.parseInt(startTime);
-            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9 && Integer.parseInt(t1) > start){
-                endTime = String.valueOf(t1);
+            if (Integer.parseInt(t2) < 17 && Integer.parseInt(t2) >= 9 && Integer.parseInt(t2) > start){
+                endTime = t2;
                 catcher = false;
             }
             else{
@@ -548,8 +548,8 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else if (option.equals("2")) {
                 createAttendee();
                 loop = false;
-            } else if (option.equals("3")) {
-                loop = false;
+//            } else if (option.equals("3")) {
+//                loop = false;
             } else {
                 displayMessage.notValidChoice();
             }
@@ -607,7 +607,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayEvent.VIPStatusPrompt();
                 boolean VIPStatus = false;
                 String responseInput = scan.nextLine();
-                if (responseInput.equals("VIP")) {
+                if (responseInput.equalsIgnoreCase("y")) {
                     VIPStatus = true;
                 }
                 if (validInput(newAttendeePassword)) {
