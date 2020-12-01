@@ -21,8 +21,8 @@ public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
     private LoadUpIGateway loader;
-    private SpeakerActions speaker;
-    private OrganizerActions organizer;
+//    private SpeakerActions speaker;
+//    private OrganizerActions organizer;
 
     /**
      * @return ID of the attendee from the hashmap

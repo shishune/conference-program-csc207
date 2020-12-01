@@ -141,6 +141,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         String roomID = "";
 
         while (catcher) {
+            displayRooms();
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
             // fix TODO does skips the first input??
@@ -263,6 +264,33 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /**
+     * displays all the rooms that match the requirements
+     */
+    public void displayRooms(){
+        ArrayList<String> rooms = new ArrayList<String>();
+        displayEvent.promptNeedProjector();
+        String needProjector = scan.nextLine();
+        if (needProjector.equalsIgnoreCase("y")){
+            rooms.addAll(room.getRoomsWithProjector());
+        }
+        displayEvent.promptNeedMicrophone();
+        String needMicrophone = scan.nextLine();
+        if (needMicrophone.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithMicrophone());
+        }
+        displayEvent.promptNeedTables();
+        String needTables = scan.nextLine();
+        if(needTables.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithTables());
+        }
+        displayEvent.promptNeedWhiteboard();
+        String needWhiteboard = scan.nextLine();
+        if(needWhiteboard.equalsIgnoreCase("y")){
+            rooms.retainAll(room.getRoomsWithWhiteboard());
+        }
+        displayEvent.viewRooms(rooms);
+    }
+    /**
      * Responds to menu option 7
      */
     public void option7() {
@@ -369,19 +397,26 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
+
         catcher = true;
         while(catcher){
             displayEvent.promptStartTime();
-            while (!scan.hasNextInt()) {
-                    displayEvent.badTime();
-                    scan.next();
-                }
-            int t1 = scan.nextInt();
-            if (t1 < 17 && t1 >= 9){
+            String t1 = scan.nextLine();
+//            while (!scan.hasNextInt()) {
+//                    displayEvent.badTime();
+//                    scan.next();
+//                }
+//            int t1 = scan.nextInt();
+            try{
+            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
                 startTime = String.valueOf(t1);
                 catcher = false;
             }
             else{
+                displayEvent.badTime();
+            }}
+            catch (NumberFormatException ex){
+            //else{
                 displayEvent.badTime();
             }
         }
@@ -390,16 +425,23 @@ public class OrganizerMainMenuController extends MainMenuController {
         catcher = true;
         while(catcher){
             displayEvent.promptEndTime();
-            while (!scan.hasNextInt()) {
-                displayEvent.badTime();
-                scan.next();
-            }
-            int t1 = scan.nextInt();
-            if (t1 < 17 && t1 >= 9){
+//            while (!scan.hasNextInt()) {
+//                displayEvent.badTime();
+//                scan.next();
+//            }
+            String t1 = scan.nextLine();
+            //int t1 = scan.nextInt();
+            try{
+                int start = Integer.parseInt(startTime);
+            if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9 && Integer.parseInt(t1) > start){
                 endTime = String.valueOf(t1);
                 catcher = false;
             }
             else{
+                displayEvent.badTime();
+            }}
+            catch (NumberFormatException ex){
+            //else{
                 displayEvent.badTime();
             }
         }
@@ -459,6 +501,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 catcher = false;
             } else if (controller != null) {
                 if (controller.createRoom(roomName)) {
+                    addRoomProperties(roomName);
                     displayMessage.addedRoom();
                     catcher = false;
                 }
@@ -467,6 +510,28 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
+    public void addRoomProperties(String roomName){
+        displayEvent.promptHasProjector();
+        String hasProjector = scan.nextLine();
+        if (hasProjector.equalsIgnoreCase("y")){
+            room.setProjector(roomName);
+        }
+        displayEvent.promptHasMicrophone();
+        String hasMicrophone = scan.nextLine();
+        if (hasMicrophone.equalsIgnoreCase("y")){
+            room.setMicrophone(roomName);
+        }
+        displayEvent.promptHasTables();
+        String hasTables = scan.nextLine();
+        if (hasTables.equalsIgnoreCase("y")){
+            room.setTables(roomName);
+        }
+        displayEvent.promptHasWhiteboard();
+        String hasWhiteboard = scan.nextLine();
+        if (hasWhiteboard.equalsIgnoreCase("y")){
+            room.setWhiteboard(roomName);
+        }
+    }
     /***
      * Responds to menu option 10- create a new user
      */

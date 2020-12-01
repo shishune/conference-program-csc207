@@ -1,6 +1,7 @@
 package presenters;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A presenter class. This class is responsible for anything related to displaying events to an organizer.
@@ -12,6 +13,16 @@ public class OrganizerEventPresenter extends EventPresenter {
     private String eventSuccess = "This event has been successfully ";
     private String roomSuccess = "This room has been successfully ";
 
+    /**
+     * View all the rooms that meet hte requirements
+     */
+    public void viewRooms(ArrayList<String> rooms){
+        System.out.println("The following is a list of all rooms that meet your requirements:");
+        for (String room : rooms){
+            System.out.println(room);
+        }
+
+    }
     /**
      * Message informing that user cancelled event
      * */
@@ -183,6 +194,49 @@ public class OrganizerEventPresenter extends EventPresenter {
      */
     public void promptVIP(){System.out.println("Is this a VIP event? Enter 'Y' for Yes and 'N' for No.");}
 
+    /**
+     * Asks user if room has projector
+     */
+    public void promptHasProjector(){System.out.println("Does this room have a projector? Enter 'y' for yes and 'n' for no.");}
+
+    /**
+     * Asks user if room has microphone
+     */
+    public void promptHasMicrophone(){System.out.println("Does this room have a microphone? Enter 'y' for yes and 'n' for no.");}
+
+    /**
+     * Asks user if room has tables
+     */
+    public void promptHasTables(){System.out.println("Does this room have tables? Enter 'y' for yes and 'n' for no.");}
+    /**
+     * Asks user if room has whiteboard
+     */
+    public void promptHasWhiteboard(){System.out.println("Does this room have a white board? Enter 'y' for yes and 'n' for no.");}
+
+    /**
+     * Asks user if the room to be added needs a projector
+     */
+    public void promptNeedProjector(){
+        System.out.println("Do you need a room with a projector? Enter 'y' for yes and 'n' for no.");
+    }
+    /**
+     * Asks user if the room to be added needs a microphone
+     */
+    public void promptNeedMicrophone(){
+        System.out.println("Do you need a room with a microphone? Enter 'y' for yes and 'n' for no.");
+    }
+    /**
+     * Asks user if the room to be added needs tables
+     */
+    public void promptNeedTables(){
+        System.out.println("Do you need a room with tables? Enter 'y' for yes and 'n' for no.");
+    }
+    /**
+     * Asks user if the room to be added needs a whiteboard
+     */
+    public void promptNeedWhiteboard(){
+        System.out.println("Do you need a room with a whiteboard? Enter 'y' for yes and 'n' for no.");
+    }
     /**
      * Tells user that their input is not valid
      */

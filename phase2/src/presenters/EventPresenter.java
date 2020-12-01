@@ -73,10 +73,16 @@ public class EventPresenter {
         System.out.println(eventSuccess+ "added.");
     }
 
+    /**
+     * Message informing that user saved event
+     * */
     public void successSaveEvent() {
         System.out.println(eventSuccess+ "saved.");
     }
 
+    /**
+     * Message informing that the event is already saved
+     * */
     public void failedSaveEvent() {
         System.out.println("The event is already saved.");
     }
