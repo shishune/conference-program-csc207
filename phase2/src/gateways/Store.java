@@ -140,21 +140,21 @@ public class Store{
      * Uses the method in conferenceActions for obtaining all conferences as a list then stores in csv
      * @param conferenceActions the use case class for conference
      */
-    public void storeConferences(useCases.ConferenceActions conferenceActions) {
-        ArrayList<String> conferenceList = new ArrayList<String>();
-        String path = "./phase2/src/assets/dataFiles/conferences.csv";
-        conferenceList = conferenceActions.storeConferences();
-        try {
-            FileWriter writer;
-            writer = new FileWriter(path, false);
-            for (String conference : conferenceList){
-                writer.write(conference);
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void storeConferences(useCases.ConferenceActions conferenceActions) {
+//        ArrayList<String> conferenceList = new ArrayList<String>();
+//        String path = "./phase2/src/assets/dataFiles/conferences.csv";
+//        conferenceList = conferenceActions.storeConferences();
+//        try {
+//            FileWriter writer;
+//            writer = new FileWriter(path, false);
+//            for (String conference : conferenceList){
+//                writer.write(conference);
+//            }
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * Stores entities of Attendee, Event, Message, Organizer, Room, Event, Speaker

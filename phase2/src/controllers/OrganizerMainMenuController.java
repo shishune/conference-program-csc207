@@ -182,7 +182,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                         String speakerUsername = createSpeaker();
                         if (speakerUserName != null) {
                             speakerId = speaker.getIDFromName(speakerUsername);
-                            speakerUsernames.add(speakerUsername);
+                            speakerUsernames.add(speakerId);
                             displayMessage.speakerAdded();
                         }
 

@@ -171,14 +171,16 @@ public class OrganizerController extends UserController {
     /**
      * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
      * @param eventID
-     * @param speakerID
+     * @param speakerIDs
      *
      */
-    public boolean scheduleSpeaker(String eventID, List<String> speakerID, boolean canAdd){
+    public boolean scheduleSpeaker(String eventID, List<String> speakerIDs, boolean canAdd){
         if (canAdd) {
-            eventActions.setSpeaker(eventID, speakerID);
-            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
-            speakerActions.addEventToUser(eventID, speakerUsername);
+            eventActions.setSpeakers(eventID, speakerIDs);
+            for (String speakerID: speakerIDs) {
+                String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
+                speakerActions.addEventToUser(eventID, speakerUsername);
+            }
             return true;
         }
         return false;

@@ -176,10 +176,10 @@ public class EventActions  {
     /***
      * set speaker of an event
      * @param eventID if of event
-     * @param speakerID id of new speaker
+     * @param speakerIDs id of new speaker
      */
-    public void setSpeaker(String eventID, List<String> speakerID){
-        this.events.get(eventID).setSpeaker(speakerID);
+    public void setSpeakers(String eventID, List<String> speakerIDs){
+        this.events.get(eventID).setSpeaker(speakerIDs);
     }
 
 
