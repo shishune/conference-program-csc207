@@ -3,6 +3,7 @@ package entities;
 import java.util.List;
 
 public class Conference {
+    //TODO: add check start time <= end time, end time >= start time
     private String conferenceID;
     private String title;
     private List<String> events;
