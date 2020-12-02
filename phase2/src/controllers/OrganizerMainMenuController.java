@@ -1,6 +1,9 @@
 package controllers;
+import entities.Conference;
 import entities.Event;
 import entities.User;
+import presenters.ConferencePresenter;
+import presenters.OrganizerConferencePresenter;
 import presenters.OrganizerEventPresenter;
 import presenters.OrganizerMessagePresenter;
 import useCases.RoomActions;
@@ -23,9 +26,11 @@ public class OrganizerMainMenuController extends MainMenuController {
     private useCases.SpeakerActions speaker;
     private useCases.EventActions event;
     private useCases.OrganizerActions organizer;
+    private useCases.ConferenceActions conference;
     private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
+    private OrganizerConferencePresenter displayConferences;
     private useCases.AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -37,17 +42,22 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param user                the user
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, useCases.SpeakerActions speaker, useCases.EventActions event, useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee) {
-        super(user, organizerController, room, speaker);
+    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room,
+                                       useCases.SpeakerActions speaker, useCases.EventActions event,
+                                       useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
+                                       useCases.ConferenceActions conference) {
+        super(user, organizerController, room, speaker, conference);
         this.user = user;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
+        this.displayConferences = new OrganizerConferencePresenter();
         this.room = room;
         this.controller = organizerController;
         this.speaker = speaker;
         this.event = event;
         this.organizer = organizerActions;
         this.attendee = attendee;
+        this.conference = conference;
     }
 
     /**
@@ -111,8 +121,10 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 6 - create an event
      */
     public void option6() {
+        // title of the event
         displayEvent.promptTitle();
         String title = "";
+        // is it vip event?
         boolean isVip = false;
 
         while (true) {
@@ -247,6 +259,26 @@ public class OrganizerMainMenuController extends MainMenuController {
             if (checks.get(0) && checks.size() == 1) {
                 String eventToAdd = event.getEventNames().get(title).getId();
                 organizer.addEventToUser(eventToAdd, user.getUsername());
+
+                // Add this event to a conference
+                displayEvent.promptConference();
+                // display conferences
+                ArrayList<List<String>> conferences = getConferences();
+                displayConferences.displayConferences(conferences);
+                String conferenceTitle = scan.nextLine();
+
+                //System.out.println("HERE!" + conference.returnTitleHashMap());
+                if(conference.conferenceExists(conferenceTitle)){
+                    // add event to conference
+                    String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
+                    if(eventId != null){
+                        conference.addEvent(conferenceTitle, eventId);
+                    } else {
+                        displayEvent.failedAddEventToConference();
+                    }
+                } else {
+                    displayEvent.invalidConference();
+                }
                 displayEvent.successAddEvent();
             } else {
                 if (!checks.get(0)) {
@@ -263,6 +295,21 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
+    }
+
+    private ArrayList<List<String>> getConferences() {
+        HashMap<String, Conference> conferenceUsernameHash = conference.returnTitleHashMap();
+        ArrayList<List<String>> stringRepConferences = new ArrayList<>();
+        for(Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()){
+            List<String> stringRepConference = new ArrayList<String>();
+            Conference conference = entry.getValue();
+            stringRepConference.add(conference.getTitle());
+            //stringRepConference.add(conference.getStartDateTime());
+            //stringRepConference.add(conference.getEndDateTime());
+
+            stringRepConferences.add(stringRepConference);
+        }
+        return stringRepConferences;
     }
 
     /**
@@ -654,6 +701,22 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option11() {
         super.option8();
     }
+
+    /***
+     * Responds to menu option 12 - Create Conference/Add events to conferences
+     */
+    public void option15() {
+        displayConferences.printOrganizerConferenceMenu();
+        String option = scan.nextLine();
+        controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
+        if (option.equals("1")) {
+            menuController.option1(); // send message to all speakers
+        }
+        if (option.equals("2")) {
+            menuController.option2(); // send message to all attendees of an event
+        }
+    }
+
 
 
 }

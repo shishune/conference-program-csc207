@@ -28,6 +28,7 @@ public class UserController {
     private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
     private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
     private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+    private useCases.ConferenceActions conferenceActions; // = super.getConferences()
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -37,7 +38,7 @@ public class UserController {
      * AttendeeActions, RoomActions.
      */
     public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
-                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker) {
+                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
         this.messageActions = message;
         this.eventActions = events;
         this.roomActions = rooms;
@@ -52,6 +53,7 @@ public class UserController {
         this.attendeeActions = attendee;
         this.organizerActions = organizer;
         this.speakerActions = speaker;
+        this.conferenceActions = conference;
     }
 
 

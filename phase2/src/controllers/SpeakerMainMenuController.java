@@ -3,10 +3,7 @@ import entities.Event;
 import entities.User;
 import presenters.EventPresenter;
 import presenters.SpeakerMessagePresenter;
-import useCases.AttendeeActions;
-import useCases.EventActions;
-import useCases.RoomActions;
-import useCases.SpeakerActions;
+import useCases.*;
 
 import java.util.*;
 
@@ -24,6 +21,7 @@ public class SpeakerMainMenuController extends MainMenuController {
     private AttendeeActions attendeeActions;
     private RoomActions roomActions;
     private SpeakerActions speakerActions;
+    private ConferenceActions conferenceActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -32,8 +30,8 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param user              the user
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions) {
-        super(user, speakerController, roomActions, speakerActions);
+    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions, ConferenceActions conferenceActions) {
+        super(user, speakerController, roomActions, speakerActions, conferenceActions);
         this.user = user;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
@@ -42,6 +40,7 @@ public class SpeakerMainMenuController extends MainMenuController {
         this.controller = speakerController;
         this.eventActions = eventActions;
         this.attendeeActions = attendeeActions;
+        this.conferenceActions = conferenceActions;
         this.roomActions = roomActions;
     }
 

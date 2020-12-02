@@ -13,7 +13,8 @@ public class AccountPresenter {
             + "\n[2] Send a message"
             + "\n[3] View all messages"
             + "\n[4] Add a contact"
-            + "\n[5] View all contacts";
+            + "\n[5] View all contacts"
+            + "\n[13] View all Conferences";
 
     /**
      * Failed sign up. Username already exists

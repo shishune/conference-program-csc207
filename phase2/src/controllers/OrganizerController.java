@@ -25,6 +25,7 @@ public class OrganizerController extends UserController {
     private useCases.SpeakerActions speakerActions;
     private useCases.OrganizerActions organizerActions;
     private useCases.AttendeeActions attendeeActions;
+    private useCases.ConferenceActions conferenceActions;
     private String organizerID;
 
     /**
@@ -39,9 +40,9 @@ public class OrganizerController extends UserController {
      * @param speakerActions
      */
     public OrganizerController(String organizerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions, //hello
-                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions ){ //hello
+                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.ConferenceActions conferenceActions){ //hello
 
-        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions); //hello
+        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions, conferenceActions); //hello
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
@@ -49,6 +50,7 @@ public class OrganizerController extends UserController {
         this.messageActions = messageActions;
         this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
+        this.conferenceActions = conferenceActions;
     }
     /***
      * create a new event
@@ -177,7 +179,7 @@ public class OrganizerController extends UserController {
     public boolean scheduleSpeaker(String eventID, List<String> speakerID, boolean canAdd){
         if (canAdd) {
             eventActions.setSpeaker(eventID, speakerID);
-            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
+            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID) != null ? speakerActions.returnIDHashMap().get(speakerID).getUsername() : null;
             speakerActions.addEventToUser(eventID, speakerUsername);
             return true;
         }

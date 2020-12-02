@@ -40,7 +40,9 @@ public class AccountController {
         useCases.SpeakerActions speakerActions = new useCases.SpeakerActions(g);
         useCases.OrganizerActions organizerActions = new useCases.OrganizerActions(g);
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
+        useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
+
         controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
                 messageActions, 'u', attendeeActions, organizerActions, speakerActions);
 
@@ -77,7 +79,7 @@ public class AccountController {
                     controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
                             attendeeActions, organizerActions, speakerActions);
                     menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
-                            roomActions, speakerActions);
+                            roomActions, speakerActions, conferenceActions);
                 }
                 else if (type.equals("S")) { //indicates speaker
                     Speaker user = speakerActions.returnUsernameHashMap().get(username);
@@ -86,15 +88,15 @@ public class AccountController {
                             roomActions,
                             attendeeActions, organizerActions, speakerActions);
                     menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
-                            eventActions, attendeeActions, roomActions, speakerActions);
+                            eventActions, attendeeActions, roomActions, speakerActions, conferenceActions);
                 }
                 else{
                     Organizer user = organizerActions.returnUsernameHashMap().get(username);
                     accountDisplay = new presenters.OrganizerAccountPresenter();
                     controllers.OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
                             roomActions,
-                            attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions);
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
+                    menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions, conferenceActions);
                 }
 
                 while (true) {
@@ -142,7 +144,15 @@ public class AccountController {
                         menuController.option10();
                     } else if (menuOption.equals("11") && (type.equals("O"))) {
                         menuController.option11();
-                    } else {
+                    } else if (menuOption.equals("12") && (type.equals("O"))) {
+                        // add conference (organizers only)
+                        //TODO: change to appropriate name after everyone is done adding options option12(?)
+                        menuController.option15();
+                    }  else if (menuOption.equals("13")) {
+                        // view conferences (general)
+                        //TODO: change to appropriate name after everyone is done adding options option13(?)
+                        menuController.option16();
+                    }else {
                         accountDisplay.printMenuError();
                     }
                     accountDisplay.promptReturn();

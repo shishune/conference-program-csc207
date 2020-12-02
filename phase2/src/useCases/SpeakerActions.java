@@ -273,15 +273,18 @@ public class SpeakerActions extends UserAccountActions {
 
     public boolean addEventToUser(String event, String username) {
         User user = speakerUsername.get(username);
-        boolean isPresent = user.getEventList().contains(event);
-        if (isPresent) {
-            return false;
-        } else {
-            List<String> userEvents = user.getEventList();
-            userEvents.add(event);
-            user.setEventList(userEvents);
-            return true;
+        if(user != null){
+            boolean isPresent = user.getEventList().contains(event);
+            if (isPresent) {
+                return false;
+            } else {
+                List<String> userEvents = user.getEventList();
+                userEvents.add(event);
+                user.setEventList(userEvents);
+                return true;
+            }
         }
+        return false;
     }
 
 

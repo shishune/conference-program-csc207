@@ -88,10 +88,31 @@ public class OrganizerEventPresenter extends EventPresenter {
     }
 
     /**
-     * Asks for the title fo the event to be added
+     * Asks for the title of the event to be added
      */
     public void promptTitle(){
         System.out.println("Enter the title of the event you want to add.");
+    }
+
+    /**
+     * Asks for the title of the conference this event is to be added to
+     */
+    public void promptConference(){
+        System.out.println("Enter the title of the conference you want to add this event to. \nIf the conference does not exist, please create a new conference from the main menu.");
+    }
+
+    /**
+     * Shows that conference title added was invalid
+     */
+    public void invalidConference(){
+        System.out.println("This conference does not exist, please enter the title of an existing conference or create a new conference from the main menu.");
+    }
+
+    /**
+     * Shows that comething went wrong when creating the event
+     */
+    public void failedAddEventToConference(){
+        System.out.println("This event was successfully created but could not be added to the conference. You can create a conference and add this event to the conference in the main menu.");
     }
 
     /**

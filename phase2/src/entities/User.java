@@ -130,17 +130,17 @@ public abstract class User{
         return userId + "," + username + "," + password + "," + contacts + "," + events + "," + isLogin + "," +isOrganizer;
     }
 
-//    /**
-//     * Getter for the log out time
-//     * @return the time the user logs out
-//     */
-//    public Date getLogOutTime(){ return logOutTime;}
-//
-//    /**
-//     * Setter for the log out time
-//     * @param date the date of the log out
-//     */
-//    public void setLogOutTime(Date date) {this.logOutTime = date;}
+    /**
+     * Getter for the log out time
+     * @return the time the user logs out
+     */
+    public Date getLogOutTime(){ return logOutTime;}
+
+    /**
+     * Setter for the log out time
+     * @param date the date of the log out
+     */
+    public void setLogOutTime(Date date) {this.logOutTime = date;}
 
 
 

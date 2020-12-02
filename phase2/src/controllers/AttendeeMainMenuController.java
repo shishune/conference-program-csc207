@@ -2,6 +2,7 @@ package controllers;
 import entities.User;
 import presenters.EventPresenter;
 import presenters.MessagePresenter;
+import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.SpeakerActions;
 
@@ -20,6 +21,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     private MessagePresenter displayMessage;
     private RoomActions room;
     private SpeakerActions speaker;
+    private ConferenceActions conference;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -27,13 +29,14 @@ public class AttendeeMainMenuController extends MainMenuController {
      * @param user               the user object
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(User user, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker) {
-        super(user, attendeeController, room, speaker);
+    public AttendeeMainMenuController(User user, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conference) {
+        super(user, attendeeController, room, speaker, conference);
         this.user = user;
         this.controller = attendeeController;
         this.displayEvent = new EventPresenter();
         this.displayMessage = new MessagePresenter();
         this.speaker = speaker;
+        this.conference = conference;
     }
 
     /**

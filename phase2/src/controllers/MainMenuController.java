@@ -1,7 +1,9 @@
 package controllers;
 import entities.User;
+import presenters.ConferencePresenter;
 import presenters.EventPresenter;
 import presenters.MessagePresenter;
+import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.SpeakerActions;
 
@@ -19,6 +21,8 @@ public abstract class MainMenuController extends AccountController {
     private MessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private SpeakerActions speakerActions;
+    private ConferenceActions conferenceActions;
+    private ConferencePresenter displayConference;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -26,13 +30,15 @@ public abstract class MainMenuController extends AccountController {
      * @param user the user
      * @param controller the controller responsible for user
      */
-    public MainMenuController(User user, UserController controller, RoomActions room, SpeakerActions speakerActions){
+    public MainMenuController(User user, UserController controller, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions){
         this.controller = controller;
         this.user = user;
         this.displayMessage = new MessagePresenter();
         this.displayEvent = new EventPresenter();
+        this.displayConference = new ConferencePresenter();
         this.room = room;
         this.speakerActions = speakerActions;
+        this.conferenceActions = conferenceActions;
     }
 
     /**
@@ -173,8 +179,16 @@ public abstract class MainMenuController extends AccountController {
 
     public void option11(){}
 
+    public void option15(){}
+
+    /***
+     * Responds to menu option 13 - View conferences
+     */
+    public void option16(){
+        displayConference.displayConferences(conferenceActions.returnConferences());
+    }
+
     protected boolean validInput(String str){
         return !str.equals("") && !str.equalsIgnoreCase("x");
     }
-
 }
