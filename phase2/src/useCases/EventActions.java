@@ -435,8 +435,8 @@ public class EventActions  {
     }
 
     /**
-     *
-     * @return
+     * Return the number of events that are available.
+     * @return the number of events that are available.
      */
     public Integer numberEventsAvailable(){
         Integer total = 0;
@@ -446,34 +446,49 @@ public class EventActions  {
         return total;
     }
 
-
     /**
-     *
-     * @return
+     * Events are considered to be one of the most attended events with an attendance rate of at least 75%
+     * @return a list of the most attended events
      */
-    public String mostAttendedEvents() {
-        int maxSize = Integer.MIN_VALUE;
-        for (String e : attendees.keySet()) {
-            if (maxSize < attendees.get(e).size()) {
-                maxSize = attendees.get(e).size();
+    public ArrayList<String> mostAttendedEvents(){
+        ArrayList<String> mostAttended = new ArrayList<String>();
+        for (Map.Entry<String, Event> entry: events.entrySet()){
+            double numAttendees = attendees.get(entry.getValue()).size();
+            double eventCapacity = entry.getValue().getCapacity();
+            if (numAttendees/eventCapacity >= 0.75){
+                mostAttended.add(entry.getKey());
+                return mostAttended;
             }
-            return e;
         }
-        return null;
+        return mostAttended;
     }
 
-
-    public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
-        Integer total = 0;
-        for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
-            for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
-                if (entry1.getValue().size() == entry2.getValue());
-                {
-                    total++;
-                }
+    /**
+     * Reveals the number of events that are at full capacity
+     * @return the number of events at full capacity
+     */
+    public int numAtMaxCapacity() {
+        int count = 0;
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
+            if (attendees.get(entry.getValue()).size() == entry.getValue().getCapacity()) {
+                count += 1;
             }
-            return total;
         }
-        return null;
+        return count;
+    }
+
+    /**
+     * Provides a list of events in ascending order of event date
+     * @return a list of events with their date times in ascending order
+     */
+
+    public ArrayList<String> eventsOrderedByDate(){
+        ArrayList<String> eventsByDate = new ArrayList<String>();
+        for (Map.Entry<String, Event> entry : events.entrySet()) {
+            eventsByDate.add(entry.getValue().getStartDateTime() + " , " + entry.getKey());
+            eventsByDate.sort(Comparator.comparing(String::toString));
+            return eventsByDate;
+        }
+        return eventsByDate;
     }
 }
