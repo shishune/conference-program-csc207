@@ -559,27 +559,39 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
-//    public void option12(){
-//        boolean loop = true;
-//        displayMessage.printUserMenu();
-//        while(loop) {
-//            String option = scan.nextLine();
-//            if (option.equalsIgnoreCase("x")) {
-//                loop = false;
-//            } else if (option.equals("1")) {
-//                Event eventObject = event.getEventNames().get(eventName);
-//                displayMessage.numberOfAttendees(eventList.eventsOrderedByDate());
-//                loop = false;
-//            } else if (option.equals("2")) {
-//           //     createAttendee();
-//                loop = false;
-////            } else if (option.equals("3")) {
-////                loop = false;
-//            } else {
-//                displayMessage.notValidChoice();
-//            }
-//        }
-//    }
+    public void option12(){
+        boolean loop = true;
+        displayMessage.printUserMenu();
+        while(loop) {
+            String option = scan.nextLine();
+            if (option.equalsIgnoreCase("x")) {
+                loop = false;
+            } else if (option.equals("1")) {
+                displayMessage.numberEventsAvailable(event.numberEventsAvailable());
+                loop = false;
+            } else if (option.equals("2")) {
+                displayMessage.mostAttendedEvents(event.mostAttendedEvents());
+                loop = false;
+            } else if (option.equals("3")) {
+                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
+                loop = false;
+            } else if (option.equals("4")) {
+                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
+                loop = false;
+            } else if (option.equals("5")) {
+                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                loop = false;
+            } else if (option.equals("6")) {
+                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                loop = false;
+            } else if (option.equals("7")) {
+                displayMessage.newSessionAttendees(attendee.newSessionAttendees());
+                loop = false;
+            } else {
+                displayMessage.notValidChoice();
+            }
+        }
+    }
 
     /***
      * create a new speaker
