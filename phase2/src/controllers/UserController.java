@@ -445,10 +445,10 @@ public class UserController {
         return (speakerActions.returnIDHashMap().size() > 0);
     }
 
-    public Date dateLoggedOut(String userName) {
-        User u = user.findUserFromUsername(userName);
-        return u.getLogOutTime();
-    }
+//    public Date dateLoggedOut(String userName) {
+//        User u = user.findUserFromUsername(userName);
+//        return u.getLogOutTime();
+//    }
 
 }
 
