@@ -139,10 +139,10 @@ public class EventActions  {
         if (eventList != null && !eventList.isEmpty()) {
             for (String event: eventList){
                 String[] eventAttributes = event.split(",");
-                    List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
-                    List<String> eventSpeaker = new ArrayList<>(Arrays.asList(eventAttributes[2].split("%%")));
-                    loadEvent(eventAttributes[0], eventAttributes[1], eventSpeaker, eventAttributes[3], eventAttributes[4],
-                            eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]), Boolean.parseBoolean(eventAttributes[8]));
+                List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
+                List<String> eventSpeaker = new ArrayList<>(Arrays.asList(eventAttributes[2].split("%%")));
+                loadEvent(eventAttributes[0], eventAttributes[1], eventSpeaker, eventAttributes[3], eventAttributes[4],
+                        eventAttendees, eventAttributes[6], Integer.parseInt(eventAttributes[7]), Boolean.parseBoolean(eventAttributes[8]));
             }
         }
     }
@@ -160,7 +160,7 @@ public class EventActions  {
      * @return true if the event was created
      * */
     public Event createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
-                               List<String> attendees, String roomID, int capacity, boolean isVip){
+                             List<String> attendees, String roomID, int capacity, boolean isVip){
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 
@@ -196,7 +196,7 @@ public class EventActions  {
      * @param isVip if event is a vip event
      */
     public Event loadEvent(String eventID, String title, List<String> speakerId, String startDateTime, String endDateTime,
-                          List<String> attendees, String roomID, int capacity, boolean isVip) {
+                           List<String> attendees, String roomID, int capacity, boolean isVip) {
 
         if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
@@ -462,30 +462,18 @@ public class EventActions  {
         return null;
     }
 
-    public int numAtMaxCapacity(){
-        int count = 0;
-        for(Map.Entry<String, Event> entry : events.entrySet()){
-            // entry.getKey();
-            // entry.getValue();
-            if(attendees.get(entry.getValue()).size() == entry.getValue().getCapacity()) { // >= or ==?
-                count += 1;
-            }
-        }
-        return count;
-    }
-
 
     public Integer numberEventsFull(HashMap<String, List<String>> attendees, HashMap<String, Integer> eventCapacity) {
         Integer total = 0;
         for (Map.Entry<String, List<String>> entry1 : attendees.entrySet()) {
             for (Map.Entry<String, Integer> entry2 : eventCapacity.entrySet()) {
                 if (entry1.getValue().size() == entry2.getValue());
-            {
-                total++;
+                {
+                    total++;
+                }
             }
+            return total;
         }
-        return total;
-    }
         return null;
-}
+    }
 }

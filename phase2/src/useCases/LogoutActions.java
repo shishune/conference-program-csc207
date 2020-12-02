@@ -2,6 +2,10 @@ package useCases;
 
 import entities.User;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A use case class which is responsible for validating of the user's username and password match
  * @author Mizna & Jiessie
@@ -30,6 +34,8 @@ public class LogoutActions{
         else{
             User user = attendees.returnUsernameHashMap().get(username);
             user.setLogin(false);
+            Date date = new Date();
+            user.setLogOutTime(date);
         }
     }
 }

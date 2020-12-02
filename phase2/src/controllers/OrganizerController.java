@@ -221,7 +221,7 @@ public class OrganizerController extends UserController {
             if(userHash.get(attendeesHash.get(attendeeID).getUsername()) == null) {
                 return false;
             }
-                messageActions.createMessage(organizerID, attendeeID, message);
+            messageActions.createMessage(organizerID, attendeeID, message);
         }
         return true;
     }

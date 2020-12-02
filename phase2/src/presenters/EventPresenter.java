@@ -155,7 +155,7 @@ public class EventPresenter {
     /**
      * A prompt asking the user for their VIP status
      * */
-    public void VIPStatusPrompt(){System.out.println("Please input 'VIP' if you are a VIP attendee, otherwise press any other key");}
+    public void VIPStatusPrompt(){System.out.println("Please input 'Y' if the attendee is a VIP, otherwise press any other key");}
 
 
 
