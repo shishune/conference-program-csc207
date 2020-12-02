@@ -411,8 +411,8 @@ public class SpeakerActions extends UserAccountActions {
 
 
     /**
-     *
-     * @return
+     * Returns the total number of speakers for all events
+     * @return the total number of speakers for all events
      */
     public Integer totalNumberSpeakers(){
         Integer total = 0;
