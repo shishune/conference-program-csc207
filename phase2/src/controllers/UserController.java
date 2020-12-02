@@ -5,11 +5,13 @@ import entities.Message;
 import entities.Room;
 import entities.User;
 import useCases.RoomActions;
+import useCases.LogoutActions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.Date;
 
 /**
  * A controller class for users. UserController is a parent class to OrganizerController, AccountController and
@@ -442,6 +444,12 @@ public class UserController {
     public boolean speakersExist() {
         return (speakerActions.returnIDHashMap().size() > 0);
     }
+
+    public Date dateLoggedOut(String userName) {
+        User u = user.findUserFromUsername(userName);
+        return u.getLogOutTime();
+    }
+
 }
 
 
