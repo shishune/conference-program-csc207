@@ -4,6 +4,8 @@ import entities.User;
 import presenters.OrganizerEventPresenter;
 import presenters.OrganizerMessagePresenter;
 import useCases.RoomActions;
+import useCases.AttendeeActions;
+import useCases.EventActions;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -556,6 +558,28 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
     }
+
+//    public void option12(){
+//        boolean loop = true;
+//        displayMessage.printUserMenu();
+//        while(loop) {
+//            String option = scan.nextLine();
+//            if (option.equalsIgnoreCase("x")) {
+//                loop = false;
+//            } else if (option.equals("1")) {
+//                Event eventObject = event.getEventNames().get(eventName);
+//                displayMessage.numberOfAttendees(eventList.eventsOrderedByDate());
+//                loop = false;
+//            } else if (option.equals("2")) {
+//           //     createAttendee();
+//                loop = false;
+////            } else if (option.equals("3")) {
+////                loop = false;
+//            } else {
+//                displayMessage.notValidChoice();
+//            }
+//        }
+//    }
 
     /***
      * create a new speaker
