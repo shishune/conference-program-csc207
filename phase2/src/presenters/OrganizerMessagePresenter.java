@@ -1,5 +1,7 @@
 package presenters;
 
+import java.util.ArrayList;
+
 /**
  * A presenter class. This class is responsible for anything related to displaying messages to the user.
  * Creates menu specific to organizer for the method of messaging.
@@ -145,5 +147,6 @@ public class OrganizerMessagePresenter extends MessagePresenter {
 
     public void zeroSpeakers(){System.out.println("Enter 'Y' to have 0 speakers");}
     public void numberOfSpeaker(){System.out.println("Enter an integer value for the number of speakers you would like to have");}
+    // public void numberOfAttendees(ArrayList<String> i ){System.out.println("Enter an integer value for the number of speakers you would like to have");}
 
 }

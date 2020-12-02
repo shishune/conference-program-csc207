@@ -21,6 +21,7 @@ public class AttendeeActions extends UserAccountActions {
     private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
     private ArrayList<String> attendees = new ArrayList<String>();
     private LoadUpIGateway loader;
+    private int counter;
 //    private SpeakerActions speaker;
 //    private OrganizerActions organizer;
 
@@ -97,8 +98,15 @@ public class AttendeeActions extends UserAccountActions {
         addUsernameToHashMap(userAttendee);
         attendeesHashMap.put(userId, userAttendee);
         attendeeUsernameHashMap.put(username, userAttendee);
+        counter += 1;
         return userAttendee;
     }
+
+    /**
+     *
+     * @return the amount of attendees created
+     */
+    public int newSessionAttendees(){ return counter; }
 
 
     /**
