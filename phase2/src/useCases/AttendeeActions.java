@@ -415,8 +415,8 @@ public class AttendeeActions extends UserAccountActions {
     }
 
         /**
-         *
-         * @return
+         * This returns the total number of attendees for all events
+         * @return the total number of attendees for all events
          */
         public Integer totalNumberAttendees(){
             Integer total = 0;
