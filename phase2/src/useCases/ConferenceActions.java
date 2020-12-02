@@ -4,10 +4,7 @@ import entities.Conference;
 import entities.Event;
 import gateways.LoadUpIGateway;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ConferenceActions {
     public HashMap<String, Conference> conferences = new HashMap<String, Conference>();
@@ -65,31 +62,15 @@ public class ConferenceActions {
         conferences.put(conferenceId, newConference);
         conferenceNames.put(title, newConference);
         //this.events.put(conferenceId, events);
-        List<String> dateTimes = timeInBetween(startDateTime, endDateTime);
-        for (String dateTime: dateTimes) {
-            if (speakerSchedule.containsKey(speakerId)) {
-                speakerSchedule.get(speakerId).add(dateTime);
-
-            } else {
-                for (String elem : speakerId) {
-                    List<String> speakerTimes = new ArrayList<>();
-                    speakerTimes.add(dateTime);
-                    speakerSchedule.put(elem, speakerTimes);
-                }
-            }
-            if (roomSchedule.containsKey(roomID)) {
-                roomSchedule.get(roomID).add(dateTime);
-
-            } else {
-                List<String> roomTimes = new ArrayList<>();
-                roomTimes.add(dateTime);
-                roomSchedule.put(roomID, roomTimes);
-            }
-        }
+        // TODO: put events?
         return newConference;
     }
 
     public List<String> storeConferences(){
-
+        List<String> storedConferences = new ArrayList<String>();
+        for(Map.Entry<String, Conference> conference : conferences.entrySet()) {
+            storedConferences.add(conference.getValue().getStringRep()+"\n");
+        }
+        return storedConferences;
     }
 }
