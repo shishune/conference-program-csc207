@@ -171,16 +171,14 @@ public class OrganizerController extends UserController {
     /**
      * Schedule speaker to speak at an event. under the assumption that speaker can be added/ is free
      * @param eventID
-     * @param speakerIDs
+     * @param speakerID
      *
      */
-    public boolean scheduleSpeaker(String eventID, List<String> speakerIDs, boolean canAdd){
+    public boolean scheduleSpeaker(String eventID, List<String> speakerID, boolean canAdd){
         if (canAdd) {
-            eventActions.setSpeakers(eventID, speakerIDs);
-            for (String speakerID: speakerIDs) {
-                String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
-                speakerActions.addEventToUser(eventID, speakerUsername);
-            }
+            eventActions.setSpeaker(eventID, speakerID);
+            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
+            speakerActions.addEventToUser(eventID, speakerUsername);
             return true;
         }
         return false;
@@ -223,7 +221,7 @@ public class OrganizerController extends UserController {
             if(userHash.get(attendeesHash.get(attendeeID).getUsername()) == null) {
                 return false;
             }
-                messageActions.createMessage(organizerID, attendeeID, message);
+            messageActions.createMessage(organizerID, attendeeID, message);
         }
         return true;
     }
