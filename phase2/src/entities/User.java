@@ -35,7 +35,7 @@ public abstract class User{
      */
 
     public User (String userId, String username, String password, List<String> contactsList, List<String> eventList,
-                 boolean isLogin, boolean isOrganizer, Date logOutTime){
+                 boolean isLogin, boolean isOrganizer/**, Date logOutTime**/){
 
         this.username = username;
         this.isLogin = isLogin;
@@ -44,7 +44,7 @@ public abstract class User{
         this.eventList = eventList;
         this.userId = userId;
         this.isOrganizer = isOrganizer;
-        this.logOutTime = logOutTime;
+        //this.logOutTime = logOutTime;
     }
 
     /**
