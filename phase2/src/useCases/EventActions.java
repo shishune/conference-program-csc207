@@ -470,6 +470,11 @@ public class EventActions  {
         return count;
     }
 
+    /**
+     * Provides a list of events in ascending order of event date
+     * @return a list of events with their date times in ascending order
+     */
+
     public ArrayList<String> eventsOrderedByDate(){
         ArrayList<String> eventsByDate = new ArrayList<String>();
         for (Map.Entry<String, Event> entry : events.entrySet()) {
