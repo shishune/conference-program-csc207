@@ -86,7 +86,7 @@ public class ConferenceActions {
                 roomSchedule.put(roomID, roomTimes);
             }
         }
-        return newEvent;
+        return newConference;
     }
 
     public List<String> storeConferences(){
