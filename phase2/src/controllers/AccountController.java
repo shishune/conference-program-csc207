@@ -42,9 +42,8 @@ public class AccountController {
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
         useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
-
         controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
-                messageActions, 'u', attendeeActions, organizerActions, speakerActions, conferenceActions);
+                messageActions, 'u', attendeeActions, organizerActions, speakerActions);
 
         //Instantiate controller classes
         controllers.LogIn logIn = new LogIn();
@@ -74,26 +73,37 @@ public class AccountController {
 
                 if (type.equals("A")) { //indicates attendee
 
-                    Attendee user = attendeeActions.returnUsernameHashMap().get(username);
-                    accountDisplay = new presenters.AttendeeAccountPresenter();
-                    controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
-                            attendeeActions, organizerActions, speakerActions, conferenceActions);
-                    menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
-                            roomActions, speakerActions, conferenceActions);
+                    String user = attendeeActions.returnUsernameHashMap().get(username).getId();
+                    boolean isVIP = attendeeActions.returnUsernameHashMap().get(username).getIsVIP();
+
+                    if (isVIP){
+                        accountDisplay = new presenters.VIPAttendeeAccountPresenter();
+                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                                attendeeActions, organizerActions, speakerActions, conferenceActions);
+                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                                roomActions, speakerActions, conferenceActions);
+                    }
+                    else{accountDisplay = new presenters.AttendeeAccountPresenter();
+                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                                attendeeActions, organizerActions, speakerActions, conferenceActions);
+                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                                roomActions, speakerActions, conferenceActions);}
+
+
                 }
                 else if (type.equals("S")) { //indicates speaker
-                    Speaker user = speakerActions.returnUsernameHashMap().get(username);
+                    String user = speakerActions.returnUsernameHashMap().get(username).getId();
                     accountDisplay = new presenters.SpeakerAccountPresenter();
-                    controllers.SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
+                    controllers.SpeakerController speakerController = new SpeakerController(user, messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions, conferenceActions);
                     menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
                             eventActions, attendeeActions, roomActions, speakerActions, conferenceActions);
                 }
                 else{
-                    Organizer user = organizerActions.returnUsernameHashMap().get(username);
+                    String user = organizerActions.returnUsernameHashMap().get(username).getId();
                     accountDisplay = new presenters.OrganizerAccountPresenter();
-                    controllers.OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
+                    controllers.OrganizerController organizerController = new OrganizerController(user, messageActions, eventActions,
                             roomActions,
                             attendeeActions, organizerActions, speakerActions, conferenceActions);
                     menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions, conferenceActions);

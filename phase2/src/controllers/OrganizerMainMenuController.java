@@ -26,6 +26,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     private useCases.SpeakerActions speaker;
     private useCases.EventActions event;
     private useCases.OrganizerActions organizer;
+    private String userID;
     private useCases.ConferenceActions conference;
     private User user;
     private OrganizerMessagePresenter displayMessage;
@@ -39,9 +40,12 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * Instantiates the main menu responder object
      *
-     * @param user                the user
+     * @param userID              the user ID
      * @param organizerController the controller responsible for organizer
      */
+    public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room, useCases.SpeakerActions speaker, useCases.EventActions event, useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee) {
+        super(userID, organizerController, room, speaker);
+        this.userID = userID;
     public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room,
                                        useCases.SpeakerActions speaker, useCases.EventActions event,
                                        useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
@@ -82,6 +86,8 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 5
      */
     public void option5() {
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+
         displayEvent.promptViewContacts();
         String option = scan.nextLine();
 
@@ -97,7 +103,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 } else {
                     Event eventObject = event.getEventNames().get(eventName);
                     String eventID = event.getEventNames().get(eventName).getId();
-                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+                    if (organizer.getOrganizersEvents(username).contains(eventID)) {
                         displayEvent.allYourContactsEvent(eventObject.getAttendees());
                         catcher = false;
                     } else {
@@ -106,7 +112,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 }
             } else {
                 List<String> newList = new ArrayList<>();
-                for (String contact : user.getContactsList()) {
+                for (String contact : controller.returnUserIDHashMap().get(userID).getContactsList()) {
                     if (controller != null) {
                         newList.add(controller.returnUserIDHashMap().get(contact).getUsername());
                     }
@@ -121,10 +127,9 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 6 - create an event
      */
     public void option6() {
-        // title of the event
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayEvent.promptTitle();
         String title = "";
-        // is it vip event?
         boolean isVip = false;
 
         while (true) {
@@ -158,7 +163,6 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayRooms();
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
-            // fix TODO does skips the first input??
             if (room != null) {
                 if (room.returnRoomUsernameHashMap() != null) {
                     if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
@@ -258,6 +262,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             if (checks.get(0) && checks.size() == 1) {
                 String eventToAdd = event.getEventNames().get(title).getId();
+                organizer.addEventToUser(eventToAdd, username);
                 organizer.addEventToUser(eventToAdd, user.getUsername());
 
                 // Add this event to a conference
@@ -417,7 +422,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option8() {
         List<List<String>> e = new ArrayList<>();
-        for (String event1 : user.getEventList()) {
+        for (String event1 : controller.returnUserIDHashMap().get(userID).getEventList()) {
             List<String> individualEvents = new ArrayList<>();
             if (event.getEvent(event1) != null) {
                 individualEvents.add(event.getEvent(event1).getTitle());

@@ -2,7 +2,6 @@ package controllers;
 import entities.User;
 import presenters.EventPresenter;
 import presenters.MessagePresenter;
-import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.SpeakerActions;
 
@@ -16,7 +15,7 @@ import java.util.Scanner;
  * */
 public class AttendeeMainMenuController extends MainMenuController {
     private controllers.AttendeeController controller;
-    private User user;
+    private String userID;
     private EventPresenter displayEvent;
     private MessagePresenter displayMessage;
     private RoomActions room;
@@ -26,12 +25,12 @@ public class AttendeeMainMenuController extends MainMenuController {
 
     /**
      * Instantiates this class referring to super class
-     * @param user               the user object
+     * @param userID             the user ID
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(User user, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conference) {
-        super(user, attendeeController, room, speaker, conference);
-        this.user = user;
+    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker) {
+        super(userID, attendeeController, room, speaker);
+        this.userID = userID;
         this.controller = attendeeController;
         this.displayEvent = new EventPresenter();
         this.displayMessage = new MessagePresenter();
@@ -43,7 +42,8 @@ public class AttendeeMainMenuController extends MainMenuController {
      * Responds to menu option 6- sign up for event
      */
     public void option6(){
-        List<List<String>> eventsList = controller.viewAvailableSchedule(user.getUsername());
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewAvailableSchedule(username);
         if (eventsList.size() == 0){
             displayMessage.noEvents();
         } else {
@@ -96,8 +96,12 @@ public class AttendeeMainMenuController extends MainMenuController {
         }
     }
 
+    /**
+     * view saved events
+     */
     public void option10(){
-        List<List<String>> eventsList = controller.viewSavedEvents(user.getUsername());
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewSavedEvents(username);
         if (eventsList.size() == 0){
             displayMessage.noSavedEvents();
         } else {
@@ -108,4 +112,19 @@ public class AttendeeMainMenuController extends MainMenuController {
             displayEvent.displayEvents(eventsList);
         }
     }
-}
+
+    public void option11(){
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewSavedEvents(username);
+
+        if (eventsList.size() == 0){
+            displayMessage.noSavedEvents();
+        } else {
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+            }
+            displayEvent.displayEvents(eventsList);
+        }
+
+}}

@@ -1,9 +1,3 @@
-R6,11,false,false,false,false
-R6,1,false,false,false,false
-R6,hens,true,true,true,false
-R10,vans,true,true,false,false
-R11,yens,true,false,false,false
-R9,fens,true,false,false,false
-R7,kens,true,false,false,false
-R3,room,false,false,false,false
-R8,pens,true,false,false,false
+R6,11
+R6,1
+R3,room

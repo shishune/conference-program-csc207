@@ -3,9 +3,11 @@ package controllers;
 // import com.sun.org.apache.xpath.internal.operations.Or;
 
 import entities.Attendee;
+import entities.Event;
 import useCases.RoomActions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AttendeeController extends UserController {
@@ -85,4 +87,30 @@ public class AttendeeController extends UserController {
         }
         return saveEventList;
     }
+
+    /**
+     * Shows the vip events to a vip attendee
+     */
+
+    public List<List<String>> viewVIPEvents(String user){
+        List<List<String>> vipEventList = new ArrayList<List<String>>();
+        List<String> vEventList = new ArrayList<String>();
+
+        for (String event : e.getEventIds()){
+            if (e.getEvent(event).getIsVip()){
+                String title = e.getEvent(event).getTitle();
+                String dateTime = e.getEvent(event).getDateTime();
+                String roomId = e.getEvent(event).getRoomID();
+                List<String> speaker = e.getEvent(event).getSpeaker();
+                List<String> info = new ArrayList<String>();
+                info.add(title);
+                info.add(dateTime);
+                info.add(roomId);
+                info.addAll(speaker);
+                vipEventList.add(info);
+            }
+        }
+        return vipEventList;
+    }
+
 }

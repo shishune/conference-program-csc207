@@ -26,4 +26,5 @@ public class AttendeeAccountPresenter extends AccountPresenter {
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }
+
 }
