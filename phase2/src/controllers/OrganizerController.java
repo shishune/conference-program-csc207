@@ -25,6 +25,7 @@ public class OrganizerController extends UserController {
     private useCases.SpeakerActions speakerActions;
     private useCases.OrganizerActions organizerActions;
     private useCases.AttendeeActions attendeeActions;
+    private useCases.ConferenceActions conferenceActions;
     private String organizerID;
 
     /**
@@ -39,9 +40,9 @@ public class OrganizerController extends UserController {
      * @param speakerActions
      */
     public OrganizerController(String organizerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions, //hello
-                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions ){ //hello
+                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.ConferenceActions conferenceActions){ //hello
 
-        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions); //hello
+        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions, conferenceActions); //hello
         this.organizerID = organizerID;
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
@@ -49,29 +50,32 @@ public class OrganizerController extends UserController {
         this.messageActions = messageActions;
         this.attendeeActions = attendeeActions;
         this.organizerActions = organizerActions;
+        this.conferenceActions = conferenceActions;
     }
     /***
      * create a new event
      * @param title of event
-     * @param speakerId of event
+     * @param speakerIds of event
      * @param startDateTime the start date and time for the event
      * @param endDateTime the end date and time for the event
      * @param roomID of event
      * @param isVip if event is a vip event
      * @return if the event was created- this will return false if the event already exists
      */
-    public List<Boolean> createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
+    public List<Boolean> createEvent(String title, List<String> speakerIds, String startDateTime, String endDateTime,
                                      String roomID, int capacity, boolean isVip){
         List<String> attendees = new ArrayList<String>();
         List<Boolean> checks = new ArrayList<Boolean>();
         int roomCap = roomActions.findRoomFromId(roomID).getCapacity();
         Event event;
         if (roomCap >= capacity) {
-            event = this.eventActions.createEvent(title, speakerId, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
+            event = this.eventActions.createEvent(title, speakerIds, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
             checks.add(true);
             if(event != null){
-                scheduleSpeaker(event.getId(), speakerId, true);
-                speakerActions.isEventAddedToSpeaker(event.getId(), speakerId);
+                if (speakerIds.size() != 0) {
+                    scheduleSpeaker(event.getId(), speakerIds, true);
+                }
+
                 return checks;
             }
         } else{
@@ -83,7 +87,7 @@ public class OrganizerController extends UserController {
         } else {
             checks.add(true);
         }
-        if(!eventActions.isSpeakerFree(speakerId, startDateTime, endDateTime)){
+        if(!eventActions.isSpeakerFree(speakerIds, startDateTime, endDateTime)){
             checks.add(false);
         } else {
             checks.add(true);
@@ -102,7 +106,7 @@ public class OrganizerController extends UserController {
     public boolean cancelEvent(String eventName){
         if (this.eventActions.getEventNames().containsKey(eventName)) {
             List<String> eventAttendees = this.eventActions.cancelEvent(eventName);
-            List<String> s = eventActions.getEventNames().get(eventName).getSpeaker();
+            List<String> s = eventActions.getEventNames().get(eventName).getSpeakers();
             if (speakerActions.isEventRemovedFromSpeaker(this.eventActions.getEventFromName(eventName).getId(), s)) {
                 if (eventAttendees != null) {
                     for (String attendeeID : eventAttendees) {
@@ -177,7 +181,7 @@ public class OrganizerController extends UserController {
     public boolean scheduleSpeaker(String eventID, List<String> speakerID, boolean canAdd){
         if (canAdd) {
             eventActions.setSpeaker(eventID, speakerID);
-            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID).getUsername();
+            String speakerUsername = speakerActions.returnIDHashMap().get(speakerID) != null ? speakerActions.returnIDHashMap().get(speakerID).getUsername() : null;
             speakerActions.addEventToUser(eventID, speakerUsername);
             return true;
         }

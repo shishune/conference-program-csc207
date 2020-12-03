@@ -40,9 +40,10 @@ public class AccountController {
         useCases.SpeakerActions speakerActions = new useCases.SpeakerActions(g);
         useCases.OrganizerActions organizerActions = new useCases.OrganizerActions(g);
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
+        useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
         controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
-                messageActions, 'u', attendeeActions, organizerActions, speakerActions);
+                messageActions, 'u', attendeeActions, organizerActions, speakerActions, conferenceActions);
 
         //Instantiate controller classes
         controllers.LogIn logIn = new LogIn();
@@ -72,29 +73,40 @@ public class AccountController {
 
                 if (type.equals("A")) { //indicates attendee
 
-                    Attendee user = attendeeActions.returnUsernameHashMap().get(username);
-                    accountDisplay = new presenters.AttendeeAccountPresenter();
-                    controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
-                            attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
-                            roomActions, speakerActions);
+                    String user = attendeeActions.returnUsernameHashMap().get(username).getId();
+                    boolean isVIP = attendeeActions.returnUsernameHashMap().get(username).getIsVIP();
+
+                    if (isVIP){
+                        accountDisplay = new presenters.VIPAttendeeAccountPresenter();
+                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                                attendeeActions, organizerActions, speakerActions, conferenceActions);
+                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                                roomActions, speakerActions, conferenceActions);
+                    }
+                    else{accountDisplay = new presenters.AttendeeAccountPresenter();
+                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                                attendeeActions, organizerActions, speakerActions, conferenceActions);
+                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                                roomActions, speakerActions, conferenceActions);}
+
+
                 }
                 else if (type.equals("S")) { //indicates speaker
-                    Speaker user = speakerActions.returnUsernameHashMap().get(username);
+                    String user = speakerActions.returnUsernameHashMap().get(username).getId();
                     accountDisplay = new presenters.SpeakerAccountPresenter();
-                    controllers.SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
+                    controllers.SpeakerController speakerController = new SpeakerController(user, messageActions, eventActions,
                             roomActions,
-                            attendeeActions, organizerActions, speakerActions);
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
                     menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
-                            eventActions, attendeeActions, roomActions, speakerActions);
+                            eventActions, attendeeActions, roomActions, speakerActions, conferenceActions);
                 }
                 else{
-                    Organizer user = organizerActions.returnUsernameHashMap().get(username);
+                    String user = organizerActions.returnUsernameHashMap().get(username).getId();
                     accountDisplay = new presenters.OrganizerAccountPresenter();
-                    controllers.OrganizerController organizerController = new OrganizerController(user.getId(), messageActions, eventActions,
+                    controllers.OrganizerController organizerController = new OrganizerController(user, messageActions, eventActions,
                             roomActions,
-                            attendeeActions, organizerActions, speakerActions);
-                    menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions);
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
+                    menuController = (controllers.OrganizerMainMenuController)new OrganizerMainMenuController(user, organizerController, roomActions, speakerActions, eventActions, organizerActions, attendeeActions, conferenceActions);
                 }
 
                 while (true) {
@@ -140,9 +152,17 @@ public class AccountController {
                         menuController.option9();}
                     else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
                         menuController.option10();
-                    } else if (menuOption.equals("11") && (type.equals("O"))) {
+                    } else if (menuOption.equals("11") && (type.equals("O")) || type.equals("A")) {
                         menuController.option11();
-                    } else {
+                    } else if (menuOption.equals("12") && (type.equals("O"))) {
+                        // add conference (organizers only)
+                        //TODO: change to appropriate name after everyone is done adding options option12(?)
+                        menuController.option15();
+                    }  else if (menuOption.equals("13")) {
+                        // view conferences (general)
+                        //TODO: change to appropriate name after everyone is done adding options option13(?)
+                        menuController.option16(); // display conferences
+                    }else {
                         accountDisplay.printMenuError();
                     }
                     accountDisplay.promptReturn();

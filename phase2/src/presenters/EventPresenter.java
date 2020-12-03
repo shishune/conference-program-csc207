@@ -1,4 +1,8 @@
 package presenters;
+import entities.Event;
+import entities.User;
+
+import java.util.HashMap;
 import java.util.List;
 /**
  * A presenter class. This class is responsible for anything related to displaying events to the user.
@@ -23,7 +27,25 @@ public class EventPresenter {
             System.out.println("Event title: "+info.get(0));
             System.out.println("Event time: "+info.get(1));
             System.out.println("Event room: "+info.get(2));
-            System.out.println("Event speaker: "+info.get(3));
+            System.out.println("Event speakers: "+info.get(3));
+
+            System.out.println("\n");
+        }
+    }
+    public void displayEvents(List<List<String>> eventsList, HashMap<String, User> userIdHash){
+        int count = 1;
+        for (List<String> info: eventsList){
+            System.out.println(count);
+            count ++;
+
+            System.out.println("Event title: "+info.get(0));
+            System.out.println("Event time: "+info.get(1));
+            System.out.println("Event room: "+info.get(2));
+            String[] speakers = info.get(3).split("%%");
+            System.out.println("Event speakers: ");
+            for(String speakerId : speakers){
+                System.out.println(userIdHash.get(speakerId).getUsername());
+            }
 
             System.out.println("\n");
         }

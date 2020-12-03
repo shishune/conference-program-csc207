@@ -28,6 +28,7 @@ public class UserController {
     private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
     private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
     private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+    private useCases.ConferenceActions conferenceActions; // = super.getConferences()
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
 
@@ -37,7 +38,7 @@ public class UserController {
      * AttendeeActions, RoomActions.
      */
     public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
-                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker) {
+                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
         this.messageActions = message;
         this.eventActions = events;
         this.roomActions = rooms;
@@ -52,6 +53,7 @@ public class UserController {
         this.attendeeActions = attendee;
         this.organizerActions = organizer;
         this.speakerActions = speaker;
+        this.conferenceActions = conference;
     }
 
 
@@ -261,12 +263,12 @@ public class UserController {
                 String title = eventActions.getEvent(event).getTitle();
                 String dateTime = eventActions.getEvent(event).getDateTime();
                 String roomId = eventActions.getEvent(event).getRoomID();
-                List<String> speaker = eventActions.getEvent(event).getSpeaker();
+                List<String> speakers = eventActions.getEvent(event).getSpeakers();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
                 info.add(roomId);
-                info.addAll(speaker);
+                info.addAll(speakers);
                 scheduleList.add(info);
             }
         }
@@ -288,7 +290,9 @@ public class UserController {
 
         for (String s : targetList) {
             if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
-                availableS.add(s);
+                if (!eventActions.getEvent(s).getIsVip()){
+                    availableS.add(s);
+                }
             }
         }
         List<List<String>> scheduleList = new ArrayList<List<String>>();
@@ -296,15 +300,44 @@ public class UserController {
             String title = eventActions.getEvent(event).getTitle();
             String dateTime = eventActions.getEvent(event).getDateTime();
             String roomId = eventActions.getEvent(event).getRoomID();
-            List<String> speaker = eventActions.getEvent(event).getSpeaker();
+            List<String> speakers = eventActions.getEvent(event).getSpeakers();
             List<String> info = new ArrayList<String>();
             info.add(title);
             info.add(dateTime);
             info.add(roomId);
-            info.addAll(speaker);
+            info.addAll(speakers);
             scheduleList.add(info);
         }
         return scheduleList;
+    }
+
+    public List<List<String>> viewVIPEvents(String user){
+        Set<String> allEvents = eventActions.getEvents().keySet();
+        List<String> availableS = new ArrayList<>();
+        List<String> targetList = new ArrayList<>(allEvents);
+
+        for (String s : targetList) {
+            if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
+                if (eventActions.getEvent(s).getIsVip()){
+                    availableS.add(s);
+                }
+            }
+        }
+        List<List<String>> scheduleList = new ArrayList<List<String>>();
+        for (String event : availableS) {
+            String title = eventActions.getEvent(event).getTitle();
+            String dateTime = eventActions.getEvent(event).getDateTime();
+            String roomId = eventActions.getEvent(event).getRoomID();
+            List<String> speakers = eventActions.getEvent(event).getSpeakers();
+            List<String> info = new ArrayList<String>();
+            info.add(title);
+            info.add(dateTime);
+            info.add(roomId);
+            info.addAll(speakers);
+            scheduleList.add(info);
+        }
+        return scheduleList;
+
     }
 
 

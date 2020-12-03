@@ -1,8 +1,12 @@
 package controllers;
+import entities.Conference;
 import entities.Event;
 import entities.User;
+import presenters.ConferencePresenter;
+import presenters.OrganizerConferencePresenter;
 import presenters.OrganizerEventPresenter;
 import presenters.OrganizerMessagePresenter;
+import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.AttendeeActions;
 import useCases.EventActions;
@@ -23,9 +27,12 @@ public class OrganizerMainMenuController extends MainMenuController {
     private useCases.SpeakerActions speaker;
     private useCases.EventActions event;
     private useCases.OrganizerActions organizer;
-    private User user;
+    private String userID;
+    private useCases.ConferenceActions conference;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
+    private OrganizerConferencePresenter displayConferences;
+    private ConferenceActions conferenceActions;
     private useCases.AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -34,20 +41,26 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * Instantiates the main menu responder object
      *
-     * @param user                the user
+     * @param userID              the user ID
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room, useCases.SpeakerActions speaker, useCases.EventActions event, useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee) {
-        super(user, organizerController, room, speaker);
-        this.user = user;
+    public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room,
+                                       useCases.SpeakerActions speaker, useCases.EventActions event,
+                                       useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
+                                       ConferenceActions conferenceActions){
+
+        super(userID, organizerController, room, speaker, conferenceActions);
+        this.userID = userID;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
+        this.displayConferences = new OrganizerConferencePresenter();
         this.room = room;
         this.controller = organizerController;
         this.speaker = speaker;
         this.event = event;
         this.organizer = organizerActions;
         this.attendee = attendee;
+        this.conference = conference;
     }
 
     /**
@@ -72,6 +85,8 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 5
      */
     public void option5() {
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+
         displayEvent.promptViewContacts();
         String option = scan.nextLine();
 
@@ -87,7 +102,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 } else {
                     Event eventObject = event.getEventNames().get(eventName);
                     String eventID = event.getEventNames().get(eventName).getId();
-                    if (organizer.getOrganizersEvents(user.getUsername()).contains(eventID)) {
+                    if (organizer.getOrganizersEvents(username).contains(eventID)) {
                         displayEvent.allYourContactsEvent(eventObject.getAttendees());
                         catcher = false;
                     } else {
@@ -96,7 +111,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 }
             } else {
                 List<String> newList = new ArrayList<>();
-                for (String contact : user.getContactsList()) {
+                for (String contact : controller.returnUserIDHashMap().get(userID).getContactsList()) {
                     if (controller != null) {
                         newList.add(controller.returnUserIDHashMap().get(contact).getUsername());
                     }
@@ -111,6 +126,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 6 - create an event
      */
     public void option6() {
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayEvent.promptTitle();
         String title = "";
         boolean isVip = false;
@@ -146,7 +162,6 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayRooms();
             displayEvent.promptRoom();
             String roomName = scan.nextLine();
-            // fix TODO does skips the first input??
             if (room != null) {
                 if (room.returnRoomUsernameHashMap() != null) {
                     if (room.returnRoomUsernameHashMap().containsKey(roomName)) {
@@ -246,9 +261,34 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             if (checks.get(0) && checks.size() == 1) {
                 String eventToAdd = event.getEventNames().get(title).getId();
-                organizer.addEventToUser(eventToAdd, user.getUsername());
+                organizer.addEventToUser(eventToAdd, username);
+                organizer.addEventToUser(eventToAdd, username);
+
+                // Add this event to a conference
+                displayEvent.promptConference();
+                // display conferences
+                ArrayList<List<String>> conferences = getConferences();
+                List<List<String>> events = event.getEventsList();
+                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+                displayConferences.displayConferences(conferences, events, userIdHash);
+                String conferenceTitle = scan.nextLine();
+
+                //System.out.println("HERE!" + conference.returnTitleHashMap());
+                if(conference.conferenceExists(conferenceTitle)){
+                    // add event to conference
+                    String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
+                    if(eventId != null){
+                        conference.addEvent(conferenceTitle, eventId);
+                        //TODO: add conference to event too
+                    } else {
+                        displayEvent.failedAddEventToConference();
+                    }
+                } else {
+                    displayEvent.invalidConference();
+                }
                 displayEvent.successAddEvent();
-            } else {
+            }
+            else {
                 if (!checks.get(0)) {
                     int roomCap = room.findRoomFromId(roomID).getCapacity(); // necessary?
                     displayEvent.roomCapacityLow(roomCap);
@@ -265,6 +305,23 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
+    private ArrayList<List<String>> getConferences() {
+        HashMap<String, Conference> conferenceUsernameHash = new HashMap<>();
+        if (conference != null){
+         conferenceUsernameHash = conference.returnTitleHashMap();}
+        ArrayList<List<String>> stringRepConferences = new ArrayList<>();
+        for(Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()){
+            Conference conference = entry.getValue();
+            List<String> stringRepConference = Arrays.asList(conference.getStringRep().split(","));
+            //stringRepConference.add(conference.getTitle());
+            //stringRepConference.add(conference.getStartDateTime());
+            //stringRepConference.add(conference.getEndDateTime());
+
+            stringRepConferences.add(stringRepConference);
+        }
+        return stringRepConferences;
+    }
+
     /**
      * displays all the rooms that match the requirements
      */
@@ -275,20 +332,32 @@ public class OrganizerMainMenuController extends MainMenuController {
         if (needProjector.equalsIgnoreCase("y")){
             rooms.addAll(room.getRoomsWithProjector());
         }
+        else{
+            rooms.addAll(room.returnRoomUsernameHashMap().keySet());
+        }
         displayEvent.promptNeedMicrophone();
         String needMicrophone = scan.nextLine();
         if (needMicrophone.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithMicrophone());
+        }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.promptNeedTables();
         String needTables = scan.nextLine();
         if(needTables.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithTables());
         }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
+        }
         displayEvent.promptNeedWhiteboard();
         String needWhiteboard = scan.nextLine();
         if(needWhiteboard.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithWhiteboard());
+        }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.viewRooms(rooms);
     }
@@ -355,14 +424,14 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option8() {
         List<List<String>> e = new ArrayList<>();
-        for (String event1 : user.getEventList()) {
+        for (String event1 : controller.returnUserIDHashMap().get(userID).getEventList()) {
             List<String> individualEvents = new ArrayList<>();
             if (event.getEvent(event1) != null) {
                 individualEvents.add(event.getEvent(event1).getTitle());
                 individualEvents.add(event.getEvent(event1).getDateTime());
                 String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
                 individualEvents.add(roomName);
-                for (String elem : event.getEvent(event1).getSpeaker()) {
+                for (String elem : event.getEvent(event1).getSpeakers()) {
                     String speakerName = speaker.findUserFromId(elem).getUsername();
                     individualEvents.add(speakerName);
                     e.add(individualEvents);
@@ -666,6 +735,22 @@ public class OrganizerMainMenuController extends MainMenuController {
     public void option11() {
         super.option8();
     }
+
+    /***
+     * Responds to menu option 12 - Create Conference/Add events to conferences
+     */
+    public void option15() {
+        displayConferences.printOrganizerConferenceMenu();
+        String option = scan.nextLine();
+        controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
+        if (option.equals("1")) {
+            menuController.option1(); // send message to all speakers
+        }
+        if (option.equals("2")) {
+            menuController.option2(); // send message to all attendees of an event
+        }
+    }
+
 
 
 }

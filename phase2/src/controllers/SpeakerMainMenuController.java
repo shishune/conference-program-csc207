@@ -3,10 +3,7 @@ import entities.Event;
 import entities.User;
 import presenters.EventPresenter;
 import presenters.SpeakerMessagePresenter;
-import useCases.AttendeeActions;
-import useCases.EventActions;
-import useCases.RoomActions;
-import useCases.SpeakerActions;
+import useCases.*;
 
 import java.util.*;
 
@@ -17,31 +14,32 @@ import java.util.*;
  * */
 public class SpeakerMainMenuController extends MainMenuController {
     private controllers.SpeakerController controller;
-    private User user;
+    private String userID;
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private EventActions eventActions;
     private AttendeeActions attendeeActions;
     private RoomActions roomActions;
     private SpeakerActions speakerActions;
+    private ConferenceActions conferenceActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
      * Instantiates the main menu responder object
      *
-     * @param user              the user
+     * @param userID              the user ID
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(User user, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions) {
-        super(user, speakerController, roomActions, speakerActions);
-        this.user = user;
+    public SpeakerMainMenuController(String userID, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions, ConferenceActions conferenceActions) {
+        super(userID, speakerController, roomActions, speakerActions, conferenceActions);
+        this.userID = userID;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();
         this.displayEvent = new EventPresenter();
-        this.user = user;
         this.controller = speakerController;
         this.eventActions = eventActions;
         this.attendeeActions = attendeeActions;
+        this.conferenceActions = conferenceActions;
         this.roomActions = roomActions;
     }
 
@@ -63,7 +61,7 @@ public class SpeakerMainMenuController extends MainMenuController {
      * Responds to menu option 3
      */
     public void option3() {
-        List<String> contactIds = user.getContactsList();
+        List<String> contactIds = controller.returnUserIDHashMap().get(userID).getContactsList();
         if(contactIds.isEmpty()){
             displayMessage.zeroContacts();
         } else {
@@ -81,7 +79,7 @@ public class SpeakerMainMenuController extends MainMenuController {
             String receiverUsername = scan.nextLine();
             HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
             if(usernameHash.get(receiverUsername) != null){
-                displayMessage.displayMessages(controller, user.getId(), usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
+                displayMessage.displayMessages(controller, userID, usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
             } else {
                 displayMessage.failedContact();
             }
@@ -94,11 +92,12 @@ public class SpeakerMainMenuController extends MainMenuController {
      */
 
     public void option4(){
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptContact();
         String add = scan.nextLine();
         //HashMap<String, User> userUsernameHashMap = controller.returnUserUsernameHashMap();
         if (controller.returnUserUsernameHashMap().containsKey(add)){
-            if (controller.addContact(add, user.getUsername())){
+            if (controller.addContact(add, username)){
                 displayMessage.successContact();
             }
         }
@@ -111,14 +110,14 @@ public class SpeakerMainMenuController extends MainMenuController {
      * Responds to menu option 5
      */
     public void option5() { //view all contacts
-        displayMessage.displayContacts(controller, user.getId());
+        displayMessage.displayContacts(controller, userID);
 }
 
     /**
      * Responds to menu option 6
      */
     public void option6() {
-        List<String> e = user.getEventList();
+        List<String> e = controller.returnUserIDHashMap().get(userID).getEventList();
         List<List<String>> stringE = new ArrayList<>();
 
         for (String event : e) {

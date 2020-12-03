@@ -3,9 +3,11 @@ package controllers;
 // import com.sun.org.apache.xpath.internal.operations.Or;
 
 import entities.Attendee;
+import entities.Event;
 import useCases.RoomActions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AttendeeController extends UserController {
@@ -23,8 +25,8 @@ public class AttendeeController extends UserController {
      * @param speaker
      */
     public AttendeeController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message,
-                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker ) {
-        super(events, rooms, message, 'a', attendee, organizer, speaker);
+                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
+        super(events, rooms, message, 'a', attendee, organizer, speaker, conference);
         this.attendee = attendee;
         this.e = events;
 
@@ -74,15 +76,42 @@ public class AttendeeController extends UserController {
                 String title = e.getEvent(event).getTitle();
                 String dateTime = e.getEvent(event).getDateTime();
                 String roomId = e.getEvent(event).getRoomID();
-                List<String> speaker = e.getEvent(event).getSpeaker();
+                List<String> speakers = e.getEvent(event).getSpeakers();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
                 info.add(roomId);
-                info.addAll(speaker);
+                info.addAll(speakers);
                 saveEventList.add(info);
             }
         }
         return saveEventList;
     }
+
+    /**
+     * Shows the vip events to a vip attendee
+     */
+
+//    public List<List<String>> viewVIPEvents(String user){
+//        List<List<String>> vipEventList = new ArrayList<List<String>>();
+//
+//        for (String event : e.getEventIds()){
+//            if (e.getEvent(event).getIsVip()){
+//                String title = e.getEvent(event).getTitle();
+//                String dateTime = e.getEvent(event).getDateTime();
+//                String roomId = e.getEvent(event).getRoomID();
+//                List<String> speaker = e.getEvent(event).getSpeakers();
+//                List<String> info = new ArrayList<String>();
+//                info.add(title);
+//                info.add(dateTime);
+//                info.add(roomId);
+//                info.addAll(speaker);
+//
+//                vipEventList.add(info);
+//            }
+//        }
+//        return vipEventList;
+//    }
+
+
 }

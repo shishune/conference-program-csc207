@@ -103,23 +103,21 @@ public class LogIn {
             } else if (userType.equals("3")) {
 
                 accountDisplay.VIPStatusPrompt();
-                boolean VIPStatus = false;
+                boolean VIPStatus;
                 String responseInput = scan.nextLine();
 
-                if (responseInput.equals("VIP")) {
-                    VIPStatus = true;
-                }
+                VIPStatus = responseInput.equals("VIP") || responseInput.equals("vip");
 
-                attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), false, false);
-                return true;
-//                if (!attendeeActions.attendeeExists(username)) {
-//                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
-//                    return true;
-//                }
-//                else{
-//                    accountDisplay.failedUsernameExists();
-//                    return false;
-//                }
+
+                if (!attendeeActions.attendeeExists(username)) {
+                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(),
+                            new ArrayList<String>(), false, VIPStatus);
+                    return true;
+                }
+                else{
+                    accountDisplay.failedUsernameExists();
+                    return false;
+                }
             } else{
                 accountDisplay.printTypingError();
                 return false;
