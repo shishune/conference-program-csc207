@@ -290,7 +290,9 @@ public class UserController {
 
         for (String s : targetList) {
             if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
-                availableS.add(s);
+                if (!eventActions.getEvent(s).getIsVip()){
+                    availableS.add(s);
+                }
             }
         }
         List<List<String>> scheduleList = new ArrayList<List<String>>();
