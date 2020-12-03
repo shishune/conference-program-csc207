@@ -352,7 +352,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         else{
             rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
-        System.out.println(rooms);
         displayEvent.viewRooms(rooms);
     }
     /**
