@@ -30,8 +30,7 @@ public abstract class MainMenuController extends AccountController {
      * @param userID the user ID
      * @param controller the controller responsible for user
      */
-    public MainMenuController(String userID, UserController controller, RoomActions room, SpeakerActions speakerActions){
-    public MainMenuController(User user, UserController controller, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions){
+    public MainMenuController(String userID, UserController controller, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions){
         this.controller = controller;
         this.userID = userID;
         this.displayMessage = new MessagePresenter();

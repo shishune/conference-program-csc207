@@ -2,6 +2,7 @@ package controllers;
 import entities.User;
 import presenters.EventPresenter;
 import presenters.MessagePresenter;
+import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.SpeakerActions;
 
@@ -28,8 +29,8 @@ public class AttendeeMainMenuController extends MainMenuController {
      * @param userID             the user ID
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker) {
-        super(userID, attendeeController, room, speaker);
+    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conferenceActions){
+        super(userID, attendeeController, room, speaker, conferenceActions);
         this.userID = userID;
         this.controller = attendeeController;
         this.displayEvent = new EventPresenter();
@@ -62,7 +63,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                 displayEvent.promptAddOrSaveEvent();
                 String option = scan.nextLine();
                 if (option.equalsIgnoreCase("A")){
-                    List<Boolean> checks = controller.signupEvent(event, user.getUsername());
+                    List<Boolean> checks = controller.signupEvent(event, username);
                     if(checks.size()==1){
                         if (checks.get(0)){
                             displayEvent.successAddEvent();
@@ -81,7 +82,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                     }
                 }
                 else if(option.equalsIgnoreCase("S")){
-                    boolean check1 = controller.saveEvent(event, user.getUsername());
+                    boolean check1 = controller.saveEvent(event, username);
                     if (check1){
                         displayEvent.successSaveEvent();
                     }

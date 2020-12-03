@@ -30,8 +30,8 @@ public class SpeakerMainMenuController extends MainMenuController {
      * @param userID              the user ID
      * @param speakerController the controller responsible for speaker
      */
-    public SpeakerMainMenuController(String userID, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions) {
-        super(userID, speakerController, roomActions, speakerActions);
+    public SpeakerMainMenuController(String userID, SpeakerController speakerController, EventActions eventActions, AttendeeActions attendeeActions, RoomActions roomActions, SpeakerActions speakerActions, ConferenceActions conferenceActions) {
+        super(userID, speakerController, roomActions, speakerActions, conferenceActions);
         this.userID = userID;
         this.controller = speakerController;
         this.displayMessage = new SpeakerMessagePresenter();

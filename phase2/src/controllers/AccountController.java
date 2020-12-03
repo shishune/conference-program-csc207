@@ -43,7 +43,7 @@ public class AccountController {
         useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
         controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
-                messageActions, 'u', attendeeActions, organizerActions, speakerActions);
+                messageActions, 'u', attendeeActions, organizerActions, speakerActions, conferenceActions);
 
         //Instantiate controller classes
         controllers.LogIn logIn = new LogIn();

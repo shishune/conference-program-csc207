@@ -6,6 +6,7 @@ import presenters.ConferencePresenter;
 import presenters.OrganizerConferencePresenter;
 import presenters.OrganizerEventPresenter;
 import presenters.OrganizerMessagePresenter;
+import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.AttendeeActions;
 import useCases.EventActions;
@@ -28,10 +29,10 @@ public class OrganizerMainMenuController extends MainMenuController {
     private useCases.OrganizerActions organizer;
     private String userID;
     private useCases.ConferenceActions conference;
-    private User user;
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
     private OrganizerConferencePresenter displayConferences;
+    private ConferenceActions conferenceActions;
     private useCases.AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -43,15 +44,13 @@ public class OrganizerMainMenuController extends MainMenuController {
      * @param userID              the user ID
      * @param organizerController the controller responsible for organizer
      */
-    public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room, useCases.SpeakerActions speaker, useCases.EventActions event, useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee) {
-        super(userID, organizerController, room, speaker);
-        this.userID = userID;
-    public OrganizerMainMenuController(User user, OrganizerController organizerController, RoomActions room,
+    public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room,
                                        useCases.SpeakerActions speaker, useCases.EventActions event,
                                        useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
-                                       useCases.ConferenceActions conference) {
-        super(user, organizerController, room, speaker, conference);
-        this.user = user;
+                                       ConferenceActions conferenceActions){
+
+        super(userID, organizerController, room, speaker, conferenceActions);
+        this.userID = userID;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
         this.displayConferences = new OrganizerConferencePresenter();
@@ -263,7 +262,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             if (checks.get(0) && checks.size() == 1) {
                 String eventToAdd = event.getEventNames().get(title).getId();
                 organizer.addEventToUser(eventToAdd, username);
-                organizer.addEventToUser(eventToAdd, user.getUsername());
+                organizer.addEventToUser(eventToAdd, username);
 
                 // Add this event to a conference
                 displayEvent.promptConference();
