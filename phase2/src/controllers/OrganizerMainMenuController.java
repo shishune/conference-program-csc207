@@ -411,7 +411,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 individualEvents.add(event.getEvent(event1).getDateTime());
                 String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
                 individualEvents.add(roomName);
-                for (String elem : event.getEvent(event1).getSpeaker()) {
+                for (String elem : event.getEvent(event1).getSpeakers()) {
                     String speakerName = speaker.findUserFromId(elem).getUsername();
                     individualEvents.add(speakerName);
                     e.add(individualEvents);

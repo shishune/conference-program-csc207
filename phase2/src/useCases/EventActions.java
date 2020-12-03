@@ -310,7 +310,7 @@ public class EventActions  {
             List<String> eventAttendees = this.attendees.get(eventID);
             this.attendees.remove(eventID);
             List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
-            speakerSchedule.get(event.getSpeaker()).removeAll(dateTimes);
+            speakerSchedule.get(event.getSpeakers()).removeAll(dateTimes);
             roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
             return eventAttendees;
         }
@@ -329,16 +329,16 @@ public class EventActions  {
         Event event = this.events.get(eventID);
         if(event != null) {
             if (isRoomFree(event.getRoomID(), newStartDateTime, newEndDateTime) &&
-                    isSpeakerFree(event.getSpeaker(), newStartDateTime, newEndDateTime)) {
+                    isSpeakerFree(event.getSpeakers(), newStartDateTime, newEndDateTime)) {
 
                 List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
-                this.speakerSchedule.get(event.getSpeaker()).removeAll(dateTimes);
+                this.speakerSchedule.get(event.getSpeakers()).removeAll(dateTimes);
                 this.roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
 
                 event.setStartTime(newStartDateTime);
                 event.setEndDateTime(newEndDateTime);
                 List<String> newDateTimes = timeInBetween(newStartDateTime, newEndDateTime);
-                this.speakerSchedule.get(event.getSpeaker()).addAll(newDateTimes);
+                this.speakerSchedule.get(event.getSpeakers()).addAll(newDateTimes);
                 this.roomSchedule.get(event.getRoomID()).addAll(newDateTimes);
                 return true;
             }
