@@ -325,21 +325,34 @@ public class OrganizerMainMenuController extends MainMenuController {
         if (needProjector.equalsIgnoreCase("y")){
             rooms.addAll(room.getRoomsWithProjector());
         }
+        else{
+            rooms.addAll(room.returnRoomUsernameHashMap().keySet());
+        }
         displayEvent.promptNeedMicrophone();
         String needMicrophone = scan.nextLine();
         if (needMicrophone.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithMicrophone());
+        }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.promptNeedTables();
         String needTables = scan.nextLine();
         if(needTables.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithTables());
         }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
+        }
         displayEvent.promptNeedWhiteboard();
         String needWhiteboard = scan.nextLine();
         if(needWhiteboard.equalsIgnoreCase("y")){
             rooms.retainAll(room.getRoomsWithWhiteboard());
         }
+        else{
+            rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
+        }
+        System.out.println(rooms);
         displayEvent.viewRooms(rooms);
     }
     /**

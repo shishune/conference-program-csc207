@@ -218,45 +218,45 @@ public class OrganizerEventPresenter extends EventPresenter {
     /**
      * Asks user if room has projector
      */
-    public void promptHasProjector(){System.out.println("Does this room have a projector? Enter 'y' for yes and 'n' for no.");}
+    public void promptHasProjector(){System.out.println("Does this room have a projector? Enter 'y' for yes and any other key for no");}
 
     /**
      * Asks user if room has microphone
      */
-    public void promptHasMicrophone(){System.out.println("Does this room have a microphone? Enter 'y' for yes and 'n' for no.");}
+    public void promptHasMicrophone(){System.out.println("Does this room have a microphone? Enter 'y' for yes and any other key for no");}
 
     /**
      * Asks user if room has tables
      */
-    public void promptHasTables(){System.out.println("Does this room have tables? Enter 'y' for yes and 'n' for no.");}
+    public void promptHasTables(){System.out.println("Does this room have tables? Enter 'y' for yes and any other key for no");}
     /**
      * Asks user if room has whiteboard
      */
-    public void promptHasWhiteboard(){System.out.println("Does this room have a white board? Enter 'y' for yes and 'n' for no.");}
+    public void promptHasWhiteboard(){System.out.println("Does this room have a white board? Enter 'y' for yes and any other key for no");}
 
     /**
      * Asks user if the room to be added needs a projector
      */
     public void promptNeedProjector(){
-        System.out.println("Do you need a room with a projector? Enter 'y' for yes and 'n' for no.");
+        System.out.println("Do you need a room with a projector? Enter 'y' for yes and any other key for no.");
     }
     /**
      * Asks user if the room to be added needs a microphone
      */
     public void promptNeedMicrophone(){
-        System.out.println("Do you need a room with a microphone? Enter 'y' for yes and 'n' for no.");
+        System.out.println("Do you need a room with a microphone? Enter 'y' for yes and any other key for no.");
     }
     /**
      * Asks user if the room to be added needs tables
      */
     public void promptNeedTables(){
-        System.out.println("Do you need a room with tables? Enter 'y' for yes and 'n' for no.");
+        System.out.println("Do you need a room with tables? Enter 'y' for yes and any other key for no.");
     }
     /**
      * Asks user if the room to be added needs a whiteboard
      */
     public void promptNeedWhiteboard(){
-        System.out.println("Do you need a room with a whiteboard? Enter 'y' for yes and 'n' for no.");
+        System.out.println("Do you need a room with a whiteboard? Enter 'y' for yes and any other key for no.");
     }
     /**
      * Tells user that their input is not valid
