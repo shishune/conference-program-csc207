@@ -70,7 +70,7 @@ public class ConferenceActions {
                 List<String> conferenceEvents = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
                 List<String> conferenceAttendees = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
                 List<String> conferenceSpeakers = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
-                loadConference(conferenceItems[0], conferenceItems[1], conferenceEvents, conferenceAttendees, conferenceSpeakers);
+                loadConference(conferenceItems[0], conferenceItems[1], conferenceEvents/*, conferenceAttendees, conferenceSpeakers*/);
             }
         }
     }
@@ -82,11 +82,11 @@ public class ConferenceActions {
         return false;
     }
 
-    public Conference createConference(String title, List<String> events, List<String> attendees, List<String> speakers){
+    public Conference createConference(String title, List<String> events/*, List<String> attendees, List<String> speakers*/){
         useCases.GenerateID generateId = new GenerateID(loader);
         String conferenceId = "C" + generateId.generateId();
         //TODO: set conference start time to start time of first event & end time = end time of last event ???
-        return loadConference(conferenceId, title, events, attendees, speakers);
+        return loadConference(conferenceId, title, events/*, attedees, speakers*/);
     }
 
 
@@ -112,11 +112,11 @@ public class ConferenceActions {
         return times;
     }
 
-    private Conference loadConference(String conferenceId, String title, List<String> events, List<String> attendees, List<String> speakers) {
+    private Conference loadConference(String conferenceId, String title, List<String> events/*, List<String> attendees, List<String> speakers*/) {
         /*if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }*/
-        Conference newConference = new Conference(conferenceId, title, events, attendees, speakers);
+        Conference newConference = new Conference(conferenceId, title, events/*, attendees, speakers*/);
         conferences.put(conferenceId, newConference);
         conferenceTitlesHash.put(title, newConference);
         //this.events.put(conferenceId, events);

@@ -18,12 +18,12 @@ public class Conference {
      * @param title the string name of this conference
      * @param events the list of strings of the ids of each event of this conference
      * */
-    public Conference(String conferenceID, String title, List<String> events, List<String> attendees, List<String> speakers){
+    public Conference(String conferenceID, String title, List<String> events/*, List<String> attendees, List<String> speakers*/){
         this.conferenceID = conferenceID;
         this.title = title;
         this.events = events;
-        this.attendees = attendees;
-        this.speakers = speakers;
+        //this.attendees = attendees;
+        //this.speakers = speakers;
         //this.startDateTime = startDateTime;
         //this.endDateTime = endDateTime;
     }

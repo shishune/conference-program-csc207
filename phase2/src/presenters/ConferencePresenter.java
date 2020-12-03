@@ -51,6 +51,8 @@ public class ConferencePresenter {
                         // print speakers
                         String[] speakers = info.get(3).split("%%");
                         System.out.println("Conference Speakers:");
+                        //TODO: (optional) put speakers into conferences
+                        // if not implemented, delete the following loop and code
                         for(String speaker : speakers){
                             System.out.println(userIdHash.get(speaker).getUsername());
                         }

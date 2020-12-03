@@ -23,8 +23,8 @@ public class AttendeeController extends UserController {
      * @param speaker
      */
     public AttendeeController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message,
-                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker ) {
-        super(events, rooms, message, 'a', attendee, organizer, speaker);
+                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
+        super(events, rooms, message, 'a', attendee, organizer, speaker, conference);
         this.attendee = attendee;
         this.e = events;
 

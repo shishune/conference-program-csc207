@@ -77,7 +77,7 @@ public class AccountController {
                     Attendee user = attendeeActions.returnUsernameHashMap().get(username);
                     accountDisplay = new presenters.AttendeeAccountPresenter();
                     controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
-                            attendeeActions, organizerActions, speakerActions);
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
                     menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
                             roomActions, speakerActions, conferenceActions);
                 }
@@ -86,7 +86,7 @@ public class AccountController {
                     accountDisplay = new presenters.SpeakerAccountPresenter();
                     controllers.SpeakerController speakerController = new SpeakerController(user.getId(), messageActions, eventActions,
                             roomActions,
-                            attendeeActions, organizerActions, speakerActions);
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
                     menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
                             eventActions, attendeeActions, roomActions, speakerActions, conferenceActions);
                 }
