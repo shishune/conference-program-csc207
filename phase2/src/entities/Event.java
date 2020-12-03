@@ -86,7 +86,7 @@ public class Event {
      * Return speaker of event
      * @return ID of speaker of event
      * */
-    public List<String> getSpeaker() {
+    public List<String> getSpeakers() {
         return this.speakers;
     }
     /**

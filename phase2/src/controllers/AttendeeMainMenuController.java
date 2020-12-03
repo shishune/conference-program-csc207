@@ -61,7 +61,7 @@ public class AttendeeMainMenuController extends MainMenuController {
             else {
                 displayEvent.promptAddOrSaveEvent();
                 String option = scan.nextLine();
-                if (option.equals("A")){
+                if (option.equalsIgnoreCase("A")){
                     List<Boolean> checks = controller.signupEvent(event, user.getUsername());
                     if(checks.size()==1){
                         if (checks.get(0)){
@@ -80,7 +80,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                         }
                     }
                 }
-                else if(option.equals("S")){
+                else if(option.equalsIgnoreCase("S")){
                     boolean check1 = controller.saveEvent(event, user.getUsername());
                     if (check1){
                         displayEvent.successSaveEvent();

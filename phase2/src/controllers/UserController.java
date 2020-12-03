@@ -263,12 +263,12 @@ public class UserController {
                 String title = eventActions.getEvent(event).getTitle();
                 String dateTime = eventActions.getEvent(event).getDateTime();
                 String roomId = eventActions.getEvent(event).getRoomID();
-                List<String> speaker = eventActions.getEvent(event).getSpeaker();
+                List<String> speakers = eventActions.getEvent(event).getSpeakers();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
                 info.add(roomId);
-                info.addAll(speaker);
+                info.addAll(speakers);
                 scheduleList.add(info);
             }
         }
@@ -298,12 +298,12 @@ public class UserController {
             String title = eventActions.getEvent(event).getTitle();
             String dateTime = eventActions.getEvent(event).getDateTime();
             String roomId = eventActions.getEvent(event).getRoomID();
-            List<String> speaker = eventActions.getEvent(event).getSpeaker();
+            List<String> speakers = eventActions.getEvent(event).getSpeakers();
             List<String> info = new ArrayList<String>();
             info.add(title);
             info.add(dateTime);
             info.add(roomId);
-            info.addAll(speaker);
+            info.addAll(speakers);
             scheduleList.add(info);
         }
         return scheduleList;

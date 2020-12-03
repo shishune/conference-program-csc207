@@ -21,6 +21,7 @@ public abstract class User{
     protected List<String> eventList;
     protected boolean isOrganizer;
     protected String userId;
+    protected Date logOutTime;
 
     /**
      * instantiates a new User object with an id attribute
