@@ -127,22 +127,4 @@ public abstract class User{
         String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return userId + "," + username + "," + password + "," + contacts + "," + events + "," + isLogin + "," +isOrganizer;
     }
-<<<<<<< HEAD
-
-    /**
-     * Getter for the log out time
-     * @return the time the user logs out
-     */
-    public Date getLogOutTime(){ return logOutTime;}
-
-    /**
-     * Setter for the log out time
-     * @param date the date of the log out
-     */
-    public void setLogOutTime(Date date) {this.logOutTime = date;}
-
-
-
-=======
->>>>>>> 7ceb81577eabda25f6f84616a062c52cdda379d0
 }
