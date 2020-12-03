@@ -21,7 +21,6 @@ public abstract class User{
     protected List<String> eventList;
     protected boolean isOrganizer;
     protected String userId;
-    protected Date logOutTime;
 
     /**
      * instantiates a new User object with an id attribute
@@ -35,7 +34,7 @@ public abstract class User{
      */
 
     public User (String userId, String username, String password, List<String> contactsList, List<String> eventList,
-                 boolean isLogin, boolean isOrganizer, Date logOutTime){
+                 boolean isLogin, boolean isOrganizer){
 
         this.username = username;
         this.isLogin = isLogin;
@@ -44,7 +43,6 @@ public abstract class User{
         this.eventList = eventList;
         this.userId = userId;
         this.isOrganizer = isOrganizer;
-        this.logOutTime = logOutTime;
     }
 
     /**
@@ -129,19 +127,4 @@ public abstract class User{
         String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return userId + "," + username + "," + password + "," + contacts + "," + events + "," + isLogin + "," +isOrganizer;
     }
-
-//    /**
-//     * Getter for the log out time
-//     * @return the time the user logs out
-//     */
-//    public Date getLogOutTime(){ return logOutTime;}
-//
-//    /**
-//     * Setter for the log out time
-//     * @param date the date of the log out
-//     */
-//    public void setLogOutTime(Date date) {this.logOutTime = date;}
-
-
-
 }

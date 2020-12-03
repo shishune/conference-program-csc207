@@ -34,8 +34,6 @@ public class LogoutActions{
         else{
             User user = attendees.returnUsernameHashMap().get(username);
             user.setLogin(false);
-            // Date date = new Date();
-            // user.setLogOutTime(date);
         }
     }
 }
