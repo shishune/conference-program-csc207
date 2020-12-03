@@ -151,7 +151,7 @@ public class AccountController {
                     }  else if (menuOption.equals("13")) {
                         // view conferences (general)
                         //TODO: change to appropriate name after everyone is done adding options option13(?)
-                        menuController.option16();
+                        menuController.option16(); // display conferences
                     }else {
                         accountDisplay.printMenuError();
                     }

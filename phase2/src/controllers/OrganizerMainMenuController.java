@@ -275,6 +275,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
                     if(eventId != null){
                         conference.addEvent(conferenceTitle, eventId);
+                        //TODO: add conference to event too
                     } else {
                         displayEvent.failedAddEventToConference();
                     }
