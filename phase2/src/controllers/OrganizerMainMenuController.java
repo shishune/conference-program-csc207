@@ -287,7 +287,8 @@ public class OrganizerMainMenuController extends MainMenuController {
                     displayEvent.invalidConference();
                 }
                 displayEvent.successAddEvent();
-            } else {
+            }
+            else {
                 if (!checks.get(0)) {
                     int roomCap = room.findRoomFromId(roomID).getCapacity(); // necessary?
                     displayEvent.roomCapacityLow(roomCap);
@@ -305,7 +306,9 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     private ArrayList<List<String>> getConferences() {
-        HashMap<String, Conference> conferenceUsernameHash = conference.returnTitleHashMap();
+        HashMap<String, Conference> conferenceUsernameHash = new HashMap<>();
+        if (conference != null){
+         conferenceUsernameHash = conference.returnTitleHashMap();}
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
         for(Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()){
             Conference conference = entry.getValue();

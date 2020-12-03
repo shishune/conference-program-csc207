@@ -116,10 +116,10 @@ public class AttendeeMainMenuController extends MainMenuController {
 
     public void option11(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        List<List<String>> eventsList = controller.viewSavedEvents(username);
+        List<List<String>> eventsList = controller.viewVIPEvents(username);
 
         if (eventsList.size() == 0){
-            displayMessage.noSavedEvents();
+            displayMessage.noEvents();
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
@@ -128,4 +128,5 @@ public class AttendeeMainMenuController extends MainMenuController {
             displayEvent.displayEvents(eventsList);
         }
 
-}}
+}
+}

@@ -92,25 +92,26 @@ public class AttendeeController extends UserController {
      * Shows the vip events to a vip attendee
      */
 
-    public List<List<String>> viewVIPEvents(String user){
-        List<List<String>> vipEventList = new ArrayList<List<String>>();
-        List<String> vEventList = new ArrayList<String>();
+//    public List<List<String>> viewVIPEvents(String user){
+//        List<List<String>> vipEventList = new ArrayList<List<String>>();
+//
+//        for (String event : e.getEventIds()){
+//            if (e.getEvent(event).getIsVip()){
+//                String title = e.getEvent(event).getTitle();
+//                String dateTime = e.getEvent(event).getDateTime();
+//                String roomId = e.getEvent(event).getRoomID();
+//                List<String> speaker = e.getEvent(event).getSpeakers();
+//                List<String> info = new ArrayList<String>();
+//                info.add(title);
+//                info.add(dateTime);
+//                info.add(roomId);
+//                info.addAll(speaker);
+//
+//                vipEventList.add(info);
+//            }
+//        }
+//        return vipEventList;
+//    }
 
-        for (String event : e.getEventIds()){
-            if (e.getEvent(event).getIsVip()){
-                String title = e.getEvent(event).getTitle();
-                String dateTime = e.getEvent(event).getDateTime();
-                String roomId = e.getEvent(event).getRoomID();
-                List<String> speaker = e.getEvent(event).getSpeakers();
-                List<String> info = new ArrayList<String>();
-                info.add(title);
-                info.add(dateTime);
-                info.add(roomId);
-                info.addAll(speaker);
-                vipEventList.add(info);
-            }
-        }
-        return vipEventList;
-    }
 
 }

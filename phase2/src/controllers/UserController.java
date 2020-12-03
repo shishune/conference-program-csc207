@@ -309,6 +309,35 @@ public class UserController {
         return scheduleList;
     }
 
+    public List<List<String>> viewVIPEvents(String user){
+        Set<String> allEvents = eventActions.getEvents().keySet();
+        List<String> availableS = new ArrayList<>();
+        List<String> targetList = new ArrayList<>(allEvents);
+
+        for (String s : targetList) {
+            if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
+                if (eventActions.getEvent(s).getIsVip()){
+                    availableS.add(s);
+                }
+            }
+        }
+        List<List<String>> scheduleList = new ArrayList<List<String>>();
+        for (String event : availableS) {
+            String title = eventActions.getEvent(event).getTitle();
+            String dateTime = eventActions.getEvent(event).getDateTime();
+            String roomId = eventActions.getEvent(event).getRoomID();
+            List<String> speakers = eventActions.getEvent(event).getSpeakers();
+            List<String> info = new ArrayList<String>();
+            info.add(title);
+            info.add(dateTime);
+            info.add(roomId);
+            info.addAll(speakers);
+            scheduleList.add(info);
+        }
+        return scheduleList;
+
+    }
+
 
     /**
      * Shows the spots available in an event

@@ -152,7 +152,7 @@ public class AccountController {
                         menuController.option9();}
                     else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
                         menuController.option10();
-                    } else if (menuOption.equals("11") && (type.equals("O"))) {
+                    } else if (menuOption.equals("11") && (type.equals("O")) || type.equals("A")) {
                         menuController.option11();
                     } else if (menuOption.equals("12") && (type.equals("O"))) {
                         // add conference (organizers only)
