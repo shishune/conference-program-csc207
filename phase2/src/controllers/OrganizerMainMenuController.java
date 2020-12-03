@@ -559,7 +559,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
-    public void option12(){
+    public void option14(){
         boolean loop = true;
         displayMessage.printUserMenu();
         while(loop) {
