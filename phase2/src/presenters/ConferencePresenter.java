@@ -1,6 +1,10 @@
 package presenters;
 
+import entities.Event;
+import entities.User;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -10,10 +14,15 @@ import java.util.List;
  * */
 public class ConferencePresenter {
 
+    private EventPresenter eventPresenter;
+
+    public ConferencePresenter(){
+        this.eventPresenter = new EventPresenter();
+    }
     /**
      * Displays conferences
      * */
-    public void displayConferences(ArrayList<List<String>> conferencesList){
+    public void displayConferences(ArrayList<List<String>> conferencesList, List<List<String>> eventsList, HashMap<String, User> userIdHash){
         if(conferencesList != null){
             if(conferencesList.isEmpty()){
                 System.out.println("There are no conferences in existance.");
@@ -27,15 +36,35 @@ public class ConferencePresenter {
                         count ++;
 
                         System.out.println("Conference title: "+info.get(0));
-                        // display events?
-                        //System.out.println("Events: "+info.get(1));
-                        System.out.println("Start Time: "+info.get(1));
-                        System.out.println("End Time: "+info.get(2));
+                        // print events
+                        String[] events = info.get(1).split("%%");
+                        System.out.println("Conference Events:");
+                        eventPresenter.displayEvents(eventsList, userIdHash);
+                        //for(String event : events){
+                            //System.out.println(userHash.get(event).getUsername());
+                        //}
+                        // print attendees
+                        //String[] attendees = info.get(2).split("%%");
+                        //System.out.println("Conference Attendees");
+                        //for(String attendee : attendees){
+                        //}
+                        // print speakers
+                        String[] speakers = info.get(3).split("%%");
+                        System.out.println("Conference Speakers:");
+                        for(String speaker : speakers){
+                            System.out.println(userIdHash.get(speaker).getUsername());
+                        }
+                        //System.out.println("Start Time: "+info.get(1));
+                        //System.out.println("End Time: "+info.get(2));
+
 
                         System.out.println("\n");
                     }
                 }
             }
         }
+    }
+
+    public void displayConferences(ArrayList<List<String>> returnConferences) {
     }
 }

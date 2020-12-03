@@ -90,6 +90,18 @@ public class EventActions  {
         return eventNames;
     }
 
+    public List<List<String>> getEventsList() {
+        List<List<String>> eventsList = new ArrayList<List<String>>();
+        if(events != null){
+            List<String> eventStringsList;
+            for(Map.Entry<String, Event> entry : events.entrySet()){
+               eventStringsList = Arrays.asList(entry.getValue().string().split(","));
+               eventsList.add(eventStringsList);
+            }
+        }
+        return eventsList;
+    }
+
 
     /***
      * return hashmap of all speakers and the times they are busy. key: speakerID value: List of date and time

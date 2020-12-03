@@ -264,7 +264,9 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayEvent.promptConference();
                 // display conferences
                 ArrayList<List<String>> conferences = getConferences();
-                displayConferences.displayConferences(conferences);
+                List<List<String>> events = event.getEventsList();
+                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+                displayConferences.displayConferences(conferences, events, userIdHash);
                 String conferenceTitle = scan.nextLine();
 
                 //System.out.println("HERE!" + conference.returnTitleHashMap());
@@ -301,9 +303,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         HashMap<String, Conference> conferenceUsernameHash = conference.returnTitleHashMap();
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
         for(Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()){
-            List<String> stringRepConference = new ArrayList<String>();
             Conference conference = entry.getValue();
-            stringRepConference.add(conference.getTitle());
+            List<String> stringRepConference = Arrays.asList(conference.getStringRep().split(","));
+            //stringRepConference.add(conference.getTitle());
             //stringRepConference.add(conference.getStartDateTime());
             //stringRepConference.add(conference.getEndDateTime());
 
