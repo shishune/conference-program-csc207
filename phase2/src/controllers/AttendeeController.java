@@ -73,10 +73,10 @@ public class AttendeeController extends UserController {
         List<List<String>> saveEventList = new ArrayList<List<String>>();
         if (e != null) {
             for (String event : savedEventList) {
-                String title = e.getEvent(event).getTitle();
-                String dateTime = e.getEvent(event).getDateTime();
-                String roomId = e.getEvent(event).getRoomID();
-                List<String> speakers = e.getEvent(event).getSpeakers();
+                String title = e.getEventFromName(event).getTitle();
+                String dateTime = e.getEventFromName(event).getDateTime();
+                String roomId = e.getEventFromName(event).getRoomID();
+                List<String> speakers = e.getEventFromName(event).getSpeakers();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
