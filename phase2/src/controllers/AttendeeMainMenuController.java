@@ -60,7 +60,13 @@ public class AttendeeMainMenuController extends MainMenuController {
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                if (e.get(3).equals("")){
+                    e.set(3, "There are no speakers at the moment for this event.");
+                }
+                else{
+                    e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                }
+
             }
             displayEvent.displayEvents(eventsList);
             displayEvent.promptSelectEvent();
@@ -118,7 +124,12 @@ public class AttendeeMainMenuController extends MainMenuController {
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                if (e.get(3).equals("")){
+                    e.set(3, "There are no speakers at the moment for this event.");
+                }
+                else{
+                    e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                }
             }
             displayEvent.displayEvents(eventsList);
         }
