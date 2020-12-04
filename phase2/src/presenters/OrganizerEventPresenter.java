@@ -105,7 +105,8 @@ public class OrganizerEventPresenter extends EventPresenter {
      * Shows that conference title added was invalid
      */
     public void invalidConference(){
-        System.out.println("This conference does not exist, please enter the title of an existing conference or create a new conference from the main menu.");
+        System.out.println("This conference does not exist, please enter the title of an existing conference or create a new conference from the main menu. " +
+                "\nEnter 'x' to go back or anything else to try again");
     }
 
     /**

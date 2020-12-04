@@ -135,42 +135,42 @@ public class OrganizerMainMenuController extends MainMenuController {
         String conferenceTitle = "";
 
 
-        while(noConference) {
-            // Add this event to a conference
 
-            // display conferences
-            ArrayList<List<String>> conferences = getConferences();
-            if(conferences.size() == 0){
-                displayConferences.noConferences();
-                return;
-            } else {
-                List<List<String>> events = event.getEventsList();
-                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
-                displayConferences.displayConferences(conferences, events, userIdHash);
+        // Add this event to a conference
 
+        // display conferences
+        ArrayList<List<String>> conferences = conference.returnConferences();
+        if(conferences.size() == 0){
+            displayConferences.noConferences();
+            return;
+        } else {
+
+            while(noConference) {
+//                List<List<String>> events = event.getEventsList();
+//                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+                displayConferences.displayConferences(conferences);
+                // displayConferences.displayConferences(conferences, events, userIdHash);
                 displayEvent.promptConference();
                 String conferenceInput = scan.nextLine();
                 //System.out.println("HERE!" + conference.returnTitleHashMap());
-                if (conference.conferenceExists(conferenceInput)) {
+                if (conferenceInput.equalsIgnoreCase("x")){
+                    return;
+                } else if (conference.conferenceExists(conferenceInput)) {
                     conferenceTitle = conferenceInput;
                     noConference = false;
-                    // add event to conference
 
-//                    String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
-//                    if (eventId != null) {
-//                        conference.addEvent(conferenceTitle, eventId);
-//                        //TODO: add conference to event too
-//                        displayEvent.successAddEvent();
-//                    } else {
-//                        displayEvent.failedAddEventToConference();
-//                    }
                 } else {
                     displayEvent.invalidConference();
+                    conferenceInput = scan.nextLine();
+                    if (conferenceInput.equalsIgnoreCase("x")){
+                        return;
+                    }
                 }
             }
         }
 
-        while (titleRun) {
+
+        while (true) {
             //displayEvent.promptTitle();
             displayEvent.promptTitle();
             title = scan.nextLine();

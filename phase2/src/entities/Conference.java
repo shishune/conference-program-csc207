@@ -35,7 +35,7 @@ public class Conference {
         String eventsString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
         String attendeesString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
         String speakersString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-        return conferenceID + "," + title + "," + eventsString + "," + attendeesString + "," + speakersString;
+        return conferenceID + "," + title + "," + eventsString + "," + attendeesString + "," + speakersString + ",0";
     }
 
     //TODO: possible methods - getAllAttendees, getNumAttendees, getAllSpeakers, getNumSpeakers,

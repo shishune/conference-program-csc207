@@ -52,9 +52,13 @@ public class ConferenceActions {
             List<String> stringRepConference = new ArrayList<String>();
             Conference conference = entry.getValue();
             stringRepConference.add(conference.getTitle());
-            //stringRepConference.add(conference.getStartDateTime());
-            //stringRepConference.add(conference.getEndDateTime());
-
+//            stringRepConference.add(conference.getStartDateTime());
+//            stringRepConference.add(conference.getEndDateTime());
+            String events = "";
+            for (String eventID: conference.getEvents()){
+                events += eventID + ",";
+            }
+            stringRepConference.add(events);
             stringRepConferences.add(stringRepConference);
         }
         return stringRepConferences;
