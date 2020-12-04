@@ -28,7 +28,7 @@ public class OrganizerConferenceController {
     /**
      * Responds to menu option 1 - create conference
      */
-    public void option1() {
+    public void createConference() {
         // prompt conference constructor objects
 
         HashMap<String, Conference> titleHash = conferenceActions.returnTitleHashMap();
@@ -51,65 +51,65 @@ public class OrganizerConferenceController {
 
     }
 
-    /**
-     * Responds to menu option 2 - add events to existing conference
-     */
-    public void option2() {
-        // print list of conferences
-        displayConference.availableConferences();
-        displayConference.displayConferences(conferenceActions.returnConferences());
-
-        while(true) {
-            displayConference.conferencePrompt();
-            String conferenceTitle = scan.nextLine();
-            if (conferenceActions.conferenceExists(conferenceTitle)) {
-                addEvents(conferenceTitle, false);
-                break;
-            } else {
-                displayConference.conferenceDoesNotExists();
-            }
-        }
-    }
-
-    public void addEvents(String conferenceTitle, boolean createNewConference){
-        // displayConference.printEventsText();
-        //TODO: Display events on screen (get/make the list of lists)
-        // List<String>
-        // displayEvent.displayEvents();
-
-        String events = "";
-        if(!createNewConference){
-            displayConference.printEventsText();
-            events = scan.nextLine();
-        }
-        String[] eventsList;
-        if (events.equals("")) {
-            eventsList = new String[0];
-        } else {
-            eventsList = events.split(",");
-        }
-
-        if(!createNewConference){
-            // add the event to conference if need be
-            for(String eventName : eventsList){
-                String eventId = eventActions.getEventFromName(eventName).getId();
-                if(conferenceActions.addEvent(conferenceTitle, eventId)){
-                    displayConference.successAddEvents(eventName);
-                } else {
-                    displayConference.failedAddEvents(eventName);
-                }
-            }
-
-        } else {
-            conferenceActions.createConference(conferenceTitle, Arrays.asList(eventsList));
-            for(String eventName : eventsList){
-                String eventId = eventActions.getEventFromName(eventName).getId();
-                if(conferenceActions.addEvent(conferenceTitle, eventId)){
-                    displayConference.successAddEvents(eventName);
-                } else {
-                    displayConference.failedAddEvents(eventName);
-                }
-            }
-        }
-    }
+//    /**
+//     * Responds to menu option 2 - add events to existing conference
+//     */
+//    public void option2() {
+//        // print list of conferences
+//        displayConference.availableConferences();
+//        displayConference.displayConferences(conferenceActions.returnConferences());
+//
+//        while(true) {
+//            displayConference.conferencePrompt();
+//            String conferenceTitle = scan.nextLine();
+//            if (conferenceActions.conferenceExists(conferenceTitle)) {
+//                addEvents(conferenceTitle, false);
+//                break;
+//            } else {
+//                displayConference.conferenceDoesNotExists();
+//            }
+//        }
+//    }
+//
+//    public void addEvents(String conferenceTitle, boolean createNewConference){
+//        // displayConference.printEventsText();
+//        //TODO: Display events on screen (get/make the list of lists)
+//        // List<String>
+//        // displayEvent.displayEvents();
+//
+//        String events = "";
+//        if(!createNewConference){
+//            displayConference.printEventsText();
+//            events = scan.nextLine();
+//        }
+//        String[] eventsList;
+//        if (events.equals("")) {
+//            eventsList = new String[0];
+//        } else {
+//            eventsList = events.split(",");
+//        }
+//
+//        if(!createNewConference){
+//            // add the event to conference if need be
+//            for(String eventName : eventsList){
+//                String eventId = eventActions.getEventFromName(eventName).getId();
+//                if(conferenceActions.addEvent(conferenceTitle, eventId)){
+//                    displayConference.successAddEvents(eventName);
+//                } else {
+//                    displayConference.failedAddEvents(eventName);
+//                }
+//            }
+//
+//        } else {
+//            conferenceActions.createConference(conferenceTitle, Arrays.asList(eventsList));
+//            for(String eventName : eventsList){
+//                String eventId = eventActions.getEventFromName(eventName).getId();
+//                if(conferenceActions.addEvent(conferenceTitle, eventId)){
+//                    displayConference.successAddEvents(eventName);
+//                } else {
+//                    displayConference.failedAddEvents(eventName);
+//                }
+//            }
+//        }
+//    }
 }

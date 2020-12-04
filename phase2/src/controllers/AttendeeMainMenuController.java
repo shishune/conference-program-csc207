@@ -5,6 +5,7 @@ import useCases.ConferenceActions;
 import useCases.RoomActions;
 import useCases.SpeakerActions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     private MessagePresenter displayMessage;
     private RoomActions room;
     private SpeakerActions speaker;
-    private ConferenceActions conference;
+    private ConferenceActions conferenceActions;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -36,7 +37,7 @@ public class AttendeeMainMenuController extends MainMenuController {
         this.displayMessage = new MessagePresenter();
         this.speaker = speaker;
         this.room = room;
-        this.conference = conference;
+        this.conferenceActions = conferenceActions;
     }
 
     /**
@@ -44,7 +45,16 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
     public void option6(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        List<List<String>> eventsList = controller.viewAvailableSchedule(username);
+        String conferenceTitle = "";
+        // TODO print list of users conferences
+        // TODO have user choose which conference events they want to see
+        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+        displayConference.displayConferences(conferences);
+        displayConference.promptConference();
+        while(!conferenceActions.conferenceExists(conferenceTitle)){
+            conferenceTitle = scan.nextLine();
+        }
+        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
         if (eventsList.size() == 0){
             displayMessage.noEvents();
         } else {

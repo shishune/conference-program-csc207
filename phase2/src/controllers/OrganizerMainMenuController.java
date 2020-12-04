@@ -32,7 +32,6 @@ public class OrganizerMainMenuController extends MainMenuController {
     private OrganizerMessagePresenter displayMessage;
     private OrganizerEventPresenter displayEvent;
     private OrganizerConferencePresenter displayConferences;
-    private ConferenceActions conferenceActions;
     private useCases.AttendeeActions attendee;
     private Scanner scan = new Scanner(System.in);
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -788,22 +787,54 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 11- view all created events
      */
     public void option11() {
-        super.option8();
+        String conferenceTitle = "";
+        // TODO print list of users conferences
+        // TODO have user choose which conference events they want to see
+        ArrayList<List<String>> conferences = conference.returnConferences();
+        displayConference.displayConferences(conferences);
+        displayConference.promptConference();
+        while(!conference.conferenceExists(conferenceTitle)){
+            conferenceTitle = scan.nextLine();
+        }
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
+        if (eventsList.size() == 0){
+            displayMessage.noEvents();
+        } else {
+
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                List<String> speakerList = new ArrayList<String>();
+                List<String> speakers = Arrays.asList(e.get(3).split(","));
+                for (String speakerID : speakers) {
+                    if (speakerID.equals("")){
+                        speakerList.add(displayMessage.noSpeakers());
+                    } else {
+                        speakerList.add(speaker.findUserFromId(speakerID).getUsername());
+                    }
+                }
+                e.set(3, String.valueOf(speakerList));
+                //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+            }
+            displayEvent.displayEvents(eventsList);
+        }
     }
 
     /***
      * Responds to menu option 12 - Create Conference/Add events to conferences
      */
     public void option15() {
-        displayConferences.printOrganizerConferenceMenu();
-        String option = scan.nextLine();
+        // displayConferences.printOrganizerConferenceMenu();
+       //  String option = scan.nextLine();
         controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
-        if (option.equals("1")) {
-            menuController.option1(); // send message to all speakers
-        }
-        if (option.equals("2")) {
-            menuController.option2(); // send message to all attendees of an event
-        }
+        menuController.createConference();
+
+//        if (option.equals("1")) {
+//           ; // send message to all speakers
+//        }
+//        if (option.equals("2")) {
+//            menuController.option2(); // send message to all attendees of an event
+//        }
     }
 
 

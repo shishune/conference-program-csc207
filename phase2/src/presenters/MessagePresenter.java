@@ -150,6 +150,14 @@ public class MessagePresenter {
         System.out.println("There are no events available.");
     }
 
+    /**
+     * Message informing user there are no events
+     * */
+    public String noSpeakers(){
+        System.out.println("There are no speakers for this event.");
+        return "There are no speakers for this event.";
+    }
+
 
     /**
      * A message asking for the capacity of an event

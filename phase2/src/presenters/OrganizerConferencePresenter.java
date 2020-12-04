@@ -14,11 +14,11 @@ public class OrganizerConferencePresenter extends ConferencePresenter{
     }
 
 
-    public void printOrganizerConferenceMenu(){
-        System.out.println(""
-                        + "\n[1] Create a conference"
-                        + "\n[2] Add events to an existing conference");
-    }
+//    public void printOrganizerConferenceMenu(){
+//        System.out.println(""
+//                        + "\n[1] Create a conference"
+//                        + "\n[2] Add events to an existing conference");
+//    }
 
     public void promptConference(){
         System.out.println("Select the conference you would like to add event(s) to.");

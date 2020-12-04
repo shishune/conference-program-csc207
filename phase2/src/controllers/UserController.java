@@ -5,6 +5,7 @@ import entities.Message;
 import entities.Room;
 import entities.User;
 import useCases.RoomActions;
+import useCases.ConferenceActions;
 import useCases.LogoutActions;
 
 import java.util.ArrayList;
@@ -283,12 +284,13 @@ public class UserController {
      * @return string of events that an user could attend
      */
 
-    public List<List<String>> viewAvailableSchedule(String user) {
-        Set<String> allEvents = eventActions.getEvents().keySet();
+    public List<List<String>> viewAvailableSchedule(String user, String conferenceTitle) {
+        List<String> conferenceEvents = conferenceActions.returnTitleHashMap().get(conferenceTitle).getEvents();
+        // Set<String> allEvents = eventActions.getEvents().keySet();
         List<String> availableS = new ArrayList<>();
-        List<String> targetList = new ArrayList<>(allEvents);
+        // List<String> targetList = new ArrayList<>(allEvents);
 
-        for (String s : targetList) {
+        for (String s : conferenceEvents) {
             if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
                 if (!eventActions.getEvent(s).getIsVip()){
                     availableS.add(s);

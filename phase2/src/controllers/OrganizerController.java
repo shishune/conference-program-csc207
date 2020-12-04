@@ -95,6 +95,24 @@ public class OrganizerController extends UserController {
         return checks;
     }
 
+    public List<List<String>> viewAvailableSchedule(String user, String conferenceTitle) {
+        List<String> conferenceEvents = conferenceActions.returnTitleHashMap().get(conferenceTitle).getEvents();
+        // Set<String> allEvents = eventActions.getEvents().keySet();
+        List<List<String>> scheduleList = new ArrayList<List<String>>();
+        for (String event : conferenceEvents) {
+            String title = eventActions.getEvent(event).getTitle();
+            String dateTime = eventActions.getEvent(event).getDateTime();
+            String roomId = eventActions.getEvent(event).getRoomID();
+            List<String> speakers = eventActions.getEvent(event).getSpeakers();
+            List<String> info = new ArrayList<String>();
+            info.add(title);
+            info.add(dateTime);
+            info.add(roomId);
+            info.addAll(speakers);
+            scheduleList.add(info);
+        }
+        return scheduleList;
+    }
 
     /***
      * cancel an event

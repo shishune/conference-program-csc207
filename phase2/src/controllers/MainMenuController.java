@@ -22,7 +22,7 @@ public abstract class MainMenuController extends AccountController {
     private EventPresenter displayEvent;
     private SpeakerActions speakerActions;
     private ConferenceActions conferenceActions;
-    private ConferencePresenter displayConference;
+    protected ConferencePresenter displayConference;
     private Scanner scan = new Scanner(System.in);
 
     /**
@@ -142,9 +142,18 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 8- view all events
      */
-    public void option8(){
+    public void viewEventsAccordingToConference(){
+        String conferenceTitle = "";
+        // TODO print list of users conferences
+        // TODO have user choose which conference events they want to see
+        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+        displayConference.displayConferences(conferences);
+        displayConference.promptConference();
+        while(!conferenceActions.conferenceExists(conferenceTitle)){
+            conferenceTitle = scan.nextLine();
+        }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        List<List<String>> eventsList = controller.viewAvailableSchedule(username);
+        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
         if (eventsList.size() == 0){
             displayMessage.noEvents();
         } else {
@@ -153,7 +162,12 @@ public abstract class MainMenuController extends AccountController {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
                 List<String> speakerList = new ArrayList<String>();
                 for (String speaker : e.get(3).split(",")) {
-                    speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
+                    if (speaker.equals("")){
+                        speakerList.add(displayMessage.noSpeakers());
+                    } else {
+                        speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
+                    }
+
                 }
                 e.set(3, String.valueOf(speakerList));
                 //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());

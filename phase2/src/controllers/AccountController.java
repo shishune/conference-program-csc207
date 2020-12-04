@@ -147,7 +147,7 @@ public class AccountController {
                         // organizer: remove event
                         menuController.option7();
                     } else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))) {
-                        menuController.option8();
+                        menuController.viewEventsAccordingToConference();
                     } else if (menuOption.equals("9") && (type.equals("A") || type.equals("O"))) {
                         menuController.option9();}
                     else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
