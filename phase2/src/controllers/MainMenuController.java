@@ -154,10 +154,12 @@ public abstract class MainMenuController extends AccountController {
         }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
-        if (eventsList.size() == 0){
-            displayMessage.noEvents();
-        } else {
 
+        if (eventsList.size() == 0){
+            //displayMessage.noEvents();
+            displayEvent.noEventsAvailable();
+        } else {
+            displayEvent.eventIntro();
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
                 List<String> speakerList = new ArrayList<String>();

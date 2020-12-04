@@ -129,6 +129,12 @@ public class EventPresenter {
         System.out.println("There is a time conflict with another event you are attending.");
     }
 
+    /**
+     * Notifies user that there are no events in that conference that the user is not participating in
+     */
+    public void noEventsAvailable(){
+        System.out.println("There are no events that you have not participated in.");
+    }
 
     /**
      * Message informing that event does not exist
@@ -157,6 +163,13 @@ public class EventPresenter {
      */
     public void failedCancelEvent(){
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
+    }
+
+    /**
+     * A clarifying message saying that the program is showing all the events that are not in the user's own schedule, in that specific conference
+     */
+    public void eventIntro(){
+        System.out.println("These are all the events in the conference that you are currently not participating in.");
     }
 
 
