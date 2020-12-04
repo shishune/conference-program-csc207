@@ -397,7 +397,7 @@ public class AttendeeActions extends UserAccountActions {
         } else {
             List<String> userSavedEvents = userOne.getSavedEventList();
             userSavedEvents.add(event);
-            userOne.setEventList(userSavedEvents);
+            userOne.setSavedEventList(userSavedEvents);
             return true;
         }
     }

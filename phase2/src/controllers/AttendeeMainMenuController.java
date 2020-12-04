@@ -1,5 +1,4 @@
 package controllers;
-import entities.User;
 import presenters.EventPresenter;
 import presenters.MessagePresenter;
 import useCases.ConferenceActions;
@@ -36,6 +35,7 @@ public class AttendeeMainMenuController extends MainMenuController {
         this.displayEvent = new EventPresenter();
         this.displayMessage = new MessagePresenter();
         this.speaker = speaker;
+        this.room = room;
         this.conference = conference;
     }
 
