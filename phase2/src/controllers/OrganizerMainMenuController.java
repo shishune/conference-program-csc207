@@ -530,7 +530,11 @@ public class OrganizerMainMenuController extends MainMenuController {
 //            int t1 = scan.nextInt();
             try{
                 if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
-                    startTime = t1;
+                    if (Integer.parseInt(t1) == 9){
+                        startTime = "09";
+                    } else {
+                        startTime = t1;
+                    }
                     catcher = false;
                 }
                 else{

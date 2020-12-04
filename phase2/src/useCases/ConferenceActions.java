@@ -73,9 +73,22 @@ public class ConferenceActions {
             for (String conference : conferencesList){
                 String[] conferenceItems = conference.split(",");
                 List<String> conferenceEvents = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
-                List<String> conferenceAttendees = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
-                List<String> conferenceSpeakers = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
-                loadConference(conferenceItems[0], conferenceItems[1], conferenceEvents/*, conferenceAttendees, conferenceSpeakers*/);
+                List<String> conferenceAttendees = new ArrayList<>(Arrays.asList(conferenceItems[3].split("%%")));
+                // List<String> conferenceSpeakers = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
+                ArrayList<String> eventList = new ArrayList<String>();
+                ArrayList<String> attendeeList = new ArrayList<String>();
+
+                for (String e : conferenceEvents) {
+                    if (!e.equals("")) {
+                        eventList.add(e);
+                    }
+                }
+                for (String a : conferenceAttendees) {
+                    if (!a.equals("")) {
+                        attendeeList.add(a);
+                    }
+                }
+                loadConference(conferenceItems[0], conferenceItems[1], eventList, attendeeList/*, conferenceSpeakers*/);
             }
         }
     }
@@ -91,7 +104,7 @@ public class ConferenceActions {
         useCases.GenerateID generateId = new GenerateID(loader);
         String conferenceId = "C" + generateId.generateId();
         //TODO: set conference start time to start time of first event & end time = end time of last event ???
-        return loadConference(conferenceId, title, events/*, attedees, speakers*/);
+        return loadConference(conferenceId, title, events, new ArrayList<>()/*, speakers*/);
     }
 
 
@@ -117,11 +130,11 @@ public class ConferenceActions {
         return times;
     }
 
-    private Conference loadConference(String conferenceId, String title, List<String> events/*, List<String> attendees, List<String> speakers*/) {
+    private Conference loadConference(String conferenceId, String title, List<String> events, List<String> attendees/*, List<String> speakers*/) {
         /*if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
             attendees = new ArrayList<>();
         }*/
-        Conference newConference = new Conference(conferenceId, title, events/*, attendees, speakers*/);
+        Conference newConference = new Conference(conferenceId, title, events, attendees/*, speakers*/);
         conferences.put(conferenceId, newConference);
         conferenceTitlesHash.put(title, newConference);
         //this.events.put(conferenceId, events);

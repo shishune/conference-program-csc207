@@ -18,11 +18,11 @@ public class Conference {
      * @param title the string name of this conference
      * @param events the list of strings of the ids of each event of this conference
      * */
-    public Conference(String conferenceID, String title, List<String> events/*, List<String> attendees, List<String> speakers*/){
+    public Conference(String conferenceID, String title, List<String> events, List<String> attendees/*, List<String> speakers*/){
         this.conferenceID = conferenceID;
         this.title = title;
         this.events = events;
-        //this.attendees = attendees;
+        this.attendees = attendees;
         //this.speakers = speakers;
         //this.startDateTime = startDateTime;
         //this.endDateTime = endDateTime;
@@ -32,10 +32,10 @@ public class Conference {
      * @return strign representation of this Conference entity
      */
     public String getStringRep(){
-        String eventsString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-        String attendeesString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-        String speakersString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(",", "%%");
-        return conferenceID + "," + title + "," + eventsString + "," + attendeesString + "," + speakersString + ",0";
+        String eventsString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+        String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+        // String speakersString = speakers.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+        return conferenceID + "," + title + "," + eventsString + "," + attendeesString+ ",0";
     }
 
     //TODO: possible methods - getAllAttendees, getNumAttendees, getAllSpeakers, getNumSpeakers,
