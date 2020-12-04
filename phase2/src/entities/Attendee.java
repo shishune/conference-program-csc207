@@ -62,7 +62,8 @@ public class Attendee extends User {
     public String stringRepresentation() {
         String contacts = contactsList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         String events = eventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
-        return userId + "," + username + "," + password + "," + contacts + "," + events + "," + savedEventList + "," + isLogin + "," +isOrganizer + "," +isVIP;
+        String savedEventListString = savedEventList.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
+        return userId + "," + username + "," + password + "," + contacts + "," + events + "," + savedEventListString + "," + isLogin + "," +isOrganizer + "," +isVIP;
     }
 
 
