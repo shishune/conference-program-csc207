@@ -117,7 +117,7 @@ public class AccountController {
                         //logout procedure. will loop back to login procedure if user does not exit
                         Store store = new Store();
                         controllers.LogOut logOut = new LogOut(store, messageActions, organizerActions,
-                                attendeeActions, roomActions, speakerActions, eventActions, logoutActions);
+                                attendeeActions, roomActions, speakerActions, eventActions, conferenceActions, logoutActions);
 
                         logOut.loggingOut(username, type);
 

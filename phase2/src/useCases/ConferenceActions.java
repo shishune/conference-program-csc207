@@ -28,6 +28,7 @@ public class ConferenceActions {
     public HashMap<String, Conference> returnTitleHashMap(){
         return conferenceTitlesHash;
     }
+
     public boolean addEvent(String conferenceTitle, String eventId){
         if(conferenceTitlesHash != null){
             conferenceTitlesHash.get(conferenceTitle).addEvent(eventId);

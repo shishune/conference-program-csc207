@@ -7,10 +7,7 @@ import presenters.OrganizerMessagePresenter;
 import useCases.ConferenceActions;
 import useCases.EventActions;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class OrganizerConferenceController {
     private controllers.OrganizerController controller;
@@ -33,16 +30,25 @@ public class OrganizerConferenceController {
      */
     public void option1() {
         // prompt conference constructor objects
+
         HashMap<String, Conference> titleHash = conferenceActions.returnTitleHashMap();
-        displayConference.promptCreateConferenceTitle();
-        String conferenceTitle = scan.nextLine();
-        if(!titleHash.containsKey(conferenceTitle)){
-            // when prompt for events, print list of events
-            addEvents(conferenceTitle, true);
-            displayConference.successCreateConference();
-        } else {
-            displayConference.conferenceExists();
+
+        while(true) {
+            displayConference.promptCreateConferenceTitle();
+            String conferenceTitle = scan.nextLine();
+            if (conferenceTitle.equalsIgnoreCase("x") || conferenceTitle.equalsIgnoreCase("")) {
+                displayConference.invalidInput();
+            } else if (!titleHash.containsKey(conferenceTitle)) {
+                // when prompt for events, print list of events
+                // addEvents(conferenceTitle, true);
+                conferenceActions.createConference(conferenceTitle, new ArrayList<>());
+                displayConference.successCreateConference();
+                break;
+            } else {
+                displayConference.conferenceExists();
+            }
         }
+
     }
 
     /**
@@ -50,18 +56,25 @@ public class OrganizerConferenceController {
      */
     public void option2() {
         // print list of conferences
-        displayConference.printConferencesText();
+        displayConference.availableConferences();
         displayConference.displayConferences(conferenceActions.returnConferences());
 
-        displayConference.printConferencesText();
-        String conferenceTitle = scan.nextLine();
-
-        addEvents(conferenceTitle, false);
+        while(true) {
+            displayConference.conferencePrompt();
+            String conferenceTitle = scan.nextLine();
+            if (conferenceActions.conferenceExists(conferenceTitle)) {
+                addEvents(conferenceTitle, false);
+                break;
+            } else {
+                displayConference.conferenceDoesNotExists();
+            }
+        }
     }
 
     public void addEvents(String conferenceTitle, boolean createNewConference){
-        displayConference.printEventsText();
+        // displayConference.printEventsText();
         //TODO: Display events on screen (get/make the list of lists)
+        // List<String>
         // displayEvent.displayEvents();
 
         String events = "";
@@ -69,8 +82,12 @@ public class OrganizerConferenceController {
             displayConference.printEventsText();
             events = scan.nextLine();
         }
-
-        String[] eventsList = events.split(",");
+        String[] eventsList;
+        if (events.equals("")) {
+            eventsList = new String[0];
+        } else {
+            eventsList = events.split(",");
+        }
 
         if(!createNewConference){
             // add the event to conference if need be

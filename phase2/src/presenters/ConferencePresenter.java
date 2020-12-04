@@ -35,7 +35,7 @@ public class ConferencePresenter {
                         System.out.println(count);
                         count ++;
 
-                        System.out.println("Conference title: "+info.get(0));
+                        System.out.println("Conference title: "+ info.get(0));
                         // print events
                         String[] events = info.get(1).split("%%");
                         System.out.println("Conference Events:");

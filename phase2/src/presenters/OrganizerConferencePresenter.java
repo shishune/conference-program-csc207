@@ -5,9 +5,15 @@ public class OrganizerConferencePresenter extends ConferencePresenter{
         System.out.println("Available events");
     };
 
-    public void printConferencesText() {
+    public void availableConferences() {
         System.out.println("Available conferences");
     }
+
+    public void conferencePrompt() {
+        System.out.println("Please enter the conference you would like to add events to");
+    }
+
+
     public void printOrganizerConferenceMenu(){
         System.out.println(""
                         + "\n[1] Create a conference"
@@ -38,7 +44,20 @@ public class OrganizerConferencePresenter extends ConferencePresenter{
         System.out.println("A conference with this name already exists");
     }
 
+    public void conferenceDoesNotExists(){
+        System.out.println("A conference with this name does not exist");
+    }
+
     public void successCreateConference() {
         System.out.println("Congratulations! You have successfully created a conference.");
     }
+
+    public void noConferences() {
+        System.out.println("There are no conferences that exist right now. Please create a conference to create an event");
+    }
+
+    /**
+     * A message informing user that their input is invalid ie empty or a variation of 'x'
+     * */
+    public void invalidInput(){System.out.println("Your input is invalid and either empty or 'x'. Please try again");}
 }

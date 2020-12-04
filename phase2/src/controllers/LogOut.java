@@ -15,6 +15,7 @@ public class LogOut {
     useCases.SpeakerActions speakerActions;
     useCases.EventActions eventActions;
     useCases.LogoutActions logoutActions;
+    useCases.ConferenceActions conferenceActions;
 
     /**
      * Instantiates a new logout object
@@ -29,7 +30,7 @@ public class LogOut {
      */
     public LogOut(Store store, useCases.MessageActions messageActions, useCases.OrganizerActions organizerActions,
                   useCases.AttendeeActions attendeeActions, RoomActions roomActions, useCases.SpeakerActions speakerActions,
-                  useCases.EventActions eventActions, useCases.LogoutActions logoutActions){
+                  useCases.EventActions eventActions, useCases.ConferenceActions conferenceActions, useCases.LogoutActions logoutActions){
         this.store = store;
         this.messageActions = messageActions;
         this.organizerActions = organizerActions;
@@ -38,6 +39,7 @@ public class LogOut {
         this.speakerActions = speakerActions;
         this.eventActions = eventActions;
         this.logoutActions = logoutActions;
+        this.conferenceActions = conferenceActions;
 
     }
 
@@ -55,6 +57,7 @@ public class LogOut {
         store.storeOrganizers(organizerActions);
         store.storeAttendees(attendeeActions);
         store.storeSpeakers(speakerActions);
+        store.storeConferences(conferenceActions);
 //        store.storeEntities(attendeeActions.getAttendeeIds(), organizerActions.getOrganizerIds(),
 //                messageActions.getMessengerIds(), roomActions.getRoomsIds(), eventActions.getEventIds(),
 //                speakerActions.getSpeakerIds());

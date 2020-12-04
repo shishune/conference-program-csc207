@@ -60,7 +60,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         this.event = event;
         this.organizer = organizerActions;
         this.attendee = attendee;
-        this.conference = conference;
+        this.conference = conferenceActions;
     }
 
     /**
@@ -127,17 +127,59 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option6() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        displayEvent.promptTitle();
+
         String title = "";
         boolean isVip = false;
+        boolean noConference = true;
+        boolean titleRun = false;
+        String conferenceTitle = "";
 
-        while (true) {
+
+        while(noConference) {
+            // Add this event to a conference
+
+            // display conferences
+            ArrayList<List<String>> conferences = getConferences();
+            if(conferences.size() == 0){
+                displayConferences.noConferences();
+                return;
+            } else {
+                List<List<String>> events = event.getEventsList();
+                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+                displayConferences.displayConferences(conferences, events, userIdHash);
+
+                displayEvent.promptConference();
+                String conferenceInput = scan.nextLine();
+                //System.out.println("HERE!" + conference.returnTitleHashMap());
+                if (conference.conferenceExists(conferenceInput)) {
+                    conferenceTitle = conferenceInput;
+                    noConference = false;
+                    // add event to conference
+
+//                    String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
+//                    if (eventId != null) {
+//                        conference.addEvent(conferenceTitle, eventId);
+//                        //TODO: add conference to event too
+//                        displayEvent.successAddEvent();
+//                    } else {
+//                        displayEvent.failedAddEventToConference();
+//                    }
+                } else {
+                    displayEvent.invalidConference();
+                }
+            }
+        }
+
+        while (titleRun) {
             //displayEvent.promptTitle();
+            displayEvent.promptTitle();
             title = scan.nextLine();
             if (!validInput(title)){
                displayMessage.invalidInput();
+               displayEvent.promptTitle();
             } else if (event.eventNameExists(title)) {
                 displayEvent.eventExists();
+                displayEvent.promptTitle();
             } else {
                 displayEvent.promptVIP();
                 String vip = scan.nextLine();
@@ -263,32 +305,41 @@ public class OrganizerMainMenuController extends MainMenuController {
                 String eventToAdd = event.getEventNames().get(title).getId();
                 organizer.addEventToUser(eventToAdd, username);
                 organizer.addEventToUser(eventToAdd, username);
-
-                // Add this event to a conference
-                displayEvent.promptConference();
-                // display conferences
-                ArrayList<List<String>> conferences = getConferences();
-                List<List<String>> events = event.getEventsList();
-                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
-                displayConferences.displayConferences(conferences, events, userIdHash);
-                String conferenceTitle = scan.nextLine();
-
-                //System.out.println("HERE!" + conference.returnTitleHashMap());
-                if(conference.conferenceExists(conferenceTitle)){
-                    // add event to conference
-                    String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
-                    if(eventId != null){
-                        conference.addEvent(conferenceTitle, eventId);
-                        //TODO: add conference to event too
-                    } else {
-                        displayEvent.failedAddEventToConference();
-                    }
+                if (conference.addEvent(conferenceTitle, eventToAdd)) {
+//                        //TODO: add conference to event too
+                    displayEvent.successAddEvent();
                 } else {
-                    displayEvent.invalidConference();
+                    displayEvent.failedAddEventToConference();
                 }
-                displayEvent.successAddEvent();
-            }
-            else {
+
+//                // Add this event to a conference
+//                displayEvent.promptConference();
+//                // display conferences
+//                ArrayList<List<String>> conferences = getConferences();
+//                List<List<String>> events = event.getEventsList();
+//                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
+//                displayConferences.displayConferences(conferences, events, userIdHash);
+//                if(conferences.size() == 0){
+//
+//                } else {
+//                    String conferenceTitle = scan.nextLine();
+//                    //System.out.println("HERE!" + conference.returnTitleHashMap());
+//                    if (conference.conferenceExists(conferenceTitle)) {
+//                        // add event to conference
+//                        String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
+//                        if (eventId != null) {
+//                            conference.addEvent(conferenceTitle, eventId);
+//                            //TODO: add conference to event too
+//                            displayEvent.successAddEvent();
+//                        } else {
+//                            displayEvent.failedAddEventToConference();
+//                        }
+//                    } else {
+//                        displayEvent.invalidConference();
+//                    }
+//                }
+
+            } else {
                 if (!checks.get(0)) {
                     int roomCap = room.findRoomFromId(roomID).getCapacity(); // necessary?
                     displayEvent.roomCapacityLow(roomCap);

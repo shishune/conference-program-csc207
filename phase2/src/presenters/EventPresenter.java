@@ -42,9 +42,14 @@ public class EventPresenter {
             System.out.println("Event time: "+info.get(1));
             System.out.println("Event room: "+info.get(2));
             String[] speakers = info.get(3).split("%%");
-            System.out.println("Event speakers: ");
-            for(String speakerId : speakers){
-                System.out.println(userIdHash.get(speakerId).getUsername());
+
+            if (speakers.length == 0){
+                System.out.println("This event has no speakers");
+            } else {
+                System.out.println("Event speakers: ");
+                for (String speakerId : speakers) {
+                    System.out.println(userIdHash.get(speakerId).getUsername());
+                }
             }
 
             System.out.println("\n");
