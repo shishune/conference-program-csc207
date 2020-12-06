@@ -148,6 +148,7 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     public void zeroSpeakers(){System.out.println("Enter 'Y' to have 0 speakers");}
     public void numberOfSpeaker(){System.out.println("Enter an integer value for the number of speakers you would like to have");}
     public void mostAttendedEvents(ArrayList<String> i ){System.out.println(i);}
+    public void leastAttendedEvents(ArrayList<String> i ){System.out.println(i);}
     public void numberEventsAvailable(Integer i){System.out.println(i);}
     public void numAtMaxCapacity(Integer i){System.out.println(i);}
     public void eventsOrderedByDate(ArrayList<String> i){System.out.println(i);}

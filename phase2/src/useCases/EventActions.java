@@ -476,6 +476,23 @@ public class EventActions  {
     }
 
     /**
+     * Events are considered to be one of the least attended events with an attendance rate of less than 50%
+     * @return a list of the most attended events
+     */
+    public ArrayList<String> leastAttendedEvents(){
+            ArrayList<String> mostAttended = new ArrayList<String>();
+            for (Map.Entry<String, Event> entry: events.entrySet()){
+                double numAttendees = attendees.get(entry.getValue()).size();
+                double eventCapacity = entry.getValue().getCapacity();
+                if (numAttendees/eventCapacity < 0.50){
+                    mostAttended.add(entry.getKey());
+                    return mostAttended;
+                }
+            }
+            return mostAttended;
+    }
+
+    /**
      * Reveals the number of events that are at full capacity
      * @return the number of events at full capacity
      */

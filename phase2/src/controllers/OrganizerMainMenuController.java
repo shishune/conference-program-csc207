@@ -696,18 +696,21 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.mostAttendedEvents(event.mostAttendedEvents());
                 loop = false;
             } else if (option.equals("3")) {
-                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
+                displayMessage.leastAttendedEvents(event.leastAttendedEvents());
                 loop = false;
             } else if (option.equals("4")) {
-                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
+                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
                 loop = false;
             } else if (option.equals("5")) {
-                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
                 loop = false;
             } else if (option.equals("6")) {
-                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
                 loop = false;
             } else if (option.equals("7")) {
+                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                loop = false;
+            } else if (option.equals("8")) {
                 displayMessage.newSessionAttendees(attendee.newSessionAttendees());
                 loop = false;
             } else {
