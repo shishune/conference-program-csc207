@@ -520,4 +520,33 @@ public class EventActions  {
         }
         return eventsByDate;
     }
+
+    /**
+     * Provide the average number of attendees in each event
+     * @return the mean number of attendees in each event
+     */
+
+    public int averageNumberAttendees(){
+        int numberEvents = numberEventsAvailable();
+        int numberAttendees = attendees.keySet().size();
+        return numberAttendees % numberEvents;
+    }
+
+    /**
+     * Provide the median for the number of attendees attending events
+     * @return the median number of attendees attending events
+     */
+    public int medianNumberAttendees() {
+        ArrayList<Integer> numberAttendees = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
+            numberAttendees.add(entry.getValue().size());
+            numberAttendees.sort(Integer::compareTo);
+            if (numberAttendees.size() % 2 == 0) {
+                return (numberAttendees.get(numberAttendees.size() / 2) + numberAttendees.get(numberAttendees.size() / 2 - 1) / 2);
+            } else {
+                return (numberAttendees.get(numberAttendees.size() / 2));
+            }
+        }
+        return 0;
+    }
 }
