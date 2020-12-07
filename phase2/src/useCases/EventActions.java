@@ -5,6 +5,9 @@ import gateways.LoadUpIGateway;
 
 import java.util.*;
 import java.util.ArrayList;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * A use case class that stores a hashmap of Events.
@@ -534,7 +537,7 @@ public class EventActions  {
 
     /**
      * Provide the median for the number of attendees attending events
-     * @return the median number of attendees attending events
+     * @return the median number of attendees attending events or 0
      */
     public int medianNumberAttendees() {
         ArrayList<Integer> numberAttendees = new ArrayList<>();
@@ -549,4 +552,23 @@ public class EventActions  {
         }
         return 0;
     }
+    /**
+     * Provide the mode for the number of attendees attending events
+     * @return the mode of attendees attending events or 0
+     */
+    public int modeNumberAttendees() {
+        ArrayList<Integer> numberAttendees = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
+            numberAttendees.add(entry.getValue().size());
+            return numberAttendees.stream()
+                    .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+                    .entrySet()
+                    .stream()
+                    .max(Map.Entry.comparingByValue())
+                    .get()
+                    .getKey();
+        }
+        return 0;
+    }
 }
+

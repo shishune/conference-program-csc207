@@ -699,18 +699,27 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.leastAttendedEvents(event.leastAttendedEvents());
                 loop = false;
             } else if (option.equals("4")) {
-                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
+                displayMessage.averageNumberAttendees(event.averageNumberAttendees());
                 loop = false;
             } else if (option.equals("5")) {
-                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
+                displayMessage.medianNumberAttendees(event.medianNumberAttendees());
                 loop = false;
             } else if (option.equals("6")) {
-                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                displayMessage.modeNumberAttendees(event.modeNumberAttendees());
                 loop = false;
             } else if (option.equals("7")) {
-                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
                 loop = false;
             } else if (option.equals("8")) {
+                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
+                loop = false;
+            } else if (option.equals("9")) {
+                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                loop = false;
+            } else if (option.equals("10")) {
+                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                loop = false;
+            } else if (option.equals("11")) {
                 displayMessage.newSessionAttendees(attendee.newSessionAttendees());
                 loop = false;
             } else {
