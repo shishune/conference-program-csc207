@@ -699,27 +699,33 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.leastAttendedEvents(event.leastAttendedEvents());
                 loop = false;
             } else if (option.equals("4")) {
-                displayMessage.averageNumberAttendees(event.averageNumberAttendees());
+                displayMessage.topFiveEvents(event.topFiveEvents());
                 loop = false;
             } else if (option.equals("5")) {
-                displayMessage.medianNumberAttendees(event.medianNumberAttendees());
+                displayMessage.bottomFiveEvents(event.bottomFiveEvents());
                 loop = false;
             } else if (option.equals("6")) {
-                displayMessage.modeNumberAttendees(event.modeNumberAttendees());
+                displayMessage.averageNumberAttendees(event.averageNumberAttendees());
                 loop = false;
             } else if (option.equals("7")) {
-                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
+                displayMessage.medianNumberAttendees(event.medianNumberAttendees());
                 loop = false;
             } else if (option.equals("8")) {
-                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
+                displayMessage.modeNumberAttendees(event.modeNumberAttendees());
                 loop = false;
             } else if (option.equals("9")) {
-                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
                 loop = false;
             } else if (option.equals("10")) {
-                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
                 loop = false;
             } else if (option.equals("11")) {
+                displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
+                loop = false;
+            } else if (option.equals("12")) {
+                displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
+                loop = false;
+            } else if (option.equals("13")) {
                 displayMessage.newSessionAttendees(attendee.newSessionAttendees());
                 loop = false;
             } else {

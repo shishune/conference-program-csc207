@@ -158,5 +158,6 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     public void averageNumberAttendees(Integer i){System.out.println(i);}
     public void medianNumberAttendees(Integer i){System.out.println(i);}
     public void modeNumberAttendees(Integer i){System.out.println(i);}
-
+    public void topFiveEvents(ArrayList<String> i){System.out.println(i);}
+    public void bottomFiveEvents(ArrayList<String> i){System.out.println(i);}
 }

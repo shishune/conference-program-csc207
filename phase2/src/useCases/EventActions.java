@@ -570,5 +570,60 @@ public class EventActions  {
         }
         return 0;
     }
+
+    /**
+     * Show a list of top 5 events with most attendees. The list could be less than 5 events, or more than 5 events if
+     * more than one event has the same number of attendees.
+     * @return a list of the top 5 events
+     */
+    public ArrayList<String> topFiveEvents() {
+        ArrayList<Integer> numberAttendees = new ArrayList<>();
+        ArrayList<Integer> topFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
+        ArrayList<String> topFive = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
+            numberAttendees.add(entry.getValue().size());
+            Set<Integer> set = new HashSet<>(numberAttendees);
+            numberAttendees.clear();
+            numberAttendees.addAll(set);
+            numberAttendees.sort(Integer::compareTo);
+            numberAttendees.sort(Comparator.reverseOrder()); //descending order
+            if (numberAttendees.size() > 5) {
+                if (topFiveNumbers.contains(entry.getValue().size())) {
+                    topFive.add(entry.getKey());
+                    return topFive;
+                }
+            }
+            else{
+                topFive.add(entry.getKey());
+                return topFive;
+            }
+        }
+        return topFive;
+    }
+
+    public ArrayList<String> bottomFiveEvents() {
+        ArrayList<Integer> numberAttendees = new ArrayList<>();
+        ArrayList<Integer> bottomFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
+        ArrayList<String> bottomFive = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
+            numberAttendees.add(entry.getValue().size());
+            Set<Integer> set = new HashSet<>(numberAttendees);
+            numberAttendees.clear();
+            numberAttendees.addAll(set);
+            numberAttendees.sort(Integer::compareTo);
+            numberAttendees.sort(Comparator.naturalOrder()); //ascending order
+            if (numberAttendees.size() > 5) {
+                if (bottomFiveNumbers.contains(entry.getValue().size())) {
+                    bottomFive.add(entry.getKey());
+                    return bottomFive;
+                }
+            }
+            else{
+                bottomFive.add(entry.getKey());
+                return bottomFive;
+            }
+        }
+        return bottomFive;
+    }
 }
 
