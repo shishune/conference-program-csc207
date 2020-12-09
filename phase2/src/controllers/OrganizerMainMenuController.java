@@ -297,7 +297,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
 
         if (controller != null && event != null) {
-            List<Boolean> checks = controller.createEvent(title, speakerUsernames, dateTimes.get(0), dateTimes.get(1), roomID, capacity, isVip);
+            List<Boolean> checks = controller.createEvent(title, speakerUsernames, dateTimes.get(0), dateTimes.get(1), roomID, conferenceTitle, capacity, isVip);
 
 
             if (checks.get(0) && checks.size() == 1) {
@@ -312,7 +312,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 }
 
 //                // Add this event to a conference
-//                displayEvent.promptConference();
+//               displayEvent.promptConference();
 //                // display conferences
 //                ArrayList<List<String>> conferences = getConferences();
 //                List<List<String>> events = event.getEventsList();
@@ -839,8 +839,47 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /***
-     * Responds to menu option 12 - Create Conference/Add events to conferences
+     *  Responds to menu option 12 - Create Conference/Add events to conferences
      */
+
+    public void option12(){
+        displayConferences.promptCreateConferenceTitle();
+        String title = scan.nextLine();;
+        boolean isVip = false;
+        boolean noConference = true;
+        boolean titleRun = false;
+        String conferenceTitle = "";
+
+        ArrayList<List<String>> conferences = conference.returnConferences();
+        if(conferences.size() == 0){
+            displayConferences.noConferences();
+            return;
+        } else {
+
+            while(noConference) {
+//
+                displayConferences.displayConferences(conferences);
+                displayEvent.promptConference();
+                String conferenceInput = scan.nextLine();
+                if (conferenceInput.equalsIgnoreCase("x")){
+                    return;
+                } else if (conference.conferenceExists(conferenceInput)) {
+                    conferenceTitle = conferenceInput;
+                    noConference = false;
+
+                } else {
+                    displayEvent.invalidConference();
+                    conferenceInput = scan.nextLine();
+                    if (conferenceInput.equalsIgnoreCase("x")){
+                        return;
+                    }
+                }
+            }
+        }
+
+
+    }
+
     public void option15() {
         // displayConferences.printOrganizerConferenceMenu();
        //  String option = scan.nextLine();

@@ -175,7 +175,7 @@ public class EventActions  {
      * @return true if the event was created
      * */
     public Event createEvent(String title, List<String> speakerId, String startDateTime, String endDateTime,
-                             List<String> attendees, String roomID, int capacity, boolean isVip){
+                             List<String> attendees, String roomID,String conference, int capacity, boolean isVip){
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 

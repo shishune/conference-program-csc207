@@ -59,11 +59,12 @@ public class OrganizerController extends UserController {
      * @param startDateTime the start date and time for the event
      * @param endDateTime the end date and time for the event
      * @param roomID of event
+     * @param conferenceTitle
      * @param isVip if event is a vip event
      * @return if the event was created- this will return false if the event already exists
      */
     public List<Boolean> createEvent(String title, List<String> speakerIds, String startDateTime, String endDateTime,
-                                     String roomID, int capacity, boolean isVip){
+                                     String roomID, String conferenceTitle, int capacity, boolean isVip){
         List<String> attendees = new ArrayList<String>();
         List<Boolean> checks = new ArrayList<Boolean>();
         int roomCap = roomActions.findRoomFromId(roomID).getCapacity();
