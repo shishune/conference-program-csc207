@@ -162,7 +162,11 @@ public class AccountController {
                         // view conferences (general)
                         //TODO: change to appropriate name after everyone is done adding options option13(?)
                         menuController.option16(); // display conferences
-                    }else {
+                    }else if (menuOption.equals("14")&& (type.equals("O"))) {
+                        // view conferences (general)
+                        //TODO: change to appropriate name after everyone is done adding options option13(?)
+                        menuController.option14(); // display conferences
+                    } else {
                         accountDisplay.printMenuError();
                     }
                     accountDisplay.promptReturn();

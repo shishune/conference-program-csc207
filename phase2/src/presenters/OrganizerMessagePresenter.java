@@ -89,6 +89,17 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     }
 
     /**
+     * Print menu for messaging options specific to organizer
+     * */
+    public void printStatsMenu(){
+        String display = ""
+                + "\n[1] "
+                + "\n[2] "
+                + "\nPlease select a menu item number or enter x to go back";
+        System.out.println(display);
+    }
+
+    /**
      * Message stating that the user does not exist, prompts user to try again or create a new speaker
      */
     public void speakerDoesNotExist(){

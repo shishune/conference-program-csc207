@@ -66,7 +66,8 @@ public class Event {
         String attendeesString = attendees.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         String speakersString = speakers.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
         return eventID + "," + title + "," + speakersString + "," +
-                this.startDateTime + ","+ this.endDateTime + ","+ attendeesString + "," + roomID + "," + capacity + "," + isVIP;
+                this.startDateTime + ","+ this.endDateTime + "," + attendeesString + "," +
+                roomID + "," + conference  + "," + capacity + "," + isVIP;
     }
 
 

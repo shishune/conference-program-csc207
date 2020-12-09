@@ -93,10 +93,12 @@ public class OrganizerMainMenuController extends MainMenuController {
 
         while (catcher) {
 
-            if (option.equals("x") || option.equals("X")) {
+            if (option.equalsIgnoreCase("x")) {
                 displayEvent.promptEvent();
                 String eventName = scan.nextLine();
-                if (!event.getEventNames().containsKey(eventName)) {
+                if(eventName.equalsIgnoreCase("x")){
+                    return;
+                } else if (!event.getEventNames().containsKey(eventName)) {
                     displayEvent.noEvent();
                 } else {
                     Event eventObject = event.getEventNames().get(eventName);
@@ -305,7 +307,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                 organizer.addEventToUser(eventToAdd, username);
                 organizer.addEventToUser(eventToAdd, username);
                 if (conference.addEvent(conferenceTitle, eventToAdd)) {
-//                        //TODO: add conference to event too
                     displayEvent.successAddEvent();
                 } else {
                     displayEvent.failedAddEventToConference();
@@ -684,50 +685,37 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     public void option14(){
         boolean loop = true;
-        displayMessage.printUserMenu();
         while(loop) {
+            displayMessage.printStatsMenu();
             String option = scan.nextLine();
             if (option.equalsIgnoreCase("x")) {
                 loop = false;
             } else if (option.equals("1")) {
                 displayMessage.numberEventsAvailable(event.numberEventsAvailable());
-                loop = false;
             } else if (option.equals("2")) {
                 displayMessage.mostAttendedEvents(event.mostAttendedEvents());
-                loop = false;
             } else if (option.equals("3")) {
                 displayMessage.leastAttendedEvents(event.leastAttendedEvents());
-                loop = false;
             } else if (option.equals("4")) {
                 displayMessage.topFiveEvents(event.topFiveEvents());
-                loop = false;
-            } else if (option.equals("5")) {
+             } else if (option.equals("5")) {
                 displayMessage.bottomFiveEvents(event.bottomFiveEvents());
-                loop = false;
             } else if (option.equals("6")) {
                 displayMessage.averageNumberAttendees(event.averageNumberAttendees());
-                loop = false;
             } else if (option.equals("7")) {
                 displayMessage.medianNumberAttendees(event.medianNumberAttendees());
-                loop = false;
             } else if (option.equals("8")) {
                 displayMessage.modeNumberAttendees(event.modeNumberAttendees());
-                loop = false;
             } else if (option.equals("9")) {
                 displayMessage.numAtMaxCapacity(event.numAtMaxCapacity());
-                loop = false;
             } else if (option.equals("10")) {
                 displayMessage.eventsOrderedByDate(event.eventsOrderedByDate());
-                loop = false;
             } else if (option.equals("11")) {
                 displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
-                loop = false;
             } else if (option.equals("12")) {
                 displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
-                loop = false;
             } else if (option.equals("13")) {
                 displayMessage.newSessionAttendees(attendee.newSessionAttendees());
-                loop = false;
             } else {
                 displayMessage.notValidChoice();
             }
