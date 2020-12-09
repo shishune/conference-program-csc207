@@ -151,13 +151,28 @@ public class OrganizerController extends UserController {
             if (speakerActions.findUserFromUsername(username) != null) {
                 return false;
             }
-
             String speakerID = this.speakerActions.createSpeaker(username, password,
                     new ArrayList<>(), new ArrayList<>(), false).getId();
 
             this.eventActions.addSpeakerToSchedule(speakerID);
         }
         return speaker;
+    }
+
+    /***
+     * create an organizer and add them to the speaker schedule
+     * @param username username of organizer
+     * @param password password of organizer
+     */
+    public boolean createOrganizer(String username, String password){
+        if(organizerActions != null) {
+            if (organizerActions.findUserFromUsername(username) != null) {
+                return false;
+            }
+            this.organizerActions.createOrganizer(username, password);
+            return true;
+        }
+        return false;
     }
 
     /***

@@ -674,8 +674,9 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else if (option.equals("2")) {
                 createAttendee();
                 loop = false;
-//            } else if (option.equals("3")) {
-//                loop = false;
+            } else if (option.equals("3")) {
+                createOrganizer();
+                loop = false;
             } else {
                 displayMessage.notValidChoice();
             }
@@ -779,6 +780,37 @@ public class OrganizerMainMenuController extends MainMenuController {
                     controller.createAttendee(newAttendeeUsername, newAttendeePassword, VIPStatus);
                     displayMessage.userCreated();
                     return newAttendeeUsername;
+                } else {
+                    displayMessage.invalidInput();
+                }
+            } else {
+                displayMessage.invalidInput();
+            }
+        }
+        return null;
+    }
+
+    /***
+     * create a new organizer
+     */
+    private String createOrganizer() {
+        displayMessage.createOrganizerMessage();
+        while (true){
+            displayMessage.userUsernamePrompt();
+            String userUsername = scan.nextLine();
+
+            if (userUsername.equalsIgnoreCase("x")) {
+                displayMessage.exit();
+                break;
+            } else if (controller.usernameExists(userUsername)) {
+                displayMessage.userExists();
+            } else if (controller != null && validInput(userUsername)) {
+                displayMessage.userPasswordPrompt();
+                String userPasswordPrompt = scan.nextLine();
+                if (validInput(userPasswordPrompt)) {
+                    controller.createOrganizer(userUsername, userPasswordPrompt);
+                    displayMessage.userCreated();
+                    return userUsername;
                 } else {
                     displayMessage.invalidInput();
                 }

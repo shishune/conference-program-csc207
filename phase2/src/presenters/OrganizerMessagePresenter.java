@@ -52,6 +52,12 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     public void createSpeakerMessage(){
         System.out.println("You have chosen to create a speaker");
     }
+    /**
+     * Tell user they are creating a speaker
+     */
+    public void createOrganizerMessage(){
+        System.out.println("You have chosen to create an organizer");
+    }
 
     /**
      * Tell user they are creating a speaker
@@ -84,6 +90,7 @@ public class OrganizerMessagePresenter extends MessagePresenter {
         String display = ""
                 + "\n[1] Create a speakers"
                 + "\n[2] Create an attendee."
+                + "\n[3] Create an organizer."
                 + "\nPlease select a menu item number or enter x to go back";
         System.out.println(display);
     }
