@@ -47,7 +47,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room,
                                        useCases.SpeakerActions speaker, useCases.EventActions event,
                                        useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
-                                       ConferenceActions conferenceActions){
+                                       ConferenceActions conferenceActions) {
 
         super(userID, organizerController, room, speaker, conferenceActions);
         this.userID = userID;
@@ -97,7 +97,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             if (option.equalsIgnoreCase("x")) {
                 displayEvent.promptEvent();
                 String eventName = scan.nextLine();
-                if(eventName.equalsIgnoreCase("x")){
+                if (eventName.equalsIgnoreCase("x")) {
                     return;
                 } else if (!event.getEventNames().containsKey(eventName)) {
                     displayEvent.noEvent();
@@ -137,17 +137,16 @@ public class OrganizerMainMenuController extends MainMenuController {
         String conferenceTitle = "";
 
 
-
         // Add this event to a conference
 
         // display conferences
         ArrayList<List<String>> conferences = conference.returnConferences();
-        if(conferences.size() == 0){
+        if (conferences.size() == 0) {
             displayConferences.noConferences();
             return;
         } else {
 
-            while(noConference) {
+            while (noConference) {
 //                List<List<String>> events = event.getEventsList();
 //                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
                 displayConferences.displayConferences(conferences);
@@ -155,7 +154,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayEvent.promptConference();
                 String conferenceInput = scan.nextLine();
                 //System.out.println("HERE!" + conference.returnTitleHashMap());
-                if (conferenceInput.equalsIgnoreCase("x")){
+                if (conferenceInput.equalsIgnoreCase("x")) {
                     return;
                 } else if (conference.conferenceExists(conferenceInput)) {
                     conferenceTitle = conferenceInput;
@@ -164,7 +163,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 } else {
                     displayEvent.invalidConference();
                     conferenceInput = scan.nextLine();
-                    if (conferenceInput.equalsIgnoreCase("x")){
+                    if (conferenceInput.equalsIgnoreCase("x")) {
                         return;
                     }
                 }
@@ -176,23 +175,22 @@ public class OrganizerMainMenuController extends MainMenuController {
             //displayEvent.promptTitle();
             displayEvent.promptTitle();
             title = scan.nextLine();
-            if (!validInput(title)){
-               displayMessage.invalidInput();
-               displayEvent.promptTitle();
+            if (!validInput(title)) {
+                displayMessage.invalidInput();
+                displayEvent.promptTitle();
             } else if (event.eventNameExists(title)) {
                 displayEvent.eventExists();
                 displayEvent.promptTitle();
             } else {
                 displayEvent.promptVIP();
                 String vip = scan.nextLine();
-                if (vip.equals("Y") || vip.equals("y")){
+                if (vip.equals("Y") || vip.equals("y")) {
                     isVip = true;
                     break;
                 }
-                if (vip.equals("N") || vip.equals("n")){
+                if (vip.equals("N") || vip.equals("n")) {
                     break;
-                }
-                else{
+                } else {
                     displayEvent.bad();
                 }
             }
@@ -284,17 +282,17 @@ public class OrganizerMainMenuController extends MainMenuController {
 
         int capacity = -1;
         boolean isInt = false;
-        while(!isInt){
+        while (!isInt) {
             displayMessage.eventCapacity();
             String capStr = scan.nextLine();
             try {
-                if(Integer.parseInt(capStr) > 0){
+                if (Integer.parseInt(capStr) > 0) {
                     capacity = Integer.parseInt(capStr);
                     isInt = true;
                 } else {
                     displayMessage.invalidInput();
                 }
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 displayMessage.invalidCapaity();
             }
         }
@@ -359,10 +357,11 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     private ArrayList<List<String>> getConferences() {
         HashMap<String, Conference> conferenceUsernameHash = new HashMap<>();
-        if (conference != null){
-         conferenceUsernameHash = conference.returnTitleHashMap();}
+        if (conference != null) {
+            conferenceUsernameHash = conference.returnTitleHashMap();
+        }
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
-        for(Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()){
+        for (Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()) {
             Conference conference = entry.getValue();
             List<String> stringRepConference = Arrays.asList(conference.getStringRep().split(","));
             //stringRepConference.add(conference.getTitle());
@@ -377,42 +376,39 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * displays all the rooms that match the requirements
      */
-    private void displayRooms(){
+    private void displayRooms() {
         ArrayList<String> rooms = new ArrayList<String>();
         displayEvent.promptNeedProjector();
         String needProjector = scan.nextLine();
-        if (needProjector.equalsIgnoreCase("y")){
+        if (needProjector.equalsIgnoreCase("y")) {
             rooms.addAll(room.getRoomsWithProjector());
-        }
-        else{
+        } else {
             rooms.addAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.promptNeedMicrophone();
         String needMicrophone = scan.nextLine();
-        if (needMicrophone.equalsIgnoreCase("y")){
+        if (needMicrophone.equalsIgnoreCase("y")) {
             rooms.retainAll(room.getRoomsWithMicrophone());
-        }
-        else{
+        } else {
             rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.promptNeedTables();
         String needTables = scan.nextLine();
-        if(needTables.equalsIgnoreCase("y")){
+        if (needTables.equalsIgnoreCase("y")) {
             rooms.retainAll(room.getRoomsWithTables());
-        }
-        else{
+        } else {
             rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.promptNeedWhiteboard();
         String needWhiteboard = scan.nextLine();
-        if(needWhiteboard.equalsIgnoreCase("y")){
+        if (needWhiteboard.equalsIgnoreCase("y")) {
             rooms.retainAll(room.getRoomsWithWhiteboard());
-        }
-        else{
+        } else {
             rooms.retainAll(room.returnRoomUsernameHashMap().keySet());
         }
         displayEvent.viewRooms(rooms);
     }
+
     /**
      * Responds to menu option 7
      */
@@ -488,8 +484,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                     individualEvents.add(speakerName);
                     e.add(individualEvents);
                 }
-            }
-            else{
+            } else {
                 break;
             }
         }
@@ -524,7 +519,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
         catcher = true;
-        while(catcher){
+        while (catcher) {
             displayEvent.promptStartTime();
             String t1 = scan.nextLine();
 //            while (!scan.hasNextInt()) {
@@ -532,28 +527,26 @@ public class OrganizerMainMenuController extends MainMenuController {
 //                    scan.next();
 //                }
 //            int t1 = scan.nextInt();
-            try{
-                if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9){
-                    if (Integer.parseInt(t1) < 10){
+            try {
+                if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9) {
+                    if (Integer.parseInt(t1) < 10) {
                         startTime = "0" + t1;
                     } else {
                         startTime = t1;
                     }
                     catcher = false;
-                }
-                else{
+                } else {
                     displayEvent.badTime();
                 }
-            }
-            catch (NumberFormatException ex){
-            //else{
+            } catch (NumberFormatException ex) {
+                //else{
                 displayEvent.badTime();
             }
         }
 
 
         catcher = true;
-        while(catcher){
+        while (catcher) {
             displayEvent.promptEndTime();
 //            while (!scan.hasNextInt()) {
 //                displayEvent.badTime();
@@ -561,17 +554,16 @@ public class OrganizerMainMenuController extends MainMenuController {
 //            }
             String t2 = scan.nextLine();
             //int t1 = scan.nextInt();
-            try{
+            try {
                 int start = Integer.parseInt(startTime);
-            if (Integer.parseInt(t2) < 17 && Integer.parseInt(t2) >= 9 && Integer.parseInt(t2) > start){
-                endTime = t2;
-                catcher = false;
-            }
-            else{
-                displayEvent.badTime();
-            }}
-            catch (NumberFormatException ex){
-            //else{
+                if (Integer.parseInt(t2) < 17 && Integer.parseInt(t2) >= 9 && Integer.parseInt(t2) > start) {
+                    endTime = t2;
+                    catcher = false;
+                } else {
+                    displayEvent.badTime();
+                }
+            } catch (NumberFormatException ex) {
+                //else{
                 displayEvent.badTime();
             }
         }
@@ -585,9 +577,9 @@ public class OrganizerMainMenuController extends MainMenuController {
     /**
      * helper function to reschedule event
      *
-     * @param eventTitle the event title
+     * @param eventTitle       the event title
      * @param newStartDateTime the new start date and time for the event to be changed to
-     * @param newEndDateTime the new end date and time for the event to be changed to
+     * @param newEndDateTime   the new end date and time for the event to be changed to
      */
     private void rescheduleEvent(String eventTitle, String newStartDateTime, String newEndDateTime) {
         if (controller != null) {
@@ -640,35 +632,36 @@ public class OrganizerMainMenuController extends MainMenuController {
         }
     }
 
-    public void addRoomProperties(String roomName){
+    public void addRoomProperties(String roomName) {
         displayEvent.promptHasProjector();
         String hasProjector = scan.nextLine();
-        if (hasProjector.equalsIgnoreCase("y")){
+        if (hasProjector.equalsIgnoreCase("y")) {
             room.setProjector(roomName);
         }
         displayEvent.promptHasMicrophone();
         String hasMicrophone = scan.nextLine();
-        if (hasMicrophone.equalsIgnoreCase("y")){
+        if (hasMicrophone.equalsIgnoreCase("y")) {
             room.setMicrophone(roomName);
         }
         displayEvent.promptHasTables();
         String hasTables = scan.nextLine();
-        if (hasTables.equalsIgnoreCase("y")){
+        if (hasTables.equalsIgnoreCase("y")) {
             room.setTables(roomName);
         }
         displayEvent.promptHasWhiteboard();
         String hasWhiteboard = scan.nextLine();
-        if (hasWhiteboard.equalsIgnoreCase("y")){
+        if (hasWhiteboard.equalsIgnoreCase("y")) {
             room.setWhiteboard(roomName);
         }
     }
+
     /***
      * Responds to menu option 10- create a new user
      */
     public void option10() {
         boolean loop = true;
         displayMessage.printUserMenu();
-        while(loop) {
+        while (loop) {
             String option = scan.nextLine();
             if (option.equalsIgnoreCase("x")) {
                 loop = false;
@@ -688,9 +681,9 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
 
-    public void option14(){
+    public void option14() {
         boolean loop = true;
-        while(loop) {
+        while (loop) {
             displayMessage.printStatsMenu();
             String option = scan.nextLine();
             if (option.equalsIgnoreCase("x")) {
@@ -703,7 +696,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.leastAttendedEvents(event.leastAttendedEvents());
             } else if (option.equals("4")) {
                 displayMessage.topFiveEvents(event.topFiveEvents());
-             } else if (option.equals("5")) {
+            } else if (option.equals("5")) {
                 displayMessage.bottomFiveEvents(event.bottomFiveEvents());
             } else if (option.equals("6")) {
                 displayMessage.averageNumberAttendees(event.averageNumberAttendees());
@@ -732,7 +725,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     private String createSpeaker() {
         displayMessage.createSpeakerMessage();
-        while (true){
+        while (true) {
             displayMessage.userUsernamePrompt();
             String speakerUsername = scan.nextLine();
 
@@ -799,7 +792,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     private String createOrganizer() {
         displayMessage.createOrganizerMessage();
-        while (true){
+        while (true) {
             displayMessage.userUsernamePrompt();
             String userUsername = scan.nextLine();
 
@@ -835,12 +828,12 @@ public class OrganizerMainMenuController extends MainMenuController {
         ArrayList<List<String>> conferences = conference.returnConferences();
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
-        while(!conference.conferenceExists(conferenceTitle)){
+        while (!conference.conferenceExists(conferenceTitle)) {
             conferenceTitle = scan.nextLine();
         }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             displayMessage.noEvents();
         } else {
 
@@ -849,7 +842,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 List<String> speakerList = new ArrayList<String>();
                 List<String> speakers = Arrays.asList(e.get(3).split(","));
                 for (String speakerID : speakers) {
-                    if (speakerID.equals("")){
+                    if (speakerID.equals("")) {
                         speakerList.add(displayMessage.noSpeakers());
                     } else {
                         speakerList.add(speaker.findUserFromId(speakerID).getUsername());
@@ -865,25 +858,25 @@ public class OrganizerMainMenuController extends MainMenuController {
     /***
      *  Responds to menu option 12 - Create Conference
      */
-    public void option12(){
+    public void option12() {
         displayConferences.promptCreateConferenceTitle();
         boolean noConference = true;
         ArrayList<List<String>> conferences = conference.returnConferences();
-            while(noConference) {
-                displayConferences.displayConferences(conferences);
-                displayEvent.promptConference();
-                String conferenceInput = scan.nextLine();
-                if (conferenceInput.equalsIgnoreCase("x")){
-                    return;
-                } else if (conference.conferenceExists(conferenceInput)) {
-                    noConference = false;
+        while (noConference) {
+            displayConferences.displayConferences(conferences);
+            displayEvent.promptConference();
+            String conferenceInput = scan.nextLine();
+            if (conferenceInput.equalsIgnoreCase("x")) {
+                return;
+            } else if (conference.conferenceExists(conferenceInput)) {
+                noConference = false;
 
-                } else {
-                    ArrayList<String> events =  new ArrayList<>();
-                    conference.createConference(conferenceInput, events);
-                    displayConferences.successCreateConference();
-                    break;
-                }
+            } else {
+                ArrayList<String> events = new ArrayList<>();
+                conference.createConference(conferenceInput, events);
+                displayConferences.successCreateConference();
+                break;
+            }
         }
 
 
@@ -891,7 +884,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     public void option15() {
         // displayConferences.printOrganizerConferenceMenu();
-       //  String option = scan.nextLine();
+        //  String option = scan.nextLine();
         controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
         menuController.createConference();
 
@@ -903,6 +896,21 @@ public class OrganizerMainMenuController extends MainMenuController {
 //        }
     }
 
+    public void optionChangeCapacity() {
+        displayEvent.changeEventCapacity();
+        String eventName = scan.nextLine();
 
+        if (event.events.get(eventName) != null) {
 
+            if (controller.returnUserIDHashMap().get(userID).getEventList().contains(event.events.get(eventName).getId())) {
+                displayEvent.newCapacity(eventName);
+                int newCapacity = scan.nextInt();
+                event.events.get(eventName).setCapacity(newCapacity);
+            }
+            else{
+                displayMessage.noAccess();
+            }
+            displayEvent.failedNoSuchEvent();
+        }
+    }
 }
