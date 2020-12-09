@@ -12,6 +12,7 @@ public class Event {
     private String endDateTime; //  yyyy-mm-dd hh  (24 h)
     private List<String> attendees;
     private String roomID;
+    private String conference;
     public int capacity;
     private boolean isVIP;
 
@@ -25,11 +26,12 @@ public class Event {
      * @param speakers the list of strings of the ids of each speaker of this event
      * @param attendees the list of people whom this attendee can event
      * @param roomID the string of the ID of the room of this event
+     * @param conference the string of name pf the conference
      * */
 
 
     public Event(String eventID, String title, List<String> speakers, String startDateTime, String endDateTime,
-                 List<String> attendees, String roomID, int capacity, boolean isVIP){
+                 List<String> attendees, String roomID, String conference, int capacity, boolean isVIP){
         this.eventID = eventID;
         this.title = title;
         this.speakers = speakers;
@@ -37,6 +39,7 @@ public class Event {
         this.endDateTime = endDateTime;
         this.attendees = attendees;
         this.roomID = roomID;
+        this.conference = conference;
         this.capacity = capacity;
         this.isVIP = isVIP;
 

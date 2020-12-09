@@ -841,30 +841,21 @@ public class OrganizerMainMenuController extends MainMenuController {
     /***
      *  Responds to menu option 12 - Create Conference/Add events to conferences
      */
-
     public void option12(){
         displayConferences.promptCreateConferenceTitle();
-        String title = scan.nextLine();;
-        boolean isVip = false;
         boolean noConference = true;
-        boolean titleRun = false;
-        String conferenceTitle = "";
-
         ArrayList<List<String>> conferences = conference.returnConferences();
         if(conferences.size() == 0){
             displayConferences.noConferences();
-            return;
         } else {
 
             while(noConference) {
-//
                 displayConferences.displayConferences(conferences);
                 displayEvent.promptConference();
                 String conferenceInput = scan.nextLine();
                 if (conferenceInput.equalsIgnoreCase("x")){
                     return;
                 } else if (conference.conferenceExists(conferenceInput)) {
-                    conferenceTitle = conferenceInput;
                     noConference = false;
 
                 } else {
