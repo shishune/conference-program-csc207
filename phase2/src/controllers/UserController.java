@@ -26,9 +26,11 @@ public class UserController {
     private useCases.MessageActions messageActions; // = super.getMessages();
     private useCases.EventActions eventActions;  //= super.getEvents();
     private useCases.RoomActions roomActions; // = super.getRooms();
+
     private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
     private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
     private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+
     private useCases.ConferenceActions conferenceActions; // = super.getConferences()
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
     private HashMap<String, User> userIdHashmap = new HashMap<String, User>();
@@ -331,11 +333,13 @@ public class UserController {
             String dateTime = eventActions.getEvent(event).getDateTime();
             String roomId = eventActions.getEvent(event).getRoomID();
             List<String> speakers = eventActions.getEvent(event).getSpeakers();
+            String conference = eventActions.getEvent(event).getConference();
             List<String> info = new ArrayList<String>();
             info.add(title);
             info.add(dateTime);
             info.add(roomId);
             info.addAll(speakers);
+            info.add(conference);
             scheduleList.add(info);
         }
         return scheduleList;

@@ -48,6 +48,7 @@ public class LoadUp implements LoadUpIGateway {
            else {
            return 0;
            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

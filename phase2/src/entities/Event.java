@@ -70,6 +70,10 @@ public class Event {
                 roomID + "," + conference  + "," + capacity + "," + isVIP;
     }
 
+    /**
+     * return conference
+     */
+    public String getConference(){return this.conference;}
 
     /**
      * Return eventID

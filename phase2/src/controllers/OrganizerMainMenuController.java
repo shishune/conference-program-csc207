@@ -488,6 +488,9 @@ public class OrganizerMainMenuController extends MainMenuController {
                     e.add(individualEvents);
                 }
             }
+            else{
+                break;
+            }
         }
         displayEvent.displayEvents(e);
     }

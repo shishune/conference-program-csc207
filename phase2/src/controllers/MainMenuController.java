@@ -163,13 +163,12 @@ public abstract class MainMenuController extends AccountController {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
                 List<String> speakerList = new ArrayList<String>();
-                for (String speaker : e.get(3).split(",")) {
-                    if (speaker.equals("")){
-                        speakerList.add(displayMessage.noSpeakers());
-                    } else {
-                        speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
-                    }
-
+                    for (String speaker : e.get(3).split(",")) {
+                        if (speaker.equals("")){
+                            speakerList.add(displayMessage.noSpeakers());
+                        } else {
+                            speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
+                        }
                 }
                 e.set(3, String.valueOf(speakerList));
                 //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());

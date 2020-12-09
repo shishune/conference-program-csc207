@@ -26,10 +26,11 @@ public class AttendeeMainMenuController extends MainMenuController {
 
     /**
      * Instantiates this class referring to super class
+     *
      * @param userID             the user ID
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conferenceActions){
+    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conferenceActions) {
         super(userID, attendeeController, room, speaker, conferenceActions);
         this.userID = userID;
         this.controller = attendeeController;
@@ -43,7 +44,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * Responds to menu option 6- sign up for event
      */
-    public void option6(){
+    public void option6() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         String conferenceTitle = "";
         // TODO print list of users conferences
@@ -51,19 +52,18 @@ public class AttendeeMainMenuController extends MainMenuController {
         ArrayList<List<String>> conferences = conferenceActions.returnConferences();
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
-        while(!conferenceActions.conferenceExists(conferenceTitle)){
+        while (!conferenceActions.conferenceExists(conferenceTitle)) {
             conferenceTitle = scan.nextLine();
         }
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             displayMessage.noEvents();
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                if (e.get(3).equals("")){
+                if (e.get(3).equals("")) {
                     e.set(3, "There are no speakers at the moment for this event.");
-                }
-                else{
+                } else {
                     e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
                 }
 
@@ -74,39 +74,32 @@ public class AttendeeMainMenuController extends MainMenuController {
             boolean check = controller.checkEvent(event);
             if (!check) {
                 displayEvent.failedNoSuchEvent();
-            }
-            else {
+            } else {
                 displayEvent.promptAddOrSaveEvent();
                 String option = scan.nextLine();
-                if (option.equalsIgnoreCase("A")){
+                if (option.equalsIgnoreCase("A")) {
                     List<Boolean> checks = controller.signupEvent(event, username);
-                    if(checks.size()==1){
-                        if (checks.get(0)){
+                    if (checks.size() == 1) {
+                        if (checks.get(0)) {
                             displayEvent.successAddEvent();
                         }
-                    }
-                    else{
-                        if (!checks.get(1)){
+                    } else {
+                        if (!checks.get(1)) {
                             displayEvent.failedRoomFull();
-                        }
-                        else if (checks.get(2)){
+                        } else if (checks.get(2)) {
                             displayEvent.failedAttendeeTimeConflict();
-                        }
-                        else {
+                        } else {
                             displayEvent.failed();
                         }
                     }
-                }
-                else if(option.equalsIgnoreCase("S")){
+                } else if (option.equalsIgnoreCase("S")) {
                     boolean check1 = controller.saveEvent(event, username);
-                    if (check1){
+                    if (check1) {
                         displayEvent.successSaveEvent();
-                    }
-                    else {
+                    } else {
                         displayEvent.failedSaveEvent();
                     }
-                }
-                else {
+                } else {
                     displayEvent.failed();
                 }
             }
@@ -116,18 +109,17 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * view saved events
      */
-    public void option10(){
+    public void option10() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewSavedEvents(username);
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             displayMessage.noSavedEvents();
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                if (e.get(3).equals("")){
+                if (e.get(3).equals("")) {
                     e.set(3, "There are no speakers at the moment for this event.");
-                }
-                else{
+                } else {
                     e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
                 }
             }
@@ -135,19 +127,30 @@ public class AttendeeMainMenuController extends MainMenuController {
         }
     }
 
-    public void option11(){
+    public void option11() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewVIPEvents(username);
+        ArrayList<String> speakerList = new ArrayList<>();
 
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             displayMessage.noEvents();
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
-            }
-            displayEvent.displayEvents(eventsList);
-        }
 
-}
+                for (String speakers : e.get(3).split(",")) {
+                    if (speakers.equals("")) {
+                        speakerList.add(displayMessage.noSpeakers());
+                    } else {
+                        speakerList.add(speaker.findUserFromId(speakers).getUsername());
+                    }
+
+                }
+                e.set(3, String.valueOf(speakerList));
+
+                displayEvent.displayEvents(eventsList);
+            }
+
+        }
+    }
 }
