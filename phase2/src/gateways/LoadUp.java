@@ -37,17 +37,16 @@ public class LoadUp implements LoadUpIGateway {
      * This method returns all object ids in a list from entities.csv
      * @return object ids in a list
      */
-    public int getIds(){
+    public int getIds() {
         try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/entities.csv"))) {
             String line = null;
-           if ((line = br.readLine()) != null) {
+            if ((line = br.readLine()) != null) {
                 ids.add(line);
                 int a = Integer.parseInt(line);
                 return a;
-           }
-           else {
-           return 0;
-           }
+            } else {
+                return 0;
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,13 +61,13 @@ public class LoadUp implements LoadUpIGateway {
     public int getObjectId() { return getIds(); }
 
 
-    //    /**
-//     * Getter for the number of the object IDs
-//     * @return objectId in a list
-//     */
-//    public int getNumOfIds() {
-//        return ids.size();
-//    }
+    /**
+     * Getter for the number of the object IDs
+     * @return objectId in a list
+     */
+    public int getNumOfIds() {
+        return ids.size();
+    }
 
 
     /**
@@ -189,7 +188,6 @@ public class LoadUp implements LoadUpIGateway {
      * @return organizers in a list
      */
     public ArrayList<String> getAllOrganizers() {
-        // gets list of messages from messages.csv and sets it to <messages>
         try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/organizers.csv"))) {
             String line = null;
             while((line = br.readLine()) != null) {
