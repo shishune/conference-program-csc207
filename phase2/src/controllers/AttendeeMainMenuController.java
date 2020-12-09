@@ -57,8 +57,9 @@ public class AttendeeMainMenuController extends MainMenuController {
         }
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
-        if (controller.returnUserUsernameHashMap().get(username).getIsVIP()){
+        if (controller.isVIP(username)){
             List<List<String>> vipEventsList = controller.viewVIPEvents(username, conferenceTitle);
+            signUpVIP(username, vipEventsList);
         }
 
         if (eventsList.size() == 0) {
@@ -113,7 +114,55 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * helper to sign up to VIP events
      */
-    public void signUpVIP(){
+    public void signUpVIP(String username, List<List<String>> vipEventsList){
+        if (vipEventsList.size() == 0) {
+            displayMessage.noEvents();
+        } else {
+            for (List<String> e : vipEventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                if (e.get(3).equals("")) {
+                    e.set(3, "There are no speakers at the moment for this event.");
+                } else {
+                    e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+                }
+
+            }
+            displayEvent.displayEvents(vipEventsList);
+            displayEvent.promptSelectEvent();
+            String event = scan.nextLine();
+            boolean check = controller.checkEvent(event);
+            if (!check) {
+                displayEvent.failedNoSuchEvent();
+            } else {
+                displayEvent.promptAddOrSaveEvent();
+                String option = scan.nextLine();
+                if (option.equalsIgnoreCase("A")) {
+                    List<Boolean> checks = controller.signupEvent(event, username);
+                    if (checks.size() == 1) {
+                        if (checks.get(0)) {
+                            displayEvent.successAddEvent();
+                        }
+                    } else {
+                        if (!checks.get(1)) {
+                            displayEvent.failedRoomFull();
+                        } else if (checks.get(2)) {
+                            displayEvent.failedAttendeeTimeConflict();
+                        } else {
+                            displayEvent.failed();
+                        }
+                    }
+                } else if (option.equalsIgnoreCase("S")) {
+                    boolean check1 = controller.saveEvent(event, username);
+                    if (check1) {
+                        displayEvent.successSaveEvent();
+                    } else {
+                        displayEvent.failedSaveEvent();
+                    }
+                } else {
+                    displayEvent.failed();
+                }
+            }
+        }
 
     }
 

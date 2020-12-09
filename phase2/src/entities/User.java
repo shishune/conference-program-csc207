@@ -22,7 +22,7 @@ public abstract class User{
     protected boolean isOrganizer;
     protected String userId;
     protected Date logOutTime;
-    protected boolean isVIP;
+//    protected boolean isVIP;
 
     /**
      * instantiates a new User object with an id attribute
@@ -36,7 +36,7 @@ public abstract class User{
      */
 
     public User (String userId, String username, String password, List<String> contactsList, List<String> eventList,
-                 boolean isLogin, boolean isOrganizer, boolean isVIP){
+                 boolean isLogin, boolean isOrganizer/*, boolean isVIP*/){
 
         this.username = username;
         this.isLogin = isLogin;
@@ -45,14 +45,14 @@ public abstract class User{
         this.eventList = eventList;
         this.userId = userId;
         this.isOrganizer = isOrganizer;
-        this.isVIP = isVIP;
+//        this.isVIP = isVIP;
     }
-    /**
-     * returns isVIP
-     */
-    public boolean getIsVIP(){
-        return isVIP;
-    }
+//    /**
+//     * returns isVIP
+//     */
+//    public boolean getIsVIP(){
+//        return isVIP;
+//    }
 
     /**
      * Getter for the login status of this user. (May be needed in Phase 2)

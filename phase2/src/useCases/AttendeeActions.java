@@ -93,7 +93,8 @@ public class AttendeeActions extends UserAccountActions {
     public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();
-        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false, isVIP);
+        Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList,
+                isLogin, false, isVIP);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
         attendeesHashMap.put(userId, userAttendee);
@@ -344,7 +345,8 @@ public class AttendeeActions extends UserAccountActions {
                     }
                 }
                 Attendee loadedAttendee = new Attendee(attendeeInfo[0], attendeeInfo[1], attendeeInfo[2], contactList,
-                        eventList, savedEventList, Boolean.parseBoolean(attendeeInfo[6]), Boolean.parseBoolean(attendeeInfo[7]), Boolean.parseBoolean(attendeeInfo[8]));
+                        eventList, savedEventList, Boolean.parseBoolean(attendeeInfo[6]),
+                        Boolean.parseBoolean(attendeeInfo[7]), Boolean.parseBoolean(attendeeInfo[8]));
                 attendeesHashMap.put(attendeeInfo[0], loadedAttendee);
                 attendeeUsernameHashMap.put(attendeeInfo[1], loadedAttendee);
             }

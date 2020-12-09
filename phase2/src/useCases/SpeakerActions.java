@@ -45,7 +45,7 @@ public class SpeakerActions extends UserAccountActions {
     public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "S" + generateId.generateId();
-        Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false, false);
+        Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false/*, false*/);
         loadSpeaker(userSpeaker);
         return userSpeaker;
     }
@@ -147,9 +147,9 @@ public class SpeakerActions extends UserAccountActions {
                 List<String> loadEventsList = Arrays.asList(speakerInfo[4].split("%%"));
                 boolean loadIsLogin = Boolean.parseBoolean(speakerInfo[5]);
                 boolean loadIsOrganizer = Boolean.parseBoolean(speakerInfo[6]);
-                boolean loadIsVIP = Boolean.parseBoolean(speakerInfo[7]);
+                /*boolean loadIsVIP = Boolean.parseBoolean(speakerInfo[7]);*/
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList,
-                        loadEventsList, loadIsLogin, loadIsOrganizer, loadIsVIP);
+                        loadEventsList, loadIsLogin, loadIsOrganizer/*, loadIsVIP*/);
                 loadSpeaker(loadedSpeaker);
             }
         }
@@ -375,8 +375,7 @@ public class SpeakerActions extends UserAccountActions {
                     }
                 }
                 Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
-                        eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6]),
-                        Boolean.parseBoolean(speakerInfo[7]));
+                        eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6])/*, false*/);
                 loadSpeaker(loadedSpeaker);
             }
 

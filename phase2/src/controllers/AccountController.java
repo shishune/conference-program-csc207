@@ -74,7 +74,7 @@ public class AccountController {
                 if (type.equals("A")) { //indicates attendee
 
                     String user = attendeeActions.returnUsernameHashMap().get(username).getId();
-                    boolean isVIP = attendeeActions.returnUsernameHashMap().get(username).getIsVIP();
+                    boolean isVIP = attendeeActions.findUserFromUsername(username).getIsVIP();
 
                     if (isVIP){
                         accountDisplay = new presenters.VIPAttendeeAccountPresenter();

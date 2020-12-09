@@ -16,8 +16,8 @@ public class Organizer extends User {
      * @param isOrganizer boolean whether this organizer is an organizer
      * */
     public Organizer (String organizerId, String username, String password, List<String> contactsList, List<String>
-            eventList, boolean isLogin, boolean isOrganizer, boolean isVIP){
-        super(organizerId, username, password, contactsList, eventList, isLogin, isOrganizer, isVIP); //added eventList to constructor (Jiessie) added userId to constructor
+            eventList, boolean isLogin, boolean isOrganizer/*, boolean isVIP*/){
+        super(organizerId, username, password, contactsList, eventList, isLogin, isOrganizer/*, isVIP*/); //added eventList to constructor (Jiessie) added userId to constructor
     }
 
     /**

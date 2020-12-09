@@ -25,7 +25,8 @@ public class AttendeeController extends UserController {
      * @param speaker
      */
     public AttendeeController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message,
-                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
+                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer,
+                              useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
         super(events, rooms, message, 'a', attendee, organizer, speaker, conference);
         this.attendee = attendee;
         this.e = events;
@@ -91,6 +92,9 @@ public class AttendeeController extends UserController {
     /**
      * Shows the vip events to a vip attendee
      */
+    public boolean isVIP(String user){
+        return attendee.findUserFromUsername(user).getIsVIP();
+    }
 
 //    public List<List<String>> viewVIPEvents(String user){
 //        List<List<String>> vipEventList = new ArrayList<List<String>>();

@@ -21,8 +21,8 @@ public class Speaker extends User {
      * @param isOrganizer boolean whether this speaker is an organizer
      * */
     public Speaker(String speakerId,String username, String password, List<String> contactsList, List<String>
-            eventList, boolean isLogin, boolean isOrganizer, boolean isVIP){
-        super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer, isVIP);
+            eventList, boolean isLogin, boolean isOrganizer/*, boolean isVIP*/){
+        super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer/*, isVIP*/);
     }
 
 
