@@ -118,7 +118,10 @@ public class SpeakerActions extends UserAccountActions {
      * @return ID of the speaker from the hashmap
      */
     public String getIDFromName(String username) {
-        return speakerUsername.get(username).getId();
+        if(username != null) {
+            return speakerUsername.get(username).getId();
+        }
+        return "";
     }
 
 
