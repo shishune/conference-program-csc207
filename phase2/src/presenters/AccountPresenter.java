@@ -111,7 +111,8 @@ public class AccountPresenter {
      * Prompt to return to menu
      * */
     public void promptReturn(){
-        System.out.println("Note: You must log out of your account in order to save new information" +
+        System.out.println("Enter any key to return to the main menu." +
+                "\nNote: You must log out of your account in order to save new information" +
                 "\nThis is accessible in the main menu.");
     }
 

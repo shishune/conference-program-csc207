@@ -152,21 +152,26 @@ public class AccountController {
                         menuController.option9();}
                     else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
                         menuController.option10();
-                    } else if (menuOption.equals("11") && (type.equals("O")) || type.equals("A")) {
+                    } else if (menuOption.equals("11") && (type.equals("O") || type.equals("A"))) {
                         menuController.option11();
-                    } else if (menuOption.equals("12") && (type.equals("O"))) {
+                    } else if (menuOption.equals("12") && (type.equals("O") || type.equals("A"))) {
+                        menuController.option12();
+                    }  else if (menuOption.equals("13")) {
                         // add conference (organizers only)
                         //TODO: change to appropriate name after everyone is done adding options option12(?)
                         menuController.option15();
-                    }  else if (menuOption.equals("13")) {
-                        // view conferences (general)
-                        //TODO: change to appropriate name after everyone is done adding options option13(?)
-                        menuController.option16(); // display conferences
                     }else if (menuOption.equals("14")&& (type.equals("O"))) {
                         // view conferences (general)
                         //TODO: change to appropriate name after everyone is done adding options option13(?)
+                        menuController.option16(); // display conferences
+                    }
+                    else if (menuOption.equals("15")&&(type.equals("O"))){
+                        // view conferences (general)
+                        //TODO: change to appropriate name after everyone is done adding options option13(?)
                         menuController.option14(); // display conferences
-                    } else {
+                    }
+
+                    else {
                         accountDisplay.printMenuError();
                     }
                     accountDisplay.promptReturn();

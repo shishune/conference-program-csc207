@@ -78,10 +78,16 @@ public class ConferencePresenter {
     }
 
     /**
-     * not correct conference title
+     * conference does not exist or attendee not in it
+     */
+    public void invalidTitle(){
+        System.out.println("This conference does not exist or you are not participating in this conference. Please enter another title or 'x' to return to menu to sign up for one.");
+    }
+    /**
+     * failed sign up for conference.
      */
     public void failedSignUp(){
-        System.out.println("This conference does not exist or you are not participating in this. Please enter another title.");
+        System.out.println("This conference does not exist.");
     }
 
     /**
@@ -112,17 +118,20 @@ public class ConferencePresenter {
      * displays conferences attended by attendees.
      * @param conferencesList the list of conferences to present.
      */
-    public void displayAttendedConferences(ArrayList<List<String>> conferencesList){
+    public boolean displayAttendedConferences(ArrayList<List<String>> conferencesList){
         if(conferencesList != null){
             if(conferencesList.isEmpty()){
                 System.out.println("There are no conferences in existence, or you have not signed up for any conferences. You may sign up for one by returning to the menu.");
+                return false;
             } else {
                 System.out.println("Conferences:");
                 for (List<String> conference : conferencesList) {
                     System.out.println(conference.get(0) + "\n");
                 }
+                return true;
             }
         }
+        return false;
     }
 }
 
