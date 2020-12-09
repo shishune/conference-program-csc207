@@ -62,6 +62,7 @@ public class LogOut {
                 messageActions.getMessengerIds(), roomActions.getRoomsIds(), eventActions.getEventIds(),
                 speakerActions.getSpeakerIds(), conferenceActions.getConferenceIds());
 
+
         logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);
     }
 

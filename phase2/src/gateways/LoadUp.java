@@ -50,6 +50,7 @@ public class LoadUp implements LoadUpIGateway {
         return "0";
     }
 
+
     /**
      * Getter for the last object Id value made using IGateway
      * */
