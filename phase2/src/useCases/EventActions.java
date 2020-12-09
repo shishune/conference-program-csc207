@@ -34,7 +34,7 @@ public class EventActions  {
         loadAllEvents(loader);
         addLoadedToHashMap();
         this.loader = loader;
-        roomSchedule.put("Toronto", new ArrayList<String>());
+       // roomSchedule.put("Toronto", new ArrayList<String>());
     }
 
 
@@ -157,7 +157,7 @@ public class EventActions  {
                 List<String> eventAttendees = new ArrayList<>(Arrays.asList(eventAttributes[5].split("%%")));
                 List<String> eventSpeaker = new ArrayList<>(Arrays.asList(eventAttributes[2].split("%%")));
                 loadEvent(eventAttributes[0], eventAttributes[1], eventSpeaker, eventAttributes[3], eventAttributes[4],
-                        eventAttendees, eventAttributes[6], eventAttributes[6], Integer.parseInt(eventAttributes[8]), Boolean.parseBoolean(eventAttributes[9]));
+                        eventAttendees, eventAttributes[6], eventAttributes[7], Integer.parseInt(eventAttributes[8]), Boolean.parseBoolean(eventAttributes[9]));
             }
         }
     }
