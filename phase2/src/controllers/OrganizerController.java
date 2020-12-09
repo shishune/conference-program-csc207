@@ -70,7 +70,7 @@ public class OrganizerController extends UserController {
         int roomCap = roomActions.findRoomFromId(roomID).getCapacity();
         Event event;
         if (roomCap >= capacity) {
-            event = this.eventActions.createEvent(title, speakerIds, startDateTime, endDateTime, attendees, roomID, capacity, isVip);
+            event = this.eventActions.createEvent(title, speakerIds, startDateTime, endDateTime, attendees, roomID, conferenceTitle, capacity, isVip);
             checks.add(true);
             if(event != null){
                 if (speakerIds.size() != 0) {
