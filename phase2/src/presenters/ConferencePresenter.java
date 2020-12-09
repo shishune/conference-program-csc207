@@ -67,7 +67,28 @@ public class ConferencePresenter {
 //        }
 //    }
     public void promptConference(){
-        System.out.println("Please enter the conference you would like to see the events of");
+        System.out.println("Please enter the conference (title) you would like to see the events of");
+    }
+
+    /**
+     * prompt for conference sign-up
+     */
+    public void promptSignUp(){
+        System.out.println("Please enter the conference (title) you would like to sign up for.");
+    }
+
+    /**
+     * not correct conference title
+     */
+    public void failedSignUp(){
+        System.out.println("This conference does not exist or you are not participating in this. Please enter another title.");
+    }
+
+    /**
+     * successful sign up for conference
+     */
+    public void successSignUp(){
+        System.out.println("You have successfully signed up for this conference.");
     }
 
     /**
