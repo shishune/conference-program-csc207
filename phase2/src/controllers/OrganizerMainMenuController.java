@@ -11,6 +11,7 @@ import useCases.RoomActions;
 import useCases.AttendeeActions;
 import useCases.EventActions;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -862,16 +863,12 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     /***
-     *  Responds to menu option 12 - Create Conference/Add events to conferences
+     *  Responds to menu option 12 - Create Conference
      */
     public void option12(){
         displayConferences.promptCreateConferenceTitle();
         boolean noConference = true;
         ArrayList<List<String>> conferences = conference.returnConferences();
-        if(conferences.size() == 0){
-            displayConferences.noConferences();
-        } else {
-
             while(noConference) {
                 displayConferences.displayConferences(conferences);
                 displayEvent.promptConference();
@@ -882,13 +879,11 @@ public class OrganizerMainMenuController extends MainMenuController {
                     noConference = false;
 
                 } else {
-                    displayEvent.invalidConference();
-                    conferenceInput = scan.nextLine();
-                    if (conferenceInput.equalsIgnoreCase("x")){
-                        return;
-                    }
+                    ArrayList<String> events =  new ArrayList<>();
+                    conference.createConference(conferenceInput, events);
+                    displayConferences.successCreateConference();
+                    break;
                 }
-            }
         }
 
 

@@ -50,6 +50,7 @@ public class AttendeeMainMenuController extends MainMenuController {
         // TODO have user choose which conference events they want to see
         ArrayList<List<String>> conferences = conferenceActions.returnAttendedConferences(username);
         boolean exists = displayConference.displayAttendedConferences(conferences);
+
         if (exists) {
             displayConference.promptConference();
             String conferenceTitle = scan.nextLine();
@@ -60,6 +61,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                     break;
                 }
             }
+
             if (!conferenceTitle.equalsIgnoreCase("x")) {
                 List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
