@@ -38,6 +38,20 @@ public class ConferenceActions {
         return false;
     }
 
+    /**
+     *
+     * @param conferenceTitle the title of conference
+     * @param attendee the username of attendee
+     * @return true if and only if attendee was added to conference
+     */
+    public boolean addAttendee(String conferenceTitle, String attendee){
+        if (conferenceTitlesHash != null || !conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendee)){
+            conferenceTitlesHash.get(conferenceTitle).addAttendee(attendee);
+            return true;
+        }
+        return false;
+    }
+
     /***
      * set speaker of an event
      * @param conferenceID if of event
@@ -47,6 +61,10 @@ public class ConferenceActions {
         this.conferences.get(conferenceID).setSpeaker(speakerID);
     }
 
+    /**
+     * returns the list of all conferences (title and events)
+     * @return returns the list of all conferences (title and events)
+     */
     public ArrayList<List<String>> returnConferences() {
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
         for (Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()) {
@@ -61,6 +79,32 @@ public class ConferenceActions {
             }
             stringRepConference.add(events);
             stringRepConferences.add(stringRepConference);
+        }
+        return stringRepConferences;
+    }
+
+    /**
+     * returns the list of all conferences (title and events) that attendee is participating in
+     * @param attendee the attendee in question
+     * @return returns the list of all conferences (title and events) that attendee is participating in
+     */
+    public ArrayList<List<String>> returnAttendedConferences(String attendee){
+        ArrayList<List<String>> stringRepConferences = new ArrayList<>();
+        for (Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()) {
+            List<String> stringRepConference = new ArrayList<String>();
+            Conference conference = entry.getValue();
+            if (conference.getAttendees().contains(attendee)){
+                stringRepConference.add(conference.getTitle());
+                //            stringRepConference.add(conference.getStartDateTime());
+                //            stringRepConference.add(conference.getEndDateTime());
+                String events = "";
+                for (String eventID : conference.getEvents()) {
+                    events += eventID + ",";
+                }
+                stringRepConference.add(events);
+                stringRepConferences.add(stringRepConference);
+            }
+
         }
         return stringRepConferences;
     }

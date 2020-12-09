@@ -23,6 +23,8 @@ public class AttendeeAccountPresenter extends AccountPresenter {
                 + "\n[8] View all events not in your schedule"
                 + "\n[9] View your schedule of events"
                 + "\n[10] View your saved events"
+                + "\n[11] View VIP events"
+                + "\n[12] Sign up for conference"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

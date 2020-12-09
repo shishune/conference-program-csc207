@@ -68,10 +68,18 @@ public class Conference {
         return this.events;
     }
 
+    /**
+     * return list of attendees participating in this conference
+     * @return list of attendees participating in this conference
+     */
     public List<String> getAttendees(){
         return this.attendees;
     }
 
+    /**
+     * return list of speakers participating in this conference
+     * @return list of speakers participating in this conference
+     */
     public List<String> getSpeakers(){
         return this.speakers;
     }

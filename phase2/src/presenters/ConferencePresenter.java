@@ -70,10 +70,31 @@ public class ConferencePresenter {
         System.out.println("Please enter the conference you would like to see the events of");
     }
 
+    /**
+     * displays all conferences for any users.
+     * @param conferencesList the list of conferences to present.
+     */
     public void displayConferences(ArrayList<List<String>> conferencesList) {
         if(conferencesList != null){
             if(conferencesList.isEmpty()){
                 System.out.println("There are no conferences in existence.");
+            } else {
+                System.out.println("Conferences:");
+                for (List<String> conference : conferencesList) {
+                    System.out.println(conference.get(0) + "\n");
+                }
+            }
+        }
+    }
+
+    /**
+     * displays conferences attended by attendees.
+     * @param conferencesList the list of conferences to present.
+     */
+    public void displayAttendedConferences(ArrayList<List<String>> conferencesList){
+        if(conferencesList != null){
+            if(conferencesList.isEmpty()){
+                System.out.println("There are no conferences in existence, or you have not signed up for any conferences. You may sign up for one by returning to the menu.");
             } else {
                 System.out.println("Conferences:");
                 for (List<String> conference : conferencesList) {
