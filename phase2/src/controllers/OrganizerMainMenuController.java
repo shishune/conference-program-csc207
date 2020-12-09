@@ -858,6 +858,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     /***
      *  Responds to menu option 12 - Create Conference
      */
+    /*
     public void option12() {
         displayConferences.promptCreateConferenceTitle();
         boolean noConference = true;
@@ -881,8 +882,8 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
     }
-
-    public void option15() {
+    */
+    public void option12() {
         // displayConferences.printOrganizerConferenceMenu();
         //  String option = scan.nextLine();
         controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
