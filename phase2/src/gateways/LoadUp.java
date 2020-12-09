@@ -74,6 +74,43 @@ public class LoadUp implements LoadUpIGateway {
     }
 
 
+//    /**
+//     * This method returns all object ids in a list from entities.csv
+//     * @return object ids in a list
+//     */
+//    public int getIds() {
+//        try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/entities.csv"))) {
+//            String line = null;
+//            if ((line = br.readLine()) != null) {
+//                ids.add(line);
+//                int a = Integer.parseInt(line);
+//                return a;
+//            } else {
+//                return 0;
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return 0;
+//    }
+//
+//
+//    /**
+//     * Getter for the last object Id value made using IGateway
+//     * */
+//    public int getObjectId() { return getIds(); }
+//
+//
+//    /**
+//     * Getter for the number of the object IDs
+//     * @return objectId in a list
+//     */
+//    public int getNumOfIds() {
+//        return ids.size();
+//    }
+
+
     /**
      * adds to the list of ids
      * @param id the id of an entity
