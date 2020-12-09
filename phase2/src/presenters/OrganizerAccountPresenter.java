@@ -25,6 +25,7 @@ public class OrganizerAccountPresenter extends AccountPresenter {
                 + "\n[10] Add user"
                 + "\n[11] View all created events"
                 + "\n[12] Add a conference"
+                + "\n[13] Change event capacity"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

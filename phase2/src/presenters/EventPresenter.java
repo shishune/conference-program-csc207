@@ -197,6 +197,9 @@ public class EventPresenter {
      * */
     public void VIPStatusPrompt(){System.out.println("Please input 'Y' if the attendee is a VIP, otherwise press any other key");}
 
+    public void changeEventCapacity() {System.out.println("Please enter the name you would like to change the capacity of"); }
+
+    public void newCapacity(String eventName) {System.out.println("Please enter the new capacity for" + eventName);}
     /**
      * Telling user they are not a VIP
      */
