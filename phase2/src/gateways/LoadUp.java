@@ -30,6 +30,8 @@ public class LoadUp implements LoadUpIGateway {
         getRooms();
         getSpeakers();
         getIds();
+        getAllAttendees();
+        getAllOrganizers();
         getConferences();
         getAllAttendees();
         getAllOrganizers();

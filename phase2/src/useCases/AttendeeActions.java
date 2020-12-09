@@ -63,7 +63,8 @@ public class AttendeeActions extends UserAccountActions {
      * @param isVIP the VIP status of the attendee
      * This will create a new Attendee (Will need the overloaded function for phase 2)
      * */
-    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
+    private Attendee createAttendee(String userId, String username, String password, List<String> contactsList,
+                                    List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList, isLogin, false, isVIP);
         addUserIdToHashMap(userAttendee);
         addUsernameToHashMap(userAttendee);
@@ -90,7 +91,8 @@ public class AttendeeActions extends UserAccountActions {
      * @param isVIP the VIP status of the attendee
      * This will create a new Attendee
      * */
-    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isVIP) {
+    public Attendee createAttendee(String username, String password, List<String> contactsList, List<String> eventList,
+                                   List<String> savedEventList, boolean isLogin, boolean isVIP) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "A" + generateId.generateId();
         Attendee userAttendee = new Attendee(userId, username, password, contactsList, eventList, savedEventList,
