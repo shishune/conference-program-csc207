@@ -76,18 +76,11 @@ public class AccountController {
                     String user = attendeeActions.returnUsernameHashMap().get(username).getId();
                     boolean isVIP = attendeeActions.findUserFromUsername(username).getIsVIP();
 
-                    if (isVIP){
-                        accountDisplay = new presenters.VIPAttendeeAccountPresenter();
-                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
-                                attendeeActions, organizerActions, speakerActions, conferenceActions);
-                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
-                                roomActions, speakerActions, conferenceActions);
-                    }
-                    else{accountDisplay = new presenters.AttendeeAccountPresenter();
-                        controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
-                                attendeeActions, organizerActions, speakerActions, conferenceActions);
-                        menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
-                                roomActions, speakerActions, conferenceActions);}
+                    accountDisplay = new presenters.AttendeeAccountPresenter();
+                    controllers.AttendeeController attendeeController = new AttendeeController(eventActions, roomActions, messageActions,
+                            attendeeActions, organizerActions, speakerActions, conferenceActions);
+                    menuController = (controllers.AttendeeMainMenuController)new AttendeeMainMenuController(user, attendeeController,
+                            roomActions, speakerActions, conferenceActions);
 
 
                 }
