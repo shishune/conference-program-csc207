@@ -171,7 +171,7 @@ public class Store{
      */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker, ArrayList<String> conference) {
 
-            for (String id : attendee) {
+        for (String id : attendee) {
                 allEntities.add(id);
             }
             for (String id : organizer) {
