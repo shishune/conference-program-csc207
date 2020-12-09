@@ -117,11 +117,33 @@ public class ConferencePresenter {
     /**
      * displays conferences attended by attendees.
      * @param conferencesList the list of conferences to present.
+     * @return true if and only if conferenceList is non-empty
      */
     public boolean displayAttendedConferences(ArrayList<List<String>> conferencesList){
         if(conferencesList != null){
             if(conferencesList.isEmpty()){
                 System.out.println("There are no conferences in existence, or you have not signed up for any conferences. You may sign up for one by returning to the menu.");
+                return false;
+            } else {
+                System.out.println("Conferences:");
+                for (List<String> conference : conferencesList) {
+                    System.out.println(conference.get(0) + "\n");
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * displays conferences not attended by attendees
+     * @param conferencesList the list of conferences to present
+     * @return true if and only if conferenceList is non-empty
+     */
+    public boolean displayAvailableConferences(ArrayList<List<String>> conferencesList){
+        if(conferencesList != null){
+            if(conferencesList.isEmpty()){
+                System.out.println("There are no conferences in existence, or you have already signed up for all conferences.");
                 return false;
             } else {
                 System.out.println("Conferences:");

@@ -234,18 +234,19 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
     public void option12(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
-        displayConference.displayConferences(conferences);
-        displayConference.promptSignUp();
+        ArrayList<List<String>> conferences = conferenceActions.returnAvailableConferences(username);
+        boolean available = displayConference.displayAvailableConferences(conferences);
+        if (available) {
+            displayConference.promptSignUp();
 
-        String conferenceTitle = scan.nextLine();
-        if (conferenceActions.conferenceExists(conferenceTitle)) {
-            conferenceActions.addAttendee(conferenceTitle, username);
-            displayConference.successSignUp();
+            String conferenceTitle = scan.nextLine();
+            if (conferenceActions.conferenceAvailable(conferenceTitle, username)) {
+                conferenceActions.addAttendee(conferenceTitle, username);
+                System.out.println(conferenceActions.returnTitleHashMap().get(conferenceTitle).getAttendees());
+                displayConference.successSignUp();
+            } else {
+                displayConference.failedSignUp();
+            }
         }
-        else{
-            displayConference.failedSignUp();
-        }
-
     }
 }

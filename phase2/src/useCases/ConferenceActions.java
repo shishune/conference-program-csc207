@@ -109,6 +109,30 @@ public class ConferenceActions {
         return stringRepConferences;
     }
 
+    /**
+     * returns the list of all conferences (title and events) that attendee is NOT participating in
+     * @param attendee the attendee name in question
+     * @return list of all conferences (title and events) that attendee is NOT participating in
+     */
+    public ArrayList<List<String>> returnAvailableConferences(String attendee){
+        ArrayList<List<String>> stringRepConferences = new ArrayList<>();
+        for (Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()) {
+            List<String> stringRepConference = new ArrayList<String>();
+            Conference conference = entry.getValue();
+            if (!conference.getAttendees().contains(attendee)){
+                stringRepConference.add(conference.getTitle());
+                String events = "";
+                for (String eventID : conference.getEvents()) {
+                    events += eventID + ",";
+                }
+                stringRepConference.add(events);
+                stringRepConferences.add(stringRepConference);
+            }
+
+        }
+        return stringRepConferences;
+    }
+
     private void loadAllConferences(LoadUpIGateway loader) {
         conferencesList = loader.getConferencesList();
     }
@@ -140,6 +164,19 @@ public class ConferenceActions {
 
     public boolean conferenceExists(String conferenceTitle) {
         if (conferenceTitlesHash.containsKey(conferenceTitle)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * determines whether a given attendee is not participating in a given conference, and whether the conference exists
+     * @param conferenceTitle title of conference
+     * @param attendee username of attendee
+     * @return true if and only if given attendee is not participating in the given conference and the conference exists
+     */
+    public boolean conferenceAvailable(String conferenceTitle, String attendee){
+        if (conferenceTitlesHash.containsKey(conferenceTitle) && !conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendee)){
             return true;
         }
         return false;
