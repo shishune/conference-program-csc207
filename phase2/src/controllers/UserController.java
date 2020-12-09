@@ -315,12 +315,13 @@ public class UserController {
         return scheduleList;
     }
 
-    public List<List<String>> viewVIPEvents(String user){
-        Set<String> allEvents = eventActions.getEvents().keySet();
+    public List<List<String>> viewVIPEvents(String user, String conferenceTitle){
+        List<String> conferenceEvents = conferenceActions.returnTitleHashMap().get(conferenceTitle).getEvents();
+        // Set<String> allEvents = eventActions.getEvents().keySet();
         List<String> availableS = new ArrayList<>();
-        List<String> targetList = new ArrayList<>(allEvents);
+        // List<String> targetList = new ArrayList<>(allEvents);
 
-        for (String s : targetList) {
+        for (String s : conferenceEvents) {
             if (!checkConflictTime(user, s) && !checkConflictSpots(s)) {
                 if (eventActions.getEvent(s).getIsVip()){
                     availableS.add(s);
@@ -333,13 +334,11 @@ public class UserController {
             String dateTime = eventActions.getEvent(event).getDateTime();
             String roomId = eventActions.getEvent(event).getRoomID();
             List<String> speakers = eventActions.getEvent(event).getSpeakers();
-            String conference = eventActions.getEvent(event).getConference();
             List<String> info = new ArrayList<String>();
             info.add(title);
             info.add(dateTime);
             info.add(roomId);
             info.addAll(speakers);
-            info.add(conference);
             scheduleList.add(info);
         }
         return scheduleList;

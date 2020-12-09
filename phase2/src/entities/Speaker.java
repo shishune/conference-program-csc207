@@ -20,8 +20,9 @@ public class Speaker extends User {
      * @param isLogin boolean whether this speaker has an account
      * @param isOrganizer boolean whether this speaker is an organizer
      * */
-    public Speaker(String speakerId,String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin, boolean isOrganizer){
-        super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer);
+    public Speaker(String speakerId,String username, String password, List<String> contactsList, List<String>
+            eventList, boolean isLogin, boolean isOrganizer, boolean isVIP){
+        super(speakerId, username, password, contactsList, eventList, isLogin, isOrganizer, isVIP);
     }
 
 

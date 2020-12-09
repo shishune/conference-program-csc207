@@ -20,7 +20,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     private EventPresenter displayEvent;
     private MessagePresenter displayMessage;
     private RoomActions room;
-    private SpeakerActions speaker;
+    private SpeakerActions speakerActions;
     private ConferenceActions conferenceActions;
     private Scanner scan = new Scanner(System.in);
 
@@ -30,13 +30,13 @@ public class AttendeeMainMenuController extends MainMenuController {
      * @param userID             the user ID
      * @param attendeeController the controller responsible for user
      */
-    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speaker, ConferenceActions conferenceActions) {
-        super(userID, attendeeController, room, speaker, conferenceActions);
+    public AttendeeMainMenuController(String userID, AttendeeController attendeeController, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions) {
+        super(userID, attendeeController, room, speakerActions, conferenceActions);
         this.userID = userID;
         this.controller = attendeeController;
         this.displayEvent = new EventPresenter();
         this.displayMessage = new MessagePresenter();
-        this.speaker = speaker;
+        this.speakerActions = speakerActions;
         this.room = room;
         this.conferenceActions = conferenceActions;
     }
@@ -56,6 +56,11 @@ public class AttendeeMainMenuController extends MainMenuController {
             conferenceTitle = scan.nextLine();
         }
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
+
+        if (controller.returnUserUsernameHashMap().get(username).getIsVIP()){
+            List<List<String>> vipEventsList = controller.viewVIPEvents(username, conferenceTitle);
+        }
+
         if (eventsList.size() == 0) {
             displayMessage.noEvents();
         } else {
@@ -64,7 +69,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                 if (e.get(3).equals("")) {
                     e.set(3, "There are no speakers at the moment for this event.");
                 } else {
-                    e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                    e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
                 }
 
             }
@@ -105,6 +110,12 @@ public class AttendeeMainMenuController extends MainMenuController {
             }
         }
     }
+    /**
+     * helper to sign up to VIP events
+     */
+    public void signUpVIP(){
+
+    }
 
     /**
      * view saved events
@@ -120,37 +131,47 @@ public class AttendeeMainMenuController extends MainMenuController {
                 if (e.get(3).equals("")) {
                     e.set(3, "There are no speakers at the moment for this event.");
                 } else {
-                    e.set(3, speaker.findUserFromId(e.get(3)).getUsername());
+                    e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
                 }
             }
             displayEvent.displayEvents(eventsList);
         }
     }
 
-    public void option11() {
-        String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        List<List<String>> eventsList = controller.viewVIPEvents(username);
-        ArrayList<String> speakerList = new ArrayList<>();
+    /**
+     * view vip events
+     */
 
-        if (eventsList.size() == 0) {
-            displayMessage.noEvents();
+    public void option11() {
+        String conferenceTitle = "";
+        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+        displayConference.displayConferences(conferences);
+        displayConference.promptConference();
+        while(!conferenceActions.conferenceExists(conferenceTitle)){
+            conferenceTitle = scan.nextLine();
+        }
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewVIPEvents(username, conferenceTitle);
+
+        if (eventsList.size() == 0){
+            //displayMessage.noEvents();
+            displayEvent.noEventsAvailable();
         } else {
+            displayEvent.eventIntro();
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-
-                for (String speakers : e.get(3).split(",")) {
-                    if (speakers.equals("")) {
+                List<String> speakerList = new ArrayList<String>();
+                for (String speaker : e.get(3).split(",")) {
+                    if (speaker.equals("")){
                         speakerList.add(displayMessage.noSpeakers());
                     } else {
-                        speakerList.add(speaker.findUserFromId(speakers).getUsername());
+                        speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
                     }
-
                 }
                 e.set(3, String.valueOf(speakerList));
-
-                displayEvent.displayEvents(eventsList);
+                //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
             }
-
+            displayEvent.displayEvents(eventsList);
         }
     }
 }

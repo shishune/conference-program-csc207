@@ -21,9 +21,8 @@ public class Attendee extends User {
 
 
     public Attendee (String attendeeId, String username, String password, List<String> contactsList, List<String> eventList, List<String> savedEventList, boolean isLogin, boolean isOrganizer, boolean isVIP){
-        super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer);
+        super(attendeeId, username, password, contactsList, eventList, isLogin, isOrganizer, isVIP);
         this.savedEventList = savedEventList;
-        this.isVIP = isVIP;
     }
 
     /**

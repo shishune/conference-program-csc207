@@ -58,7 +58,7 @@ public class OrganizerActions extends UserAccountActions {
      * @return the loaded organizer
      */
     public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
-        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
+        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true, false);
         addUserIdToHashMap(userOrganizer);
         addUsernameToHashMap(userOrganizer);
         organizerHashMap.put(userId, userOrganizer);
