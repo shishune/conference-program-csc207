@@ -31,6 +31,8 @@ public class LoadUp implements LoadUpIGateway {
         getSpeakers();
         getIds();
         getConferences();
+        getAllAttendees();
+        getAllOrganizers();
     }
 
     /**

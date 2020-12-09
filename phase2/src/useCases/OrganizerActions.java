@@ -1,5 +1,6 @@
 package useCases;
 
+import entities.Attendee;
 import entities.Organizer;
 import entities.User;
 import gateways.LoadUpIGateway;
@@ -18,6 +19,7 @@ public class OrganizerActions extends UserAccountActions {
     private HashMap<String, Organizer> organizerUsernameHashMap = new HashMap<String, Organizer>();
     private ArrayList<String> organizers = new ArrayList<String>();
     private LoadUpIGateway loader;
+    private int counter;
 
 
     /**
@@ -79,6 +81,17 @@ public class OrganizerActions extends UserAccountActions {
         return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
     }
 
+//    public User createOrganizer(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+//        useCases.GenerateID generateId = new GenerateID(loader);
+//        String userId = "O" + generateId.generateId();
+//        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
+//        addUserIdToHashMap(userOrganizer);
+//        addUsernameToHashMap(userOrganizer);
+//        organizerHashMap.put(userId, userOrganizer);
+//        organizerUsernameHashMap.put(username, userOrganizer);
+//        counter += 1;
+//        return userOrganizer;
+//    }
 
     /**
      * @param username the username of the organizer to check
