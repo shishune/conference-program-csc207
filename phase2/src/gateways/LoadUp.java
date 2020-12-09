@@ -37,17 +37,33 @@ public class LoadUp implements LoadUpIGateway {
      * This method returns all object ids in a list from entities.csv
      * @return object ids in a list
      */
-    public ArrayList<String> getIds(){
+    public String getIds(){
         try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/entities.csv"))) {
             String line = null;
-            while((line = br.readLine()) != null) {
-                ids.add(line);
-            }
+           if ((line = br.readLine()) != null) {
+                // ids.add(line);
+                return br.readLine();
+           }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ids;
+        return "0";
     }
+
+    /**
+     * Getter for the last object Id value made using IGateway
+     * */
+    public int getObjectId() { return Integer.parseInt(getIds()); }
+
+
+    //    /**
+//     * Getter for the number of the object IDs
+//     * @return objectId in a list
+//     */
+//    public int getNumOfIds() {
+//        return ids.size();
+//    }
+
 
     /**
      * adds to the list of ids
@@ -56,6 +72,7 @@ public class LoadUp implements LoadUpIGateway {
     public void addId(String id){
         this.ids.add(id);
     }
+
     /**
      * This method returns messages in a list from messages.csv
      * @return messages in a list
@@ -195,20 +212,7 @@ public class LoadUp implements LoadUpIGateway {
         return speakers;
     }
 
-    /**
-     * Getter for the number of the object IDs
-     * @return objectId in a list
-     */
-    public int getNumOfIds() {
-        return ids.size();
-    }
 
-    /**
-     * Getter for the last object Id made using IGateway
-     * */
-    public int getObjectId() {
-        return getNumOfIds();
-    }
 
 
     // Methods from IGateway

@@ -1,5 +1,6 @@
 package useCases;
 
+import entities.Attendee;
 import entities.Conference;
 import entities.Event;
 import gateways.LoadUpIGateway;
@@ -15,22 +16,22 @@ public class ConferenceActions {
     private LoadUpIGateway loader;
     private List<String> conferencesList;
 
-    public ConferenceActions(LoadUpIGateway loader){
+    public ConferenceActions(LoadUpIGateway loader) {
         loadAllConferences(loader);
         addLoadedToHashMap();
         this.loader = loader;
     }
 
-    public HashMap<String, Conference> returnIDHashMap(){
+    public HashMap<String, Conference> returnIDHashMap() {
         return conferences;
     }
 
-    public HashMap<String, Conference> returnTitleHashMap(){
+    public HashMap<String, Conference> returnTitleHashMap() {
         return conferenceTitlesHash;
     }
 
-    public boolean addEvent(String conferenceTitle, String eventId){
-        if(conferenceTitlesHash != null){
+    public boolean addEvent(String conferenceTitle, String eventId) {
+        if (conferenceTitlesHash != null) {
             conferenceTitlesHash.get(conferenceTitle).addEvent(eventId);
             return true;
         }
@@ -42,20 +43,20 @@ public class ConferenceActions {
      * @param conferenceID if of event
      * @param speakerID id of new speaker
      */
-    public void setSpeaker(String conferenceID, List<String> speakerID){
+    public void setSpeaker(String conferenceID, List<String> speakerID) {
         this.conferences.get(conferenceID).setSpeaker(speakerID);
     }
 
-    public ArrayList<List<String>> returnConferences(){
+    public ArrayList<List<String>> returnConferences() {
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
-        for(Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()){
+        for (Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()) {
             List<String> stringRepConference = new ArrayList<String>();
             Conference conference = entry.getValue();
             stringRepConference.add(conference.getTitle());
 //            stringRepConference.add(conference.getStartDateTime());
 //            stringRepConference.add(conference.getEndDateTime());
             String events = "";
-            for (String eventID: conference.getEvents()){
+            for (String eventID : conference.getEvents()) {
                 events += eventID + ",";
             }
             stringRepConference.add(events);
@@ -70,7 +71,7 @@ public class ConferenceActions {
 
     private void addLoadedToHashMap() {
         if (conferencesList != null && !conferencesList.isEmpty()) {
-            for (String conference : conferencesList){
+            for (String conference : conferencesList) {
                 String[] conferenceItems = conference.split(",");
                 List<String> conferenceEvents = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
                 List<String> conferenceAttendees = new ArrayList<>(Arrays.asList(conferenceItems[3].split("%%")));
@@ -93,20 +94,19 @@ public class ConferenceActions {
         }
     }
 
-    public boolean conferenceExists(String conferenceTitle){
-        if(conferenceTitlesHash.containsKey(conferenceTitle)){
+    public boolean conferenceExists(String conferenceTitle) {
+        if (conferenceTitlesHash.containsKey(conferenceTitle)) {
             return true;
         }
         return false;
     }
 
-    public Conference createConference(String title, List<String> events/*, List<String> attendees, List<String> speakers*/){
+    public Conference createConference(String title, List<String> events/*, List<String> attendees, List<String> speakers*/) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String conferenceId = "C" + generateId.generateId();
         //TODO: set conference start time to start time of first event & end time = end time of last event ???
         return loadConference(conferenceId, title, events, new ArrayList<>()/*, speakers*/);
     }
-
 
 
     /***
@@ -117,13 +117,13 @@ public class ConferenceActions {
      * @return list of dates in string format of the time beginning with and including startDateTime,
      *      and ending with and excluding  endDateTime
      */
-    private List<String> timeInBetween(String startDateTime, String endDateTime){
+    private List<String> timeInBetween(String startDateTime, String endDateTime) {
         int startTime = Integer.parseInt(startDateTime.substring(29, 31));
         int endTime = Integer.parseInt(endDateTime.substring(29, 31));
         String date = startDateTime.substring(0, 10);
         List<String> times = new ArrayList<>();
         times.add(startDateTime);
-        while (startTime < endTime){
+        while (startTime < endTime) {
             times.add(date + startTime);
             startTime += 1;
         }
@@ -142,11 +142,26 @@ public class ConferenceActions {
         return newConference;
     }
 
-    public ArrayList<String> storeConferences(){
+    public ArrayList<String> storeConferences() {
         ArrayList<String> storedConferences = new ArrayList<String>();
-        for(Map.Entry<String, Conference> conference : conferences.entrySet()) {
-            storedConferences.add(conference.getValue().getStringRep()+"\n");
+        for (Map.Entry<String, Conference> conference : conferences.entrySet()) {
+            storedConferences.add(conference.getValue().getStringRep() + "\n");
         }
         return storedConferences;
+    }
+
+    /**
+     * It will be get the conference IDs
+     *
+     * @return ArrayList<String>
+     */
+    public ArrayList<String> getConferenceIds() {
+        ArrayList<String> storedConference = new ArrayList<String>();
+        if (conferences != null && !conferences.isEmpty()) {
+            for (Map.Entry<String, Conference> o : conferences.entrySet()) {
+                storedConference.add(o.getValue().getId() + "\n");
+            }
+        }
+        return storedConference;
     }
 }
