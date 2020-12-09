@@ -202,6 +202,12 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
 
     public void option11() {
+        String username1 = controller.returnUserIDHashMap().get(userID).getUsername();
+        if(!controller.isVIP(username1)){
+            displayEvent.notVIP();
+        }
+        else{
+
         String conferenceTitle = "";
         ArrayList<List<String>> conferences = conferenceActions.returnConferences();
         displayConference.displayConferences(conferences);
@@ -231,6 +237,7 @@ public class AttendeeMainMenuController extends MainMenuController {
                 //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
             }
             displayEvent.displayEvents(eventsList);
+        }
         }
     }
 
