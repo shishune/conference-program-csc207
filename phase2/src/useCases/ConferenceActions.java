@@ -182,6 +182,19 @@ public class ConferenceActions {
         return false;
     }
 
+    /**
+     * determines whether conference exists and a given attendee is participating in a given conference
+     * @param conferenceTitle title of conference
+     * @param attendee username of attendee
+     * @return true if and only if conference exists and attendee is participating in the conference
+     */
+    public boolean conferenceAttended(String conferenceTitle, String attendee){
+        if (conferenceTitlesHash.containsKey(conferenceTitle) && conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendee)){
+            return true;
+        }
+        return false;
+    }
+
     public Conference createConference(String title, List<String> events/*, List<String> attendees, List<String> speakers*/) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String conferenceId = "C" + generateId.generateId();

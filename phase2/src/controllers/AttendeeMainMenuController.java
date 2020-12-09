@@ -53,11 +53,14 @@ public class AttendeeMainMenuController extends MainMenuController {
         if (exists) {
             displayConference.promptConference();
             String conferenceTitle = scan.nextLine();
-            while (!conferenceActions.conferenceExists(conferenceTitle) || !conferenceTitle.equalsIgnoreCase("x")) {
+            while (!conferenceActions.conferenceAttended(conferenceTitle, username)) {
                 displayConference.invalidTitle();
                 conferenceTitle = scan.nextLine();
+                if(conferenceTitle.equalsIgnoreCase("x")){ //this cannot be inserted into loop condition
+                    break;
+                }
             }
-            if (conferenceTitle.equalsIgnoreCase("x")) {
+            if (!conferenceTitle.equalsIgnoreCase("x")) {
                 List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
                 if (controller.isVIP(username)) {
