@@ -129,6 +129,7 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option6() {
         System.out.println(event.getEventsList());
+        System.out.println(event);
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
 
         String title = "";
