@@ -35,13 +35,13 @@ public class AttendeeController extends UserController {
 
     @Override
     public boolean leaveEvent(String eventName, String userId){
-        String eventID = e.getEventFromName(eventName).getId();
-        if(this.attendee.findUserFromId(userId).getEventList().contains(eventID)) {
-            return this.attendee.removeEventFromUser(eventID, userId);
+        if (e.getEventNames().containsKey(eventName)){
+            String eventID = e.getEventFromName(eventName).getId();
+            if(this.attendee.findUserFromId(userId).getEventList().contains(eventID)) {
+                return this.attendee.removeEventFromUser(eventID, userId);
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 
     /**
