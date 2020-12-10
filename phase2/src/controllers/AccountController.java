@@ -150,18 +150,16 @@ public class AccountController {
                     } else if (menuOption.equals("12") && (type.equals("O") || type.equals("A"))) {
                         menuController.option12();
                     }  else if (menuOption.equals("13")) {
-                        // add conference (organizers only)
-                        //TODO: change to appropriate name after everyone is done adding options option12(?)
-                        menuController.option15();
-                    }else if (menuOption.equals("14")&& (type.equals("O"))) {
-                        // view conferences (general)
-                        //TODO: change to appropriate name after everyone is done adding options option13(?)
-                        menuController.option16(); // display conferences
+                        menuController.optionChangeCapacity();
+                    }
+                    else if (menuOption.equals("14")&& (type.equals("O"))) {
+                        menuController.option14();
                     }
                     else if (menuOption.equals("15")&&(type.equals("O"))){
-                        // view conferences (general)
-                        //TODO: change to appropriate name after everyone is done adding options option13(?)
-                        menuController.option14(); // display conferences
+                        menuController.option15();
+                    }
+                    else if (menuOption.equals("16")&&(type.equals("O"))){
+                        menuController.option16();
                     }
 
                     else {

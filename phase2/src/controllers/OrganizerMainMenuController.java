@@ -471,24 +471,57 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 8- view all events user has created
      */
     public void option8() {
-        List<List<String>> e = new ArrayList<>();
-        for (String event1 : controller.returnUserIDHashMap().get(userID).getEventList()) {
-            List<String> individualEvents = new ArrayList<>();
-            if (event.getEvent(event1) != null) {
-                individualEvents.add(event.getEvent(event1).getTitle());
-                individualEvents.add(event.getEvent(event1).getDateTime());
-                String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
-                individualEvents.add(roomName);
-                for (String elem : event.getEvent(event1).getSpeakers()) {
-                    String speakerName = speaker.findUserFromId(elem).getUsername();
-                    individualEvents.add(speakerName);
-                    e.add(individualEvents);
-                }
-            } else {
-                break;
-            }
+        String conferenceTitle = "";
+        // TODO print list of users conferences
+        // TODO have user choose which conference events they want to see
+        ArrayList<List<String>> conferences = conference.returnConferences();
+        displayConference.displayConferences(conferences);
+        displayConference.promptConference();
+        while(!conference.conferenceExists(conferenceTitle)){
+            conferenceTitle = scan.nextLine();
         }
-        displayEvent.displayEvents(e);
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
+
+        if (eventsList.size() == 0){
+            //displayMessage.noEvents();
+            displayEvent.noEventsAvailable();
+        } else {
+            displayEvent.eventIntro();
+            for (List<String> e : eventsList) {
+                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                List<String> speakerList = new ArrayList<String>();
+                for (String s : e.get(3).split(",")) {
+                    if (s.equals("")){
+                        speakerList.add(displayMessage.noSpeakers());
+                    } else {
+                        speakerList.add(speaker.findUserFromId(s).getUsername());
+                    }
+                }
+                e.set(3, String.valueOf(speakerList));
+                //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+            }
+            displayEvent.displayEvents(eventsList);
+        }
+
+//        List<List<String>> e = new ArrayList<>();
+//        for (String event1 : controller.returnUserIDHashMap().get(userID).getEventList()) {
+//            List<String> individualEvents = new ArrayList<>();
+//            if (event.getEvent(event1) != null) {
+//                individualEvents.add(event.getEvent(event1).getTitle());
+//                individualEvents.add(event.getEvent(event1).getDateTime());
+//                String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
+//                individualEvents.add(roomName);
+//                for (String elem : event.getEvent(event1).getSpeakers()) {
+//                    String speakerName = speaker.findUserFromId(elem).getUsername();
+//                    individualEvents.add(speakerName);
+//                    e.add(individualEvents);
+//                }
+//            } else {
+//                break;
+//            }
+//        }
+//        displayEvent.displayEvents(e);
     }
 
 
@@ -903,6 +936,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     }
 
     public void optionChangeCapacity() {
+        option8();
         displayEvent.changeEventCapacity();
         String eventName = scan.nextLine();
 

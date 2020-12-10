@@ -223,4 +223,5 @@ public abstract class MainMenuController extends AccountController {
     protected boolean validInput(String str){
         return !str.equals("") && !str.equalsIgnoreCase("x");
     }
+    public void optionChangeCapacity() {}
 }
