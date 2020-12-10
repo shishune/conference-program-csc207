@@ -516,7 +516,7 @@ public class EventActions  {
 
     public ArrayList<String> eventsOrderedByDate(){
         ArrayList<String> eventsByDate = new ArrayList<String>();
-        for (Map.Entry<String, Event> entry : events.entrySet()) {
+        for (Map.Entry<String, Event> entry : eventNames.entrySet()) {
             eventsByDate.add(entry.getValue().getStartDateTime() + " , " + entry.getKey());
             eventsByDate.sort(Comparator.comparing(String::toString));
             return eventsByDate;
