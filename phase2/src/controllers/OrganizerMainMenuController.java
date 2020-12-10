@@ -830,6 +830,11 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayConference.promptConference();
         while (!conference.conferenceExists(conferenceTitle)) {
             conferenceTitle = scan.nextLine();
+            displayConferences.conferenceDoesNotExists();
+            displayConferences.leaveOption();
+            if (scan.nextLine().equalsIgnoreCase("x")){
+                return;
+            }
         }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);

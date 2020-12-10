@@ -60,4 +60,6 @@ public class OrganizerConferencePresenter extends ConferencePresenter{
      * A message informing user that their input is invalid ie empty or a variation of 'x'
      * */
     public void invalidInput(){System.out.println("Your input is invalid and either empty or 'x'. Please try again");}
+
+    public void leaveOption(){System.out.println("Press X to leave this option.");}
 }
