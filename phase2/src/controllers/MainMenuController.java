@@ -151,6 +151,10 @@ public abstract class MainMenuController extends AccountController {
         displayConference.promptConference();
         while(!conferenceActions.conferenceExists(conferenceTitle)){
             conferenceTitle = scan.nextLine();
+            displayConference.invalidTitle();
+            if (scan.nextLine().equalsIgnoreCase("x")){
+                return;
+            }
         }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);

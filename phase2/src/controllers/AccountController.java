@@ -153,12 +153,14 @@ public class AccountController {
                         menuController.optionChangeCapacity();
                     }
                     else if (menuOption.equals("14")&& (type.equals("O"))) {
+                        //view stats
                         menuController.option14();
                     }
                     else if (menuOption.equals("15")&&(type.equals("O"))){
                         menuController.option15();
                     }
                     else if (menuOption.equals("16")&&(type.equals("O"))){
+                        //View all conferences
                         menuController.option16();
                     }
 

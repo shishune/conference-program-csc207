@@ -856,11 +856,10 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option11() {
         String conferenceTitle = "";
-        // TODO print list of users conferences
-        // TODO have user choose which conference events they want to see
         ArrayList<List<String>> conferences = conference.returnConferences();
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
+
         while (!conference.conferenceExists(conferenceTitle)) {
             conferenceTitle = scan.nextLine();
             displayConferences.conferenceDoesNotExists();
@@ -940,7 +939,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayEvent.changeEventCapacity();
         String eventName = scan.nextLine();
 
-        if (event.events.get(eventName) != null) {
+        if (event.getEventNames().get(eventName) != null) {
 
             if (controller.returnUserIDHashMap().get(userID).getEventList().contains(event.events.get(eventName).getId())) {
                 displayEvent.newCapacity(eventName);
