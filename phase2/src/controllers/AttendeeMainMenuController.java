@@ -254,6 +254,7 @@ public class AttendeeMainMenuController extends MainMenuController {
             String conferenceTitle = scan.nextLine();
             if (conferenceActions.conferenceAvailable(conferenceTitle, username)) {
                 conferenceActions.addAttendee(conferenceTitle, username);
+
                 System.out.println(conferenceActions.returnTitleHashMap().get(conferenceTitle).getAttendees());
                 displayConference.successSignUp();
             } else {

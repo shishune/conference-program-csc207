@@ -39,7 +39,7 @@ public class ConferenceActions {
     }
 
     /**
-     *
+     * add attendee to a conference
      * @param conferenceTitle the title of conference
      * @param attendee the username of attendee
      * @return true if and only if attendee was added to conference
@@ -50,6 +50,15 @@ public class ConferenceActions {
             return true;
         }
         return false;
+    }
+    /**
+     *
+     * @param conferenceTitle the title of conference
+     * @param attendeeUsername the username of attendee
+     * @return true if and only if attendee was added to conference
+     */
+    public boolean isAttendee(String conferenceTitle, String attendeeUsername){
+        return conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendeeUsername);
     }
 
     /***
@@ -85,15 +94,15 @@ public class ConferenceActions {
 
     /**
      * returns the list of all conferences (title and events) that attendee is participating in
-     * @param attendee the attendee in question
+     * @param attendeeID the id of the attendee in question
      * @return returns the list of all conferences (title and events) that attendee is participating in
      */
-    public ArrayList<List<String>> returnAttendedConferences(String attendee){
+    public ArrayList<List<String>> returnAttendedConferences(String attendeeID){
         ArrayList<List<String>> stringRepConferences = new ArrayList<>();
         for (Map.Entry<String, Conference> entry : conferenceTitlesHash.entrySet()) {
             List<String> stringRepConference = new ArrayList<String>();
             Conference conference = entry.getValue();
-            if (conference.getAttendees().contains(attendee)){
+            if (conference.getAttendees().contains(attendeeID)){
                 stringRepConference.add(conference.getTitle());
                 //            stringRepConference.add(conference.getStartDateTime());
                 //            stringRepConference.add(conference.getEndDateTime());
