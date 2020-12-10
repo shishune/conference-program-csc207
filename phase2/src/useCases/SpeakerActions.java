@@ -14,11 +14,11 @@ public class SpeakerActions extends UserAccountActions {
     private LoadUpIGateway loader;
     private ArrayList<String> speakerLoadUpList = new ArrayList<String>();
 
-    private HashMap<String, Speaker> speakerID = new HashMap<String, Speaker>();
-    private HashMap<String, Speaker> speakerUsername = new HashMap<String, Speaker>();
+    private HashMap<String, Speaker> speakerID = super.speakerHashMapID;
+    private HashMap<String, Speaker> speakerUsername = super.speakerHashMapUsername;
 
-    private ArrayList<String> speakers = new ArrayList<String>();
-    public ArrayList<String> storedSpeaker = new ArrayList<String>();
+    private ArrayList<String> speakers = new ArrayList<String>(); // needed for loader
+    public ArrayList<String> storedSpeaker = new ArrayList<String>(); // what was this needed for; never used??
 
 
     /**

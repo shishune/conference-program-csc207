@@ -1,8 +1,14 @@
 package useCases;
 
+import entities.Attendee;
+import entities.Organizer;
+import entities.Speaker;
 import entities.User;
 
 import java.util.HashMap;
+
+
+
 /**
  * A use case class that stores a hashmap of users and can add and remove users from the hashmap.
  * Parent class to AttendeeActions, OrganizationActions and SpeakerActions. This class collaborates with user,
@@ -12,6 +18,15 @@ import java.util.HashMap;
  */
 
 public abstract class UserAccountActions {
+    // ID HashMaps
+    protected HashMap<String, Attendee> attendeeHashMapID = new HashMap<String, Attendee>();
+    protected HashMap<String, Organizer> organizerHashMapID = new HashMap<String, Organizer>();
+    protected HashMap<String, Speaker> speakerHashMapID = new HashMap<String, Speaker>();
+
+    //Username HashMaps
+    protected HashMap<String, Attendee> attendeeHashMapUsername = new HashMap<String, Attendee>();
+    protected HashMap<String, Organizer> organizerHashMapUsername = new HashMap<String, Organizer>();
+    protected HashMap<String, Speaker> speakerHashMapUsername = new HashMap<String, Speaker>();
 
     /**
      * Adds an user to existing list of contacts for an user.
