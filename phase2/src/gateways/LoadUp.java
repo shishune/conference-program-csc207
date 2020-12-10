@@ -41,28 +41,26 @@ public class LoadUp implements LoadUpIGateway {
      * This method returns all object ids in a list from entities.csv
      * @return object ids in a list
      */
-    public int getIds() {
+    public ArrayList<String> getIds(){
         try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/entities.csv"))) {
             String line = null;
-            if ((line = br.readLine()) != null) {
+            while((line = br.readLine()) != null) {
                 ids.add(line);
-                int a = Integer.parseInt(line);
-                return a;
-            } else {
-                return 0;
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return 0;
+        return ids;
     }
 
-
     /**
-     * Getter for the last object Id value made using IGateway
-     * */
-    public int getObjectId() { return getIds(); }
+     * adds to the list of ids
+     * @param id the id of an entity
+     */
+    public void addId(String id){
+        System.out.println(ids);
+        this.ids.add(id);
+    }
 
 
     /**
@@ -70,7 +68,33 @@ public class LoadUp implements LoadUpIGateway {
      * @return objectId in a list
      */
     public int getNumOfIds() {
+        /*
+        String filename = "./phase1/src/assets/dataFiles/entities.csv";
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                objectId++;
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            // TODO: tell user error was generated
+            e.printStackTrace();
+        }
+        System.out.println(objectId);
+        return objectId;
+        */
+
         return ids.size();
+    }
+
+    /**
+     * Getter for the last object Id made using IGateway
+     * */
+    public int getObjectId() {
+        //LoadUp l = new LoadUp();
+        return getNumOfIds();
     }
 
 
@@ -109,15 +133,6 @@ public class LoadUp implements LoadUpIGateway {
 //    public int getNumOfIds() {
 //        return ids.size();
 //    }
-
-
-    /**
-     * adds to the list of ids
-     * @param id the id of an entity
-     */
-    public void addId(String id){
-        this.ids.add(id);
-    }
 
     /**
      * This method returns messages in a list from messages.csv

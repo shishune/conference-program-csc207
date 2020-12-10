@@ -27,15 +27,19 @@ public class GenerateID {
      * @return String of unique 16 digits
      * */
     public String generateId() {
-
+        System.out.println(loader);
         if (loader != null && loader.getObjectId() <= objectId) {
             objectId += 1;
 
-        } else {
+        }
+
+        else {
             objectId = loader != null ? loader.getObjectId() : 0;
             if (loader != null){
                 loader.addId(String.valueOf(objectId));
             }
+
+
         }
 
         return String.valueOf(objectId);
