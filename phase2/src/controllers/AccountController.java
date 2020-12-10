@@ -1,8 +1,5 @@
 package controllers;
 
-import entities.Attendee;
-import entities.Organizer;
-import entities.Speaker;
 import gateways.LoadUp;
 import gateways.LoadUpIGateway;
 import gateways.Store;
