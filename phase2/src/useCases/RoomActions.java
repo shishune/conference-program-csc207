@@ -221,7 +221,7 @@ public class RoomActions {
      * @param roomName the name of the room
      */
     public void setWhiteboard(String roomName){
-        roomUsername.get(roomName).setProjector();
+        roomUsername.get(roomName).setWhiteboard();
     }
 
     /**

@@ -128,8 +128,8 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 6 - create an event
      */
     public void option6() {
-        System.out.println(event.getEventsList());
-        System.out.println(event);
+//        System.out.println(event.getEventsList());
+//        System.out.println(event);
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
 
         String title = "";
@@ -312,33 +312,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                 } else {
                     displayEvent.failedAddEventToConference();
                 }
-
-//                // Add this event to a conference
-//               displayEvent.promptConference();
-//                // display conferences
-//                ArrayList<List<String>> conferences = getConferences();
-//                List<List<String>> events = event.getEventsList();
-//                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
-//                displayConferences.displayConferences(conferences, events, userIdHash);
-//                if(conferences.size() == 0){
-//
-//                } else {
-//                    String conferenceTitle = scan.nextLine();
-//                    //System.out.println("HERE!" + conference.returnTitleHashMap());
-//                    if (conference.conferenceExists(conferenceTitle)) {
-//                        // add event to conference
-//                        String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
-//                        if (eventId != null) {
-//                            conference.addEvent(conferenceTitle, eventId);
-//                            //TODO: add conference to event too
-//                            displayEvent.successAddEvent();
-//                        } else {
-//                            displayEvent.failedAddEventToConference();
-//                        }
-//                    } else {
-//                        displayEvent.invalidConference();
-//                    }
-//                }
 
             } else {
                 if (!checks.get(0)) {
@@ -722,7 +695,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.printStatsMenu();
             String option = scan.nextLine();
             if (option.equalsIgnoreCase("x")) {
-                loop = false;
+                return;
             } else if (option.equals("1")) {
                 displayMessage.numberEventsAvailable(event.numberEventsAvailable());
             } else if (option.equals("2")) {
@@ -752,6 +725,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else {
                 displayMessage.notValidChoice();
             }
+            option = scan.nextLine();
         }
     }
 
