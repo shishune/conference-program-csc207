@@ -100,8 +100,19 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      * */
     public void printStatsMenu(){
         String display = ""
-                + "\n[1] "
-                + "\n[2] "
+                + "\n[1] View number of offered events"
+                + "\n[2] Most attended events"
+                + "\n[3] Least attended event"
+                + "\n[4] Top 5 events"
+                + "\n[5] Bottom 5 events"
+                + "\n[6] Average number of attendees"
+                + "\n[7] Median number of attendees"
+                + "\n[8] Mode number of attendees"
+                + "\n[9] Num at max capacity"
+                + "\n[10] Events ordered by dates"
+                + "\n[11] Total number of speakers"
+                + "\n[12] Total number of attendees"
+                + "\n[13] New session attendees"
                 + "\nPlease select a menu item number or enter x to go back";
         System.out.println(display);
     }
@@ -164,18 +175,32 @@ public class OrganizerMessagePresenter extends MessagePresenter {
     public void notValidChoice(){System.out.println("That choice is invalid please try again or press x to go back.");}
 
     public void zeroSpeakers(){System.out.println("Enter 'Y' to have 0 speakers");}
+
     public void numberOfSpeaker(){System.out.println("Enter an integer value for the number of speakers you would like to have");}
-    public void mostAttendedEvents(ArrayList<String> i ){System.out.println(i);}
-    public void leastAttendedEvents(ArrayList<String> i ){System.out.println(i);}
-    public void numberEventsAvailable(Integer i){System.out.println(i);}
-    public void numAtMaxCapacity(Integer i){System.out.println(i);}
+
+    public void mostAttendedEvents(ArrayList<String> i ){System.out.println(i + "is the most attended event.");}
+
+    public void leastAttendedEvents(ArrayList<String> i ){System.out.println(i + "is the least attended event.");}
+
+    public void numberEventsAvailable(Integer i){System.out.println("There are " + i + " events available.");}
+
+    public void numAtMaxCapacity(Integer i){System.out.println(i + "Is the max capacity.");}
+
     public void eventsOrderedByDate(ArrayList<String> i){System.out.println(i);}
-    public void totalNumberSpeakers(Integer i){System.out.println(i);}
-    public void totalNumberAttendees(Integer i){System.out.println(i);}
-    public void newSessionAttendees(Integer i){System.out.println(i);}
-    public void averageNumberAttendees(Integer i){System.out.println(i);}
-    public void medianNumberAttendees(Integer i){System.out.println(i);}
-    public void modeNumberAttendees(Integer i){System.out.println(i);}
-    public void topFiveEvents(ArrayList<String> i){System.out.println(i);}
-    public void bottomFiveEvents(ArrayList<String> i){System.out.println(i);}
+
+    public void totalNumberSpeakers(Integer i){System.out.println(i + "is the total number of speakers.");}
+
+    public void totalNumberAttendees(Integer i){System.out.println(i + "is the total number of attendees.");}
+
+    public void newSessionAttendees(Integer i){System.out.println(i + "is the new session attendees.");}
+
+    public void averageNumberAttendees(Integer i){System.out.println(i + "is the average number of attendees.");}
+
+    public void medianNumberAttendees(Integer i){System.out.println(i + "is the median number of attendees.");}
+
+    public void modeNumberAttendees(Integer i){System.out.println(i + "is the mode number of attendees.");}
+
+    public void topFiveEvents(ArrayList<String> i){System.out.println(i + "are the top five events.");}
+
+    public void bottomFiveEvents(ArrayList<String> i){System.out.println(i + "are the bottom five events.");}
 }
