@@ -467,11 +467,14 @@ public class EventActions  {
      */
     public ArrayList<String> mostAttendedEvents(){
         ArrayList<String> mostAttended = new ArrayList<String>();
-        for (Map.Entry<String, Event> entry: events.entrySet()){            //key: string, value: event (i think)
-            double numAttendees = attendees.get(entry.getValue()).size();  //key: event, value: list of attendees (attendees)
-            double eventCapacity = entry.getValue().getCapacity();
-            if (numAttendees/eventCapacity >= 0.75){
-                mostAttended.add(entry.getKey());
+        for (Map.Entry<String, Integer> entry1: eventCapacity.entrySet()) {
+            for (Map.Entry<String, List<String>> entry2 : attendees.entrySet()) {
+                double eventRoomCapacity = eventCapacity.get(entry1.getValue());
+                double numAttendees = attendees.get(entry2.getValue()).size();
+                if (numAttendees / eventRoomCapacity >= 0.75) {
+                    mostAttended.add(entry1.getKey());
+                    return mostAttended;
+                }
             }
         }
         return mostAttended;
@@ -482,16 +485,18 @@ public class EventActions  {
      * @return a list of the most attended events
      */
     public ArrayList<String> leastAttendedEvents(){
-            ArrayList<String> mostAttended = new ArrayList<String>();
-            for (Map.Entry<String, Event> entry: events.entrySet()){
-                double numAttendees = attendees.get(entry.getValue()).size();
-                double eventCapacity = entry.getValue().getCapacity();
-                if (numAttendees/eventCapacity < 0.50){
-                    mostAttended.add(entry.getKey());
-                    return mostAttended;
+        ArrayList<String> leastAttended = new ArrayList<String>();
+        for (Map.Entry<String, Integer> entry1: eventCapacity.entrySet()) {
+            for (Map.Entry<String, List<String>> entry2 : attendees.entrySet()) {
+                double eventRoomCapacity = eventCapacity.get(entry1.getValue());
+                double numAttendees = attendees.get(entry2.getValue()).size();
+                if (numAttendees / eventRoomCapacity <= 0.50) {
+                    leastAttended.add(entry1.getKey());
+                    return leastAttended;
                 }
             }
-            return mostAttended;
+        }
+        return leastAttended;
     }
 
     /**
