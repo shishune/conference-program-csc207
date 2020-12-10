@@ -1,10 +1,9 @@
 package Factories;
-
-import controllers.AttendeeController;
-import controllers.OrganizerController;
-import controllers.SpeakerController;
 import gateways.LoadUpIGateway;
-import useCases.*;
+import useCases.UserAccountActions;
+import useCases.AttendeeActions;
+import useCases.SpeakerActions;
+import useCases.OrganizerActions;
 
 public class UserActionsFactory {
     public UserAccountActions getUserActions(String type, LoadUpIGateway loader) {
