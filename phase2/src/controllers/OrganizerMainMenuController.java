@@ -23,8 +23,8 @@ import java.util.*;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController {
-    private controllers.OrganizerController controller; // = new OrganizerController();
-    private useCases.RoomActions room; // = super.getRooms();
+    private controllers.OrganizerController controller;
+    private useCases.RoomActions room;
     private useCases.SpeakerActions speaker;
     private useCases.EventActions event;
     private useCases.OrganizerActions organizer;
@@ -707,7 +707,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             displayMessage.printStatsMenu();
             String option = scan.nextLine();
             if (option.equalsIgnoreCase("x")) {
-                loop = false;
+                return;
             } else if (option.equals("1")) {
                 displayMessage.numberEventsAvailable(event.numberEventsAvailable());
             } else if (option.equals("2")) {
@@ -737,6 +737,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else {
                 displayMessage.notValidChoice();
             }
+            option = scan.nextLine();
         }
     }
 

@@ -158,17 +158,30 @@ public abstract class MainMenuController extends AccountController {
         String conferenceTitle = "";
         // TODO print list of users conferences
         // TODO have user choose which conference events they want to see
-        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        ArrayList<List<String>> conferences = conferenceActions.returnAttendedConferences(username);
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
-        while(!conferenceActions.conferenceExists(conferenceTitle)){
+        boolean correctConference = false;
+        while (!correctConference) {
             conferenceTitle = scan.nextLine();
-            displayConference.invalidTitle();
-            if (scan.nextLine().equalsIgnoreCase("x")){
-                return;
+            if (!conferenceActions.conferenceExists(conferenceTitle)) {
+                displayConference.invalidTitle();
+                if (scan.nextLine().equalsIgnoreCase("x")) {
+                    return;
+                }
+            } else if (!conferenceActions.isAttendee(conferenceTitle, username)) {
+                displayConference.notAttendingConfernce();
+                if (scan.nextLine().equalsIgnoreCase("x")) {
+                    return;
+                }
+            } else {
+                correctConference = true;
             }
         }
-        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+
+
+        // String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
         if (eventsList.size() == 0){
