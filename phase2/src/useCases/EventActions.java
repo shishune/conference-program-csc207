@@ -471,7 +471,8 @@ public class EventActions  {
                 double eventRoomCapacity = eventCapacity.get(entry1.getValue());
                 double numAttendees = attendees.get(entry2.getValue()).size();
                 if (numAttendees / eventRoomCapacity >= 0.75) {
-                    mostAttended.add(entry1.getKey());
+                    String username = events.get(entry1.getKey()).getTitle();
+                    mostAttended.add(username);
                     return mostAttended;
                 }
             }
@@ -490,7 +491,8 @@ public class EventActions  {
                 double eventRoomCapacity = eventCapacity.get(entry1.getValue());
                 double numAttendees = attendees.get(entry2.getValue()).size();
                 if (numAttendees / eventRoomCapacity <= 0.50) {
-                    leastAttended.add(entry1.getKey());
+                    String username = events.get(entry1.getKey()).getTitle();
+                    leastAttended.add(username);
                     return leastAttended;
                 }
             }
@@ -594,13 +596,13 @@ public class EventActions  {
             if (numberAttendees.size() > 5) {
                 ArrayList<Integer> topFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
                 if (topFiveNumbers.contains(entry.getValue().size())) {
-                    topFive.add(entry.getKey());
-                    return topFive;
+                    String username = events.get(entry.getKey()).getTitle();
+                    topFive.add(username);
                 }
             }
             else{
-                topFive.add(entry.getKey());
-                return topFive;
+                String username = events.get(entry.getKey()).getTitle();
+                topFive.add(username);
             }
         }
         return topFive;
@@ -619,13 +621,13 @@ public class EventActions  {
             if (numberAttendees.size() > 5) {
                 ArrayList<Integer> bottomFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
                 if (bottomFiveNumbers.contains(entry.getValue().size())) {
-                    bottomFive.add(entry.getKey());
-                    return bottomFive;
+                    String username = events.get(entry.getKey()).getTitle();
+                    bottomFive.add(username);
                 }
             }
             else{
-                bottomFive.add(entry.getKey());
-                return bottomFive;
+                String username = events.get(entry.getKey()).getTitle();
+                bottomFive.add(username);
             }
         }
         return bottomFive;
