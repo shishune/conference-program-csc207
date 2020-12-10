@@ -467,12 +467,11 @@ public class EventActions  {
      */
     public ArrayList<String> mostAttendedEvents(){
         ArrayList<String> mostAttended = new ArrayList<String>();
-        for (Map.Entry<String, Event> entry: events.entrySet()){
-            double numAttendees = attendees.get(entry.getValue()).size();
+        for (Map.Entry<String, Event> entry: events.entrySet()){            //key: string, value: event (i think)
+            double numAttendees = attendees.get(entry.getValue()).size();  //key: event, value: list of attendees (attendees)
             double eventCapacity = entry.getValue().getCapacity();
             if (numAttendees/eventCapacity >= 0.75){
                 mostAttended.add(entry.getKey());
-                return mostAttended;
             }
         }
         return mostAttended;
@@ -501,9 +500,11 @@ public class EventActions  {
      */
     public int numAtMaxCapacity() {
         int count = 0;
-        for (Map.Entry<String, Event> entry : events.entrySet()) {
-            if (attendees.get(entry.getValue()).size() == entry.getValue().getCapacity()) {
-                count += 1;
+        for (Map.Entry<String, Integer> entry1 : eventCapacity.entrySet()) {
+            for (Map.Entry<String, List<String>> entry2 : attendees.entrySet()) {
+                if (eventCapacity.get(entry1.getValue()) == attendees.get(entry2.getValue()).size()) {
+                    count += 1;
+                }
             }
         }
         return count;
