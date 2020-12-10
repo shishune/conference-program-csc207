@@ -17,13 +17,12 @@ import java.util.Map;
 
 
 public class AttendeeActions extends UserAccountActions {
-    private HashMap<String, Attendee> attendeesHashMap = new HashMap<String, Attendee>();
-    private HashMap<String, Attendee> attendeeUsernameHashMap = new HashMap<String, Attendee>();
+    private HashMap<String, Attendee> attendeesHashMap = super.attendeeHashMapID;
+    private HashMap<String, Attendee> attendeeUsernameHashMap = super.attendeeHashMapUsername;
     private ArrayList<String> attendees = new ArrayList<String>();
     private LoadUpIGateway loader;
     private int counter;
-//    private SpeakerActions speaker;
-//    private OrganizerActions organizer;
+
 
     /**
      * @param loader
