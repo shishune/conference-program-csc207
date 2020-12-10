@@ -43,7 +43,6 @@ public class Store{
      * @param eventActions the use case class responsible for events
      */
     public void storeEvents(useCases.EventActions eventActions) {
-        System.out.println(eventActions);
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/events.csv";
         List<String> eventsList = eventActions.storeEvents();

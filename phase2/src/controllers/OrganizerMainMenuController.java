@@ -23,8 +23,8 @@ import java.util.*;
  * @version 1
  * */
 public class OrganizerMainMenuController extends MainMenuController {
-    private controllers.OrganizerController controller; // = new OrganizerController();
-    private useCases.RoomActions room; // = super.getRooms();
+    private controllers.OrganizerController controller;
+    private useCases.RoomActions room;
     private useCases.SpeakerActions speaker;
     private useCases.EventActions event;
     private useCases.OrganizerActions organizer;
@@ -272,7 +272,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                                     catcherUserName = false;
                                 } else {
                                     displayMessage.speakerDoesNotExist();
-                                    return;
+
                                 }
                                 catcher1 -= 1;
                             }
@@ -339,9 +339,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         for (Map.Entry<String, Conference> entry : conferenceUsernameHash.entrySet()) {
             Conference conference = entry.getValue();
             List<String> stringRepConference = Arrays.asList(conference.getStringRep().split(","));
-            //stringRepConference.add(conference.getTitle());
-            //stringRepConference.add(conference.getStartDateTime());
-            //stringRepConference.add(conference.getEndDateTime());
 
             stringRepConferences.add(stringRepConference);
         }
@@ -478,25 +475,6 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
             displayEvent.displayEvents(eventsList);
         }
-
-//        List<List<String>> e = new ArrayList<>();
-//        for (String event1 : controller.returnUserIDHashMap().get(userID).getEventList()) {
-//            List<String> individualEvents = new ArrayList<>();
-//            if (event.getEvent(event1) != null) {
-//                individualEvents.add(event.getEvent(event1).getTitle());
-//                individualEvents.add(event.getEvent(event1).getDateTime());
-//                String roomName = room.findRoomFromId(event.getEvent(event1).getRoomID()).getRoomName();
-//                individualEvents.add(roomName);
-//                for (String elem : event.getEvent(event1).getSpeakers()) {
-//                    String speakerName = speaker.findUserFromId(elem).getUsername();
-//                    individualEvents.add(speakerName);
-//                    e.add(individualEvents);
-//                }
-//            } else {
-//                break;
-//            }
-//        }
-//        displayEvent.displayEvents(e);
     }
 
 
