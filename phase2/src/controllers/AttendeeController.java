@@ -36,7 +36,12 @@ public class AttendeeController extends UserController {
     @Override
     public boolean leaveEvent(String eventName, String userId){
         String eventID = e.getEventFromName(eventName).getId();
-        return this.attendee.removeEventFromUser(eventID, userId);
+        if(this.attendee.findUserFromId(userId).getEventList().contains(eventID)) {
+            return this.attendee.removeEventFromUser(eventID, userId);
+        }
+        else{
+            return false;
+        }
     }
 
     /**

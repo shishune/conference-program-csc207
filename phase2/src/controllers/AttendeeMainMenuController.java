@@ -44,7 +44,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * Responds to menu option 6- sign up for event
      */
-    public void option6() {
+    public void option6EventSignupCreateView() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         // TODO print list of users conferences
         // TODO have user choose which conference events they want to see
@@ -179,7 +179,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * view saved events
      */
-    public void option10() {
+    public void option10AddOrViewEvents() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewSavedEvents(username);
         if (eventsList.size() == 0) {
@@ -201,7 +201,7 @@ public class AttendeeMainMenuController extends MainMenuController {
      * view vip events
      */
 
-    public void option11() {
+    public void option11VIPOrConferences() {
         String username1 = controller.returnUserIDHashMap().get(userID).getUsername();
         if(!controller.isVIP(username1)){
             displayEvent.notVIP();
@@ -244,7 +244,7 @@ public class AttendeeMainMenuController extends MainMenuController {
     /**
      * sign up for conference
      */
-    public void option12(){
+    public void option12Conference(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         ArrayList<List<String>> conferences = conferenceActions.returnAvailableConferences(username);
         boolean available = displayConference.displayAvailableConferences(conferences);

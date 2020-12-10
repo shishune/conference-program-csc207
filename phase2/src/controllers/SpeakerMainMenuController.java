@@ -44,9 +44,9 @@ public class SpeakerMainMenuController extends MainMenuController {
     }
 
     /**
-     * Responds to menu option 2
+     * Responds to menu option 2, send message
      */
-    public void option2(){
+    public void option2SendMessage(){
         displayMessage.printMenu();
         String option = scan.nextLine();
         controllers.SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
@@ -54,13 +54,14 @@ public class SpeakerMainMenuController extends MainMenuController {
             menuController.option1();
         }
         if (option.equals("2")){
-            super.option2();
+            super.option2SendMessage();
         }
     }
     /**
      * Responds to menu option 3
+     * View all messages
      */
-    public void option3() {
+    public void option3ViewAllMessages() {
         List<String> contactIds = controller.returnUserIDHashMap().get(userID).getContactsList();
         if(contactIds.isEmpty()){
             displayMessage.zeroContacts();
@@ -91,7 +92,7 @@ public class SpeakerMainMenuController extends MainMenuController {
      * Add a contact
      */
 
-    public void option4(){
+    public void option4AddContact(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptContact();
         String add = scan.nextLine();
@@ -108,15 +109,17 @@ public class SpeakerMainMenuController extends MainMenuController {
 
     /**
      * Responds to menu option 5
+     * View all contacts
      */
-    public void option5() { //view all contacts
+    public void option5ViewAllContacts() { //view all contacts
         displayMessage.displayContacts(controller, userID);
 }
 
     /**
      * Responds to menu option 6
+     * View schedule of talks
      */
-    public void option6() {
+    public void option6EventSignupCreateView() {
         List<String> e = controller.returnUserIDHashMap().get(userID).getEventList();
         List<List<String>> stringE = new ArrayList<>();
 

@@ -42,12 +42,23 @@ public abstract class MainMenuController extends AccountController {
     }
 
     /**
-     * Responds to menu option 2
+     *
+     * @param str
+     * @return exiting program
      */
-    public void option2(){
+
+    protected boolean validInput(String str){
+        return !str.equals("") && !str.equalsIgnoreCase("x");
+    }
+
+
+    /**
+     * Responds to menu option 2, send message
+     */
+    public void option2SendMessage(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptRecipient(); // enter user you would like to send message to
-        option5();
+        option5ViewAllContacts();
         String receiver = scan.nextLine();
         // if receiver in contacts
         displayMessage.promptMessage(); // enter the message
@@ -60,9 +71,9 @@ public abstract class MainMenuController extends AccountController {
     }
 
     /**
-     * Responds to menu option 3
+     * Responds to menu option 3, view all messages
      */
-    public void option3(){
+    public void option3ViewAllMessages(){
         List<String> contactIds = controller.returnUserIDHashMap().get(userID).getContactsList();
         if(contactIds.isEmpty()){
             displayMessage.zeroContacts();
@@ -89,9 +100,9 @@ public abstract class MainMenuController extends AccountController {
     }
 
     /**
-     * Responds to menu option 4
+     * Responds to menu option 4, add a contact
      */
-    public void option4(){
+    public void option4AddContact(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptContact();
         String add = scan.nextLine();
@@ -110,30 +121,31 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 5- view all contacts
      */
-    public void option5(){ //view all contacts
+    public void option5ViewAllContacts(){ //view all contacts
 
         displayMessage.displayContacts(controller,userID);
 
     }
 
     /**
-     * Responds to menu option 6- sign up for event
+     * Responds to menu option 6- sign up or save an event (Attendee)
+     * Create event or speaker (Organizer)
+     * View schedule of talks (Speaker)
      */
-    public abstract void option6();
+    public abstract void option6EventSignupCreateView();
 
     /**
-     * Responds to menu option 7- cancel attendance to an event
+     * Responds to menu option 7- cancel attendance to an event (Attendee)
+     * Remove event or reschedule (Organizer)
      */
-    public void option7(){
-        option9();
+    public void option7Cancel(){
+        option9ScheduleOrRoom();
         displayEvent.promptCancelEvent();
         String eventName = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
-        if(controller.returnUserIDHashMap().get(userID).getEventList().contains(eventName)){
-            if(controller.leaveEvent(eventName, userID)){
+        if(controller.leaveEvent(eventName, userID)){
                 displayEvent.successCancelEnrol();
             }
-        }
         else{
             displayEvent.failedCancelEvent();
         }
@@ -142,7 +154,7 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 8- view all events
      */
-    public void viewEventsAccordingToConference(){
+    public void option8ViewAllEvents(){
         String conferenceTitle = "";
         // TODO print list of users conferences
         // TODO have user choose which conference events they want to see
@@ -182,9 +194,11 @@ public abstract class MainMenuController extends AccountController {
     }
 
     /**
-     * Responds to menu option 9- view events user is signed up for
+     * Responds to menu option 9- view events user is signed up for (Attendee)
+     * Add room (Organizer)
+     * View schedule of talks (Speaker)
      */
-    public void option9(){
+    public void option9ScheduleOrRoom(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewOwnSchedule(username);
         if (eventsList.size() == 0){
@@ -206,26 +220,37 @@ public abstract class MainMenuController extends AccountController {
 
     /**
      * Responds to menu option 10
+     * Add user (Organizer)
+     * View saved events (Attendee)
      */
-    public void option10(){}
+    public void option10AddOrViewEvents(){}
 
-    public void option11(){}
-
-    public void option12(){}
-
-    public void option14(){}
-
-    public void option15(){}
-
-    /***
-     * Responds to menu option 13 - View conferences
+    /**
+     * Responds to menu option 11
+     * View VIP events (Attendee)
+     * View conferences (Organizers)
      */
-    public void option16(){
-        displayConference.displayConferences(conferenceActions.returnConferences());
-    }
+    public void option11VIPOrConferences(){}
 
-    protected boolean validInput(String str){
-        return !str.equals("") && !str.equalsIgnoreCase("x");
-    }
-    public void optionChangeCapacity() {}
+    /**
+     * Response to menu option 12
+     * Add a conference (Organizer)
+     * Sign up for a conference (Attendee)
+     */
+    public void option12Conference(){}
+
+    /**
+     * Responds to menu option 14 - change event capacity (Organizer)
+     */
+    public void option13ChangeCapacity() {}
+
+    public void option14ViewStatistics() {}
+
+
+//    /***
+//     * Responds to menu option 15 - View all conferences (Organizer)
+//     */
+//    public void option15ViewAllConferences(){
+//        displayConference.displayConferences(conferenceActions.returnConferences());
+//    }
 }

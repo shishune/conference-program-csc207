@@ -163,10 +163,7 @@ public class ConferenceActions {
     }
 
     public boolean conferenceExists(String conferenceTitle) {
-        if (conferenceTitlesHash.containsKey(conferenceTitle)) {
-            return true;
-        }
-        return false;
+        return conferenceTitlesHash.containsKey(conferenceTitle);
     }
 
     /**

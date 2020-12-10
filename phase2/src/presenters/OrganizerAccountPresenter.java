@@ -23,12 +23,10 @@ public class OrganizerAccountPresenter extends AccountPresenter {
                 + "\n[8] View all your created events"
                 + "\n[9] Add room"
                 + "\n[10] Add user"
-                + "\n[11] View all created events"
+                + "\n[11] View all conferences"
                 + "\n[12] Add a conference"
                 + "\n[13] Change capacity of an event"
                 + "\n[14] View Statistics"
-                + "\n[15]"
-                + "\n[16] View all conferences"
                 + "\nPlease select a menu item number.";
         System.out.println(display);
     }

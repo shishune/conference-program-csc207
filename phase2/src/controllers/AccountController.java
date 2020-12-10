@@ -123,45 +123,38 @@ public class AccountController {
                     } else if (menuOption.equals("2")) {
                         // send message. for attendee there is just one option, for organizer/speaker there
                         // are several options
-                        menuController.option2();
+                        menuController.option2SendMessage();
                     } else if (menuOption.equals("3")) { //view all messages
-                        menuController.option3();
+                        menuController.option3ViewAllMessages();
                     } else if (menuOption.equals("4")) { //add contact
-                        menuController.option4();
+                        menuController.option4AddContact();
                     } else if (menuOption.equals("5")) { //view all contacts
-                        menuController.option5();
+                        menuController.option5ViewAllContacts();
                     } else if (menuOption.equals("6")) {
                         // attendee: sign up for event
                         // organizer: add event
                         // speaker: see schedule of given talks
-                        menuController.option6();
+                        menuController.option6EventSignupCreateView();
                     } else if (menuOption.equals("7") && (type.equals("A") || type.equals("O"))) {
                         // attendee: cancel enrollment in event
                         // organizer: remove event
-                        menuController.option7();
+                        menuController.option7Cancel();
                     } else if (menuOption.equals("8") && (type.equals("A") || type.equals("O"))) {
-                        menuController.viewEventsAccordingToConference();
+                        menuController.option8ViewAllEvents();
                     } else if (menuOption.equals("9") && (type.equals("A") || type.equals("O"))) {
-                        menuController.option9();}
+                        menuController.option9ScheduleOrRoom();}
                     else if (menuOption.equals("10") && (type.equals("O") || type.equals("A"))) {
-                        menuController.option10();
+                        menuController.option10AddOrViewEvents();
                     } else if (menuOption.equals("11") && (type.equals("O") || type.equals("A"))) {
-                        menuController.option11();
+                        menuController.option11VIPOrConferences();
                     } else if (menuOption.equals("12") && (type.equals("O") || type.equals("A"))) {
-                        menuController.option12();
+                        menuController.option12Conference();
                     }  else if (menuOption.equals("13")) {
-                        menuController.optionChangeCapacity();
+                        menuController.option13ChangeCapacity();
                     }
                     else if (menuOption.equals("14")&& (type.equals("O"))) {
-                        //view stats
-                        menuController.option14();
-                    }
-                    else if (menuOption.equals("15")&&(type.equals("O"))){
-                        menuController.option15();
-                    }
-                    else if (menuOption.equals("16")&&(type.equals("O"))){
-                        //View all conferences
-                        menuController.option16();
+                        //view all conferences
+                        menuController.option14ViewStatistics();
                     }
 
                     else {
