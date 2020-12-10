@@ -109,7 +109,7 @@ public class ConferencePresenter {
             } else {
                 System.out.println("Conferences:");
                 for (List<String> conference : conferencesList) {
-                    System.out.println(conference.get(0) + "\n");
+                    System.out.println(conference.get(0));
                 }
             }
         }
@@ -128,7 +128,7 @@ public class ConferencePresenter {
             } else {
                 System.out.println("Conferences:");
                 for (List<String> conference : conferencesList) {
-                    System.out.println(conference.get(0) + "\n");
+                    System.out.println(conference.get(0));
                 }
                 return true;
             }
@@ -149,7 +149,7 @@ public class ConferencePresenter {
             } else {
                 System.out.println("Conferences:");
                 for (List<String> conference : conferencesList) {
-                    System.out.println(conference.get(0) + "\n");
+                    System.out.println(conference.get(0));
                 }
                 return true;
             }
