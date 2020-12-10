@@ -43,6 +43,7 @@ public class OrganizerActions extends UserAccountActions {
      * This will load up the data in the hashmap to the CSV files.
      * */
     public OrganizerActions(LoadUpIGateway loader) {
+        this.loader = loader;
         getAllOrganizer(loader); // gets all messages from message.csv
         addOrganizerToHashMap(); // adds those messages to a hashmap of all messages from the csv
         // with message ID as key and message object as value
