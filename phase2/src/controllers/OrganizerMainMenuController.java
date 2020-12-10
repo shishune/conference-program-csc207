@@ -246,8 +246,8 @@ public class OrganizerMainMenuController extends MainMenuController {
                         }
 
                     } else {
-                        boolean catcher1 = true;
-                        while (catcher1) {
+                        int catcher1 = Integer.parseInt(numberOfSpeakers);
+                        while (catcher1 > 0) {
                             displayEvent.promptSpeaker();
                             String speakerUser = scan.nextLine();
 
@@ -258,21 +258,21 @@ public class OrganizerMainMenuController extends MainMenuController {
                                     if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
-                                            catcher1 = false;
+                                            return;
 
                                         } else {
                                             speakerUsernames.add(speakerId);
                                             displayMessage.speakerAdded();
-
                                         }
                                     }
                                     speakerUserName = speakerUser;
-                                    catcher1 = false;
+                                    catcher1 -= 1;
                                     catcherUserName = false;
                                 } else {
                                     displayMessage.speakerDoesNotExist();
+                                    return;
                                 }
-                                catcher1 = false;
+                                catcher1 -= 1;
                             }
                         }
                     }
