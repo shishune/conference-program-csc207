@@ -58,14 +58,17 @@ public abstract class MainMenuController extends AccountController {
     public void option2SendMessage(){
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptRecipient(); // enter user you would like to send message to
-        option5ViewAllContacts();
+        if (option2Helper()){
+
         String receiver = scan.nextLine();
         // if receiver in contacts
         displayMessage.promptMessage(); // enter the message
         String content = scan.nextLine();
+
         if (controller.sendMessage(username, receiver, content)){
             displayMessage.successMessage(); // message has been sent successfully
-        } else {
+        }}
+        else {
             displayMessage.failedMessage(); // message could not be sent
         }
     }
@@ -126,6 +129,15 @@ public abstract class MainMenuController extends AccountController {
         displayMessage.displayContacts(controller,userID);
 
     }
+    /**
+     * Responds to menu option 5- view all contacts
+     * Returns boolean if contact list is empty
+     */
+    private boolean option2Helper(){ //view all contacts
+
+        return displayMessage.displayContacts(controller,userID);
+
+    }
 
     /**
      * Responds to menu option 6- sign up or save an event (Attendee)
@@ -179,7 +191,6 @@ public abstract class MainMenuController extends AccountController {
                 correctConference = true;
             }
         }
-
 
         // String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
@@ -253,10 +264,14 @@ public abstract class MainMenuController extends AccountController {
     public void option12Conference(){}
 
     /**
-     * Responds to menu option 14 - change event capacity (Organizer)
+     * Responds to menu option 13 - change event capacity (Organizer)
      */
     public void option13ChangeCapacity() {}
 
+
+    /**
+     * Responds to menu option 14 - View statistics (Organizer)
+     */
     public void option14ViewStatistics() {}
 
 

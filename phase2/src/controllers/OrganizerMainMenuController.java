@@ -128,8 +128,6 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Responds to menu option 6 - create an event or new speaker
      */
     public void option6EventSignupCreateView() {
-        System.out.println(event.getEventsList());
-        System.out.println(event);
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
 
         String title = "";
@@ -502,11 +500,7 @@ public class OrganizerMainMenuController extends MainMenuController {
         while (catcher) {
             displayEvent.promptStartTime();
             String t1 = scan.nextLine();
-//            while (!scan.hasNextInt()) {
-//                    displayEvent.badTime();
-//                    scan.next();
-//                }
-//            int t1 = scan.nextInt();
+
             try {
                 if (Integer.parseInt(t1) < 17 && Integer.parseInt(t1) >= 9) {
                     if (Integer.parseInt(t1) < 10) {
@@ -528,12 +522,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         catcher = true;
         while (catcher) {
             displayEvent.promptEndTime();
-//            while (!scan.hasNextInt()) {
-//                displayEvent.badTime();
-//                scan.next();
-//            }
+
             String t2 = scan.nextLine();
-            //int t1 = scan.nextInt();
+
             try {
                 int start = Integer.parseInt(startTime);
                 if (Integer.parseInt(t2) < 17 && Integer.parseInt(t2) >= 9 && Integer.parseInt(t2) > start) {
@@ -662,9 +653,8 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
     /**
-     * Responds to menu option 8- view all events user has created
+     * Responds to menu option 8- view all events
      */
-
     public void option8ViewAllEvents() {
         ArrayList<List<String>> conferences = conference.returnConferences();
         displayConference.displayConferences(conferences);
@@ -846,56 +836,15 @@ public class OrganizerMainMenuController extends MainMenuController {
      */
     public void option11VIPOrConferences() {
         ArrayList<List<String>> conferences = conference.returnConferences();
-        displayConference.displayConferences(conferences);
-//        displayConference.promptConference();
-//        String conferenceTitle = scan.nextLine();
-//
-//        while (!conference.conferenceExists(conferenceTitle)) {
-//            //conferenceTitle = scan.nextLine();
-//            displayConferences.conferenceDoesNotExists();
-//            displayConferences.leaveOption();
-//            if (scan.nextLine().equalsIgnoreCase("x")) {
-//                return;
-//            }
-//        }
-//        String username = controller.returnUserIDHashMap().get(userID).getUsername();
-//        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
-//        if (eventsList.size() == 0) {
-//            displayMessage.noEvents();
-//        } else {
-//
-//            for (List<String> e : eventsList) {
-//                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-//                List<String> speakerList = new ArrayList<String>();
-//                List<String> speakers = Arrays.asList(e.get(3).split(","));
-//                for (String speakerID : speakers) {
-//                    if (speakerID.equals("")) {
-//                        speakerList.add(displayMessage.noSpeakers());
-//                    } else {
-//                        speakerList.add(speaker.findUserFromId(speakerID).getUsername());
-//                    }
-//                }
-//                e.set(3, String.valueOf(speakerList));
-//                //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
-//            }
-//            displayEvent.displayEvents(eventsList);
-//        }
-        }
+        displayConference.displayConferences(conferences);}
+
 
 
 
     public void option12Conference() {
-        // displayConferences.printOrganizerConferenceMenu();
-        //  String option = scan.nextLine();
+
         controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
         menuController.createConference();
-
-//        if (option.equals("1")) {
-//           ; // send message to all speakers
-//        }
-//        if (option.equals("2")) {
-//            menuController.option2(); // send message to all attendees of an event
-//        }
     }
 
     public void option13ChangeCapacity() {
@@ -982,3 +931,51 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     }
     */
+
+//        displayConference.promptConference();
+//        String conferenceTitle = scan.nextLine();
+//
+//        while (!conference.conferenceExists(conferenceTitle)) {
+//            //conferenceTitle = scan.nextLine();
+//            displayConferences.conferenceDoesNotExists();
+//            displayConferences.leaveOption();
+//            if (scan.nextLine().equalsIgnoreCase("x")) {
+//                return;
+//            }
+//        }
+//        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+//        List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
+//        if (eventsList.size() == 0) {
+//            displayMessage.noEvents();
+//        } else {
+//
+//            for (List<String> e : eventsList) {
+//                e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+//                List<String> speakerList = new ArrayList<String>();
+//                List<String> speakers = Arrays.asList(e.get(3).split(","));
+//                for (String speakerID : speakers) {
+//                    if (speakerID.equals("")) {
+//                        speakerList.add(displayMessage.noSpeakers());
+//                    } else {
+//                        speakerList.add(speaker.findUserFromId(speakerID).getUsername());
+//                    }
+//                }
+//                e.set(3, String.valueOf(speakerList));
+//                //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+//            }
+//            displayEvent.displayEvents(eventsList);
+//        }
+
+//    public void option12Conference() {
+//        // displayConferences.printOrganizerConferenceMenu();
+//        //  String option = scan.nextLine();
+//        controllers.OrganizerConferenceController menuController = new OrganizerConferenceController(this.controller, conference, event);
+//        menuController.createConference();
+//
+////        if (option.equals("1")) {
+////           ; // send message to all speakers
+////        }
+////        if (option.equals("2")) {
+////            menuController.option2(); // send message to all attendees of an event
+////        }
+//    }

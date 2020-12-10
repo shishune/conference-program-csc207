@@ -128,6 +128,7 @@ public class AttendeeMainMenuController extends MainMenuController {
      * helper to sign up to VIP events
      */
     public void signUpVIP(String username, List<List<String>> vipEventsList){
+
         if (vipEventsList.size() == 0) {
             displayMessage.noVIPEvents();
         } else {
@@ -205,20 +206,32 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
 
     public void option11VIPOrConferences() {
-        String username1 = controller.returnUserIDHashMap().get(userID).getUsername();
-        if(!controller.isVIP(username1)){
+        String conferenceTitle = "";
+        String username = controller.returnUserIDHashMap().get(userID).getUsername();
+        if(!controller.isVIP(username)){
             displayEvent.notVIP();
         }
         else{
-
-        String conferenceTitle = "";
-        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+        ArrayList<List<String>> conferences = conferenceActions.returnAttendedConferences(username);
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
-        while(!conferenceActions.conferenceExists(conferenceTitle)){
+        boolean correctConference = false;
+        while (!correctConference) {
             conferenceTitle = scan.nextLine();
+            if (!conferenceActions.conferenceExists(conferenceTitle)) {
+                displayConference.invalidTitle();
+                if (scan.nextLine().equalsIgnoreCase("x")) {
+                    return;
+                }
+            } else if (!conferenceActions.isAttendee(conferenceTitle, username)) {
+                displayConference.notAttendingConfernce();
+                if (scan.nextLine().equalsIgnoreCase("x")) {
+                    return;
+                }
+            } else {
+                correctConference = true;
+            }
         }
-        String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewVIPEvents(username, conferenceTitle);
 
         if (eventsList.size() == 0){
@@ -241,8 +254,8 @@ public class AttendeeMainMenuController extends MainMenuController {
             }
             displayEvent.displayEvents(eventsList);
         }
-        }
-    }
+        }}
+
 
     /**
      * sign up for conference
@@ -266,3 +279,29 @@ public class AttendeeMainMenuController extends MainMenuController {
         }
     }
 }
+    /*        String username1 = controller.returnUserIDHashMap().get(userID).getUsername();
+        if(!controller.isVIP(username1)){
+            displayEvent.notVIP();
+        }
+        else{
+
+//        String conferenceTitle = "";
+//        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
+//        displayConference.displayConferences(conferences);
+//        displayConference.promptConference();
+//        while(!conferenceActions.conferenceExists(conferenceTitle)){
+//            conferenceTitle = scan.nextLine();
+//            displayConference.invalidTitle();
+//        }
+            boolean exists = displayConference.displayAttendedConferences(conferences);
+
+            if (exists) {
+                displayConference.promptConference();
+                String conferenceTitle = scan.nextLine();
+                while (!conferenceActions.conferenceAttended(conferenceTitle, username)) {
+                    displayConference.invalidTitle();
+                    conferenceTitle = scan.nextLine();
+                    if(conferenceTitle.equalsIgnoreCase("x")){ //this cannot be inserted into loop condition
+                        break;
+                    }
+                }*/

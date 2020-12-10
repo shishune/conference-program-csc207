@@ -103,10 +103,11 @@ public class MessagePresenter {
     /**
      * Display all contacts
      */
-    public void displayContacts(UserController controller, String userId) {
+    public boolean displayContacts(UserController controller, String userId) {
         List<String> usersList = controller.viewContacts(userId);
         if (usersList.size() == 0) {
             noContacts();
+            return false;
         } else {
             int count = 1;
             if (usersList != null) {
@@ -116,6 +117,7 @@ public class MessagePresenter {
                 }
             }
         }
+        return true;
     }
 
     /**
