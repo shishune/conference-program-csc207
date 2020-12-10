@@ -940,7 +940,6 @@ public class OrganizerMainMenuController extends MainMenuController {
         String eventName = scan.nextLine();
 
         if (event.getEventNames().containsKey(eventName)) {
-            //if (controller.returnUserIDHashMap().get(userID).getEventList().contains(event.events.get(eventName).getId())) {
             displayEvent.newCapacity(eventName);
             int newCapacity = scan.nextInt();
 
