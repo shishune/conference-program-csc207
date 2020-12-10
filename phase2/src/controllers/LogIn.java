@@ -78,6 +78,7 @@ public class LogIn {
             accountDisplay.failedUsernameExists();
             return false;
         } else {
+            // note: implements factory pattern
             if (userType.equals("1")) {
                 organizerActions.createOrganizer(username, password);
                 return true;

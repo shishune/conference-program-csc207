@@ -157,6 +157,13 @@ public class MessagePresenter {
     /**
      * Message informing user there are no events
      */
+    public void noVIPEvents() {
+        System.out.println("There are no VIP events available.");
+    }
+
+    /**
+     * Message informing user there are no events
+     */
     public String noSpeakers() {
         System.out.println("There are no speakers for this event.");
         return "There are no speakers for this event.";

@@ -253,8 +253,9 @@ public class EventActions  {
      *      and ending with and excluding  endDateTime
      */
     private List<String> timeInBetween(String startDateTime, String endDateTime){
-        int startTime = Integer.parseInt(startDateTime.substring(29, 31));
-        int endTime = Integer.parseInt(endDateTime.substring(29, 31));
+        int strLength = startDateTime.length();
+        int startTime = Integer.parseInt(startDateTime.substring(strLength - 2, strLength));
+        int endTime = Integer.parseInt(endDateTime.substring(strLength - 2, strLength));
         String date = startDateTime.substring(0, 10);
         List<String> times = new ArrayList<>();
         times.add(startDateTime);

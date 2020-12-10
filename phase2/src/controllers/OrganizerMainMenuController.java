@@ -177,12 +177,12 @@ public class OrganizerMainMenuController extends MainMenuController {
             //displayEvent.promptTitle();
             displayEvent.promptTitle();
             title = scan.nextLine();
-            if (!validInput(title)) {
+            if (title.equalsIgnoreCase("x")){
+                return;
+            } else if (!validInput(title)) {
                 displayMessage.invalidInput();
-                displayEvent.promptTitle();
             } else if (event.eventNameExists(title)) {
                 displayEvent.eventExists();
-                displayEvent.promptTitle();
             } else {
                 displayEvent.promptVIP();
                 String vip = scan.nextLine();
@@ -228,7 +228,9 @@ public class OrganizerMainMenuController extends MainMenuController {
         String zeroSpeaker = scan.nextLine();
         String speakerId = "";
 
-        if (!zeroSpeaker.equalsIgnoreCase("y")) {
+        if(zeroSpeaker.equalsIgnoreCase("y")){
+            speakerUsernames.add(speakerId);
+        } else {
             displayMessage.numberOfSpeaker();
             String numberOfSpeakers = scan.nextLine();
             int i = 0;
@@ -260,7 +262,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                                     if (speaker.returnUsernameHashMap().get(speakerUser).getEventList() != null) {
                                         if (controller.checkTimeConflict(speakerUser, dateTimes.get(0), dateTimes.get(1))) {
                                             displayEvent.failedDoubleBookSpeaker();
-                                            return;
 
                                         } else {
                                             speakerUsernames.add(speakerId);
@@ -636,6 +637,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
     /***
      * Responds to menu option 10- create a new user
+     * note: implements factory pattern
      */
     public void option10AddOrViewEvents() {
         boolean loop = true;

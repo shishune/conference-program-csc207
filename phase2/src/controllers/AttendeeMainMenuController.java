@@ -46,8 +46,6 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
     public void option6EventSignupCreateView() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
-        // TODO print list of users conferences
-        // TODO have user choose which conference events they want to see
         ArrayList<List<String>> conferences = conferenceActions.returnAttendedConferences(username);
         boolean exists = displayConference.displayAttendedConferences(conferences);
 
@@ -73,16 +71,21 @@ public class AttendeeMainMenuController extends MainMenuController {
                 if (eventsList.size() == 0) {
                     displayMessage.noEvents();
                 } else {
+                    List<List<String>> eventsListString = new ArrayList<>();
                     for (List<String> e : eventsList) {
-                        e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
+                        List<String> eventInfo = new ArrayList<>();
+                        eventInfo.add(e.get(0));
+                        eventInfo.add(e.get(1));
+                        eventInfo.add(room.findRoomFromId(e.get(2)).getRoomName());
                         if (e.get(3).equals("")) {
-                            e.set(3, "There are no speakers at the moment for this event.");
+                            eventInfo.add("There are no speakers at the moment for this event.");
                         } else {
-                            e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
+                            eventInfo.add(speakerActions.findUserFromId(e.get(3)).getUsername());
                         }
+                        eventsListString.add(eventInfo);
 
                     }
-                    displayEvent.displayEvents(eventsList);
+                    displayEvent.displayEvents(eventsListString);
                     displayEvent.promptSelectEvent();
                     String event = scan.nextLine();
                     boolean check = controller.checkEvent(event);
@@ -126,7 +129,7 @@ public class AttendeeMainMenuController extends MainMenuController {
      */
     public void signUpVIP(String username, List<List<String>> vipEventsList){
         if (vipEventsList.size() == 0) {
-            displayMessage.noEvents();
+            displayMessage.noVIPEvents();
         } else {
             for (List<String> e : vipEventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
