@@ -150,6 +150,7 @@ public class EventPresenter {
     public void failed(){
         System.out.println("Sorry, there was a problem with your request.");
     }
+
     /**
      * Event not created
      */
@@ -199,7 +200,9 @@ public class EventPresenter {
 
     public void changeEventCapacity() {System.out.println("Please enter the name you would like to change the capacity of"); }
 
-    public void newCapacity(String eventName) {System.out.println("Please enter the new capacity for" + eventName);}
+    public void newCapacity(String eventName) {System.out.println("Please enter the new capacity for " + eventName);}
+
+    public void capacityChanged() {System.out.println("Capacity was successfully changed");}
     /**
      * Telling user they are not a VIP
      */

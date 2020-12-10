@@ -477,13 +477,13 @@ public class OrganizerMainMenuController extends MainMenuController {
         ArrayList<List<String>> conferences = conference.returnConferences();
         displayConference.displayConferences(conferences);
         displayConference.promptConference();
-        while(!conference.conferenceExists(conferenceTitle)){
+        while (!conference.conferenceExists(conferenceTitle)) {
             conferenceTitle = scan.nextLine();
         }
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             //displayMessage.noEvents();
             displayEvent.noEventsAvailable();
         } else {
@@ -492,7 +492,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
                 List<String> speakerList = new ArrayList<String>();
                 for (String s : e.get(3).split(",")) {
-                    if (s.equals("")){
+                    if (s.equals("")) {
                         speakerList.add(displayMessage.noSpeakers());
                     } else {
                         speakerList.add(speaker.findUserFromId(s).getUsername());
@@ -864,7 +864,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             conferenceTitle = scan.nextLine();
             displayConferences.conferenceDoesNotExists();
             displayConferences.leaveOption();
-            if (scan.nextLine().equalsIgnoreCase("x")){
+            if (scan.nextLine().equalsIgnoreCase("x")) {
                 return;
             }
         }
@@ -939,17 +939,17 @@ public class OrganizerMainMenuController extends MainMenuController {
         displayEvent.changeEventCapacity();
         String eventName = scan.nextLine();
 
-        if (event.getEventNames().get(eventName) != null) {
+        if (event.getEventNames().containsKey(eventName)) {
+            //if (controller.returnUserIDHashMap().get(userID).getEventList().contains(event.events.get(eventName).getId())) {
+            displayEvent.newCapacity(eventName);
+            int newCapacity = scan.nextInt();
 
-            if (controller.returnUserIDHashMap().get(userID).getEventList().contains(event.events.get(eventName).getId())) {
-                displayEvent.newCapacity(eventName);
-                int newCapacity = scan.nextInt();
-                event.events.get(eventName).setCapacity(newCapacity);
+            event.getEventNames().get(eventName).setCapacity(newCapacity);
+            displayEvent.capacityChanged();
+
+        }
+        else{
+                displayEvent.failedNoSuchEvent();
             }
-            else{
-                displayMessage.noAccess();
-            }
-            displayEvent.failedNoSuchEvent();
         }
     }
-}
