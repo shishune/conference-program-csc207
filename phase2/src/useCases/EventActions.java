@@ -425,7 +425,6 @@ public class EventActions  {
 
     }
 
-
     /***
      * @return the event ID
      */
@@ -584,7 +583,6 @@ public class EventActions  {
      */
     public ArrayList<String> topFiveEvents() {
         ArrayList<Integer> numberAttendees = new ArrayList<>();
-        ArrayList<Integer> topFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
         ArrayList<String> topFive = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
             numberAttendees.add(entry.getValue().size());
@@ -594,6 +592,7 @@ public class EventActions  {
             numberAttendees.sort(Integer::compareTo);
             numberAttendees.sort(Comparator.reverseOrder()); //descending order
             if (numberAttendees.size() > 5) {
+                ArrayList<Integer> topFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
                 if (topFiveNumbers.contains(entry.getValue().size())) {
                     topFive.add(entry.getKey());
                     return topFive;
@@ -609,7 +608,6 @@ public class EventActions  {
 
     public ArrayList<String> bottomFiveEvents() {
         ArrayList<Integer> numberAttendees = new ArrayList<>();
-        ArrayList<Integer> bottomFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
         ArrayList<String> bottomFive = new ArrayList<>();
         for (Map.Entry<String, List<String>> entry : attendees.entrySet()) {
             numberAttendees.add(entry.getValue().size());
@@ -619,6 +617,7 @@ public class EventActions  {
             numberAttendees.sort(Integer::compareTo);
             numberAttendees.sort(Comparator.naturalOrder()); //ascending order
             if (numberAttendees.size() > 5) {
+                ArrayList<Integer> bottomFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
                 if (bottomFiveNumbers.contains(entry.getValue().size())) {
                     bottomFive.add(entry.getKey());
                     return bottomFive;
