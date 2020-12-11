@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @version 1
  */
 
-public abstract class UserAccountActions {
+public class UserAccountActions {
     // ID HashMaps
     protected HashMap<String, Attendee> attendeeHashMapID = new HashMap<String, Attendee>();
     protected HashMap<String, Organizer> organizerHashMapID = new HashMap<String, Organizer>();
@@ -28,6 +28,31 @@ public abstract class UserAccountActions {
     protected HashMap<String, Organizer> organizerHashMapUsername = new HashMap<String, Organizer>();
     protected HashMap<String, Speaker> speakerHashMapUsername = new HashMap<String, Speaker>();
 
+
+    public HashMap<String, Attendee> getAttendeeHashmapID() {
+        return attendeeHashMapID;
+    }
+
+    public HashMap<String, Organizer> getOrganizerHashMapID() {
+        return organizerHashMapID;
+    }
+
+    public HashMap<String, Speaker> getSpeakerHashMapID() {
+        return speakerHashMapID;
+    }
+
+    public HashMap<String, Organizer> getOrganizerHashMapUsername() {
+        return organizerHashMapUsername;
+    }
+
+    public HashMap<String, Attendee> getAttendeeHashMapUsername() {
+        return attendeeHashMapUsername;
+    }
+
+    public HashMap<String, Speaker> getSpeakerHashMapUsername() {
+        return speakerHashMapUsername;
+    }
+
     /**
      * Adds an user to existing list of contacts for an user.
      * @param addMe the user to be added
@@ -35,7 +60,9 @@ public abstract class UserAccountActions {
      * @return true if user is added successfully, false if not
      * */
 
-    public abstract boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userHashMap);
+    public boolean addUserContactList(String toMe, String addMe, HashMap<String, User> userHashMap) {
+        return false;
+    }
 
 
     /**
@@ -45,7 +72,9 @@ public abstract class UserAccountActions {
      * @return true if user is removed successfully, false if not
      * */
 
-    public abstract boolean removeUserContactList(String toMe, String removeMe);
+    public boolean removeUserContactList(String toMe, String removeMe) {
+        return false;
+    }
 
 
     /**
@@ -55,7 +84,9 @@ public abstract class UserAccountActions {
      * @return true if event is added successfully, false if not
      * */
 
-    public abstract boolean addEventToUser(String event, String user);
+    public boolean addEventToUser(String event, String user){
+        return false;
+    }
 
 
     /**
@@ -65,7 +96,9 @@ public abstract class UserAccountActions {
      * @return true if event is removed successfully, false if not
      * */
 
-    public abstract boolean removeEventFromUser(String event, String user);
+    public boolean removeEventFromUser(String event, String user) {
+        return false;
+    }
 
     /**
      * Prints all the events in an user's eventList
@@ -73,21 +106,27 @@ public abstract class UserAccountActions {
      * @return string of all the events a user is attending
      * */
 
-    public abstract String returnAllEvents(String user);
+    public String returnAllEvents(String user) {
+        return null;
+    }
 
     /**
      * Finds an user from a given username
      * @param username the username given
      * @return user object from hashmap of user objects
      * */
-    public abstract User findUserFromUsername(String username);
+    public User findUserFromUsername(String username){
+        return null;
+    }
 
     /**
      * Finds an user from a given userId
      * @param userId the userId given
      * @return user object from hashmap of user objects
      * */
-    public abstract User findUserFromId(String userId);
+    public User findUserFromId(String userId){
+        return null;
+    }
 
 
 
