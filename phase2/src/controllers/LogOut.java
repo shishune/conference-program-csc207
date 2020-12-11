@@ -21,25 +21,21 @@ public class LogOut {
      * Instantiates a new logout object
      * @param store the gateway responsible for storing information regarding rooms, events, messages, and
      *              organizers of the conference
-     * @param messageActions the use case responsible for messages
-     * @param organizerActions the use case responsible for organizers
-     * @param attendeeActions the use case responsible for attendees
-     * @param roomActions the use case responsible for rooms
-     * @param speakerActions the use case responsible for speakers
-     * @param eventActions the use case responsible for events
+     * @param eventSystemActions the use cases for handling the system of events
+     * @param accountActions the use cases for handling the accounts of users
+     * @param logoutActions the use case handling logout
      */
-    public LogOut(Store store, useCases.MessageActions messageActions, useCases.OrganizerActions organizerActions,
-                  useCases.AttendeeActions attendeeActions, RoomActions roomActions, useCases.SpeakerActions speakerActions,
-                  useCases.EventActions eventActions, useCases.ConferenceActions conferenceActions, useCases.LogoutActions logoutActions){
+    public LogOut(Store store, parameterObjects.EventSystemActions eventSystemActions,
+                  parameterObjects.AccountActions accountActions, useCases.LogoutActions logoutActions){
         this.store = store;
-        this.messageActions = messageActions;
-        this.organizerActions = organizerActions;
-        this.attendeeActions = attendeeActions;
-        this.roomActions = roomActions;
-        this.speakerActions = speakerActions;
-        this.eventActions = eventActions;
+        this.messageActions = eventSystemActions.getMessageActions();
+        this.organizerActions = accountActions.getOrganizerActions();
+        this.attendeeActions = accountActions.getAttendeeActions();
+        this.roomActions = eventSystemActions.getRoomActions();
+        this.speakerActions = accountActions.getSpeakerActions();
+        this.eventActions = eventSystemActions.getEventActions();
         this.logoutActions = logoutActions;
-        this.conferenceActions = conferenceActions;
+        this.conferenceActions = eventSystemActions.getConferenceActions();
 
     }
 
