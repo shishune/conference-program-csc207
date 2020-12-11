@@ -91,7 +91,7 @@ public class AccountController {
                     menuController = (controllers.SpeakerMainMenuController) new SpeakerMainMenuController(user, speakerController,
                             eventActions, attendeeActions, roomActions, speakerActions, conferenceActions);
                 }
-                else{
+                else{ //indicates organizer
                     String user = organizerActions.returnUsernameHashMap().get(username).getId();
                     accountDisplay = new presenters.OrganizerAccountPresenter();
                     controllers.OrganizerController organizerController = new OrganizerController(user, eventSystemActions, accountActions);
