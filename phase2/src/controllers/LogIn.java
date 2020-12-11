@@ -27,12 +27,9 @@ public class LogIn {
     /**
      * This method is called when the user enter 'x' to sigh up. It reads the username and password the user inputted.
      * @param userController controller responsible for all users
-     * @param organizerActions the use case responsible for organizers
-     * @param speakerActions the use case responsible for speakers
-     * @param attendeeActions the use case responsible for attendees
+     * @param accountActions the use case for attendee, organizer, speaker
      */
-    public void signUp(controllers.UserController userController, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
-                       useCases.AttendeeActions attendeeActions) {
+    public void signUp(controllers.UserController userController, parameterObjects.AccountActions accountActions) {
 
         while (true){
 
@@ -49,7 +46,7 @@ public class LogIn {
 
             accountDisplay.printUserTypeMenu();
 
-                if(signUpCheck(username, password, userController, organizerActions, speakerActions, attendeeActions)){
+                if(signUpCheck(username, password, userController, accountActions)){
                     accountDisplay.successSignUp();
                     break;
                 }
@@ -65,14 +62,11 @@ public class LogIn {
      * Checks if username is unique
      * @param username A string the user inputs as their username
      * @param password A string the user inputs as their password
-     * @param organizerActions the use case responsible for organizers
-     * @param speakerActions the use case responsible for speakers
-     * @param attendeeActions the use case responsible for attendees
+     * @param accountActions the use case for attendee, speaker, organizer
      * @return true if the username is unique otherwise return false
      */
     private boolean signUpCheck(String username, String password, controllers.UserController userController,
-                                useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
-                                useCases.AttendeeActions attendeeActions) {
+                                parameterObjects.AccountActions accountActions) {
         String userType = scan.nextLine();
         if (userController.usernameExists(username)){
             accountDisplay.failedUsernameExists();
@@ -80,10 +74,10 @@ public class LogIn {
         } else {
             // note: implements factory pattern
             if (userType.equals("1")) {
-                organizerActions.createOrganizer(username, password);
+                accountActions.getOrganizerActions().createOrganizer(username, password);
                 return true;
             } else if (userType.equals("2")) {
-                speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+                accountActions.getSpeakerActions().createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
 
             } else if (userType.equals("3")) {
@@ -93,8 +87,8 @@ public class LogIn {
 
                 VIPStatus = responseInput.equals("VIP") || responseInput.equals("vip");
 
-                if (!attendeeActions.attendeeExists(username)) {
-                    attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(),
+                if (!accountActions.getAttendeeActions().attendeeExists(username)) {
+                    accountActions.getAttendeeActions().createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(),
                             new ArrayList<String>(), false, VIPStatus);
                     return true;
                 }

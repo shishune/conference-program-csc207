@@ -39,6 +39,11 @@ public class AccountController {
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
         useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
+
+        //Instantiate use case parameter objects
+        parameterObjects.AccountActions accountActions = new parameterObjects.AccountActions(attendeeActions, speakerActions, organizerActions);
+        parameterObjects.EventSystemActions eventSystemActions = new parameterObjects.EventSystemActions(conferenceActions, eventActions, messageActions, roomActions);
+
         controllers.UserController userController = new controllers.UserController(eventActions, roomActions,
                 messageActions, 'u', attendeeActions, organizerActions, speakerActions, conferenceActions);
 
@@ -50,7 +55,7 @@ public class AccountController {
         //loop breaks when user chooses to exit program
         while (true) {
             //login procedure.
-            logIn.signUp(userController, organizerActions, speakerActions, attendeeActions);
+            logIn.signUp(userController, accountActions);
             accountDisplay.promptUsername();
             String username = scan.nextLine();  // Read user input
             accountDisplay.promptPassword();
