@@ -18,9 +18,9 @@ public class LogIn {
      * @return The user object of the user if the login was successful otherwise null if given username and password
      * are incorrect.
      */
-    public String logIn(String username, String password, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.AttendeeActions attendeeActions) {
+    public String logIn(String username, String password, parameterObjects.AccountActions accountActions) {
         useCases.LoginActions l = new LoginActions();
-        String type = l.isLogin(username, password, organizerActions, speakerActions, attendeeActions);
+        String type = l.isLogin(username, password, accountActions);
         return type;
     }
 

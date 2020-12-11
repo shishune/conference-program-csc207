@@ -62,7 +62,7 @@ public class AccountController {
             String password = scan.nextLine();  // Read user input
 
             //String id = logIn.loggingIn(username, password); // evaluate username/password
-            String type = logIn.logIn(username, password, organizerActions, speakerActions, attendeeActions);
+            String type = logIn.logIn(username, password, accountActions);
 
             if(type.equals("")){
                 accountDisplay.failedLogin();
