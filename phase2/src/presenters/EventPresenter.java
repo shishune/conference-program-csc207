@@ -27,7 +27,7 @@ public class EventPresenter {
             System.out.println("Event title: "+info.get(0));
             System.out.println("Event time: "+info.get(1));
             System.out.println("Event room: "+info.get(2));
-            System.out.println("Event speakers: "+info.get(3));
+            System.out.println("Event speakers: "+ info.get(3));
 
             System.out.println("\n");
         }

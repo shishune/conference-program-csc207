@@ -2,6 +2,7 @@ package gateways;
 
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,6 @@ public class Store{
      * @param eventActions the use case class responsible for events
      */
     public void storeEvents(useCases.EventActions eventActions) {
-        System.out.println(eventActions);
         // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/events.csv";
         List<String> eventsList = eventActions.storeEvents();
@@ -83,7 +83,7 @@ public class Store{
      * Uses the method in organizerActions for obtaining all organizers as a list then stores in csv
      * @param organizerActions the use case class responsible for organizers
      */
-    public void storeOrganizers(OrganizerActions organizerActions) {
+    public <ICsvListWriter> void storeOrganizers(OrganizerActions organizerActions) {
         ArrayList<String> organizerList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/organizers.csv";
         organizerList = organizerActions.storingOrganizers();

@@ -89,6 +89,7 @@ public class UserController {
     }
 
 
+
     /***
      * return if the username already belongs to a user
      * @param username potential username 
@@ -344,7 +345,6 @@ public class UserController {
         return scheduleList;
 
     }
-
 
     /**
      * Shows the spots available in an event

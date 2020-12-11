@@ -81,9 +81,17 @@ public class ConferencePresenter {
      * conference does not exist or attendee not in it
      */
     public void invalidTitle(){
-        System.out.println("This conference does not exist or you are not participating in this conference. " +
+        System.out.println("This conference does not exist. " +
                 "Please enter another title or 'x' to return to menu to sign up for one.");
     }
+    /**
+     *  attendee not in conference
+     */
+    public void notAttendingConfernce(){
+        System.out.println("You are not participating in this conference. " +
+                "Please enter another title or 'x' to return to menu to sign up for one.");
+    }
+
     /**
      * failed sign up for conference.
      */

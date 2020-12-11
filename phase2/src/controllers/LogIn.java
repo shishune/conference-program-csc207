@@ -74,40 +74,24 @@ public class LogIn {
                                 useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions,
                                 useCases.AttendeeActions attendeeActions) {
         String userType = scan.nextLine();
-        if (userController.usernameExists(username)){ // hi i changed this because if not you could have two different types of accounts with the same username. -eryka
+        if (userController.usernameExists(username)){
             accountDisplay.failedUsernameExists();
             return false;
         } else {
+            // note: implements factory pattern
             if (userType.equals("1")) {
                 organizerActions.createOrganizer(username, password);
                 return true;
-//                if (!organizerActions.organizerExists(username)) {
-//                    organizerActions.createOrganizer(username, password);
-//                    return true;
-//                }
-//                else{
-//                    accountDisplay.failedUsernameExists();
-//                    return false;
-//                }
             } else if (userType.equals("2")) {
                 speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
                 return true;
-//                if (!speakerActions.speakerExists(username)) {
-//                    speakerActions.createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
-//                    return true;
-//                }
-//                else{
-//                    accountDisplay.failedUsernameExists();
-//                    return false;
-//                }
-            } else if (userType.equals("3")) {
 
+            } else if (userType.equals("3")) {
                 accountDisplay.VIPStatusPrompt();
                 boolean VIPStatus;
                 String responseInput = scan.nextLine();
 
                 VIPStatus = responseInput.equals("VIP") || responseInput.equals("vip");
-
 
                 if (!attendeeActions.attendeeExists(username)) {
                     attendeeActions.createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(),

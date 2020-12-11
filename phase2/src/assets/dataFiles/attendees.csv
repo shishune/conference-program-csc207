@@ -1,1 +1,4 @@
-A11,m,m,,,,false,false,false
+A3,3,3,,,,false,false,false
+A13,a,a,S17%%A5,E18,,true,false,false
+A5,attendee,attendee,A13,,,true,false,false
+A7,vip,vip,O4,,,false,false,true
