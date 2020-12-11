@@ -27,9 +27,9 @@ public class UserController {
     private useCases.EventActions eventActions;  //= super.getEvents();
     private useCases.RoomActions roomActions; // = super.getRooms();
 
-    private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
-    private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
-    private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+//    private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
+//    private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
+//    private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
 
     private useCases.ConferenceActions conferenceActions; // = super.getConferences()
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -53,40 +53,65 @@ public class UserController {
             this.user = attendee;
         }
 
-        this.attendeeActions = attendee;
-        this.organizerActions = organizer;
-        this.speakerActions = speaker;
+//        this.attendeeActions = attendee;
+//        this.organizerActions = organizer;
+//        this.speakerActions = speaker;
         this.conferenceActions = conference;
     }
 
 
     public HashMap<String, User> returnUserUsernameHashMap() {
-        if (!(attendeeActions == null) && !attendeeActions.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(attendeeActions.returnUsernameHashMap());
+        if (!user.getAttendeeHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(user.getAttendeeHashMapUsername());
         }
-        if (!(organizerActions == null) && !organizerActions.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(organizerActions.returnUsernameHashMap());
+        if (!user.getOrganizerHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(user.getOrganizerHashMapUsername());
         }
-        if (!(speakerActions == null) && !speakerActions.returnUsernameHashMap().isEmpty()) {
-            usernameHashmap.putAll(speakerActions.returnUsernameHashMap());
+        if (!user.getSpeakerHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(user.getSpeakerHashMapUsername());
         }
         return usernameHashmap;
 
     }
-
+//    public HashMap<String, User> returnUserUsernameHashMap() {
+//        if (!(attendeeActions == null) && !attendeeActions.returnUsernameHashMap().isEmpty()) {
+//            usernameHashmap.putAll(attendeeActions.returnUsernameHashMap());
+//        }
+//        if (!(organizerActions == null) && !organizerActions.returnUsernameHashMap().isEmpty()) {
+//            usernameHashmap.putAll(organizerActions.returnUsernameHashMap());
+//        }
+//        if (!(speakerActions == null) && !speakerActions.returnUsernameHashMap().isEmpty()) {
+//            usernameHashmap.putAll(speakerActions.returnUsernameHashMap());
+//        }
+//        return usernameHashmap;
+//
+//    }
 
     public HashMap<String, User> returnUserIDHashMap() {
-        if (!attendeeActions.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(attendeeActions.returnIDHashMap());
+        if (!user.getAttendeeHashmapID().isEmpty()) {
+            userIdHashmap.putAll(user.getAttendeeHashmapID());
         }
-        if (!organizerActions.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(organizerActions.returnIDHashMap());
+        if (!user.getOrganizerHashMapID().isEmpty()) {
+            userIdHashmap.putAll(user.getOrganizerHashMapID());
         }
-        if (!speakerActions.returnIDHashMap().isEmpty()) {
-            userIdHashmap.putAll(speakerActions.returnIDHashMap());
+        if (!user.getSpeakerHashMapID().isEmpty()) {
+            userIdHashmap.putAll(user.getSpeakerHashMapID());
         }
         return userIdHashmap;
     }
+
+//    public HashMap<String, User> returnUserIDHashMap() {
+//        if (!attendeeActions.returnIDHashMap().isEmpty()) {
+//            userIdHashmap.putAll(attendeeActions.returnIDHashMap());
+//        }
+//        if (!organizerActions.returnIDHashMap().isEmpty()) {
+//            userIdHashmap.putAll(organizerActions.returnIDHashMap());
+//        }
+//        if (!speakerActions.returnIDHashMap().isEmpty()) {
+//            userIdHashmap.putAll(speakerActions.returnIDHashMap());
+//        }
+//        return userIdHashmap;
+//    }
 
 
 
@@ -475,13 +500,18 @@ public class UserController {
         return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
     }
 
-
     /***
      * Check if any speakers exists in the system
      */
     public boolean speakersExist() {
-        return (speakerActions.returnIDHashMap().size() > 0);
+        return (user.getSpeakerHashMapID().size() > 0);
     }
+//    /***
+//     * Check if any speakers exists in the system
+//     */
+//    public boolean speakersExist() {
+//        return (speakerActions.returnIDHashMap().size() > 0);
+//    }
 
 //    public Date dateLoggedOut(String userName) {
 //        User u = user.findUserFromUsername(userName);

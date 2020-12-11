@@ -36,7 +36,6 @@ public class GenerateID {
                 loader.addId(String.valueOf(objectId));
             }
 
-
         }
         return String.valueOf(objectId);
     }

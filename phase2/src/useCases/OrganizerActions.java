@@ -379,4 +379,5 @@ public class OrganizerActions extends UserAccountActions {
         return returnUsernameHashMap().get(username).getEventList();
     }
 
+
 }
