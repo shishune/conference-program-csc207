@@ -12,8 +12,8 @@ import java.util.List;
 
 public class AttendeeController extends UserController {
     private useCases.MessageActions message;
-    private useCases.EventActions e;
-    private useCases.AttendeeActions attendee;
+    private useCases.EventActions eventActions;
+    private useCases.AttendeeActions attendeeActions;
 
     /**
      *
@@ -22,17 +22,17 @@ public class AttendeeController extends UserController {
      */
     public AttendeeController(parameterObjects.EventSystemActions eventSystemActions, parameterObjects.AccountActions accountActions) {
         super(eventSystemActions, accountActions, 'a');
-        this.attendee = accountActions.getAttendeeActions();
-        this.e = eventSystemActions.getEventActions();
+        this.attendeeActions = accountActions.getAttendeeActions();
+        this.eventActions = eventSystemActions.getEventActions();
 
     }
 
     @Override
     public boolean leaveEvent(String eventName, String userId){
-        if (e.getEventNames().containsKey(eventName)){
-            String eventID = e.getEventFromName(eventName).getId();
-            if(this.attendee.findUserFromId(userId).getEventList().contains(eventID)) {
-                return this.attendee.removeEventFromUser(eventID, userId);
+        if (eventActions.getEventNames().containsKey(eventName)){
+            String eventID = eventActions.getEventFromName(eventName).getId();
+            if(this.attendeeActions.findUserFromId(userId).getEventList().contains(eventID)) {
+                return this.attendeeActions.removeEventFromUser(eventID, userId);
             }
         }
         return false;
@@ -45,7 +45,7 @@ public class AttendeeController extends UserController {
      * @return true if the event is successfully saved return false if not
      */
     public boolean saveEvent(String eventName, String userName){
-        return this.attendee.addEventToSavedEvent(eventName, userName);
+        return this.attendeeActions.addEventToSavedEvent(eventName, userName);
     }
 
     /**
@@ -55,8 +55,8 @@ public class AttendeeController extends UserController {
      * @return true if the event is successfully removed return false if not
      */
     public boolean unSaveEvent(String eventName, String userID){
-        String eventID = e.getEventFromName(eventName).getId();
-        return this.attendee.removeEventFromSavedEvent(eventID, userID);
+        String eventID = eventActions.getEventFromName(eventName).getId();
+        return this.attendeeActions.removeEventFromSavedEvent(eventID, userID);
     }
 
     /**
@@ -68,15 +68,15 @@ public class AttendeeController extends UserController {
      */
 
     public List<List<String>> viewSavedEvents(String user) {
-        Attendee a1 = attendee.returnUsernameHashMap().get(user);
+        Attendee a1 = attendeeActions.returnUsernameHashMap().get(user);
         List<String> savedEventList = a1.getSavedEventList();
         List<List<String>> saveEventList = new ArrayList<List<String>>();
-        if (e != null) {
+        if (eventActions != null) {
             for (String event : savedEventList) {
-                String title = e.getEventFromName(event).getTitle();
-                String dateTime = e.getEventFromName(event).getDateTime();
-                String roomId = e.getEventFromName(event).getRoomID();
-                List<String> speakers = e.getEventFromName(event).getSpeakers();
+                String title = eventActions.getEventFromName(event).getTitle();
+                String dateTime = eventActions.getEventFromName(event).getDateTime();
+                String roomId = eventActions.getEventFromName(event).getRoomID();
+                List<String> speakers = eventActions.getEventFromName(event).getSpeakers();
                 List<String> info = new ArrayList<String>();
                 info.add(title);
                 info.add(dateTime);
@@ -92,7 +92,7 @@ public class AttendeeController extends UserController {
      * Shows the vip events to a vip attendee
      */
     public boolean isVIP(String user){
-        return attendee.findUserFromUsername(user).getIsVIP();
+        return attendeeActions.findUserFromUsername(user).getIsVIP();
     }
 
 //    public List<List<String>> viewVIPEvents(String user){
