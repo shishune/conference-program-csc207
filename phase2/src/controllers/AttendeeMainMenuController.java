@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * A controller class for attendee that decides what to do based on user input when choosing from the main menu.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class AttendeeMainMenuController extends MainMenuController {

@@ -3,7 +3,7 @@ package presenters;
 /**
  * A presenter class. The AccountPresenter is responsible for anything related to logging in,
  * logging out, and navigating through the account.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 

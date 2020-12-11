@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * A controller class for organizer that decides what to do based on user input when choosing from
  * the menu of messaging methods.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class SpeakerMessageMenuController{

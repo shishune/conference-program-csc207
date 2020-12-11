@@ -3,7 +3,7 @@ package presenters;
 /**
  * A presenter class. This class is responsible for anything related to logging in,
  * logging out, and navigating through the account. It also creates a menu specific to an organizer.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class OrganizerAccountPresenter extends AccountPresenter {

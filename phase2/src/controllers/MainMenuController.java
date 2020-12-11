@@ -11,7 +11,7 @@ import java.util.*;
 
 /**
  * A controller class that decides what to do based on user input when choosing from the main menu.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public abstract class MainMenuController extends AccountController {

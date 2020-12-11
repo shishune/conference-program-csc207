@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * A master controller class to take in user input and respond using other controllers and presenters.
  * This is what is run in the main method.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class AccountController {

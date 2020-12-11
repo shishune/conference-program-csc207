@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * A controller class for speaker that decides what to do based on user input when choosing from the main menu.
- * @author Cynthia
+ * @author multiple
  * @version 1
  * */
 public class SpeakerMainMenuController extends MainMenuController {
