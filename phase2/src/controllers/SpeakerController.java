@@ -24,19 +24,21 @@ public class SpeakerController extends UserController{
     /**
      * Instantiates a new SpeakerController object. Creates an instance of SpeakerID, MessageActions, EventActions
      * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
+     * @param SpeakerID
+     * @param eventSystemActions the use cases related to the system of events
+     * @param accountActions the use cases related to handling the account
      */
 
-    public SpeakerController(String SpeakerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions,
-                             useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.ConferenceActions conferenceActions) {
-        super(eventActions, roomActions, messageActions, 's', attendeeActions, organizerActions, speakerActions, conferenceActions);
+    public SpeakerController(String SpeakerID, parameterObjects.EventSystemActions eventSystemActions, parameterObjects.AccountActions accountActions) {
+        super(eventSystemActions, accountActions, 's');
 
         this.SpeakerID = SpeakerID;
-        this.messageActions = messageActions;
-        this.eventActions = eventActions;
-        this.roomActions = roomActions;
-        this.attendeeActions = attendeeActions;
-        this.organizerActions = organizerActions;
-        this.speakerActions = speakerActions;
+        this.messageActions = eventSystemActions.getMessageActions();
+        this.eventActions = eventSystemActions.getEventActions();
+        this.roomActions = eventSystemActions.getRoomActions();
+        this.attendeeActions = accountActions.getAttendeeActions();
+        this.organizerActions = accountActions.getOrganizerActions();
+        this.speakerActions = accountActions.getSpeakerActions();
         this.displayMessage = new SpeakerMessagePresenter();
     }
     /**

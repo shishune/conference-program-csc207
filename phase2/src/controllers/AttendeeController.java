@@ -17,19 +17,13 @@ public class AttendeeController extends UserController {
 
     /**
      *
-     * @param events
-     * @param rooms
-     * @param message
-     * @param attendee
-     * @param organizer
-     * @param speaker
+     * @param eventSystemActions actions related to the system of events
+     * @param accountActions actions related to the account
      */
-    public AttendeeController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message,
-                              useCases.AttendeeActions attendee, useCases.OrganizerActions organizer,
-                              useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
-        super(events, rooms, message, 'a', attendee, organizer, speaker, conference);
-        this.attendee = attendee;
-        this.e = events;
+    public AttendeeController(parameterObjects.EventSystemActions eventSystemActions, parameterObjects.AccountActions accountActions) {
+        super(eventSystemActions, accountActions, 'a');
+        this.attendee = accountActions.getAttendeeActions();
+        this.e = eventSystemActions.getEventActions();
 
     }
 

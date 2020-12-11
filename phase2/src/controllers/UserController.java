@@ -40,23 +40,23 @@ public class UserController {
      * Instantiates a new UserController object. Creates an instance of UserAccountActions, MessageActions, EventActions
      * AttendeeActions, RoomActions.
      */
-    public UserController(useCases.EventActions events, RoomActions rooms, useCases.MessageActions message, char userType,
-                          useCases.AttendeeActions attendee, useCases.OrganizerActions organizer, useCases.SpeakerActions speaker, useCases.ConferenceActions conference) {
-        this.messageActions = message;
-        this.eventActions = events;
-        this.roomActions = rooms;
+    public UserController(parameterObjects.EventSystemActions eventSystemActions, parameterObjects.AccountActions accountActions, char userType) {
+        this.messageActions = eventSystemActions.getMessageActions();
+        this.eventActions = eventSystemActions.getEventActions();
+        this.roomActions = eventSystemActions.getRoomActions();
+        this.conferenceActions = eventSystemActions.getConferenceActions();
         if (userType == 'o') {
-            this.user = organizer;
+            this.user = accountActions.getOrganizerActions();
         } else if (userType == 's') {
-            this.user = speaker;
+            this.user = accountActions.getSpeakerActions();
         } else if (userType == 'a') {
-            this.user = attendee;
+            this.user = accountActions.getAttendeeActions();
         }
 
 //        this.attendeeActions = attendee;
 //        this.organizerActions = organizer;
 //        this.speakerActions = speaker;
-        this.conferenceActions = conference;
+        //this.conferenceActions = conference;
     }
 
 

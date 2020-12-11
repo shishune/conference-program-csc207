@@ -32,25 +32,20 @@ public class OrganizerController extends UserController {
      * Instantiates a new SpeakerController object. Creates an instance of SpeakerID, MessageActions, EventActions
      * AttendeeActions, RoomActions, OrganizerActions and SpeakerActions.
      * @param organizerID
-     * @param messageActions
-     * @param eventActions
-     * @param roomActions
-     * @param attendeeActions
-     * @param organizerActions
-     * @param speakerActions
+     * @param eventSystemActions the use cases related to the system of events
+     * @param accountActions the use cases related to handling the account
      */
-    public OrganizerController(String organizerID, useCases.MessageActions messageActions, useCases.EventActions eventActions, RoomActions roomActions, //hello
-                               useCases.AttendeeActions attendeeActions, useCases.OrganizerActions organizerActions, useCases.SpeakerActions speakerActions, useCases.ConferenceActions conferenceActions){ //hello
+    public OrganizerController(String organizerID, parameterObjects.EventSystemActions eventSystemActions, parameterObjects.AccountActions accountActions){
 
-        super(eventActions, roomActions, messageActions, 'o', attendeeActions, organizerActions, speakerActions, conferenceActions); //hello
+        super(eventSystemActions, accountActions, 'o');
         this.organizerID = organizerID;
-        this.speakerActions = speakerActions;
-        this.eventActions = eventActions;
-        this.roomActions = roomActions;
-        this.messageActions = messageActions;
-        this.attendeeActions = attendeeActions;
-        this.organizerActions = organizerActions;
-        this.conferenceActions = conferenceActions;
+        this.speakerActions = accountActions.getSpeakerActions();
+        this.eventActions = eventSystemActions.getEventActions();
+        this.roomActions = eventSystemActions.getRoomActions();
+        this.messageActions = eventSystemActions.getMessageActions();
+        this.attendeeActions = accountActions.getAttendeeActions();
+        this.organizerActions = accountActions.getOrganizerActions();
+        this.conferenceActions = eventSystemActions.getConferenceActions();
     }
     /***
      * create a new event
