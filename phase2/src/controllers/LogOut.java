@@ -64,6 +64,8 @@ public class LogOut {
 
 
         logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);
+
+
     }
 
     /**
