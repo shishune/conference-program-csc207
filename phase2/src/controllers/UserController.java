@@ -61,13 +61,13 @@ public class UserController {
 
 
     public HashMap<String, User> returnUserUsernameHashMap() {
-        if (!user.getAttendeeHashMapUsername().isEmpty()) {
+        if (!(user == null) &&!user.getAttendeeHashMapUsername().isEmpty()) {
             usernameHashmap.putAll(user.getAttendeeHashMapUsername());
         }
-        if (!user.getOrganizerHashMapUsername().isEmpty()) {
+        if (!(user == null)&&!user.getOrganizerHashMapUsername().isEmpty()) {
             usernameHashmap.putAll(user.getOrganizerHashMapUsername());
         }
-        if (!user.getSpeakerHashMapUsername().isEmpty()) {
+        if (!(user == null)&&!user.getSpeakerHashMapUsername().isEmpty()) {
             usernameHashmap.putAll(user.getSpeakerHashMapUsername());
         }
         return usernameHashmap;
