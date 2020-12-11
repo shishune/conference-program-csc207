@@ -27,10 +27,11 @@ public abstract class MainMenuController extends AccountController {
 
     /**
      * Instantiates the main menu responder object
-     * @param userID the user ID
+     *
+     * @param userID     the user ID
      * @param controller the controller responsible for user
      */
-    public MainMenuController(String userID, UserController controller, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions){
+    public MainMenuController(String userID, UserController controller, RoomActions room, SpeakerActions speakerActions, ConferenceActions conferenceActions) {
         this.controller = controller;
         this.userID = userID;
         this.displayMessage = new MessagePresenter();
@@ -42,12 +43,11 @@ public abstract class MainMenuController extends AccountController {
     }
 
     /**
-     *
      * @param str
      * @return exiting program
      */
 
-    protected boolean validInput(String str){
+    protected boolean validInput(String str) {
         return !str.equals("") && !str.equalsIgnoreCase("x");
     }
 
@@ -55,20 +55,20 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 2, send message
      */
-    public void option2SendMessage(){
+    public void option2SendMessage() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptRecipient(); // enter user you would like to send message to
-        if (option2Helper()){
+        if (option2Helper()) {
 
-        String receiver = scan.nextLine();
-        // if receiver in contacts
-        displayMessage.promptMessage(); // enter the message
-        String content = scan.nextLine();
+            String receiver = scan.nextLine();
+            // if receiver in contacts
+            displayMessage.promptMessage(); // enter the message
+            String content = scan.nextLine();
 
-        if (controller.sendMessage(username, receiver, content)){
-            displayMessage.successMessage(); // message has been sent successfully
-        }}
-        else {
+            if (controller.sendMessage(username, receiver, content)) {
+                displayMessage.successMessage(); // message has been sent successfully
+            }
+        } else {
             displayMessage.failedMessage(); // message could not be sent
         }
     }
@@ -76,25 +76,25 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 3, view all messages
      */
-    public void option3ViewAllMessages(){
+    public void option3ViewAllMessages() {
         List<String> contactIds = controller.returnUserIDHashMap().get(userID).getContactsList();
-        if(contactIds.isEmpty()){
+        if (contactIds.isEmpty()) {
             displayMessage.zeroContacts();
         } else {
             HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
             ArrayList<String> contactUsernames = new ArrayList<String>();
-            for(Map.Entry<String, User> user : userIdHash.entrySet()) {
-                if(contactIds.contains(user.getKey())){
+            for (Map.Entry<String, User> user : userIdHash.entrySet()) {
+                if (contactIds.contains(user.getKey())) {
                     contactUsernames.add(user.getValue().getUsername());
                 }
             }
             displayMessage.promptSelectReceiver(); // please select the receiver whose conversation you would like to view
-            for(String username : contactUsernames){
+            for (String username : contactUsernames) {
                 displayMessage.printString(username); // receiver username
             }
             String receiverUsername = scan.nextLine();
             HashMap<String, User> usernameHash = controller.returnUserUsernameHashMap();
-            if(usernameHash.get(receiverUsername) != null){
+            if (usernameHash.get(receiverUsername) != null) {
                 displayMessage.displayMessages(controller, userID, usernameHash.get(receiverUsername).getId()); // will pass in id instead of username
             } else {
                 displayMessage.failedContact();
@@ -105,18 +105,17 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 4, add a contact
      */
-    public void option4AddContact(){
+    public void option4AddContact() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         displayMessage.promptContact();
         String add = scan.nextLine();
-        if (controller.returnUserUsernameHashMap().containsKey(add)){
-            if (controller.addContact(add, username)){
+        if (controller.returnUserUsernameHashMap().containsKey(add)) {
+            if (controller.addContact(add, username)) {
                 displayMessage.successContact();
             } else {
                 displayMessage.sameUserContact();
             }
-        }
-        else{
+        } else {
             displayMessage.failedContact();
         }
     }
@@ -124,18 +123,19 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 5- view all contacts
      */
-    public void option5ViewAllContacts(){ //view all contacts
+    public void option5ViewAllContacts() { //view all contacts
 
-        displayMessage.displayContacts(controller,userID);
+        displayMessage.displayContacts(controller, userID);
 
     }
+
     /**
      * Responds to menu option 5- view all contacts
      * Returns boolean if contact list is empty
      */
-    private boolean option2Helper(){ //view all contacts
+    private boolean option2Helper() { //view all contacts
 
-        return displayMessage.displayContacts(controller,userID);
+        return displayMessage.displayContacts(controller, userID);
 
     }
 
@@ -150,15 +150,14 @@ public abstract class MainMenuController extends AccountController {
      * Responds to menu option 7- cancel attendance to an event (Attendee)
      * Remove event or reschedule (Organizer)
      */
-    public void option7Cancel(){
+    public void option7Cancel() {
         option9ScheduleOrRoom();
         displayEvent.promptCancelEvent();
         String eventName = scan.nextLine();
         // i think this is trying to cancel event for an attendee, so it's using leaveEvent in AttendeeActions
-        if(controller.leaveEvent(eventName, userID)){
-                displayEvent.successCancelEnrol();
-            }
-        else{
+        if (controller.leaveEvent(eventName, userID)) {
+            displayEvent.successCancelEnrol();
+        } else {
             displayEvent.failedCancelEvent();
         }
     }
@@ -166,7 +165,7 @@ public abstract class MainMenuController extends AccountController {
     /**
      * Responds to menu option 8- view all events
      */
-    public void option8ViewAllEvents(){
+    public void option8ViewAllEvents() {
         String conferenceTitle = "";
         // TODO print list of users conferences
         // TODO have user choose which conference events they want to see
@@ -195,7 +194,7 @@ public abstract class MainMenuController extends AccountController {
         // String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewAvailableSchedule(username, conferenceTitle);
 
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             //displayMessage.noEvents();
             displayEvent.noEventsAvailable();
         } else {
@@ -203,12 +202,12 @@ public abstract class MainMenuController extends AccountController {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
                 List<String> speakerList = new ArrayList<String>();
-                    for (String speaker : e.get(3).split(",")) {
-                        if (speaker.equals("")){
-                            speakerList.add(displayMessage.noSpeakers());
-                        } else {
-                            speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
-                        }
+                for (String speaker : e.get(3).split(",")) {
+                    if (speaker.equals("")) {
+                        speakerList.add(displayMessage.noSpeakers());
+                    } else {
+                        speakerList.add(speakerActions.findUserFromId(speaker).getUsername());
+                    }
                 }
                 e.set(3, String.valueOf(speakerList));
                 //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
@@ -222,18 +221,17 @@ public abstract class MainMenuController extends AccountController {
      * Add room (Organizer)
      * View schedule of talks (Speaker)
      */
-    public void option9ScheduleOrRoom(){
+    public void option9ScheduleOrRoom() {
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         List<List<String>> eventsList = controller.viewOwnSchedule(username);
-        if (eventsList.size() == 0){
+        if (eventsList.size() == 0) {
             displayMessage.noEventsSignUp();
         } else {
             for (List<String> e : eventsList) {
                 e.set(2, room.findRoomFromId(e.get(2)).getRoomName());
-                if (e.get(3).equals("")){
+                if (e.get(3).equals("")) {
                     e.set(3, "There are no speakers at the moment for this event.");
-                }
-                else{
+                } else {
                     e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
                 }
             }
@@ -247,33 +245,38 @@ public abstract class MainMenuController extends AccountController {
      * Add user (Organizer)
      * View saved events (Attendee)
      */
-    public void option10AddOrViewEvents(){}
+    public void option10AddOrViewEvents() {
+    }
 
     /**
      * Responds to menu option 11
      * View VIP events (Attendee)
      * View conferences (Organizers)
      */
-    public void option11VIPOrConferences(){}
+    public void option11VIPOrConferences() {
+    }
 
     /**
      * Response to menu option 12
      * Add a conference (Organizer)
      * Sign up for a conference (Attendee)
      */
-    public void option12Conference(){}
+    public void option12Conference() {
+    }
 
     /**
      * Responds to menu option 13 - change event capacity (Organizer)
      */
-    public void option13ChangeCapacity() {}
+    public void option13ChangeCapacity() {
+    }
 
 
     /**
      * Responds to menu option 14 - View statistics (Organizer)
      */
-    public void option14ViewStatistics() {}
-
+    public void option14ViewStatistics() {
+    }
+}
 
 //    /***
 //     * Responds to menu option 15 - View all conferences (Organizer)
@@ -281,4 +284,3 @@ public abstract class MainMenuController extends AccountController {
 //    public void option15ViewAllConferences(){
 //        displayConference.displayConferences(conferenceActions.returnConferences());
 //    }
-}
