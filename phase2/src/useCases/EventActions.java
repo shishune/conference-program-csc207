@@ -581,7 +581,8 @@ public class EventActions  {
 
     /**
      * Show a list of top 5 events with most attendees. The list could be less than 5 events, or more than 5 events if
-     * more than one event has the same number of attendees.
+     * more than one event has the same number of attendees. It is top 5 based on number of attendees; in other words,
+     * the top attendee rate.
      * @return a list of the top 5 events
      */
     public ArrayList<String> topFiveEvents() {
@@ -595,8 +596,8 @@ public class EventActions  {
             numberAttendees.sort(Integer::compareTo);
             numberAttendees.sort(Comparator.reverseOrder()); //descending order
             if (numberAttendees.size() > 5) {
-                ArrayList<Integer> topFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
-                if (topFiveNumbers.contains(entry.getValue().size())) {
+                ArrayList<Integer> bottomFiveNumbers = new ArrayList<>(numberAttendees.subList(0,5));
+                if (bottomFiveNumbers.contains(entry.getValue().size())) {
                     String username = events.get(entry.getKey()).getTitle();
                     topFive.add(username);
                 }
@@ -608,7 +609,12 @@ public class EventActions  {
         }
         return topFive;
     }
-
+    /**
+     * Show a list of bottom 5 events with most attendees. The list could be less than 5 events, or more than 5 events if
+     * more than one event has the same number of attendees. It is bottom 5 based on number of attendees; in other words,
+     * the bottom attendee rate.
+     * @return a list of the bottom 5 events
+     */
     public ArrayList<String> bottomFiveEvents() {
         ArrayList<Integer> numberAttendees = new ArrayList<>();
         ArrayList<String> bottomFive = new ArrayList<>();
