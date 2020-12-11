@@ -43,23 +43,26 @@ public class OrganizerMainMenuController extends MainMenuController {
      *
      * @param userID              the user ID
      * @param organizerController the controller responsible for organizer
+     * @param room the use case for handling rooms
+     * @param event the use case for handling events
+     * @param conferenceActions the use case for handling conferences
+     * @param accountActions the use case for handling the accounts
      */
     public OrganizerMainMenuController(String userID, OrganizerController organizerController, RoomActions room,
-                                       useCases.SpeakerActions speaker, useCases.EventActions event,
-                                       useCases.OrganizerActions organizerActions, useCases.AttendeeActions attendee,
-                                       ConferenceActions conferenceActions) {
+                                       useCases.EventActions event, ConferenceActions conferenceActions,
+                                       parameterObjects.AccountActions accountActions) {
 
-        super(userID, organizerController, room, speaker, conferenceActions);
+        super(userID, organizerController, room, accountActions.getSpeakerActions(), conferenceActions);
         this.userID = userID;
         this.displayMessage = new OrganizerMessagePresenter();
         this.displayEvent = new OrganizerEventPresenter();
         this.displayConferences = new OrganizerConferencePresenter();
         this.room = room;
         this.controller = organizerController;
-        this.speaker = speaker;
+        this.speaker = accountActions.getSpeakerActions();
         this.event = event;
-        this.organizer = organizerActions;
-        this.attendee = attendee;
+        this.organizer = accountActions.getOrganizerActions();
+        this.attendee = accountActions.getAttendeeActions();
         this.conference = conferenceActions;
     }
 
