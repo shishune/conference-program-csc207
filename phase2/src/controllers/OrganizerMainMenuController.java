@@ -518,7 +518,6 @@ public class OrganizerMainMenuController extends MainMenuController {
             }
         }
 
-
         catcher = true;
         while (catcher) {
             displayEvent.promptEndTime();

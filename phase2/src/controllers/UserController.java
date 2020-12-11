@@ -346,7 +346,6 @@ public class UserController {
 
     }
 
-
     /**
      * Shows the spots available in an event
      *

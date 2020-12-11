@@ -276,6 +276,7 @@ public abstract class MainMenuController extends AccountController {
      */
     public void option14ViewStatistics() {
     }
+
 }
 
 //    /***
