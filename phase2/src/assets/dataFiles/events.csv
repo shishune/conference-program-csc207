@@ -1,7 +1,3 @@
-E8,event,,Wed Sep 11 00:00:00 EDT 2030-09,Wed Sep 11 00:00:00 EDT 2030-10,A9%%A3,R7,a,4,true
-E11,e,,Sun Oct 10 00:00:00 EDT 2010-10,Sun Oct 10 00:00:00 EDT 2010-11,A10%%A17%%A20,R10,c,2,false
-E12,event2,,Sun Oct 10 00:00:00 EDT 2010-09,Sun Oct 10 00:00:00 EDT 2010-10,A16,R9,conference,2,true
-E1,po,,Mon Dec 12 00:00:00 EST 2011-09,Mon Dec 12 00:00:00 EST 2011-10,,R1,uo,1,false
-E19,pizza,S17,Mon Oct 12 00:00:00 EDT 2010-09,Mon Oct 12 00:00:00 EDT 2010-10,,R9,conference,3,false
-E2,d,,Mon Sep 12 00:00:00 EDT 2011-09,Mon Sep 12 00:00:00 EDT 2011-10,A7%%A8%%A9%%A19,R1,uo,1,false
-E18,non-vip,S17,Mon Oct 11 00:00:00 EDT 2010-09,Mon Oct 11 00:00:00 EDT 2010-10,A13%%A12%%A14%%A15%%A18,R9,conference,3,false
+E11,e,,Sun Oct 10 00:00:00 EDT 2010-10,Sun Oct 10 00:00:00 EDT 2010-11,,R10,c,2,false
+E12,event,,Sun Oct 10 00:00:00 EDT 2010-09,Sun Oct 10 00:00:00 EDT 2010-10,,R9,conference,2,true
+E18,non-vip,S17,Mon Oct 11 00:00:00 EDT 2010-09,Mon Oct 11 00:00:00 EDT 2010-10,A13,R9,conference,3,false

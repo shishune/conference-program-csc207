@@ -20,6 +20,7 @@ public class SpeakerActions extends UserAccountActions implements Storable {
 
     private ArrayList<String> speakers = new ArrayList<String>(); // needed for loader
     public ArrayList<String> storedSpeaker = new ArrayList<String>(); // what was this needed for; never used??
+    private int counter;
 
 
     /**
@@ -33,23 +34,57 @@ public class SpeakerActions extends UserAccountActions implements Storable {
         addSpeakerToHashMap(); // adds those messages to a hashmap of all messages from the csv
     }
 
-
     /**
-     * This will create a new speaker
-     * @param username the username of the speaker
-     * @param password the password of the speaker
-     * @param contactsList the contact list of the speaker
-     * @param eventList the list of events that the speaker will speak at
-     * @param isLogin the login status of the speaker
-     * @return a new speaker
-     */
-    public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
-        useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "S" + generateId.generateId();
+     * @param userId the id of the attendee
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * @param contactsList the contact list of the attendee
+     * @param eventList the list of events the attending is attending
+     * @param isLogin the login status of the attendee
+     * This will create a new Attendee (Will need the overloaded function for phase 2)
+     * */
+    public Speaker loadSpeaker(String userId, String username, String password, List<String> contactsList,
+                                 List<String> eventList, boolean isLogin) {
         Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
-        loadSpeaker(userSpeaker);
+        addUserIdToHashMap(userSpeaker);
+        addUsernameToHashMap(userSpeaker);
+        speakerID.put(userId, userSpeaker);
+        speakerUsername.put(username, userSpeaker);
         return userSpeaker;
     }
+
+    /**
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * This will create a new Attendee
+     * */
+    public Speaker createUser(String username, String password) {
+        useCases.GenerateID generateId = new GenerateID(loader);
+        String userId = "S" + generateId.generateId();
+        Speaker userSpeaker = loadSpeaker(userId, username, password, new ArrayList<>(), new ArrayList<>(),false);
+        speakerID.put(userId, userSpeaker);
+        speakerUsername.put(username, userSpeaker);
+        counter += 1;
+        return userSpeaker;
+    }
+
+
+//    /**
+//     * This will create a new speaker
+//     * @param username the username of the speaker
+//     * @param password the password of the speaker
+//     * @param contactsList the contact list of the speaker
+//     * @param eventList the list of events that the speaker will speak at
+//     * @param isLogin the login status of the speaker
+//     * @return a new speaker
+//     */
+//    public Speaker createSpeaker(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin) {
+//        useCases.GenerateID generateId = new GenerateID(loader);
+//        String userId = "S" + generateId.generateId();
+//        Speaker userSpeaker = new Speaker(userId, username, password, contactsList, eventList, isLogin, false);
+//        loadSpeaker(userSpeaker);
+//        return userSpeaker;
+//    }
 
 
     /**
@@ -90,13 +125,13 @@ public class SpeakerActions extends UserAccountActions implements Storable {
     }
 
 
-    /**
-     * Load new speakers into HashMap of new speakers
-     */
-    public void loadSpeaker(Speaker newSpeaker){
-        speakerID.put(newSpeaker.getId(), newSpeaker);
-        speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
-    }
+//    /**
+//     * Load new speakers into HashMap of new speakers
+//     */
+//    public void loadSpeaker(Speaker newSpeaker){
+//        speakerID.put(newSpeaker.getId(), newSpeaker);
+//        speakerUsername.put(newSpeaker.getUsername(), newSpeaker);
+//    }
 
 
     /**
@@ -150,10 +185,8 @@ public class SpeakerActions extends UserAccountActions implements Storable {
                 List<String> loadContactsList = Arrays.asList(speakerInfo[3].split("%%"));
                 List<String> loadEventsList = Arrays.asList(speakerInfo[4].split("%%"));
                 boolean loadIsLogin = Boolean.parseBoolean(speakerInfo[5]);
-                boolean loadIsOrganizer = Boolean.parseBoolean(speakerInfo[6]);
-                Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList,
-                        loadEventsList, loadIsLogin, loadIsOrganizer);
-                loadSpeaker(loadedSpeaker);
+                loadSpeaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], loadContactsList,
+                        loadEventsList, loadIsLogin);
             }
         }
     }
@@ -367,6 +400,7 @@ public class SpeakerActions extends UserAccountActions implements Storable {
                 ArrayList<String> contactList = new ArrayList<String>();
                 String[] events = speakerInfo[4].split("%%");
                 String[] contacts = speakerInfo[3].split("%%");
+
                 for (String e : events) {
                     if (!e.equals("")) {
                         eventList.add(e);
@@ -377,9 +411,9 @@ public class SpeakerActions extends UserAccountActions implements Storable {
                         contactList.add(c);
                     }
                 }
-                Speaker loadedSpeaker = new Speaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
-                        eventList, Boolean.parseBoolean(speakerInfo[5]), Boolean.parseBoolean(speakerInfo[6]));
-                loadSpeaker(loadedSpeaker);
+
+                loadSpeaker(speakerInfo[0], speakerInfo[1], speakerInfo[2], contactList,
+                        eventList, Boolean.parseBoolean(speakerInfo[5]));
             }
 
 

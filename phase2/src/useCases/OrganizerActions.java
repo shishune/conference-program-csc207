@@ -51,18 +51,17 @@ public class OrganizerActions extends UserAccountActions implements Storable {
         // with message ID as key and message object as value
     }
 
-
     /**
-     * This will be loading the organizer
-     * @param userId the unique id of the organizer
-     * @param username the unique username of the organizer
-     * @param password the password of the organizer
-     * @param contactsList the contact list of the organizer
-     * @param eventList the list of events the organizer is in charge of
-     * @param isLogin the login status of the organizer
-     * @return the loaded organizer
-     */
-    public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+     * @param userId the id of the attendee
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * @param contactsList the contact list of the attendee
+     * @param eventList the list of events the attending is attending
+     * @param isLogin the login status of the attendee
+     * This will create a new Attendee (Will need the overloaded function for phase 2)
+     * */
+    public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList,
+                                 List<String> eventList, boolean isLogin) {
         Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
         addUserIdToHashMap(userOrganizer);
         addUsernameToHashMap(userOrganizer);
@@ -71,18 +70,53 @@ public class OrganizerActions extends UserAccountActions implements Storable {
         return userOrganizer;
     }
 
-
     /**
-     * This will create a new organizer
-     * @param username the username of the organizer to be created
-     * @param password the password of the organizer to be created
-     * @return a new organizer
-     */
-    public User createOrganizer(String username, String password){
+     * @param username the username of the attendee
+     * @param password the password of the attendee
+     * This will create a new Attendee
+     * */
+    public Organizer createUser(String username, String password) {
         useCases.GenerateID generateId = new GenerateID(loader);
         String userId = "O" + generateId.generateId();
-        return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+        Organizer userOrganizer = loadOrganizer(userId, username, password, new ArrayList<>(), new ArrayList<>(), false);
+        organizerHashMap.put(userId, userOrganizer);
+        organizerUsernameHashMap.put(username, userOrganizer);
+        counter += 1;
+        return userOrganizer;
     }
+
+
+//    /**
+//     * This will be loading the organizer
+//     * @param userId the unique id of the organizer
+//     * @param username the unique username of the organizer
+//     * @param password the password of the organizer
+//     * @param contactsList the contact list of the organizer
+//     * @param eventList the list of events the organizer is in charge of
+//     * @param isLogin the login status of the organizer
+//     * @return the loaded organizer
+//     */
+//    public Organizer loadOrganizer(String userId, String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
+//        Organizer userOrganizer = new Organizer(userId, username, password, contactsList, eventList, isLogin, true);
+//        addUserIdToHashMap(userOrganizer);
+//        addUsernameToHashMap(userOrganizer);
+//        organizerHashMap.put(userId, userOrganizer);
+//        organizerUsernameHashMap.put(username, userOrganizer);
+//        return userOrganizer;
+//    }
+
+
+//    /**
+//     * This will create a new organizer
+//     * @param username the username of the organizer to be created
+//     * @param password the password of the organizer to be created
+//     * @return a new organizer
+//     */
+//    public User createOrganizer(String username, String password){
+//        useCases.GenerateID generateId = new GenerateID(loader);
+//        String userId = "O" + generateId.generateId();
+//        return loadOrganizer(userId, username, password, new ArrayList<String>(), new ArrayList<String>(), false);
+//    }
 
 //    public User createOrganizer(String username, String password, List<String> contactsList, List<String> eventList, boolean isLogin){
 //        useCases.GenerateID generateId = new GenerateID(loader);
@@ -321,6 +355,7 @@ public class OrganizerActions extends UserAccountActions implements Storable {
                 ArrayList<String> contactList = new ArrayList<String>();
                 String[] events = organizerInfo[4].split("%%");
                 String[] contacts = organizerInfo[3].split("%%");
+                List<String> emptySavedEvents = new ArrayList<>();
 
                 for (String e : events) {
                     if (!e.equals("")) {

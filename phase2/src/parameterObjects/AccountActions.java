@@ -1,7 +1,9 @@
 package parameterObjects;
+import entities.User;
 import useCases.AttendeeActions;
 import useCases.SpeakerActions;
 import useCases.OrganizerActions;
+import useCases.UserAccountActions;
 
 /**
  * Parameter object for all use cases involving using the account to access the system of events.
@@ -13,6 +15,7 @@ public class AccountActions {
     private AttendeeActions attendeeActions;
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
+    private UserAccountActions userAccountActions;
 
     /**
      * Instantiates the parameter object with all the use case objects that handle the account.
@@ -20,10 +23,11 @@ public class AccountActions {
      * @param speakerActions use case for speaker account
      * @param organizerActions use case for organizer account
      */
-    public AccountActions(AttendeeActions attendeeActions, SpeakerActions speakerActions, OrganizerActions organizerActions){
+    public AccountActions(AttendeeActions attendeeActions, SpeakerActions speakerActions, OrganizerActions organizerActions, UserAccountActions userAccountActions){
         this.attendeeActions = attendeeActions;
         this.speakerActions = speakerActions;
         this.organizerActions = organizerActions;
+        this.userAccountActions = userAccountActions;
     }
 
     /**
@@ -49,5 +53,7 @@ public class AccountActions {
     public OrganizerActions getOrganizerActions(){
         return this.organizerActions;
     }
+
+    public UserAccountActions getUserAccountActions(){return this.userAccountActions;}
 
 }

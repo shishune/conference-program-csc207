@@ -2,6 +2,7 @@ package controllers;
 
 import presenters.AccountPresenter;
 import useCases.LoginActions;
+import useCases.UserAccountActions;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -73,36 +74,53 @@ public class LogIn {
             return false;
         } else {
             // note: implements factory pattern
+            UserAccountActions userActions;
             if (userType.equals("1")) {
-                accountActions.getOrganizerActions().createOrganizer(username, password);
-                return true;
+                userActions = accountActions.getOrganizerActions(); // .createOrganizer(username, password);
             } else if (userType.equals("2")) {
-                accountActions.getSpeakerActions().createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
-                return true;
-
+                userActions = accountActions.getSpeakerActions(); // .createSpeaker(username, password, new ArrayList<String>(), new ArrayList<String>(), false);
             } else if (userType.equals("3")) {
-                accountDisplay.VIPStatusPrompt();
-                boolean VIPStatus;
-                String responseInput = scan.nextLine();
+                userActions = accountActions.getAttendeeActions();
 
-                VIPStatus = responseInput.equals("VIP") || responseInput.equals("vip");
-
-                if (!accountActions.getAttendeeActions().attendeeExists(username)) {
-                    accountActions.getAttendeeActions().createAttendee(username, password, new ArrayList<String>(), new ArrayList<String>(),
-                            new ArrayList<String>(), false, VIPStatus);
-                    return true;
-                }
-                else{
-                    accountDisplay.failedUsernameExists();
-                    return false;
-                }
             } else{
                 accountDisplay.printTypingError();
                 return false;
             }
+
+            userActions.createUser(username, password);
+            return true;
+
         }
-
-
     }
 }
 
+// if (userController.usernameExists(username)){
+//            accountDisplay.failedUsernameExists();
+//            return false;
+//        } else {
+//            // note: implements factory pattern
+//            if (userType.equals("1")) {
+//                accountActions.getUserAccountActions().createUser(username, password);
+//                return true;
+//            } else if (userType.equals("2")) {
+//                accountActions.getUserAccountActions().createUser(username, password);
+//                return true;
+//
+//            } else if (userType.equals("3")) {
+//
+//                if (!accountActions.getAttendeeActions().attendeeExists(username)) {
+//                    accountActions.getUserAccountActions().createUser(username, password);
+//                    return true;
+//                }
+//                else{
+//                    accountDisplay.failedUsernameExists();
+//                    return false;
+//                }
+//            } else{
+//                accountDisplay.printTypingError();
+//                return false;
+//            }
+//        }
+//
+//
+//    }

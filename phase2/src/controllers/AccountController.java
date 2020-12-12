@@ -39,9 +39,10 @@ public class AccountController {
         useCases.AttendeeActions attendeeActions = new useCases.AttendeeActions(g);
         useCases.ConferenceActions conferenceActions = new useCases.ConferenceActions(g);
         useCases.LogoutActions logoutActions = new useCases.LogoutActions();
+        useCases.UserAccountActions userAccountActions = new useCases.UserAccountActions();
 
         //Instantiate use case parameter objects
-        parameterObjects.AccountActions accountActions = new parameterObjects.AccountActions(attendeeActions, speakerActions, organizerActions);
+        parameterObjects.AccountActions accountActions = new parameterObjects.AccountActions(attendeeActions, speakerActions, organizerActions, userAccountActions);
         parameterObjects.EventSystemActions eventSystemActions = new parameterObjects.EventSystemActions(conferenceActions, eventActions, messageActions, roomActions);
 
         controllers.UserController userController = new controllers.UserController(eventSystemActions, accountActions, 'u');

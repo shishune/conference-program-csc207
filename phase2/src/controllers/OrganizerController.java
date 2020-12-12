@@ -26,6 +26,7 @@ public class OrganizerController extends UserController {
     private useCases.OrganizerActions organizerActions;
     private useCases.AttendeeActions attendeeActions;
     private useCases.ConferenceActions conferenceActions;
+    private useCases.UserAccountActions userAccountActions;
     private String organizerID;
 
     /**
@@ -45,6 +46,7 @@ public class OrganizerController extends UserController {
         this.messageActions = eventSystemActions.getMessageActions();
         this.attendeeActions = accountActions.getAttendeeActions();
         this.organizerActions = accountActions.getOrganizerActions();
+        this.userAccountActions = accountActions.getUserAccountActions();
         this.conferenceActions = eventSystemActions.getConferenceActions();
     }
     /***
@@ -146,8 +148,7 @@ public class OrganizerController extends UserController {
             if (speakerActions.findUserFromUsername(username) != null) {
                 return false;
             }
-            String speakerID = this.speakerActions.createSpeaker(username, password,
-                    new ArrayList<>(), new ArrayList<>(), false).getId();
+            String speakerID = this.speakerActions.createUser(username, password).getId();
 
             this.eventActions.addSpeakerToSchedule(speakerID);
         }
@@ -164,7 +165,7 @@ public class OrganizerController extends UserController {
             if (organizerActions.findUserFromUsername(username) != null) {
                 return false;
             }
-            this.organizerActions.createOrganizer(username, password);
+            this.organizerActions.createUser(username, password);
             return true;
         }
         return false;
@@ -181,7 +182,7 @@ public class OrganizerController extends UserController {
                 return false;
             }
 
-            this.attendeeActions.createAttendee(username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), false, isVIP);
+            this.attendeeActions.createUser(username, password);
 
             return true;
         }

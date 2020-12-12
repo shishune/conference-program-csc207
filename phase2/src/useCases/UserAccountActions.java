@@ -78,6 +78,11 @@ public class UserAccountActions {
         return false;
     }
 
+    /**
+     *
+     */
+    public User createUser(String username, String password){return null;}
+
 
     /**
      * Removes an user to existing list of contacts from an user.
@@ -141,6 +146,8 @@ public class UserAccountActions {
     public User findUserFromId(String userId){
         return null;
     }
+
+
 
 
 
