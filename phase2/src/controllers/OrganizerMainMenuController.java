@@ -418,6 +418,20 @@ public class OrganizerMainMenuController extends MainMenuController {
      * Remove/reschedule an event
      */
     public void option7Cancel() {
+        option8ViewAllEvents();
+        String conferenceTitle = "";
+        boolean hasConference = false;
+        while(!hasConference) {
+            displayEvent.promptEditConference();
+            conferenceTitle = scan.nextLine();
+            if (conference.conferenceExists(conferenceTitle)) {
+                hasConference = true;
+            } else {
+                displayConferences.conferenceDoesNotExists();
+            }
+
+        }
+
         displayEvent.promptCancelMethod();
         String option = scan.nextLine();
 
@@ -436,9 +450,12 @@ public class OrganizerMainMenuController extends MainMenuController {
                     }
                 }
                 if (event.getEventNames().containsKey(eventCancel)) {
-                    if (cancelEvent(eventCancel)){
-                    displayEvent.successCancelEvent();
-                    catcher = false;}
+                    if (cancelEvent(eventCancel)) {
+                        String eventID = event.getEventFromName(eventCancel).getId();
+                        conference.removeEvent(conferenceTitle, eventID);
+                        displayEvent.successCancelEvent();
+                        catcher = false;
+                    }
 
                 } else {
                     displayEvent.noEvent();
@@ -692,7 +709,8 @@ public class OrganizerMainMenuController extends MainMenuController {
                 //e.set(3, speakerActions.findUserFromId(e.get(3)).getUsername());
             }
             displayEvent.displayEvents(eventsList);
-        }}
+        }
+    }
 
 
     public void option14ViewStatistics() {
