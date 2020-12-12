@@ -76,6 +76,13 @@ public class OrganizerEventPresenter extends EventPresenter {
     /**
      * Two options: reschedule or cancel event?
      */
+    public void promptEditConference(){
+        System.out.println("Enter conference you want to remove or edit the event from");
+    }
+
+    /**
+     * Two options: reschedule or cancel event?
+     */
     public void promptCancelMethod(){
         System.out.println("If you are cancelling an event, enter 'x'. Otherwise enter any key.");
     }
@@ -204,7 +211,7 @@ public class OrganizerEventPresenter extends EventPresenter {
     /**
      * Prompts user exit the selection
      */
-    public void breakPlease(){System.out.println("*Write '!' if you would like exit the selection at any time. Doing so will not save your current information.*");}
+    public void breakPlease(){System.out.println("* Write '!' if you would like exit the selection at any time. Doing so will not save your current information. *");}
 
     /**
      * Warns the user that they are existing without saving their information

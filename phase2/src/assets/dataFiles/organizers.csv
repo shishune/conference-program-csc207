@@ -1,4 +1,5 @@
-O1,1,1,S2%%S6%%A7,E11%%E12,false,true
+O1,1,1,S2%%S6%%A7,E11%%E12,true,true
 O14,o,o,,,false,true
 O25,v,o,,,true,true
 O4,organizer,organizer,A7,E18,true,true
+O44,1,1,,,true,true

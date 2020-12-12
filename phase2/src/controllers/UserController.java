@@ -27,9 +27,9 @@ public class UserController {
     private useCases.EventActions eventActions;  //= super.getEvents();
     private useCases.RoomActions roomActions; // = super.getRooms();
 
-//    private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
-//    private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
-//    private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
+    private useCases.AttendeeActions attendeeActions; // = super.getAttendees();
+    private useCases.OrganizerActions organizerActions; // = super.getOrganizers();
+    private useCases.SpeakerActions speakerActions; // = super.getSpeakers();
 
     private useCases.ConferenceActions conferenceActions; // = super.getConferences()
     private HashMap<String, User> usernameHashmap = new HashMap<String, User>();
@@ -53,22 +53,22 @@ public class UserController {
             this.user = accountActions.getAttendeeActions();
         }
 
-//        this.attendeeActions = attendee;
-//        this.organizerActions = organizer;
-//        this.speakerActions = speaker;
+        this.attendeeActions = accountActions.getAttendeeActions();
+        this.organizerActions = accountActions.getOrganizerActions();
+        this.speakerActions = accountActions.getSpeakerActions();
         //this.conferenceActions = conference;
     }
 
 
     public HashMap<String, User> returnUserUsernameHashMap() {
-        if (!(user == null) &&!user.getAttendeeHashMapUsername().isEmpty()) {
-            usernameHashmap.putAll(user.getAttendeeHashMapUsername());
+        if (!(attendeeActions == null) &&!attendeeActions.getAttendeeHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(attendeeActions.getAttendeeHashMapUsername());
         }
-        if (!(user == null)&&!user.getOrganizerHashMapUsername().isEmpty()) {
-            usernameHashmap.putAll(user.getOrganizerHashMapUsername());
+        if (!(organizerActions == null)&&!organizerActions.getOrganizerHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(organizerActions.getOrganizerHashMapUsername());
         }
-        if (!(user == null)&&!user.getSpeakerHashMapUsername().isEmpty()) {
-            usernameHashmap.putAll(user.getSpeakerHashMapUsername());
+        if (!(speakerActions == null)&&!speakerActions.getSpeakerHashMapUsername().isEmpty()) {
+            usernameHashmap.putAll(speakerActions.getSpeakerHashMapUsername());
         }
         return usernameHashmap;
 

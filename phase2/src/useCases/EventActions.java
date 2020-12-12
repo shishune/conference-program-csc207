@@ -314,7 +314,13 @@ public class EventActions  {
             List<String> eventAttendees = this.attendees.get(eventID);
             this.attendees.remove(eventID);
             List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
-            speakerSchedule.get(event.getSpeakers()).removeAll(dateTimes);
+            List<String> speakers = event.getSpeakers();
+            if (!(speakers.size()== 1 && speakers.get(0).equalsIgnoreCase(""))) {
+                for (String speaker : speakers) {
+                    this.speakerSchedule.get(speaker).removeAll(dateTimes);
+                }
+            }
+            // speakerSchedule.get(event.getSpeakers()).removeAll(dateTimes);
             roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
             return eventAttendees;
         }
@@ -336,13 +342,19 @@ public class EventActions  {
                     isSpeakerFree(event.getSpeakers(), newStartDateTime, newEndDateTime)) {
 
                 List<String> dateTimes = timeInBetween(event.getStartDateTime(), event.getEndDateTime());
-                this.speakerSchedule.get(event.getSpeakers()).removeAll(dateTimes);
                 this.roomSchedule.get(event.getRoomID()).removeAll(dateTimes);
 
                 event.setStartTime(newStartDateTime);
                 event.setEndDateTime(newEndDateTime);
                 List<String> newDateTimes = timeInBetween(newStartDateTime, newEndDateTime);
-                this.speakerSchedule.get(event.getSpeakers()).addAll(newDateTimes);
+                List<String> speakers = event.getSpeakers();
+                if (!(speakers.size()== 1 && speakers.get(0).equalsIgnoreCase(""))) {
+                    for (String speaker : speakers) {
+                        this.speakerSchedule.get(speaker).removeAll(dateTimes);
+                        this.speakerSchedule.get(speaker).addAll(dateTimes);
+                    }
+                }
+                // this.speakerSchedule.get(event.getSpeakers()).addAll(newDateTimes);
                 this.roomSchedule.get(event.getRoomID()).addAll(newDateTimes);
                 return true;
             }

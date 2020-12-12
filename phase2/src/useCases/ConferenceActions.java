@@ -250,6 +250,20 @@ public class ConferenceActions {
         return storedConferences;
     }
 
+    /***
+     * remove event from a conference
+     * @param conferenceTitle conference title
+     * @param eventID ID of event
+     * @return if this has been successful
+     */
+    public boolean removeEvent(String conferenceTitle, String eventID){
+        Conference conference = conferenceTitlesHash.get(conferenceTitle);
+        if (conference!= null) {
+            return conference.removeEvent(eventID);
+        }
+        return false;
+    }
+
     /**
      * It will be get the conference IDs
      *

@@ -68,6 +68,9 @@ public class Conference {
         return this.events;
     }
 
+
+
+
     /**
      * return list of attendees participating in this conference
      * @return list of attendees participating in this conference
@@ -121,8 +124,8 @@ public class Conference {
      * @return true if the event could be removes, false if it couldn't be
      * */
     public boolean removeEvent(String eventID){
-        if (!this.events.contains(eventID)){
-            this.events.add(eventID);
+        if (this.events.contains(eventID)){
+            this.events.remove(eventID);
             return true;
         } else{
             return false;

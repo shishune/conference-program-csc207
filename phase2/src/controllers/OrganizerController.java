@@ -121,15 +121,15 @@ public class OrganizerController extends UserController {
         if (this.eventActions.getEventNames().containsKey(eventName)) {
             List<String> eventAttendees = this.eventActions.cancelEvent(eventName);
             List<String> s = eventActions.getEventNames().get(eventName).getSpeakers();
-            if (speakerActions.isEventRemovedFromSpeaker(this.eventActions.getEventFromName(eventName).getId(), s)) {
-                if (eventAttendees != null) {
-                    for (String attendeeID : eventAttendees) {
-                        this.organizerActions.removeEventFromUser(eventName, attendeeID);
-                    }
-
-                    return true;
+            //if (speakerActions.isEventRemovedFromSpeaker(this.eventActions.getEventFromName(eventName).getId(), s)) {
+            if (eventAttendees != null) {
+                for (String attendeeID : eventAttendees) {
+                    this.organizerActions.removeEventFromUser(eventName, attendeeID);
                 }
+
+                return true;
             }
+
         }
         return false;
     }
