@@ -14,59 +14,22 @@ public class ConferencePresenter {
 
     private EventPresenter eventPresenter;
 
+
+    /**
+     * Presenting conferences
+     */
     public ConferencePresenter(){
         this.eventPresenter = new EventPresenter();
     }
+
+
     /**
-     * Displays conferences
-     * */
-//    public void displayConferences(ArrayList<List<String>> conferencesList, List<List<String>> eventsList, HashMap<String, User> userIdHash){
-//        if(conferencesList != null){
-//            if(conferencesList.isEmpty()){
-//                System.out.println("There are no conferences in existance.");
-//            } else {
-//                int count = 1;
-//                for (List<String> info: conferencesList){
-//                    //TODO: detect if conference is current
-//                    //TODO: print events
-//                    if(true /* conference start time same or after current time*/){
-//                        System.out.println(count);
-//                        count ++;
-//
-//                        System.out.println("Conference title: "+ info.get(0));
-//                        // print events
-//                        String[] events = info.get(1).split("%%");
-//                        System.out.println("Conference Events:");
-//                        eventPresenter.displayEvents(eventsList, userIdHash);
-//                        //for(String event : events){
-//                            //System.out.println(userHash.get(event).getUsername());
-//                        //}
-//                        // print attendees
-//                        //String[] attendees = info.get(2).split("%%");
-//                        //System.out.println("Conference Attendees");
-//                        //for(String attendee : attendees){
-//                        //}
-//                        // print speakers
-//                        String[] speakers = info.get(3).split("%%");
-//                        System.out.println("Conference Speakers:");
-//                        //TODO: (optional) put speakers into conferences
-//                        // if not implemented, delete the following loop and code
-//                        for(String speaker : speakers){
-//                            System.out.println(userIdHash.get(speaker).getUsername());
-//                        }
-//                        //System.out.println("Start Time: "+info.get(1));
-//                        //System.out.println("End Time: "+info.get(2));
-//
-//
-//                        System.out.println("\n");
-//                    }
-//                }
-//            }
-//        }
-//    }
+     * prompt for viewing conference events
+     */
     public void promptConference(){
         System.out.println("Please enter the conference (title) you would like to see the events of");
     }
+
 
     /**
      * prompt for conference sign-up
@@ -75,6 +38,7 @@ public class ConferencePresenter {
         System.out.println("Please enter the conference (title) you would like to sign up for.");
     }
 
+
     /**
      * conference does not exist or attendee not in it
      */
@@ -82,6 +46,8 @@ public class ConferencePresenter {
         System.out.println("This conference does not exist. " +
                 "Please enter another title or 'x' to return to menu to sign up for one.");
     }
+
+
     /**
      *  attendee not in conference
      */
@@ -90,6 +56,7 @@ public class ConferencePresenter {
                 "Please enter another title or 'x' to return to menu to sign up for one.");
     }
 
+
     /**
      * failed sign up for conference.
      */
@@ -97,12 +64,14 @@ public class ConferencePresenter {
         System.out.println("This conference does not exist.");
     }
 
+
     /**
      * successful sign up for conference
      */
     public void successSignUp(){
         System.out.println("You have successfully signed up for this conference.");
     }
+
 
     /**
      * displays all conferences for any users.
@@ -120,6 +89,7 @@ public class ConferencePresenter {
             }
         }
     }
+
 
     /**
      * displays conferences attended by attendees.
@@ -141,6 +111,7 @@ public class ConferencePresenter {
         }
         return false;
     }
+
 
     /**
      * displays conferences not attended by attendees
