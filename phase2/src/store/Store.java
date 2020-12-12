@@ -12,11 +12,10 @@ import store.Storable;
  * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
  */
 public class Store{
-    /**
-     * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
-     */
+
 
     /**
+     * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
      * takes in information to in csv
      * @param path path to the csv
      * @param entityList List of entity information
@@ -33,6 +32,7 @@ public class Store{
             e.printStackTrace();
         }
     }
+
 
     /**
      * Uses the method in roomActions for obtaining all room ids as a list then stores in csv
@@ -57,6 +57,7 @@ public class Store{
 
     }
 
+
     /**
      * Uses the method in messageActions for obtaining all messages as a list then stores in csv
      * @param messageActions the use case class responsible for messages
@@ -68,6 +69,7 @@ public class Store{
         store(messagesList, path);
     }
 
+
     /**
      * Uses the method in organizerActions for obtaining all organizers as a list then stores in csv
      * @param organizerActions the use case class responsible for organizers
@@ -77,6 +79,7 @@ public class Store{
         ArrayList<String> organizerList = organizerActions.store();
         store(organizerList, path);
     }
+
 
     /**
      * Uses the method in attendeeActions for obtaining all attendees as a list then stores in csv
@@ -88,6 +91,7 @@ public class Store{
         store(attendeeList, path);
     }
 
+
     /**
      * Uses the method in speakerActions for obtaining all speakers as a list then stores in csv
      * @param speakerActions the use case class for speaker
@@ -97,6 +101,7 @@ public class Store{
         ArrayList<String> speakerList = speakerActions.store();
         store(speakerList, path);
     }
+
 
     /**
      * Uses the method in conferenceActions for obtaining all conferences as a list then stores in csv
