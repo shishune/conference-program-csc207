@@ -89,6 +89,9 @@ public class AttendeeController extends UserController {
 
     /**
      * Shows the vip events to a vip attendee
+     *
+     * @param user the user ID on if they are a VIP
+     * @return true if the attendee is a VIp
      */
     public boolean isVIP(String user){
         return attendeeActions.findUserFromUsername(user).getIsVIP();
