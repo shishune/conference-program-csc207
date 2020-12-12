@@ -3,6 +3,7 @@ import entities.Attendee;
 import entities.Event;
 import entities.Room;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @version 1
  * */
 
-public class RoomActions {
+public class RoomActions implements Storable {
     private HashMap<String, Room> roomsID = new HashMap<String, Room>();
     private HashMap<String, Room> roomUsername = new HashMap<String, Room>();
     private LoadUpIGateway loader;
@@ -310,7 +311,7 @@ public class RoomActions {
      * It will be storing rooms
      * @return ArrayList<String>
      */
-    public ArrayList<String> storingRooms() {
+    public ArrayList<String> store() {
         ArrayList<String> storedR = new ArrayList<String>();
         if(roomUsername != null && !roomUsername.isEmpty()) {
             for (Map.Entry<String, Room> o : roomUsername.entrySet()) {

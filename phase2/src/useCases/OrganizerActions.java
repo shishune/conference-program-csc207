@@ -4,6 +4,7 @@ import entities.Attendee;
 import entities.Organizer;
 import entities.User;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.Map;
 /**
  * A use case class that stores a hashmap of organizers
  */
-public class OrganizerActions extends UserAccountActions {
+public class OrganizerActions extends UserAccountActions implements Storable {
 
     private HashMap<String, Organizer> organizerHashMap = super.organizerHashMapID;
     private HashMap<String, Organizer> organizerUsernameHashMap = super.organizerHashMapUsername;
@@ -343,7 +344,7 @@ public class OrganizerActions extends UserAccountActions {
      * It will be storing organizers
      * @return ArrayList<String>
      */
-    public ArrayList<String> storingOrganizers(){
+    public ArrayList<String> store(){
         ArrayList<String> storedOrganizer = new ArrayList<String>();
         if(organizerHashMap != null && !organizerHashMap.isEmpty()) {
             for(Map.Entry<String, Organizer> o : organizerHashMap.entrySet()) {

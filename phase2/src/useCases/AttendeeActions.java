@@ -3,6 +3,7 @@ package useCases;
 import entities.Attendee;
 import entities.User;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 
 
-public class AttendeeActions extends UserAccountActions {
+public class AttendeeActions extends UserAccountActions implements Storable {
     private HashMap<String, Attendee> attendeesHashMap = super.attendeeHashMapID;
     private HashMap<String, Attendee> attendeeUsernameHashMap = super.attendeeHashMapUsername;
     private ArrayList<String> attendees = new ArrayList<String>();
@@ -359,7 +360,7 @@ public class AttendeeActions extends UserAccountActions {
      * It will be storing attendees
      * @return ArrayList<String>
      */
-    public ArrayList<String> storingAttendees() {
+    public ArrayList<String> store() {
         ArrayList<String> storedAttendee = new ArrayList<String>();
         if(attendeesHashMap != null && !attendeesHashMap.isEmpty()) {
             for (Map.Entry<String, Attendee> o : attendeesHashMap.entrySet()) {

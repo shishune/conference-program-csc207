@@ -2,6 +2,7 @@ package useCases;
 import entities.Attendee;
 import entities.Event;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * @version 1
  */
 
-public class EventActions  {
+public class EventActions implements Storable {
     public HashMap<String, Event> events = new HashMap<String, Event>(); // public private
     public HashMap<String, Integer> eventCapacity = new HashMap<String, Integer>(); //eventID: capacity
     private HashMap<String, Event> eventNames = new HashMap<String, Event>();
@@ -429,8 +430,8 @@ public class EventActions  {
      * return all events in hashmap as a List of strings
      * @return all events in hashmap as a List of strings
      */
-    public List<String> storeEvents(){
-        List<String> storedEvents = new ArrayList<String>();
+    public ArrayList<String> store(){
+        ArrayList<String> storedEvents = new ArrayList<String>();
         for(Map.Entry<String, Event> event : events.entrySet()) {
             storedEvents.add(event.getValue().string()+"\n");
         }

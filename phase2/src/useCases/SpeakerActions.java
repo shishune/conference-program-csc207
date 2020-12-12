@@ -4,13 +4,14 @@ import entities.Event;
 import entities.Speaker;
 import entities.User;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.*;
 
 /**
  * A use case class that stores a hashmap of speakers
  */
-public class SpeakerActions extends UserAccountActions {
+public class SpeakerActions extends UserAccountActions implements Storable {
     private LoadUpIGateway loader;
     private ArrayList<String> speakerLoadUpList = new ArrayList<String>();
 
@@ -390,7 +391,7 @@ public class SpeakerActions extends UserAccountActions {
      * It will be storing speakers
      * @return ArrayList<String>
      */
-    public ArrayList<String> storeSpeakers() {
+    public ArrayList<String> store() {
         ArrayList<String> storedSpeaker = new ArrayList<String>();
         if(speakerID != null && !speakerID.isEmpty()) {
             for (Map.Entry<String, Speaker> o : speakerID.entrySet()) {

@@ -2,6 +2,7 @@ package useCases;
 
 import entities.Message;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -13,7 +14,7 @@ import java.util.*;
  * Allows actions to be done with messages, including creating messages, sending messages, loading messages,
  * retrieving message information, printing messages, storing messages
  */
-public class MessageActions {
+public class MessageActions implements Storable {
     private ArrayList<String> conversations = new ArrayList<String>(); // list containing loaded messages
     private HashMap<String, Message> messages = new HashMap<String, Message>(); // hashmap containing all loaded and new messages
     private LoadUpIGateway loader;
@@ -160,9 +161,10 @@ public class MessageActions {
      * This method stores messages in an array
      * @return an array of all messages (new and old) for storage
      */
-    public ArrayList<String> storeMessages() {
+    public ArrayList<String> store() {
         ArrayList<String> allMessages = new ArrayList<String>();
         // store messages
+
         if (messages != null && !messages.isEmpty()) {
             for (Map.Entry<String, Message> message : messages.entrySet()) {
                 allMessages.add(message.getValue().getStringRep() + "\n");
