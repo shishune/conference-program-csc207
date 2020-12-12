@@ -32,6 +32,7 @@ public interface LoadUpIGateway {
      **/
     public ArrayList<String> getAllOrganizers();
 
+
     /**
      * Gets list of rooms from the gateway
      **/
