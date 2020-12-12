@@ -4,6 +4,7 @@ import user.speaker.SpeakerActions;
 import user.organizer.OrganizerActions;
 import user.UserAccountActions;
 
+
 /**
  * Parameter object for all use cases involving using the account to access the system of events.
  * This includes account actions for attendees, speakers, and organizers.
@@ -15,6 +16,7 @@ public class AccountActions {
     private SpeakerActions speakerActions;
     private OrganizerActions organizerActions;
     private UserAccountActions userAccountActions;
+
 
     /**
      * Instantiates the parameter object with all the use case objects that handle the account.
@@ -29,6 +31,7 @@ public class AccountActions {
         this.userAccountActions = userAccountActions;
     }
 
+
     /**
      * getter for attendee use case
      * @return attendee use case
@@ -36,6 +39,7 @@ public class AccountActions {
     public AttendeeActions getAttendeeActions(){
         return this.attendeeActions;
     }
+
 
     /**
      * getter for speaker use case
@@ -45,6 +49,7 @@ public class AccountActions {
         return this.speakerActions;
     }
 
+
     /**
      * getter for organizer use case
      * @return organizer use case
@@ -53,6 +58,11 @@ public class AccountActions {
         return this.organizerActions;
     }
 
+
+    /**
+     * getter for general user object use case
+     * @return user use case
+     */
     public UserAccountActions getUserAccountActions(){return this.userAccountActions;}
 
 }
