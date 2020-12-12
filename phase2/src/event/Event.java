@@ -42,12 +42,16 @@ public class Event {
         this.isVIP = isVIP;
 
     }
+
+
     /**
      * @return isVip of Event entity
      */
     public boolean getIsVip() {
         return isVIP;
     }
+
+
     /**
      * Setter isVip of Event entity
      * @param newVip the new vip boolean
@@ -55,6 +59,7 @@ public class Event {
     public void setVIP(boolean newVip){
         this.isVIP = newVip;
     }
+
 
     /**
      * @return String representation of Event entity
@@ -68,10 +73,12 @@ public class Event {
                 roomID + "," + conference  + "," + capacity + "," + isVIP;
     }
 
+
     /**
      * return conference
      */
     public String getConference(){return this.conference;}
+
 
     /**
      * Return eventID
@@ -81,6 +88,7 @@ public class Event {
         return this.eventID;
     }
 
+
     /**
      * Return title
      * @return title of event
@@ -89,6 +97,7 @@ public class Event {
         return this.title;
     }
 
+
     /**
      * Return speaker of event
      * @return ID of speaker of event
@@ -96,6 +105,8 @@ public class Event {
     public List<String> getSpeakers() {
         return this.speakers;
     }
+
+
     /**
      * set speaker for event
      * @param speakers new speakers' ids
@@ -112,6 +123,8 @@ public class Event {
     public int getCapacity() {
         return this.capacity;
     }
+
+
     /**
      * set capacity for event
      * @param newCapacity new capacity of event
@@ -119,6 +132,7 @@ public class Event {
     public void setCapacity(int newCapacity) {
         this.capacity = newCapacity;
     }
+
 
     /**
      * Return dateTime of event
@@ -128,6 +142,7 @@ public class Event {
         return startDateTime + " to " + endDateTime;
     }
 
+
     /**
      * Return startHour of event
      * @return startHour of event
@@ -135,6 +150,8 @@ public class Event {
     public String getStartDateTime() {
         return this.startDateTime;
     }
+
+
     /**
      * set startHour for event
      * @param newDateTime date and hour event starts  yyyy-mm-dd hh  (24 h)
@@ -142,6 +159,8 @@ public class Event {
     public void setStartTime(String newDateTime) {
         this.startDateTime = newDateTime;
     }
+
+
     /**
      * Return endHour of event
      * @return startHour of event
@@ -149,6 +168,8 @@ public class Event {
     public String getEndDateTime() {
         return this.endDateTime;
     }
+
+
     /**
      * set endHour for event
      * @param newDateTime date and hour event starts  yyyy-mm-dd hh  (24 h)
@@ -157,6 +178,7 @@ public class Event {
         this.endDateTime = newDateTime;
     }
 
+
     /**
      * Return List of attendees of an event
      * @return date and hour event starts  yyyy-mm-dd hh  (24 h)
@@ -164,6 +186,8 @@ public class Event {
     public List<String> getAttendees() {
         return attendees;
     }
+
+
     /**
      * Set List of attendees of an event
      * @param newAttendees list of IDs of the new attendee
@@ -171,6 +195,7 @@ public class Event {
     public void setAttendees(List<String> newAttendees) {
         this.attendees =  newAttendees;
     }
+
 
     /**
      * Add attendeeID to list of attendees, return True if attendee is successfully added
@@ -187,6 +212,7 @@ public class Event {
         }
     }
 
+
     /**
      * Remove attendeeID to list of attendees, return True if attendee is successfully removed
      * (ie was already in the list of attendees, and is now no longer there)
@@ -201,6 +227,7 @@ public class Event {
             return false;
         }
     }
+
 
     /**
      * Return location of event (room)
