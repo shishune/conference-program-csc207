@@ -136,37 +136,4 @@ public class ConferencePresenter {
 }
 
 
-//                    //TODO: detect if conference is current
-//                    //TODO: print events
-//                    if(true /* conference start time same or after current time*/){
-//                        System.out.println(count);
-//                        count ++;
-//
-//                        System.out.println("Conference title: "+ info.get(0));
-//                        // print events
-//                        String[] events = info.get(1).split("%%");
-//                        System.out.println("Conference Events:");
-//                        //for(String event : events){
-//                        //System.out.println(userHash.get(event).getUsername());
-//                        //}
-//                        // print attendees
-//                        //String[] attendees = info.get(2).split("%%");
-//                        //System.out.println("Conference Attendees");
-//                        //for(String attendee : attendees){
-//                        //}
-//                        // print speakers
-//                        String[] speakers = info.get(3).split("%%");
-//                        System.out.println("Conference Speakers:");
-//                        //TODO: (optional) put speakers into conferences
-//                        // if not implemented, delete the following loop and code
-//                        for(String speaker : speakers){
-//                            System.out.println(userIdHash.get(speaker).getUsername());
-//                        }
-//                        //System.out.println("Start Time: "+info.get(1));
-//                        //System.out.println("End Time: "+info.get(2));
-
-
-
-
-
 

@@ -176,6 +176,9 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      */
     public void notValidChoice(){System.out.println("That choice is invalid please try again or press x to go back.");}
 
+    /***
+     *
+     */
     public void zeroSpeakers(){System.out.println("Enter 'Y' to have 0 speakers");}
 
     public void numberOfSpeaker(){System.out.println("Enter an integer value for the number of speakers you would like to have");}

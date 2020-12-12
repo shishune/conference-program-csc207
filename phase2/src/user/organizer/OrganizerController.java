@@ -147,8 +147,6 @@ public class OrganizerController extends UserController {
      * @param password password of speaker
      */
     public boolean createSpeaker(String username, String password){
-        // what if speaker is already created?
-        boolean speaker = true;
         if(speakerActions != null) {
             if (speakerActions.findUserFromUsername(username) != null) {
                 return false;
@@ -157,7 +155,7 @@ public class OrganizerController extends UserController {
 
             this.eventActions.addSpeakerToSchedule(speakerID);
         }
-        return speaker;
+        return true;
     }
 
     /***
@@ -222,8 +220,6 @@ public class OrganizerController extends UserController {
         }
         return false;
     }
-
-    // TODO edit event details... is this necessary?
 
     /***
      * reschedule an event with a new date and time

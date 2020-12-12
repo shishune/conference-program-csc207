@@ -226,7 +226,6 @@ public class UserController {
             for (String id : usersList) {
                 contacts.add(returnUserIDHashMap().get(id).getUsername());
             }
-            // TODO i think theres something wrong with the for loop here
         }
         return contacts;
     }
