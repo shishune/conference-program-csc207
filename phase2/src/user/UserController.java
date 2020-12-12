@@ -157,7 +157,7 @@ public class UserController {
 
     /**
      * Adds a user to the contact list of another user
-     *
+     *\
      * @param toMe  the username who's contact list that is updated
      * @param addMe the username who will be added
      * @return boolean true if contact was successfully added, false if it was not
@@ -342,6 +342,13 @@ public class UserController {
         return scheduleList;
     }
 
+    /**
+     * Allows them to view VIP Events
+     *\
+     * @param user  the username who's contact list that is updated
+     * @param conferenceTitle the username who will be added
+     * @return List<List<String>> true if contact was successfully added, false if it was not
+     */
     public List<List<String>> viewVIPEvents(String user, String conferenceTitle){
         List<String> conferenceEvents = conferenceActions.returnTitleHashMap().get(conferenceTitle).getEvents();
         // Set<String> allEvents = eventActions.getEvents().keySet();
@@ -487,6 +494,8 @@ public class UserController {
     /***
      * Check if event exists
      * @param eventName
+     *
+     * @return true if an event with that event name exists
      */
     public boolean checkEvent(String eventName) {
         return (eventActions.getEventNames().containsKey(eventName));
@@ -496,6 +505,8 @@ public class UserController {
     /***
      * Check if event has attendees
      * @param eventName
+     *
+     * @return true is the event has more than 0 attendees
      */
     public boolean eventHasAttendees(String eventName) {
         return (eventActions.getEventFromName(eventName).getAttendees().size() > 0);
@@ -503,6 +514,8 @@ public class UserController {
 
     /***
      * Check if any speakers exists in the system
+     *
+     * @return true if speaker exists in the hashmap
      */
     public boolean speakersExist() {
         return (user.getSpeakerHashMapID().size() > 0);

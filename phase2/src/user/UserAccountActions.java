@@ -78,7 +78,11 @@ public class UserAccountActions {
     }
 
     /**
-     *
+     * Allows them create to users
+     *\
+     * @param username  the username
+     * @param password the password
+     * @return User based on the username and password created
      */
     public User createUser(String username, String password){return null;}
 
