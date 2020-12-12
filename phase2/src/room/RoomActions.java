@@ -1,8 +1,6 @@
 package room;
 import loadUp.LoadUpIGateway;
 import store.Storable;
-import useCases.GenerateID;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,8 +59,6 @@ public class RoomActions implements Storable {
      * @return a new room
      */
     public Room createRoom(String username) {
-        useCases.GenerateID generateId = new GenerateID(loader);
-//        String userId = "R" + generateId.generateId();
         String userId = "R" + String.valueOf(roomsID.size());
         Room room = new Room(userId, username);
         addRoomIdToHashMap(room);

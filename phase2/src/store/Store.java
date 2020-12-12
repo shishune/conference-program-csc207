@@ -114,48 +114,4 @@ public class Store{
 
     }
 
-
-        /**
-     * Stores entities of Attendee, Event, Message, Organizer, Room, Event, Speaker
-     * @param attendee from Attendee entity
-     * @param organizer from Organizer entity
-     * @param message from Message entity
-     * @param room from Room entity
-     * @param event from Event entity
-     * @param speaker from Speaker entity
-     * @param conference from Conference entity
-     */
-    public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker, ArrayList<String> conference) {
-
-        try {
-            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
-
-            for (String id : attendee) {
-                csvWriter.append(id);
-            }
-            for (String id : organizer) {
-                csvWriter.append(id);
-            }
-            for (String id : message) {
-                csvWriter.append(id);
-            }
-            for (String id : room) {
-                csvWriter.append(id);
-            }
-            for (String id : event) {
-                csvWriter.append(id);
-            }
-            for (String id : speaker) {
-                csvWriter.append(id);
-            }
-            for (String id: conference){
-                csvWriter.append(id);
-            }
-
-            csvWriter.flush();
-            csvWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

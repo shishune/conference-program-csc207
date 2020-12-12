@@ -3,7 +3,6 @@ package user.organizer;
 import user.User;
 import loadUp.LoadUpIGateway;
 import store.Storable;
-import useCases.GenerateID;
 import user.UserAccountActions;
 
 import java.util.ArrayList;
@@ -76,8 +75,6 @@ public class OrganizerActions extends UserAccountActions implements Storable {
      * This will create a new Attendee
      * */
     public Organizer createUser(String username, String password) {
-        useCases.GenerateID generateId = new GenerateID(loader);
-//        String userId = "O" + generateId.generateId();
         String userId = "O" + String.valueOf(organizerHashMap.size());
         Organizer userOrganizer = loadOrganizer(userId, username, password, new ArrayList<>(), new ArrayList<>(), false);
         organizerHashMap.put(userId, userOrganizer);

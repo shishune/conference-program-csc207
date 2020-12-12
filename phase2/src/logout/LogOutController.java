@@ -60,9 +60,6 @@ public class LogOutController {
         store.storeAttendees(attendeeActions);
         store.storeSpeakers(speakerActions);
         store.storeConferences(conferenceActions);
-        store.storeEntities(attendeeActions.getAttendeeIds(), organizerActions.getOrganizerIds(),
-                messageActions.getMessengerIds(), roomActions.getRoomsIds(), eventActions.getEventIds(),
-                speakerActions.getSpeakerIds(), conferenceActions.getConferenceIds());
 
 
         logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);

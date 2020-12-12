@@ -157,7 +157,7 @@ Allows VIP attendees to view VIP events. If a non-VIP attendee tries this option
  
 #####Option [12] - (NEW FEATURE) Sign up for conference
  
-Allow attendees to sign up to conferences. Doing so will allow attendees to view events that they are attending
+Allow attendees to sign up to conferences. Doing so will allow attendees to view events that they are attending.
  
  
 ##Design

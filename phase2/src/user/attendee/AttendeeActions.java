@@ -3,7 +3,6 @@ package user.attendee;
 import user.User;
 import loadUp.LoadUpIGateway;
 import store.Storable;
-import useCases.GenerateID;
 import user.UserAccountActions;
 
 import java.util.ArrayList;
@@ -64,8 +63,6 @@ public class AttendeeActions extends UserAccountActions implements Storable {
      * This will create a new Attendee
      * */
     public Attendee createUser(String username, String password, boolean isVIP) {
-        useCases.GenerateID generateId = new GenerateID(loader);
-//        String userId = "A" + generateId.generateId();
         String userId = "A" + String.valueOf(attendeesHashMap.size());
         Attendee userAttendee = loadAttendee(userId, username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
                 false, isVIP);
@@ -81,13 +78,9 @@ public class AttendeeActions extends UserAccountActions implements Storable {
      * This will create a new Attendee
      * */
     public Attendee createUser(String username, String password) {
-        useCases.GenerateID generateId = new GenerateID(loader);
-//        String userId = "A" + generateId.generateId();
         String userId = "A" + String.valueOf(attendeesHashMap.size());
         Attendee userAttendee = loadAttendee(userId, username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
                 false, false);
-//        attendeesHashMap.put(userId, userAttendee);
-//        attendeeUsernameHashMap.put(username, userAttendee);
         counter += 1;
         return userAttendee;
     }

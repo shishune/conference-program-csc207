@@ -18,8 +18,6 @@ public interface LoadUpIGateway {
     public ArrayList<String> getAllAttendees();
     public ArrayList<String> getSpeakersList();
     public ArrayList<String> getAllOrganizers();
-    public int getObjectId();
-    public void addId(String id);
     public ArrayList<String> getRooms();
     public ArrayList<String> getEvents();
     public ArrayList<String> getConferencesList();
