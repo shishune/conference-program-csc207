@@ -114,7 +114,6 @@ The speaker-specific menu is extended by the option below;
     
 Option [6] allows the speaker to view the events they are scheduled to speak at.
  
-###### Note: The total number of speakers must be greater than or equal to the number of events as each event can only have one speaker.
  
 ### Attendee
 The attendee-specific menu is extended by the options below;
@@ -186,6 +185,9 @@ After all the hard work our organizers will be completing to create new conferen
     [12] Total number of attendees
 
 
+
+
+###### Designed and Coded by : Jiessie Tie, Mizna Dada, Cynthia Shen, Eryka Shi, Akiki Liang, Sejal Sahni, Jennifer Vo, Suhyun Park
 
 
 
