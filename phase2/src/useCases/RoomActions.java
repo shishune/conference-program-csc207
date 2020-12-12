@@ -64,7 +64,8 @@ public class RoomActions implements Storable {
      */
     public Room createRoom(String username) {
         useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "R" + generateId.generateId();
+//        String userId = "R" + generateId.generateId();
+        String userId = "R" + String.valueOf(roomsID.size());
         Room room = new Room(userId, username);
         addRoomIdToHashMap(room);
         addRoomUsernameToHashMap(room);

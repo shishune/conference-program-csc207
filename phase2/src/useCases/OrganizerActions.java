@@ -77,7 +77,8 @@ public class OrganizerActions extends UserAccountActions implements Storable {
      * */
     public Organizer createUser(String username, String password) {
         useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "O" + generateId.generateId();
+//        String userId = "O" + generateId.generateId();
+        String userId = "O" + String.valueOf(organizerHashMap.size());
         Organizer userOrganizer = loadOrganizer(userId, username, password, new ArrayList<>(), new ArrayList<>(), false);
         organizerHashMap.put(userId, userOrganizer);
         organizerUsernameHashMap.put(username, userOrganizer);

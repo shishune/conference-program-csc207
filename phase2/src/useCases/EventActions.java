@@ -35,7 +35,6 @@ public class EventActions implements Storable {
         loadAllEvents(loader);
         addLoadedToHashMap();
         this.loader = loader;
-       // roomSchedule.put("Toronto", new ArrayList<String>());
     }
 
 
@@ -180,8 +179,12 @@ public class EventActions implements Storable {
 
         if (isRoomFree(roomID, startDateTime, endDateTime) && isSpeakerFree(speakerId, startDateTime, endDateTime)){
 
-            useCases.GenerateID generateId = new GenerateID(loader);
-            String newID = "E" + generateId.generateId();
+            int IDNumber = events.size();
+            String newID = "E" + IDNumber;
+            while(events.containsKey(newID)){
+                IDNumber += 1;
+                newID = "E" + IDNumber;
+            }
 
             return loadEvent(newID, title, speakerId, startDateTime, endDateTime, attendees, roomID, conference,  capacity, isVip);
         }

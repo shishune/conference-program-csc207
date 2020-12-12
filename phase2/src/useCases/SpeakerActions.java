@@ -60,7 +60,8 @@ public class SpeakerActions extends UserAccountActions implements Storable {
      * */
     public Speaker createUser(String username, String password) {
         useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "S" + generateId.generateId();
+//        String userId = "S" + generateId.generateId();
+        String userId = "S" + String.valueOf(speakerID.size());
         Speaker userSpeaker = loadSpeaker(userId, username, password, new ArrayList<>(), new ArrayList<>(),false);
         speakerID.put(userId, userSpeaker);
         speakerUsername.put(username, userSpeaker);

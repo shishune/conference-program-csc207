@@ -13,6 +13,7 @@ All users can;
     [3] View all messages
     [4] Add a contact
     [5] View all contacts
+    [13] View all Conferences
             
 #####Option 1 
  
@@ -37,17 +38,24 @@ Allows users to add any contact they want.
 #####Option 5 
 
 Allows users to view all the contacts they have already added.
+ 
+#####Option 6 
+
+Allow 
             
 
 ### Organizer
 The organizer-specific menu is extended by the options below;
 
-    [6] Add an event/create new speaker account
+    [6] Add an event/create new speaker account"
     [7] Remove/reschedule an event
     [8] View all your created events
     [9] Add room
-    [10] Add speaker
-    [11] View all created events
+    [10] Add user
+    [11] View all conferences
+    [12] Add a conference
+    [13] Change capacity of an event
+    [14] View Statistics
                 
 #####Option 6
  
@@ -106,6 +114,8 @@ Allows the attendee to sign up to an event after showing the available events to
 
 Allows the attendee to cancel their spot for an event they are already signed up for.
 
+
+
 #####Option 8 
  
 Allows the attendee to view the possible events available to them, with no conflicts.
@@ -119,6 +129,8 @@ Allows the attendee to view the schedule of events they are already signed up fo
 
 Our code implements the design rules from Clean Architecture. The UML diagram of this design can be found in the UML file.
 The choice to store the data in the csv files was made to prepare for the implementation for phase 2, as the way the information is processed, is similar to the way databases are used.
+
+
 
 
 

@@ -64,7 +64,8 @@ public class AttendeeActions extends UserAccountActions implements Storable {
      * */
     public Attendee createUser(String username, String password, boolean isVIP) {
         useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "A" + generateId.generateId();
+//        String userId = "A" + generateId.generateId();
+        String userId = "A" + String.valueOf(attendeesHashMap.size());
         Attendee userAttendee = loadAttendee(userId, username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
                 false, isVIP);
         attendeesHashMap.put(userId, userAttendee);
@@ -80,11 +81,12 @@ public class AttendeeActions extends UserAccountActions implements Storable {
      * */
     public Attendee createUser(String username, String password) {
         useCases.GenerateID generateId = new GenerateID(loader);
-        String userId = "A" + generateId.generateId();
+//        String userId = "A" + generateId.generateId();
+        String userId = "A" + String.valueOf(attendeesHashMap.size());
         Attendee userAttendee = loadAttendee(userId, username, password, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
                 false, false);
-        attendeesHashMap.put(userId, userAttendee);
-        attendeeUsernameHashMap.put(username, userAttendee);
+//        attendeesHashMap.put(userId, userAttendee);
+//        attendeeUsernameHashMap.put(username, userAttendee);
         counter += 1;
         return userAttendee;
     }

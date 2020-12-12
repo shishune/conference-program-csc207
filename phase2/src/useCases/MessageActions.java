@@ -40,8 +40,7 @@ public class MessageActions implements Storable {
      * @return a new message
      */
     public Message createMessage(String senderId, String receiverId, String message) {
-        useCases.GenerateID generateID = new GenerateID(loader);
-        String messageId = "M" + generateID.generateId();
+        String messageId = "A" + String.valueOf(messages.size());
         Message newMessage = new Message(messageId, senderId, receiverId, message, generateSentTime());
         loadMessage(messageId, newMessage);
         return newMessage;
