@@ -169,8 +169,6 @@ public abstract class MainMenuController extends AccountController {
      */
     public void option8ViewAllEvents() {
         String conferenceTitle = "";
-        // TODO print list of users conferences
-        // TODO have user choose which conference events they want to see
         String username = controller.returnUserIDHashMap().get(userID).getUsername();
         ArrayList<List<String>> conferences = conferenceActions.returnAttendedConferences(username);
         displayConference.displayConferences(conferences);
@@ -280,10 +278,3 @@ public abstract class MainMenuController extends AccountController {
     }
 
 }
-
-//    /***
-//     * Responds to menu option 15 - View all conferences (Organizer)
-//     */
-//    public void option15ViewAllConferences(){
-//        displayConference.displayConferences(conferenceActions.returnConferences());
-//    }

@@ -161,14 +161,21 @@ Allow attendees to sign up to conferences. Doing so will allow attendees to view
  
 Our code implements the design rules from Clean Architecture. The UML diagram of this design can be found in the UML file.
 The choice to store the data in the csv files was made to prepare for the implementation for phase 2, as the way the information is processed, is similar to the way databases are used.
-The design patterns we implemented are Dependency Injection and Factory methods. Dependency Injection is known as a technique in which a certain object receives other objects that it depends on. These other objects are known as dependencies. In our program, attendees, organizers, and speaker objects receive user objects which are also known as dependencies. The factory method allows programmers to create objects without stating the class of the object. In our project, the users can be created without stating which class they are in. This is very useful because the user can possibly be speaker, organizer or attendee and that does not need to be disclosed as the object is created.
- 
- 
+The design patterns we implemented are Dependency Injection and Factory methods. 
+Dependency Injection is known as a technique in which a certain object receives other objects that it depends on. These other objects are known as dependencies. In our program, attendees, organizers, and speaker action classes will use dependency injection when loading their users into the program, by passing in loaded parameters.  
+The factory method allows programmers to create objects without stating the class of the object. In our project, the users can be created without stating which class they are in. This is very useful because the user can possibly be speaker, organizer or attendee and that does not need to be disclosed as the object is created. We implement the factory pattern by implementing and overriding the createUser method in all userAction classes.
+
+Extra notes:
+* The storable interface is implemented in every usecase classes that needs to store the entities to make the code more readable and extensible. 
+* The parameterObjects AccountActions and EventSystemActions is our solution to having too many parameters that are often used together, which is a code smell.  
+
+
+
 NEW FEATURES: 
 An amazing feature that we have added in this program is to allow the same users to log in and select which conference they want to participate in and further allow them to select events within those conferences. We allow users to both save an event, and sign up for the event. For participation means viewing and signing up for events. The inbox is made as one general inbox for all messages from all conferences to that user. 
 Another feature we added is for our organizers to have  additional constraints to the scheduling.  For various types of events, they may require a  projector,  microphone, tables, and whiteboard. Our program will look through every room and provide the best one according to your requirements.  When organizers are creating events, they can see a suggested list of rooms that fit the requirements of their event. This allows all your technical needs to be met without arriving at the room.
 After all the hard work our organizers will be completing to create new conferences and events, we would like to provide  a summary of everything that has been completed. Our upgraded features will allow organizers to view the following statistics: 
-   
+
     [1] View number of offered events
     [2] Most attended events
     [3] Least attended event

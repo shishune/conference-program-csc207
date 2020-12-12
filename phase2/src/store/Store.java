@@ -51,7 +51,6 @@ public class Store{
      * @param eventActions the use case class responsible for events
      */
     public void storeEvents(Storable eventActions) {
-        // ArrayList<String> eventsList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/events.csv";
         List<String> eventsList = eventActions.store();
         store(eventsList, path);
@@ -74,9 +73,8 @@ public class Store{
      * @param organizerActions the use case class responsible for organizers
      */
     public <ICsvListWriter> void storeOrganizers(Storable organizerActions) {
-        ArrayList<String> organizerList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/organizers.csv";
-        organizerList = organizerActions.store();
+        ArrayList<String> organizerList = organizerActions.store();
         store(organizerList, path);
     }
 
@@ -85,7 +83,6 @@ public class Store{
      * @param attendeeActions the use case class responsible for attendee
      */
     public void storeAttendees(Storable attendeeActions) {
-        // attendeeList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/attendees.csv";
         ArrayList<String> attendeeList = attendeeActions.store();
         store(attendeeList, path);
@@ -96,7 +93,6 @@ public class Store{
      * @param speakerActions the use case class for speaker
      */
     public void storeSpeakers(Storable speakerActions) {
-        // speakerList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/speakers.csv";
         ArrayList<String> speakerList = speakerActions.store();
         store(speakerList, path);
