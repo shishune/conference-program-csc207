@@ -8,26 +8,44 @@ import java.util.*;
 public class ConferenceActions implements Storable {
     public HashMap<String, Conference> conferences = new HashMap<String, Conference>();
     private HashMap<String, Conference> conferenceTitlesHash = new HashMap<String, Conference>();
-    //private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
-    //private HashMap<String, List<String>> attendees = new HashMap<String, List<String>>(); // EventID: attendees
-    //private HashMap<String, List<String>> events = new HashMap<String, List<String>>(); // ConferenceID: event
     private LoadUpIGateway loader;
     private List<String> conferencesList;
 
+    /**
+     * Instantiates ConferenceActions
+     * @param loader LoadUpIGateway for loading up of conference objects
+     * */
     public ConferenceActions(LoadUpIGateway loader) {
         loadAllConferences(loader);
         addLoadedToHashMap();
         this.loader = loader;
     }
 
+
+    /***
+     * return hashmap of all conferences in existence. key: conferenceID value: The conference object itself
+     * @return hashmap of all conferences in existence with conferenceID as key
+     */
     public HashMap<String, Conference> returnIDHashMap() {
         return conferences;
     }
 
+
+    /***
+     * return hashmap of all conferences in existence. key: the conference's title value: The conference object itself
+     * @return hashmap of all conferences in existence with the conference's title as key
+     */
     public HashMap<String, Conference> returnTitleHashMap() {
         return conferenceTitlesHash;
     }
 
+
+    /***
+     * Adds an event to the conference object
+     * @param conferenceTitle The title of the conference to which the event will be aded to
+     * @param eventId the id of the event to be added
+     * @return True if the event could be added and false if it could not be
+     */
     public boolean addEvent(String conferenceTitle, String eventId) {
         if (conferenceTitlesHash != null) {
             conferenceTitlesHash.get(conferenceTitle).addEvent(eventId);
@@ -35,6 +53,7 @@ public class ConferenceActions implements Storable {
         }
         return false;
     }
+
 
     /**
      * add attendee to a conference
@@ -49,8 +68,10 @@ public class ConferenceActions implements Storable {
         }
         return false;
     }
+
+
     /**
-     *
+     * Returns whether the user is an attendee
      * @param conferenceTitle the title of conference
      * @param attendeeUsername the username of attendee
      * @return true if and only if attendee was added to conference
@@ -58,6 +79,7 @@ public class ConferenceActions implements Storable {
     public boolean isAttendee(String conferenceTitle, String attendeeUsername){
         return conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendeeUsername);
     }
+
 
     /***
      * set speaker of an event
@@ -67,6 +89,7 @@ public class ConferenceActions implements Storable {
     public void setSpeaker(String conferenceID, List<String> speakerID) {
         this.conferences.get(conferenceID).setSpeaker(speakerID);
     }
+
 
     /**
      * returns the list of all conferences (title and events)
@@ -78,8 +101,6 @@ public class ConferenceActions implements Storable {
             List<String> stringRepConference = new ArrayList<String>();
             Conference conference = entry.getValue();
             stringRepConference.add(conference.getTitle());
-//            stringRepConference.add(conference.getStartDateTime());
-//            stringRepConference.add(conference.getEndDateTime());
             String events = "";
             for (String eventID : conference.getEvents()) {
                 events += eventID + ",";
@@ -89,6 +110,7 @@ public class ConferenceActions implements Storable {
         }
         return stringRepConferences;
     }
+
 
     /**
      * returns the list of all conferences (title and events) that attendee is participating in
@@ -116,6 +138,7 @@ public class ConferenceActions implements Storable {
         return stringRepConferences;
     }
 
+
     /**
      * returns the list of all conferences (title and events) that attendee is NOT participating in
      * @param attendee the attendee name in question
@@ -140,17 +163,24 @@ public class ConferenceActions implements Storable {
         return stringRepConferences;
     }
 
+
+    /***
+     * Get list of all conferences (as string representations) from the loader
+     */
     private void loadAllConferences(LoadUpIGateway loader) {
         conferencesList = loader.getConferencesList();
     }
 
+
+    /***
+     * Creates conference objects from their string representations and adds them to conferences hash map
+     */
     private void addLoadedToHashMap() {
         if (conferencesList != null && !conferencesList.isEmpty()) {
             for (String conference : conferencesList) {
                 String[] conferenceItems = conference.split(",");
                 List<String> conferenceEvents = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
                 List<String> conferenceAttendees = new ArrayList<>(Arrays.asList(conferenceItems[3].split("%%")));
-                // List<String> conferenceSpeakers = new ArrayList<>(Arrays.asList(conferenceItems[2].split("%%")));
                 ArrayList<String> eventList = new ArrayList<String>();
                 ArrayList<String> attendeeList = new ArrayList<String>();
 
@@ -169,9 +199,14 @@ public class ConferenceActions implements Storable {
         }
     }
 
+
+    /***
+     * @return True if conference exists, false if it doesn't.
+     */
     public boolean conferenceExists(String conferenceTitle) {
         return conferenceTitlesHash.containsKey(conferenceTitle);
     }
+
 
     /**
      * determines whether a given attendee is not participating in a given conference, and whether the conference exists
@@ -186,6 +221,7 @@ public class ConferenceActions implements Storable {
         return false;
     }
 
+
     /**
      * determines whether conference exists and a given attendee is participating in a given conference
      * @param conferenceTitle title of conference
@@ -196,45 +232,38 @@ public class ConferenceActions implements Storable {
         return conferenceTitlesHash.containsKey(conferenceTitle) && conferenceTitlesHash.get(conferenceTitle).getAttendees().contains(attendee);
     }
 
-    public void createConference(String title, List<String> events/*, List<String> attendees, List<String> speakers*/) {
+
+    /***
+     * Creates a conference object
+     * @param title The title of the conference
+     * @param events The list of event IDs
+     */
+    public void createConference(String title, List<String> events) {
         String conferenceId = "C" + String.valueOf(conferences.size());
-        loadConference(conferenceId, title, events, new ArrayList<>()/*, speakers*/);
+        loadConference(conferenceId, title, events, new ArrayList<>());
     }
 
 
     /***
-     * return list of dates in string format of the time beginning with and including startDateTime,
-     *      and ending with and excluding  endDateTime
-     * @param startDateTime the new start date and time for the conference to be changed to
-     * @param endDateTime the new end date and time for the conference to be changed to
-     * @return list of dates in string format of the time beginning with and including startDateTime,
-     *      and ending with and excluding  endDateTime
+     * Puts conferences into conferences and conferenceTitlesHash
+     * @param conferenceId Id of the conference
+     * @param title Title of the conference
+     * @param events List of event IDs of the events in this conference
+     * @param attendees List of attendee IDs of the attendees for this conference
+     * @return conference object that was just loaded into the HashMaps
      */
-    private List<String> timeInBetween(String startDateTime, String endDateTime) {
-        int startTime = Integer.parseInt(startDateTime.substring(29, 31));
-        int endTime = Integer.parseInt(endDateTime.substring(29, 31));
-        String date = startDateTime.substring(0, 10);
-        List<String> times = new ArrayList<>();
-        times.add(startDateTime);
-        while (startTime < endTime) {
-            times.add(date + startTime);
-            startTime += 1;
-        }
-        return times;
-    }
-
-    private Conference loadConference(String conferenceId, String title, List<String> events, List<String> attendees/*, List<String> speakers*/) {
-        /*if (attendees.size() == 1 && attendees.get(0).equals("")) { // not certain second one is necessary
-            attendees = new ArrayList<>();
-        }*/
-        Conference newConference = new Conference(conferenceId, title, events, attendees/*, speakers*/);
+    private Conference loadConference(String conferenceId, String title, List<String> events, List<String> attendees) {
+        Conference newConference = new Conference(conferenceId, title, events, attendees);
         conferences.put(conferenceId, newConference);
         conferenceTitlesHash.put(title, newConference);
-        //this.events.put(conferenceId, events);
-        // TODO: put events?
         return newConference;
     }
 
+
+    /***
+     * Will be called to store conferences
+     * @return List of string representations of all the conferences in existance
+     */
     public ArrayList<String> store() {
         ArrayList<String> storedConferences = new ArrayList<String>();
         for (Map.Entry<String, Conference> conference : conferences.entrySet()) {
@@ -242,6 +271,7 @@ public class ConferenceActions implements Storable {
         }
         return storedConferences;
     }
+
 
     /***
      * remove event from a conference
@@ -256,21 +286,4 @@ public class ConferenceActions implements Storable {
         }
         return false;
     }
-
-    /**
-     * It will be get the conference IDs
-     *
-     * @return ArrayList<String>
-     */
-    public ArrayList<String> getConferenceIds() {
-        ArrayList<String> storedConference = new ArrayList<String>();
-        if (conferences != null && !conferences.isEmpty()) {
-            for (Map.Entry<String, Conference> o : conferences.entrySet()) {
-                storedConference.add(o.getValue().getId() + "\n");
-            }
-        }
-        return storedConference;
-    }
-
-
 }

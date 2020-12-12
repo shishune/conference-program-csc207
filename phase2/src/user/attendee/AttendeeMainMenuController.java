@@ -280,29 +280,3 @@ public class AttendeeMainMenuController extends MainMenuController {
         }
     }
 }
-    /*        String username1 = controller.returnUserIDHashMap().get(userID).getUsername();
-        if(!controller.isVIP(username1)){
-            displayEvent.notVIP();
-        }
-        else{
-
-//        String conferenceTitle = "";
-//        ArrayList<List<String>> conferences = conferenceActions.returnConferences();
-//        displayConference.displayConferences(conferences);
-//        displayConference.promptConference();
-//        while(!conferenceActions.conferenceExists(conferenceTitle)){
-//            conferenceTitle = scan.nextLine();
-//            displayConference.invalidTitle();
-//        }
-            boolean exists = displayConference.displayAttendedConferences(conferences);
-
-            if (exists) {
-                displayConference.promptConference();
-                String conferenceTitle = scan.nextLine();
-                while (!conferenceActions.conferenceAttended(conferenceTitle, username)) {
-                    displayConference.invalidTitle();
-                    conferenceTitle = scan.nextLine();
-                    if(conferenceTitle.equalsIgnoreCase("x")){ //this cannot be inserted into loop condition
-                        break;
-                    }
-                }*/
