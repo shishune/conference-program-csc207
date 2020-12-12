@@ -1,8 +1,8 @@
 package parameterObjects;
-import useCases.ConferenceActions;
-import useCases.EventActions;
-import useCases.MessageActions;
-import useCases.RoomActions;
+import conference.ConferenceActions;
+import event.EventActions;
+import message.MessageActions;
+import room.RoomActions;
 
 /**
  * Parameter object for all use case classes involved in the system of events. This includes

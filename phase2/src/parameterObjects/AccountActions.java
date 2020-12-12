@@ -1,9 +1,8 @@
 package parameterObjects;
-import entities.User;
-import useCases.AttendeeActions;
-import useCases.SpeakerActions;
-import useCases.OrganizerActions;
-import useCases.UserAccountActions;
+import user.attendee.AttendeeActions;
+import user.speaker.SpeakerActions;
+import user.organizer.OrganizerActions;
+import user.UserAccountActions;
 
 /**
  * Parameter object for all use cases involving using the account to access the system of events.

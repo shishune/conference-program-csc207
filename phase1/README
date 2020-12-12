@@ -1,5 +1,5 @@
 ###### **README FILE** - G-0082
-## Conference System Program
+## conference System Program
 _This program creates a system allowing users to login in and according to their account type, schedule for events, message other users and present personalized schedules, whilst implementing design rules from Clean Architecture._
 
 #### How this program works.

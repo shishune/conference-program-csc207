@@ -1,6 +1,6 @@
 package useCases;
 
-import gateways.LoadUpIGateway;
+import loadUp.LoadUpIGateway;
 
 /**
  * A use case class that creates a unique id when called
