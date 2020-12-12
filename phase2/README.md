@@ -134,7 +134,7 @@ Allows the attendee to sign up to an event after showing the available events to
  
 #####Option [7] - Cancel enrollment for an event
  
-Allows the attendee to cancel their spot for an event they are already signed up for.
+Allows the attendee to cancel their spot for an event they are already signed up for. Attendee must be signed up to an event.
  
 #####Option [8] - View all your events
  

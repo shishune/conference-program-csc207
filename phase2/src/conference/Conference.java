@@ -16,18 +16,16 @@ public class Conference {
      * @param title the string name of this conference
      * @param events the list of strings of the ids of each event of this conference
      * */
-    public Conference(String conferenceID, String title, List<String> events, List<String> attendees/*, List<String> speakers*/){
+    public Conference(String conferenceID, String title, List<String> events, List<String> attendees){
         this.conferenceID = conferenceID;
         this.title = title;
         this.events = events;
         this.attendees = attendees;
-        //this.speakers = speakers;
-        //this.startDateTime = startDateTime;
-        //this.endDateTime = endDateTime;
     }
 
-    /**
-     * @return strign representation of this Conference entity
+
+    /** Returns information representing the Conference object as a string, separated by commas
+     * @return string representation of this Conference entity
      */
     public String getStringRep(){
         String eventsString = events.toString().replaceAll("[\\[\\]]", "").replaceAll(", ", "%%");
@@ -36,11 +34,6 @@ public class Conference {
         return conferenceID + "," + title + "," + eventsString + "," + attendeesString+ ",0";
     }
 
-    //TODO: possible methods - getAllAttendees, getNumAttendees, getAllSpeakers, getNumSpeakers,
-    // getAllRooms, getVIPEvents, getVIPAttendees, getVIPSpeakers, getVIPs, helper methods
-
-    //TODO: add conference actions, controller?
-    //TODO: edit presenter
 
     /**
      * Return conferenceID
@@ -50,6 +43,7 @@ public class Conference {
         return this.conferenceID;
     }
 
+
     /**
      * Return title
      * @return title of this conference
@@ -57,6 +51,7 @@ public class Conference {
     public String getTitle(){
         return this.title;
     }
+
 
     /**
      * Return list of IDs of the events in this conference
@@ -67,8 +62,6 @@ public class Conference {
     }
 
 
-
-
     /**
      * return list of attendees participating in this conference
      * @return list of attendees participating in this conference
@@ -76,6 +69,7 @@ public class Conference {
     public List<String> getAttendees(){
         return this.attendees;
     }
+
 
     /**
      * return list of speakers participating in this conference
@@ -85,6 +79,7 @@ public class Conference {
         return this.speakers;
     }
 
+
     /**
      * Adds the new event ID to the list of event IDs
      * @return true if the event was successfully added, and false if it couldn't be
@@ -92,6 +87,7 @@ public class Conference {
     public boolean addEvent(String eventID){
         return this.events.add(eventID);
     }
+
 
     /**
      * Adds the new attendee ID to the list of attendee IDs
@@ -101,6 +97,7 @@ public class Conference {
         return this.attendees.add(attendeeID);
     }
 
+
     /**
      * Adds the new speaker ID to the list of speaker IDs
      * @return true if the speaker was successfully added, and false if it couldn't be
@@ -109,6 +106,7 @@ public class Conference {
         return this.speakers.add(speakerID);
     }
 
+
     /**
      * set speaker for event
      * @param speakers new speakers' ids
@@ -116,6 +114,7 @@ public class Conference {
     public void setSpeaker(List<String> speakers) {
         this.speakers = speakers;
     }
+
 
     /**
      * Removes the event ID from the list of event IDs
@@ -129,42 +128,4 @@ public class Conference {
             return false;
         }
     }
-
-    /**
-     * Return startDateTime to endDateTime
-     * @return String representing the range of start to end date time
-     * */
-    //public String getDateTime(){
-    //    return startDateTime + "to" + endDateTime;
-    //}
-
-    /**
-     * Return startDateTime
-     * @return String representing the start date and time of the conference
-     * */
-    //public String getStartDateTime(){
-        //return this.startDateTime;
-    //}
-
-    /**
-     * Sets the start date time of this Conference
-     * */
-    //public void setStartDateTime(String newStartDateTime){
-        //this.startDateTime = newStartDateTime;
-    //}
-
-    /**
-     * Return endDateTime
-     * @return String representing the end date time of the program
-     * */
-    //public String getEndDateTime(){
-        //return this.endDateTime;
-    //}
-
-    /**
-     * Sets the end date and time of this Conference entity
-     * */
-    //public void setEndDateTime(String newEndDateTime){
-        //this.endDateTime = newEndDateTime;
-    //}
 }

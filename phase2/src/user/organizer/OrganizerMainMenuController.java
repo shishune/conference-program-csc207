@@ -172,7 +172,6 @@ public class OrganizerMainMenuController extends MainMenuController {
 
 
         while (true) {
-            //displayEvent.promptTitle();
             displayEvent.promptTitle();
             title = scan.nextLine();
             if (title.equalsIgnoreCase("x")){
@@ -311,33 +310,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                 } else {
                     displayEvent.failedAddEventToConference();
                 }
-
-//                // Add this event to a conference
-//               displayEvent.promptConference();
-//                // display conferences
-//                ArrayList<List<String>> conferences = getConferences();
-//                List<List<String>> events = event.getEventsList();
-//                HashMap<String, User> userIdHash = controller.returnUserIDHashMap();
-//                displayConferences.displayConferences(conferences, events, userIdHash);
-//                if(conferences.size() == 0){
-//
-//                } else {
-//                    String conferenceTitle = scan.nextLine();
-//                    //System.out.println("HERE!" + conference.returnTitleHashMap());
-//                    if (conference.conferenceExists(conferenceTitle)) {
-//                        // add event to conference
-//                        String eventId = event.getEventFromName(title).getId() != null ? event.getEventFromName(title).getId() : null;
-//                        if (eventId != null) {
-//                            conference.addEvent(conferenceTitle, eventId);
-//                            //TODO: add conference to event too
-//                            displayEvent.successAddEvent();
-//                        } else {
-//                            displayEvent.failedAddEventToConference();
-//                        }
-//                    } else {
-//                        displayEvent.invalidConference();
-//                    }
-//                }
 
             } else {
                 if (!checks.get(0)) {

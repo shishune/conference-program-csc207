@@ -101,7 +101,6 @@ public class OrganizerController extends UserController {
 
     public List<List<String>> viewAvailableSchedule(String user, String conferenceTitle) {
         List<String> conferenceEvents = conferenceActions.returnTitleHashMap().get(conferenceTitle).getEvents();
-        // Set<String> allEvents = eventActions.getEvents().keySet();
         List<List<String>> scheduleList = new ArrayList<List<String>>();
         for (String event : conferenceEvents) {
             String title = eventActions.getEvent(event).getTitle();
