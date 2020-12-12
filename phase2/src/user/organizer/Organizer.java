@@ -5,7 +5,6 @@ import user.User;
 import java.util.List;
 
 public class Organizer extends User {
-    //private static String lastOrganizerIdNums = "";
 
     /**
      * Instantiates a new attendee object
