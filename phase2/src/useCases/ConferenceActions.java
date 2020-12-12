@@ -4,10 +4,11 @@ import entities.Attendee;
 import entities.Conference;
 import entities.Event;
 import gateways.LoadUpIGateway;
+import interfaces.Storable;
 
 import java.util.*;
 
-public class ConferenceActions {
+public class ConferenceActions implements Storable {
     public HashMap<String, Conference> conferences = new HashMap<String, Conference>();
     private HashMap<String, Conference> conferenceTitlesHash = new HashMap<String, Conference>();
     //private HashMap<String, List<String>> speakerSchedule = new HashMap<String, List<String>>(); // SpeakerID: date
@@ -242,7 +243,7 @@ public class ConferenceActions {
         return newConference;
     }
 
-    public ArrayList<String> storeConferences() {
+    public ArrayList<String> store() {
         ArrayList<String> storedConferences = new ArrayList<String>();
         for (Map.Entry<String, Conference> conference : conferences.entrySet()) {
             storedConferences.add(conference.getValue().getStringRep() + "\n");
@@ -278,4 +279,6 @@ public class ConferenceActions {
         }
         return storedConference;
     }
+
+
 }
