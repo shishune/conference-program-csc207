@@ -11,6 +11,8 @@ public class LogInController {
     private Scanner scan = new Scanner(System.in);  // Create a Scanner object
     private AccountPresenter accountDisplay = new AccountPresenter();
     private UserController controller;
+
+
     /**
      * This method is called when the user is logging in after they have inputted a username and password and checks if
      * the username and password are correct, if so returns the user object which was logging in, otherwise returns null
@@ -24,6 +26,7 @@ public class LogInController {
         String type = l.isLogin(username, password, accountActions);
         return type;
     }
+
 
     /**
      * This method is called when the user enter 'x' to sigh up. It reads the username and password the user inputted.
@@ -59,6 +62,7 @@ public class LogInController {
 
     }
 
+
     /**
      * Checks if username is unique
      * @param username A string the user inputs as their username
@@ -93,34 +97,3 @@ public class LogInController {
         }
     }
 }
-
-// if (userController.usernameExists(username)){
-//            accountDisplay.failedUsernameExists();
-//            return false;
-//        } else {
-//            // note: implements factory pattern
-//            if (userType.equals("1")) {
-//                accountActions.getUserAccountActions().createUser(username, password);
-//                return true;
-//            } else if (userType.equals("2")) {
-//                accountActions.getUserAccountActions().createUser(username, password);
-//                return true;
-//
-//            } else if (userType.equals("3")) {
-//
-//                if (!accountActions.getAttendeeActions().attendeeExists(username)) {
-//                    accountActions.getUserAccountActions().createUser(username, password);
-//                    return true;
-//                }
-//                else{
-//                    accountDisplay.failedUsernameExists();
-//                    return false;
-//                }
-//            } else{
-//                accountDisplay.printTypingError();
-//                return false;
-//            }
-//        }
-//
-//
-//    }
