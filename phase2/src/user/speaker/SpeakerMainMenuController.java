@@ -54,7 +54,7 @@ public class SpeakerMainMenuController extends MainMenuController {
         String option = scan.nextLine();
         SpeakerMessageMenuController menuController = new SpeakerMessageMenuController(this.controller);
         if (option.equals("1")){
-            menuController.option1();
+            menuController.sendMessage();
         }
         if (option.equals("2")){
             super.option2SendMessage();
