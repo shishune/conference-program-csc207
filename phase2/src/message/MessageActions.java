@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+
 /**
  * A use case class that stores a hashmap of messages
  * Allows actions to be done with messages, including creating messages, sending messages, loading messages,
@@ -127,6 +128,7 @@ public class MessageActions implements Storable {
         return userMessages;
     }
 
+
     /**
      * This method returns all messages sent by user with senderId and received by user with receiverId
      * @param senderId the ID of the sender
@@ -147,6 +149,7 @@ public class MessageActions implements Storable {
         return userMessages;
     }
 
+
     /**
      * For if presenter needs to access message using its Id (for printMessages)
      * @param messageId the id of message
@@ -154,6 +157,7 @@ public class MessageActions implements Storable {
     public String getMessageFromMap(String messageId) {
         return messages.get(messageId).getStringRep();
     }
+
 
     /**
      * This method stores messages in an array
@@ -171,6 +175,7 @@ public class MessageActions implements Storable {
         return allMessages;
     }
 
+
     /**
      * This method accesses message IDs
      * @return message IDs in a list
@@ -184,6 +189,4 @@ public class MessageActions implements Storable {
         }
         return storedMessenger;
     }
-
-
 }
