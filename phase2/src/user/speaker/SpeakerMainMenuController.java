@@ -21,9 +21,8 @@ public class SpeakerMainMenuController extends MainMenuController {
     private SpeakerMessagePresenter displayMessage;
     private EventPresenter displayEvent;
     private EventActions eventActions;
-    private AttendeeActions attendeeActions; //TODO : Should we get rid of attendee actions and bring in useractionations instead?
+    private AttendeeActions attendeeActions;
     private RoomActions roomActions;
-    // private SpeakerActions speakerActions;
     private ConferenceActions conferenceActions;
     private Scanner scan = new Scanner(System.in);
 
