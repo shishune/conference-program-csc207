@@ -1,5 +1,6 @@
 package message;
 
+
 /**
  * Class for messages and their ID, sender ID, receiver ID and time sent
  */
@@ -10,6 +11,7 @@ public class Message {
     private String receiverId;
     private String message;
     private String timeSent;
+
 
     /**
      * Instantiates a new message object
@@ -28,6 +30,7 @@ public class Message {
     }
 
 
+
     /**
      * This method gets the string representation of the message
      * @return the message as a string with message ID, sender ID, receiver ID and the time sent
@@ -35,6 +38,7 @@ public class Message {
     public String getStringRep() {
         return messageId + "%2%0%7%" + senderId + "%2%0%7%" + receiverId + "%2%0%7%" + message + "%2%0%7%" + timeSent;
     }
+
 
     /**
      * Getter for the ID of message.
@@ -44,6 +48,7 @@ public class Message {
         return messageId;
     }
 
+
     /**
      * Getter for the ID of sender.
      * @return ID of the sender
@@ -51,6 +56,7 @@ public class Message {
     public String getSenderId() {
         return senderId;
     }
+
 
     /**
      * Getter for the ID of the receiver
@@ -60,6 +66,7 @@ public class Message {
         return receiverId;
     }
 
+
     /**
      * Getter for the content of the message.
      * @return content of the message
@@ -67,6 +74,7 @@ public class Message {
     public String getMessage() {
         return message;
     }
+
 
     /**
      * Getter for the time sent of message.

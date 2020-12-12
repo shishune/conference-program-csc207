@@ -36,7 +36,7 @@ public class EventActions implements Storable {
 
     /***
      * return event of given ID
-     * @param eventID
+     * @param eventID the unique id of event
      * @return events
      */
     public Event getEvent(String eventID){
@@ -46,7 +46,7 @@ public class EventActions implements Storable {
 
     /***
      * return event of given name
-     * @param eventName
+     * @param eventName the title of the event
      * @return events
      */
     public Event getEventFromName(String eventName){
@@ -56,21 +56,23 @@ public class EventActions implements Storable {
 
     /***
      * return if the event exists in events
-     * @param eventID
+     * @param eventID the unique id of the event
      * @return true if the event exists in events
      */
     public boolean eventExists(String eventID){
         return events.containsKey(eventID);
     }
 
+
     /***
      * return if the eventName exists in eventNames
-     * @param eventName
+     * @param eventName the title of the event
      * @return true if the eventName exists in eventNames
      */
     public boolean eventNameExists(String eventName){
         return eventNames.containsKey(eventName);
     }
+
 
     /***
      * return hashmap of all eventIDs and the corresponding event object. key: speakerID value: List of date and time
@@ -244,6 +246,7 @@ public class EventActions implements Storable {
         return newEvent;
     }
 
+
     /***
      * return list of dates in string format of the time beginning with and including startDateTime,
      *      and ending with and excluding  endDateTime
@@ -265,6 +268,7 @@ public class EventActions implements Storable {
         }
         return times;
     }
+
 
     /***
      * Add an attendee who has requested to be added to a specific event
@@ -363,6 +367,7 @@ public class EventActions implements Storable {
 
     }
 
+
     /***
      * return if this dateTime is in conflict with a given event
      * @param eventID ID of event
@@ -381,6 +386,7 @@ public class EventActions implements Storable {
         }
         return false;
     }
+
 
     /**
      * Change the time of an event which has been created
@@ -438,6 +444,7 @@ public class EventActions implements Storable {
 
     }
 
+
     /***
      * @return the event ID
      */
@@ -493,6 +500,7 @@ public class EventActions implements Storable {
         return mostAttended;
     }
 
+
     /**
      * Events are considered to be one of the least attended events with an attendance rate of less than 50%
      * @return a list of the most attended events
@@ -513,6 +521,7 @@ public class EventActions implements Storable {
         return leastAttended;
     }
 
+
     /**
      * Reveals the number of events that are at full capacity
      * @return the number of events at full capacity
@@ -529,6 +538,7 @@ public class EventActions implements Storable {
         return count;
     }
 
+
     /**
      * Provides a list of events in ascending order of event date
      * @return a list of events with their date times in ascending order
@@ -544,6 +554,7 @@ public class EventActions implements Storable {
         return eventsByDate;
     }
 
+
     /**
      * Provide the average number of attendees in each event
      * @return the mean number of attendees in each event
@@ -554,6 +565,7 @@ public class EventActions implements Storable {
         int numberAttendees = attendees.keySet().size();
         return numberAttendees % numberEvents;
     }
+
 
     /**
      * Provide the median for the number of attendees attending events
@@ -572,6 +584,8 @@ public class EventActions implements Storable {
         }
         return 0;
     }
+
+
     /**
      * Provide the mode for the number of attendees attending events
      * @return the mode of attendees attending events or 0
@@ -590,6 +604,7 @@ public class EventActions implements Storable {
         }
         return 0;
     }
+
 
     /**
      * Show a list of top 5 events with most attendees. The list could be less than 5 events, or more than 5 events if
@@ -621,6 +636,8 @@ public class EventActions implements Storable {
         }
         return topFive;
     }
+
+
     /**
      * Show a list of bottom 5 events with most attendees. The list could be less than 5 events, or more than 5 events if
      * more than one event has the same number of attendees. It is bottom 5 based on number of attendees; in other words,

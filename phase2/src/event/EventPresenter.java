@@ -1,8 +1,7 @@
 package event;
-import user.User;
-
-import java.util.HashMap;
 import java.util.List;
+
+
 /**
  * A presenter class. This class is responsible for anything related to displaying events to the user.
  * @author multiple
@@ -11,8 +10,8 @@ import java.util.List;
 public class EventPresenter {
     private String enterNameOfEvent = "Please enter the name of the event you would like to ";
     private String eventSuccess = "This event has been successfully ";
-    private String genericRoomSuccess = "This room has been successfully ";
-    private String enterNameofRoom = "Please enter the name of the room you would like to ";
+    private String enterNameOfRoom = "Please enter the name of the room you would like to ";
+
 
     /**
      * Displays events
@@ -31,29 +30,8 @@ public class EventPresenter {
             System.out.println("\n");
         }
     }
-    public void displayEvents(List<List<String>> eventsList, HashMap<String, User> userIdHash){
-        int count = 1;
-        for (List<String> info: eventsList){
-            System.out.println(count);
-            count ++;
 
-            System.out.println("Event title: "+info.get(0));
-            System.out.println("Event time: "+info.get(1));
-            System.out.println("Event room: "+info.get(2));
-            String[] speakers = info.get(3).split("%%");
 
-            if (speakers.length == 0){
-                System.out.println("This event has no speakers");
-            } else {
-                System.out.println("Event speakers: ");
-                for (String speakerId : speakers) {
-                    System.out.println(userIdHash.get(speakerId).getUsername());
-                }
-            }
-
-            System.out.println("\n");
-        }
-    }
     /**
      * Prompt for user to cancel event/remove event
      * */
@@ -69,6 +47,7 @@ public class EventPresenter {
         System.out.println(enterNameOfEvent+ "add or save.");
     }
 
+
     /**
      * Prompt for user to add or save an event
      * */
@@ -76,11 +55,12 @@ public class EventPresenter {
         System.out.println("Enter 'A' to add the event or enter 'S' to save the event");
     }
 
+
     /**
      * Prompt for user to add room
      * */
     public void promptAddRoom(){
-        System.out.println(enterNameofRoom+ "add.");
+        System.out.println(enterNameOfRoom+ "add.");
     }
 
 
@@ -99,6 +79,7 @@ public class EventPresenter {
         System.out.println(eventSuccess+ "added.");
     }
 
+
     /**
      * Message informing that user saved event
      * */
@@ -106,12 +87,14 @@ public class EventPresenter {
         System.out.println(eventSuccess+ "saved.");
     }
 
+
     /**
      * Message informing that the event is already saved
      * */
     public void failedSaveEvent() {
         System.out.println("The event is already saved.");
     }
+
 
     /**
      * Message informing that room is full; user cannot attend
@@ -128,12 +111,14 @@ public class EventPresenter {
         System.out.println("There is a time conflict with another event you are attending.");
     }
 
+
     /**
      * Notifies user that there are no events in that conference that the user is not participating in
      */
     public void noEventsAvailable(){
         System.out.println("There are no events that you have not participated in.");
     }
+
 
     /**
      * Message informing that event does not exist
@@ -150,6 +135,7 @@ public class EventPresenter {
         System.out.println("Sorry, there was a problem with your request.");
     }
 
+
     /**
      * Event not created
      */
@@ -164,6 +150,7 @@ public class EventPresenter {
     public void failedCancelEvent(){
         System.out.println("We are not able to cancel this event. Check if you entered the correct name.");
     }
+
 
     /**
      * A clarifying message saying that the program is showing all the events that are not in the user's own schedule, in that specific conference
@@ -192,16 +179,30 @@ public class EventPresenter {
         }
     }
 
+
     /**
      * A prompt asking the user for their VIP status
      * */
     public void VIPStatusPrompt(){System.out.println("Please input 'Y' if the attendee is a VIP, otherwise press any other key");}
 
+
+    /**
+     * Asking the user for the name of the event the change of capacity should be applied to
+     */
     public void changeEventCapacity() {System.out.println("Please enter the name you would like to change the capacity of"); }
 
+
+    /**
+     * Asking the user for the new capacity to be set to
+     */
     public void newCapacity(String eventName) {System.out.println("Please enter the new capacity for " + eventName);}
 
+
+    /**
+     * Telling user they have successfully changed the capacity
+     */
     public void capacityChanged() {System.out.println("Capacity was successfully changed");}
+
     /**
      * Telling user they are not a VIP
      */

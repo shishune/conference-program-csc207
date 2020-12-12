@@ -11,13 +11,22 @@ import java.util.List;
  * */
 public class MessagePresenter {
 
+
+    /**
+     * Displays the content of the message
+     */
     public void printString(String theString) {
         System.out.println(theString);
     }
 
+
+    /**
+     * Display the prompt to select the receiver of the user's message
+     */
     public void promptSelectReceiver() {
         System.out.println("Please select the conversation you would like to view by selecting the receiver of your message.");
     }
+
 
     /**
      * Display messages
@@ -37,12 +46,14 @@ public class MessagePresenter {
         return true;
     }
 
+
     /**
      * Prompt for recipient
      */
     public void promptRecipient() {
         System.out.println("To whom would you like to send this message? Enter a username.");
     }
+
 
     /**
      * Prompt for message content
@@ -51,12 +62,14 @@ public class MessagePresenter {
         System.out.println("Enter your message.");
     }
 
+
     /**
      * Prompt for contact
      */
     public void promptContact() {
         System.out.println("Enter the username of the person you would like to add to your contacts list.");
     }
+
 
     /**
      * Message of successful contact
@@ -65,12 +78,14 @@ public class MessagePresenter {
         System.out.println("You have successfully added this person to your contacts list!");
     }
 
+
     /**
      * Message of failed contact
      */
     public void failedContact() {
         System.out.println("This username is not valid.");
     }
+
 
     /**
      * User does not have any contacts
@@ -79,12 +94,14 @@ public class MessagePresenter {
         System.out.println("You have not received any messages or contacted anyone.");
     }
 
+
     /**
      * Message of failed contact
      */
     public void sameUserContact() {
         System.out.println("This username is your username");
     }
+
 
     /**
      * Message informing message sent
@@ -93,12 +110,14 @@ public class MessagePresenter {
         System.out.println("Your message has been sent successfully!");
     }
 
+
     /**
      * Message informing message sent
      */
     public void failedMessageNoSpeakers() {
         System.out.println("No speakers exist so there is no one to send your message to :(");
     }
+
 
     /**
      * Display all contacts
@@ -120,6 +139,7 @@ public class MessagePresenter {
         return true;
     }
 
+
     /**
      * Message informing user they have no contacts
      */
@@ -128,12 +148,14 @@ public class MessagePresenter {
         System.out.println("Add a friend through option 4!");
     }
 
+
     /**
      * Message informing failed message
      */
     public void failedMessage() {
         System.out.println("Your message could not be sent. Please check if the recipient is valid.");
     }
+
 
     /**
      * Message informing user is signed up for no events
@@ -142,12 +164,14 @@ public class MessagePresenter {
         System.out.println("You are not signed up for any events.");
     }
 
+
     /**
      * Message informing user has no saved events
      */
     public void noSavedEvents() {
         System.out.println("You didn't save any events");
     }
+
 
     /**
      * Message informing user there are no events
@@ -156,12 +180,14 @@ public class MessagePresenter {
         System.out.println("There are no events available.");
     }
 
+
     /**
      * Message informing user there are no events
      */
     public void noVIPEvents() {
         System.out.println("There are no VIP events available.");
     }
+
 
     /**
      * Message informing user there are no events
@@ -179,12 +205,14 @@ public class MessagePresenter {
         System.out.println("Please enter the event capacity");
     }
 
+
     /**
      * A message informing user that their input is invalid
      */
     public void invalidCapaity() {
         System.out.println("Seems like that wasn't a number, please try again");
     }
+
 
     /**
      * A message informing user that their input is invalid ie empty or a variation of 'x'
@@ -193,15 +221,12 @@ public class MessagePresenter {
         System.out.println("Your input is invalid and either empty or 'x'. Please try again");
     }
 
+
     /**
      * A message informing user that they are exiting their current task
      */
     public void exit() {
         System.out.println("Exiting...");
-    }
-
-    public void noAccess() {
-        System.out.println("You are not in charge of this event, so you do not have the authority to make changes to this event");
     }
 
 }
