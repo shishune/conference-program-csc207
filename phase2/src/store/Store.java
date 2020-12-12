@@ -72,7 +72,7 @@ public class Store{
      * Uses the method in organizerActions for obtaining all organizers as a list then stores in csv
      * @param organizerActions the use case class responsible for organizers
      */
-    public <ICsvListWriter> void storeOrganizers(Storable organizerActions) {
+    public void storeOrganizers(Storable organizerActions) {
         String path = "./phase2/src/assets/dataFiles/organizers.csv";
         ArrayList<String> organizerList = organizerActions.store();
         store(organizerList, path);
