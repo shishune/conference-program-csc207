@@ -5,6 +5,7 @@ import user.organizer.OrganizerActions;
 import user.speaker.SpeakerActions;
 import user.User;
 
+
 /**
  * A use case class which is responsible for validating of the user's username and password match
  * @author Mizna & Jiessie
@@ -12,6 +13,7 @@ import user.User;
  * */
 
 public class LogoutActions{
+
 
     /**
      * Passes true to the setter for Log in when the username and password are correct otherwise passes false.
