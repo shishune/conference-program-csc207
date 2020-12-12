@@ -4,6 +4,7 @@ import event.EventActions;
 import message.MessageActions;
 import room.RoomActions;
 
+
 /**
  * Parameter object for all use case classes involved in the system of events. This includes
  * messages, conferences, rooms, and the events themselves.
@@ -16,6 +17,7 @@ public class EventSystemActions {
     private EventActions eventActions;
     private MessageActions messageActions;
     private RoomActions roomActions;
+
 
     /**
      * instantiates the parameter object with all the use case objects involved in handling the system of events.
@@ -31,6 +33,7 @@ public class EventSystemActions {
         this.roomActions = roomActions;
     }
 
+
     /**
      * getter for the conference use case
      * @return conference use case
@@ -38,6 +41,7 @@ public class EventSystemActions {
     public ConferenceActions getConferenceActions() {
         return conferenceActions;
     }
+
 
     /**
      * getter for the events use case
@@ -47,6 +51,7 @@ public class EventSystemActions {
         return eventActions;
     }
 
+
     /**
      * getter for the messages use case
      * @return messages use case
@@ -54,6 +59,7 @@ public class EventSystemActions {
     public MessageActions getMessageActions() {
         return messageActions;
     }
+
 
     /**
      * getter for the rooms use case
