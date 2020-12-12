@@ -187,15 +187,18 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      */
     public void speakerAdded(){System.out.println("Speaker has successfully been added");}
 
+
     /**
      * Message stating that the room already exists
      */
     public void notValidChoice(){System.out.println("That choice is invalid please try again or press x to go back.");}
 
+
     /**
      * Message stating there are no speakers
      */
     public void zeroSpeakers(){System.out.println("Enter 'Y' to have 0 speakers");}
+
 
     /**
      * Prompt for number of speakers
@@ -208,16 +211,22 @@ public class OrganizerMessagePresenter extends MessagePresenter {
      */
     public void mostAttendedEvents(ArrayList<String> i ){System.out.println(i + " is the most attended event.");}
 
+
     /**
      * Message stating least attended events
      */
     public void leastAttendedEvents(ArrayList<String> i ){System.out.println(i + " is the least attended event.");}
+
 
     /**
      * Message stating number of events available
      */
     public void numberEventsAvailable(Integer i){System.out.println("There are " + i + " events available.");}
 
+
+    /**
+     * States the number of events at max capacity
+     */
     public void numAtMaxCapacity(Integer i){System.out.println(i + " is the number of events at max capacity.");}
 
     public void eventsOrderedByDate(ArrayList<String> i){System.out.println(i);}
