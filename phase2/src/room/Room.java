@@ -14,6 +14,7 @@ public class Room {
     private boolean hasTables = false;
     private boolean hasWhiteboard = false;
 
+
     /**
      * instantiates a new Room object with an id attribute
      * @param roomId the unique id of this room
@@ -24,11 +25,13 @@ public class Room {
         this.roomName = roomName;
     }
 
+
     /**
      * Getter for the capacity of this room.
      * @return capacity of room
      * */
     public int getCapacity(){ return capacity; }
+
 
     /**
      * Setter for the capacity of this room. (Will be needed in Phase 2)
@@ -36,17 +39,20 @@ public class Room {
      * */
     public void setCapacity(int capacity){ this.capacity = capacity; }
 
+
     /**
      * Getter for the id unique to this room.
      * @return the id of this room
      * */
     public String getRoomId(){ return roomId; }
 
+
     /**
      * Returns the unique name of this room object
      * @return the name of this room
      * */
     public String getRoomName() {return roomName;}
+
 
     /**
      * Returns the string representation of this room object
@@ -65,12 +71,14 @@ public class Room {
         this.hasProjector = true;
     }
 
+
     /**
      * sets a microphone in room
      */
     public void setMicrophone(){
         this.hasMicrophone = true;
     }
+
 
     /**
      * sets tables in room
@@ -79,12 +87,14 @@ public class Room {
         this.hasTables = true;
     }
 
+
     /**
      * sets whiteboard in room
      */
     public void setWhiteboard(){
         this.hasWhiteboard = true;
     }
+
 
     /**
      * returns whether the room has a projector
@@ -93,12 +103,14 @@ public class Room {
         return this.hasProjector;
     }
 
+
     /**
      * returns whether the room has a microphone
      */
     public boolean getHasMicrophone(){
         return this.hasMicrophone;
     }
+
 
     /**
      * returns whether the room has tables
@@ -107,12 +119,11 @@ public class Room {
         return this.hasTables;
     }
 
+
     /**
      * returns whether the room has a whiteboard
      */
     public boolean getHasWhiteboard(){
         return this.hasWhiteboard;
     }
-
-
 }
