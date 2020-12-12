@@ -9,6 +9,7 @@ import user.speaker.SpeakerActions;
 import event.EventActions;
 import store.Store;
 
+
 /**
  * Allows user to exit the system with their information stored
  */
@@ -22,6 +23,7 @@ public class LogOutController {
     EventActions eventActions;
     LogoutActions logoutActions;
     ConferenceActions conferenceActions;
+
 
     /**
      * Instantiates a new logout object
@@ -45,6 +47,7 @@ public class LogOutController {
 
     }
 
+
     /**
      * Stores information for logging out
      * @param username A string the user inputs as their username
@@ -52,7 +55,6 @@ public class LogOutController {
      */
     public void loggingOut(String username, String type) {
 
-        // login procedure...
         store.storeMessages(messageActions);
         store.storeRooms(roomActions);
         store.storeEvents(eventActions);
@@ -64,8 +66,8 @@ public class LogOutController {
 
         logoutActions.logout(username, type, attendeeActions, organizerActions, speakerActions);
 
-
     }
+
 
     /**
      * Exits the application
