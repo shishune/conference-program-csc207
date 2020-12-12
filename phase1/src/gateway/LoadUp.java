@@ -30,24 +30,8 @@ public class LoadUp implements LoadUpIGateway {
         getEvents();
         getRooms();
         getSpeakers();
-        getIds();
     }
 
-    /**
-     * This method returns all object ids in a list from entities.csv
-     * @return object ids in a list
-     */
-    public ArrayList<String> getIds(){
-        try (BufferedReader br = new BufferedReader(new FileReader("./phase1/src/assets/dataFiles/entities.csv"))) {
-            String line = null;
-            while((line = br.readLine()) != null) {
-                ids.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ids;
-    }
 
     /**
      * adds to the list of ids
