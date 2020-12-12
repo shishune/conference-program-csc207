@@ -25,9 +25,9 @@ public class SpeakerMessageMenuController{
     }
 
     /**
-     * Responds to menu option 1
+     * Responds to menu option 2
      */
-    public void option1(){
+    public void sendMessage(){
         displayMessage.promptMessage(); // enter your message
         String content = scan.nextLine();
         displayMessage.promptListEvents(); //
@@ -52,36 +52,4 @@ public class SpeakerMessageMenuController{
         }
     }
 
-    /**
-     * Responds to menu option 5
-     */
-    public void option5(){
-        displayMessage.promptMessage();
-        String content = scan.nextLine();
-        displayMessage.promptListEvents();
-        List<String> events = new ArrayList<String>();
-        while (true){
-            String event = scan.nextLine();
-            if (event.equals("x")||event.equals("X")){
-                break;
-            }
-
-            else if (!(controller == null) && controller.eventActions.getEvents().containsKey(event)){
-                events.add(event);
-            }
-
-            else{
-                displayMessage.failedEvent();
-            }
-
-        }
-        for (String event : events) {
-            if (!controller.sendMessages(event, content)){
-                displayMessage.noAttendees();
-                break;
-            }
-            controller.sendMessages(event, content);
-        }
-
-    }
 }

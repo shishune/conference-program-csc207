@@ -36,6 +36,7 @@ public class LoadUp implements LoadUpIGateway {
         getAllOrganizers();
     }
 
+
     /**
      * This method returns messages in a list from messages.csv
      * @return messages in a list
@@ -53,11 +54,11 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
+
     /**
      * This method returns rooms in a list from rooms.csv
      * @return rooms in a list
      */
-
     public ArrayList<String> getRooms(){
         try (BufferedReader br = new BufferedReader(new FileReader("./phase2/src/assets/dataFiles/rooms.csv"))) {
             String line = null;
@@ -87,6 +88,7 @@ public class LoadUp implements LoadUpIGateway {
         }
         return events;
     }
+
 
     /**
      * This method returns conferences in a list from conferences.csv
@@ -124,6 +126,7 @@ public class LoadUp implements LoadUpIGateway {
         return messages;
     }
 
+
     /**
      * This method returns attendees in a list from attendees.csv
      * @return attendees in a list
@@ -141,6 +144,7 @@ public class LoadUp implements LoadUpIGateway {
         return attendees;
     }
 
+
     /**
      * This method returns organizers in a list from organizers.csv
      * @return organizers in a list
@@ -156,6 +160,7 @@ public class LoadUp implements LoadUpIGateway {
         }
         return organizers;
     }
+
 
     /**
      * This method returns messages in a list from messages.csv
@@ -175,8 +180,6 @@ public class LoadUp implements LoadUpIGateway {
     }
 
 
-
-
     // Methods from IGateway
     // To be called inside Use Case Classes
 
@@ -194,6 +197,7 @@ public class LoadUp implements LoadUpIGateway {
      * */
     @Override
     public ArrayList<String> getSpeakersList() { return speakers; }
+
 
     /**
      * Getter for the list of conferences from last use of program using IGateway
