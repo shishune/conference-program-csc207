@@ -1,5 +1,3 @@
- 
- 
 READ ME 
 ###### **README FILE** - G-0082
 ## Conference System Program
