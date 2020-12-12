@@ -3,6 +3,7 @@ package user.organizer;
 import conference.ConferencePresenter;
 
 public class OrganizerConferencePresenter extends ConferencePresenter {
+
     public void printEventsText(){
         System.out.println("Available events");
     };
@@ -16,24 +17,30 @@ public class OrganizerConferencePresenter extends ConferencePresenter {
     }
 
 
-//    public void printOrganizerConferenceMenu(){
-//        System.out.println(""
-//                        + "\n[1] Create a conference"
-//                        + "\n[2] Add events to an existing conference");
-//    }
-
+    /**
+     * View all conferences
+     */
     public void promptConference(){
         System.out.println("Select the conference you would like to add event(s) to.");
     }
 
+    /**
+     * Adds all event
+     */
     public void promptAddEvent(){
         System.out.println("List out the event/events you would like to add to this conference \nseparated by commas, without spaces");
     }
 
+    /**
+     * Adding an event successfully
+     */
     public void successAddEvents(String eventName) {
         System.out.println("Your event" + eventName + "has been successfully added to the conference.");
     }
 
+    /**
+     * Adding an event failed
+     */
     public void failedAddEvents(String eventName) {
         System.out.println("Something went wrong. Your event" + eventName + "could not be added to the conference");
     }
