@@ -179,57 +179,57 @@ public class Store {
      * @param conference from Conference entity
      */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker, ArrayList<String> conference) {
-        allEntities.addAll(attendee);
-        allEntities.addAll(organizer);
-        allEntities.addAll(message);
-        allEntities.addAll(room);
-        allEntities.addAll(event);
-        allEntities.addAll(speaker);
-        allEntities.addAll(conference);
-
-        try {
-            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
-
-            csvWriter.append(Integer.toString(allEntities.size()));
-
-            csvWriter.flush();
-            csvWriter.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-//}
+//        allEntities.addAll(attendee);
+//        allEntities.addAll(organizer);
+//        allEntities.addAll(message);
+//        allEntities.addAll(room);
+//        allEntities.addAll(event);
+//        allEntities.addAll(speaker);
+//        allEntities.addAll(conference);
+//
 //        try {
 //            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
 //
-//            for (String id : attendee) {
-//                csvWriter.append(id);
-//            }
-//            for (String id : organizer) {
-//                csvWriter.append(id);
-//            }
-//            for (String id : message) {
-//                csvWriter.append(id);
-//            }
-//            for (String id : room) {
-//                csvWriter.append(id);
-//            }
-//            for (String id : event) {
-//                csvWriter.append(id);
-//            }
-//            for (String id : speaker) {
-//                csvWriter.append(id);
-//            }
-//            for (String id: conference){
-//                csvWriter.append(id);
-//            }
+//            csvWriter.append(Integer.toString(allEntities.size()));
 //
 //            csvWriter.flush();
 //            csvWriter.close();
+//
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
 //    }
 //}
+//}
+        try {
+            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
+
+            for (String id : attendee) {
+                csvWriter.append(id);
+            }
+            for (String id : organizer) {
+                csvWriter.append(id);
+            }
+            for (String id : message) {
+                csvWriter.append(id);
+            }
+            for (String id : room) {
+                csvWriter.append(id);
+            }
+            for (String id : event) {
+                csvWriter.append(id);
+            }
+            for (String id : speaker) {
+                csvWriter.append(id);
+            }
+            for (String id: conference){
+                csvWriter.append(id);
+            }
+
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
