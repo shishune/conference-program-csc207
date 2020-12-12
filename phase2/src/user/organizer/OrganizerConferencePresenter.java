@@ -45,14 +45,24 @@ public class OrganizerConferencePresenter extends ConferencePresenter {
         System.out.println("Something went wrong. Your event" + eventName + "could not be added to the conference");
     }
 
+    /**
+     * Conference Title
+     */
     public void promptCreateConferenceTitle() {
         System.out.println("Enter the name of your conference");
     }
+
+    /**
+     * Conference Exists Check
+     */
 
     public void conferenceExists(){
         System.out.println("A conference with this name already exists");
     }
 
+    /**
+     * Conference does not Exists Check
+     */
     public void conferenceDoesNotExists(){
         System.out.println("A conference with this name does not exist");
     }
@@ -60,6 +70,7 @@ public class OrganizerConferencePresenter extends ConferencePresenter {
     public void successCreateConference() {
         System.out.println("Congratulations! You have successfully created a conference.");
     }
+
 
     public void noConferences() {
         System.out.println("There are no conferences that exist right now. Please create a conference to create an event");
