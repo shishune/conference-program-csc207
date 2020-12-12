@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * A use case class that stores a list of rooms and can add/remove rooms.
  * @author multiple
@@ -16,6 +17,7 @@ public class RoomActions implements Storable {
     private HashMap<String, Room> roomUsername = new HashMap<String, Room>();
     private LoadUpIGateway loader;
     private ArrayList<String> loadUpRooms = new ArrayList<String>();
+
 
     /**
      * @param loader the IGateway to use when loading
@@ -109,7 +111,6 @@ public class RoomActions implements Storable {
     }
 
 
-
     /**
      * Removes a room
      * @param room the room to be removed
@@ -188,6 +189,7 @@ public class RoomActions implements Storable {
         return storedR;
     }
 
+
     /**
      * Sets a  projector in the room
      * @param roomName the name of the room
@@ -195,6 +197,7 @@ public class RoomActions implements Storable {
     public void setProjector(String roomName){
         roomUsername.get(roomName).setProjector();
     }
+
 
     /**
      * Sets a microphone in the room
@@ -204,6 +207,7 @@ public class RoomActions implements Storable {
         roomUsername.get(roomName).setMicrophone();
     }
 
+
     /**
      * sets tables in the room
      * @param roomName the name of the room
@@ -211,6 +215,7 @@ public class RoomActions implements Storable {
     public void setTables(String roomName){
         roomUsername.get(roomName).setTables();
     }
+
 
     /**
      * sets a whiteboard in the room
@@ -220,6 +225,7 @@ public class RoomActions implements Storable {
         roomUsername.get(roomName).setWhiteboard();
     }
 
+
     /**
      * checks if there is a projector in room
      */
@@ -227,24 +233,30 @@ public class RoomActions implements Storable {
         return roomUsername.get(roomName).getHasProjector();
     }
 
+
     /**
      * checks if there is a microphone in room
      */
     private boolean checkMicrophone(String roomName){
         return roomUsername.get(roomName).getHasMicrophone();
     }
+
+
     /**
      * checks if there are tables in room
      */
     private boolean checkTables(String roomName){
         return roomUsername.get(roomName).getHasTables();
     }
+
+
     /**
      * checks if there is a whiteboard in room
      */
     private boolean checkWhiteboard(String roomName){
         return roomUsername.get(roomName).getHasWhiteboard();
     }
+
 
     /**
      * returns all the rooms containing projector
@@ -260,6 +272,7 @@ public class RoomActions implements Storable {
         return rooms;
     }
 
+
     /**
      * returns all the rooms containing microphone
      * @return all rooms containing microphone
@@ -273,6 +286,7 @@ public class RoomActions implements Storable {
         }
         return rooms;
     }
+
 
     /**
      * returns all the rooms containing tables
@@ -288,6 +302,7 @@ public class RoomActions implements Storable {
         return rooms;
     }
 
+
     /**
      * returns all the rooms containing whiteboard
      * @return all rooms containing whiteboard
@@ -301,6 +316,7 @@ public class RoomActions implements Storable {
         }
         return rooms;
     }
+
 
     /**
      * It will be storing rooms
