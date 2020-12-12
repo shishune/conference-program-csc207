@@ -726,7 +726,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             } else if (option.equals("4")) {
                 displayMessage.topFiveEvents(event.topFiveEvents());
             } else if (option.equals("5")) {
-                displayMessage.bottomFiveEvents(event.bottomFiveEvents());
+                displayMessage.newSessionAttendees(attendee.newSessionAttendees());
             } else if (option.equals("6")) {
                 displayMessage.averageNumberAttendees(event.averageNumberAttendees());
             } else if (option.equals("7")) {
@@ -741,8 +741,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.totalNumberSpeakers(speaker.totalNumberSpeakers());
             } else if (option.equals("12")) {
                 displayMessage.totalNumberAttendees(attendee.totalNumberAttendees());
-            } else if (option.equals("13")) {
-                displayMessage.newSessionAttendees(attendee.newSessionAttendees());
             } else {
                 displayMessage.notValidChoice();
             }
