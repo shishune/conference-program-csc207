@@ -2,7 +2,7 @@ package gateways;
 
 import java.io.IOException;
 import java.io.FileWriter;
-import java.io.StringWriter;
+// import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +14,14 @@ import useCases.RoomActions;
 /**
  * Stores information of the event regarding attendees, events, messages, organizers, rooms, speakers and user.
  */
-public class Store{
+public class Store {
     private ArrayList<String> allEntities = new ArrayList<String>();
 
     /**
      * Uses the method in roomActions for obtaining all room ids as a list then stores in csv
+     *
      * @param roomActions the use case class responsible for rooms
-     * */
+     */
     public void storeRooms(RoomActions roomActions) {
         ArrayList<String> roomsList = new ArrayList<String>();
         String path = "./phase2/src/assets/dataFiles/rooms.csv";
@@ -29,7 +30,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String room : roomsList){
+            for (String room : roomsList) {
                 writer.write(room);
             }
             writer.close();
@@ -41,6 +42,7 @@ public class Store{
 
     /**
      * Uses the method in eventActions for obtaining all events as a list then stores in csv
+     *
      * @param eventActions the use case class responsible for events
      */
     public void storeEvents(useCases.EventActions eventActions) {
@@ -50,7 +52,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String event : eventsList){
+            for (String event : eventsList) {
                 writer.write(event);
             }
             writer.close();
@@ -61,6 +63,7 @@ public class Store{
 
     /**
      * Uses the method in messageActions for obtaining all messages as a list then stores in csv
+     *
      * @param messageActions the use case class responsible for messages
      */
     public void storeMessages(MessageActions messageActions) {
@@ -70,7 +73,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String message : messagesList){
+            for (String message : messagesList) {
                 writer.write(message);
             }
             writer.close();
@@ -81,6 +84,7 @@ public class Store{
 
     /**
      * Uses the method in organizerActions for obtaining all organizers as a list then stores in csv
+     *
      * @param organizerActions the use case class responsible for organizers
      */
     public <ICsvListWriter> void storeOrganizers(OrganizerActions organizerActions) {
@@ -90,7 +94,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String organizer : organizerList){
+            for (String organizer : organizerList) {
                 writer.write(organizer);
             }
             writer.close();
@@ -101,6 +105,7 @@ public class Store{
 
     /**
      * Uses the method in attendeeActions for obtaining all attendees as a list then stores in csv
+     *
      * @param attendeeActions the use case class responsible for attendee
      */
     public void storeAttendees(useCases.AttendeeActions attendeeActions) {
@@ -110,7 +115,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String attendee : attendeeList){
+            for (String attendee : attendeeList) {
                 writer.write(attendee);
             }
             writer.close();
@@ -121,6 +126,7 @@ public class Store{
 
     /**
      * Uses the method in speakerActions for obtaining all speakers as a list then stores in csv
+     *
      * @param speakerActions the use case class for speaker
      */
     public void storeSpeakers(useCases.SpeakerActions speakerActions) {
@@ -130,7 +136,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String speaker : speakerList){
+            for (String speaker : speakerList) {
                 writer.write(speaker);
             }
             writer.close();
@@ -141,6 +147,7 @@ public class Store{
 
     /**
      * Uses the method in conferenceActions for obtaining all conferences as a list then stores in csv
+     *
      * @param conferenceActions the use case class for conference
      */
     public void storeConferences(useCases.ConferenceActions conferenceActions) {
@@ -150,7 +157,7 @@ public class Store{
         try {
             FileWriter writer;
             writer = new FileWriter(path, false);
-            for (String conference : conferenceList){
+            for (String conference : conferenceList) {
                 writer.write(conference);
             }
             writer.close();
@@ -162,45 +169,67 @@ public class Store{
 
     /**
      * Stores entities of Attendee, Event, Message, Organizer, Room, Event, Speaker
-     * @param attendee from Attendee entity
-     * @param organizer from Organizer entity
-     * @param message from Message entity
-     * @param room from Room entity
-     * @param event from Event entity
-     * @param speaker from Speaker entity
+     *
+     * @param attendee   from Attendee entity
+     * @param organizer  from Organizer entity
+     * @param message    from Message entity
+     * @param room       from Room entity
+     * @param event      from Event entity
+     * @param speaker    from Speaker entity
      * @param conference from Conference entity
      */
     public void storeEntities(ArrayList<String> attendee, ArrayList<String> organizer, ArrayList<String> message, ArrayList<String> room, ArrayList<String> event, ArrayList<String> speaker, ArrayList<String> conference) {
+        allEntities.addAll(attendee);
+        allEntities.addAll(organizer);
+        allEntities.addAll(message);
+        allEntities.addAll(room);
+        allEntities.addAll(event);
+        allEntities.addAll(speaker);
+        allEntities.addAll(conference);
 
         try {
             FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
 
-            for (String id : attendee) {
-                csvWriter.append(id);
-            }
-            for (String id : organizer) {
-                csvWriter.append(id);
-            }
-            for (String id : message) {
-                csvWriter.append(id);
-            }
-            for (String id : room) {
-                csvWriter.append(id);
-            }
-            for (String id : event) {
-                csvWriter.append(id);
-            }
-            for (String id : speaker) {
-                csvWriter.append(id);
-            }
-            for (String id: conference){
-                csvWriter.append(id);
-            }
+            csvWriter.append(Integer.toString(allEntities.size()));
 
             csvWriter.flush();
             csvWriter.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+//}
+//        try {
+//            FileWriter csvWriter = new FileWriter("./phase2/src/assets/dataFiles/entities.csv");
+//
+//            for (String id : attendee) {
+//                csvWriter.append(id);
+//            }
+//            for (String id : organizer) {
+//                csvWriter.append(id);
+//            }
+//            for (String id : message) {
+//                csvWriter.append(id);
+//            }
+//            for (String id : room) {
+//                csvWriter.append(id);
+//            }
+//            for (String id : event) {
+//                csvWriter.append(id);
+//            }
+//            for (String id : speaker) {
+//                csvWriter.append(id);
+//            }
+//            for (String id: conference){
+//                csvWriter.append(id);
+//            }
+//
+//            csvWriter.flush();
+//            csvWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//}

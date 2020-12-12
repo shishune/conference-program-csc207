@@ -747,6 +747,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             if (speakerUsername.equalsIgnoreCase("x")) {
                 displayMessage.exit();
                 break;
+//            } else if (userActions.getMasterUsernameHashMap().containsKey(speakerUsername)){
             } else if (controller.usernameExists(speakerUsername)) {
                 displayMessage.userExists();
             } else if (controller != null && validInput(speakerUsername)) {
@@ -769,7 +770,7 @@ public class OrganizerMainMenuController extends MainMenuController {
     /***
      * create a new user
      */
-    private String createAttendee() {
+    private void createAttendee() {
         displayMessage.createAttendeeMessage();
         while (true) {
             displayMessage.userUsernamePrompt();
@@ -777,6 +778,7 @@ public class OrganizerMainMenuController extends MainMenuController {
 
             if (newAttendeeUsername.equals("x") || newAttendeeUsername.equals("X")) {
                 break;
+//            } else if (userActions.getMasterUsernameHashMap().containsKey(newAttendeeUsername)){
             } else if (controller.usernameExists(newAttendeeUsername)) {
                 displayMessage.userExists();
             } else if (controller != null && validInput(newAttendeeUsername)) {
@@ -791,7 +793,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 if (validInput(newAttendeePassword)) {
                     controller.createAttendee(newAttendeeUsername, newAttendeePassword, VIPStatus);
                     displayMessage.userCreated();
-                    return newAttendeeUsername;
+                    return;
                 } else {
                     displayMessage.invalidInput();
                 }
@@ -799,13 +801,12 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.invalidInput();
             }
         }
-        return null;
     }
 
     /***
      * create a new organizer
      */
-    private String createOrganizer() {
+    private void createOrganizer() {
         displayMessage.createOrganizerMessage();
         while (true) {
             displayMessage.userUsernamePrompt();
@@ -814,6 +815,7 @@ public class OrganizerMainMenuController extends MainMenuController {
             if (userUsername.equalsIgnoreCase("x")) {
                 displayMessage.exit();
                 break;
+//            } else if (userActions.getMasterUsernameHashMap().containsKey(userUsername)){
             } else if (controller.usernameExists(userUsername)) {
                 displayMessage.userExists();
             } else if (controller != null && validInput(userUsername)) {
@@ -822,7 +824,7 @@ public class OrganizerMainMenuController extends MainMenuController {
                 if (validInput(userPasswordPrompt)) {
                     controller.createOrganizer(userUsername, userPasswordPrompt);
                     displayMessage.userCreated();
-                    return userUsername;
+                    return;
                 } else {
                     displayMessage.invalidInput();
                 }
@@ -830,7 +832,6 @@ public class OrganizerMainMenuController extends MainMenuController {
                 displayMessage.invalidInput();
             }
         }
-        return null;
     }
 
     /***

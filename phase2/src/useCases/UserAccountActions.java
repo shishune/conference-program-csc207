@@ -28,6 +28,20 @@ public class UserAccountActions {
     protected HashMap<String, Organizer> organizerHashMapUsername = new HashMap<String, Organizer>();
     protected HashMap<String, Speaker> speakerHashMapUsername = new HashMap<String, Speaker>();
 
+    protected HashMap<String, User> master = new HashMap<String, User>();
+
+    public HashMap<String, User> getMasterUsernameHashMap() {
+        if (!attendeeHashMapUsername.isEmpty()) {
+            master.putAll(attendeeHashMapUsername);
+        }
+        if (!organizerHashMapUsername.isEmpty()) {
+            master.putAll(organizerHashMapUsername);
+        }
+        if (!speakerHashMapUsername.isEmpty()) {
+            master.putAll(speakerHashMapUsername);
+        }
+        return master;
+    }
 
     public HashMap<String, Attendee> getAttendeeHashmapID() {
         return attendeeHashMapID;
