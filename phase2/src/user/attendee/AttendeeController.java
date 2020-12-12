@@ -1,6 +1,5 @@
 package user.attendee;
 
-// import com.sun.org.apache.xpath.internal.operations.Or;
 
 import user.UserController;
 import message.MessageActions;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendeeController extends UserController {
-    private MessageActions message;
     private EventActions eventActions;
     private AttendeeActions attendeeActions;
 
@@ -96,27 +94,5 @@ public class AttendeeController extends UserController {
     public boolean isVIP(String user){
         return attendeeActions.findUserFromUsername(user).getIsVIP();
     }
-
-//    public List<List<String>> viewVIPEvents(String user){
-//        List<List<String>> vipEventList = new ArrayList<List<String>>();
-//
-//        for (String event : e.getEventIds()){
-//            if (e.getEvent(event).getIsVip()){
-//                String title = e.getEvent(event).getTitle();
-//                String dateTime = e.getEvent(event).getDateTime();
-//                String roomId = e.getEvent(event).getRoomID();
-//                List<String> speaker = e.getEvent(event).getSpeakers();
-//                List<String> info = new ArrayList<String>();
-//                info.add(title);
-//                info.add(dateTime);
-//                info.add(roomId);
-//                info.addAll(speaker);
-//
-//                vipEventList.add(info);
-//            }
-//        }
-//        return vipEventList;
-//    }
-
 
 }
