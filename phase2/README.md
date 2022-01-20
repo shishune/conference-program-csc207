@@ -15,27 +15,27 @@ All users can;
     [4] Add a contact
     [5] View all contacts
             
-#####Option [1] 
+##### Option [1] 
  
 Allows them to log out, saving the information they have created in a corresponding csv file, which will be then loaded. If a user does not log out, their information will not be stored.
  
  
-#####Option [2]
+##### Option [2]
  
 Allows them to send a message. The recipients of the messages will differ for each user.
 - Organizers can send messages to all speakers and all attendees of an event, as well as individually
 - Speakers can send messages to all attendees of one event or multiple events, as well as respond to a specific attendee
 - Attendees can send messages to other attendees, as well as view messages that have been sent to them.
  
-#####Option [3] 
+##### Option [3] 
  
 Allows users to see all the messages that have been sent, and are able to reply to them, categorized by users. 
  
-#####Option [4]
+##### Option [4]
  
 Allows users to add any contact they want.
  
-#####Option [5] 
+##### Option [5] 
  
 Allows users to view all the contacts they have already added.
             
@@ -53,42 +53,42 @@ The organizer-specific menu is extended by the options below;
     [13] Change capacity of an event
     [14] View Statistics
                 
-#####Option [6]
+##### Option [6]
  
 Allows organizers to create an event, and in doing so, also allows them to create a new room, and/or adding a new speaker.
  - They can also use existing speakers and rooms. 
  - This option checks if speakers are double-booked or if the room is double-booked
  
-#####Option [7] (Remove/reschedule
+##### Option [7] (Remove/reschedule
  
 Allows organizers to remove or reschedule an event. This option will also check if the event exists and if rescheduling will cause errors. Option [8] allows organizers to view all the events that the current user has created
  
-#####Option [8]  (View all created events)
+##### Option [8]  (View all created events)
  
 Allows organizers to view all created events
  
-#####Option [9] (Add room)
+##### Option [9] (Add room)
  
 Allows organizers to create a room specifying its requirement for projectors, tables, chairs, microphones and whiteboards.
  +***New Feature!*** Added requirements to rooms and events, which can be matched accordingly.
  
  
-#####Option [10] - NEW FEATURE (Add user)
+##### Option [10] - NEW FEATURE (Add user)
  
 Allows organizers to create any type of users; Attendee, Speakers and Organizers. They can specify whether an Attendee is a VIP or not. 
  
-#####Option [11] - NEW FEATURE (View all conferences)
+##### Option [11] - NEW FEATURE (View all conferences)
  
 Allows organizers to view all created conferences, presenting each conference title.
  
-#####Option [12] - NEW FEATURE (Add a conference)
+##### Option [12] - NEW FEATURE (Add a conference)
 Allows organizers to create a new conference which then can have events be added into them from another option.
  
-#####Option [13] - NEW FEATURE (Change the capacity of an event)
+##### Option [13] - NEW FEATURE (Change the capacity of an event)
  
 Allows organizers to change the capacity of an event as long as it is less than the room capacity.
  
-#####Option [14] - NEW FEATURE (View Statistics)
+##### Option [14] - NEW FEATURE (View Statistics)
  
 Allows organizers to view the following list of statistics. 
  
@@ -125,39 +125,39 @@ The attendee-specific menu is extended by the options below;
     [12] Sign up for conference
     
     
-#####Option [6] - Sign up for an event / Save an event
+##### Option [6] - Sign up for an event / Save an event
  
 Allows the attendee to sign up to an event after showing the available events to them. It does not present the events that conflict with events that they are already signed up for, full events, nor the events they are already signed up for. 
  
  +***New Feature!*** It also allows the attendee to save an event. This will then allow them to view these saved events at a later time and 
  
  
-#####Option [7] - Cancel enrollment for an event
+##### Option [7] - Cancel enrollment for an event
  
 Allows the attendee to cancel their spot for an event they are already signed up for. Attendee must be signed up to an event.
  
-#####Option [8] - View all your events
+##### Option [8] - View all your events
  
 Allows the attendee to view all events in conferences they are signed up for. The attendee must be signed up for conferences, but do not have to be signed up for any of the events in the conferences. These events are the possible events available to the attendee to sign up to, _with no conflicts_. This does not include VIP events.
  
-#####Option [9] - View your schedule of events
+##### Option [9] - View your schedule of events
  
 Allows the attendee to view the schedule of events they are already signed up for, showing the title, speaker and room that it will take place in. The attendee must be signed up for events.
  
-#####Option [10] - (NEW FEATURE) View saved events
+##### Option [10] - (NEW FEATURE) View saved events
  
 Allows attendees to view the events they have saved. 
  
-#####Option [11] - (NEW FEATURE) View VIP events
+##### Option [11] - (NEW FEATURE) View VIP events
  
 Allows VIP attendees to view VIP events. If a non-VIP attendee tries this option, it will not allow the attendee to view. 
  
-#####Option [12] - (NEW FEATURE) Sign up for conference
+##### Option [12] - (NEW FEATURE) Sign up for conference
  
 Allow attendees to sign up to conferences. Doing so will allow attendees to view events that they are attending.
  
  
-##Design
+## Design
  
 Our code implements the design rules from Clean Architecture. The UML diagram of this design can be found in the UML file.
 The choice to store the data in the csv files was made to prepare for the implementation for phase 2, as the way the information is processed, is similar to the way databases are used.
